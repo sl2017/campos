@@ -95,6 +95,38 @@ class event_registration(osv.osv):
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
         
+        'organization': fields.selection([('dds','Det Danske Spejderkorps'),
+                                          ('dbs','Danske Baptisters Spejderkorps'),
+                                          ('dgp',u'De Grønne Pigespejdere'),
+                                          ('dui', 'DUI Leg og Virke'),
+                                          ('fdf', 'FDF'),
+                                          ('kfum','KFUM Spejderne'),
+                                          ('waggs','WAGGS'),
+                                          ('wosm', 'WOSM'),
+                                          ('other','Other')],'Scout Organization',required=True),
+        
+        # Contact
+        'contact_name': fields.char('Contact Name', size=128, required=True, select=True),
+        'contact_street': fields.char('Street', size=128),
+        'contact_street2': fields.char('Street2', size=128),
+        'contact_zip': fields.char('Zip', change_default=True, size=24),
+        'contact_city': fields.char('City', size=128),
+        'contact_state_id': fields.many2one("res.country.state", 'State'),
+        'contact_country_id': fields.many2one('res.country', 'Country'),
+        'contact_email': fields.char('Email', size=240),
+        'contact_phone': fields.char('Phone', size=64),
+        
+        # Economic Contact
+        'econ_name': fields.char('Economic Contact Name', size=128, required=True, select=True),
+        'econ_street': fields.char('Street', size=128),
+        'econ_street2': fields.char('Street2', size=128),
+        'econ_zip': fields.char('Zip', change_default=True, size=24),
+        'econ_city': fields.char('City', size=128),
+        'econ_state_id': fields.many2one("res.country.state", 'State'),
+        'econ_country_id': fields.many2one('res.country', 'Country'),
+        'econ_email': fields.char('Email', size=240),
+        'econ_phone': fields.char('Phone', size=64),
+        
     }
     
     def button_open_weborder_url(self, cr, uid, ids, context): 

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+         <!--  Event inherited form -->
+
+        <record id="view_dds_camp_event_info_form1" model="ir.ui.view">
+            <field name="name">event.event.dds_camp.info.inherit1</field>
+            <field name="model">event.event</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                  
+                
+               
+                <page string="Registrations" position="after">
+                	<page string="DDS Webshop">
+                		<group colspan="2" col="2">
+                			 <field name="project_id"/>
+                			 <field name="webshop_product_nid"/>
+                	         <button name="button_open_webevent_url" type="object" string="Webshop Event" icon="gtk-zoom-in" help="Open Event Detail" colspan="2"/>
+                	    </group>
+                    </page>
+               </page>
+            </field>
+        </record>
+
+		<!--  Registration inherited tree
+
+        <record id="view_dds_camp_reg_info_tree1" model="ir.ui.view">
+            <field name="name">event.event.dds_camp.reg.inherit2</field>
+            <field name="model">event.registration</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="event.view_event_registration_tree"/>
+            <field name="arch" type="xml">
+				<field name="nb_register" position="replace">
+				    <field name="dep"/>
+					<field name="transport_to"/>
+				</field>
+	        	<field name="origin" position="replace">
+					<field name="transport_from"/>
+				</field>
+	        </field>
+	    </record>
+	     -->
+        <!--  Registration inherited form -->
+
+        <record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
+            <field name="name">event.event.dds_camp.reg.inherit1</field>
+            <field name="model">event.registration</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="event.view_event_registration_form"/>
+            <field name="arch" type="xml">
+            	
+                <xpath expr="/form/sheet/group" position="after">
+                <group>
+                 <notebook colspan="8" col="8">
+                    <page string="Contact">
+                        <group>
+                	<field name="date_begin"/>
+                	<field name="date_end"/>
+                	<field name="transport_to"/>
+                	<field name="transport_from"/>
+                	<field name="dep"/>
+                	<field name="event_birth_age"/>
+                    <field name="event_join_age"/>
+                	<field name="description"/>
+                	</group>
+                	</page>
+                	<page string="Webshop">
+                		<group colspan="4">
+                	         <field name="webshop_orderno"/>
+                	         <field name="webshop_order_product_id"/>
+                	         <button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
+                	         </group>
+                	  </page>
+                	  <page string="Order Attributes">
+                	  <group colspan="4">       
+                             <field name="reg_attr_ids" colspan="4" nolabel="1">
+                                <tree string="Order attributter" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                </tree>
+                                </field>
+                          </group>      
+                    </page>
+                    </notebook>
+                    </group>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        <!--  Registration inherited search -->
+
+        <record id="view_dds_member_reg_info_search1" model="ir.ui.view">
+            <field name="name">event.event.dds_member.reg.inherit3</field>
+            <field name="model">event.registration</field>
+            <field name="inherit_id" ref="event.view_registration_search"/>
+            <field name="arch" type="xml">
+        		<xpath expr="/search/group/filter[@string='Status']" position="after">
+        		<filter string="Afdeling" icon="terp-crm" domain="[]" context="{'group_by':'dep'}"/>
+        		<filter string="Udrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_to'}"/>
+        		<filter string="Hjemrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_from'}"/>
+        		</xpath>
+        	</field>	
+        </record>	
+        
+        <!--  GruppeWeb Products 
+        
+        <record id="view_gw_product_form" model="ir.ui.view">
+            <field name="name">GruppeWeb Events</field>
+            <field name="model">dds_member.gw_product</field>
+            <field name="arch" type="xml">
+                <form string="GruppeWeb Events" version="7.0">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="startdate"/>
+                        <field name="product_nid"/>
+                        <field name="enddate"/>
+                        <field name="mprice"/>
+                        <field name="deadlinedate"/>
+                    	<field name="lprice"/>
+                    	
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="view_gw_product_list" model="ir.ui.view">
+            <field name="name">GruppeWeb Events</field>
+            <field name="model">dds_member.gw_product</field>
+            <field eval="6" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="GruppeWeb Events">
+                    <field name="name"/>
+                    <field name="startdate"/>
+                    <field name="enddate"/>
+                   
+                    
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_gw_product_form" model="ir.actions.act_window">
+            <field name="name">GruppeWeb Events</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dds_member.gw_product</field>
+            <field name="view_type">form</field>
+            
+        </record>
+
+        <menuitem action="action_gw_product_form" id="menu_gw_product_form" name="GruppeWeb Events" sequence="5" parent="base.menu_marketing_config_root" groups="base.group_no_one"/>
+        -->
+        </data>
+        </openerp>
