@@ -20,24 +20,10 @@
 ##############################################################################
 
 
-import sys
-from osv import fields,osv
-from openerp import tools
-import pprint
-from datetime import date, datetime
-import netsvc
-import hmac, hashlib, random, xmlrpclib, time, csv, urllib2
-import logging
-import re
-import string
-
-from cStringIO import StringIO
-try:
-    import xlwt
-except ImportError:
-    xlwt = None
-
-_logger = logging.getLogger(__name__)
+from datetime import datetime, timedelta
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
+from openerp import SUPERUSER_ID
 
 
 class event_event(osv.osv):
@@ -70,7 +56,7 @@ class dds_camp_event_participant(osv.osv):
         'name': fields.char('Name', size=64),
         'value': fields.char('Value', size=256),
     }
-dds_member_event_regattr()
+dds_camp_event_participant()
     
 class event_registration(osv.osv):
     """ Inherits Event and adds DDS Camp information in the Registration form """
@@ -106,6 +92,7 @@ class event_registration(osv.osv):
                                           ('other','Other')],'Scout Organization',required=True),
         
         # Contact
+        'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
         'contact_name': fields.char('Contact Name', size=128, required=True, select=True),
         'contact_street': fields.char('Street', size=128),
         'contact_street2': fields.char('Street2', size=128),
@@ -117,6 +104,7 @@ class event_registration(osv.osv):
         'contact_phone': fields.char('Phone', size=64),
         
         # Economic Contact
+        'econ_partner_id': fields.many2one('res.partner', 'Economic Contact', states={'done': [('readonly', True)]}),
         'econ_name': fields.char('Economic Contact Name', size=128, required=True, select=True),
         'econ_street': fields.char('Street', size=128),
         'econ_street2': fields.char('Street2', size=128),
