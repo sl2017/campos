@@ -100,7 +100,7 @@
                 	  </page>
                 	  <page string="Administration" groups='event.group_event_manager'>
                 	  		<group colspan="4">       
-							<field name='foreigners'                             
+							<field name='foreigners'/>                             
                           </group>      
                     	</page>
                     </notebook>
