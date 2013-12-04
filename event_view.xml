@@ -51,18 +51,19 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="event.view_event_registration_form"/>
             <field name="arch" type="xml">
-            	
-                <xpath expr="/form/sheet/group" position="after">
-                <field name="organization"/>
+            	<field name="date_closed" position="after">
+            	<field name="organization"/>
                 <field name="scout_division"/>
                 <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
+                </field>
+                <xpath expr="/form/sheet/group" position="after">
                 
                 <group>
                  <notebook colspan="8" col="8">
                     <page string="Contact">
                         <group>
-                			<field name="contact_partner_id"/>
-                			<field name="econ_partner_id"/> 
+                			<field name="contact_partner_id" context="{'default_parent_id': partner_id.id, 'default_city': partner_id.city, 'default_state_id': partner_id.state_id, 'default_zip': partner_id.zip, 'default_country_id': partner_id.country_id, 'default_supplier': False, 'default_customer': True}">/>/>
+                			<field name="econ_partner_id" context="{'default_parent_id': partner_id.id, 'default_city': partner_id.city, 'default_state_id': partner_id.state_id, 'default_zip': partner_id.zip, 'default_country_id': partner_id.country_id, 'default_supplier': False, 'default_customer': True}">/> 
                 	   	</group>
 
                 	</page>
@@ -102,7 +103,10 @@
                 	  </page>
                 	  <page string="Administration" groups='event.group_event_manager'>
                 	  		<group colspan="4">       
-							<field name='foreigners'/>                             
+							<field name='foreigners'/>      
+							<field name='agreements'/>
+							<field name='internal_note'/>
+							                       
                           </group>      
                     	</page>
                     </notebook>
