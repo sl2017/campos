@@ -1,0 +1,278 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* dds_camp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.saas~2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-04 19:25+0000\n"
+"PO-Revision-Date: 2013-12-04 19:25+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dds_camp
+#: field:event.registration,hh_aftercamp:0
+msgid "Would like home hospitality after the camp"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "Webshop Event"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,partner_id:0
+msgid "Participant"
+msgstr ""
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_event_participant
+msgid "Event participant"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,hcap:0
+msgid "Do you bring any handicapped scouts"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,scout_division:0
+msgid "Division/District"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Administration"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,patrol:0
+msgid "Patrol name"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,participant_ids:0
+msgid "Registration."
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "Danske Baptisters Spejderkorps"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,hcap_specneeds:0
+msgid "Describe speciel needs"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "Other"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "KFUM Spejderne"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.event,webshop_product_nid:0
+msgid "Webshop nid"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,food_allergy_desc:0
+msgid "Descibe the allergy"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Webshop"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "FDF"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Webshop Order"
+msgstr ""
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,hcap_desc:0
+msgid "Describe the handicap"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,foreigners:0
+msgid "Foreigners"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,econ_partner_id:0
+msgid "Economic Contact"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Open Order Detail"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,name:0
+msgid "Name"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "DDS Webshop"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,shared_transport:0
+msgid "Maybe"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "DUI Leg og Virke"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,friendshipgroup_name:0
+msgid "Name of friendship group"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,shared_transport:0
+msgid "No"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,rel_phone:0
+msgid "Relatives phonenumber"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+#: field:event.registration,contact_partner_id:0
+msgid "Contact"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,agreements:0
+msgid "What have been arranged"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "Det Danske Spejderkorps"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Special considerations"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "Registrations"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,shared_transport:0
+msgid "Yes"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,has_friendshipgroup:0
+msgid "Do you have a friendship group participate in the camp"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Home Hospitality/Friendship Groups"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,hh_precamp:0
+msgid "Would like home hospitality before the camp"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "WAGGS"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,want_friendshipgroup:0
+msgid "Want a friendship group"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,webshop_orderno:0
+msgid "Webshop Order No"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,shared_transport:0
+msgid "Shared transport"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "WOSM"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,food_allergy:0
+msgid "Do you have any food allergy sufferer"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,webshop_order_product_id:0
+msgid "Webshop Order Line No"
+msgstr ""
+
+#. module: dds_camp
+#: field:event.registration,organization:0
+msgid "Scout Organization"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,appr_leader:0
+msgid "Leder godkent"
+msgstr ""
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "De Grønne Pigespejdere"
+msgstr ""
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,registration_id:0
+msgid "Registration"
+msgstr ""
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "Open Event Detail"
+msgstr ""
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_event_event
+msgid "Event"
+msgstr ""
+

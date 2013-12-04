@@ -62,8 +62,8 @@
                  <notebook colspan="8" col="8">
                     <page string="Contact">
                         <group>
-                			<field name="contact_partner_id" context="{'default_parent_id': partner_id.id, 'default_city': partner_id.city, 'default_state_id': partner_id.state_id, 'default_zip': partner_id.zip, 'default_country_id': partner_id.country_id, 'default_supplier': False, 'default_customer': True}"/>
-                			<field name="econ_partner_id" context="{'default_parent_id': partner_id.id, 'default_city': partner_id.city, 'default_state_id': partner_id.state_id, 'default_zip': partner_id.zip, 'default_country_id': partner_id.country_id, 'default_supplier': False, 'default_customer': True}"/> 
+                			<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+                			<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/> 
                 	   	</group>
 
                 	</page>
