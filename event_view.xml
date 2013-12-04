@@ -102,7 +102,8 @@
                 	         </group>
                 	  </page>
                 	  <page string="Administration" groups='event.group_event_manager'>
-                	  		<group colspan="4">       
+                	  		<group colspan="4">
+                	  		<field name='signed_up'/>       
 							<field name='foreigners'/>      
 							<field name='agreements'/>
 							<field name='internal_note'/>
@@ -131,6 +132,112 @@
         	</field>	
         </record>	
         -->
+        
+        <record model="ir.ui.view" id="portal_event_registration_form">
+            <field name="name">portal.registration.form</field>
+            <field name="model">event.registration</field>
+            <field name="arch" type="xml">
+                <form string="Event Registration" version="7.0">
+                    <header>
+                        
+                        <field name="state" nolabel="1" colspan="2" widget="statusbar" statusbar_visible="draft,open,done"/>
+                    </header>
+                    <sheet string="Registration">
+                        <label for="partner_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="partner_id" attrs="{'readonly': '1'}"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="event_id" attrs="{'readonly': '1'}"/>
+                                
+                            </group>
+                            <group>
+                                <field name="nb_register"/>
+                            </group>
+                            <group">
+                                
+                            
+                            <field name="organization"/>
+                <field name="scout_division"/>
+                <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
+                </group>
+                
+                
+                <group>
+                 <notebook colspan="8" col="8">
+                    <page string="Contact">
+                        <group>
+                			<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+                			<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/> 
+                	   	</group>
+
+                	</page>
+                	<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
+                        <group colspan="8" col="8">
+                        	<group>
+                        	<field name="hh_precamp"/>
+                        	<field name="hh_aftercamp"/>
+                        	</group>
+                        	<group>
+                        	<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
+                			<field name="has_friendshipgroup"/>
+                			<field name="friendshipgroup_name"/>
+                			</group> 
+                	   	</group>
+                	</page>
+                	<page string="Special considerations" colspan="8" col="8">
+                        <group colspan="8" col="8">
+                        	<group>
+                        	<field name="hcap"/>
+                        	<field name="hcap_desc"/>
+                        	<field name="hcap_specneeds"/>
+                        	</group>
+                        	<group>
+                			<field name="food_allergy"/>
+                			<field name="food_allergy_desc"/>
+                			</group> 
+                	   	</group>
+
+                	</page>
+                	<page string="Webshop">
+                		<group colspan="4">
+                	         <field name="webshop_orderno"/>
+                	         <field name="webshop_order_product_id"/>
+                	         <button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
+                	         </group>
+                	  </page>
+                	  <page string="Administration" groups='event.group_event_manager'>
+                	  		<group colspan="4">
+                	  		<field name='signed_up'/>       
+							<field name='foreigners'/>      
+							<field name='agreements'/>
+							<field name='internal_note'/>
+							                       
+                          </group>      
+                    	</page>
+                    </notebook>
+                    </group>
+                
+                        </group>
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_portal_event_registration_form" model="ir.actions.act_window">
+            <field name="name">Registrations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.registration</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="portal_event_registration_form"/>
+            
+        </record>
+
+		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
+        <menuitem action="action_portal_event_registration_form" id="portal_event_registration_form" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
+        
         
         </data>
         </openerp>

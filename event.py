@@ -121,6 +121,7 @@ class event_registration(osv.osv):
 #         'econ_email': fields.char('Email', size=240),
 #         'econ_phone': fields.char('Phone', size=64),
         'foreigners' : fields.boolean('Foreigners'),
+        'signed_up' : fields.boolean('Signed up'),
         'shared_transport': fields.selection([('yes','Yes'),
                                               ('no', 'No'),
                                               ('maybe','Maybe')],'Shared transport',required=True),
