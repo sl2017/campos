@@ -41,7 +41,7 @@ class event_event(osv.osv):
         # logger.info("%s.button_open_drawing_url(): ids = %s", self._name, ids)
         webevent_ref = self.browse(cr, uid, ids)[0].webshop_product_nid
         if webevent_ref:
-            return { 'type': 'ir.actions.act_url', 'url': r"%s/node/%s" % (r"http://www.mikkelskov.dk", webevent_ref), 'nodestroy': True, 'target': 'new' }
+            return { 'type': 'ir.actions.act_url', 'url': r"%s/node/%s" % (r"http://e2014.gruppe.dds.dk", webevent_ref), 'nodestroy': True, 'target': 'new' }
         return True    
 
 event_event()
@@ -52,9 +52,12 @@ class dds_camp_event_participant(osv.osv):
     _name = 'dds_camp.event.participant'
     _order = 'name'
     _columns = {
-        'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),        
+        'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
+        'partner_id': fields.many2one('res.partner', 'Participant', states={'done': [('readonly', True)]}),        
         'name': fields.char('Name', size=64),
-        'value': fields.char('Value', size=256),
+        'rel_phone': fields.char('Relatives phonenumber', size=64),
+        'patrol' : fields.char('Patrol name', size=64),
+        'appr_leader' : fields.boolean('Leder godkent')
     }
 dds_camp_event_participant()
     
@@ -90,41 +93,69 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
+        'scout_division' : fields.text('Division/District', size=64),       
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
-        'contact_name': fields.char('Contact Name', size=128, required=True, select=True),
-        'contact_street': fields.char('Street', size=128),
-        'contact_street2': fields.char('Street2', size=128),
-        'contact_zip': fields.char('Zip', change_default=True, size=24),
-        'contact_city': fields.char('City', size=128),
-        'contact_state_id': fields.many2one("res.country.state", 'State'),
-        'contact_country_id': fields.many2one('res.country', 'Country'),
-        'contact_email': fields.char('Email', size=240),
-        'contact_phone': fields.char('Phone', size=64),
         
+#         'contact_name': fields.char('Contact Name', size=128, required=True, select=True),
+#         'contact_street': fields.char('Street', size=128),
+#         'contact_street2': fields.char('Street2', size=128),
+#         'contact_zip': fields.char('Zip', change_default=True, size=24),
+#         'contact_city': fields.char('City', size=128),
+#         'contact_state_id': fields.many2one("res.country.state", 'State'),
+#         'contact_country_id': fields.many2one('res.country', 'Country'),
+#         'contact_email': fields.char('Email', size=240),
+#         'contact_phone': fields.char('Phone', size=64),
+#         
         # Economic Contact
         'econ_partner_id': fields.many2one('res.partner', 'Economic Contact', states={'done': [('readonly', True)]}),
-        'econ_name': fields.char('Economic Contact Name', size=128, required=True, select=True),
-        'econ_street': fields.char('Street', size=128),
-        'econ_street2': fields.char('Street2', size=128),
-        'econ_zip': fields.char('Zip', change_default=True, size=24),
-        'econ_city': fields.char('City', size=128),
-        'econ_state_id': fields.many2one("res.country.state", 'State'),
-        'econ_country_id': fields.many2one('res.country', 'Country'),
-        'econ_email': fields.char('Email', size=240),
-        'econ_phone': fields.char('Phone', size=64),
+#         
+#         'econ_name': fields.char('Economic Contact Name', size=128, required=True, select=True),
+#         'econ_street': fields.char('Street', size=128),
+#         'econ_street2': fields.char('Street2', size=128),
+#         'econ_zip': fields.char('Zip', change_default=True, size=24),
+#         'econ_city': fields.char('City', size=128),
+#         'econ_state_id': fields.many2one("res.country.state", 'State'),
+#         'econ_country_id': fields.many2one('res.country', 'Country'),
+#         'econ_email': fields.char('Email', size=240),
+#         'econ_phone': fields.char('Phone', size=64),
+        'foreigners' : fields.boolean('Foreigners'),
+        'shared_transport': fields.selection([('yes','Yes'),
+                                              ('no', 'No'),
+                                              ('maybe','Maybe')],'Shared transport',required=True),
+                
+        # Home Hsopitality
+        'hh_precamp' : fields.boolean('Would like home hospitality before the camp'),
+        'hh_aftercamp' : fields.boolean('Would like home hospitality after the camp'),
+        'want_friendshipgroup': fields.boolean('Want a friendship group'),
+        'has_friendshipgroup' : fields.boolean('Do you have a friendship group participate in the camp'),
+        'friendshipgroup_name' : fields.char('Name of friendship group'),
+>>>>>>> branch 'master' of ssh://hhg@dev.gabelgaard.org/home/hhg/git/dds_camp
         
+        'hcap' : fields.boolean('Do you bring any handicapped scouts'),
+        'hcap_desc': fields.text('Describe the handicap'),
+        'hcap_specneeds' : fields.text('Describe speciel needs'),
+        'food_allergy' : fields.boolean('Do you have any food allergy sufferer'),
+        'food_allergy_desc': fields.text('Descibe the allergy'),
+        
+        #Internal fields
+        'agreements': fields.text('What have been arranged'),
+        'internal_note' : fields.text(''),
+        
+                
+                
+                
     }
     
     def button_open_weborder_url(self, cr, uid, ids, context): 
-        """ Open Blåt Medlem
+        """ Open Pre Registretion
         @return: True
         """
         # logger.info("%s.button_open_drawing_url(): ids = %s", self._name, ids)
         weborder_ref = self.browse(cr, uid, ids)[0].webshop_orderno
         if weborder_ref:
-            return { 'type': 'ir.actions.act_url', 'url': r"%s/dds/tilmelding/orders/%s/invoice" % (r"http://www.mikkelskov.dk", weborder_ref), 'nodestroy': True, 'target': 'new' }
+            return { 'type': 'ir.actions.act_url', 'url': r"%s/dds/tilmelding/orders/%s/invoice" % (r"http://e2014.gruppe.dds.dk", weborder_ref), 'nodestroy': True, 'target': 'new' }
 
         return True
          

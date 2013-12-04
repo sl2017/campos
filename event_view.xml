@@ -53,6 +53,10 @@
             <field name="arch" type="xml">
             	
                 <xpath expr="/form/sheet/group" position="after">
+                <field name="organization"/>
+                <field name="scout_division"/>
+                <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
+                
                 <group>
                  <notebook colspan="8" col="8">
                     <page string="Contact">
@@ -60,6 +64,34 @@
                 			<field name="contact_partner_id"/>
                 			<field name="econ_partner_id"/> 
                 	   	</group>
+
+                	</page>
+                	<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
+                        <group colspan="8" col="8">
+                        	<group>
+                        	<field name="hh_precamp"/>
+                        	<field name="hh_aftercamp"/>
+                        	</group>
+                        	<group>
+                        	<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
+                			<field name="has_friendshipgroup"/>
+                			<field name="friendshipgroup_name"/>
+                			</group> 
+                	   	</group>
+                	</page>
+                	<page string="Special considerations" colspan="8" col="8">
+                        <group colspan="8" col="8">
+                        	<group>
+                        	<field name="hcap"/>
+                        	<field name="hcap_desc"/>
+                        	<field name="hcap_specneeds"/>
+                        	</group>
+                        	<group>
+                			<field name="food_allergy"/>
+                			<field name="food_allergy_desc"/>
+                			</group> 
+                	   	</group>
+
                 	</page>
                 	<page string="Webshop">
                 		<group colspan="4">
@@ -68,16 +100,11 @@
                 	         <button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
                 	         </group>
                 	  </page>
-                	  <page string="Order Attributes">
-                	  <group colspan="4">       
-                             <field name="reg_attr_ids" colspan="4" nolabel="1">
-                                <tree string="Order attributter" editable="bottom">
-                                    <field name="name"/>
-                                    <field name="value"/>
-                                </tree>
-                                </field>
+                	  <page string="Administration" groups='event.group_event_manager'>
+                	  		<group colspan="4">       
+							<field name='foreigners'/>                             
                           </group>      
-                    </page>
+                    	</page>
                     </notebook>
                     </group>
                 </xpath>
