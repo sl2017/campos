@@ -135,12 +135,12 @@ class event_registration(osv.osv):
         'hcap' : fields.boolean('Do you bring any handicapped scouts'),
         'hcap_desc': fields.text('Describe the handicap'),
         'hcap_specneeds' : fields.text('Describe speciel needs'),
-        'food_allergy' : field.boolean('Do you have any food allergy sufferer'),
+        'food_allergy' : fields.boolean('Do you have any food allergy sufferer'),
         'food_allergy_desc': field.text('Descibe the allergy'),
         
         #Internal fields
-        'agreements': field.text('What have been arranged'),
-        'internal_note' : field.text(''),
+        'agreements': fields.text('What have been arranged'),
+        'internal_note' : fields.text(''),
         
                 
                 
