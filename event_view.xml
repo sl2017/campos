@@ -65,7 +65,7 @@
                 			<field name="econ_partner_id"/> 
                 	   	</group>
                 	</page>
-                	<page string="Home Hospitality & Friendship Groups" colspan="8" col="8">
+                	<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
                         <group colspan="8" col="8">
                         	<group>
                         	<field name="hh_precamp"/>
