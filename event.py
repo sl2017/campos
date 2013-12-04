@@ -131,8 +131,7 @@ class event_registration(osv.osv):
         'want_friendshipgroup': fields.boolean('Want a friendship group'),
         'has_friendshipgroup' : fields.boolean('Do you have a friendship group participate in the camp'),
         'friendshipgroup_name' : fields.char('Name of friendship group'),
->>>>>>> branch 'master' of ssh://hhg@dev.gabelgaard.org/home/hhg/git/dds_camp
-        
+
         'hcap' : fields.boolean('Do you bring any handicapped scouts'),
         'hcap_desc': fields.text('Describe the handicap'),
         'hcap_specneeds' : fields.text('Describe speciel needs'),
@@ -141,7 +140,7 @@ class event_registration(osv.osv):
         
         #Internal fields
         'agreements': fields.text('What have been arranged'),
-        'internal_note' : fields.text(''),
+        'internal_note' : fields.text('Internal note'),
         
                 
                 

@@ -31,7 +31,7 @@
     "init_xml" : [],
     "demo_xml" : [],
     'data': [
-             'security/ir.model.access.csv',
+             #'security/ir.model.access.csv',
              ],
     "update_xml" : ["event_view.xml", 
                     ],
