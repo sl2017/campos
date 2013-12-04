@@ -244,7 +244,8 @@
             <field name="view_mode">tree,form</field>
             <field name="view_type">tree</field>
             <field name="view_id" ref="portal_view_event_registration_tree"/>
-            
+            </record>
+                
         <record id="action_portal_event_registration_form" model="ir.actions.act_window">
             <field name="name">Registrations</field>
             <field name="type">ir.actions.act_window</field>
