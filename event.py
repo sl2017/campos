@@ -57,7 +57,7 @@ class dds_camp_event_participant(osv.osv):
         'name': fields.char('Name', size=64),
         'rel_phone': fields.char('Relatives phonenumber', size=64),
         'patrol' : fields.char('Patrol name', size=64),
-        'appr_leader' : field.boolean('Leder godkent')
+        'appr_leader' : fields.boolean('Leder godkent')
     }
 dds_camp_event_participant()
     
