@@ -16,7 +16,7 @@
                 <page string="Registrations" position="after">
                 	<page string="DDS Webshop">
                 		<group colspan="2" col="2">
-                			 <field name="project_id"/>
+                			
                 			 <field name="webshop_product_nid"/>
                 	         <button name="button_open_webevent_url" type="object" string="Webshop Event" icon="gtk-zoom-in" help="Open Event Detail" colspan="2"/>
                 	    </group>
