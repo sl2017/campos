@@ -163,7 +163,7 @@
                 <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
                 </group>
                 
-                
+                </group>
                 <group>
                  <notebook colspan="8" col="8">
                     <page string="Contact">
@@ -219,11 +219,22 @@
                     </notebook>
                     </group>
                 
-                        </group>
+                    
                     </sheet>
                     
                 </form>
             </field>
+        </record>
+        
+        <record model="ir.ui.view" id="portal_view_event_registration_form">
+            <field name="name">portal.registration.form</field>
+            <field name="model">event.registration</field>
+            <field name="arch" type="xml">
+        		<tree>
+        		<field name="Name"/>
+        		<field name="nb_register"/>
+        		</tree>
+        </field>
         </record>
         
         <record id="action_portal_event_registration_form" model="ir.actions.act_window">
@@ -231,6 +242,15 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">event.registration</field>
             <field name="view_mode">tree,form</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="portal_view_event_registration_tree"/>
+            
+        <record id="action_portal_event_registration_form" model="ir.actions.act_window">
+            <field name="name">Registrations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.registration</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
             <field name="view_id" ref="portal_view_event_registration_form"/>
             
         </record>
