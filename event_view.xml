@@ -133,7 +133,7 @@
         </record>	
         -->
         
-        <record model="ir.ui.view" id="portal_event_registration_form">
+        <record model="ir.ui.view" id="portal_view_event_registration_form">
             <field name="name">portal.registration.form</field>
             <field name="model">event.registration</field>
             <field name="arch" type="xml">
@@ -155,7 +155,7 @@
                             <group>
                                 <field name="nb_register"/>
                             </group>
-                            <group">
+                            <group>
                                 
                             
                             <field name="organization"/>
@@ -231,12 +231,12 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">event.registration</field>
             <field name="view_type">form</field>
-            <field name="view_id" ref="portal_event_registration_form"/>
+            <field name="view_id" ref="portal_view_event_registration_form"/>
             
         </record>
 
 		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
-        <menuitem action="action_portal_event_registration_form" id="portal_event_registration_form" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
+        <menuitem action="action_portal_event_registration_form" id="portal_event_registration_menu" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
         
         
         </data>
