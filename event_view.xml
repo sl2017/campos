@@ -231,7 +231,7 @@
             <field name="model">event.registration</field>
             <field name="arch" type="xml">
         		<tree>
-        		<field name="Name"/>
+        		<field name="name"/>
         		<field name="nb_register"/>
         		</tree>
         </field>
