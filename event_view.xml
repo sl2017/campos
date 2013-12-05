@@ -237,27 +237,29 @@
         </field>
         </record>
         
-        <record id="action_portal_event_registration_form" model="ir.actions.act_window">
+        <record id="action_portal_event_registration_tree" model="ir.actions.act_window">
             <field name="name">Registrations</field>
-            <field name="type">ir.actions.act_window</field>
+            
             <field name="res_model">event.registration</field>
-            <field name="view_mode">tree,form</field>
             <field name="view_type">tree</field>
             <field name="view_id" ref="portal_view_event_registration_tree"/>
             </record>
                 
-        <record id="action_portal_event_registration_form" model="ir.actions.act_window">
+        <record id="view.action_portal_event_registration_form" model="ir.actions.act_window.view">
             <field name="name">Registrations</field>
-            <field name="type">ir.actions.act_window</field>
             <field name="res_model">event.registration</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="portal_view_event_registration_tree"/>
+        </record>
+		<record id="view.action_portal_event_registration_tree" model="ir.actions.act_window.view">
+            <field name="name">Registrations</field>
+            <field name="res_model">event.registration</field>
+            <field name="view_mode">form</field>
             <field name="view_id" ref="portal_view_event_registration_form"/>
-            
         </record>
 
 		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
-        <menuitem action="action_portal_event_registration_form" id="portal_event_registration_menu" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
+        <menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
         
         
         </data>
