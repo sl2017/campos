@@ -94,6 +94,16 @@
                 	   	</group>
 
                 	</page>
+                	<field name="participant_ids" colspan="4" nolabel="1">
+                		<tree string="Participants">
+                                        <field name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>/>
+                                        
+                                        <field name="patrol" />
+                                        <field name="rel_phone"/>
+					
+                                    </tree>
+						</field>
+					</page>
                 	<page string="Webshop">
                 		<group colspan="4">
                 	         <field name="webshop_orderno"/>
@@ -237,7 +247,7 @@
             </field>
         </record>
         
-        <record model="ir.ui.view" id="portal_view_event_registration_participant.form">
+        <record model="ir.ui.view" id="portal_view_event_registration_participant_form">
             <field name="name">portal.registration.participant.form</field>
             <field name="model">dds_camp.event.participant</field>
             <field name="arch" type="xml">
@@ -246,6 +256,8 @@
                         colspan="4" 
                         mode="form" 
                         name="partner_id" 
+                        context="{'default_parent_id': parent.partner_id, 'default_customer': True}" 
+                        domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
                         nolabel="1" 
                         select="1">
                         <form string="Participant Details">
