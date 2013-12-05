@@ -226,16 +226,25 @@
             </field>
         </record>
         
+        
+        
         <record model="ir.ui.view" id="portal_view_event_registration_form">
-            <field name="name">portal.registration.form</field>
+            <field name="name">portal.event.registration.tree</field>
             <field name="model">event.registration</field>
             <field name="arch" type="xml">
-        		<tree>
-        		<field name="name"/>
-        		<field name="nb_register"/>
-        		</tree>
-        </field>
+                <tree string="Registration">
+                    <field name="create_date"/>
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="event_id" />
+                    <field name="nb_register"/>
+                    <field name="user_id" invisible="1"/>
+                    
+                </tree>
+            </field>
         </record>
+        
         
         <record id="action_portal_event_registration_tree" model="ir.actions.act_window">
             <field name="name">Registrations</field>
