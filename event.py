@@ -53,7 +53,7 @@ class dds_camp_event_participant(osv.osv):
     _order = 'name'
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
-        'partner_id': fields.many2one('res.partner', 'Participant', states={'done': [('readonly', True)]}),        
+        'partner_id': fields.many2one('res.partner', 'Participant'),        
         'name': fields.char('Name', size=64),
         'rel_phone': fields.char('Relatives phonenumber', size=64),
         'patrol' : fields.char('Patrol name', size=64),
@@ -93,7 +93,7 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
-        'scout_division' : fields.text('Division/District', size=64),       
+        'scout_division' : fields.char('Division/District', size=64),       
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),

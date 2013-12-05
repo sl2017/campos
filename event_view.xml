@@ -278,7 +278,7 @@
 							</field>
 						</group>
 						<group>
-							<field name="state" invisible="1" />
+							
 							<field name="patrol" />
 							<field name="rel_phone" />
 						</group>
@@ -310,7 +310,7 @@
 			<field name="name">Registrations</field>
 
 			<field name="res_model">event.registration</field>
-			<field name="view_type">Form</field>
+			<field name="view_type">form</field>
 
 		</record>
 		<!-- <record id="view_action_portal_event_registration_form" model="ir.actions.act_window.view"> 
