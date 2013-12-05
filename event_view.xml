@@ -251,7 +251,7 @@
             
             <field name="res_model">event.registration</field>
             <field name="view_type">tree</field>
-            <field name="view_id" ref="portal_view_event_registration_tree"/>
+            
             </record>
                 
         <record id="view_action_portal_event_registration_form" model="ir.actions.act_window.view">
@@ -259,12 +259,14 @@
             <field name="res_model">event.registration</field>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="portal_view_event_registration_tree"/>
+            <field name="act_window_id" ref="action_portal_event_registration_tree"/>
         </record>
 		<record id="view_action_portal_event_registration_tree" model="ir.actions.act_window.view">
             <field name="name">Registrations</field>
             <field name="res_model">event.registration</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="portal_view_event_registration_form"/>
+            <field name="act_window_id" ref="action_portal_event_registration_tree"/>
         </record>
 
 		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
