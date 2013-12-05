@@ -1,331 +1,333 @@
 <?xml version="1.0"?>
 <openerp>
-    <data>
+	<data>
 
-         <!--  Event inherited form -->
+		<!-- Event inherited form -->
 
-        <record id="view_dds_camp_event_info_form1" model="ir.ui.view">
-            <field name="name">event.event.dds_camp.info.inherit1</field>
-            <field name="model">event.event</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="event.view_event_form"/>
-            <field name="arch" type="xml">
-                  
-                
-               
-                <page string="Registrations" position="after">
-                	<page string="DDS Webshop">
-                		<group colspan="2" col="2">
-                			
-                			 <field name="webshop_product_nid"/>
-                	         <button name="button_open_webevent_url" type="object" string="Webshop Event" icon="gtk-zoom-in" help="Open Event Detail" colspan="2"/>
-                	    </group>
-                    </page>
-               </page>
-            </field>
-        </record>
+		<record id="view_dds_camp_event_info_form1" model="ir.ui.view">
+			<field name="name">event.event.dds_camp.info.inherit1</field>
+			<field name="model">event.event</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_event_form" />
+			<field name="arch" type="xml">
 
-		<!--  Registration inherited tree
 
-        <record id="view_dds_camp_reg_info_tree1" model="ir.ui.view">
-            <field name="name">event.event.dds_camp.reg.inherit2</field>
-            <field name="model">event.registration</field>
-            <field name="type">tree</field>
-            <field name="inherit_id" ref="event.view_event_registration_tree"/>
-            <field name="arch" type="xml">
-				<field name="nb_register" position="replace">
-				    <field name="dep"/>
-					<field name="transport_to"/>
-				</field>
-	        	<field name="origin" position="replace">
-					<field name="transport_from"/>
-				</field>
-	        </field>
-	    </record>
-	     -->
-        <!--  Registration inherited form -->
 
-        <record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
-            <field name="name">event.event.dds_camp.reg.inherit1</field>
-            <field name="model">event.registration</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="event.view_event_registration_form"/>
-            <field name="arch" type="xml">
-            	<field name="date_closed" position="after">
-            	<field name="organization"/>
-                <field name="scout_division"/>
-                <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
-                </field>
-                <xpath expr="/form/sheet/group" position="after">
-                
-                <group>
-                 <notebook colspan="8" col="8">
-                    <page string="Contact">
-                        <group>
-                			<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
-                			<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/> 
-                	   	</group>
+				<page string="Registrations" position="after">
+					<page string="DDS Webshop">
+						<group colspan="2" col="2">
 
-                	</page>
-                	<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
-                        <group colspan="8" col="8">
-                        	<group>
-                        	<field name="hh_precamp"/>
-                        	<field name="hh_aftercamp"/>
-                        	</group>
-                        	<group>
-                        	<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
-                			<field name="has_friendshipgroup"/>
-                			<field name="friendshipgroup_name"/>
-                			</group> 
-                	   	</group>
-                	</page>
-                	<page string="Special considerations" colspan="8" col="8">
-                        <group colspan="8" col="8">
-                        	<group>
-                        	<field name="hcap"/>
-                        	<field name="hcap_desc"/>
-                        	<field name="hcap_specneeds"/>
-                        	</group>
-                        	<group>
-                			<field name="food_allergy"/>
-                			<field name="food_allergy_desc"/>
-                			</group> 
-                	   	</group>
-
-                	</page>
-                	<page string="Participants" colspan="8" col="8">
-                	<field name="participant_ids" colspan="4" nolabel="1">
-                		<tree string="Participants">
-                                        <field name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>/>
-                                        
-                                        <field name="patrol" />
-                                        <field name="rel_phone"/>
-					
-                                    </tree>
-						</field>
+							<field name="webshop_product_nid" />
+							<button name="button_open_webevent_url" type="object"
+								string="Webshop Event" icon="gtk-zoom-in" help="Open Event Detail"
+								colspan="2" />
+						</group>
 					</page>
-                	<page string="Webshop">
-                		<group colspan="4">
-                	         <field name="webshop_orderno"/>
-                	         <field name="webshop_order_product_id"/>
-                	         <button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
-                	         </group>
-                	  </page>
-                	  <page string="Administration" groups='event.group_event_manager'>
-                	  		<group colspan="4">
-                	  		<field name='signed_up'/>       
-							<field name='foreigners'/>      
-							<field name='agreements'/>
-							<field name='internal_note'/>
-							                       
-                          </group>      
-                    	</page>
-                    </notebook>
-                    </group>
-                </xpath>
-                
-            </field>
-        </record>
-        
-        <!--  Registration inherited search 
+				</page>
+			</field>
+		</record>
 
-        <record id="view_dds_member_reg_info_search1" model="ir.ui.view">
-            <field name="name">event.event.dds_member.reg.inherit3</field>
-            <field name="model">event.registration</field>
-            <field name="inherit_id" ref="event.view_registration_search"/>
-            <field name="arch" type="xml">
-        		<xpath expr="/search/group/filter[@string='Status']" position="after">
-        		<filter string="Afdeling" icon="terp-crm" domain="[]" context="{'group_by':'dep'}"/>
-        		<filter string="Udrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_to'}"/>
-        		<filter string="Hjemrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_from'}"/>
-        		</xpath>
-        	</field>	
-        </record>	
-        -->
-        
-        <record model="ir.ui.view" id="portal_view_event_registration_form">
-            <field name="name">portal.registration.form</field>
-            <field name="model">event.registration</field>
-            <field name="arch" type="xml">
-                <form string="Event Registration" version="7.0">
-                    <header>
-                        
-                        <field name="state" nolabel="1" colspan="2" widget="statusbar" statusbar_visible="draft,open,done"/>
-                    </header>
-                    <sheet string="Registration">
-                        <label for="partner_id" class="oe_edit_only"/>
-                        <h1>
-                            <field name="partner_id" attrs="{'readonly': '1'}"/>
-                        </h1>
-                        <group>
-                            <group>
-                                <field name="event_id" attrs="{'readonly': '1'}"/>
-                                
-                            </group>
-                            <group>
-                                <field name="nb_register"/>
-                            </group>
-                            <group>
-                                
-                            
-                            <field name="organization"/>
-                <field name="scout_division"/>
-                <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
-                </group>
-                
-                </group>
-                <group>
-                 <notebook colspan="8" col="8">
-                    <page string="Contact">
-                        <group>
-                			<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
-                			<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/> 
-                	   	</group>
+		<!-- Registration inherited tree <record id="view_dds_camp_reg_info_tree1" 
+			model="ir.ui.view"> <field name="name">event.event.dds_camp.reg.inherit2</field> 
+			<field name="model">event.registration</field> <field name="type">tree</field> 
+			<field name="inherit_id" ref="event.view_event_registration_tree"/> <field 
+			name="arch" type="xml"> <field name="nb_register" position="replace"> <field 
+			name="dep"/> <field name="transport_to"/> </field> <field name="origin" position="replace"> 
+			<field name="transport_from"/> </field> </field> </record> -->
+		<!-- Registration inherited form -->
 
-                	</page>
-                	<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
-                        <group colspan="8" col="8">
-                        	<group>
-                        	<field name="hh_precamp"/>
-                        	<field name="hh_aftercamp"/>
-                        	</group>
-                        	<group>
-                        	<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
-                			<field name="has_friendshipgroup"/>
-                			<field name="friendshipgroup_name"/>
-                			</group> 
-                	   	</group>
-                	</page>
-                	<page string="Special considerations" colspan="8" col="8">
-                        <group colspan="8" col="8">
-                        	<group>
-                        	<field name="hcap"/>
-                        	<field name="hcap_desc"/>
-                        	<field name="hcap_specneeds"/>
-                        	</group>
-                        	<group>
-                			<field name="food_allergy"/>
-                			<field name="food_allergy_desc"/>
-                			</group> 
-                	   	</group>
+		<record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
+			<field name="name">event.event.dds_camp.reg.inherit1</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_event_registration_form" />
+			<field name="arch" type="xml">
+				<field name="date_closed" position="after">
+					<field name="organization" />
+					<field name="scout_division" />
+					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
+				</field>
+				<xpath expr="/form/sheet/group" position="after">
 
-                	</page>
-                	<page string="Participants" colspan="8" col="8">
-        <field name="participant_ids" colspan="4" nolabel="1">
-                <tree string="Participants">
-                                        <field name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>/>
-                                        
-                                        <field name="patrol" />
-                                        <field name="rel_phone"/>
-					
-                                    </tree>
-</field>
-</page>
-                	<page string="Webshop" groups='event.group_event_manager'>
-                		<group colspan="4">
-                	         <field name="webshop_orderno"/>
-                	         <field name="webshop_order_product_id"/>
-                	         <button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
-                	         </group>
-                	  </page>
-                	  <page string="Administration" groups='event.group_event_manager'>
-                	  		<group colspan="4">
-                	  		<field name='signed_up'/>       
-							<field name='foreigners'/>      
-							<field name='agreements'/>
-							<field name='internal_note'/>
-							                       
-                          </group>      
-                    	</page>
-                    </notebook>
-                    </group>
-                
-                    
-                    </sheet>
-                    
-                </form>
-            </field>
-        </record>
-        
-        <record model="ir.ui.view" id="portal_view_event_registration_participant_form">
-            <field name="name">portal.registration.participant.form</field>
-            <field name="model">dds_camp.event.participant</field>
-            <field name="arch" type="xml">
-                <form string="Event Registration" version="7.0">
-                	<field 
-                        colspan="4" 
-                        mode="form" 
-                        name="partner_id" 
-                        context="{'default_parent_id': parent.partner_id, 'default_customer': True}" 
-                        domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
-                        nolabel="1" 
-                        select="1">
-                        <form string="Participant Details">
-                            <field name="name"/>
-                             
-                                    <field name="street"/>
-                                    <field name="street2"/>
-                                    <field name="zip"/>
-                                    <field name="city"/>
-                                    <field name="state_id"/>
-                                    <field name="country_id"/>
-                                    <field name="mobile"/>
-                                 	
-                                    <field name="phone"/>
-                                 	<field name="email"/>
-                             </form>
-                        </field>   	
-                                    
-                </form>
-        	</field>
-        </record>    
-        
-        <record model="ir.ui.view" id="portal_view_event_registration_tree">
-            <field name="name">portal.event.registration.tree</field>
-            <field name="model">event.registration</field>
-            <field name="arch" type="xml">
-                <tree string="Registration">
-                    <field name="create_date"/>
-                    <field name="partner_id"/>
-                    <field name="name"/>
-                    <field name="email"/>
-                    <field name="event_id" />
-                    <field name="nb_register"/>
-                    <field name="user_id" invisible="1"/>
-                    <field name="state" invisible="1"/> 
-                    
-                </tree>
-            </field>
-        </record>
-        
-        
-        <record id="action_portal_event_registration_tree" model="ir.actions.act_window">
-            <field name="name">Registrations</field>
-            
-            <field name="res_model">event.registration</field>
-            <field name="view_type">tree</field>
-            
-            </record>
-        <!--         
-        <record id="view_action_portal_event_registration_form" model="ir.actions.act_window.view">
-            <field name="name">Registrations</field>
-            <field name="res_model">event.registration</field>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="portal_view_event_registration_tree"/>
-            <field name="act_window_id" ref="action_portal_event_registration_tree"/>
-        </record>
-		<record id="view_action_portal_event_registration_tree" model="ir.actions.act_window.view">
-            <field name="name">Registrations</field>
-            <field name="res_model">event.registration</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="portal_view_event_registration_form"/>
-            <field name="act_window_id" ref="action_portal_event_registration_tree"/>
-        </record>
- 		-->
-		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
-        <menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
-        
-        
-        </data>
-        </openerp>
+					<group>
+						<notebook colspan="8" col="8">
+							<page string="Contact">
+								<group>
+									<field name="contact_partner_id"
+										context="{'default_parent_id': partner_id, 'default_customer': True}"
+										domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+									<field name="econ_partner_id"
+										context="{'default_parent_id': partner_id, 'default_customer': True}"
+										domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+								</group>
+
+							</page>
+							<page string="Home Hospitality/Friendship Groups" colspan="8"
+								col="8">
+								<group colspan="8" col="8">
+									<group>
+										<field name="hh_precamp" />
+										<field name="hh_aftercamp" />
+									</group>
+									<group>
+										<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}" />
+										<field name="has_friendshipgroup" />
+										<field name="friendshipgroup_name" />
+									</group>
+								</group>
+							</page>
+							<page string="Special considerations" colspan="8" col="8">
+								<group colspan="8" col="8">
+									<group>
+										<field name="hcap" />
+										<field name="hcap_desc" />
+										<field name="hcap_specneeds" />
+									</group>
+									<group>
+										<field name="food_allergy" />
+										<field name="food_allergy_desc" />
+									</group>
+								</group>
+
+							</page>
+							<page string="Participants" colspan="8" col="8">
+								<field name="participant_ids" colspan="4" nolabel="1">
+									<tree string="Participants">
+										<field name="partner_id"
+											context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
+											domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]" />
+										/>
+
+										<field name="patrol" />
+										<field name="rel_phone" />
+
+									</tree>
+								</field>
+							</page>
+							<page string="Webshop">
+								<group colspan="4">
+									<field name="webshop_orderno" />
+									<field name="webshop_order_product_id" />
+									<button name="button_open_weborder_url" type="object"
+										string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail"
+										colspan="2" />
+								</group>
+							</page>
+							<page string="Administration" groups='event.group_event_manager'>
+								<group colspan="4">
+									<field name='signed_up' />
+									<field name='foreigners' />
+									<field name='agreements' />
+									<field name='internal_note' />
+
+								</group>
+							</page>
+						</notebook>
+					</group>
+				</xpath>
+
+			</field>
+		</record>
+
+		<!-- Registration inherited search <record id="view_dds_member_reg_info_search1" 
+			model="ir.ui.view"> <field name="name">event.event.dds_member.reg.inherit3</field> 
+			<field name="model">event.registration</field> <field name="inherit_id" ref="event.view_registration_search"/> 
+			<field name="arch" type="xml"> <xpath expr="/search/group/filter[@string='Status']" 
+			position="after"> <filter string="Afdeling" icon="terp-crm" domain="[]" context="{'group_by':'dep'}"/> 
+			<filter string="Udrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_to'}"/> 
+			<filter string="Hjemrejse" icon="terp-crm" domain="[]" context="{'group_by':'transport_from'}"/> 
+			</xpath> </field> </record> -->
+
+		<record model="ir.ui.view" id="portal_view_event_registration_form">
+			<field name="name">portal.registration.form</field>
+			<field name="model">event.registration</field>
+			<field name="arch" type="xml">
+				<form string="Event Registration" version="7.0">
+					<header>
+
+						<field name="state" nolabel="1" colspan="2" widget="statusbar"
+							statusbar_visible="draft,open,done" />
+					</header>
+					<sheet string="Registration">
+						<label for="partner_id" class="oe_edit_only" />
+						<h1>
+							<field name="partner_id" attrs="{'readonly': '1'}" />
+						</h1>
+						<group>
+							<group>
+								<field name="event_id" attrs="{'readonly': '1'}" />
+
+							</group>
+							<group>
+								<field name="nb_register" />
+							</group>
+							<group>
+
+
+								<field name="organization" />
+								<field name="scout_division" />
+								<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
+							</group>
+
+						</group>
+						<group>
+							<notebook colspan="8" col="8">
+								<page string="Contact">
+									<group>
+										<field name="contact_partner_id"
+											context="{'default_parent_id': partner_id, 'default_customer': True}"
+											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+										<field name="econ_partner_id"
+											context="{'default_parent_id': partner_id, 'default_customer': True}"
+											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+									</group>
+
+								</page>
+								<page string="Home Hospitality/Friendship Groups" colspan="8"
+									col="8">
+									<group colspan="8" col="8">
+										<group>
+											<field name="hh_precamp" />
+											<field name="hh_aftercamp" />
+										</group>
+										<group>
+											<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}" />
+											<field name="has_friendshipgroup" />
+											<field name="friendshipgroup_name" />
+										</group>
+									</group>
+								</page>
+								<page string="Special considerations" colspan="8" col="8">
+									<group colspan="8" col="8">
+										<group>
+											<field name="hcap" />
+											<field name="hcap_desc" />
+											<field name="hcap_specneeds" />
+										</group>
+										<group>
+											<field name="food_allergy" />
+											<field name="food_allergy_desc" />
+										</group>
+									</group>
+
+								</page>
+								<page string="Participants" colspan="8" col="8">
+									<field name="participant_ids" colspan="4" nolabel="1">
+										<tree string="Participants">
+											<field name="partner_id"
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]" />
+											<field name="patrol" />
+											<field name="rel_phone" />
+
+										</tree>
+									</field>
+								</page>
+								<page string="Webshop" groups='event.group_event_manager'>
+									<group colspan="4">
+										<field name="webshop_orderno" />
+										<field name="webshop_order_product_id" />
+										<button name="button_open_weborder_url" type="object"
+											string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail"
+											colspan="2" />
+									</group>
+								</page>
+								<page string="Administration" groups='event.group_event_manager'>
+									<group colspan="4">
+										<field name='signed_up' />
+										<field name='foreigners' />
+										<field name='agreements' />
+										<field name='internal_note' />
+
+									</group>
+								</page>
+							</notebook>
+						</group>
+
+
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="portal_view_event_registration_participant_form">
+			<field name="name">portal.registration.participant.form</field>
+			<field name="model">dds_camp.event.participant</field>
+			<field name="arch" type="xml">
+				<form string="Event Registration" version="7.0">
+					<group>
+						<group>
+							<field colspan="4" mode="form" name="partner_id"
+								context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
+								domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
+								nolabel="1" select="1">
+								<form string="Participant Details">
+									<field name="name" />
+									<field name="street" />
+									<field name="street2" />
+									<field name="zip" />
+									<field name="city" />
+									<field name="state_id" />
+									<field name="country_id" />
+									<field name="mobile" />
+
+									<field name="phone" />
+									<field name="email" />
+								</form>
+							</field>
+						</group>
+						<group>
+							<field name="state" invisible="1" />
+							<field name="patrol" />
+							<field name="rel_phone" />
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="portal_view_event_registration_tree">
+			<field name="name">portal.event.registration.tree</field>
+			<field name="model">event.registration</field>
+			<field name="arch" type="xml">
+				<tree string="Registration">
+					<field name="create_date" />
+					<field name="partner_id" />
+					<field name="name" />
+					<field name="email" />
+					<field name="event_id" />
+					<field name="nb_register" />
+					<field name="user_id" invisible="1" />
+					<field name="state" invisible="1" />
+
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="action_portal_event_registration_tree" model="ir.actions.act_window">
+			<field name="name">Registrations</field>
+
+			<field name="res_model">event.registration</field>
+			<field name="view_type">Form</field>
+
+		</record>
+		<!-- <record id="view_action_portal_event_registration_form" model="ir.actions.act_window.view"> 
+			<field name="name">Registrations</field> <field name="res_model">event.registration</field> 
+			<field name="view_mode">tree</field> <field name="view_id" ref="portal_view_event_registration_tree"/> 
+			<field name="act_window_id" ref="action_portal_event_registration_tree"/> 
+			</record> <record id="view_action_portal_event_registration_tree" model="ir.actions.act_window.view"> 
+			<field name="name">Registrations</field> <field name="res_model">event.registration</field> 
+			<field name="view_mode">form</field> <field name="view_id" ref="portal_view_event_registration_form"/> 
+			<field name="act_window_id" ref="action_portal_event_registration_tree"/> 
+			</record> -->
+		<menuitem id="menu_portal_registration" name="Registretion"
+			action="" parent="portal.portal_menu" sequence="25" />
+		<menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu"
+			name="Registration" sequence="40" parent="menu_portal_registration"
+			groups="portal.group_portal" />
+
+
+	</data>
+</openerp>
