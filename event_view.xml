@@ -200,7 +200,18 @@
                 	   	</group>
 
                 	</page>
-                	<page string="Webshop">
+                	<page string="Participants" colspan="8" col="8">
+        <field name="participant_ids" colspan="4" nolabel="1">
+                <tree string="Participants">
+                                        <field name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>/>
+                                        
+                                        <field name="patrol" />
+                                        <field name="rel_phone"/>
+					
+                                    </tree>
+</field>
+</page>
+                	<page string="Webshop" groups='event.group_event_manager'>
                 		<group colspan="4">
                 	         <field name="webshop_orderno"/>
                 	         <field name="webshop_order_product_id"/>
@@ -226,7 +237,36 @@
             </field>
         </record>
         
-        
+        <record model="ir.ui.view" id="portal_view_event_registration_participant.form">
+            <field name="name">portal.registration.participant.form</field>
+            <field name="model">dds_camp.event.participant</field>
+            <field name="arch" type="xml">
+                <form string="Event Registration" version="7.0">
+                	<field 
+                        colspan="4" 
+                        mode="form" 
+                        name="partner_id" 
+                        nolabel="1" 
+                        select="1">
+                        <form string="Participant Details">
+                            <field name="name"/>
+                             
+                                    <field name="street"/>
+                                    <field name="street2"/>
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="state_id"/>
+                                    <field name="country_id"/>
+                                    <field name="mobile"/>
+                                 	
+                                    <field name="phone"/>
+                                 	<field name="email"/>
+                             </form>
+                        </field>   	
+                                    
+                </form>
+        	</field>
+        </record>    
         
         <record model="ir.ui.view" id="portal_view_event_registration_tree">
             <field name="name">portal.event.registration.tree</field>
@@ -240,6 +280,7 @@
                     <field name="event_id" />
                     <field name="nb_register"/>
                     <field name="user_id" invisible="1"/>
+                    <field name="state" invisible="1"/> 
                     
                 </tree>
             </field>
@@ -253,7 +294,7 @@
             <field name="view_type">tree</field>
             
             </record>
-                
+        <!--         
         <record id="view_action_portal_event_registration_form" model="ir.actions.act_window.view">
             <field name="name">Registrations</field>
             <field name="res_model">event.registration</field>
@@ -268,7 +309,7 @@
             <field name="view_id" ref="portal_view_event_registration_form"/>
             <field name="act_window_id" ref="action_portal_event_registration_tree"/>
         </record>
-
+ 		-->
 		<menuitem id="menu_portal_registration" name="Registretion" action="" parent="portal.portal_menu" sequence="25"/>
         <menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu" name="Registration" sequence="40" parent="menu_portal_registration" groups="portal.group_portal"/>
         
