@@ -94,6 +94,7 @@
                 	   	</group>
 
                 	</page>
+                	<page string="Participants" colspan="8" col="8">
                 	<field name="participant_ids" colspan="4" nolabel="1">
                 		<tree string="Participants">
                                         <field name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>/>
