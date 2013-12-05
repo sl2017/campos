@@ -228,7 +228,7 @@
         
         
         
-        <record model="ir.ui.view" id="portal_view_event_registration_form">
+        <record model="ir.ui.view" id="portal_view_event_registration_tree">
             <field name="name">portal.event.registration.tree</field>
             <field name="model">event.registration</field>
             <field name="arch" type="xml">
