@@ -118,7 +118,11 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
+<<<<<<< HEAD
         'scout_division' : fields.char('Division/District', size=64),
+=======
+        'scout_division' : fields.text('Division/District', size=64),
+>>>>>>> branch 'master' of ssh://hhg@dev.gabelgaard.org/home/hhg/git/dds_camp
         'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),       
         
         # Contact
