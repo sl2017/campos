@@ -54,6 +54,7 @@
             	<field name="date_closed" position="after">
             	<field name="organization"/>
                 <field name="scout_division"/>
+                <field name="municipality_id/>"
                 <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
                 </field>
                 <xpath expr="/form/sheet/group" position="after">
@@ -133,6 +134,7 @@
         </record>	
         -->
         
+        <!--  Portal version --> 
         <record model="ir.ui.view" id="portal_view_event_registration_form">
             <field name="name">portal.registration.form</field>
             <field name="model">event.registration</field>
@@ -160,6 +162,7 @@
                             
                             <field name="organization"/>
                 <field name="scout_division"/>
+                <field name="municipality_id/>"
                 <field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
                 </group>
                 
