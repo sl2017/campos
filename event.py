@@ -26,6 +26,18 @@ from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 
 
+class dds_camp_municipality(osv.osv):
+    """ Kommuner """
+    _description = 'DK Kommuner'
+    _name = 'dds_camp.municipality'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=64),
+        'numer': fields.integer('Number')
+    }
+dds_camp_event_participant()
+
+
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
     _inherit = 'event.event'
@@ -46,6 +58,18 @@ class event_event(osv.osv):
 
 event_event()
 
+class dds_camp_event_participant_day(osv.osv):
+    """ Event participant day """
+    _description = 'Event participant day'
+    _name = 'dds_camp.event.participant.day'
+    _order = 'date'
+    _columns = {
+        'participant_id': fields.many2one('dds_camp.event.participant', 'Participant', required=True, select=True, ondelete='cascade'),
+        'date' : fields.date('Date'),
+        'state': fields.boolean('Participate'),
+        }
+dds_camp_event_participant_day()    
+ 
 class dds_camp_event_participant(osv.osv):
     """ Event participants """
     _description = 'Event participant'
@@ -57,7 +81,8 @@ class dds_camp_event_participant(osv.osv):
         'name': fields.char('Name', size=64),
         'rel_phone': fields.char('Relatives phonenumber', size=64),
         'patrol' : fields.char('Patrol name', size=64),
-        'appr_leader' : fields.boolean('Leder godkent')
+        'appr_leader' : fields.boolean('Leder godkent'),
+        'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Parti'),
     }
 dds_camp_event_participant()
     
@@ -93,7 +118,8 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
-        'scout_division' : fields.char('Division/District', size=64),       
+        'scout_division' : fields.char('Division/District', size=64),
+        'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),       
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
