@@ -26,6 +26,18 @@ from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 
 
+class dds_camp_municipality(osv.osv):
+    """ Kommuner """
+    _description = 'DK Kommuner'
+    _name = 'dds_camp.municipality'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=64),
+        'numer': fields.integer('Number')
+    }
+dds_camp_event_participant()
+
+
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
     _inherit = 'event.event'
@@ -93,7 +105,8 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
-        'scout_division' : fields.text('Division/District', size=64),       
+        'scout_division' : fields.text('Division/District', size=64),
+        'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),       
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
