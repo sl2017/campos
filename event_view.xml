@@ -43,9 +43,10 @@
 			<field name="inherit_id" ref="event.view_event_registration_form" />
 			<field name="arch" type="xml">
 				<field name="date_closed" position="after">
-					<field name="organization" />
-					<field name="scout_division" />
-					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
+					<field name="organization"/>
+					<field name="scout_division"/>
+					<field name="municipality_id"/>
+					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
 				</field>
 				<xpath expr="/form/sheet/group" position="after">
 
@@ -53,72 +54,63 @@
 						<notebook colspan="8" col="8">
 							<page string="Contact">
 								<group>
-									<field name="contact_partner_id"
-										context="{'default_parent_id': partner_id, 'default_customer': True}"
-										domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
-									<field name="econ_partner_id"
-										context="{'default_parent_id': partner_id, 'default_customer': True}"
-										domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+									<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+									<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
 								</group>
 
 							</page>
-							<page string="Home Hospitality/Friendship Groups" colspan="8"
-								col="8">
+							<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
 								<group colspan="8" col="8">
 									<group>
-										<field name="hh_precamp" />
-										<field name="hh_aftercamp" />
+										<field name="hh_precamp"/>
+										<field name="hh_aftercamp"/>
 									</group>
 									<group>
-										<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}" />
-										<field name="has_friendshipgroup" />
-										<field name="friendshipgroup_name" />
+										<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
+										<field name="has_friendshipgroup"/>
+										<field name="friendshipgroup_name"/>
 									</group>
 								</group>
 							</page>
 							<page string="Special considerations" colspan="8" col="8">
 								<group colspan="8" col="8">
 									<group>
-										<field name="hcap" />
-										<field name="hcap_desc" />
-										<field name="hcap_specneeds" />
+										<field name="hcap"/>
+										<field name="hcap_desc"/>
+										<field name="hcap_specneeds"/>
 									</group>
 									<group>
-										<field name="food_allergy" />
-										<field name="food_allergy_desc" />
+										<field name="food_allergy"/>
+										<field name="food_allergy_desc"/>
 									</group>
 								</group>
 
 							</page>
 							<page string="Participants" colspan="8" col="8">
-								<field name="participant_ids" colspan="4" nolabel="1">
-									<tree string="Participants">
-										<field name="partner_id"
-											context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
-											domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]" />
-										/>
+									<field name="participant_ids" colspan="4" nolabel="1">
+										<tree string="Participants">
+											<field name="partner_id"
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>
+											<field name="patrol"/>
+											<field name="rel_phone"/>
 
-										<field name="patrol" />
-										<field name="rel_phone" />
-
-									</tree>
-								</field>
-							</page>
+										</tree>
+									</field>
+								</page>
 							<page string="Webshop">
 								<group colspan="4">
-									<field name="webshop_orderno" />
-									<field name="webshop_order_product_id" />
-									<button name="button_open_weborder_url" type="object"
-										string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail"
-										colspan="2" />
+									<field name="webshop_orderno"/>
+									<field name="webshop_order_product_id"/>
+									<button name="button_open_weborder_url" type="object" string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail" colspan="2"/>
 								</group>
 							</page>
-							<page string="Administration" groups='event.group_event_manager'>
+							<page string="Administration" groups="event.group_event_manager">
 								<group colspan="4">
-									<field name='signed_up' />
-									<field name='foreigners' />
-									<field name='agreements' />
-									<field name='internal_note' />
+									<field name="signed_up"/>
+									<field name="foreigners"/>
+									<field name="agreements"/>
+									<field name="internal_note"/>
 
 								</group>
 							</page>
@@ -214,9 +206,9 @@
 								<page string="Participants" colspan="8" col="8">
 									<field name="participant_ids" colspan="4" nolabel="1">
 										<tree string="Participants">
-											<field name="partner_id"
-												context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
-												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]" />
+											<field name="partner_id"/>
+												<!-- context="{'default_parent_id': registration_id.partner_id, 'default_customer': True}"
+												domain="[('parent_id','=',registration_id.partner_id),('is_company','=',False)]"  -->
 											<field name="patrol" />
 											<field name="rel_phone" />
 
@@ -255,15 +247,15 @@
 			<field name="name">portal.registration.participant.form</field>
 			<field name="model">dds_camp.event.participant</field>
 			<field name="arch" type="xml">
+				
 				<form string="Event Registration" version="7.0">
 					<group>
 						<group>
-							<field colspan="4" mode="form" name="partner_id"
-								context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
-								domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
-								nolabel="1" select="1">
+							<field colspan="4" mode="form" name="partner_id" context="{'default_parent_id': parent.partner_id, 'default_customer': True}" domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]" nolabel="1" select="1"/>
+								<!--  
 								<form string="Participant Details">
-									<field name="name" />
+									<field name="partner_id" />
+									<field name="appr_leader" />
 									<field name="street" />
 									<field name="street2" />
 									<field name="zip" />
@@ -273,17 +265,19 @@
 									<field name="mobile" />
 
 									<field name="phone" />
-									<field name="email" />
+									<field name="email" /> 
 								</form>
+								
 							</field>
+							-->
 						</group>
 						<group>
-							
-							<field name="patrol" />
-							<field name="rel_phone" />
+							<field name="patrol"/>
+							<field name="rel_phone"/>
 						</group>
 					</group>
 				</form>
+
 			</field>
 		</record>
 
@@ -328,6 +322,29 @@
 			name="Registration" sequence="40" parent="menu_portal_registration"
 			groups="portal.group_portal" />
 
+		<!-- Municipality -->
+		<record model="ir.ui.view" id="municipality_tree">
+            <field name="name">municipality.tree</field>
+            <field name="model">dds_camp.municipality</field>
+            <field name="arch" type="xml">
+                <tree string="Municipality">
+                    <field name="number"/>
+                    <field name="name"/>
+                    
+                    
+                </tree>
+            </field>
+        </record>
+		
+		<record id="action_municipality_tree" model="ir.actions.act_window">
+			<field name="name">Municipality</field>
 
+			<field name="res_model">dds_camp.municipality</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_municipality_tree" id="event_municipality_menu"
+			name="Municipality" sequence="40" parent="base.menu_marketing_config_root"/>
 	</data>
 </openerp>

@@ -33,9 +33,9 @@ class dds_camp_municipality(osv.osv):
     _order = 'name'
     _columns = {
         'name': fields.char('Name', size=64),
-        'numer': fields.integer('Number')
+        'number': fields.integer('Number')
     }
-dds_camp_event_participant()
+dds_camp_municipality()
 
 
 class event_event(osv.osv):
@@ -67,6 +67,7 @@ class dds_camp_event_participant_day(osv.osv):
         'participant_id': fields.many2one('dds_camp.event.participant', 'Participant', required=True, select=True, ondelete='cascade'),
         'date' : fields.date('Date'),
         'state': fields.boolean('Participate'),
+        'name' : fields.char('Name', size=64)
         }
 dds_camp_event_participant_day()    
  
@@ -82,7 +83,7 @@ class dds_camp_event_participant(osv.osv):
         'rel_phone': fields.char('Relatives phonenumber', size=64),
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkent'),
-        'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Parti'),
+        'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Deltagelse'),
     }
 dds_camp_event_participant()
     
@@ -118,11 +119,7 @@ class event_registration(osv.osv):
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
-<<<<<<< HEAD
         'scout_division' : fields.char('Division/District', size=64),
-=======
-        'scout_division' : fields.text('Division/District', size=64),
->>>>>>> branch 'master' of ssh://hhg@dev.gabelgaard.org/home/hhg/git/dds_camp
         'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),       
         
         # Contact
