@@ -33,7 +33,9 @@
     'data': [
              #'security/ir.model.access.csv',
              ],
-    "update_xml" : ["event_view.xml", 
+    "update_xml" : ["dds_camp_view.xml",
+                    "event_view.xml",
+                    "portal_view.xml" 
                     ],
     "installable": True,
     'auto_install': False,

@@ -20,10 +20,11 @@
 ##############################################################################
 
 
-from datetime import datetime, timedelta
+import datetime
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class dds_camp_municipality(osv.osv):
@@ -69,6 +70,12 @@ class dds_camp_event_participant_day(osv.osv):
         'state': fields.boolean('Participate'),
         'name' : fields.char('Name', size=64)
         }
+    
+    def button_reg_confirm(self, cr, uid, ids, context=None, *args):
+        return self.write(cr, uid, ids, {'state': True})
+             
+    def button_reg_cancel(self, cr, uid, ids, context=None, *args):
+        return self.write(cr, uid, ids, {'state': False})
 dds_camp_event_participant_day()    
  
 class dds_camp_event_participant(osv.osv):
@@ -78,13 +85,68 @@ class dds_camp_event_participant(osv.osv):
     _order = 'name'
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
-        'partner_id': fields.many2one('res.partner', 'Participant'),        
-        'name': fields.char('Name', size=64),
+        'partner_id': fields.many2one('res.partner', 'Participant'),  
+        # The following fields are synced to res_partner on Write      
+        'name': fields.char('Name', size=128, required=True, select=True),
+        'street': fields.char('Street', size=128),
+        'street2': fields.char('Street2', size=128),
+        'zip': fields.char('Zip', change_default=True, size=24),
+        'city': fields.char('City', size=128),
+        'state_id': fields.many2one("res.country.state", 'State'),
+        'country_id': fields.many2one('res.country', 'Country'),
+        'email': fields.char('Email', size=240),
+        'phone': fields.char('Phone', size=64),
+        # end of res_partner fields
+        
         'rel_phone': fields.char('Relatives phonenumber', size=64),
+
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkent'),
-        'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Deltagelse'),
+        'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
     }
+    
+    def action_create_day_lines(self, cr, uid, ids, context):
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        participant = self.browse(cr, uid, ids)[0]
+        dates = {}
+       
+        if participant.days_ids:
+            for d in participant.days_ids:
+                dates[d.date] = d.id
+        from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+        to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+        print "dates", from_date, to_date
+        dt = from_date
+        delta = datetime.timedelta(days=1)
+        while dt <= to_date:
+            if dt not in dates.keys():
+                day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                         'date' : dt,
+                                         'state': True})
+                dt += delta
+            else:
+                day_obj.write(cr, SUPERUSER_ID, [dates[dt]], {'state' : True})    
+     
+    def action_create_day_some(self, cr, uid, ids, context):
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        participant = self.browse(cr, uid, ids)[0]
+        dates = {}
+       
+        if participant.days_ids:
+            for d in participant.days_ids:
+                dates[d.date] = d.id
+        from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+        to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+        print "dates", from_date, to_date
+        dt = from_date
+        delta = datetime.timedelta(days=1)
+        while dt <= to_date:
+            if dt not in dates.keys():
+                day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                         'date' : dt,
+                                         'state': False})
+                dt += delta
+                
 dds_camp_event_participant()
     
 class event_registration(osv.osv):

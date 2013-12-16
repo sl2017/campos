@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<!-- Municipality -->
+		<record model="ir.ui.view" id="municipality_tree">
+			<field name="name">municipality.tree</field>
+			<field name="model">dds_camp.municipality</field>
+			<field name="arch" type="xml">
+				<tree string="Municipality">
+					<field name="number" />
+					<field name="name" />
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_municipality_tree" model="ir.actions.act_window">
+			<field name="name">Municipality</field>
+
+			<field name="res_model">dds_camp.municipality</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_municipality_tree" id="event_municipality_menu"
+			name="Municipality" sequence="40" parent="base.menu_marketing_config_root" />
+	</data>
+</openerp>
