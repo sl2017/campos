@@ -26,5 +26,35 @@
 
 		<menuitem action="action_municipality_tree" id="event_municipality_menu"
 			name="Municipality" sequence="40" parent="base.menu_marketing_config_root" />
+			
+		<!-- Scout Organizations -->
+		
+		<record model="ir.ui.view" id="scoutorg_tree">
+			<field name="name">scoutorg.tree</field>
+			<field name="model">dds_camp.scout.org</field>
+			<field name="arch" type="xml">
+				<tree string="Scout Organizations">
+					
+					<field name="name" />
+					<field name="country_id" />
+					<field name="sex" />
+					<field name="worldorg" />
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_scoutorg_tree" model="ir.actions.act_window">
+			<field name="name">Scout Organizations</field>
+
+			<field name="res_model">dds_camp.scout.org</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_scoutorg_tree" id="event_scoutorg_menu"
+			name="Scout Orgs" sequence="50" parent="base.menu_marketing_config_root" />
+			
 	</data>
 </openerp>

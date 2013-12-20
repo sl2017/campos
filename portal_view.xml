@@ -28,7 +28,8 @@
 							</group>
 							<group>
 
-
+								<field name="country_id" on_change="onchange_country_id(country_id)"/>
+								<field name="organization_id"/>
 								<field name="organization" />
 								<field name="scout_division" />
 								<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
@@ -40,10 +41,12 @@
 								<page string="Contact">
 									<group>
 										<field name="contact_partner_id"
-											context="{'default_parent_id': partner_id, 'default_customer': True}"
+											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'show_email': True}"  
+											options='{"always_reload": True, "highlight_first_line": True}'
 											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
 										<field name="econ_partner_id"
-											context="{'default_parent_id': partner_id, 'default_customer': True}"
+											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'show_email': True}"
+											options='{"always_reload": True, "highlight_first_line": True}'
 											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
 									</group>
 
@@ -124,11 +127,12 @@
 				<form string="Event Registration" version="7.0">
 					<group>
 						<group>
-							<field colspan="4" mode="form" name="partner_id"
-								context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only' : True}"
+							
+							<field colspan="4" mode="form" name="partner_id" on_change="onchange_partner_id(partner_id)"
+								context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': 1}"
 								domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
-								nolabel="1" select="1" />
-							 
+								 select="1" />
+							 <!-- 
 								<field name="appr_leader"  groups='event.group_event_manager'/>
 								<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}"/> 
 								<field name="street" /> 
@@ -143,7 +147,7 @@
 								
 							
 							<field name="rel_phone" />
-							<field name="patrol" />
+							<field name="patrol" />  -->
 						</group>
 						<group col="4">
 							<field name="days_ids" colspan="4">

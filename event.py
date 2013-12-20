@@ -25,7 +25,23 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
+
+class dds_camp_scoutorg(osv.osv):
+    """ Scout Organizations"""
+    _description = 'Scout Organizations'
+    _name = 'dds_camp.scout.org'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=128),
+        'country_id': fields.many2one('res.country', 'Country'),
+        'sex' : fields.char('Sex', size=128),
+        'worldorg': fields.selection([('wagggs','WAGGGS'),
+                                      ('wosm', 'WOSM'),
+                                      ('other','Other')],'World Organization'),
+    }
+dds_camp_scoutorg()
 
 class dds_camp_municipality(osv.osv):
     """ Kommuner """
@@ -105,6 +121,10 @@ class dds_camp_event_participant(osv.osv):
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
     }
     
+    _sql_constraints = [
+        ('participation_uniq', 'unique(registration_id, partner_id)', 'Participant must be unique!'),
+    ]
+    
     def action_create_day_lines(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
         participant = self.browse(cr, uid, ids)[0]
@@ -119,7 +139,7 @@ class dds_camp_event_participant(osv.osv):
         dt = from_date
         delta = datetime.timedelta(days=1)
         while dt <= to_date:
-            if dt not in dates.keys():
+            if dt.strftime(DEFAULT_SERVER_DATE_FORMAT) not in dates.keys():
                 day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
                                          'date' : dt,
                                          'state': True})
@@ -141,12 +161,43 @@ class dds_camp_event_participant(osv.osv):
         dt = from_date
         delta = datetime.timedelta(days=1)
         while dt <= to_date:
-            if dt not in dates.keys():
+            if dt.strftime(DEFAULT_SERVER_DATE_FORMAT) not in dates.keys():
                 day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
                                          'date' : dt,
                                          'state': False})
                 dt += delta
-                
+        
+    def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):
+        partner_obj = self.pool.get('res.partner')
+        partner = partner_obj.browse(cr, uid, [partner_id])[0]
+        res = {}
+        values = {}
+        for k in ['name', 'street', 'street2', 'email','phone']:
+            values.update({k : getattr(partner, k)})
+        values.update({'state_id' : partner.state_id.id,
+                       'country_id' : partner.country_id.id})
+        res['value'] = values
+        print res
+        return res
+    
+#     def write(self, cr, uid, ids, vals, context=None):
+#         res = super(dds_camp_event_participant, self).write(cr, uid, ids, vals, context=context)
+#         partner_obj = self.pool.get('res.partner')
+#         print "write", ids, vals 
+#         values = {}
+#         for k in ['name', 'street', 'street2', 'state_id', 'country_id', 'email','phone']:
+#             if vals.has_key(k):    
+#                 values.update({k : vals[k]})
+#             if vals.has_key('partner_id'):
+#                 partner_obj.write(cr,uid,[vals['partner_id']], values, context)
+#                 print "write", values
+#             else:
+#                 #values.update({'parent_id' : par.registration_id.partner_id.id})
+#                 partner_id = partner_obj.create(cr,uid, values, context)
+#                 self.write(cr, uid, {'partner_id': partner_id}, context)
+#                 print "create", partner_id, values            
+#         return res
+               
 dds_camp_event_participant()
     
 class event_registration(osv.osv):
@@ -171,7 +222,8 @@ class event_registration(osv.osv):
         'webshop_orderno': fields.integer('Webshop Order No'),
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
-        
+        'country_id': fields.many2one('res.country', 'Country'),
+        'organization_id': fields.many2one('dds_camp.scout.org', 'Scout Organization'),
         'organization': fields.selection([('dds','Det Danske Spejderkorps'),
                                           ('dbs','Danske Baptisters Spejderkorps'),
                                           ('dgp',u'De Grønne Pigespejdere'),
@@ -218,6 +270,8 @@ class event_registration(osv.osv):
         # Home Hsopitality
         'hh_precamp' : fields.boolean('Would like home hospitality before the camp'),
         'hh_aftercamp' : fields.boolean('Would like home hospitality after the camp'),
+        'hh_precamp_prv' : fields.boolean('Can provide home hospitality before the camp'),
+        'hh_aftercamp_prv' : fields.boolean('Can provide home hospitality after the camp'),
         'want_friendshipgroup': fields.boolean('Want a friendship group'),
         'has_friendshipgroup' : fields.boolean('Do you have a friendship group participate in the camp'),
         'friendshipgroup_name' : fields.char('Name of friendship group'),
@@ -231,11 +285,17 @@ class event_registration(osv.osv):
         #Internal fields
         'agreements': fields.text('What have been arranged'),
         'internal_note' : fields.text('Internal note'),
-        
-                
-                
-                
+    
     }
+    
+        
+    def onchange_country_id(self, cr, uid, ids, country_id, context=None):       
+                
+        res = {}           
+        # - set a domain on organization_id
+        res['domain'] = {'organization_id': [('country_id','=',country_id)]}      
+        return res
+    
     
     def button_open_weborder_url(self, cr, uid, ids, context): 
         """ Open Pre Registretion
