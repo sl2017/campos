@@ -14,6 +14,9 @@
 							statusbar_visible="draft,open,done" />
 					</header>
 					<sheet string="Registration">
+						<div class="oe_right oe_button_box">
+                            <button name="%(dds_camp.action_portal_event_participants_tree)d" type="action" string="Participants" help="Register Participants for this Group"/>
+                        </div>
 						<label for="partner_id" class="oe_edit_only" />
 						<h1>
 							<field name="partner_id" attrs="{'readonly': '1'}" />
@@ -41,11 +44,11 @@
 								<page string="Contact">
 									<group>
 										<field name="contact_partner_id"
-											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'show_email': True}"  
+											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'add_email': True, 'form_view_ref':'dds_camp.portal_partner_simple_form'}"  
 											options='{"always_reload": True, "highlight_first_line": True}'
 											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
 										<field name="econ_partner_id"
-											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'show_email': True}"
+											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'add_email': True, 'form_view_ref':'dds_camp.portal_partner_simple_form'}"
 											options='{"always_reload": True, "highlight_first_line": True}'
 											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
 									</group>
@@ -55,8 +58,10 @@
 									col="8">
 									<group colspan="8" col="8">
 										<group>
-											<field name="hh_precamp" />
-											<field name="hh_aftercamp" />
+											<field name="hh_precamp" attrs="{'invisible': [('foreigners','=',True)]}"/>
+											<field name="hh_aftercamp" attrs="{'invisible': [('foreigners','=',True)]}"/>
+											<field name="hh_precamp_prv" attrs="{'invisible': [('foreigners','=',False)]}"/>
+											<field name="hh_aftercamp_prv" attrs="{'invisible': [('foreigners','=',False)]}"/>
 										</group>
 										<group>
 											<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}" />
@@ -82,11 +87,13 @@
 								<page string="Participants" colspan="8" col="8">
 									<field name="participant_ids" colspan="4" nolabel="1">
 										<tree string="Participants">
-											<field name="partner_id"
+											<field name="name"/>
+											<!-- 
 												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
-												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
 											<field name="patrol"/>
-											<field name="rel_phone"/>
+											<field name="day_summery"/>
 
 										</tree>
 									</field>
@@ -127,12 +134,12 @@
 				<form string="Event Registration" version="7.0">
 					<group>
 						<group>
-							
+							<field name="registration_id"/>
 							<field colspan="4" mode="form" name="partner_id" on_change="onchange_partner_id(partner_id)"
-								context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': 1}"
-								domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"
-								 select="1" />
-							 <!-- 
+								context="{'default_parent_id': registration_id.partner_id, 'default_customer': True, 'default_is_company': False'name_only': 1}"
+								domain="[('parent_id','=',registration_id.partner_id),('is_company','=',False)]"
+								 select="1" string="Select a Contact as Participant"/>
+							 <group string="Or add a new participant below">
 								<field name="appr_leader"  groups='event.group_event_manager'/>
 								<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}"/> 
 								<field name="street" /> 
@@ -145,12 +152,14 @@
 								<field name="phone" /> 
 								<field name="email" /> 
 								
-							
+								<field name="birth" on_change="onchange_birth(birth)"/>
+								<field name="age_group"/>
 							<field name="rel_phone" />
-							<field name="patrol" />  -->
+							<!--  <field name="patrol" />  -->  
+							</group>
 						</group>
 						<group col="4">
-							<field name="days_ids" colspan="4">
+							<field name="days_ids" colspan="4" nolabel="1">
 								<tree string="Participation" editable="top">
 									<field name="date" readonly="1"/>
 									<field name="state" />
@@ -214,7 +223,76 @@
 		<menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu"
 			name="Registration" sequence="40" parent="menu_portal_registration"
 			groups="portal.group_portal" />
+			
+			
+		<!-- Simplified partner form -->
+		
+		<record id="portal_partner_simple_form" model="ir.ui.view">
+            <field name="name">res.partner.simplified.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Contact" version="7.0">
+                    
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name"/>
+                    
+                        </div>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name" />
+                        </h1>
+                        <field name="parent_id" readonly="1"/>
+                        <group>
+                            <label for="street" string="Address"/>
+                            <div>
+                                <field name="street" placeholder="Street..."/>
+                                <field name="street2"/>
+                                <div class="address_format">
+                                    <field name="city" placeholder="City" style="width: 40%%"/>
+                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)"/>
+                                    <field name="zip" placeholder="ZIP" style="width: 20%%"/>
+                                </div>
+                                <field name="country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}'/>
+                            </div>
+                            <field name="email" required="context.get('force_email', False)"/>
+                            <field name="phone"/>
+                            <field name="mobile"/>
+                        </group>
+                    </div>
+                </form>
+            </field>
+        </record>
+			
+			
+		<record id="dds_camp_event_participant_form" model="ir.ui.view">
+            <field name="name">dds_camp.event.participant.form</field>
+            <field name="model">dds_camp.event.participant</field>
+            <field name="arch" type="xml">	
+			<tree string="Participants">
+											<field name="name"/>
+											<!-- 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
+											<!-- <field name="patrol"/>  -->
+											<field name="day_summery"/>
 
+										</tree>
+										</field>
+										</record>
+										
+										
+		<record id="action_portal_event_participants_tree" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+
+			<field name="res_model">dds_camp.event.participant</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_registration_id': active_id, 'default_registration_id': active_id}</field>
+        
+		</record>
+										
+		
 	</data>
 </openerp>
 		

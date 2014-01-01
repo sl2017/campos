@@ -51,14 +51,26 @@
 					<field name="municipality_id"/>
 					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
 				</field>
-				<xpath expr="/form/sheet/group" position="after">
+				<!-- 
+				<field name="user_id" position="after">
+					<field name="agegroup_ids" colspan="4" nolabel="1">
+								<tree>
+									<field name="age_group"/>
+									<field name="pre_reg"/>
+									<field name="number"/>
+					
+					</tree>
+					</field>
+				</field>
+				 -->
+ 				<xpath expr="/form/sheet/group" position="after">
 
 					<group>
 						<notebook colspan="8" col="8">
 							<page string="Contact">
 								<group>
-									<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
-									<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+									<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+									<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
 								</group>
 
 							</page>
@@ -94,11 +106,13 @@
 							<page string="Participants" colspan="8" col="8">
 									<field name="participant_ids" colspan="4" nolabel="1">
 										<tree string="Participants">
-											<field name="partner_id"
+											<field name="name"/>
+											<!-- 
 												context="{'default_parent_id': parent.partner_id, 'default_customer': True}"
 												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>
+											 -->	
 											<field name="patrol"/>
-											<field name="rel_phone"/>
+											<field name="day_summery"/>
 
 										</tree>
 									</field>

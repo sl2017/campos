@@ -43,10 +43,15 @@ class res_partner(osv.osv):
                 name = name.replace('\n\n','\n')
             if context.get('show_email') and record.email:
                 name = "%s <%s>" % (name, record.email)
+            if context.get('add_email') and record.email:
+                name = "%s\n<%s>" % (name, record.email)    
             if context.get('name_only'):
                 name = record.name    
             res.append((record.id, name))
         return res
+    
+    
+    
 
 res_partner()
 

@@ -93,12 +93,102 @@ class dds_camp_event_participant_day(osv.osv):
     def button_reg_cancel(self, cr, uid, ids, context=None, *args):
         return self.write(cr, uid, ids, {'state': False})
 dds_camp_event_participant_day()    
- 
+
+
+class dds_camp_event_participant_agegroup(osv.osv):
+    """ Event participants by Age Group """
+    _description = 'Event participant by Age Group'
+    _name = 'dds_camp.event.participant'
+    _order = 'age_group'
+
+    def _calc_number(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for ag in self.browse(cr, uid, ids, context=context):
+            nbr = 0
+            for par in ag.registration_id.participant_ids:
+                if par.age_group == ag.age_group:
+                    nbr += 1
+            res[ag.id] = {'number': nbr}
+        return res
+                
+    _columns = {
+        'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),        
+        'age_group' : fields.selection([('06-08','Age 6 - 8'),
+                                          ('09-10','Age 9 - 10'),
+                                          ('11-12',u'Age 11 - 12'),
+                                          ('13-16', 'Age 13 - 16'),
+                                          ('17-22', 'Age 17 - 22'),
+                                          ('22+','Age 22+ and leaders')],'Age group',required=True),
+        'pre_reg' : fields.integer('Number of preregistered'),        
+        'number': fields.function(_calc_number, type = 'integer', string='Number of participants', method=True, multi='PART' ),
+    }
+    
+dds_camp_event_participant_agegroup() 
+   
 class dds_camp_event_participant(osv.osv):
     """ Event participants """
     _description = 'Event participant'
     _name = 'dds_camp.event.participant'
     _order = 'name'
+    
+    def _calc_summery(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for par in self.browse(cr, uid, ids, context=context):
+            dates= []
+            full = True
+            for d in par.days_ids:
+                if d.state:
+                    dates.append(d.date)
+                else:
+                    full = False
+            if full:
+                res[par.id] = {'day_summery' : _('Full periode')}
+            else:
+                dates.sort()
+                text = ''
+                for d in dates:
+                    text += ',' + d[8:]
+                res[par.id] = {'day_summery' : text[1:]}    
+        return res
+    
+    def _age(self, date_of_birth_str, date_begin_str):
+        if date_of_birth_str:
+            date_of_birth = datetime.datetime.strptime(date_of_birth_str, '%Y-%m-%d').date()
+            date_begin = datetime.datetime.strptime(date_begin_str, '%Y-%m-%d').date()
+            if date_of_birth >= date_begin.replace(year = date_of_birth.year):
+                return date_begin.year - date_of_birth.year - 1
+            else:
+                return date_begin.year - date_of_birth.year
+        else:
+            return False
+    
+    def onchange_birth(self, cr, uid, ids, birth, context=None):
+        age = self._age(birth, '2013-07-22')
+        ag = False
+        if age >= 6 and age <= 8:
+            ag = '06-08'
+        if age >= 9 and age <= 10:
+            ag = '09-10'
+        if age >= 11 and age <= 12:
+            ag = '11-12'
+        if age >= 13 and age <= 16:
+            ag = '13-16'
+        if age >= 17 and age <= 22:
+            ag = '17-22'
+        if age > 22:
+            ag = '22+'
+            
+        res = {'values' : {'age_group': ag}}    
+        return res
+    
+    def _get_pars_from_days(self, cr, uid, days_ids, context=None):
+        days = self.pool.get('dds_camp.event.participant.day').browse(cr, uid, days_ids, context=context)
+        print '_get_pars_from_days', days
+        par_ids = [day.participant_id.id for day in days if day.participant_id]
+        return par_ids
+    
+    
+            
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
         'partner_id': fields.many2one('res.partner', 'Participant'),  
@@ -115,10 +205,22 @@ class dds_camp_event_participant(osv.osv):
         # end of res_partner fields
         
         'rel_phone': fields.char('Relatives phonenumber', size=64),
+        'birth' : fields.date('Birth date'),
 
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkent'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
+        'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
+                                       #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
+        'age_group' : fields.selection([('06-08','Age 6 - 8'),
+                                          ('09-10','Age 9 - 10'),
+                                          ('11-12',u'Age 11 - 12'),
+                                          ('13-16', 'Age 13 - 16'),
+                                          ('17-22', 'Age 17 - 22'),
+                                          ('22+','Age 22+ and leaders')],'Age group'),
+         'memberno' : fields.char('Membership number', size=32, help='Own reference number'),
+         'imported_bm' : fields.boolean(u'Imported from Blåt Medlem')       
+        
     }
     
     _sql_constraints = [
@@ -128,45 +230,38 @@ class dds_camp_event_participant(osv.osv):
     def action_create_day_lines(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
         participant = self.browse(cr, uid, ids)[0]
-        dates = {}
-       
+               
         if participant.days_ids:
-            for d in participant.days_ids:
-                dates[d.date] = d.id
-        from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
-        to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-        print "dates", from_date, to_date
-        dt = from_date
-        delta = datetime.timedelta(days=1)
-        while dt <= to_date:
-            if dt.strftime(DEFAULT_SERVER_DATE_FORMAT) not in dates.keys():
+                day_obj.write(cr, SUPERUSER_ID, [day.id for day in participant.days_ids], {'state' : True})    
+        else:
+            from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
                 day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
-                                         'date' : dt,
-                                         'state': True})
+                                             'date' : dt,
+                                             'state': True})
                 dt += delta
-            else:
-                day_obj.write(cr, SUPERUSER_ID, [dates[dt]], {'state' : True})    
+                
      
     def action_create_day_some(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
         participant = self.browse(cr, uid, ids)[0]
-        dates = {}
        
-        if participant.days_ids:
-            for d in participant.days_ids:
-                dates[d.date] = d.id
-        from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
-        to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-        print "dates", from_date, to_date
-        dt = from_date
-        delta = datetime.timedelta(days=1)
-        while dt <= to_date:
-            if dt.strftime(DEFAULT_SERVER_DATE_FORMAT) not in dates.keys():
+        if not participant.days_ids:
+            from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
                 day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
                                          'date' : dt,
                                          'state': False})
                 dt += delta
-        
+    
     def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):
         partner_obj = self.pool.get('res.partner')
         partner = partner_obj.browse(cr, uid, [partner_id])[0]
@@ -222,6 +317,9 @@ class event_registration(osv.osv):
         'webshop_orderno': fields.integer('Webshop Order No'),
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
+        'agegroup_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Age grouping.'),
+        
+        
         'country_id': fields.many2one('res.country', 'Country'),
         'organization_id': fields.many2one('dds_camp.scout.org', 'Scout Organization'),
         'organization': fields.selection([('dds','Det Danske Spejderkorps'),
@@ -234,7 +332,8 @@ class event_registration(osv.osv):
                                           ('wosm', 'WOSM'),
                                           ('other','Other')],'Scout Organization',required=True),
         'scout_division' : fields.char('Division/District', size=64),
-        'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),       
+        'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),  
+        'ddsgroup': fields.integer('DDS Gruppenr'),     
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
