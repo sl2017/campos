@@ -21,7 +21,7 @@
 
 
 import datetime
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -39,6 +39,7 @@ class dds_camp_scoutorg(osv.osv):
         'sex' : fields.char('Sex', size=128),
         'worldorg': fields.selection([('wagggs','WAGGGS'),
                                       ('wosm', 'WOSM'),
+                                      ('w/w', 'WAGGGS/WOSM'),
                                       ('other','Other')],'World Organization'),
     }
 dds_camp_scoutorg()
@@ -53,7 +54,6 @@ class dds_camp_municipality(osv.osv):
         'number': fields.integer('Number')
     }
 dds_camp_municipality()
-
 
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
@@ -98,7 +98,7 @@ dds_camp_event_participant_day()
 class dds_camp_event_participant_agegroup(osv.osv):
     """ Event participants by Age Group """
     _description = 'Event participant by Age Group'
-    _name = 'dds_camp.event.participant'
+    _name = 'dds_camp.event.agegroup'
     _order = 'age_group'
 
     def _calc_number(self, cr, uid, ids, field_name, arg, context):
@@ -148,7 +148,25 @@ class dds_camp_event_participant(osv.osv):
                 text = ''
                 for d in dates:
                     text += ',' + d[8:]
-                res[par.id] = {'day_summery' : text[1:]}    
+                res[par.id] = {'day_summery' : text[1:]}
+            if par.leader:
+                ag = '22+'
+            else:             
+                age = self._age(par.birth, '2013-07-22')
+                ag = False
+                if age >= 6 and age <= 8:
+                    ag = '06-08'
+                if age >= 9 and age <= 10:
+                    ag = '09-10'
+                if age >= 11 and age <= 12:
+                    ag = '11-12'
+                if age >= 13 and age <= 16:
+                    ag = '13-16'
+                if age >= 17 and age <= 22:
+                    ag = '17-22'
+                if age > 22:
+                    ag = '22+'
+            res[par.id].update({'age_group': ag})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -209,15 +227,17 @@ class dds_camp_event_participant(osv.osv):
 
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkent'),
+        'leader' : fields.boolean('Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
-        'age_group' : fields.selection([('06-08','Age 6 - 8'),
-                                          ('09-10','Age 9 - 10'),
-                                          ('11-12',u'Age 11 - 12'),
-                                          ('13-16', 'Age 13 - 16'),
-                                          ('17-22', 'Age 17 - 22'),
-                                          ('22+','Age 22+ and leaders')],'Age group'),
+        'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Summery', method=True, multi='PART'),                               
+#         'age_group' : fields.selection([('06-08','Age 6 - 8'),
+#                                           ('09-10','Age 9 - 10'),
+#                                           ('11-12',u'Age 11 - 12'),
+#                                           ('13-16', 'Age 13 - 16'),
+#                                           ('17-22', 'Age 17 - 22'),
+#                                           ('22+','Age 22+ and leaders')],'Age group'),
          'memberno' : fields.char('Membership number', size=32, help='Own reference number'),
          'imported_bm' : fields.boolean(u'Imported from Blåt Medlem')       
         
@@ -317,7 +337,7 @@ class event_registration(osv.osv):
         'webshop_orderno': fields.integer('Webshop Order No'),
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
-        'agegroup_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Age grouping.'),
+        'agegroup_ids': fields.one2many('dds_camp.event.agegroup', 'registration_id', 'Age grouping.'),
         
         
         'country_id': fields.many2one('res.country', 'Country'),
@@ -330,13 +350,15 @@ class event_registration(osv.osv):
                                           ('kfum','KFUM Spejderne'),
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
-                                          ('other','Other')],'Scout Organization',required=True),
+                                          ('other','Other')],'Scout Organization'),
         'scout_division' : fields.char('Division/District', size=64),
         'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),  
         'ddsgroup': fields.integer('DDS Gruppenr'),     
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
+        'contact_email': fields.related('contact_partner_id','email', readonly=True, type='char', relation='res.partner', string='Email'),
+#
         
 #         'contact_name': fields.char('Contact Name', size=128, required=True, select=True),
 #         'contact_street': fields.char('Street', size=128),
@@ -350,6 +372,7 @@ class event_registration(osv.osv):
 #         
         # Economic Contact
         'econ_partner_id': fields.many2one('res.partner', 'Economic Contact', states={'done': [('readonly', True)]}),
+        'econ_email': fields.related('econ_partner_id','email', readonly=True, type='char', relation='res.partner', string='Email'),
 #         
 #         'econ_name': fields.char('Economic Contact Name', size=128, required=True, select=True),
 #         'econ_street': fields.char('Street', size=128),
@@ -387,6 +410,21 @@ class event_registration(osv.osv):
     
     }
     
+    def message_get_suggested_recipients(self, cr, uid, ids, context=None):
+        recipients = super(event_registration, self).message_get_suggested_recipients(cr, uid, ids, context=context)
+        try:
+            for reg in self.browse(cr, uid, ids, context=context):
+                if reg.partner_id:
+                    self._message_add_suggested_recipient(cr, uid, recipients, reg, partner=reg.partner_id, reason=_('Group'))
+                if reg.contact_partner_id:
+                    self._message_add_suggested_recipient(cr, uid, recipients, reg, partner=reg.contact_partner_id, reason=_('Group Contact'))
+                if reg.econ_partner_id:
+                    self._message_add_suggested_recipient(cr, uid, recipients, reg, partner=reg.econ_partner_id, reason=_('Group Econ. Contact'))
+                if reg.email:
+                    self._message_add_suggested_recipient(cr, uid, recipients, reg, email=reg.email, reason=_('Registration Email'))
+        except (osv.except_osv, orm.except_orm):  # no read access rights -> just ignore suggested recipients because this imply modifying followers
+            pass
+        return recipients
         
     def onchange_country_id(self, cr, uid, ids, country_id, context=None):       
                 

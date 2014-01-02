@@ -43,34 +43,49 @@
 			<field name="type">form</field>
 			<field name="inherit_id" ref="event.view_event_registration_form" />
 			<field name="arch" type="xml">
-				<field name="date_closed" position="after">
+				<xpath expr="/form/sheet/group/group/label" position="replace"/>
+				<xpath expr="/form/sheet/group/group/div" position="replace">
+					<field name="email"/>
 				    <field name="country_id" on_change="onchange_country_id(country_id)"/>
 					<field name="organization_id"/>
 					<field name="organization"/>
 					<field name="scout_division"/>
 					<field name="municipality_id"/>
 					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
+				</xpath>
+				<field name="partner_id" position="after">
+					<field name="ddsgroup"/>
 				</field>
-				<!-- 
+				
+				<field name="nb_register" position="replace">
+				
+				</field>
 				<field name="user_id" position="after">
-					<field name="agegroup_ids" colspan="4" nolabel="1">
+					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}">
 								<tree>
 									<field name="age_group"/>
-									<field name="pre_reg"/>
-									<field name="number"/>
+									<field name="pre_reg"  sum="Number of Pre-reg"/>
+									<field name="number"  sum="Number of Participants"/>
 					
 					</tree>
 					</field>
 				</field>
-				 -->
+				
  				<xpath expr="/form/sheet/group" position="after">
 
 					<group>
 						<notebook colspan="8" col="8">
 							<page string="Contact">
 								<group>
-									<field name="contact_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
-									<field name="econ_partner_id" context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" domain="[('parent_id','=',partner_id),('is_company','=',False)]"/>
+									<field name="contact_partner_id" 
+										context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" 
+										domain="[('parent_id','=',partner_id),('is_company','=',False)]"
+										options='{"always_reload": True, "highlight_first_line": True}'/>
+									
+									<field name="econ_partner_id" 
+										context="{'default_parent_id': partner_id, 'default_customer': True, 'show_address' : True, 'without_company':True, 'add_email': True}" 
+										domain="[('parent_id','=',partner_id),('is_company','=',False)]"
+										options='{"always_reload": True, "highlight_first_line": True}'/>
 								</group>
 
 							</page>
@@ -139,6 +154,17 @@
 
 			</field>
 		</record>
+		
+		<record id="action_event_participants_tree" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+
+			<field name="res_model">dds_camp.event.participant</field>
+			<field name="view_type">form</field>
+		</record>
+		
+		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"
+			name="Participants" sequence="50" parent="base.menu_event_main"
+			groups="event.group_event_manager" />	
 
 		<!-- Registration inherited search <record id="view_dds_member_reg_info_search1" 
 			model="ir.ui.view"> <field name="name">event.event.dds_member.reg.inherit3</field> 
