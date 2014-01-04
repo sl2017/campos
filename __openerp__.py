@@ -26,7 +26,7 @@
     "author" : "Hans Henrik Gabelgaard",
     "website" : "http://www.blushoejspejderne.dk/",
     "category" : "Generic Modules/Others",
-    "depends" : ["base", "event", "mail"],
+    "depends" : ["base", "event", "mail","better_zip"],
     "description" : "DDS Camp",
     "init_xml" : [],
     "demo_xml" : [],

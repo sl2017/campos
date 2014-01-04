@@ -9,10 +9,9 @@
 			<field name="arch" type="xml">
 				<form string="Event Registration" version="7.0">
 					<header>
-						<!-- 
+
 						<field name="state" nolabel="1" colspan="2" widget="statusbar"
 							statusbar_visible="draft,open,done" />
-						-->
 					</header>
 					<sheet string="Registration">
 						<div class="oe_right oe_button_box">
@@ -24,11 +23,10 @@
 						</h1>
 						<group>
 							<group>
-								<field name="ddsgroup" attrs="{'ddsgroup':[('writeoff','=',0)]}"/>
 								<field name="event_id" attrs="{'readonly': '1'}" />
 								<field name="country_id" on_change="onchange_country_id(country_id)"/>
 								<field name="organization_id"/>
-								<field name="organization" />
+								<!--   <field name="organization" /> -->
 								<field name="scout_division" />
 								<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
 							</group>
@@ -146,7 +144,12 @@
 								<field name="appr_leader"  groups='event.group_event_manager'/>
 								<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}"/> 
 								<field name="street" /> 
-								<field name="street2"/> 
+								<field name="street2"/>
+								<field name="zip_id"
+                 					on_change="onchange_zip_id(zip_id)"
+                 					placeholder="City completion"
+			     					/>
+								 
 								<field name="zip" /> 
 								<field name="city" /> 
 								<field name="state_id" /> 
@@ -245,12 +248,17 @@
                         <h1>
                             <field name="name" default_focus="1" placeholder="Name" />
                         </h1>
-                        <field name="parent_id" readonly="1"/>
+                        <field name="parent_id" readonly="1" context="{'name_only' : True}"/>
                         <group>
                             <label for="street" string="Address"/>
                             <div>
                                 <field name="street" placeholder="Street..."/>
                                 <field name="street2"/>
+                                <field name="zip_id"
+                 					on_change="onchange_zip_id(zip_id)"
+                 					placeholder="City completion"
+			     					/>
+                                
                                 <div class="address_format">
                                     <field name="city" placeholder="City" style="width: 40%%"/>
                                     <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)"/>

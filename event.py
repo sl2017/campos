@@ -35,7 +35,7 @@ partmap = {('docTitle', 'name'),
            ('addressFull','street'),
            ('organizationAddress2','street2'),
            ('organizationPostalCode','zip'),
-           ('city','city'),
+           ('City','city'),
            ('organizationEMail','email'),
            ('organizationWeb','website'),
            ('organizationPhone','phone'),
@@ -222,6 +222,20 @@ class dds_camp_event_participant(osv.osv):
         res = {'values' : {'age_group': ag}}    
         return res
     
+    def onchange_zip_id(self, cursor, uid, ids, zip_id, context=None):
+        if not zip_id:
+            return {}
+        if isinstance(zip_id, list):
+            zip_id = zip_id[0]
+        bzip = self.pool['res.better.zip'].browse(cursor, uid, zip_id, context=context)
+        return {'value': {'zip': bzip.name,
+                          'city': bzip.city,
+                          'country_id': bzip.country_id.id if bzip.country_id else False,
+                          'state_id': bzip.state_id.id if bzip.state_id else False,
+                          }
+                }
+
+    
     def _get_pars_from_days(self, cr, uid, days_ids, context=None):
         days = self.pool.get('dds_camp.event.participant.day').browse(cr, uid, days_ids, context=context)
         print '_get_pars_from_days', days
@@ -237,6 +251,7 @@ class dds_camp_event_participant(osv.osv):
         'name': fields.char('Name', size=128, required=True, select=True),
         'street': fields.char('Street', size=128),
         'street2': fields.char('Street2', size=128),
+        'zip_id': fields.many2one('res.better.zip', 'City/Location'),
         'zip': fields.char('Zip', change_default=True, size=24),
         'city': fields.char('City', size=128),
         'state_id': fields.many2one("res.country.state", 'State'),
