@@ -54,7 +54,7 @@
 					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
 				</xpath>
 				<field name="partner_id" position="after">
-					<field name="ddsgroup"/>
+					<field name="ddsgroup" on_change="onchange_ddsgroup(ddsgroup, partner_id, econ_partner_id)"/>
 				</field>
 				
 				<field name="nb_register" position="replace">

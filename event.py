@@ -27,7 +27,30 @@ from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
+from xml.etree import ElementTree as ET
+from urllib import urlopen
 
+
+partmap = {('docTitle', 'name'),
+           ('addressFull','street'),
+           ('organizationAddress2','street2'),
+           ('organizationPostalCode','zip'),
+           ('city','city'),
+           ('organizationEMail','email'),
+           ('organizationWeb','website'),
+           ('organizationPhone','phone'),
+           ('organizationMobilePhone','mobile')
+           
+           }
+
+econmap = {('userFirstname', 'name'),
+           ('addressFull','street'),
+           ('organizationAddress2','street2'),
+           ('userEmail','email'),
+           ('userPrivatePhone','phone'),
+           ('userMobilePhone','mobile')
+           
+           }
 class dds_camp_scoutorg(osv.osv):
     """ Scout Organizations"""
     _description = 'Scout Organizations'
@@ -433,7 +456,89 @@ class event_registration(osv.osv):
         res['domain'] = {'organization_id': [('country_id','=',country_id)]}      
         return res
     
-    
+    def onchange_ddsgroup(self, cr, uid, ids, ddsgroup, partner_id, econ_partner_id, context=None):
+         
+        res = {}
+         
+        if ddsgroup > 0:
+            res['value'] = {}
+            
+            ir_config_parameter = self.pool.get("ir.config_parameter")
+            params = eval(ir_config_parameter.get_param(cr, uid, "dds_camp.bm_settings", context=context))
+            partner_obj = self.pool.get('res.partner')
+            
+            #Get Group info
+            params.update({'action' : 'organizations',
+                           'org' : ddsgroup})
+            rows = ET.parse(urlopen('%(url)s%(action)s?system=%(system)s&password=%(password)s&org=%(org)s' % params))
+            for row in rows.getroot():
+                org = dict((e.tag, e.text) for e in row)
+                # Create/update Partner
+                
+                if org.has_key('organizationKommune'):
+                    muni = self.pool.get('dds_camp.municipality')
+                    muni_ids = muni.search(cr, uid, [('number'), '=', int(org('organizationKommune'))])
+                else:
+                    muni_ids = False    
+                res['value'].update({'name': org['docTitle'],
+                                     'country_id' : 60, #Denmark
+                                     'organization_id' : 1843, #DDS
+                                     'scout_division' : org['organizationDivisionName'] if org.has_key('organizationDivisionName') else False,
+                                     'email' : org['organizationEMail'] if org.has_key('organizationEMail') else False,
+                                     'municipality_id' : muni_ids[0] if muni_ids else False,
+                                     })
+                partner = {}
+                for k,v in partmap:
+                    if org.has_key(k):
+                        partner[v] = org[k]
+                        
+                if partner_id:
+                    partner_obj.write(cr, uid, [partner_id], partner, context)
+                else:
+                    partner['is_company'] = True
+                    partner_id = partner_obj.create(cr, uid, partner, context)
+                        
+                #only process first row..
+                break
+                
+            #Get kasserer info
+            #1: Find by Trust Code
+            params.update({'action': 'memberships',
+                           'trustcodes': '66' })
+            
+            print 'URL: ', '%(url)s%(action)s?system=%(system)s&password=%(password)s&org=%(org)s&trustcodes=%(trustcodes)s' % params
+            rows = ET.parse(urlopen('%(url)s%(action)s?system=%(system)s&password=%(password)s&org=%(org)s&trustcodes=%(trustcodes)s' % params))
+            for row in rows.getroot():
+                membership = dict((e.tag, e.text) for e in row)
+                if membership:
+                    print membership
+                    #fetch memberdata
+                    params.update({'action': 'members',
+                                   'memberNumber': membership['memberNumber']})
+                    rows2 = ET.parse(urlopen('%(url)s%(action)s?system=%(system)s&password=%(password)s&org=%(org)s&memberNumber=%(memberNumber)s' % params))
+                    for row2 in rows2.getroot():
+                        member = dict((e.tag, e.text) for e in row2)
+                        # Create/update Econ Partner
+                        econ = {}
+                        for k,v in econmap:
+                            if member.has_key(k):
+                                econ[v] = member[k]
+                        
+                        if member.has_key('userLastname'):
+                            econ['name'] += ' ' + member['userLastname']
+                        
+                        if econ_partner_id:
+                            partner_obj.write(cr, uid, [econ_partner_id], econ, context)
+                        else:
+                            econ['parent_id'] = partner_id
+                            econ['is_company'] = False 
+                            econ_partner_id = partner_obj.create(cr, uid, econ, context)
+                
+                res['value'].update({'partner_id' : partner_id,
+                                     'econ_partner_id': econ_partner_id
+                                     })
+            return res 
+
     def button_open_weborder_url(self, cr, uid, ids, context): 
         """ Open Pre Registretion
         @return: True
