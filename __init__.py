@@ -21,3 +21,4 @@
 
 import event
 import res_partner
+import wizard
