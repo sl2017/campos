@@ -48,7 +48,7 @@
 					<field name="email"/>
 				    <field name="country_id" on_change="onchange_country_id(country_id)"/>
 					<field name="organization_id"/>
-					<field name="organization"/>
+					<!-- <field name="organization"/>  -->
 					<field name="scout_division"/>
 					<field name="municipality_id"/>
 					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>

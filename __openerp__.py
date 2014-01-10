@@ -35,8 +35,9 @@
              ],
     "update_xml" : ["dds_camp_view.xml",
                     "event_view.xml",
-                    "portal_view.xml",
-                    "wizard/bmimport_view.xml" 
+                    
+                    "wizard/bmimport_view.xml",
+                    "portal_view.xml", 
                     ],
     "installable": True,
     'auto_install': False,

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 19:34+0000\n"
-"PO-Revision-Date: 2013-12-08 22:04+0100\n"
+"POT-Creation-Date: 2014-01-08 06:22+0000\n"
+"PO-Revision-Date: 2014-01-09 23:44+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,42 +15,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: da_DK\n"
-"X-Generator: Poedit 1.6\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #. module: dds_camp
-#: field:event.registration,hh_aftercamp:0
-msgid "Would like home hospitality after the camp"
-msgstr "Tilbyder Homehospitality Før"
-
-#. module: dds_camp
-#: view:event.event:0
-msgid "Webshop Event"
-msgstr "Webshop arrangement"
-
-#. module: dds_camp
-#: field:dds_camp.event.participant,partner_id:0
-msgid "Participant"
-msgstr "Deltager"
-
-#. module: dds_camp
-#: model:ir.model,name:dds_camp.model_dds_camp_event_participant
-msgid "Event participant"
-msgstr "Arrangement deltager"
-
-#. module: dds_camp
-#: field:event.registration,hcap:0
-msgid "Do you bring any handicapped scouts"
-msgstr "Har gruppen Handicappede spejdere med på lejren"
-
-#. module: dds_camp
-#: field:event.registration,scout_division:0
-msgid "Division/District"
-msgstr "Division/distrikt"
+#: model:ir.model,name:dds_camp.model_dds_camp_event_agegroup
+msgid "Event participant by Age Group"
+msgstr "Deltagere pr alder"
 
 #. module: dds_camp
 #: view:event.registration:0
-msgid "Administration"
-msgstr "Administration"
+msgid "Number of Participants"
+msgstr "Antal deltagere"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,zip:0
+#: field:dds_camp.event.participant,zip:0
+msgid "Zip"
+msgstr "Postnr"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,patrol:0
@@ -68,24 +49,217 @@ msgid "Danske Baptisters Spejderkorps"
 msgstr "Danske Baptisters Spejderkorps"
 
 #. module: dds_camp
-#: field:event.registration,hcap_specneeds:0
-msgid "Describe speciel needs"
-msgstr "Beskriv særlige behov"
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 17 - 22"
+msgstr "17 - 22 år"
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:463
+#, python-format
+msgid "Registration Email"
+msgstr "Registration Email"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Select a Contact as Participant"
+msgstr "Vælg en kontaktperson som deltager"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Webshop"
+msgstr "Webshop"
+
+#. module: dds_camp
+#: field:event.registration,hh_precamp_prv:0
+msgid "Can provide home hospitality before the camp"
+msgstr "Tilbyder Home hospitality før lejren"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:event.registration:0
+#: model:ir.model,name:dds_camp.model_event_registration
+msgid "Event Registration"
+msgstr "Arrangements tilmelding"
+
+#. module: dds_camp
+#: field:event.registration,hh_aftercamp_prv:0
+msgid "Can provide home hospitality after the camp"
+msgstr "Tilbyder Home hospitality efter lejren"
+
+#. module: dds_camp
+#: selection:dds_camp.bmimportwizard,state:0
+msgid "step1"
+msgstr "step1"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Open Order Detail"
+msgstr "Vis forhåndstilmelding"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,imported_bm:0
+msgid "Imported from Blåt Medlem"
+msgstr "Hentet fra Blåt Medlem"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Birtday missing"
+msgstr "Birtday missing"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 11 - 12"
+msgstr "11 - 12 år"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:res.partner:0
+msgid "ZIP"
+msgstr "Postnr"
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:459
+#, python-format
+msgid "Group Contact"
+msgstr "Gruppe kontaktperson"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_municipality
+#: model:ir.model,name:dds_camp.model_dds_camp_scout_org
+msgid "DK Kommuner"
+msgstr "DK Kommuner"
+
+#. module: dds_camp
+#: field:event.registration,friendshipgroup_name:0
+msgid "Name of friendship group"
+msgstr "Navn på venskabsgruppe"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
-msgid "Other"
-msgstr "Andet"
+msgid "Det Danske Spejderkorps"
+msgstr "Det Danske Spejderkorps"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Number of Pre-reg"
+msgstr "Antal forhåndsregistrerede"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "All days"
+msgstr "Alle dage"
+
+#. module: dds_camp
+#: view:dds_camp.bmimportwizard:0
+msgid "Wizard with step"
+msgstr "Wizard with step"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
-msgid "KFUM Spejderne"
-msgstr "KFUM Spejderne"
+msgid "WAGGS"
+msgstr "WAGGS"
 
 #. module: dds_camp
-#: field:event.event,webshop_product_nid:0
-msgid "Webshop nid"
-msgstr "Webshop nid"
+#: model:ir.actions.act_window,name:dds_camp.action_bm_import_wizard
+msgid "Hent medlemmer"
+msgstr "Hent medlemmer"
+
+#. module: dds_camp
+#: field:event.registration,webshop_order_product_id:0
+msgid "Webshop Order Line No"
+msgstr "Webshop Order Line No"
+
+#. module: dds_camp
+#: field:event.registration,organization:0
+#: field:event.registration,organization_id:0
+msgid "Scout Organization"
+msgstr "Spejderkorps"
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "De Grønne Pigespejdere"
+msgstr "De Grønne Pigespejdere"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard,registration_id:0
+#: field:dds_camp.bmimportwizard.members,registration_id:0
+#: field:dds_camp.event.agegroup,registration_id:0
+#: field:dds_camp.event.participant,registration_id:0
+#: view:event.registration:0
+#: model:ir.ui.menu,name:dds_camp.portal_event_registration_menu
+msgid "Registration"
+msgstr "Tilmelding"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_event_event
+msgid "Event"
+msgstr "Arrangement"
+
+#. module: dds_camp
+#: field:event.registration,hh_aftercamp:0
+msgid "Would like home hospitality after the camp"
+msgstr "ØnskerHomehospitality efter lejren"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,partner_id:0
+#: field:dds_camp.event.participant.day,participant_id:0
+msgid "Participant"
+msgstr "Deltager"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Confirm"
+msgstr "Bekræft"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,age_group:0
+#: field:dds_camp.event.participant,day_summery:0
+msgid "Summery"
+msgstr "Oversigt"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard,bmpassword:0
+msgid "Adgangskode"
+msgstr "Adgangskode"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+#: field:dds_camp.event.participant,state_id:0 view:res.partner:0
+msgid "State"
+msgstr "Stat"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,appr_leader:0
+msgid "Leder godkent"
+msgstr "Leder godkent"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Selected days"
+msgstr "Enkelte dage"
+
+#. module: dds_camp
+#: selection:dds_camp.bmimportwizard.members,state:0
+msgid "Tilmeldt"
+msgstr "Tilmeldt"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,email:0
+#: field:dds_camp.event.participant,email:0
+#: field:event.registration,contact_email:0
+#: field:event.registration,econ_email:0
+msgid "Email"
+msgstr "Email"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,participation_id:0
+#: view:dds_camp.event.participant:0
+#: field:dds_camp.event.participant,days_ids:0
+msgid "Participation"
+msgstr "Deltagelse"
 
 #. module: dds_camp
 #: field:event.registration,food_allergy_desc:0
@@ -93,9 +267,216 @@ msgid "Descibe the allergy"
 msgstr "Beskriv mad allergien"
 
 #. module: dds_camp
+#: code:addons/dds_camp/event.py:169
+#, python-format
+msgid "Full periode"
+msgstr "Fuld lejrperiode"
+
+#. module: dds_camp
+#: field:event.registration,webshop_orderno:0
+msgid "Webshop Order No"
+msgstr "Webshop Order No"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,zip_id:0
+#: field:dds_camp.event.participant,zip_id:0
+msgid "City/Location"
+msgstr "Postnr/by "
+
+#. module: dds_camp
+#: field:event.registration,foreigners:0
+msgid "Foreigners"
+msgstr "Udlændinge"
+
+#. module: dds_camp
+#: selection:event.registration,shared_transport:0
+msgid "Maybe"
+msgstr "Måske"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard,members_ids:0
+msgid "Members"
+msgstr "Medlemmer"
+
+#. module: dds_camp
+#: sql_constraint:dds_camp.event.participant:0
+msgid "Participant must be unique!"
+msgstr "Deltager skal være unik"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_bmimportwizard
+#: model:ir.model,name:dds_camp.model_dds_camp_bmimportwizard_members
+msgid "BM Import Participants"
+msgstr "BM Import Participants"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 13 - 16"
+msgstr "13 - 16 år"
+
+#. module: dds_camp
+#: selection:dds_camp.scout.org,worldorg:0
+msgid "WAGGGS"
+msgstr "WAGGGS"
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "DUI Leg og Virke"
+msgstr "DUI Leg og Virke"
+
+#. module: dds_camp
+#: view:event.registration:0 field:event.registration,contact_partner_id:0
+#: view:res.partner:0
+msgid "Contact"
+msgstr "Kontaktperson"
+
+#. module: dds_camp
+#: field:event.registration,agreements:0
+msgid "What have been arranged"
+msgstr "Aftaler"
+
+#. module: dds_camp
+#: field:event.registration,internal_note:0
+msgid "Internal note"
+msgstr "Intern note (E2014 Adm)"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,birth:0
+#: field:dds_camp.event.participant,birth:0
+msgid "Birth date"
+msgstr "Birth date"
+
+#. module: dds_camp
+#: field:event.registration,has_friendshipgroup:0
+msgid "Do you have a friendship group participate in the camp"
+msgstr "Har en venskabsgruppe"
+
+#. module: dds_camp
+#: model:ir.ui.menu,name:dds_camp.menu_portal_registration
+msgid "Registretion"
+msgstr "Tilmelding"
+
+#. module: dds_camp
+#: field:event.registration,ddsgroup:0
+msgid "DDS Gruppenr"
+msgstr "DDS Gruppenr"
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:461
+#, python-format
+msgid "Group Econ. Contact"
+msgstr "Kasserer kontakt"
+
+#. module: dds_camp
+#: field:event.registration,shared_transport:0
+msgid "Shared transport"
+msgstr "Ønsker fælles transport"
+
+#. module: dds_camp
+#: field:event.registration,signed_up:0
+msgid "Signed up"
+msgstr "Tilmeldt"
+
+#. module: dds_camp
+#: field:event.registration,food_allergy:0
+msgid "Do you have any food allergy sufferer"
+msgstr "Har gruppen mad allergikere med på lejren"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 6 - 8"
+msgstr " 6 - 8 år"
+
+#. module: dds_camp
 #: view:event.registration:0
-msgid "Webshop"
-msgstr "Webshop"
+msgid "Special considerations"
+msgstr "Særlige forhold"
+
+#. module: dds_camp
+#: selection:dds_camp.bmimportwizard.members,state:0
+msgid "Tilmeldes"
+msgstr "Tilmeldes"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 22+ and leaders"
+msgstr "22+ år og ledere"
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "Webshop Event"
+msgstr "Webshop arrangement"
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:457
+#, python-format
+msgid "Group"
+msgstr "Gruppe"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_event_participant
+msgid "Event participant"
+msgstr "Arrangement deltager"
+
+#. module: dds_camp
+#: selection:event.registration,shared_transport:0
+msgid "No"
+msgstr "Nej"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Administration"
+msgstr "Administration"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:res.partner:0
+msgid "Street..."
+msgstr "Vej/gade.."
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:event.registration:0
+#: model:ir.actions.act_window,name:dds_camp.action_event_participants_tree
+#: model:ir.actions.act_window,name:dds_camp.action_portal_event_participants_tree
+#: model:ir.ui.menu,name:dds_camp.event_participants_tree_menu
+msgid "Participants"
+msgstr "Deltagere"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,leader:0
+#: field:dds_camp.event.participant,leader:0
+msgid "Leader"
+msgstr "Leder"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: dds_camp
+#: field:dds_camp.event.agegroup,age_group:0
+msgid "Age group"
+msgstr "Aldersgruppe"
+
+#. module: dds_camp
+#: view:dds_camp.bmimportwizard:0 view:dds_camp.bmimportwizard.members:0
+msgid "medlemmer"
+msgstr "medlemmer"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard,state:0
+msgid "unknown"
+msgstr "ukendt"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,street2:0
+#: field:dds_camp.event.participant,street2:0
+msgid "Street2"
+msgstr "Gade/vej2"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
@@ -108,9 +489,10 @@ msgid "Webshop Order"
 msgstr "Webshop Order"
 
 #. module: dds_camp
-#: model:ir.model,name:dds_camp.model_event_registration
-msgid "Event Registration"
-msgstr "Arrangements tilmelding"
+#: field:dds_camp.bmimportwizard.members,phone:0
+#: field:dds_camp.event.participant,phone:0
+msgid "Phone"
+msgstr "Telefon"
 
 #. module: dds_camp
 #: field:event.registration,hcap_desc:0
@@ -118,22 +500,158 @@ msgid "Describe the handicap"
 msgstr "Beskriv handicap"
 
 #. module: dds_camp
-#: field:event.registration,foreigners:0
-msgid "Foreigners"
-msgstr "Udlændinge"
-
-#. module: dds_camp
 #: field:event.registration,econ_partner_id:0
 msgid "Economic Contact"
-msgstr "Økonomiperson"
+msgstr "Økonomikontakt"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant.day,date:0
+msgid "Date"
+msgstr "Dato"
 
 #. module: dds_camp
 #: view:event.registration:0
-msgid "Open Order Detail"
-msgstr "Open Order Detail"
+msgid "Register Participants for this Group"
+msgstr "Tilmeld deltagere for denne gruppe"
 
 #. module: dds_camp
+#: selection:dds_camp.bmimportwizard,state:0
+msgid "step2"
+msgstr "step2"
+
+#. module: dds_camp
+#: field:dds_camp.scout.org,worldorg:0
+msgid "World Organization"
+msgstr "Verdensorganisation"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Home Hospitality/Friendship Groups"
+msgstr "Home Hospitality/Venskabsgruppe"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 9 - 10"
+msgstr "9 - 10 år"
+
+#. module: dds_camp
+#: field:dds_camp.event.agegroup,number:0
+msgid "Number of participants"
+msgstr "Deltagerantal"
+
+#. module: dds_camp
+#: view:dds_camp.municipality:0 field:event.registration,municipality_id:0
+#: model:ir.actions.act_window,name:dds_camp.action_municipality_tree
+#: model:ir.ui.menu,name:dds_camp.event_municipality_menu
+msgid "Municipality"
+msgstr "Kommune"
+
+#. module: dds_camp
+#: field:dds_camp.municipality,number:0
+msgid "Number"
+msgstr "Nummer"
+
+#. module: dds_camp
+#: field:dds_camp.scout.org,sex:0
+msgid "Sex"
+msgstr "Køn"
+
+#. module: dds_camp
+#: view:dds_camp.bmimportwizard:0
+msgid "Done"
+msgstr "Afslut"
+
+#. module: dds_camp
+#: view:dds_camp.bmimportwizard:0
+msgid "Cancel"
+msgstr "Annuller"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:res.partner:0
+msgid "City completion"
+msgstr "Slå by/postnr op"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,city:0
+#: view:dds_camp.event.participant:0 field:dds_camp.event.participant,city:0
+#: view:res.partner:0
+msgid "City"
+msgstr "By"
+
+#. module: dds_camp
+#: help:dds_camp.bmimportwizard.members,memberno:0
+#: help:dds_camp.event.participant,memberno:0
+msgid "Own reference number"
+msgstr "Eget reference nummer"
+
+#. module: dds_camp
+#: field:event.registration,hcap:0
+msgid "Do you bring any handicapped scouts"
+msgstr "Har gruppen Handicappede spejdere med på lejren"
+
+#. module: dds_camp
+#: view:dds_camp.scout.org:0
+#: model:ir.actions.act_window,name:dds_camp.action_scoutorg_tree
+msgid "Scout Organizations"
+msgstr "Spejderkorps"
+
+#. module: dds_camp
+#: field:event.registration,scout_division:0
+msgid "Division/District"
+msgstr "Division/distrikt"
+
+#. module: dds_camp
+#: selection:dds_camp.scout.org,worldorg:0
+#: selection:event.registration,organization:0
+msgid "Other"
+msgstr "Andet"
+
+#. module: dds_camp
+#: field:event.registration,hcap_specneeds:0
+msgid "Describe speciel needs"
+msgstr "Beskriv særlige behov"
+
+#. module: dds_camp
+#: field:event.event,webshop_product_nid:0
+msgid "Webshop nid"
+msgstr "Webshop nid"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Or add a new participant below"
+msgstr "Eller tilføj en ny deltager nedenfor"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_event_participant_day
+msgid "Event participant day"
+msgstr "Deltagerdag"
+
+#. module: dds_camp
+#: model:ir.ui.menu,name:dds_camp.event_scoutorg_menu
+msgid "Scout Orgs"
+msgstr "Scout Orgs"
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "KFUM Spejderne"
+msgstr "KFUM Spejderne"
+
+#. module: dds_camp
+#: field:event.registration,agegroup_ids:0
+msgid "Age grouping."
+msgstr "Aldersgrupper"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0 view:res.partner:0
+msgid "Address"
+msgstr "Adresse"
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,name:0
 #: field:dds_camp.event.participant,name:0
+#: field:dds_camp.event.participant.day,name:0
+#: field:dds_camp.municipality,name:0 field:dds_camp.scout.org,name:0
+#: view:res.partner:0
 msgid "Name"
 msgstr "Navn"
 
@@ -143,24 +661,22 @@ msgid "DDS Webshop"
 msgstr "DDS Webshop"
 
 #. module: dds_camp
-#: selection:event.registration,shared_transport:0
-msgid "Maybe"
-msgstr "Måske"
+#: view:dds_camp.event.participant:0
+#: field:dds_camp.event.participant,country_id:0
+#: field:dds_camp.scout.org,country_id:0 field:event.registration,country_id:0
+#: view:res.partner:0
+msgid "Country"
+msgstr "Land"
 
 #. module: dds_camp
-#: selection:event.registration,organization:0
-msgid "DUI Leg og Virke"
-msgstr "DUI Leg og Virke"
+#: view:dds_camp.event.participant:0
+msgid "Not this day"
+msgstr "Ikke denne dag"
 
 #. module: dds_camp
-#: field:event.registration,friendshipgroup_name:0
-msgid "Name of friendship group"
-msgstr "Navn på venskabsgruppe"
-
-#. module: dds_camp
-#: selection:event.registration,shared_transport:0
-msgid "No"
-msgstr "Nej"
+#: view:event.registration:0
+msgid "Hent deltagere fra Blåt Medlem"
+msgstr "Hent deltagere fra Blåt Medlem"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,rel_phone:0
@@ -168,44 +684,26 @@ msgid "Relatives phonenumber"
 msgstr "Telefon pårørende"
 
 #. module: dds_camp
-#: view:event.registration:0 field:event.registration,contact_partner_id:0
-msgid "Contact"
-msgstr "Kontaktperson"
-
-#. module: dds_camp
-#: field:event.registration,agreements:0
-msgid "What have been arranged"
-msgstr "Aftaler"
-
-#. module: dds_camp
-#: selection:event.registration,organization:0
-msgid "Det Danske Spejderkorps"
-msgstr "Det Danske Spejderkorps"
-
-#. module: dds_camp
-#: view:event.registration:0
-msgid "Special considerations"
-msgstr "Særlige forhold"
+#: view:dds_camp.bmimportwizard:0
+msgid "Login"
+msgstr "Login"
 
 #. module: dds_camp
 #: view:event.event:0
+#: model:ir.actions.act_window,name:dds_camp.action_portal_event_registration_tree
 msgid "Registrations"
 msgstr "Registrations"
 
 #. module: dds_camp
-#: selection:event.registration,shared_transport:0
-msgid "Yes"
-msgstr "Ja"
+#: selection:dds_camp.scout.org,worldorg:0
+msgid "WAGGGS/WOSM"
+msgstr "WAGGGS/WOSM"
 
 #. module: dds_camp
-#: field:event.registration,has_friendshipgroup:0
-msgid "Do you have a friendship group participate in the camp"
-msgstr "Har en venskabsgruppe"
-
-#. module: dds_camp
-#: view:event.registration:0
-msgid "Home Hospitality/Friendship Groups"
-msgstr "Home Hospitality/Venskabsgruppe"
+#: field:dds_camp.bmimportwizard.members,memberno:0
+#: field:dds_camp.event.participant,memberno:0
+msgid "Membership number"
+msgstr "Medlemsnummer"
 
 #. module: dds_camp
 #: field:event.registration,hh_precamp:0
@@ -213,66 +711,43 @@ msgid "Would like home hospitality before the camp"
 msgstr "Tilbyder Homehospitality før lejren"
 
 #. module: dds_camp
-#: selection:event.registration,organization:0
-msgid "WAGGS"
-msgstr "WAGGS"
-
-#. module: dds_camp
 #: field:event.registration,want_friendshipgroup:0
 msgid "Want a friendship group"
 msgstr "Ønsker en venskabsgruppe"
 
 #. module: dds_camp
-#: field:event.registration,webshop_orderno:0
-msgid "Webshop Order No"
-msgstr "Webshop Order No"
-
-#. module: dds_camp
-#: field:event.registration,shared_transport:0
-msgid "Shared transport"
-msgstr "Ønsker fælles transport"
-
-#. module: dds_camp
+#: selection:dds_camp.scout.org,worldorg:0
 #: selection:event.registration,organization:0
 msgid "WOSM"
 msgstr "WOSM"
 
 #. module: dds_camp
-#: field:event.registration,food_allergy:0
-msgid "Do you have any food allergy sufferer"
-msgstr "Har gruppen mad allergikere med på lejren"
+#: field:dds_camp.event.agegroup,pre_reg:0
+msgid "Number of preregistered"
+msgstr "Antal forhåndsregistrerede"
 
 #. module: dds_camp
-#: field:event.registration,webshop_order_product_id:0
-msgid "Webshop Order Line No"
-msgstr "Webshop Order Line No"
+#: field:dds_camp.bmimportwizard.members,street:0
+#: field:dds_camp.event.participant,street:0
+msgid "Street"
+msgstr "Gade/vej"
 
 #. module: dds_camp
-#: field:event.registration,organization:0
-msgid "Scout Organization"
-msgstr "Spejderkorps"
+#: field:dds_camp.bmimportwizard,bmmember:0
+msgid "Blåt medlemsnr"
+msgstr "Blåt medlemsnr"
 
 #. module: dds_camp
-#: field:dds_camp.event.participant,appr_leader:0
-msgid "Leder godkent"
-msgstr "Leder godkent"
+#: field:dds_camp.event.participant.day,state:0
+msgid "Participate"
+msgstr "Deltager"
 
 #. module: dds_camp
-#: selection:event.registration,organization:0
-msgid "De Grønne Pigespejdere"
-msgstr "De Grønne Pigespejdere"
-
-#. module: dds_camp
-#: field:dds_camp.event.participant,registration_id:0
-msgid "Registration"
-msgstr "Tilmelding"
+#: selection:event.registration,shared_transport:0
+msgid "Yes"
+msgstr "Ja"
 
 #. module: dds_camp
 #: view:event.event:0
 msgid "Open Event Detail"
 msgstr "Open Event Detail"
-
-#. module: dds_camp
-#: model:ir.model,name:dds_camp.model_event_event
-msgid "Event"
-msgstr "Arrangement"

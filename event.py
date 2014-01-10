@@ -48,7 +48,8 @@ econmap = {('userFirstname', 'name'),
            ('organizationAddress2','street2'),
            ('userEmail','email'),
            ('userPrivatePhone','phone'),
-           ('userMobilePhone','mobile')
+           ('userMobilePhone','mobile'),
+           ('userMemberNumber','ref')
            
            }
 class dds_camp_scoutorg(osv.osv):
@@ -136,12 +137,15 @@ class dds_camp_event_participant_agegroup(osv.osv):
                 
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),        
-        'age_group' : fields.selection([('06-08','Age 6 - 8'),
+        'age_group' : fields.selection([('00-03','Age 0 - 3'),
+                                        ('04-06','Age 4 - 5'),
+                                         ('06-08','Age 6 - 8'),
                                           ('09-10','Age 9 - 10'),
                                           ('11-12',u'Age 11 - 12'),
                                           ('13-16', 'Age 13 - 16'),
                                           ('17-22', 'Age 17 - 22'),
-                                          ('22+','Age 22+ and leaders')],'Age group',required=True),
+                                          ('22+','Age 22+ and leaders'),
+                                          ('unknown', 'Unknown')],'Age group',required=True),
         'pre_reg' : fields.integer('Number of preregistered'),        
         'number': fields.function(_calc_number, type = 'integer', string='Number of participants', method=True, multi='PART' ),
     }
@@ -154,6 +158,27 @@ class dds_camp_event_participant(osv.osv):
     _name = 'dds_camp.event.participant'
     _order = 'name'
     
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        print "fields_view_get entry:", view_id, toolbar
+        res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
+                                                                    context=context, toolbar=toolbar, submenu=submenu)
+        print "res:", res
+        
+        if res['name'] == u'portal.registration.participant.form':
+            
+        return res
+    
+    def fields_get(self, cr, uid, allfields=None, context=None, write_access=True):
+        res = super(dds_camp_event_participant, self).fields_get(cr, uid, allfields, context, write_access)
+        
+        res['date22'] = {
+                        'type': 'boolean',
+                        'string': '22/7-2014',
+                        'help': 'Tirsdag',
+                        'exportable': False,
+                    }
+        return res
+        
     def _calc_summery(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for par in self.browse(cr, uid, ids, context=context):
@@ -176,7 +201,11 @@ class dds_camp_event_participant(osv.osv):
                 ag = '22+'
             else:             
                 age = self._age(par.birth, '2013-07-22')
-                ag = False
+                ag = 'unknown'
+                if age <= 3:
+                    ag = '00-03'
+                if age >= 4 and age <= 5:
+                    ag = '04-05'
                 if age >= 6 and age <= 8:
                     ag = '06-08'
                 if age >= 9 and age <= 10:
@@ -265,7 +294,7 @@ class dds_camp_event_participant(osv.osv):
 
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkent'),
-        'leader' : fields.boolean('Leader'),
+        'leader' : fields.boolean('Is Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
@@ -276,7 +305,7 @@ class dds_camp_event_participant(osv.osv):
 #                                           ('13-16', 'Age 13 - 16'),
 #                                           ('17-22', 'Age 17 - 22'),
 #                                           ('22+','Age 22+ and leaders')],'Age group'),
-         'memberno' : fields.char('Membership number', size=32, help='Own reference number'),
+         'memberno' : fields.char('DDS Medlemsnummer', size=32),
          'imported_bm' : fields.boolean(u'Imported from Blåt Medlem')       
         
     }

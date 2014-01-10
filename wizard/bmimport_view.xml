@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<record model="ir.ui.view" id="wizard_bm_import_form">
+    <field name="name">wizard_with_step.form</field>
+    <field name="model">dds_camp.bmimportwizard</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Wizard with step" version="7.0">
+       <field invisible="1" name="state" />             
+	   <field name = "message" nolabel="1" readonly="1"/>
+	   <field name="registration_id" invisible="1"/>
+	    
+       <group states="step1">
+       		
+          <field name="bmmember" />
+          <field name="bmpassword" password="1" />                
+          </group>
+
+          <group states="step2">
+          <field name="members_ids" colspan="4" nolabel="1" domain="[('registration_id','=',registration_id),('state', '=','draft')]">
+          	<tree string="medlemmer" editable="top">
+                                        
+                                        <field name="memberno"/>
+                                        <field name="name" />
+                                        <field name="street"/>
+                                        <field name="birth"/>
+                                        
+                                        
+                                    </tree>
+          </field>    
+          </group>
+
+          <footer states="step1">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            <button name="action_login" string="Login" type="object" />
+          </footer>
+
+          <footer states="step2">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            <button name="action_done" string="Import" type="object" />
+          </footer>
+
+      </form>
+    </field>
+   </record>
+
+<record model="ir.ui.view" id="wizard_bm_import_tree">
+    <field name="name">Medlememr</field>
+    <field name="model">dds_camp.bmimportwizard.members</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+   	<tree string="medlemmer" create="false">
+                                        
+                                        <field name="memberno"/>
+                                        <field name="name" />
+                                        <field name="street"/>
+                                        <field name="birth"/>
+                                        
+                                        
+                                    </tree>
+   	</field>
+   	</record>
+   	
+   <record id="action_bm_import_wizard" model="ir.actions.act_window">
+            <field name="name">Hent medlemmer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dds_camp.bmimportwizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_bm_import_form"/>
+            <field name="context">{'default_registration_id': active_id, 'default_state' : 'step1'}</field>
+            <field name="target">new</field>
+        </record>
+        
+    </data>
+</openerp>
+       
