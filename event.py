@@ -26,6 +26,7 @@ from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from openerp.osv.orm import setup_modifiers
 
 from xml.etree import ElementTree as ET
 from urllib import urlopen
@@ -162,16 +163,94 @@ class dds_camp_event_participant(osv.osv):
         print "fields_view_get entry:", view_id, toolbar
         res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
                                                                     context=context, toolbar=toolbar, submenu=submenu)
-        print "res:", res
         
+         
         if res['name'] == u'portal.registration.participant.form':
+            reg_id = context.get('active_id', False)
+            if reg_id:
+                reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
+                from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+                to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+                print "dates", from_date, to_date
+                dt = from_date
+                delta = datetime.timedelta(days=1)
+                while dt <= to_date:
+                    res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                    dt += delta
+                doc = ET.XML(res['arch'])
+                for grp in doc.findall(".//group[@string='Lejrperiode']"):
+                    dt = from_date
+                    while dt <= to_date:
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta
+                        
+                res['arch'] = ET.tostring(doc) 
+        return res
+
+    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+        if 'days_ids' not in fields:
+            fields.append('days_ids')
+        res = super(dds_camp_event_participant, self).read(cr, uid, ids, fields, context=context, load=load)
+        for r in res:
+            if r.has_key('days_ids'):
+                for d in self.pool.get('dds_camp.event.participant.day').browse(cr, uid, r['days_ids'], context):
+                    r.update({ 'date_' + d.date.replace('-','_') : d.state})
+        return res
+
+    def write(self, cr, uid, ids, values, context=None):
+        res = super(dds_camp_event_participant, self).write(cr, uid, ids, values, context)
+        
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        for participant in self.browse(cr, uid, ids):
+            if participant.days_ids:
+                for d in participant.days_ids:
+                    if values.has_key('date_' + d.date.replace('-','_')):
+                        day_obj.write(cr, SUPERUSER_ID, [d.id], {'state' : values['date_' + d.date.replace('-','_')]})    
+            else:
+                from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+                to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+                print "dates", from_date, to_date
+                dt = from_date
+                delta = datetime.timedelta(days=1)
+                while dt <= to_date:
+                    if values.has_key(dt.strftime('date_%Y_%m_%d')):
+                        day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                          'date' : dt,
+                                                          'state': values[dt.strftime('date_%Y_%m_%d')]})
+                    else:
+                        day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                          'date' : dt,
+                                                          'state': False})    
+                    dt += delta
             
         return res
     
+    def create(self, cr, uid, values, context=None):
+        id = super(dds_camp_event_participant, self).create(cr, uid, values, context)
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        for participant in self.browse(cr, uid, [id]):
+            from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
+                if values.has_key(dt.strftime('date_%Y_%m_%d')):
+                    day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                      'date' : dt,
+                                                      'state': values[dt.strftime('date_%Y_%m_%d')]})
+                else:
+                    day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                      'date' : dt,
+                                                      'state': False})    
+                dt += delta
+        return id 
+
     def fields_get(self, cr, uid, allfields=None, context=None, write_access=True):
         res = super(dds_camp_event_participant, self).fields_get(cr, uid, allfields, context, write_access)
-        
-        res['date22'] = {
+         
+        res['date_2014_07_22'] = {
                         'type': 'boolean',
                         'string': '22/7-2014',
                         'help': 'Tirsdag',

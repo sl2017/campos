@@ -144,7 +144,7 @@
 		<form string="Event Registration" version="7.0">
 			<group colspan="4" col="4">
 				<group colspan="2" col="2">
-					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
 					<!-- 
 					<field mode="form" name="partner_id"
 						on_change="onchange_partner_id(partner_id)"
@@ -188,24 +188,11 @@
 					<field name="imported_bm" invisible="1" />
 					<!-- <field name="patrol" /> -->
 			</group>
-			<group colspan="2" col="4">
-				<field name="days_ids" colspan="4" nolabel="1">
-					<tree string="Participation" editable="top">
-						<field name="date" readonly="1" />
-						<field name="state" />
-						<button name="button_reg_confirm" string="Confirm" type="object"
-							icon="gtk-apply"/>
-						<button name="button_reg_cancel" string="Not this day"
-							type="object" icon="STOCK_NO"/>
-
-					</tree>
-
-				</field>
-
+			<group colspan="2" col="2" string="Lejrperiode">
+				
 				<button name="action_create_day_lines" type="object" string="All days"
-					help="" colspan="1" />
-				<button name="action_create_day_some" type="object" string="Selected days"
-					help="" colspan="1" />
+					help="" colspan="2" />
+				
 			</group>
 		</group>
 		</form>
