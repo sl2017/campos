@@ -188,11 +188,14 @@
 					<field name="imported_bm" invisible="1" />
 					<!-- <field name="patrol" /> -->
 			</group>
-			<group colspan="2" col="2" string="Lejrperiode">
+			<group colspan="2" col="2">
+				<group colspan="2" col="2" string="Lejrperiode">
+				</group>
+				<group colspan="2" col="2">
+					<button name="action_create_day_lines" type="object" string="All days"
+						help="" colspan="2" />
 				
-				<button name="action_create_day_lines" type="object" string="All days"
-					help="" colspan="2" />
-				
+			</group>
 			</group>
 		</group>
 		</form>

@@ -19,7 +19,7 @@
           </group>
 
           <group states="step2">
-          <field name="members_ids" colspan="4" nolabel="1" domain="[('registration_id','=',registration_id),('state', '=','draft')]">
+          <field name="members_ids" colspan="4" nolabel="1" options="{'create': false }" domain="[('registration_id','=',registration_id),('state', '=','draft')]">
           	<tree string="medlemmer" editable="top">
                                         
                                         <field name="memberno"/>

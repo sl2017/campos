@@ -232,7 +232,6 @@ class dds_camp_event_participant(osv.osv):
         for participant in self.browse(cr, uid, [id]):
             from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
             to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-            print "dates", from_date, to_date
             dt = from_date
             delta = datetime.timedelta(days=1)
             while dt <= to_date:
@@ -393,6 +392,24 @@ class dds_camp_event_participant(osv.osv):
         ('participation_uniq', 'unique(registration_id, partner_id)', 'Participant must be unique!'),
     ]
     
+    def action_select_all_days(self, cr, uid, ids, context):
+       
+        res = {}
+        values = {}
+        for participant in self.browse(cr, uid, ids):
+            from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
+                values[dt.strftime('date_%Y_%m_%d')] = True
+                dt += delta
+        
+        res['value'] = values
+        print res
+        return res
+        
+    
     def action_create_day_lines(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
         participant = self.browse(cr, uid, ids)[0]
@@ -410,7 +427,8 @@ class dds_camp_event_participant(osv.osv):
                                              'date' : dt,
                                              'state': True})
                 dt += delta
-                
+    
+            
      
     def action_create_day_some(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
@@ -496,7 +514,7 @@ class event_registration(osv.osv):
                                           ('kfum','KFUM Spejderne'),
                                           ('waggs','WAGGS'),
                                           ('wosm', 'WOSM'),
-                                          ('other','Other')],'Scout Organization'),
+                                          ('other','Other')],'Scout Organization - OLD'),
         'scout_division' : fields.char('Division/District', size=64),
         'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),  
         'ddsgroup': fields.integer('DDS Gruppenr'),     
