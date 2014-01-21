@@ -51,6 +51,7 @@
 					<!-- <field name="organization"/>  -->
 					<field name="scout_division"/>
 					<field name="municipality_id"/>
+					<field name="region"/>
 					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
 				</xpath>
 				<field name="partner_id" position="after">

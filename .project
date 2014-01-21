@@ -3,7 +3,9 @@
 	<name>dds_camp</name>
 	<comment></comment>
 	<projects>
-		<project>OpenERP-Trunk</project>
+		<project>better_zip</project>
+		<project>report_xls</project>
+		<project>saas-2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

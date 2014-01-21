@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//report/__init__.py=utf-8
+encoding//report/participants_list_xls.py=utf-8
 encoding//wizard/bmimport.py=utf-8
+encoding//wizard/portal_wizard.py=utf-8
 encoding/__init__.py=utf-8
 encoding/__openerp__.py=utf-8
 encoding/event.py=utf-8

@@ -139,7 +139,7 @@ class dds_camp_event_participant_agegroup(osv.osv):
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),        
         'age_group' : fields.selection([('00-03','Age 0 - 3'),
-                                        ('04-06','Age 4 - 5'),
+                                        ('04-05','Age 4 - 5'),
                                          ('06-08','Age 6 - 8'),
                                           ('09-10','Age 9 - 10'),
                                           ('11-12',u'Age 11 - 12'),
@@ -164,9 +164,13 @@ class dds_camp_event_participant(osv.osv):
         res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
                                                                     context=context, toolbar=toolbar, submenu=submenu)
         
-         
+        #print "FORM: ", res['name'] 
         if res['name'] == u'portal.registration.participant.form':
+            #print "Form found!"
+            #print "Context: ", context
             reg_id = context.get('active_id', False)
+            if not reg_id:
+                reg_id = 1
             if reg_id:
                 reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
                 from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
@@ -177,14 +181,21 @@ class dds_camp_event_participant(osv.osv):
                 while dt <= to_date:
                     res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
                     dt += delta
+                print res['arch']
                 doc = ET.XML(res['arch'])
-                for grp in doc.findall(".//group[@string='Lejrperiode']"):
+                #print "FindAll:",".//group[@string='"+ _('Camp Period') +"']"
+                for grp in doc.findall(".//group[@string='Camp Period']"):
                     dt = from_date
                     while dt <= to_date:
                         fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
                         setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
                         dt += delta
-                        
+                for grp in doc.findall(".//group[@string='Lejrperiode']"):
+                    dt = from_date
+                    while dt <= to_date:
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta        
                 res['arch'] = ET.tostring(doc) 
         return res
 
@@ -280,22 +291,23 @@ class dds_camp_event_participant(osv.osv):
             else:             
                 age = self._age(par.birth, '2013-07-22')
                 ag = 'unknown'
-                if age <= 3:
-                    ag = '00-03'
-                if age >= 4 and age <= 5:
-                    ag = '04-05'
-                if age >= 6 and age <= 8:
-                    ag = '06-08'
-                if age >= 9 and age <= 10:
-                    ag = '09-10'
-                if age >= 11 and age <= 12:
-                    ag = '11-12'
-                if age >= 13 and age <= 16:
-                    ag = '13-16'
-                if age >= 17 and age <= 22:
-                    ag = '17-22'
-                if age > 22:
-                    ag = '22+'
+                if age:
+                    if age <= 3:
+                        ag = '00-03'
+                    if age >= 4 and age <= 5:
+                        ag = '04-05'
+                    if age >= 6 and age <= 8:
+                        ag = '06-08'
+                    if age >= 9 and age <= 10:
+                        ag = '09-10'
+                    if age >= 11 and age <= 12:
+                        ag = '11-12'
+                    if age >= 13 and age <= 16:
+                        ag = '13-16'
+                    if age >= 17 and age <= 22:
+                        ag = '17-22'
+                    if age > 22:
+                        ag = '22+'
             res[par.id].update({'age_group': ag})
         return res
     
@@ -339,6 +351,7 @@ class dds_camp_event_participant(osv.osv):
                           'city': bzip.city,
                           'country_id': bzip.country_id.id if bzip.country_id else False,
                           'state_id': bzip.state_id.id if bzip.state_id else False,
+                          'zip_id': False 
                           }
                 }
 
@@ -476,6 +489,35 @@ class dds_camp_event_participant(osv.osv):
 #                 self.write(cr, uid, {'partner_id': partner_id}, context)
 #                 print "create", partner_id, values            
 #         return res
+        
+        # override list in custom module to add/drop columns or change order
+    def _report_xls_fields(self, cr, uid, context=None):
+        return [
+            'name', 'birth', 'street', 'street2','zip','city','day_summery'
+            #'journal', 'period', 'partner', 'account',
+            #'date_maturity', 'debit', 'credit', 'balance',
+            #'reconcile', 'reconcile_partial', 'analytic_account',
+            #'ref', 'partner_ref', 'tax_code', 'tax_amount', 'amount_residual',
+            #'amount_currency', 'currency_name', 'company_currency',
+            #'amount_residual_currency',
+            #'product', 'product_ref', 'product_uom', 'quantity',
+            #'statement', 'invoice', 'narration', 'blocked',
+        ]
+
+    # Change/Add Template entries
+    def _report_xls_template(self, cr, uid, context=None):
+        """
+        Template updates, e.g.
+
+        my_change = {
+            'move':{
+                'header': [1, 20, 'text', _('My Move Title')],
+                'lines': [1, 0, 'text', _render("line.move_id.name or ''")],
+                'totals': [1, 0, 'text', None]},
+        }
+        return my_change
+        """
+        return {}
                
 dds_camp_event_participant()
     
@@ -483,19 +525,30 @@ class event_registration(osv.osv):
     """ Inherits Event and adds DDS Camp information in the Registration form """
     _inherit = 'event.registration'
     
-    def name_get(self, cr, uid, ids, context=None):
-        if not ids:
-            return []
-
-        if isinstance(ids, (long, int)):
-            ids = [ids]
-
-        res = []
-        for record in self.browse(cr, uid, ids, context=context):
-            display_name = record.name + ' (' + (record.event_id.name or '') + ')'
-            res.append((record['id'], display_name))
+#     def name_get(self, cr, uid, ids, context=None):
+#         if not ids:
+#             return []
+# 
+#         if isinstance(ids, (long, int)):
+#             ids = [ids]
+# 
+#         res = []
+#         for record in self.browse(cr, uid, ids, context=context):
+#             display_name = record.name + ' (' + (record.event_id.name or '') + ')'
+#             res.append((record['id'], display_name))
+#         return res
+#     
+    def _calc_number(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for reg in self.browse(cr, uid, ids, context=context):
+            nbr = 0
+            pre = 0
+            for ag in reg.agegroup_ids:
+                nbr = nbr + ag.number
+                pre = pre + ag.pre_reg
+            res[reg.id] = {'reg_number': nbr,
+                           'pre_reg_number': pre}
         return res
-    
             
     _columns = {
         'webshop_orderno': fields.integer('Webshop Order No'),
@@ -518,6 +571,7 @@ class event_registration(osv.osv):
         'scout_division' : fields.char('Division/District', size=64),
         'municipality_id': fields.many2one('dds_camp.municipality', 'Municipality', select=True, ondelete='set null'),  
         'ddsgroup': fields.integer('DDS Gruppenr'),     
+        'region' : fields.char('Region', size=64),
         
         # Contact
         'contact_partner_id': fields.many2one('res.partner', 'Contact', states={'done': [('readonly', True)]}),
@@ -551,7 +605,7 @@ class event_registration(osv.osv):
         'signed_up' : fields.boolean('Signed up'),
         'shared_transport': fields.selection([('yes','Yes'),
                                               ('no', 'No'),
-                                              ('maybe','Maybe')],'Shared transport',required=True),
+                                              ('maybe','Maybe')],'Shared transport'),
                 
         # Home Hsopitality
         'hh_precamp' : fields.boolean('Would like home hospitality before the camp'),
@@ -565,14 +619,35 @@ class event_registration(osv.osv):
         'hcap' : fields.boolean('Do you bring any handicapped scouts'),
         'hcap_desc': fields.text('Describe the handicap'),
         'hcap_specneeds' : fields.text('Describe speciel needs'),
-        'food_allergy' : fields.boolean('Do you have any food allergy sufferer'),
+        'food_allergy' : fields.boolean('Do you have any allergy sufferer'),
         'food_allergy_desc': fields.text('Descibe the allergy'),
         
         #Internal fields
         'agreements': fields.text('What have been arranged'),
         'internal_note' : fields.text('Internal note'),
+        'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART' ),
+        'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART' ),
     
     }
+    
+    def write(self, cr, uid, ids, values, context=None):
+        res = super(event_registration, self).write(cr, uid, ids, values, context)
+        
+        ag_obj = self.pool.get('dds_camp.event.agegroup')
+        for e in self.browse(cr, uid, ids, context):
+            if len(e.agegroup_ids) < 9:
+                ag = []
+                for a in e.agegroup_ids:
+                    ag.append(a.age_group)
+                for a in ['00-03','04-05','06-08','09-10','11-12','13-16','17-22','22+','unknown']:
+                    if a not in ag:
+                        ag_obj.create(cr, SUPERUSER_ID, {'registration_id' : e.id,
+                                                         'age_group' : a,
+                                                         'pre_reg' : 0}
+                                                         )
+                            
+        
+        return res
     
     def message_get_suggested_recipients(self, cr, uid, ids, context=None):
         recipients = super(event_registration, self).message_get_suggested_recipients(cr, uid, ids, context=context)
@@ -618,7 +693,7 @@ class event_registration(osv.osv):
                 
                 if org.has_key('organizationKommune'):
                     muni = self.pool.get('dds_camp.municipality')
-                    muni_ids = muni.search(cr, uid, [('number'), '=', int(org('organizationKommune'))])
+                    muni_ids = muni.search(cr, uid, [('number', '=', int(org['organizationKommune']))])
                 else:
                     muni_ids = False    
                 res['value'].update({'name': org['docTitle'],
@@ -667,6 +742,10 @@ class event_registration(osv.osv):
                         
                         if member.has_key('userLastname'):
                             econ['name'] += ' ' + member['userLastname']
+                        
+                        econ['zip'] = member['PostalCity'][:4] if member.has_key('PostalCity') and member['PostalCity'] else False  # # zip,
+                        econ['city'] =  member['PostalCity'][5:] if member.has_key('PostalCity') and member['PostalCity'] else False  # # city
+                        econ['country_id'] = 60
                         
                         if econ_partner_id:
                             partner_obj.write(cr, uid, [econ_partner_id], econ, context)

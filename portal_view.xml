@@ -16,22 +16,25 @@
 					</header>
 					<sheet string="Registration">
 					<field name="state" invisible="1"/>
+					<field name="participant_ids" invisible="1"/>
 						<div class="oe_right oe_button_box">
                             <button name="%(dds_camp.action_portal_event_participants_tree)d" type="action" string="Participants" help="Register Participant Details for this Group"/>
-                            <button name="%(dds_camp.action_bm_import_wizard)d" string="Hent deltagere fra Blåt Medlem" type="action"/>
+                            <button name="%(dds_camp.action_bm_import_wizard)d" string="Hent deltagere fra Blåt Medlem" type="action" attrs="{'invisible': [('ddsgroup','=',0)]}"/>
+                            
                         </div>
 						<label for="partner_id" class="oe_edit_only" />
 						<h1>
-							<field name="partner_id" attrs="{'readonly': '1'}" />
+							<field name="partner_id" attrs="{'readonly': '1'}" options="{'no_open': True}" />
 						</h1>
 						<group>
 							<group>
 								<field name="event_id" attrs="{'readonly': '1'}" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
-								<field name="country_id" on_change="onchange_country_id(country_id)" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
-								<field name="organization_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+								<field name="country_id" attrs="{'readonly': '1'}"  on_change="onchange_country_id(country_id)" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+								<field name="organization_id" attrs="{'readonly': '1'}"  options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 								<!--   <field name="organization" /> -->
-								<field name="ddsgroup" attrs="{'invisible': [('ddsgroup','=',0)]}"/> 
-								<field name="scout_division" />
+								<field name="ddsgroup" attrs="{'invisible': [('ddsgroup','=',0)], 'readonly': '1'}"/> 
+								<field name="scout_division" attrs="{'readonly': [('ddsgroup','!=',0)]}"/>
+								<field name="municipality_id" options="{'no_open': True}" attrs="{'readonly': [('ddsgroup','!=',0)], 'invisible': [('foreigners','=',True)]}"/>
 								<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
 							</group>
 							<group>
@@ -52,7 +55,7 @@
 										<field name="contact_partner_id"
 											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'add_email': True, 'form_view_ref':'dds_camp.portal_partner_simple_form'}"  
 											options='{"always_reload": True, "highlight_first_line": True}'
-											domain="[('parent_id','=',partner_id),('is_company','=',False)]" />
+											domain="[('parent_id','=',partner_id),('is_company','=',False)]" attrs="{'readonly': '1'}"/>
 										<field name="econ_partner_id"
 											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'add_email': True, 'form_view_ref':'dds_camp.portal_partner_simple_form'}"
 											options='{"always_reload": True, "highlight_first_line": True}'
@@ -142,6 +145,7 @@
 	<field name="arch" type="xml">
 
 		<form string="Event Registration" version="7.0">
+			<sheet>
 			<group colspan="4" col="4">
 				<group colspan="2" col="2">
 					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
@@ -169,7 +173,7 @@
 								<field name="zip" placeholder="ZIP" style="width: 20%%" />
 								<field name="city" placeholder="City" style="width: 40%%" />
 								<field name="state_id" class="oe_no_button" placeholder="State"
-									style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)" />
+									style="width: 37%%" options="{'no_open': True, 'create': False, 'create_edit': False}" on_change="onchange_state(state_id)" />
 
 							</div>
 							<field name="country_id" placeholder="Country" class="oe_no_button"
@@ -189,15 +193,16 @@
 					<!-- <field name="patrol" /> -->
 			</group>
 			<group colspan="2" col="2">
-				<group colspan="2" col="2" string="Lejrperiode">
+				<group colspan="2" col="2" string="Camp Period">
 				</group>
-				<group colspan="2" col="2">
+				<group colspan="2" col="2" class="oe_edit_only">
 					<button name="action_create_day_lines" type="object" string="All days"
 						help="" colspan="2" />
 				
 			</group>
 			</group>
 		</group>
+		</sheet>
 		</form>
 
 	</field>
@@ -238,7 +243,7 @@
 			<field name="view_mode">form</field> <field name="view_id" ref="portal_view_event_registration_form"/> 
 			<field name="act_window_id" ref="action_portal_event_registration_tree"/> 
 			</record> -->
-		<menuitem id="menu_portal_registration" name="Registretion"
+		<menuitem id="menu_portal_registration" name="Registration"
 			action="" parent="portal.portal_menu" sequence="25" />
 		<menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu"
 			name="Registration" sequence="40" parent="menu_portal_registration"
@@ -252,17 +257,12 @@
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <form string="Contact" version="7.0">
+                    <sheet>
                     
-                    <div class="oe_title">
-                        <div class="oe_edit_only">
-                            <label for="name"/>
                     
-                        </div>
-                        <h1>
-                            <field name="name" default_focus="1" placeholder="Name" />
-                        </h1>
-                        <field name="parent_id" readonly="1" context="{'name_only' : True}"/>
                         <group>
+                            <field name="parent_id" readonly="1" context="{'name_only' : True}"/>
+                        	<field name="name" default_focus="1" placeholder="Name" />
                             <label for="street" string="Address"/>
                             <div>
                                 <field name="street" placeholder="Street..."/>
@@ -285,7 +285,7 @@
                             <field name="phone"/>
                             <field name="mobile"/>
                         </group>
-                    </div>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -307,7 +307,38 @@
 										</tree>
 										</field>
 										</record>
-										
+		
+		<record id="dds_camp_event_participant_search" model="ir.ui.view">
+            <field name="name">dds_camp.event.participant.tree.search</field>
+            <field name="model">dds_camp.event.participant</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="name"/>
+                 	<field name="registration_id"/>
+                 	<field name="city"/>
+                 </search>
+            </field>
+            </record>  
+            
+		<record id="dds_camp_event_participant_tree" model="ir.ui.view">
+            <field name="name">dds_camp.event.participant.tree</field>
+            <field name="model">dds_camp.event.participant</field>
+            <field name="arch" type="xml">	
+			<tree string="Participants">
+											<field name="name"/>
+											<field name="registration_id"/>
+											<field name="city"/>
+											<!-- 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
+											<!-- <field name="patrol"/>  -->
+											<field name="day_summery"/>
+
+										</tree>
+										</field>
+										</record>								
 										
 		<record id="action_portal_event_participants_tree" model="ir.actions.act_window">
 			<field name="name">Participants</field>
@@ -315,6 +346,8 @@
 			<field name="res_model">dds_camp.event.participant</field>
 			<field name="view_type">form</field>
     		<field name="view_mode">tree,form</field>
+    		<field name="view_id" ref="dds_camp_event_participant_form"/>
+    		<field name="search_view_id" ref="dds_camp_event_participant_search"/>
             <field name="context">{'search_default_registration_id': active_id, 'default_registration_id': active_id}</field>
         
 		</record>

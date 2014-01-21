@@ -26,7 +26,7 @@
     "author" : "Hans Henrik Gabelgaard",
     "website" : "http://www.blushoejspejderne.dk/",
     "category" : "Generic Modules/Others",
-    "depends" : ["base", "event", "mail","better_zip"],
+    "depends" : ["base", "event", "mail","better_zip","portal","report_xls"],
     "description" : "DDS Camp",
     "init_xml" : [],
     "demo_xml" : [],
@@ -35,9 +35,11 @@
              ],
     "update_xml" : ["dds_camp_view.xml",
                     "event_view.xml",
-                    
+                    "report/participants_list_xls.xml"
                     "wizard/bmimport_view.xml",
                     "portal_view.xml", 
+                    "wizard/portal_wizard.xml",
+                    
                     ],
     "installable": True,
     'auto_install': False,

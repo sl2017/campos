@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 06:22+0000\n"
-"PO-Revision-Date: 2014-01-09 23:44+0100\n"
+"POT-Creation-Date: 2014-01-17 19:46+0000\n"
+"PO-Revision-Date: 2014-01-18 22:16+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,13 +25,107 @@ msgstr "Deltagere pr alder"
 #. module: dds_camp
 #: view:event.registration:0
 msgid "Number of Participants"
-msgstr "Antal deltagere"
+msgstr "Deltagerantal"
+
+#. module: dds_camp
+#: model:email.template,body_html:dds_camp.set_password_email
+msgid ""
+"            \n"
+"                    <p>\n"
+"                        Hej ${object.partner_id.name}<br>\n"
+"Gruppe: ${object.partner_id.company_id.name or ''}\n"
+"                    </p>\n"
+"                    <p>\n"
+"Vi har nu oprettet dig i vores tilmeldingssystem.\n"
+"\n"
+"\n"
+"                    </p>\n"
+"                    <p>\n"
+"Det første du skal gøre er, at indberette dit password.\n"
+"</p><p>\n"
+"Dit brugernavn er: ${object.login}\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        Du ændrer dit password ved at klikke på dette link: "
+"<a href=\"${object.signup_url}\">Opret Password</a></p>\n"
+"                    </p>\n"
+"                    <p>\n"
+"Når du har indberettet dit password, vil du modtage en mail med yderligere "
+"informationer.\n"
+"</p><p>\n"
+"Tilmeldingssystemet kan du finde her: <a href=\"${object.portal_url}\">E2014 "
+"Tilmelding</a>, men for at kunne logge dig på skal du have indberettet dit "
+"password, som beskrevet tidligere i denne mail.\n"
+"</p><p>\n"
+"Du kan finde vejledning til tilmeldingssystemet på vores hjemmeside eller "
+"ved at klikke her.<br>\n"
+"Du kan finde relevante tidsfrister på vores hjemmeside eller ved at klikke "
+"her.<br>\n"
+"</p><p>\n"
+"Hvis du har problemer, så skriv til tilmelding@e2014.dk\n"
+"</p><p>\n"
+"Christian Eggert Jørgensen<br>\n"
+"Administration<br>\n"
+"<img src='http://e2014.gabelgaard.org/web/binary/company_logo'/><br>\n"
+"Mail: adm-formand@E2014.DK<br>\n"
+"Web: E2014.dk\n"
+"</p>\n"
+"                \n"
+"            "
+msgstr ""
+"            \n"
+"                    <p>\n"
+"                        Hej ${object.partner_id.name}<br>\n"
+"Gruppe: ${object.partner_id.company_id.name or ''}\n"
+"                    </p>\n"
+"                    <p>\n"
+"Vi har nu oprettet dig i vores tilmeldingssystem.\n"
+"\n"
+"\n"
+"                    </p>\n"
+"                    <p>\n"
+"Det første du skal gøre er, at indberette dit password.\n"
+"</p><p>\n"
+"Dit brugernavn er: ${object.login}\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        Du ændrer dit password ved at klikke på dette link: "
+"<a href=\"${object.signup_url}\">Opret Password</a></p>\n"
+"                    </p>\n"
+"                    <p>\n"
+"Når du har indberettet dit password, vil du modtage en mail med yderligere "
+"informationer.\n"
+"</p><p>\n"
+"Tilmeldingssystemet kan du finde her: <a href=\"${object.portal_url}\">E2014 "
+"Tilmelding</a>, men for at kunne logge dig på skal du have indberettet dit "
+"password, som beskrevet tidligere i denne mail.\n"
+"</p><p>\n"
+"Du kan finde vejledning til tilmeldingssystemet på vores hjemmeside eller "
+"ved at klikke her.<br>\n"
+"Du kan finde relevante tidsfrister på vores hjemmeside eller ved at klikke "
+"her.<br>\n"
+"</p><p>\n"
+"Hvis du har problemer, så skriv til tilmelding@e2014.dk\n"
+"</p><p>\n"
+"Christian Eggert Jørgensen<br>\n"
+"Administration<br>\n"
+"<img src='http://e2014.gabelgaard.org/web/binary/company_logo'/><br>\n"
+"Mail: adm-formand@E2014.DK<br>\n"
+"Web: E2014.dk\n"
+"</p>\n"
+"                \n"
+"            "
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,zip:0
 #: field:dds_camp.event.participant,zip:0
 msgid "Zip"
 msgstr "Postnr"
+
+#. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Unknown"
+msgstr "Ukendt"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,patrol:0
@@ -49,20 +143,20 @@ msgid "Danske Baptisters Spejderkorps"
 msgstr "Danske Baptisters Spejderkorps"
 
 #. module: dds_camp
-#: selection:dds_camp.event.agegroup,age_group:0
-msgid "Age 17 - 22"
-msgstr "17 - 22 år"
+#: view:event.registration:0
+msgid "Number of Pre-reg"
+msgstr "Antal forhåndsregistrerede"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:463
+#: code:addons/dds_camp/event.py:633
 #, python-format
 msgid "Registration Email"
 msgstr "Registration Email"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Select a Contact as Participant"
-msgstr "Vælg en kontaktperson som deltager"
+#: view:dds_camp.bmimportwizard:0 view:dds_camp.bmimportwizard.members:0
+msgid "medlemmer"
+msgstr "medlemmer"
 
 #. module: dds_camp
 #: view:event.registration:0
@@ -70,9 +164,19 @@ msgid "Webshop"
 msgstr "Webshop"
 
 #. module: dds_camp
+#: field:portal.wizard.user,company:0
+msgid "Company"
+msgstr "Firma"
+
+#. module: dds_camp
 #: field:event.registration,hh_precamp_prv:0
 msgid "Can provide home hospitality before the camp"
 msgstr "Tilbyder Home hospitality før lejren"
+
+#. module: dds_camp
+#: field:portal.wizard.user,signup_url:0
+msgid "Signup URL"
+msgstr "Signup URL"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0 view:event.registration:0
@@ -102,11 +206,6 @@ msgstr "Hentet fra Blåt Medlem"
 
 #. module: dds_camp
 #: selection:dds_camp.event.agegroup,age_group:0
-msgid "Birtday missing"
-msgstr "Birtday missing"
-
-#. module: dds_camp
-#: selection:dds_camp.event.agegroup,age_group:0
 msgid "Age 11 - 12"
 msgstr "11 - 12 år"
 
@@ -116,7 +215,7 @@ msgid "ZIP"
 msgstr "Postnr"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:459
+#: code:addons/dds_camp/event.py:629
 #, python-format
 msgid "Group Contact"
 msgstr "Gruppe kontaktperson"
@@ -128,9 +227,19 @@ msgid "DK Kommuner"
 msgstr "DK Kommuner"
 
 #. module: dds_camp
+#: field:portal.wizard.user,db:0
+msgid "db"
+msgstr "db"
+
+#. module: dds_camp
 #: field:event.registration,friendshipgroup_name:0
 msgid "Name of friendship group"
 msgstr "Navn på venskabsgruppe"
+
+#. module: dds_camp
+#: view:dds_camp.bmimportwizard:0
+msgid "Wizard with step"
+msgstr "Wizard with step"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
@@ -138,9 +247,9 @@ msgid "Det Danske Spejderkorps"
 msgstr "Det Danske Spejderkorps"
 
 #. module: dds_camp
-#: view:event.registration:0
-msgid "Number of Pre-reg"
-msgstr "Antal forhåndsregistrerede"
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 17 - 22"
+msgstr "17 - 22 år"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0
@@ -148,9 +257,9 @@ msgid "All days"
 msgstr "Alle dage"
 
 #. module: dds_camp
-#: view:dds_camp.bmimportwizard:0
-msgid "Wizard with step"
-msgstr "Wizard with step"
+#: field:portal.wizard.user,portal_url:0
+msgid "Portal URL"
+msgstr "Portal URL"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
@@ -168,7 +277,6 @@ msgid "Webshop Order Line No"
 msgstr "Webshop Order Line No"
 
 #. module: dds_camp
-#: field:event.registration,organization:0
 #: field:event.registration,organization_id:0
 msgid "Scout Organization"
 msgstr "Spejderkorps"
@@ -189,9 +297,14 @@ msgid "Registration"
 msgstr "Tilmelding"
 
 #. module: dds_camp
-#: model:ir.model,name:dds_camp.model_res_partner
-msgid "Partner"
-msgstr "Partner"
+#: model:email.template,subject:dds_camp.set_password_email
+msgid "Link til E2014 Tilmelding"
+msgstr "Link til E2014 Tilmelding"
+
+#. module: dds_camp
+#: view:event.registration:0
+msgid "Register Participant Details for this Group"
+msgstr "Register deltager oplysninger"
 
 #. module: dds_camp
 #: model:ir.model,name:dds_camp.model_event_event
@@ -201,7 +314,7 @@ msgstr "Arrangement"
 #. module: dds_camp
 #: field:event.registration,hh_aftercamp:0
 msgid "Would like home hospitality after the camp"
-msgstr "ØnskerHomehospitality efter lejren"
+msgstr "Ønsker Home hospitality efter lejren"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,partner_id:0
@@ -210,9 +323,14 @@ msgid "Participant"
 msgstr "Deltager"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Confirm"
-msgstr "Bekræft"
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 6 - 8"
+msgstr " 6 - 8 år"
+
+#. module: dds_camp
+#: selection:event.registration,organization:0
+msgid "FDF"
+msgstr "FDF"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,age_group:0
@@ -237,11 +355,6 @@ msgid "Leder godkent"
 msgstr "Leder godkent"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Selected days"
-msgstr "Enkelte dage"
-
-#. module: dds_camp
 #: selection:dds_camp.bmimportwizard.members,state:0
 msgid "Tilmeldt"
 msgstr "Tilmeldt"
@@ -256,7 +369,6 @@ msgstr "Email"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,participation_id:0
-#: view:dds_camp.event.participant:0
 #: field:dds_camp.event.participant,days_ids:0
 msgid "Participation"
 msgstr "Deltagelse"
@@ -264,10 +376,10 @@ msgstr "Deltagelse"
 #. module: dds_camp
 #: field:event.registration,food_allergy_desc:0
 msgid "Descibe the allergy"
-msgstr "Beskriv mad allergien"
+msgstr "Beskriv allergien"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:169
+#: code:addons/dds_camp/event.py:282
 #, python-format
 msgid "Full periode"
 msgstr "Fuld lejrperiode"
@@ -289,9 +401,12 @@ msgid "Foreigners"
 msgstr "Udlændinge"
 
 #. module: dds_camp
-#: selection:event.registration,shared_transport:0
-msgid "Maybe"
-msgstr "Måske"
+#: view:dds_camp.event.participant:0
+#: field:dds_camp.event.participant,country_id:0
+#: field:dds_camp.scout.org,country_id:0 field:event.registration,country_id:0
+#: view:res.partner:0
+msgid "Country"
+msgstr "Land"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard,members_ids:0
@@ -325,15 +440,24 @@ msgid "DUI Leg og Virke"
 msgstr "DUI Leg og Virke"
 
 #. module: dds_camp
-#: view:event.registration:0 field:event.registration,contact_partner_id:0
-#: view:res.partner:0
-msgid "Contact"
-msgstr "Kontaktperson"
+#: field:event.registration,reg_number:0
+msgid "# Participants"
+msgstr "# Deltagere"
+
+#. module: dds_camp
+#: field:event.registration,pre_reg_number:0
+msgid "# Pre-registred"
+msgstr "# Førhånds reg."
 
 #. module: dds_camp
 #: field:event.registration,agreements:0
 msgid "What have been arranged"
 msgstr "Aftaler"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_res_partner
+msgid "Partner"
+msgstr "Partner"
 
 #. module: dds_camp
 #: field:event.registration,internal_note:0
@@ -344,7 +468,7 @@ msgstr "Intern note (E2014 Adm)"
 #: field:dds_camp.bmimportwizard.members,birth:0
 #: field:dds_camp.event.participant,birth:0
 msgid "Birth date"
-msgstr "Birth date"
+msgstr "Fødselsdato"
 
 #. module: dds_camp
 #: field:event.registration,has_friendshipgroup:0
@@ -362,10 +486,15 @@ msgid "DDS Gruppenr"
 msgstr "DDS Gruppenr"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:461
+#: code:addons/dds_camp/event.py:631
 #, python-format
 msgid "Group Econ. Contact"
 msgstr "Kasserer kontakt"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,leader:0
+msgid "Is Leader"
+msgstr "Er leder"
 
 #. module: dds_camp
 #: field:event.registration,shared_transport:0
@@ -378,14 +507,10 @@ msgid "Signed up"
 msgstr "Tilmeldt"
 
 #. module: dds_camp
-#: field:event.registration,food_allergy:0
-msgid "Do you have any food allergy sufferer"
-msgstr "Har gruppen mad allergikere med på lejren"
-
-#. module: dds_camp
-#: selection:dds_camp.event.agegroup,age_group:0
-msgid "Age 6 - 8"
-msgstr " 6 - 8 år"
+#: view:event.registration:0 field:event.registration,contact_partner_id:0
+#: view:res.partner:0
+msgid "Contact"
+msgstr "Kontaktperson"
 
 #. module: dds_camp
 #: view:event.registration:0
@@ -413,7 +538,7 @@ msgid "Webshop Event"
 msgstr "Webshop arrangement"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:457
+#: code:addons/dds_camp/event.py:627
 #, python-format
 msgid "Group"
 msgstr "Gruppe"
@@ -447,8 +572,12 @@ msgid "Participants"
 msgstr "Deltagere"
 
 #. module: dds_camp
+#: view:dds_camp.bmimportwizard:0
+msgid "Import"
+msgstr "Import"
+
+#. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,leader:0
-#: field:dds_camp.event.participant,leader:0
 msgid "Leader"
 msgstr "Leder"
 
@@ -463,9 +592,17 @@ msgid "Age group"
 msgstr "Aldersgruppe"
 
 #. module: dds_camp
-#: view:dds_camp.bmimportwizard:0 view:dds_camp.bmimportwizard.members:0
-msgid "medlemmer"
-msgstr "medlemmer"
+#: code:addons/dds_camp/wizard/portal_wizard.py:42
+#, python-format
+msgid "You must have an email address in your User Preferences to send emails."
+msgstr ""
+"You must have an email address in your User Preferences to send emails."
+
+#. module: dds_camp
+#: field:dds_camp.bmimportwizard.members,phone:0
+#: field:dds_camp.event.participant,phone:0
+msgid "Phone"
+msgstr "Telefon"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard,state:0
@@ -479,25 +616,24 @@ msgid "Street2"
 msgstr "Gade/vej2"
 
 #. module: dds_camp
-#: selection:event.registration,organization:0
-msgid "FDF"
-msgstr "FDF"
-
-#. module: dds_camp
 #: view:event.registration:0
 msgid "Webshop Order"
 msgstr "Webshop Order"
 
 #. module: dds_camp
-#: field:dds_camp.bmimportwizard.members,phone:0
-#: field:dds_camp.event.participant,phone:0
-msgid "Phone"
-msgstr "Telefon"
+#: field:dds_camp.event.participant,memberno:0
+msgid "DDS Medlemsnummer"
+msgstr "DDS Medlemsnummer"
 
 #. module: dds_camp
 #: field:event.registration,hcap_desc:0
 msgid "Describe the handicap"
 msgstr "Beskriv handicap"
+
+#. module: dds_camp
+#: field:portal.wizard.user,user_id:0
+msgid "User"
+msgstr "User"
 
 #. module: dds_camp
 #: field:event.registration,econ_partner_id:0
@@ -510,14 +646,19 @@ msgid "Date"
 msgstr "Dato"
 
 #. module: dds_camp
-#: view:event.registration:0
-msgid "Register Participants for this Group"
-msgstr "Tilmeld deltagere for denne gruppe"
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 0 - 3"
+msgstr "0 - 3 år"
 
 #. module: dds_camp
 #: selection:dds_camp.bmimportwizard,state:0
 msgid "step2"
 msgstr "step2"
+
+#. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Search"
+msgstr "Search"
 
 #. module: dds_camp
 #: field:dds_camp.scout.org,worldorg:0
@@ -557,9 +698,10 @@ msgid "Sex"
 msgstr "Køn"
 
 #. module: dds_camp
-#: view:dds_camp.bmimportwizard:0
-msgid "Done"
-msgstr "Afslut"
+#: code:addons/dds_camp/wizard/portal_wizard.py:41
+#, python-format
+msgid "Email Required"
+msgstr "Email Required"
 
 #. module: dds_camp
 #: view:dds_camp.bmimportwizard:0
@@ -567,9 +709,14 @@ msgid "Cancel"
 msgstr "Annuller"
 
 #. module: dds_camp
+#: field:portal.wizard.user,login:0
+msgid "login"
+msgstr "login"
+
+#. module: dds_camp
 #: view:dds_camp.event.participant:0 view:res.partner:0
 msgid "City completion"
-msgstr "Slå by/postnr op"
+msgstr "Slå by/postnummer op"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,city:0
@@ -579,8 +726,13 @@ msgid "City"
 msgstr "By"
 
 #. module: dds_camp
+#: code:addons/dds_camp/wizard/portal_wizard.py:72
+#, python-format
+msgid "Cannot send email: user has no email address."
+msgstr "Cannot send email: user has no email address."
+
+#. module: dds_camp
 #: help:dds_camp.bmimportwizard.members,memberno:0
-#: help:dds_camp.event.participant,memberno:0
 msgid "Own reference number"
 msgstr "Eget reference nummer"
 
@@ -612,14 +764,14 @@ msgid "Describe speciel needs"
 msgstr "Beskriv særlige behov"
 
 #. module: dds_camp
+#: field:event.registration,organization:0
+msgid "Scout Organization - OLD"
+msgstr "Scout Organization - OLD"
+
+#. module: dds_camp
 #: field:event.event,webshop_product_nid:0
 msgid "Webshop nid"
 msgstr "Webshop nid"
-
-#. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Or add a new participant below"
-msgstr "Eller tilføj en ny deltager nedenfor"
 
 #. module: dds_camp
 #: model:ir.model,name:dds_camp.model_dds_camp_event_participant_day
@@ -647,6 +799,16 @@ msgid "Address"
 msgstr "Adresse"
 
 #. module: dds_camp
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 4 - 5"
+msgstr "4 - 5 år"
+
+#. module: dds_camp
+#: model:ir.model,name:dds_camp.model_portal_wizard_user
+msgid "Portal User Config"
+msgstr "Portal User Config"
+
+#. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,name:0
 #: field:dds_camp.event.participant,name:0
 #: field:dds_camp.event.participant.day,name:0
@@ -661,17 +823,9 @@ msgid "DDS Webshop"
 msgstr "DDS Webshop"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
-#: field:dds_camp.event.participant,country_id:0
-#: field:dds_camp.scout.org,country_id:0 field:event.registration,country_id:0
-#: view:res.partner:0
-msgid "Country"
-msgstr "Land"
-
-#. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Not this day"
-msgstr "Ikke denne dag"
+#: selection:event.registration,shared_transport:0
+msgid "Maybe"
+msgstr "Måske"
 
 #. module: dds_camp
 #: view:event.registration:0
@@ -684,6 +838,11 @@ msgid "Relatives phonenumber"
 msgstr "Telefon pårørende"
 
 #. module: dds_camp
+#: view:dds_camp.event.participant:0
+msgid "Camp Period"
+msgstr "Lejrperiode"
+
+#. module: dds_camp
 #: view:dds_camp.bmimportwizard:0
 msgid "Login"
 msgstr "Login"
@@ -692,7 +851,7 @@ msgstr "Login"
 #: view:event.event:0
 #: model:ir.actions.act_window,name:dds_camp.action_portal_event_registration_tree
 msgid "Registrations"
-msgstr "Registrations"
+msgstr "Tilmeldinger"
 
 #. module: dds_camp
 #: selection:dds_camp.scout.org,worldorg:0
@@ -700,8 +859,12 @@ msgid "WAGGGS/WOSM"
 msgstr "WAGGGS/WOSM"
 
 #. module: dds_camp
+#: field:event.registration,food_allergy:0
+msgid "Do you have any allergy sufferer"
+msgstr "Har gruppen allergikere med på lejren"
+
+#. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,memberno:0
-#: field:dds_camp.event.participant,memberno:0
 msgid "Membership number"
 msgstr "Medlemsnummer"
 
@@ -750,4 +913,4 @@ msgstr "Ja"
 #. module: dds_camp
 #: view:event.event:0
 msgid "Open Event Detail"
-msgstr "Open Event Detail"
+msgstr "Åbn arrangement oplysninger"

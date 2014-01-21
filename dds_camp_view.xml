@@ -29,6 +29,17 @@
 			
 		<!-- Scout Organizations -->
 		
+		<record id="scoutorg_search" model="ir.ui.view">
+            <field name="name">dds_camp.scout.org.tree.search</field>
+            <field name="model">dds_camp.scout.org</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="name" />
+					<field name="country_id" />
+                 </search>
+            </field>
+            </record>     	
 		<record model="ir.ui.view" id="scoutorg_tree">
 			<field name="name">scoutorg.tree</field>
 			<field name="model">dds_camp.scout.org</field>
@@ -50,6 +61,7 @@
 
 			<field name="res_model">dds_camp.scout.org</field>
 			<field name="view_type">form</field>
+			<field name="search_view_id" ref="scoutorg_search"/>
 
 		</record>
 
