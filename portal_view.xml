@@ -120,12 +120,12 @@
 											colspan="2" />
 									</group>
 								</page>
-								<page string="Administration" groups='event.group_event_manager'>
+								<page string="Agreements" >
 									<group colspan="4">
-										<field name='signed_up' />
-										<field name='foreigners' />
-										<field name='agreements' />
-										<field name='internal_note' />
+										
+										<field name='foreigners' attrs="{'invisible': True}"/>
+										<field name='agreements' attrs="{'readonly': '1'}"/>
+										
 
 									</group>
 								</page>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+
+<!-- Email template for new users -->
+        <record id="set_password_email" model="email.template">
+            <field name="name">OpenERP Enterprise Connection</field>
+            <field name="model_id" ref="portal.wizard.user"/>
+            <field name="email_from"><![CDATA[${object.company} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject"><![CDATA[${object.company} invitation to connect on OpenERP]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        ${object.name},
+                    </p>
+                    <p>
+                        You have been invited to connect to "${object.company}" in order to get access to your documents in OpenERP.
+                    </p>
+                    <p>
+                        To accept the invitation, click on the following link:
+                    </p>
+                    <ul>
+                        <li><a href="${object.signup_url}">Accept invitation to "${object.company}"</a></li>
+                    </ul>
+                    <p>
+                        Thanks,
+                    </p>
+                    <pre>
+--
+
+                    </pre>
+                ]]>
+            </field>
+        </record>
+
+    </data>
+</openerp>
