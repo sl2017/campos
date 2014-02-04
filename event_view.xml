@@ -93,10 +93,10 @@
 							<page string="Home Hospitality/Friendship Groups" colspan="8" col="8">
 								<group colspan="8" col="8">
 									<group>
-										<field name="hh_precamp" attrs="{'invisible': [('foreigners','=',True)]}"/>
-										<field name="hh_aftercamp" attrs="{'invisible': [('foreigners','=',True)]}"/>
-										<field name="hh_precamp_prv" attrs="{'invisible': [('foreigners','=',False)]}"/>
-										<field name="hh_aftercamp_prv" attrs="{'invisible': [('foreigners','=',False)]}"/>
+										<field name="hh_precamp" attrs="{'invisible': [('foreigners','=',False)]}"/>
+										<field name="hh_aftercamp" attrs="{'invisible': [('foreigners','=',False)]}"/>
+										<field name="hh_precamp_prv" attrs="{'invisible': [('foreigners','=',True)]}"/>
+										<field name="hh_aftercamp_prv" attrs="{'invisible': [('foreigners','=',True)]}"/>
 									</group>
 									<group>
 										<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
