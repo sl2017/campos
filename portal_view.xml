@@ -317,6 +317,14 @@
                  	<field name="name"/>
                  	<field name="registration_id"/>
                  	<field name="city"/>
+                 	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
+                 	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
+                 	<filter icon="terp-personal" string="Staff" help="Camp Staff" domain="[('event_id','=',2)]"/>
+                 	<group expand="0" string="Group By...">
+                 	<filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
+                    <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+                 	<filter name="fAge" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age_group'}"/>
+                 	</group>
                  </search>
             </field>
             </record>  
@@ -335,7 +343,9 @@
 											-->
 											<!-- <field name="patrol"/>  -->
 											<field name="day_summery"/>
-											
+											<field name="age_group" invisible="1"/>
+											<field name="leader"/>
+											<field name="event_id"/>
 
 										</tree>
 										</field>

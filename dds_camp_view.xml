@@ -39,7 +39,8 @@
 					<field name="country_id" />
                  </search>
             </field>
-            </record>     	
+        </record>
+             	
 		<record model="ir.ui.view" id="scoutorg_tree">
 			<field name="name">scoutorg.tree</field>
 			<field name="model">dds_camp.scout.org</field>
@@ -67,6 +68,60 @@
 
 		<menuitem action="action_scoutorg_tree" id="event_scoutorg_menu"
 			name="Scout Orgs" sequence="50" parent="base.menu_marketing_config_root" />
+			
+		<!-- Day overview -->
+		
+		<record id="camp_event_participant_day_search" model="ir.ui.view">
+            <field name="name">dds_camp.event.participant.day.tree.search</field>
+            <field name="model">dds_camp.event.participant.day</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="day_txt" />
+					<field name="participant_id" />
+					<field name="registration_id" />
+					<filter icon="terp-personal" name='Active' string="Active days" help="Active days" domain="[('state','=',True)]"/>
+					<group expand="0" string="Group By...">
+                        <filter name="fDays" string="Days" icon="terp-personal" domain="[]" context="{'group_by':'day_txt'}"/>
+                        <filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
+                        <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+                        <filter name="fAge" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age_group'}"/>
+                    </group>
+                 </search>
+            </field>
+        </record>
+             	
+		<record model="ir.ui.view" id="camp_event_participant_day_tree">
+			<field name="name">dds_camp.event.participant.day.tree</field>
+			<field name="model">dds_camp.event.participant.day</field>
+			<field name="arch" type="xml">
+				<tree string="Participations Days">
+					
+					<field name="day_txt" />
+					<field name="event_id"/>
+					<field name="registration_id"/>
+					<field name="participant_id" />
+					<field name="age_group" invisible="1"/>
+					<field name="state" />
+					
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_event_participant_day_tree" model="ir.actions.act_window">
+			<field name="name">Participations Days</field>
+
+			<field name="res_model">dds_camp.event.participant.day</field>
+			<field name="view_type">form</field>
+			<field name="search_view_id" ref="camp_event_participant_day_search"/>
+			<field name="context">{'search_default_Active' : 1, 'search_default_fDays' : 1, 'search_default_fEvent' : 1, 'search_default_fGroup' : 1}</field>
+
+		</record>
+
+		<menuitem action="action_event_participant_day_tree" id="event_participant_day_menu"
+			name=" - by Days" sequence="60" parent="base.menu_event_main" />
 			
 	</data>
 </openerp>

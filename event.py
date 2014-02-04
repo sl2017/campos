@@ -109,8 +109,8 @@ class dds_camp_event_participant_day(osv.osv):
     def _calc_day_txt(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for par_day in self.browse(cr, uid, ids, context=context):
-            dt = datetime.datetime.strptime(par_day.date, DEFAULT_SERVER_DATETIME_FORMAT).date()
-            res[par_day.id] = dt.strftime('%d/%m-%Y')
+            dt = datetime.datetime.strptime(par_day.date, DEFAULT_SERVER_DATE_FORMAT).date()
+            res[par_day.id] = {'day_txt' : dt.strftime('%d/%m-%Y')}
         return res
             
     _columns = {
@@ -118,7 +118,10 @@ class dds_camp_event_participant_day(osv.osv):
         'date' : fields.date('Date'),
         'state': fields.boolean('Participate'),
         'name' : fields.char('Name', size=64),
-        'day_txt' : fields.function(_calc_day_txt, type = 'char', size = 32, string='Day', method=True, multi='TXT'), 
+        'day_txt' : fields.function(_calc_day_txt, type = 'char', size = 32, string='Day', method=True, multi='TXT', store=True),
+        'registration_id' : fields.related('participant_id', 'registration_id', type='many2one', relation='event.registration', store=True, string='Group'),
+        'age_group' : fields.related('participant_id', 'age_group', type='char', size=16,  store=True, string='Age'),
+        'event_id' : fields.related('participant_id', 'registration_id', 'event_id', type='many2one', relation='event.event', store=True, string='Event'), 
         }
     
     def button_reg_confirm(self, cr, uid, ids, context=None, *args):
@@ -421,7 +424,7 @@ class dds_camp_event_participant(osv.osv):
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
-        'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART'),
+        'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART',store=True),
         'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),                               
 #         'age_group' : fields.selection([('06-08','Age 6 - 8'),
 #                                           ('09-10','Age 9 - 10'),
@@ -430,7 +433,8 @@ class dds_camp_event_participant(osv.osv):
 #                                           ('17-22', 'Age 17 - 22'),
 #                                           ('22+','Age 22+ and leaders')],'Age group'),
          'memberno' : fields.char('DDS Medlemsnummer', size=32),
-         'imported_bm' : fields.boolean(u'Imported from Blåt Medlem')       
+         'imported_bm' : fields.boolean(u'Imported from Blåt Medlem'),
+         'event_id' : fields.related('registration_id', 'event_id', type='many2one', relation='event.event', store=True, string='Event'),       
         
     }
     
@@ -651,9 +655,9 @@ class event_registration(osv.osv):
 
         'hcap' : fields.boolean('Do you bring any handicapped scouts'),
         'hcap_desc': fields.text('Describe the handicap'),
-        'hcap_specneeds' : fields.text('Describe speciel needs'),
+        'hcap_specneeds' : fields.text('Describe special needs'),
         'food_allergy' : fields.boolean('Do you have any allergy sufferer'),
-        'food_allergy_desc': fields.text('Descibe the allergy'),
+        'food_allergy_desc': fields.text('Describe the allergy'),
         
         #Internal fields
         'agreements': fields.text('What have been arranged'),
