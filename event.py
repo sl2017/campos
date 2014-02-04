@@ -105,11 +105,20 @@ class dds_camp_event_participant_day(osv.osv):
     _description = 'Event participant day'
     _name = 'dds_camp.event.participant.day'
     _order = 'date'
+    
+    def _calc_day_txt(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for par_day in self.browse(cr, uid, ids, context=context):
+            dt = datetime.datetime.strptime(par_day.date, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            res[par_day.id] = dt.strftime('%d/%m-%Y')
+        return res
+            
     _columns = {
         'participant_id': fields.many2one('dds_camp.event.participant', 'Participant', required=True, select=True, ondelete='cascade'),
         'date' : fields.date('Date'),
         'state': fields.boolean('Participate'),
-        'name' : fields.char('Name', size=64)
+        'name' : fields.char('Name', size=64),
+        'day_txt' : fields.function(_calc_day_txt, type = 'char', size = 32, string='Day', method=True, multi='TXT'), 
         }
     
     def button_reg_confirm(self, cr, uid, ids, context=None, *args):
@@ -169,13 +178,19 @@ class dds_camp_event_participant(osv.osv):
             #print "Form found!"
             #print "Context: ", context
             reg_id = context.get('active_id', False)
-            if not reg_id:
-                reg_id = 1
+            
             if reg_id:
                 reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
                 from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
                 to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
                 print "dates", from_date, to_date
+            if not reg_id:
+                event = self.pool.get('event.event').browse(cr, uid, [1])[0]
+                from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+                to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+                print "dates", from_date, to_date
+            
+            if from_date:
                 dt = from_date
                 delta = datetime.timedelta(days=1)
                 while dt <= to_date:
@@ -272,6 +287,9 @@ class dds_camp_event_participant(osv.osv):
         res = {}
         for par in self.browse(cr, uid, ids, context=context):
             dates= []
+            fee = 0
+            text = ''
+            age = 15 # Default to pay age
             full = True
             for d in par.days_ids:
                 if d.state:
@@ -282,7 +300,6 @@ class dds_camp_event_participant(osv.osv):
                 res[par.id] = {'day_summery' : _('Full periode')}
             else:
                 dates.sort()
-                text = ''
                 for d in dates:
                     text += ',' + d[8:]
                 res[par.id] = {'day_summery' : text[1:]}
@@ -308,7 +325,22 @@ class dds_camp_event_participant(osv.osv):
                         ag = '17-22'
                     if age > 22:
                         ag = '22+'
-            res[par.id].update({'age_group': ag})
+            if age > 3 or not age:
+                if full:
+                    fee = 1500.00
+                elif text == ',25,26,27':    # Special pris for weekenden fredag – søndag 500 kr
+                    fee = 500.00
+                elif text == ',22,23,24,25,26,27':               # Tirsdag til Søndag 6 dage 1.050 kr
+                    fee = 1050.00
+                elif text == ',27,28,29,30,31':               # Søndag til Torsdag 5 dage 850 kr.
+                    fee = 850.00
+                elif text == ',26,27,28,29,30,31':               # Lørdag til Torsdag 6 dage 1.050 kr.
+                    fee = 1050.00    
+                elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
+                    fee = 1500.00
+                         
+            res[par.id].update({'age_group': ag,
+                                'camp_fee': fee})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -389,7 +421,8 @@ class dds_camp_event_participant(osv.osv):
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
-        'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Summery', method=True, multi='PART'),                               
+        'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART'),
+        'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),                               
 #         'age_group' : fields.selection([('06-08','Age 6 - 8'),
 #                                           ('09-10','Age 9 - 10'),
 #                                           ('11-12',u'Age 11 - 12'),

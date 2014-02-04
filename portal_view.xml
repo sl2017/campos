@@ -335,6 +335,7 @@
 											-->
 											<!-- <field name="patrol"/>  -->
 											<field name="day_summery"/>
+											
 
 										</tree>
 										</field>
