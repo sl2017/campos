@@ -29,6 +29,7 @@
 						<group>
 							<group>
 								<field name="event_id" attrs="{'readonly': '1'}" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+								<field name="event_id2"/>
 								<field name="country_id" attrs="{'readonly': '1'}"  on_change="onchange_country_id(country_id)" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 								<field name="organization_id" attrs="{'readonly': '1'}"  options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 								<!--   <field name="organization" /> -->
@@ -50,7 +51,7 @@
 						</group>
 						<group>
 							<notebook colspan="8" col="8">
-								<page string="Contact">
+								<page string="Contact" attrs="{'invisible': [('event_id2', '=', 2)]}">
 									<group>
 										<field name="contact_partner_id"
 											context="{'default_parent_id': partner_id, 'default_customer': True, 'default_country_id' : country_id, 'show_address' : True, 'without_company':True, 'add_email': True, 'form_view_ref':'dds_camp.portal_partner_simple_form'}"  
@@ -63,8 +64,17 @@
 									</group>
 
 								</page>
+								<page string="Accommodation" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									<group>
+									
+										<field name="accommodation"/>
+										<field name="parking"/>
+										<field name="power"/>
+																	
+									</group>
+								</page>
 								<page string="Home Hospitality/Friendship Groups" colspan="8"
-									col="8">
+									col="8" attrs="{'invisible': [('event_id2', '=', 2)]}">
 									<group colspan="8" col="8">
 										<group>
 											<field name="hh_precamp" attrs="{'invisible': [('foreigners','=',False)]}"/>
@@ -148,6 +158,7 @@
 			<sheet>
 			<group colspan="4" col="4">
 				<group colspan="2" col="2">
+					<group colspan="2" col="2">
 					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
 					<!-- 
 					<field mode="form" name="partner_id"
@@ -186,15 +197,44 @@
 
 					<field name="birth" />
 					<field name="age_group" invisible="1" />
-					<field name="leader" />
-					<field name="rel_phone" />
+					<field name="leader"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<field name="rel_phone"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
 					<field name="memberno" attrs="{'readonly': True, 'invisible': [('imported_bm', '=', False)]}" />
 					<field name="imported_bm" invisible="1" />
+					<field name="event_id2" invisible="1"/>
+					</group>
+					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+						<field name="workwish"/>
+						<field name="committee_id"/>
+						<field name="app_proc" groups='event.group_event_manager'/>
+						<field name="withgroup"/>
+						<field name="groupname"/>
+						<field name="profession"/>
+						<field name="tshirt_size_id"/>
+						</group>
+						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
+							<field name="drvlic_car"/>
+							<field name="drvlic_truck"/>
+							<field name="drvlic_bus"/>
+							<field name="drvlic_trailer"/>
+							<field name="drvlic_tractor"/>
+							<field name="drvlic_flift"/>
+							<field name="drvlic_other"/>
+						</group>
+					
 					<!-- <field name="patrol" /> -->
 			</group>
 			<group colspan="2" col="2">
+				<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+				</group>
+			    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+				</group> 
 				<group colspan="2" col="2" string="Camp Period">
 				</group>
+				 
+				<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
+				</group>
+				
 				<group colspan="2" col="2" class="oe_edit_only">
 					<button name="action_create_day_lines" type="object" string="All days"
 						help="" colspan="2" />
@@ -364,6 +404,67 @@
 		</record>
 										
 		
+		
+	<record model="ir.ui.view" id="portal_staff_form">
+			<field name="name">portal.dds_camp.staff.form</field>
+			<field name="model">dds_camp.staff</field>
+			<field name="arch" type="xml">
+				<form string="Event Registration" version="7.0">
+					<header>
+						<!-- 
+						<field name="state" nolabel="1" colspan="2" widget="statusbar"
+							statusbar_visible="draft,open,done" />
+						 -->	
+					</header>
+					<sheet string="Registration">
+					<field name="state" invisible="1"/>
+						<label for="partner_id" class="oe_edit_only" />
+						<h1>
+							<field name="partner_id" />
+						</h1>
+					
+					<field name="name"/>
+					<field name="event_id2"/>
+					<field name="event_id"/>
+					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+						<field name="workwish"/>
+						<field name="committee_id"/>
+						<field name="app_proc" groups='event.group_event_manager'/>
+						<field name="withgroup"/>
+						<field name="groupname"/>
+						<field name="profession"/>
+						<field name="tshirt_size_id"/>
+						</group>
+						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
+							<field name="drvlic_car"/>
+							<field name="drvlic_truck"/>
+							<field name="drvlic_bus"/>
+							<field name="drvlic_trailer"/>
+							<field name="drvlic_tractor"/>
+							<field name="drvlic_flift"/>
+							<field name="drvlic_other"/>
+						</group>
+					
+				</sheet>
+				</form>
+				</field>
+				</record>	
+				
+		<record id="action_staff_tree" model="ir.actions.act_window">
+			<field name="name">Staff</field>
+
+			<field name="res_model">dds_camp.staff</field>
+			<field name="view_type">form</field>
+			
+
+		</record>
+
+		<menuitem action="action_staff_tree" id="event_staff_menu"
+			name="Staff" sequence="60" parent="menu_portal_registration"
+			groups="portal.group_portal" />	
+			
+		<menuitem action="action_staff_tree" id="event_staff2_menu"
+			name="Staff" sequence="70"  parent="base.menu_marketing_config_root" />
 	</data>
 </openerp>
 		

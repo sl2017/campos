@@ -123,5 +123,29 @@
 		<menuitem action="action_event_participant_day_tree" id="event_participant_day_menu"
 			name=" - by Days" sequence="60" parent="base.menu_event_main" />
 			
+			
+		<record id="action_committee_tree" model="ir.actions.act_window">
+			<field name="name">Committees</field>
+
+			<field name="res_model">dds_camp.committee</field>
+			<field name="view_type">form</field>
+			
+
+		</record>
+
+		<menuitem action="action_committee_tree" id="event_committee_menu"
+			name="Committess" sequence="60" parent="base.menu_marketing_config_root" />	
+			
+		<record id="action_tshirt_tree" model="ir.actions.act_window">
+			<field name="name">T Shirt</field>
+
+			<field name="res_model">dds_camp.tshirtsize</field>
+			<field name="view_type">form</field>
+			
+
+		</record>
+
+		<menuitem action="action_tshirt_tree" id="event_tshirt_menu"
+			name="T Shirt" sequence="60" parent="base.menu_marketing_config_root" />	
 	</data>
 </openerp>

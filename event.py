@@ -80,6 +80,28 @@ class dds_camp_municipality(osv.osv):
     }
 dds_camp_municipality()
 
+class dds_camp_committee(osv.osv):
+    """ Committee """
+    _description = 'Committee'
+    _name = 'dds_camp.committee'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=64),
+        'desc': fields.text('Description')
+    }
+dds_camp_committee()
+
+class dds_camp_tshirtsize(osv.osv):
+    """ Committee """
+    _description = 'T Shirt'
+    _name = 'dds_camp.tshirtsize'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=64),
+        'desc': fields.text('Description')
+    }
+dds_camp_committee()
+
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
     _inherit = 'event.event'
@@ -180,18 +202,18 @@ class dds_camp_event_participant(osv.osv):
         if res['name'] == u'portal.registration.participant.form':
             #print "Form found!"
             #print "Context: ", context
-            reg_id = context.get('active_id', False)
-            
-            if reg_id:
-                reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
-                from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
-                to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-                print "dates", from_date, to_date
-            if not reg_id:
-                event = self.pool.get('event.event').browse(cr, uid, [1])[0]
-                from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
-                to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-                print "dates", from_date, to_date
+#             reg_id = context.get('active_id', False)
+#             
+#             if reg_id:
+#                 reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
+#                 from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+#                 to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+#                 print "dates", from_date, to_date
+#             if not reg_id:
+            event = self.pool.get('event.event').browse(cr, uid, [1])[0]
+            from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
             
             if from_date:
                 dt = from_date
@@ -214,6 +236,34 @@ class dds_camp_event_participant(osv.osv):
                         fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
                         setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
                         dt += delta        
+                # Staff camps
+                for grp in doc.findall(".//group[@string='Teknik forlejr']"):
+                    dt = datetime.datetime.strptime('2014-07-12', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-07-17', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta           
+                
+                for grp in doc.findall(".//group[@string='Forlejr']"):
+                    dt = datetime.datetime.strptime('2014-07-18', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-07-21', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta
+                
+                for grp in doc.findall(".//group[@string='Efterlejr']"):
+                    dt = datetime.datetime.strptime('2014-08-01', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-08-03', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta     
+                print ET.tostring(doc)              
                 res['arch'] = ET.tostring(doc) 
         return res
 
@@ -434,8 +484,26 @@ class dds_camp_event_participant(osv.osv):
 #                                           ('22+','Age 22+ and leaders')],'Age group'),
          'memberno' : fields.char('DDS Medlemsnummer', size=32),
          'imported_bm' : fields.boolean(u'Imported from Blåt Medlem'),
-         'event_id' : fields.related('registration_id', 'event_id', type='many2one', relation='event.event', store=True, string='Event'),       
-        
+         'event_id' : fields.related('registration_id', 'event_id', type='many2one', relation='event.event', store=True, string='Event'),
+         'event_id2' : fields.related('registration_id', 'event_id','id', type='integer', string='Event'),   
+         
+         # Staff registraring
+         'workwish' : fields.char('Want to work with', size=64),   
+         'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee'),
+         'app_proc' : fields.selection([('draft','Received'),
+                                        ('sent','Sent to committee'),
+                                        ('approved','Approved by the committee')],'Approval Procedure'),
+         'withgroup' : fields.boolean('Also participating with my group'),
+         'groupname' : fields.char('Group name', size=64),
+         'profession': fields.char('Profession', size=64, help='What do you do for living'),
+         'tshirt_size_id' : fields.many2one('dds_camp.tshirtsize', 'Size of T-shirt'),
+         'drvlic_car' : fields.boolean('Car'),
+         'drvlic_truck' : fields.boolean('Truck'),
+         'drvlic_bus' : fields.boolean('Bus'),
+         'drvlic_trailer' : fields.boolean('Trailer'),
+         'drvlic_tractor' : fields.boolean('Tractor'),
+         'drvlic_flift' : fields.boolean('Forklift'),
+         'drvlic_other' : fields.boolean('Other'),
     }
     
     _sql_constraints = [
@@ -588,6 +656,7 @@ class event_registration(osv.osv):
         return res
             
     _columns = {
+        'event_id2' : fields.related('event_id','id', type='integer', string='Event'),
         'webshop_orderno': fields.integer('Webshop Order No'),
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
@@ -664,7 +733,17 @@ class event_registration(osv.osv):
         'internal_note' : fields.text('Internal note'),
         'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART' ),
         'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART' ),
-    
+        
+        # Staff registraring
+        'accommodation' : fields.selection([('tents','Tents'),
+                                          ('caravan','Caravan'),
+                                          ('camplet',u'CampLet'),
+                                          ('cottent', 'Cottage tent'),
+                                          ('group', 'By my Troop'),
+                                          ('otherstaff','At other Staff'),
+                                          ('other','Other')],'Accomadation'),
+        'parking' : fields.boolean('Do you need parking?'),
+        'power' : fields.boolean('Do you need 220 V power - for a fee?')        
     }
     
     def write(self, cr, uid, ids, values, context=None):
@@ -809,3 +888,15 @@ class event_registration(osv.osv):
          
 event_registration()
 
+class dds_staff(osv.osv):
+    _name = "dds_camp.staff"
+    _description = "Staff signup"
+    _inherits = {'event.registration': "reg_id",
+                 'dds_camp.event.participant': "par_id"}
+    
+    _defaults = {'user_id' : lambda self,cr,uid,context: uid,
+                 'event_id' : lambda *a: 2}
+    
+    
+dds_staff()
+    

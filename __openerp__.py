@@ -35,11 +35,12 @@
              ],
     "update_xml" : ["dds_camp_view.xml",
                     "event_view.xml",
-                    "report/participants_list_xls.xml"
+                    
                     "wizard/bmimport_view.xml",
                     "portal_view.xml", 
                     "wizard/portal_wizard.xml",
-                    
+                    "report/participants_list_xls.xml",
+		      "wizard/welcome_view.xml"
                     ],
     "installable": True,
     'auto_install': False,

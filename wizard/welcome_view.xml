@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	
+	
+	<record model="ir.ui.view" id="portal_welcome_form">
+			<field name="name">portal.dds_camp.welcome.form</field>
+			<field name="model">dds_camp.wizard.welcome</field>
+			<field name="arch" type="xml">
+				<form string="Welcome" version="7.0">
+					<header>
+							
+					</header>
+					<sheet string="Welcome">
+				 <button name="open_staffsignup" string="Staff Signup" type="object"/>
+				 
+				 </sheet>
+				 </form>
+				 </field>
+				 </record>				
+	
+	
+	<record id="action_welcome_form" model="ir.actions.act_window">
+			<field name="name">Welcome</field>
+
+			<field name="res_model">dds_camp.wizard.welcome</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+
+
+		</record>
+
+		<menuitem action="action_welcome_form" id="event_welcome_menu"
+			name="Welcome" sequence="70" parent="menu_portal_registration"
+			groups="portal.group_portal" />
+			
+
+	<record id="action_signup_staff_form" model="ir.actions.act_window">
+			<field name="name">Staff signup</field>
+
+			<field name="res_model">dds_camp.wizard.signup.staff</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="context">{'default_state' : 'step1', 'default_lang': 2}</field>
+
+
+		</record>
+
+		<menuitem action="action_signup_staff_form" id="event_signup_staff_menu"
+			name="Staff Signup" sequence="20" parent="portal.portal_company"
+			groups="portal.group_anonymous" />
+
+			
+		<record model="ir.ui.view" id="portal_signup_staff_form">
+			<field name="name">portal.dds_camp.signup_staff.form</field>
+			<field name="model">dds_camp.wizard.signup.staff</field>
+			<field name="arch" type="xml">
+				<form string="Staff registration" version="7.0">
+					<header>
+							
+					</header>
+					<sheet string="Welcome">
+					<field invisible="1" name="state" />             
+	   				<field name = "message" nolabel="1" readonly="1"/>
+					
+					<group states="step1">
+						<field name="name"/>
+						<field name="email"/>
+						<field name="lang"/>
+					</group>
+				<group states="step2">
+					<div>Vi har nu sendt dig en bekræftigelsesmail. Følg venligst vejledningen deri.</div>
+						
+				</group>
+				
+				</sheet>
+				<footer states="step1">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            <button name="do_staffsignup" string="Next" type="object" />
+          </footer>
+
+          <footer states="step2">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            
+          </footer>
+
+      </form>
+    </field>
+   </record>
+				
+			</data>
+			</openerp>
