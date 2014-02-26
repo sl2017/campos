@@ -86,8 +86,10 @@ class dds_camp_committee(osv.osv):
     _name = 'dds_camp.committee'
     _order = 'name'
     _columns = {
-        'name': fields.char('Name', size=64),
-        'desc': fields.text('Description')
+        'name': fields.char('Name', size=64, translate=True),
+        'desc': fields.text('Description', translate=True),
+        'email': fields.char('Name', size=128),
+        'members_ids': fields.one2many('dds_camp.event.participant', 'committee_id', 'Members'),
     }
 dds_camp_committee()
 
@@ -490,13 +492,14 @@ class dds_camp_event_participant(osv.osv):
          # Staff registraring
          'workwish' : fields.char('Want to work with', size=64),   
          'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee'),
-         'app_proc' : fields.selection([('draft','Received'),
+         'state' : fields.selection([('draft','Received'),
                                         ('sent','Sent to committee'),
                                         ('approved','Approved by the committee')],'Approval Procedure'),
          'withgroup' : fields.boolean('Also participating with my group'),
-         'groupname' : fields.char('Group name', size=64),
+         'group_id' : fields.many2one('event.registration', 'Group'),
          'profession': fields.char('Profession', size=64, help='What do you do for living'),
          'tshirt_size_id' : fields.many2one('dds_camp.tshirtsize', 'Size of T-shirt'),
+         'softshell_size_id' : fields.many2one('dds_camp.tshirtsize', u'Bestilling af Soft shell jakke pris 450 kr - størrelse'),
          'drvlic_car' : fields.boolean('Car'),
          'drvlic_truck' : fields.boolean('Truck'),
          'drvlic_bus' : fields.boolean('Bus'),
@@ -504,6 +507,12 @@ class dds_camp_event_participant(osv.osv):
          'drvlic_tractor' : fields.boolean('Tractor'),
          'drvlic_flift' : fields.boolean('Forklift'),
          'drvlic_other' : fields.boolean('Other'),
+         'functitle' : fields.selection([('fm','Formand'),
+                                        ('um','Udvalgsmedlem'),
+                                        ('hlp','Hjælper'),
+                                        ('chld','Hjælperbarn'),
+                                        ('rel','Pårørende'),
+                                        ('ex', 'Ekstern (ikke betalende)')],'Function'),
     }
     
     _sql_constraints = [
@@ -741,7 +750,7 @@ class event_registration(osv.osv):
                                           ('cottent', 'Cottage tent'),
                                           ('group', 'By my Troop'),
                                           ('otherstaff','At other Staff'),
-                                          ('other','Other')],'Accomadation'),
+                                          ('other','Outside Camp')],'Accomadation'),
         'parking' : fields.boolean('Do you need parking?'),
         'power' : fields.boolean('Do you need 220 V power - for a fee?')        
     }

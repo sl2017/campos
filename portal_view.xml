@@ -155,6 +155,12 @@
 	<field name="arch" type="xml">
 
 		<form string="Event Registration" version="7.0">
+		<header>
+ 
+						<field name="state" nolabel="1" colspan="2" widget="statusbar"
+							 groups='event.group_event_manager' attrs="{'invisible': [('event_id2', '=', 1)]}"/>
+		</header>
+		
 			<sheet>
 			<group colspan="4" col="4">
 				<group colspan="2" col="2">
@@ -195,7 +201,7 @@
 
 
 
-					<field name="birth" />
+					<field name="birth" required="1"/>
 					<field name="age_group" invisible="1" />
 					<field name="leader"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
 					<field name="rel_phone"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
@@ -206,11 +212,12 @@
 					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 						<field name="workwish"/>
 						<field name="committee_id"/>
-						<field name="app_proc" groups='event.group_event_manager'/>
+						<field name="functitle" groups='event.group_event_manager' /> 
 						<field name="withgroup"/>
-						<field name="groupname"/>
+						<field name="group_id"/>
 						<field name="profession"/>
 						<field name="tshirt_size_id"/>
+						<field name="softshell_size_id"/>
 						</group>
 						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
 							<field name="drvlic_car"/>
@@ -411,10 +418,8 @@
 			<field name="arch" type="xml">
 				<form string="Event Registration" version="7.0">
 					<header>
-						<!-- 
 						<field name="state" nolabel="1" colspan="2" widget="statusbar"
-							statusbar_visible="draft,open,done" />
-						 -->	
+							 groups='event.group_event_manager' attrs="{'invisible': [('event_id2', '=', 1)]}"/>
 					</header>
 					<sheet string="Registration">
 					<field name="state" invisible="1"/>
@@ -429,11 +434,12 @@
 					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 						<field name="workwish"/>
 						<field name="committee_id"/>
-						<field name="app_proc" groups='event.group_event_manager'/>
+						<field name="functitle" groups='event.group_event_manager' />
 						<field name="withgroup"/>
-						<field name="groupname"/>
+						<field name="group_id"/>
 						<field name="profession"/>
 						<field name="tshirt_size_id"/>
+						<field name="softshell_size_id"/>
 						</group>
 						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
 							<field name="drvlic_car"/>
@@ -455,6 +461,7 @@
 
 			<field name="res_model">dds_camp.staff</field>
 			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
 			
 
 		</record>

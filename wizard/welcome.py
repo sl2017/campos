@@ -70,6 +70,7 @@ class wizard_signupstaff(osv.osv_memory):
         reg_obj = self.pool.get('event.registration')
         par_obj = self.pool.get('dds_camp.event.participant')
         partner_obj = self.pool.get('res.partner')
+        por_obj = self.pool.get('portal.wizard')
     
         for signup in self.browse(cr, uid, ids, context):
             # Create partner
@@ -77,12 +78,20 @@ class wizard_signupstaff(osv.osv_memory):
                                                                'email': signup.email,
                                                                'lang': signup.lang})
             # Create user
+            por_id = por_obj.create(cr, SUPERUSER_ID, {'portal_id': 11,
+                                                       'user_ids': [(0, 0, {'partner_id': partner_id, 
+                                                                           'email': signup.email, 
+                                                                           'in_portal': True})]
+                                                       })
             
+            por_obj.action_apply(cr, SUPERUSER_ID, [por_id], context)
             # Create Registration
+            #partner = partner_obj.browse(cr, SUPERUSER_ID, [partner_id], context)[0]
             reg_id = reg_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
                                                        'email': signup.email,
                                                        'partner_id': partner_id,
                                                        'event_id' : 2,
+                                                       #'user_id': partner.user_id
                                                        })
             
             # Create participant
