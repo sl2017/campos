@@ -88,7 +88,7 @@ class dds_camp_committee(osv.osv):
     _columns = {
         'name': fields.char('Name', size=64, translate=True),
         'desc': fields.text('Description', translate=True),
-        'email': fields.char('Name', size=128),
+        'email': fields.char('Email', size=128),
         'members_ids': fields.one2many('dds_camp.event.participant', 'committee_id', 'Members'),
     }
 dds_camp_committee()
@@ -200,8 +200,8 @@ class dds_camp_event_participant(osv.osv):
         res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
                                                                     context=context, toolbar=toolbar, submenu=submenu)
         
-        #print "FORM: ", res['name'] 
-        if res['name'] == u'portal.registration.participant.form':
+        print "FORM: ", res['name'] 
+        if res['name'] == u'portal.registration.participant.form' or res['name'] == u'portal.dds_camp.staff.form':
             #print "Form found!"
             #print "Context: ", context
 #             reg_id = context.get('active_id', False)
@@ -496,7 +496,7 @@ class dds_camp_event_participant(osv.osv):
                                         ('sent','Sent to committee'),
                                         ('approved','Approved by the committee')],'Approval Procedure'),
          'withgroup' : fields.boolean('Also participating with my group'),
-         'group_id' : fields.many2one('event.registration', 'Group'),
+         'group_id' : fields.many2one('event.registration', 'Group', domain = "[('event_id2','=',1)]"),
          'profession': fields.char('Profession', size=64, help='What do you do for living'),
          'tshirt_size_id' : fields.many2one('dds_camp.tshirtsize', 'Size of T-shirt'),
          'softshell_size_id' : fields.many2one('dds_camp.tshirtsize', u'Bestilling af Soft shell jakke pris 450 kr - størrelse'),
@@ -513,6 +513,7 @@ class dds_camp_event_participant(osv.osv):
                                         ('chld','Hjælperbarn'),
                                         ('rel','Pårørende'),
                                         ('ex', 'Ekstern (ikke betalende)')],'Function'),
+         'partype' : fields.selection([('',''), ('itshead', 'ITS HEad'),('other', 'ITS Other')], 'Record Type'),       
     }
     
     _sql_constraints = [
@@ -669,6 +670,7 @@ class event_registration(osv.osv):
         'webshop_orderno': fields.integer('Webshop Order No'),
         'webshop_order_product_id': fields.integer('Webshop Order Line No'),
         'participant_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration.'),
+        'par_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration',domain=[('partype','!=','itshead')]),
         'agegroup_ids': fields.one2many('dds_camp.event.agegroup', 'registration_id', 'Age grouping.'),
         
         
@@ -906,6 +908,81 @@ class dds_staff(osv.osv):
     _defaults = {'user_id' : lambda self,cr,uid,context: uid,
                  'event_id' : lambda *a: 2}
     
+    #_columns = {'par_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration',domain=[('partype','!=','itshead')]),}
+    
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        print "fields_view_get entry:", view_id, toolbar
+        res = super(dds_staff, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
+                                                                    context=context, toolbar=toolbar, submenu=submenu)
+        
+        #print "FORM: ", res['name'] 
+        if res['name'] == u'portal.registration.participant.form' or res['name'] == u'portal.dds_camp.staff.form':
+            #print "Form found!"
+            #print "Context: ", context
+#             reg_id = context.get('active_id', False)
+#             
+#             if reg_id:
+#                 reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
+#                 from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+#                 to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+#                 print "dates", from_date, to_date
+#             if not reg_id:
+            event = self.pool.get('event.event').browse(cr, uid, [1])[0]
+            from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
+            
+            if from_date:
+                dt = from_date
+                delta = datetime.timedelta(days=1)
+                while dt <= to_date:
+                    res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                    dt += delta
+                print res['arch']
+                doc = ET.XML(res['arch'])
+                #print "FindAll:",".//group[@string='"+ _('Camp Period') +"']"
+                for grp in doc.findall(".//group[@string='Camp Period']"):
+                    dt = from_date
+                    while dt <= to_date:
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta
+                for grp in doc.findall(".//group[@string='Lejrperiode']"):
+                    dt = from_date
+                    while dt <= to_date:
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta        
+                # Staff camps
+                for grp in doc.findall(".//group[@string='Teknik forlejr']"):
+                    dt = datetime.datetime.strptime('2014-07-12', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-07-17', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta           
+                
+                for grp in doc.findall(".//group[@string='Forlejr']"):
+                    dt = datetime.datetime.strptime('2014-07-18', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-07-21', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta
+                
+                for grp in doc.findall(".//group[@string='Efterlejr']"):
+                    dt = datetime.datetime.strptime('2014-08-01', '%Y-%m-%d').date()
+                    to_date = datetime.datetime.strptime('2014-08-03', '%Y-%m-%d').date()
+                    while dt <= to_date:
+                        res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
+                        fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
+                        setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
+                        dt += delta     
+                #print ET.tostring(doc)              
+                res['arch'] = ET.tostring(doc) 
+        return res
     
 dds_staff()
     

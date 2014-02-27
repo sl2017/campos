@@ -165,7 +165,8 @@
 			<group colspan="4" col="4">
 				<group colspan="2" col="2">
 					<group colspan="2" col="2">
-					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
+					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/> 
+						<!--  attrs="{'invisible': True}"  -->
 					<!-- 
 					<field mode="form" name="partner_id"
 						on_change="onchange_partner_id(partner_id)"
@@ -211,10 +212,10 @@
 					</group>
 					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 						<field name="workwish"/>
-						<field name="committee_id"/>
+						<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						<field name="functitle" groups='event.group_event_manager' /> 
 						<field name="withgroup"/>
-						<field name="group_id"/>
+						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						<field name="profession"/>
 						<field name="tshirt_size_id"/>
 						<field name="softshell_size_id"/>
@@ -422,33 +423,163 @@
 							 groups='event.group_event_manager' attrs="{'invisible': [('event_id2', '=', 1)]}"/>
 					</header>
 					<sheet string="Registration">
-					<field name="state" invisible="1"/>
-						<label for="partner_id" class="oe_edit_only" />
-						<h1>
-							<field name="partner_id" />
-						</h1>
 					
-					<field name="name"/>
-					<field name="event_id2"/>
-					<field name="event_id"/>
-					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
-						<field name="workwish"/>
-						<field name="committee_id"/>
-						<field name="functitle" groups='event.group_event_manager' />
-						<field name="withgroup"/>
-						<field name="group_id"/>
-						<field name="profession"/>
-						<field name="tshirt_size_id"/>
-						<field name="softshell_size_id"/>
-						</group>
-						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
-							<field name="drvlic_car"/>
-							<field name="drvlic_truck"/>
-							<field name="drvlic_bus"/>
-							<field name="drvlic_trailer"/>
-							<field name="drvlic_tractor"/>
-							<field name="drvlic_flift"/>
-							<field name="drvlic_other"/>
+					<group colspan="2" col="2">
+					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
+						<field name="appr_leader" groups='event.group_event_manager' />
+						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
+
+
+						<label for="street" string="Address" />
+						<div>
+							<field name="street" placeholder="Street..." />
+							<field name="street2" />
+							<field name="zip_id" on_change="onchange_zip_id(zip_id)"
+								placeholder="City completion" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+
+							<div class="address_format">
+								<field name="zip" placeholder="ZIP" style="width: 20%%" />
+								<field name="city" placeholder="City" style="width: 40%%" />
+								<field name="state_id" class="oe_no_button" placeholder="State"
+									style="width: 37%%" options="{'no_open': True, 'create': False, 'create_edit': False}" on_change="onchange_state(state_id)" />
+
+							</div>
+							<field name="country_id" placeholder="Country" class="oe_no_button"
+								options="{'no_open': True, 'create': False, 'create_edit': False}" />
+						</div>
+						<field name="email" />
+						<field name="phone" />
+
+
+
+					<field name="birth" required="1"/>
+					<field name="age_group" invisible="1" />
+					<field name="leader"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<field name="rel_phone"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<field name="memberno" attrs="{'readonly': True, 'invisible': [('imported_bm', '=', False)]}" />
+					<field name="imported_bm" invisible="1" />
+					<field name="event_id2" invisible="1"/>
+					<field name="organization_id" attrs="{'readonly': '1'}"  options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+					</group>
+					
+						
+					<group>
+							<notebook colspan="8" col="8">
+								<page string="General info">
+								<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									<field name="workwish"/>
+									<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="functitle" groups='event.group_event_manager' />
+									<field name="withgroup"/>
+									<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="profession"/>
+									<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="partype"/>
+									
+								</group>
+								
+								</page>
+								<page string="Accommodation" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									<group>
+									
+										<field name="accommodation"/>
+										<field name="parking"/>
+										<field name="power"/>
+																	
+									</group>
+								</page>
+								<page string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
+										<field name="drvlic_car"/>
+										<field name="drvlic_truck"/>
+										<field name="drvlic_bus"/>
+										<field name="drvlic_trailer"/>
+										<field name="drvlic_tractor"/>
+										<field name="drvlic_flift"/>
+										<field name="drvlic_other"/>
+									</group>
+								</page>
+								<page string="Camp Period" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									<group colspan="4" col="4">
+										<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+										</group>
+									    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+										</group> 
+										<group colspan="2" col="2" string="Camp Period">
+										</group>
+										 
+										<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
+										</group>
+										
+										<group colspan="2" col="2" class="oe_edit_only">
+											<button name="action_create_day_lines" type="object" string="All days"
+										help="" colspan="2" />
+										</group>
+									</group>			
+								</page>
+								<page string="Other participants" colspan="8" col="8">
+									<field name='reg_id' />
+									<field name="participant_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id}">
+										<tree string="Participants">
+											<field name="name"/>
+											 <field name="day_summery"/>
+
+										</tree>
+									</field>
+										
+								</page>
+								<page string="Special considerations" colspan="8" col="8">
+									<group colspan="8" col="8">
+										<group>
+											<field name="hcap" string="Handicap" />
+											<field name="hcap_desc" />
+											<field name="hcap_specneeds" />
+										</group>
+										<group>
+											<field name="food_allergy" string="Allergy"/>
+											<field name="food_allergy_desc" />
+										</group>
+									</group>
+
+								</page>
+								<!-- 
+								<page string="Participants" colspan="8" col="8">
+									<div>Use the Participants button above to add</div>
+									<field name="participant_ids" colspan="4" options="{'create': False}">
+										<tree string="Participants">
+											<field name="name"/>
+											 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											
+											<field name="patrol"/>
+											
+											<field name="day_summery"/>
+
+										</tree>
+									</field>
+								</page>
+								 -->
+								<page string="Webshop" groups='event.group_event_manager'>
+									<group colspan="4">
+										<field name="webshop_orderno" />
+										<field name="webshop_order_product_id" />
+										<button name="button_open_weborder_url" type="object"
+											string="Webshop Order" icon="gtk-zoom-in" help="Open Order Detail"
+											colspan="2" />
+									</group>
+								</page>
+								<page string="Agreements" >
+									<group colspan="4">
+										
+										<field name='foreigners' attrs="{'invisible': True}"/>
+										<field name='agreements' attrs="{'readonly': '1'}"/>
+										
+
+									</group>
+								</page>
+							</notebook>
 						</group>
 					
 				</sheet>
@@ -456,6 +587,17 @@
 				</field>
 				</record>	
 				
+				
+		<record model="ir.ui.view" id="portal_staff_tree">
+			<field name="name">portal.dds_camp.staff.tree</field>
+			<field name="model">dds_camp.staff</field>
+			<field name="arch" type="xml">
+			<tree string="IST">
+					<field name="name"/>
+			</tree>
+                     </field>    
+              </record>			
+
 		<record id="action_staff_tree" model="ir.actions.act_window">
 			<field name="name">Staff</field>
 
@@ -467,11 +609,13 @@
 		</record>
 
 		<menuitem action="action_staff_tree" id="event_staff_menu"
-			name="Staff" sequence="60" parent="menu_portal_registration"
+			name="IST (International Service Team)" sequence="60" parent="menu_portal_registration"
 			groups="portal.group_portal" />	
 			
 		<menuitem action="action_staff_tree" id="event_staff2_menu"
-			name="Staff" sequence="70"  parent="base.menu_marketing_config_root" />
+			name="IST (International Service Team)" sequence="70"  parent="base.menu_marketing_config_root" />
+		
+				
 	</data>
 </openerp>
 		

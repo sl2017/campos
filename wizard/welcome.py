@@ -84,7 +84,7 @@ class wizard_signupstaff(osv.osv_memory):
                                                                            'in_portal': True})]
                                                        })
             
-            por_obj.action_apply(cr, SUPERUSER_ID, [por_id], context)
+            por_obj.action_apply(cr, SUPERUSER_ID, [por_id])
             # Create Registration
             #partner = partner_obj.browse(cr, SUPERUSER_ID, [partner_id], context)[0]
             reg_id = reg_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
@@ -105,7 +105,7 @@ class wizard_signupstaff(osv.osv_memory):
                                                 'par_id' : par_id,
                                                 })
             
-        self.write(cr, uid, ids, {'state': 'step2',}, context=context)
+        self.write(cr, uid, ids, {'state': 'step2',})
         return {
               'type': 'ir.actions.act_window',
               'res_model': 'dds_camp.wizard.signup.staff',
