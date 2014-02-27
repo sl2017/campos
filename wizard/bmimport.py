@@ -166,9 +166,14 @@ class bm_import_wizard(osv.osv_memory):
             member = dict((e.tag, e.text) for e in row)
             if member:
                 print member
+                fullname = ''
+                if member.has_key('userFirstname') and member['userFirstname']:
+                    fullname = member['userFirstname'] + ' '
+                if member.has_key('userLastname') and member['userLastname']:
+                    fullname += member['userLastname']    
                 data.append([
                          member['userMemberNumber'],  # # id
-                         member['userFirstname'] + ' ' + member['userLastname'],  # # name
+                         fullname,  # # name
                          member['addressFull'] if member.has_key('addressFull') else False,  # # street
                          member['PostalCity'][:4] if member.has_key('PostalCity') and member['PostalCity'] else False,  # # zip,
                          member['PostalCity'][5:] if member.has_key('PostalCity') and member['PostalCity'] else False,  # # city,
