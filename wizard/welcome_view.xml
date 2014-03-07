@@ -31,25 +31,26 @@
 
 		</record>
 
+		<!-- 
 		<menuitem action="action_welcome_form" id="event_welcome_menu"
 			name="Welcome" sequence="70" parent="menu_portal_registration"
 			groups="portal.group_portal" />
-			
+			 -->
 
 	<record id="action_signup_staff_form" model="ir.actions.act_window">
-			<field name="name">Staff signup</field>
+			<field name="name">IST signup</field>
 
 			<field name="res_model">dds_camp.wizard.signup.staff</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">form</field>
 			<field name="target">new</field>
-			<field name="context">{'default_state' : 'step1', 'default_lang': 2}</field>
+			<field name="context">{'default_state' : 'step1'}</field>
 
 
 		</record>
 
 		<menuitem action="action_signup_staff_form" id="event_signup_staff_menu"
-			name="Staff Signup" sequence="20" parent="portal.portal_company"
+			name="IST Signup" sequence="20" parent="portal.portal_company"
 			groups="portal.group_anonymous" />
 
 			
@@ -57,7 +58,7 @@
 			<field name="name">portal.dds_camp.signup_staff.form</field>
 			<field name="model">dds_camp.wizard.signup.staff</field>
 			<field name="arch" type="xml">
-				<form string="Staff registration" version="7.0">
+				<form string="IST registration" version="7.0">
 					<header>
 							
 					</header>
@@ -71,7 +72,17 @@
 						<field name="lang"/>
 					</group>
 				<group states="step2">
-					<div>Vi har nu sendt dig en bekræftigelsesmail. Følg venligst vejledningen deri.</div>
+					<div>Tak din interesse for at være hjælper på E2014 The Vikings strike back<br/>
+Du vil om kort tid modtage en mail, hvor du kan oprette dig selv som bruger i tilmeldingsystemet, følg vejledningen i mailen.<br/>
+Du kan også finde en vejledning til tilmeldingssystemet her >link>. Vi vil anbefale, at du lige læser vejledningen igennem før du begynder at tilmelde dig.<br/>
+Du er ikke godkendt som hjælper før du får en accept fra det udvalg du gerne vil arbejde for.<br/>
+Hvis du ikke modtager en mail, så kig i dit spamfilter hvis den ikke findes der har du muligvis skrevet en forkert mail adresse, så prøv at oprette dig igen.<br/>
+<br/>
+Spejderhilsen<br/>
+<br/>
+Christian Eggert Jørgensen<br/>
+<br/>
+Administration</div>
 						
 				</group>
 				
@@ -82,7 +93,7 @@
           </footer>
 
           <footer states="step2">
-          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+          	<button special="cancel" string="Close"/>
             
           </footer>
 

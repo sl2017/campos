@@ -64,7 +64,7 @@ class wizard_user(osv.osv_memory):
         
         # send email to users with their signup url
         template = False
-        template = self.pool.get('ir.model.data').get_object(cr, uid, 'dds_camp', 'set_password_email')
+        template = self.pool.get('ir.model.data').get_object(cr, uid, this_context.get('mail_tpl_module', 'dds_camp'), this_context.get('mail_template','set_password_email'))
         assert template._name == 'email.template'
 
         for user in self.browse(cr, uid, [wizard_user.id], context):

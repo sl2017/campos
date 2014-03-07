@@ -155,18 +155,20 @@
 	<field name="arch" type="xml">
 
 		<form string="Event Registration" version="7.0">
-		<header>
- 
-						<field name="state" nolabel="1" colspan="2" widget="statusbar"
-							 groups='event.group_event_manager' attrs="{'invisible': [('event_id2', '=', 1)]}"/>
+		<header attrs="{'invisible': [('event_id2', '=', 1)]}">
+			<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
+            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user"/>
+            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user"/>
+                         
+			<field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors='{"approved":"blue","rejected":"red"}'
+							 groups="event.group_event_user"/>
 		</header>
 		
 			<sheet>
-			<group colspan="4" col="4">
-				<group colspan="2" col="2">
-					<group colspan="2" col="2">
-					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/> 
-						<!--  attrs="{'invisible': True}"  -->
+			<group colspan="6" col="6">
+				<group colspan="4" col="2">
+					<group colspan="4" col="2">
+					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}" />
 					<!-- 
 					<field mode="form" name="partner_id"
 						on_change="onchange_partner_id(partner_id)"
@@ -210,17 +212,18 @@
 					<field name="imported_bm" invisible="1" />
 					<field name="event_id2" invisible="1"/>
 					</group>
-					<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+					<group  colspan="4" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+					    <field name="is_relative"/>
 						<field name="workwish"/>
 						<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						<field name="functitle" groups='event.group_event_manager' /> 
-						<field name="withgroup"/>
-						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<!--  <field name="withgroup"/>
+						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
 						<field name="tshirt_size_id"/>
 						<field name="softshell_size_id"/>
 						</group>
-						<group colspan="2" col="2" string="Driving license" attrs="{'invisible': [('event_id2', '=', 1)]}">
+						<group string="Driving license" colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 							<field name="drvlic_car"/>
 							<field name="drvlic_truck"/>
 							<field name="drvlic_bus"/>
@@ -251,6 +254,12 @@
 			</group>
 		</group>
 		</sheet>
+		<group groups='event.group_event_manager'>
+		<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups='event.group_event_manager'/>
+                        <field name="message_ids" widget="mail_thread" groups='event.group_event_manager'/>
+                    </div>
+        </group>            
 		</form>
 
 	</field>
@@ -277,7 +286,7 @@
 
 		<record id="action_portal_event_registration_tree" model="ir.actions.act_window">
 			<field name="name">Registrations</field>
-
+			<field name="domain">[('event_id2','=',1)]</field>
 			<field name="res_model">event.registration</field>
 			<field name="view_type">form</field>
 
@@ -294,7 +303,7 @@
 		<menuitem id="menu_portal_registration" name="Registration"
 			action="" parent="portal.portal_menu" sequence="25" />
 		<menuitem action="action_portal_event_registration_tree" id="portal_event_registration_menu"
-			name="Registration" sequence="40" parent="menu_portal_registration"
+			name="Registration Troops" sequence="40" parent="menu_portal_registration"
 			groups="portal.group_portal" />
 			
 			
@@ -356,6 +365,24 @@
 										</field>
 										</record>
 		
+		<record id="dds_camp_event_participant_form2" model="ir.ui.view">
+            <field name="name">dds_camp.event.participant.form2</field>
+            <field name="model">dds_camp.event.participant</field>
+            <field name="arch" type="xml">	
+			<tree string="Participants">
+											<field name="name"/>
+											<!-- 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
+											<!-- <field name="patrol"/>  -->
+											<field name="day_summery"/>
+											<field name="state"/>
+											<field name="functitle"/>
+
+										</tree>
+										</field>
+										</record>
 		<record id="dds_camp_event_participant_search" model="ir.ui.view">
             <field name="name">dds_camp.event.participant.tree.search</field>
             <field name="model">dds_camp.event.participant</field>
@@ -418,9 +445,15 @@
 			<field name="model">dds_camp.staff</field>
 			<field name="arch" type="xml">
 				<form string="Event Registration" version="7.0">
-					<header>
-						<field name="state" nolabel="1" colspan="2" widget="statusbar"
-							 groups='event.group_event_manager' attrs="{'invisible': [('event_id2', '=', 1)]}"/>
+					<header attrs="{'invisible': [('event_id2', '=', 1)]}">
+						
+						<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
+			            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user"/>
+			            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user"/>
+			                         
+						<field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors='{"approved":"blue","rejected":"red"}'
+							 groups='event.group_event_user'/>
+						
 					</header>
 					<sheet string="Registration">
 					
@@ -432,13 +465,13 @@
 
 						<label for="street" string="Address" />
 						<div>
-							<field name="street" placeholder="Street..." />
+							<field name="street" placeholder="Street..." required="1"/>
 							<field name="street2" />
 							<field name="zip_id" on_change="onchange_zip_id(zip_id)"
 								placeholder="City completion" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 
 							<div class="address_format">
-								<field name="zip" placeholder="ZIP" style="width: 20%%" />
+								<field name="zip" placeholder="ZIP" style="width: 20%%" required="1" />
 								<field name="city" placeholder="City" style="width: 40%%" />
 								<field name="state_id" class="oe_no_button" placeholder="State"
 									style="width: 37%%" options="{'no_open': True, 'create': False, 'create_edit': False}" on_change="onchange_state(state_id)" />
@@ -448,7 +481,7 @@
 								options="{'no_open': True, 'create': False, 'create_edit': False}" />
 						</div>
 						<field name="email" />
-						<field name="phone" />
+						<field name="phone" required="1"/>
 
 
 
@@ -459,7 +492,7 @@
 					<field name="memberno" attrs="{'readonly': True, 'invisible': [('imported_bm', '=', False)]}" />
 					<field name="imported_bm" invisible="1" />
 					<field name="event_id2" invisible="1"/>
-					<field name="organization_id" attrs="{'readonly': '1'}"  options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+					<field name="organization_id" domain="[('country_id','=',country_id)]" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 					</group>
 					
 						
@@ -468,14 +501,14 @@
 								<page string="General info">
 								<group  colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 									<field name="workwish"/>
-									<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="committee_id" required="1" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 									<field name="functitle" groups='event.group_event_manager' />
-									<field name="withgroup"/>
-									<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<!--  <field name="withgroup"/>
+									<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/> -->
 									<field name="profession"/>
 									<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 									<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
-									<field name="partype"/>
+									<field name="partype" invisible="1"/>
 									
 								</group>
 								
@@ -519,15 +552,38 @@
 									</group>			
 								</page>
 								<page string="Other participants" colspan="8" col="8">
-									<field name='reg_id' />
-									<field name="participant_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id}">
+									<field name='reg_id' invisible="1"/>
+									<field name='id' invisible="1"/>
+									<field name="participant_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}" invisible="1">
 										<tree string="Participants">
 											<field name="name"/>
 											 <field name="day_summery"/>
 
 										</tree>
 									</field>
-										
+									<field name="list_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_staff_id' : id, 'search_partype' : 'other'}">
+										<tree string="Participants">
+											<field name="name"/>
+											 <field name="day_summery"/>
+
+										</tree>
+									</field>
+									<!-- 
+									<field name="view_line_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}">
+										<tree string="Participants">
+											<field name="name"/>
+											 <field name="day_summery"/>
+
+										</tree>
+									</field>
+									<field name="par_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}">
+										<tree string="Participants">
+											<field name="name"/>
+											 <field name="day_summery"/>
+
+										</tree>
+									</field>
+									 -->	
 								</page>
 								<page string="Special considerations" colspan="8" col="8">
 									<group colspan="8" col="8">
@@ -583,6 +639,13 @@
 						</group>
 					
 				</sheet>
+				<group groups='event.group_event_manager'>
+				
+				<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups='event.group_event_manager'/>
+                        <field name="message_ids" widget="mail_thread" groups='event.group_event_manager'/>
+                    </div>
+                    </group>
 				</form>
 				</field>
 				</record>	
@@ -613,7 +676,7 @@
 			groups="portal.group_portal" />	
 			
 		<menuitem action="action_staff_tree" id="event_staff2_menu"
-			name="IST (International Service Team)" sequence="70"  parent="base.menu_marketing_config_root" />
+			name="IST (International Service Team)" sequence="70"  parent="base.menu_event_main" />
 		
 				
 	</data>

@@ -61,7 +61,8 @@ class wizard_signupstaff(osv.osv_memory):
                 'message': fields.char('Message', size=128),
                 'lang': fields.selection(_lang_get, 'Language',
                                          help="If the selected language is loaded in the system, all documents related to this contact will be printed in this language. If not, it will be English."),
-               }     
+               } 
+    _defaults = {'lang': lambda self, cr, uid, ctx: ctx.get('lang', 'da_DK')}    
                 
     def do_staffsignup(self, cr, uid, ids, context=None):                 
 
@@ -76,15 +77,20 @@ class wizard_signupstaff(osv.osv_memory):
             # Create partner
             partner_id = partner_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
                                                                'email': signup.email,
-                                                               'lang': signup.lang})
+                                                               'lang': signup.lang,
+                                                               'tz': 'Europe/Copenhagen'})
             # Create user
             por_id = por_obj.create(cr, SUPERUSER_ID, {'portal_id': 11,
                                                        'user_ids': [(0, 0, {'partner_id': partner_id, 
                                                                            'email': signup.email, 
                                                                            'in_portal': True})]
                                                        })
-            
-            por_obj.action_apply(cr, SUPERUSER_ID, [por_id])
+            ctx = context
+            ctx = {'mail_template' : 'email_template_14', 'mail_tpl_module': '__export__'}
+            if ctx.has_key('default_state'):
+                del ctx['default_state']
+                
+            por_obj.action_apply(cr, SUPERUSER_ID, [por_id], ctx)
             # Create Registration
             #partner = partner_obj.browse(cr, SUPERUSER_ID, [partner_id], context)[0]
             reg_id = reg_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
@@ -99,16 +105,20 @@ class wizard_signupstaff(osv.osv_memory):
                                                        'email': signup.email,
                                                        'partner_id': partner_id,
                                                        'registration_id': reg_id,
+                                                       'state': 'draft',
+                                                       'partype' : 'itshead',
                                                        })
             # Create Staff
             staff_obj.create(cr, SUPERUSER_ID, {'reg_id' : reg_id,
                                                 'par_id' : par_id,
                                                 })
             
-        self.write(cr, uid, ids, {'state': 'step2',})
+            self.write(cr, uid, ids, {'state': 'step2',
+                                      'message': 'Hej ' + signup.name})
         return {
               'type': 'ir.actions.act_window',
               'res_model': 'dds_camp.wizard.signup.staff',
+              'name': 'Thank you!',
               'view_mode': 'form',
               'view_type': 'form',
               'res_id': ids[0],

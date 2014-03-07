@@ -129,10 +129,10 @@
 			<field name="res_model">dds_camp.event.participant</field>
 			<field name="view_type">form</field>
     		<field name="view_mode">tree,form</field>
-    		<field name="view_id" ref="dds_camp_event_participant_form"/>
+    		<field name="view_id" ref="dds_camp_event_participant_form2"/>
     		<field name="search_view_id" ref="dds_camp_event_participant_search"/>
             <field name="context">{'search_default_committee_id': active_id}</field>
-            <field name="domain">[('committee_id','=',active_id)]</field>
+            <field name="domain">[('committee_id','=',active_id),('state','in',['sent','approved'])]</field>
         
 		</record>	
 
@@ -148,6 +148,10 @@
 				<field name="name"/>
 				<field name="email"/>
 				<field name="desc"/>
+				<field  name="template_id"/>
+				<field name="parent_id"/>
+				<field name="child_ids"/>
+				<field name="sequence"/>
 				</group>
 				</form>
 			</field>
@@ -160,7 +164,9 @@
 			<field name="model">dds_camp.committee</field>
 			<field name="arch" type="xml">
 				<tree string="Committee">
-						<field name="name" />
+						
+						<field name="complete_name" />
+						<field name="sequence"/>
 				</tree>
 			</field>
 		</record>	
@@ -185,6 +191,20 @@
 			
 
 		</record>
+		
+		<record model="ir.ui.view" id="dds_camp_tshirtsize_tree">
+			<field name="name">dds_camp.tshirtsize.tree</field>
+			<field name="model">dds_camp.tshirtsize</field>
+			<field name="arch" type="xml">
+				<tree string="Sizes">
+						
+						<field name="name" />
+						<field name="sizetype" />
+						<field name="sequence"/>
+				</tree>
+			</field>
+		</record>	
+
 
 		<menuitem action="action_tshirt_tree" id="event_tshirt_menu"
 			name="T Shirt" sequence="60" parent="base.menu_marketing_config_root" />	

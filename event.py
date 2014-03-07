@@ -84,25 +84,69 @@ class dds_camp_committee(osv.osv):
     """ Committee """
     _description = 'Committee'
     _name = 'dds_camp.committee'
-    _order = 'name'
+    
+    
+    def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
+        if not args:
+            args = []
+        if not context:
+            context = {}
+        if name:
+            # Be sure name_search is symetric to name_get
+            name = name.split(' / ')[-1]
+            ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)
+        else:
+            ids = self.search(cr, uid, args, limit=limit, context=context)
+        return self.name_get(cr, uid, ids, context)
+    
+    def name_get(self, cr, uid, ids, context=None):
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        reads = self.read(cr, uid, ids, ['name', 'parent_id'], context=context)
+        res = []
+        for record in reads:
+            name = record['name']
+            if record['parent_id']:
+                name = record['parent_id'][1] + ' / ' + name
+            res.append((record['id'], name))
+        return res
+    
+    def _name_get_fnc(self, cr, uid, ids, prop, unknow_none, context=None):
+        res = self.name_get(cr, uid, ids, context=context)
+        return dict(res)
+    _order = 'sequence, complete_name'
+    
     _columns = {
         'name': fields.char('Name', size=64, translate=True),
         'desc': fields.text('Description', translate=True),
         'email': fields.char('Email', size=128),
         'members_ids': fields.one2many('dds_camp.event.participant', 'committee_id', 'Members'),
+        'template_id': fields.many2one('email.template', 'Email Template', ondelete='set null', domain=[('model_id', '=', 'dds_camp.event.participant')]),
+        'parent_id': fields.many2one('dds_camp.committee', 'Hovedudvalg'),
+        'child_ids': fields.one2many('dds_camp.committee', 'parent_id', 'Underudvalg'),
+        'sequence': fields.integer('Sequence', select=True, help="Gives the sequence order."),
+        'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', store=True),     
+        
     }
+    
+    
+    
 dds_camp_committee()
 
 class dds_camp_tshirtsize(osv.osv):
     """ Committee """
     _description = 'T Shirt'
     _name = 'dds_camp.tshirtsize'
-    _order = 'name'
+    _order = 'sequence, name'
+    
     _columns = {
         'name': fields.char('Name', size=64),
-        'desc': fields.text('Description')
+        'desc': fields.text('Description'),
+        'sizetype' : fields.selection([('tshirt','T-Shirt'),
+                                      ('softshell', 'Soft Shell')], "Sizetype"),
+        'sequence': fields.integer('Sequence', select=True, help="Gives the sequence order."),        
     }
-dds_camp_committee()
+dds_camp_tshirtsize()
 
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
@@ -194,6 +238,7 @@ class dds_camp_event_participant(osv.osv):
     _description = 'Event participant'
     _name = 'dds_camp.event.participant'
     _order = 'name'
+    _inherit = 'mail.thread'
     
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         print "fields_view_get entry:", view_id, toolbar
@@ -280,14 +325,14 @@ class dds_camp_event_participant(osv.osv):
         return res
 
     def write(self, cr, uid, ids, values, context=None):
-        res = super(dds_camp_event_participant, self).write(cr, uid, ids, values, context)
         
         day_obj = self.pool.get('dds_camp.event.participant.day')
         for participant in self.browse(cr, uid, ids):
             if participant.days_ids:
                 for d in participant.days_ids:
                     if values.has_key('date_' + d.date.replace('-','_')):
-                        day_obj.write(cr, SUPERUSER_ID, [d.id], {'state' : values['date_' + d.date.replace('-','_')]})    
+                        day_obj.write(cr, SUPERUSER_ID, [d.id], {'state' : values['date_' + d.date.replace('-','_')]})
+                        del values['date_' + d.date.replace('-','_')]    
             else:
                 from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
                 to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
@@ -299,12 +344,18 @@ class dds_camp_event_participant(osv.osv):
                         day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
                                                           'date' : dt,
                                                           'state': values[dt.strftime('date_%Y_%m_%d')]})
+                        del values['date_' + d.date.replace('-','_')]
                     else:
                         day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
                                                           'date' : dt,
                                                           'state': False})    
                     dt += delta
-            
+        
+        for k in values.keys():
+            if k[:5] == 'date_':
+                del values[k]
+                
+        res = super(dds_camp_event_participant, self).write(cr, uid, ids, values, context)
         return res
     
     def create(self, cr, uid, values, context=None):
@@ -330,12 +381,12 @@ class dds_camp_event_participant(osv.osv):
     def fields_get(self, cr, uid, allfields=None, context=None, write_access=True):
         res = super(dds_camp_event_participant, self).fields_get(cr, uid, allfields, context, write_access)
          
-        res['date_2014_07_22'] = {
-                        'type': 'boolean',
-                        'string': '22/7-2014',
-                        'help': 'Tirsdag',
-                        'exportable': False,
-                    }
+#         res['date_2014_07_22'] = {
+#                         'type': 'boolean',
+#                         'string': '22/7-2014',
+#                         'help': 'Tirsdag',
+#                         'exportable': False,
+#                     }
         return res
         
     def _calc_summery(self, cr, uid, ids, field_name, arg, context):
@@ -471,7 +522,7 @@ class dds_camp_event_participant(osv.osv):
         'birth' : fields.date('Birth date'),
 
         'patrol' : fields.char('Patrol name', size=64),
-        'appr_leader' : fields.boolean('Leder godkent'),
+        'appr_leader' : fields.boolean('Leder godkent', track_visibility='onchange'),
         'leader' : fields.boolean('Is Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
@@ -491,15 +542,16 @@ class dds_camp_event_participant(osv.osv):
          
          # Staff registraring
          'workwish' : fields.char('Want to work with', size=64),   
-         'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee'),
-         'state' : fields.selection([('draft','Received'),
+         'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee', track_visibility='onchange'),
+         'state': fields.selection([('draft','Received'),
                                         ('sent','Sent to committee'),
-                                        ('approved','Approved by the committee')],'Approval Procedure'),
-         'withgroup' : fields.boolean('Also participating with my group'),
-         'group_id' : fields.many2one('event.registration', 'Group', domain = "[('event_id2','=',1)]"),
+                                        ('approved','Approved by the committee'),
+                                        ('rejected', 'Rejected')],'Approval Procedure', track_visibility='onchange'),
+         #'withgroup' : fields.boolean('Also participating with my group'),
+         #'group_id' : fields.many2one('event.registration', 'Group', domain = "[('event_id2','=',1)]"),
          'profession': fields.char('Profession', size=64, help='What do you do for living'),
-         'tshirt_size_id' : fields.many2one('dds_camp.tshirtsize', 'Size of T-shirt'),
-         'softshell_size_id' : fields.many2one('dds_camp.tshirtsize', u'Bestilling af Soft shell jakke pris 450 kr - størrelse'),
+         'tshirt_size_id' : fields.many2one('dds_camp.tshirtsize', 'Size of T-shirt',domain = "[('sizetype','=','tshirt')]"),
+         'softshell_size_id' : fields.many2one('dds_camp.tshirtsize', u'Bestilling af Soft shell jakke pris 400 kr - størrelse', domain = "[('sizetype','=','softshell')]"),
          'drvlic_car' : fields.boolean('Car'),
          'drvlic_truck' : fields.boolean('Truck'),
          'drvlic_bus' : fields.boolean('Bus'),
@@ -513,13 +565,36 @@ class dds_camp_event_participant(osv.osv):
                                         ('chld','Hjælperbarn'),
                                         ('rel','Pårørende'),
                                         ('ex', 'Ekstern (ikke betalende)')],'Function'),
-         'partype' : fields.selection([('',''), ('itshead', 'ITS HEad'),('other', 'ITS Other')], 'Record Type'),       
+         'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
+         'is_relative' : fields.boolean('Deltager som pårørende'),       
+         'staff_id': fields.many2one('dds_camp.staff', 'ITS', select=True, ondelete='cascade'),
     }
     
     _sql_constraints = [
         ('participation_uniq', 'unique(registration_id, partner_id)', 'Participant must be unique!'),
     ]
     
+    def button_confirm(self, cr, uid, ids, context=None):
+        
+        template = False
+        template = self.pool.get('ir.model.data').get_object(cr, uid, 'dds_camp', 'new_ist_member')
+        assert template._name == 'email.template'
+        
+        for par in self.browse(cr, uid, ids, context):
+            print "Confirm", template.id, par.id, par._name, par.name
+            self.pool.get('email.template').send_mail(cr, uid, template.id, par.id, force_send=True, raise_exception=True, context=context)
+         
+        return self.write(cr, uid, ids, {'state': 'sent'}, context=context)
+
+    def button_approve(self, cr, uid, ids, context=None):
+        for par in self.browse(cr, uid, ids, context):
+            self.pool.get('email.template').send_mail(cr, uid, par.committee_id.template_id.id, par.id, force_send=True, raise_exception=True, context=context)
+        
+        return self.write(cr, uid, ids, {'state': 'approved'}, context=context)
+    
+    def button_reject(self, cr, uid, ids, context=None):
+        return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
+        
     def action_select_all_days(self, cr, uid, ids, context):
        
         res = {}
@@ -754,7 +829,7 @@ class event_registration(osv.osv):
                                           ('otherstaff','At other Staff'),
                                           ('other','Outside Camp')],'Accomadation'),
         'parking' : fields.boolean('Do you need parking?'),
-        'power' : fields.boolean('Do you need 220 V power - for a fee?')        
+        'power' : fields.boolean('Do you need 220 V power - for a fee 50 kr.')        
     }
     
     def write(self, cr, uid, ids, values, context=None):
@@ -902,13 +977,37 @@ event_registration()
 class dds_staff(osv.osv):
     _name = "dds_camp.staff"
     _description = "Staff signup"
+    _inherit = 'mail.thread'
     _inherits = {'event.registration': "reg_id",
                  'dds_camp.event.participant': "par_id"}
     
     _defaults = {'user_id' : lambda self,cr,uid,context: uid,
                  'event_id' : lambda *a: 2}
     
+#     def _get_lines(self, cr, uid, ids, field_name, arg, context):
+#         res = {}
+#         for staff in self.browse(cr, uid, ids, context=context):
+#             list_ids = []
+#             link = []
+#             for par in staff.participant_ids:
+#                 if par.id != staff.par_id.id:
+#                     list_ids.append(par.id)
+#                     link.append((1,par.id,{}))
+#                     
+#             res[staff.id] = {'view_line_ids': list_ids}
+#             #self.write(cr, uid, [staff.id], {'par_ids': link})
+#         print res
+#         return res   
+    
+#     def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+#         res = super(dds_staff, self).read(cr, uid, ids, fields, context=context, load=load)
+#         self._get_lines(cr, uid, ids, 'view_line_ids', None, context)
+#         return res
+#                 
     #_columns = {'par_ids': fields.one2many('dds_camp.event.participant', 'registration_id', 'Registration',domain=[('partype','!=','itshead')]),}
+    
+    _columns = { #'view_line_ids': fields.function(_get_lines, 'Deltager', relation="dds_camp.event.participant", method=True, type="one2many",  multi='VIEW'),
+                'list_ids': fields.one2many('dds_camp.event.participant', 'staff_id', 'Participants'),}
     
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         print "fields_view_get entry:", view_id, toolbar
@@ -984,5 +1083,94 @@ class dds_staff(osv.osv):
                 res['arch'] = ET.tostring(doc) 
         return res
     
+    def write(self, cr, uid, ids, values, context=None):
+        
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        for participant in self.browse(cr, uid, ids):
+            if participant.days_ids:
+                for d in participant.days_ids:
+                    if values.has_key('date_' + d.date.replace('-','_')):
+                        day_obj.write(cr, SUPERUSER_ID, [d.id], {'state' : values['date_' + d.date.replace('-','_')]})
+                        del values['date_' + d.date.replace('-','_')]    
+            else:
+                from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+                to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+                print "dates", from_date, to_date
+                dt = from_date
+                delta = datetime.timedelta(days=1)
+                while dt <= to_date:
+                    if values.has_key(dt.strftime('date_%Y_%m_%d')):
+                        day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                          'date' : dt,
+                                                          'state': values[dt.strftime('date_%Y_%m_%d')]})
+                        del values['date_' + d.date.replace('-','_')]
+                    else:
+                        day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                                          'date' : dt,
+                                                          'state': False})    
+                    dt += delta
+        
+        for k in values.keys():
+            if k[:5] == 'date_':
+                del values[k]
+                
+        res = super(dds_staff, self).write(cr, uid, ids, values, context)
+        return res
+    
+    
+    def button_confirm(self, cr, uid, ids, context=None):
+        
+        template = False
+        template = self.pool.get('ir.model.data').get_object(cr, uid, 'dds_camp', 'new_ist_member')
+        assert template._name == 'email.template'
+        
+        for par in self.browse(cr, uid, ids, context):
+            self.pool.get('email.template').send_mail(cr, uid, template.id, par.par_id.id, force_send=True, raise_exception=True, context=context)
+         
+        return self.write(cr, uid, ids, {'state': 'sent'}, context=context)
+
+    def button_approve(self, cr, uid, ids, context=None):
+        for par in self.browse(cr, uid, ids, context):
+            self.pool.get('email.template').send_mail(cr, uid, par.par_id.committee_id.template_id.id, par.par_id.id, force_send=True, raise_exception=True, context=context)
+        
+        return self.write(cr, uid, ids, {'state': 'approved'}, context=context)
+    
+    def button_reject(self, cr, uid, ids, context=None):
+        return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
+        
+       
+    
+    def action_create_day_lines(self, cr, uid, ids, context):
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        participant = self.browse(cr, uid, ids)[0]
+               
+        if participant.days_ids:
+                day_obj.write(cr, SUPERUSER_ID, [day.id for day in participant.days_ids], {'state' : True})    
+        else:
+            from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
+            to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
+                day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                             'date' : dt,
+                                             'state': True})
+                dt += delta
+    
+    def onchange_zip_id(self, cursor, uid, ids, zip_id, context=None):
+        if not zip_id:
+            return {}
+        if isinstance(zip_id, list):
+            zip_id = zip_id[0]
+        bzip = self.pool['res.better.zip'].browse(cursor, uid, zip_id, context=context)
+        return {'value': {'zip': bzip.name,
+                          'city': bzip.city,
+                          'country_id': bzip.country_id.id if bzip.country_id else False,
+                          'state_id': bzip.state_id.id if bzip.state_id else False,
+                          'zip_id': False 
+                          },
+                'domain' : {'organization_id' : [('country_id','=', bzip.country_id.id if bzip.country_id else False)]},
+                }
 dds_staff()
     
