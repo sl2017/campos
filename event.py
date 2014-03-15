@@ -84,7 +84,7 @@ class dds_camp_committee(osv.osv):
     """ Committee """
     _description = 'Committee'
     _name = 'dds_camp.committee'
-    
+    _inherit = 'mail.thread'
     
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
         if not args:

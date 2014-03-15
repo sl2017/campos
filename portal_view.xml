@@ -157,11 +157,11 @@
 		<form string="Event Registration" version="7.0">
 		<header attrs="{'invisible': [('event_id2', '=', 1)]}">
 			<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
-            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user"/>
-            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user"/>
+            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user,__export__.res_groups_34"/>
+            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user,__export__.res_groups_34"/>
                          
 			<field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors='{"approved":"blue","rejected":"red"}'
-							 groups="event.group_event_user"/>
+							 groups="event.group_event_user,__export__.res_groups_34"/>
 		</header>
 		
 			<sheet>
@@ -448,11 +448,11 @@
 					<header attrs="{'invisible': [('event_id2', '=', 1)]}">
 						
 						<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
-			            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user"/>
-			            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user"/>
+			            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user,__export__.res_groups_34"/>
+			            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user,__export__.res_groups_34"/>
 			                         
 						<field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors='{"approved":"blue","rejected":"red"}'
-							 groups='event.group_event_user'/>
+							 groups='event.group_event_user,__export__.res_groups_34'/>
 						
 					</header>
 					<sheet string="Registration">
@@ -678,7 +678,8 @@
 		<menuitem action="action_staff_tree" id="event_staff2_menu"
 			name="IST (International Service Team)" sequence="70"  parent="base.menu_event_main" />
 		
-				
+		<menuitem action="action_committee_tree" id="event_committee_menu_portal"
+			name="Udvalg" sequence="80" parent="menu_portal_registration" />			
 	</data>
 </openerp>
 		
