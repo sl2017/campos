@@ -815,6 +815,7 @@ class event_registration(osv.osv):
                 fee = fee + par.camp_fee
             
             last_login = False
+            users = False
             if reg.partner_id:
                 for usr in reg.partner_id.user_ids:
                     if usr.login_date:
@@ -824,7 +825,8 @@ class event_registration(osv.osv):
                             last_login = usr.login_date 
                 if reg.partner_id.child_ids:
                     for child in reg.partner_id.child_ids:
-                        if child.user_ids:            
+                        if child.user_ids:
+                            users = True            
                             for usr in child.user_ids:
                                 if usr.login_date:
                                     if last_login:
@@ -835,7 +837,8 @@ class event_registration(osv.osv):
                            'pre_reg_number': pre,
                            'camp_fee_tot' : fee,
                            'camp_fee_charged' : max(fee, reg.camp_fee_min),
-                           'last_login' : last_login}
+                           'last_login' : last_login,
+                           'user_created' : users}
         return res
             
     _columns = {
@@ -921,6 +924,7 @@ class event_registration(osv.osv):
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
         'last_login' : fields.function(_calc_number, type = 'date', string='Last Login Date', method=True, multi='PART' ),
+        'user_created' : fields.function(_calc_number, type = 'boolean', string='Users created', method=True, multi='PART' ),
         
         # Staff registraring
         'accommodation' : fields.selection([('tents','Tents'),
