@@ -214,5 +214,101 @@
 
 		<menuitem action="action_tshirt_tree" id="event_tshirt_menu"
 			name="T Shirt" sequence="60" parent="base.menu_marketing_config_root" />	
+
+		<record id="action_camparea_tree" model="ir.actions.act_window">
+			<field name="name">Camp Area</field>
+
+			<field name="res_model">dds_camp.area</field>
+			<field name="view_type">form</field>
+			
+
+		</record>
+		
+		<record model="ir.ui.view" id="dds_camp_area_tree">
+			<field name="name">dds_camp.area</field>
+			<field name="model">dds_camp.area</field>
+			<field name="arch" type="xml">
+				<tree string="Camp Area">
+						
+						<field name="name" />
+						
+				</tree>
+			</field>
+		</record>	
+		
+		<record model="ir.ui.view" id="dds_camp_area_form">
+			<field name="name">dds_camp.area</field>
+			<field name="model">dds_camp.area</field>
+			<field name="arch" type="xml">
+				<form string="Camp Area">
+						<group colspan="2" col="2">
+						<field name="name" />
+						<field name="desc" />
+						<field name="group_ids" options="{'reload_on_button': true}">
+							<tree  delete="false">
+								<field name="name" />
+								<field name="reg_number" />
+								<button name="button_unlink_camparea" icon="STOCK_CLOSE" type="object" help="Remove Troop from Camp Area"/>
+							</tree>
+						</field>
+						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" context="{'show_camparea' : True}"/>
+						</group>
+						
+				</form>
+			</field>
+		</record>	
+					
+			
+		<menuitem action="action_camparea_tree" id="event_camparea_menu"
+			name="Camp Area" sequence="70" parent="base.menu_marketing_config_root" />	
+			
+		<!--  Friendship  -->
+		<record id="action_friendship_tree" model="ir.actions.act_window">
+			<field name="name">Friendship Grouping</field>
+
+			<field name="res_model">dds_camp.friendship</field>
+			<field name="view_type">form</field>
+			
+
+		</record>
+		
+		<record model="ir.ui.view" id="dds_friendship_tree">
+			<field name="name">dds_camp.friendship</field>
+			<field name="model">dds_camp.friendship</field>
+			<field name="arch" type="xml">
+				<tree string="Camp Area">
+						
+						<field name="name" />
+						
+				</tree>
+			</field>
+		</record>	
+		
+		<record model="ir.ui.view" id="dds_friendship_form">
+			<field name="name">dds_camp.friendship</field>
+			<field name="model">dds_camp.friendship</field>
+			<field name="arch" type="xml">
+				<form string="Friendship Grouping">
+						<group colspan="2" col="2">
+						<field name="name" />
+						<field name="desc" />
+						<field name="group_ids" options="{'reload_on_button': true}">
+							<tree  delete="false">
+								<field name="name" />
+								<field name="reg_number" />
+								<field name="country_id" />
+								<button name="button_unlink_friendship" icon="STOCK_CLOSE" type="object" help="Remove Troop from Camp Area"/>
+							</tree>
+						</field>
+						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" context="{'show_friendship' : True}"/>
+						</group>
+						
+				</form>
+			</field>
+		</record>	
+					
+			
+		<menuitem action="action_friendship_tree" id="event_friendship_menu"
+			name="Friendship Grouping" sequence="80" parent="base.menu_marketing_config_root" />			
 	</data>
 </openerp>

@@ -133,6 +133,49 @@ class dds_camp_committee(osv.osv):
     
 dds_camp_committee()
 
+class dds_camp_area(osv.osv):
+    """ Camp Area """
+    _description = 'Camp Area'
+    _name = 'dds_camp.area'
+    
+    _columns = {
+        'name': fields.char('Name', size=64, translate=True),
+        'desc': fields.text('Description', translate=True),
+        'email': fields.char('Email', size=128),
+        'group_ids': fields.one2many('event.registration', 'camparea_id', 'Troops'),
+        'addgroup_id' : fields.many2one('event.registration', 'Add Troop', ondelete='set null', domain=[('state','!=', 'cancel')]),
+        }
+    
+    def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
+        group_ids.append([4,addgroup_id,False])
+        print "addgroup", group_ids
+        return {'value': {'group_ids': group_ids,
+                          'addgroup_id' : None
+                          }
+                }
+dds_camp_area()
+    
+class dds_camp_friendship(osv.osv):
+    """ Frinedship groups """
+    _description = 'Friendship Grouping'
+    _name = 'dds_camp.friendship'
+    
+    _columns = {
+        'name': fields.char('Name', size=64, translate=True),
+        'desc': fields.text('Description', translate=True),
+        'email': fields.char('Email', size=128),
+        'group_ids': fields.one2many('event.registration', 'friendship_id', 'Troops'),
+        'addgroup_id' : fields.many2one('event.registration', 'Add Troop', ondelete='set null', domain=[('state','!=', 'cancel')]),
+        }
+    
+    def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
+        group_ids.append([4,addgroup_id,False])
+        print "addgroup", group_ids
+        return {'value': {'group_ids': group_ids,
+                          'addgroup_id' : None
+                          }
+                }
+dds_camp_area()    
 class dds_camp_tshirtsize(osv.osv):
     """ Committee """
     _description = 'T Shirt'
@@ -412,7 +455,7 @@ class dds_camp_event_participant(osv.osv):
             if par.leader:
                 ag = '22+'
             else:             
-                age = self._age(par.birth, '2013-07-22')
+                age = self._age(par.birth, '2014-07-22')
                 ag = 'unknown'
                 if age:
                     if age <= 3:
@@ -461,7 +504,7 @@ class dds_camp_event_participant(osv.osv):
             return False
     
     def onchange_birth(self, cr, uid, ids, birth, context=None):
-        age = self._age(birth, '2013-07-22')
+        age = self._age(birth, '2014-07-22')
         ag = False
         if age >= 6 and age <= 8:
             ag = '06-08'
@@ -522,7 +565,7 @@ class dds_camp_event_participant(osv.osv):
         'birth' : fields.date('Birth date'),
 
         'patrol' : fields.char('Patrol name', size=64),
-        'appr_leader' : fields.boolean('Leder godkent', track_visibility='onchange'),
+        'appr_leader' : fields.boolean('Leder godkendt', track_visibility='onchange'),
         'leader' : fields.boolean('Is Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
@@ -542,7 +585,7 @@ class dds_camp_event_participant(osv.osv):
          
          # Staff registraring
          'workwish' : fields.char('Want to work with', size=64),   
-         'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee', track_visibility='onchange'),
+         'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee', track_visibility='onchange', ondelete='set null'),
          'state': fields.selection([('draft','Received'),
                                         ('sent','Sent to committee'),
                                         ('approved','Approved by the committee'),
@@ -561,12 +604,12 @@ class dds_camp_event_participant(osv.osv):
          'drvlic_other' : fields.boolean('Other'),
          'functitle' : fields.selection([('fm','Formand'),
                                         ('um','Udvalgsmedlem'),
-                                        ('hlp','Hjælper'),
+                                        ('hlp',u'Hjælper'),
                                         ('chld','Hjælperbarn'),
-                                        ('rel','Pårørende'),
+                                        ('rel',u'Pårørende'),
                                         ('ex', 'Ekstern (ikke betalende)')],'Function'),
          'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
-         'is_relative' : fields.boolean('Deltager som pårørende'),       
+         'is_relative' : fields.boolean(u'Deltager som pårørende'),       
          'staff_id': fields.many2one('dds_camp.staff', 'ITS', select=True, ondelete='cascade'),
     }
     
@@ -612,6 +655,35 @@ class dds_camp_event_participant(osv.osv):
         print res
         return res
         
+    def create_day_lines(self, cr, uid, ids, from_dt, to_dt, context):
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        participant = self.browse(cr, uid, ids)[0]
+               
+        if participant.days_ids:
+                day_obj.write(cr, SUPERUSER_ID, [day.id for day in participant.days_ids if day.date >= from_dt and day.date <= to_dt], {'state' : True})    
+        else:
+            from_date = datetime.datetime.strptime(from_dt, DEFAULT_SERVER_DATE_FORMAT).date()
+            to_date = datetime.datetime.strptime(to_dt, DEFAULT_SERVER_DATE_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
+                day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                             'date' : dt,
+                                             'state': True})
+                dt += delta    
+    
+    def action_create_day_teknik(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-12', '2014-07-17', context)
+        
+    def action_create_day_precamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-18', '2014-07-21', context)
+        
+    def action_create_day_maincamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-22', '2014-07-31', context)        
+    
+    def action_create_day_postcamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-08-01', '2014-08-03', context)        
     
     def action_create_day_lines(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
@@ -733,11 +805,37 @@ class event_registration(osv.osv):
         for reg in self.browse(cr, uid, ids, context=context):
             nbr = 0
             pre = 0
+            
             for ag in reg.agegroup_ids:
                 nbr = nbr + ag.number
                 pre = pre + ag.pre_reg
+            
+            fee = 0
+            for par in reg.participant_ids:
+                fee = fee + par.camp_fee
+            
+            last_login = False
+            if reg.partner_id:
+                for usr in reg.partner_id.user_ids:
+                    if usr.login_date:
+                        if last_login:
+                            last_login = max(last_login, usr.login_date)
+                        else:
+                            last_login = usr.login_date 
+                if reg.partner_id.child_ids:
+                    for child in reg.partner_id.child_ids:
+                        if child.user_ids:            
+                            for usr in child.user_ids:
+                                if usr.login_date:
+                                    if last_login:
+                                        last_login = max(last_login, usr.login_date)
+                                    else:
+                                        last_login = usr.login_date                        
             res[reg.id] = {'reg_number': nbr,
-                           'pre_reg_number': pre}
+                           'pre_reg_number': pre,
+                           'camp_fee_tot' : fee,
+                           'camp_fee_charged' : max(fee, reg.camp_fee_min),
+                           'last_login' : last_login}
         return res
             
     _columns = {
@@ -819,6 +917,10 @@ class event_registration(osv.osv):
         'internal_note' : fields.text('Internal note'),
         'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART' ),
         'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART' ),
+        'camp_fee_min' : fields.float('Minimum Camp Fee'),
+        'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
+        'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
+        'last_login' : fields.function(_calc_number, type = 'date', string='Last Login Date', method=True, multi='PART' ),
         
         # Staff registraring
         'accommodation' : fields.selection([('tents','Tents'),
@@ -828,8 +930,13 @@ class event_registration(osv.osv):
                                           ('group', 'By my Troop'),
                                           ('otherstaff','At other Staff'),
                                           ('other','Outside Camp')],'Accomadation'),
+        'tent_nb' : fields.integer('Number of tents'),        
         'parking' : fields.boolean('Do you need parking?'),
-        'power' : fields.boolean('Do you need 220 V power - for a fee 50 kr.')        
+        'power' : fields.boolean('Do you need 230 V power - for a fee 50 kr.'),
+        'camparea_id' : fields.many2one('dds_camp.area', 'Camp Area', ondelete='set null'),
+        'friendship_id' : fields.many2one('dds_camp.friendship', 'Friendship Grouping', ondelete='set null'), 
+        'entry_dk': fields.char('Entry point in Denmark', 128),
+        'exit_dk': fields.char('Exit point in Denmark', 128),       
     }
     
     def write(self, cr, uid, ids, values, context=None):
@@ -971,7 +1078,27 @@ class event_registration(osv.osv):
             return { 'type': 'ir.actions.act_url', 'url': r"%s/dds/tilmelding/orders/%s/invoice" % (r"http://e2014.gruppe.dds.dk", weborder_ref), 'nodestroy': True, 'target': 'new' }
 
         return True
-         
+
+    def button_unlink_camparea(self, cr, uid, ids, context=None):
+        self.write(cr, uid, ids, {'camparea_id': None})
+        
+    def button_unlink_friendship(self, cr, uid, ids, context=None):
+        self.write(cr, uid, ids, {'friendship_id': None})
+        
+    def name_get(self, cr, uid, ids, context=None):
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        reads = self.read(cr, uid, ids, ['name', 'camparea_id', 'friendship_id'], context=context)
+        res = []
+        for record in reads:
+            name = record['name']
+            if context.get('show_camparea', False) and record['camparea_id']:
+                name = name + ' (' + record['camparea_id'][1] + ')'
+            if context.get('show_friendship', False) and record['friendship_id']:
+                name = name + ' (' + record['friendship_id'][1] + ')'    
+            res.append((record['id'], name))
+        return res
+    
 event_registration()
 
 class dds_staff(osv.osv):
@@ -1138,6 +1265,35 @@ class dds_staff(osv.osv):
     def button_reject(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
         
+    def create_day_lines(self, cr, uid, ids, from_dt, to_dt, context):
+        day_obj = self.pool.get('dds_camp.event.participant.day')
+        participant = self.browse(cr, uid, ids)[0]
+               
+        if participant.days_ids:
+                day_obj.write(cr, SUPERUSER_ID, [day.id for day in participant.days_ids if day.date >= from_dt and day.date <= to_dt], {'state' : True})    
+        else:
+            from_date = datetime.datetime.strptime(from_dt, DEFAULT_SERVER_DATE_FORMAT).date()
+            to_date = datetime.datetime.strptime(to_dt, DEFAULT_SERVER_DATE_FORMAT).date()  
+            print "dates", from_date, to_date
+            dt = from_date
+            delta = datetime.timedelta(days=1)
+            while dt <= to_date:
+                day_obj.create(cr, SUPERUSER_ID, {'participant_id' : participant.id,
+                                             'date' : dt,
+                                             'state': True})
+                dt += delta    
+    
+    def action_create_day_teknik(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-12', '2014-07-17', context)
+        
+    def action_create_day_precamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-18', '2014-07-21', context)
+        
+    def action_create_day_maincamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-22', '2014-07-31', context)        
+    
+    def action_create_day_postcamp(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-08-01', '2014-08-03', context)        
        
     
     def action_create_day_lines(self, cr, uid, ids, context):

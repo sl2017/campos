@@ -36,10 +36,12 @@
 								<field name="ddsgroup" attrs="{'invisible': [('ddsgroup','=',0)], 'readonly': '1'}"/> 
 								<field name="scout_division" attrs="{'readonly': [('ddsgroup','!=',0)]}"/>
 								<field name="municipality_id" options="{'no_open': True}" attrs="{'readonly': [('ddsgroup','!=',0)], 'invisible': [('foreigners','=',True)]}"/>
-								<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}" />
+								<field name="shared_transport"/>
+								<field name="entry_dk" attrs="{'invisible': [('foreigners','=',False)]}"/>
+								<field name="exit_dk" attrs="{'invisible': [('foreigners','=',False)]}"/>
 							</group>
 							<group>
-								<field name="agegroup_ids" colspan="4" nolabel="1">
+								<field name="agegroup_ids" colspan="4" nolabel="1" readonly="1">
 								<tree>
 									<field name="age_group"/>
 									<field name="pre_reg"  sum="Number of Pre-reg"/>
@@ -70,7 +72,8 @@
 										<field name="accommodation"/>
 										<field name="parking"/>
 										<field name="power"/>
-																	
+										<field name="tent_nb"/>
+										<field name="camparea_id" options="{'no_open': True}"/>							
 									</group>
 								</page>
 								<page string="Home Hospitality/Friendship Groups" colspan="8"
@@ -136,9 +139,16 @@
 										<field name='foreigners' attrs="{'invisible': True}"/>
 										<field name='agreements' attrs="{'readonly': '1'}"/>
 										
+										
 
 									</group>
 								</page>
+								<page string="Camp Area">
+								<group colspan="4">
+									<field name="tent_nb"/>
+									<field name="camparea_id" options="{'no_open': True}"/>
+								</group>
+							</page>
 							</notebook>
 						</group>
 
@@ -237,17 +247,21 @@
 			</group>
 			<group colspan="2" col="2">
 				<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+					<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2" class="oe_edit_only"/>
 				</group>
 			    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+			    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2" class="oe_edit_only"/>
 				</group> 
 				<group colspan="2" col="2" string="Camp Period">
+					<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" class="oe_edit_only"/>
 				</group>
 				 
 				<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
+					<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2" class="oe_edit_only"/>
 				</group>
 				
 				<group colspan="2" col="2" class="oe_edit_only">
-					<button name="action_create_day_lines" type="object" string="All days"
+					<button name="action_create_day_lines" type="object" string="Entire Camp"
 						help="" colspan="2" />
 				
 			</group>
@@ -519,6 +533,8 @@
 										<field name="accommodation"/>
 										<field name="parking"/>
 										<field name="power"/>
+										<field name="tent_nb"/>
+										<field name="camparea_id" readonly="1"/>
 																	
 									</group>
 								</page>
@@ -535,20 +551,27 @@
 								</page>
 								<page string="Camp Period" attrs="{'invisible': [('event_id2', '=', 1)]}">
 									<group colspan="4" col="4">
+									
 										<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+											<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2" class="oe_edit_only"/>
 										</group>
 									    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+									    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2" class="oe_edit_only"/>
 										</group> 
 										<group colspan="2" col="2" string="Camp Period">
+											<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" class="oe_edit_only"/>
 										</group>
 										 
 										<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
+											<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2" class="oe_edit_only"/>
 										</group>
 										
 										<group colspan="2" col="2" class="oe_edit_only">
-											<button name="action_create_day_lines" type="object" string="All days"
-										help="" colspan="2" />
+											<button name="action_create_day_lines" type="object" string="Entire Camp"
+												help="" colspan="2" />
+				
 										</group>
+										
 									</group>			
 								</page>
 								<page string="Other participants" colspan="8" col="8">
@@ -635,6 +658,7 @@
 
 									</group>
 								</page>
+								
 							</notebook>
 						</group>
 					

@@ -52,7 +52,9 @@
 					<field name="scout_division"/>
 					<field name="municipality_id"/>
 					<field name="region"/>
-					<field name="shared_transport" attrs="{'invisible': [('foreigners','=',True)]}"/>
+					<field name="shared_transport"/>
+					<field name="entry_dk" attrs="{'invisible': [('foreigners','=',False)]}"/>
+					<field name="exit_dk" attrs="{'invisible': [('foreigners','=',False)]}"/>
 				</xpath>
 				<field name="partner_id" position="after">
 					<field name="ddsgroup" on_change="onchange_ddsgroup(ddsgroup, partner_id, econ_partner_id)"/>
@@ -62,7 +64,7 @@
 				
 				</field>
 				<field name="user_id" position="after">
-					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}">
+					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}" readonly="1">
 								<tree>
 									<field name="age_group"/>
 									<field name="pre_reg"  sum="Number of Pre-reg"/>
@@ -70,6 +72,7 @@
 					
 					</tree>
 					</field>
+					
 				</field>
 				
  				<xpath expr="/form/sheet/group" position="after">
@@ -102,6 +105,7 @@
 										<field name="want_friendshipgroup" attrs="{'invisible': [('foreigners','=',True)]}"/>
 										<field name="has_friendshipgroup"/>
 										<field name="friendshipgroup_name"/>
+										<field name="friendship_id" context="{'form_view_ref':'dds_camp.dds_friendship_form'}"/>
 									</group>
 								</group>
 							</page>
@@ -141,12 +145,25 @@
 								</group>
 							</page>
 							<page string="Administration" groups="event.group_event_manager">
-								<group colspan="4">
+								<group colspan="4" col="4">
+									<group colspan="2" col="2">
 									<field name="signed_up"/>
 									<field name="foreigners"/>
 									<field name="agreements"/>
 									<field name="internal_note"/>
-
+									<field name="last_login"/>
+									</group>
+									<group colspan="2" col="2">
+										<field name="camp_fee_min"/>
+										<field name="camp_fee_tot"/>
+										<field name="camp_fee_charged"/>
+									</group>	
+								</group>
+							</page>
+							<page string="Camp Area">
+								<group colspan="4">
+									<field name="tent_nb"/>
+									<field name="camparea_id"/>
 								</group>
 							</page>
 						</notebook>
