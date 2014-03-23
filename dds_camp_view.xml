@@ -261,7 +261,24 @@
 			
 		<menuitem action="action_camparea_tree" id="event_camparea_menu"
 			name="Camp Area" sequence="70" parent="base.menu_marketing_config_root" />	
-			
+		
+		<record model="ir.ui.view" id="friendship_view_event_registration_tree">
+			<field name="name">friendship.event.registration.tree</field>
+			<field name="model">event.registration</field>
+			<field name="arch" type="xml">
+				<tree string="Registration">
+					<field name="partner_id" invisible="1"/>
+					<field name="name" />
+					<field name="friendship_id" />
+					<field name="reg_number" />
+					<field name="country_id" />
+					<field name="nb_register" invisible="1"/>
+					<field name="user_id" invisible="1" />
+					<field name="state" invisible="1" />
+
+				</tree>
+			</field>
+		</record>	
 		<!--  Friendship  -->
 		<record id="action_friendship_tree" model="ir.actions.act_window">
 			<field name="name">Friendship Grouping</field>
@@ -300,7 +317,7 @@
 								<button name="button_unlink_friendship" icon="STOCK_CLOSE" type="object" help="Remove Troop from Camp Area"/>
 							</tree>
 						</field>
-						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" context="{'show_friendship' : True}"/>
+						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" context="{'show_friendship' : True, 'tree_view_ref': 'dds_camp.friendship_view_event_registration_tree'}"/>
 						</group>
 						
 				</form>

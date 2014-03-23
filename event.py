@@ -160,14 +160,42 @@ class dds_camp_friendship(osv.osv):
     _description = 'Friendship Grouping'
     _name = 'dds_camp.friendship'
     
+    def _calc_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for record in self.browse(cr, uid, ids, context=context):
+            name = "" 
+            for grp in record.group_ids:
+                name = name + grp.name + " / "
+            name = name[:-3]
+            res[record.id] = {'name': name}
+        return res
+    
     _columns = {
-        'name': fields.char('Name', size=64, translate=True),
+        'name': fields.function(_calc_name, type = 'char', string='Name', size=128, method=True, multi='FR'),
         'desc': fields.text('Description', translate=True),
         'email': fields.char('Email', size=128),
         'group_ids': fields.one2many('event.registration', 'friendship_id', 'Troops'),
         'addgroup_id' : fields.many2one('event.registration', 'Add Troop', ondelete='set null', domain=[('state','!=', 'cancel')]),
         }
     
+    
+#     def name_get(self, cr, uid, ids, context=None):
+#         if context is None:
+#             context = {}
+#         if isinstance(ids, (int, long)):
+#             ids = [ids]
+#         res = []
+#         for record in self.browse(cr, uid, ids, context=context):
+#             if record.name:
+#                 name = record.name + ": "
+#             else:
+#                 name = "" 
+#             for grp in record.group_ids:
+#                 name = name + grp.name + "/"
+#             name = name[:-1]        
+#             res.append((record['id'], name))
+#         return res
+     
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
         print "addgroup", group_ids
@@ -522,6 +550,12 @@ class dds_camp_event_participant(osv.osv):
         res = {'values' : {'age_group': ag}}    
         return res
     
+    def onchange_state(self, cr, uid, ids, state_id, context=None):
+        if state_id:
+            country_id=self.pool.get('res.country.state').browse(cr, uid, state_id, context).country_id.id
+            return {'value':{'country_id':country_id}}
+        return {}
+    
     def onchange_zip_id(self, cursor, uid, ids, zip_id, context=None):
         if not zip_id:
             return {}
@@ -616,6 +650,8 @@ class dds_camp_event_participant(osv.osv):
     _sql_constraints = [
         ('participation_uniq', 'unique(registration_id, partner_id)', 'Participant must be unique!'),
     ]
+    
+    _defaults = {'event_id2' : lambda *a: 1}
     
     def button_confirm(self, cr, uid, ids, context=None):
         
@@ -1096,10 +1132,11 @@ class event_registration(osv.osv):
         res = []
         for record in reads:
             name = record['name']
-            if context.get('show_camparea', False) and record['camparea_id']:
-                name = name + ' (' + record['camparea_id'][1] + ')'
-            if context.get('show_friendship', False) and record['friendship_id']:
-                name = name + ' (' + record['friendship_id'][1] + ')'    
+            if context:
+                if context.get('show_camparea', False) and record['camparea_id']:
+                    name = name + ' (' + record['camparea_id'][1] + ')'
+                if context.get('show_friendship', False) and record['friendship_id']:
+                    name = name + ' (' + record['friendship_id'][1] + ')'    
             res.append((record['id'], name))
         return res
     
@@ -1269,6 +1306,41 @@ class dds_staff(osv.osv):
     def button_reject(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
         
+    def button_add_participant(self, cr, uid, ids, context=None):
+        view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'dds_camp', 'portal_view_event_registration_participant_form')
+        view_id = view_ref and view_ref[1] or False,
+        this = self.browse(cr, uid, ids, context=context)[0]
+        
+        par_obj = self.pool.get('dds_camp.event.participant')
+        par_id = par_obj.create(cr, uid, {'event_id2': 2, 
+                                          'registration_id' : this.reg_id.id, 
+                                          'state': 'draft', 
+                                          'partype' : 'other', 
+                                          'street': this.street, 
+                                          'street2': this.street2, 
+                                          'zip': this.zip, 
+                                          'city': this.city, 
+                                          'state_id': this.state_id.id if this.state_id else False, 
+                                          'country_id': this.country_id.id if this.country_id else False,
+                                          'staff_id' : this.id, 
+                                          'partype' : 'other',
+                                          'name' : this.name.split(' ')[-1] if this.name else False
+                                          })
+            
+        return {
+               'type': 'ir.actions.act_window',
+               'name': _('Add Participant'),
+               'view_mode': 'form',
+               'view_type': 'form',
+               #'view_id': view_id,
+               'views': [(False, 'form')],
+               'res_model': 'dds_camp.event.participant',
+               'res_id' : par_id,
+               'nodestroy': True,
+               'target':'new',
+               'context': context,
+               }
+            
     def create_day_lines(self, cr, uid, ids, from_dt, to_dt, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
         participant = self.browse(cr, uid, ids)[0]

@@ -230,8 +230,8 @@
 						<!--  <field name="withgroup"/>
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
-						<field name="tshirt_size_id"/>
-						<field name="softshell_size_id"/>
+						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						</group>
 						<group string="Driving license" colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 							<field name="drvlic_car"/>
@@ -247,24 +247,29 @@
 			</group>
 			<group colspan="2" col="2">
 				<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
-					<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2" class="oe_edit_only"/>
+					<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2"/>
 				</group>
 			    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
-			    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2" class="oe_edit_only"/>
+			    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2"/>
 				</group> 
 				<group colspan="2" col="2" string="Camp Period">
-					<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" class="oe_edit_only"/>
+					<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" attrs="{'invisible': [('event_id2', '=', 1)]}"/>
 				</group>
 				 
 				<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
-					<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2" class="oe_edit_only"/>
+					<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2"/>
 				</group>
 				
-				<group colspan="2" col="2" class="oe_edit_only">
+				<group colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
 					<button name="action_create_day_lines" type="object" string="Entire Camp"
 						help="" colspan="2" />
 				
-			</group>
+				</group>
+				<group colspan="2" col="2" class="oe_edit_only" attrs="{'invisible': [('event_id2', '=', 2)]}">
+					<button name="action_create_day_lines" type="object" string="All days"
+						help="" colspan="2" />
+				
+				</group>
 			</group>
 		</group>
 		</sheet>
@@ -451,9 +456,21 @@
             <field name="context">{'search_default_registration_id': active_id, 'default_registration_id': active_id}</field>
         
 		</record>
-										
+							
+	<!--  Action to add new "Other Participants" -->
+	
+	<record id="action_add_other_participant" model="ir.actions.act_window">
+            <field name="name">Add Participant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dds_camp.event.participant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="portal_view_event_registration_participant_form"/>
+            <field name="target">new</field>
+        </record>			
 		
-		
+	<!-- Staff ITS Maintain  -->
+	
 	<record model="ir.ui.view" id="portal_staff_form">
 			<field name="name">portal.dds_camp.staff.form</field>
 			<field name="model">dds_camp.staff</field>
@@ -577,20 +594,21 @@
 								<page string="Other participants" colspan="8" col="8">
 									<field name='reg_id' invisible="1"/>
 									<field name='id' invisible="1"/>
-									<field name="participant_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}" invisible="1">
+									<field name="participant_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_street': street, 'default_street2': street2, 'default_zip': zip, 'default_city': city, 'default_state_id': state_id, 'default_country_id': country_id, 'search_partype' : 'other'}" invisible="1">
 										<tree string="Participants">
 											<field name="name"/>
 											 <field name="day_summery"/>
 
 										</tree>
 									</field>
-									<field name="list_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_staff_id' : id, 'search_partype' : 'other'}">
+									<field name="list_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_street': street, 'default_street2': street2, 'default_zip': zip, 'default_city': city, 'default_state_id': state_id, 'default_country_id': country_id, 'search_partype' : 'other'}" options="{'reload_on_button': true}">
 										<tree string="Participants">
 											<field name="name"/>
 											 <field name="day_summery"/>
 
 										</tree>
 									</field>
+									<!-- <button name="button_add_participant" string="Add Participant" type="object" />  -->
 									<!-- 
 									<field name="view_line_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}">
 										<tree string="Participants">

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-20 19:48+0000\n"
-"PO-Revision-Date: 2014-03-20 20:54+0100\n"
+"POT-Creation-Date: 2014-03-23 19:33+0000\n"
+"PO-Revision-Date: 2014-03-23 20:40+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,11 @@ msgid "Udvalgsmedlem"
 msgstr "Udvalgsmedlem"
 
 #. module: dds_camp
+#: field:dds_camp.event.participant,day_summery:0
+msgid "Summery"
+msgstr "Oversigt"
+
+#. module: dds_camp
 #: field:portal.wizard.user,db:0
 msgid "db"
 msgstr "db"
@@ -84,7 +89,7 @@ msgid "Number of Pre-reg"
 msgstr "Antal forhåndsregistrerede"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:942
+#: code:addons/dds_camp/event.py:1012
 #, python-format
 msgid "Registration Email"
 msgstr "Registration Email"
@@ -98,6 +103,11 @@ msgstr "medlemmer"
 #: field:dds_camp.event.participant,camp_fee:0
 msgid "Camp fee"
 msgstr "Lejrafgift"
+
+#. module: dds_camp
+#: help:dds_camp.event.participant,profession:0
+msgid "What do you do for living"
+msgstr "Erhverv"
 
 #. module: dds_camp
 #: view:dds_camp.staff:0
@@ -152,6 +162,11 @@ msgstr "Arrangements tilmelding"
 #: view:dds_camp.event.participant:0 view:dds_camp.staff:0
 msgid "Send til udvalg"
 msgstr "Send til udvalg"
+
+#. module: dds_camp
+#: view:event.event:0
+msgid "Webshop Event"
+msgstr "Webshop arrangement"
 
 #. module: dds_camp
 #: field:event.registration,hh_aftercamp_prv:0
@@ -231,7 +246,7 @@ msgid "ZIP"
 msgstr "Postnr"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:938
+#: code:addons/dds_camp/event.py:1008
 #, python-format
 msgid "Group Contact"
 msgstr "Gruppe kontaktperson"
@@ -431,7 +446,7 @@ msgstr "Hent medlemmer"
 #. module: dds_camp
 #: field:dds_camp.event.participant,drvlic_flift:0
 msgid "Forklift"
-msgstr "Truck"
+msgstr "Gaffeltruck"
 
 #. module: dds_camp
 #: selection:event.registration,accommodation:0
@@ -516,15 +531,16 @@ msgid "Committess"
 msgstr "Udvalg"
 
 #. module: dds_camp
+#: model:ir.actions.act_window,name:dds_camp.action_signup_staff_form
+#: model:ir.ui.menu,name:dds_camp.event_signup_staff_menu
+msgid "Hjælpertilmelding/IST Signup"
+msgstr "Hjælpertilmelding/IST Signup"
+
+#. module: dds_camp
 #: field:dds_camp.event.participant,partner_id:0
 #: field:dds_camp.event.participant.day,participant_id:0
 msgid "Participant"
 msgstr "Deltager"
-
-#. module: dds_camp
-#: selection:dds_camp.event.agegroup,age_group:0
-msgid "Age 6 - 8"
-msgstr " 6 - 8 år"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
@@ -532,9 +548,11 @@ msgid "FDF"
 msgstr "FDF"
 
 #. module: dds_camp
-#: field:dds_camp.event.participant,profession:0
-msgid "Profession"
-msgstr "Erhverv"
+#: code:addons/dds_camp/event.py:1332
+#: model:ir.actions.act_window,name:dds_camp.action_add_other_participant
+#, python-format
+msgid "Add Participant"
+msgstr "Tilføj deltager"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0 view:dds_camp.staff:0
@@ -542,9 +560,9 @@ msgid "All days (1/8 - 3/8)"
 msgstr "Alle dage (1/8 - 3/8)"
 
 #. module: dds_camp
-#: field:dds_camp.event.participant,day_summery:0
-msgid "Summery"
-msgstr "Oversigt"
+#: field:event.registration,camp_fee_charged:0
+msgid "Camp Fee Charged"
+msgstr "Lejafgift"
 
 #. module: dds_camp
 #: selection:dds_camp.bmimportwizard.members,state:0
@@ -566,7 +584,7 @@ msgstr "Næste"
 #: field:dds_camp.event.participant,state_id:0 view:dds_camp.staff:0
 #: view:res.partner:0
 msgid "State"
-msgstr "Status"
+msgstr "Stat"
 
 #. module: dds_camp
 #: field:dds_camp.committee,message_follower_ids:0
@@ -579,6 +597,11 @@ msgstr "Followers"
 #: view:dds_camp.staff:0 view:event.registration:0
 msgid "Agreements"
 msgstr "Aftaler"
+
+#. module: dds_camp
+#: field:event.registration,pre_reg_number:0
+msgid "# Pre-registred"
+msgstr "# Pre-registred"
 
 #. module: dds_camp
 #: field:dds_camp.committee,message_unread:0
@@ -625,7 +648,7 @@ msgid "IST (International Service Team)"
 msgstr "Hjælper"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:449
+#: code:addons/dds_camp/event.py:477
 #, python-format
 msgid "Full periode"
 msgstr "Fuld lejrperiode"
@@ -692,7 +715,7 @@ msgstr "Overnatning"
 #: code:addons/dds_camp/wizard/portal_wizard.py:41
 #, python-format
 msgid "Email Required"
-msgstr "Email Required"
+msgstr "Email påkrævet"
 
 #. module: dds_camp
 #: view:dds_camp.wizard.signup.staff:0
@@ -738,10 +761,9 @@ msgid "step2"
 msgstr "step2"
 
 #. module: dds_camp
-#: view:event.registration:0 field:event.registration,contact_partner_id:0
-#: view:res.partner:0
-msgid "Contact"
-msgstr "Kontaktperson"
+#: selection:dds_camp.event.agegroup,age_group:0
+msgid "Age 6 - 8"
+msgstr " 6 - 8 år"
 
 #. module: dds_camp
 #: field:event.registration,agreements:0
@@ -821,9 +843,10 @@ msgid "At other Staff"
 msgstr "Hos anden hjælper"
 
 #. module: dds_camp
-#: field:event.registration,pre_reg_number:0
-msgid "# Pre-registred"
-msgstr "# Pre-registred"
+#: view:event.registration:0 field:event.registration,contact_partner_id:0
+#: view:res.partner:0
+msgid "Contact"
+msgstr "Kontaktperson"
 
 #. module: dds_camp
 #: view:dds_camp.committee:0
@@ -869,12 +892,12 @@ msgid "Age 22+ and leaders"
 msgstr "22+ år og ledere"
 
 #. module: dds_camp
-#: view:event.event:0
-msgid "Webshop Event"
-msgstr "Webshop arrangement"
+#: field:event.registration,camp_fee_tot:0
+msgid "Camp Fee Total"
+msgstr "Lejrafgift Total"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:936 view:dds_camp.event.participant:0
+#: code:addons/dds_camp/event.py:1006 view:dds_camp.event.participant:0
 #: view:dds_camp.event.participant.day:0
 #: field:dds_camp.event.participant.day,registration_id:0
 #, python-format
@@ -966,6 +989,11 @@ msgid "Leader"
 msgstr "Leder"
 
 #. module: dds_camp
+#: field:event.registration,last_login:0
+msgid "Last Login Date"
+msgstr "Seneste login"
+
+#. module: dds_camp
 #: field:dds_camp.area,group_ids:0 view:dds_camp.event.participant:0
 #: field:dds_camp.friendship,group_ids:0
 msgid "Troops"
@@ -981,11 +1009,6 @@ msgstr "Status"
 #: field:dds_camp.event.participant,age_group:0
 msgid "Age group"
 msgstr "Aldersgruppe"
-
-#. module: dds_camp
-#: model:ir.actions.act_window,name:dds_camp.action_signup_staff_form
-msgid "IST signup"
-msgstr "Hjælpertilmelding"
 
 #. module: dds_camp
 #: selection:dds_camp.event.participant,functitle:0
@@ -1047,7 +1070,7 @@ msgstr "Godkendelse"
 #. module: dds_camp
 #: field:portal.wizard.user,user_id:0
 msgid "User"
-msgstr "User"
+msgstr "Bruger"
 
 #. module: dds_camp
 #: field:event.registration,econ_partner_id:0
@@ -1095,7 +1118,7 @@ msgstr "Søg"
 #. module: dds_camp
 #: field:event.registration,tent_nb:0
 msgid "Number of tents"
-msgstr "Number of tents"
+msgstr "Telt antal"
 
 #. module: dds_camp
 #: field:dds_camp.wizard.signup.staff,lang:0
@@ -1161,6 +1184,11 @@ msgid "Participations Days"
 msgstr "Participations Days"
 
 #. module: dds_camp
+#: field:event.registration,camp_fee_min:0
+msgid "Minimum Camp Fee"
+msgstr "Minimum Camp Fee"
+
+#. module: dds_camp
 #: field:dds_camp.tshirtsize,sizetype:0
 msgid "Sizetype"
 msgstr "Sizetype"
@@ -1218,7 +1246,7 @@ msgstr "Nummer"
 #: model:ir.model,name:dds_camp.model_dds_camp_friendship
 #: model:ir.ui.menu,name:dds_camp.event_friendship_menu
 msgid "Friendship Grouping"
-msgstr "Friendship Grouping"
+msgstr "Venskabs gruppering"
 
 #. module: dds_camp
 #: field:dds_camp.scout.org,sex:0
@@ -1241,7 +1269,7 @@ msgid "Do you need 230 V power - for a fee 50 kr."
 msgstr "Do you need 230 V power - for a fee 50 kr."
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:940
+#: code:addons/dds_camp/event.py:1010
 #, python-format
 msgid "Group Econ. Contact"
 msgstr "Kasserer kontakt"
@@ -1254,7 +1282,7 @@ msgstr "Annuller"
 #. module: dds_camp
 #: view:dds_camp.wizard.signup.staff:0
 msgid "Close"
-msgstr "Close"
+msgstr "Luk"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0 view:dds_camp.staff:0 view:res.partner:0
@@ -1321,6 +1349,11 @@ msgid "Hent deltagere fra Blåt Medlem"
 msgstr "Hent deltagere fra Blåt Medlem"
 
 #. module: dds_camp
+#: field:event.registration,user_created:0
+msgid "Users created"
+msgstr "Bruger oprettet"
+
+#. module: dds_camp
 #: selection:dds_camp.event.participant,functitle:0
 msgid "Formand"
 msgstr "Formand"
@@ -1358,6 +1391,11 @@ msgid "Function"
 msgstr "Funktion"
 
 #. module: dds_camp
+#: field:dds_camp.event.participant,profession:0
+msgid "Profession"
+msgstr "Erhverv"
+
+#. module: dds_camp
 #: field:event.event,webshop_product_nid:0
 msgid "Webshop nid"
 msgstr "Webshop nid"
@@ -1385,19 +1423,14 @@ msgid "Scout Orgs"
 msgstr "Spejderkorps"
 
 #. module: dds_camp
-#: model:ir.ui.menu,name:dds_camp.event_signup_staff_menu
-msgid "IST Signup"
-msgstr "Hjælpertilmelding"
-
-#. module: dds_camp
 #: selection:event.registration,organization:0
 msgid "KFUM Spejderne"
 msgstr "KFUM Spejderne"
 
 #. module: dds_camp
-#: help:dds_camp.event.participant,profession:0
-msgid "What do you do for living"
-msgstr "Erhverv"
+#: view:dds_camp.bmimportwizard:0
+msgid "Login"
+msgstr "Login"
 
 #. module: dds_camp
 #: model:email.template,subject:dds_camp.set_password_email
@@ -1514,9 +1547,9 @@ msgid "Camp Period"
 msgstr "Lejrperiode"
 
 #. module: dds_camp
-#: view:dds_camp.bmimportwizard:0
-msgid "Login"
-msgstr "Login"
+#: view:dds_camp.event.participant:0
+msgid "All days"
+msgstr "Alle dage"
 
 #. module: dds_camp
 #: view:event.event:0
