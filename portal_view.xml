@@ -491,6 +491,7 @@
 					<group colspan="2" col="2">
 					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
 						<field name="appr_leader" groups='event.group_event_manager' />
+						<field name="partner_id" groups='event.group_event_manager' />
 						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
 
 
@@ -676,6 +677,25 @@
 
 									</group>
 								</page>
+								<page string="Administration" groups="event.group_event_manager">
+								<group colspan="4" col="4">
+									<group colspan="2" col="2">
+									<field name="signed_up"/>
+									<field name="foreigners"/>
+									<field name="agreements"/>
+									<field name="internal_note"/>
+									<field name="user_created"/>
+									<button name="action_create_login" type="object" string="Create login"
+												help="" colspan="2"/>
+									<field name="last_login"/>
+									</group>
+									<group colspan="2" col="2">
+										<field name="camp_fee_min"/>
+										<field name="camp_fee_tot"/>
+										<field name="camp_fee_charged"/>
+									</group>	
+								</group>
+							</page>
 								
 							</notebook>
 						</group>
