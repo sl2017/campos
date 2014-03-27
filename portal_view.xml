@@ -729,15 +729,40 @@
 			<field name="res_model">dds_camp.staff</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
-			
+			<field name="view_id" ref="portal_staff_tree"/>
+		</record>
+
+		<record model="ir.ui.view" id="portal_staff_tree_admin">
+			<field name="name">portal.dds_camp.staff.tree</field>
+			<field name="model">dds_camp.staff</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+			<tree string="IST">
+					<field name="name"/>
+					<field name="user_created"/>
+					<field name="last_login"/>
+			</tree>
+                     </field>    
+              </record>			
+
+
+
+		<record id="action_staff_tree_admin" model="ir.actions.act_window">
+			<field name="name">Staff</field>
+
+			<field name="res_model">dds_camp.staff</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="portal_staff_tree_admin"/>
 
 		</record>
+
 
 		<menuitem action="action_staff_tree" id="event_staff_menu"
 			name="IST (International Service Team)" sequence="60" parent="menu_portal_registration"
 			groups="portal.group_portal" />	
 			
-		<menuitem action="action_staff_tree" id="event_staff2_menu"
+		<menuitem action="action_staff_tree_admin" id="event_staff2_menu"
 			name="IST (International Service Team)" sequence="70"  parent="base.menu_event_main" />
 		
 		<menuitem action="action_committee_tree" id="event_committee_menu_portal"
