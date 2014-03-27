@@ -826,6 +826,7 @@ class event_registration(osv.osv):
 #     def name_get(self, cr, uid, ids, context=None):
 #         if not ids:
 #             return []
+
 # 
 #         if isinstance(ids, (long, int)):
 #             ids = [ids]
@@ -968,6 +969,7 @@ class event_registration(osv.osv):
                                           ('caravan','Caravan'),
                                           ('camplet',u'CampLet'),
                                           ('cottent', 'Cottage tent'),
+						('camper', 'Camper'),
                                           ('group', 'By my Troop'),
                                           ('otherstaff','At other Staff'),
                                           ('other','Outside Camp')],'Accomadation'),
