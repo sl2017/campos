@@ -644,7 +644,7 @@ class dds_camp_event_participant(osv.osv):
                                         ('ex', 'Ekstern (ikke betalende)')],'Function'),
          'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
          'is_relative' : fields.boolean(u'Deltager som pårørende'),       
-         'staff_id': fields.many2one('dds_camp.staff', 'ITS', select=True, ondelete='cascade'),
+         'staff_id': fields.many2one('dds_camp.staff', 'Tilmeldt under', select=True, ondelete='cascade'),
     }
     
     _sql_constraints = [
@@ -709,17 +709,55 @@ class dds_camp_event_participant(osv.osv):
                                              'state': True})
                 dt += delta    
     
+    def get_parcipant_form(self, cr, uid, ids, context):
+        view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'dds_camp', 'portal_view_event_registration_participant_create')
+        view_id = view_ref and view_ref[1] or False,
+        return {
+               'type': 'ir.actions.act_window',
+               'name': _('Add Participant'),
+               'view_mode': 'form',
+               'view_type': 'form',
+               'view_id': view_id,
+               #'views': [(False, 'form')],
+               'res_model': 'dds_camp.event.participant',
+               'res_id' : ids[0],
+               'nodestroy': True,
+               'target':'new',
+               'context': context,
+               }
+        
     def action_create_day_teknik(self, cr, uid, ids, context):
         self.create_day_lines(cr, uid, ids, '2014-07-12', '2014-07-17', context)
+        
+    
+    def action_create_day_teknik2(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-12', '2014-07-17', context)
+        return self.get_parcipant_form(cr, uid, ids, context) 
         
     def action_create_day_precamp(self, cr, uid, ids, context):
         self.create_day_lines(cr, uid, ids, '2014-07-18', '2014-07-21', context)
         
+    def action_create_day_precamp2(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-18', '2014-07-21', context)
+        return self.get_parcipant_form(cr, uid, ids, context)
+    
     def action_create_day_maincamp(self, cr, uid, ids, context):
         self.create_day_lines(cr, uid, ids, '2014-07-22', '2014-07-31', context)        
     
+    def action_create_day_maincamp2(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-07-22', '2014-07-31', context)        
+        return self.get_parcipant_form(cr, uid, ids, context)
+    
     def action_create_day_postcamp(self, cr, uid, ids, context):
         self.create_day_lines(cr, uid, ids, '2014-08-01', '2014-08-03', context)        
+    
+    def action_create_day_postcamp2(self, cr, uid, ids, context):
+        self.create_day_lines(cr, uid, ids, '2014-08-01', '2014-08-03', context)        
+        return self.get_parcipant_form(cr, uid, ids, context)
+    
+    def action_create_day_lines2(self, cr, uid, ids, context):
+        self.action_create_day_lines(cr, uid, ids, context)
+        return self.get_parcipant_form(cr, uid, ids, context)
     
     def action_create_day_lines(self, cr, uid, ids, context):
         day_obj = self.pool.get('dds_camp.event.participant.day')
@@ -1310,7 +1348,8 @@ class dds_staff(osv.osv):
         return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
         
     def button_add_participant(self, cr, uid, ids, context=None):
-        view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'dds_camp', 'portal_view_event_registration_participant_form')
+        view_ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'dds_camp', 'portal_view_event_registration_participant_create')
+        print "View ID:", view_ref
         view_id = view_ref and view_ref[1] or False,
         this = self.browse(cr, uid, ids, context=context)[0]
         
@@ -1335,8 +1374,8 @@ class dds_staff(osv.osv):
                'name': _('Add Participant'),
                'view_mode': 'form',
                'view_type': 'form',
-               #'view_id': view_id,
-               'views': [(False, 'form')],
+               'view_id': view_id,
+               #'views': [(False, 'form')],
                'res_model': 'dds_camp.event.participant',
                'res_id' : par_id,
                'nodestroy': True,
@@ -1405,10 +1444,11 @@ class dds_staff(osv.osv):
         por_id = por_obj.create(cr, SUPERUSER_ID, {'portal_id': 11,
                                                    'user_ids': [(0, 0, {'partner_id': staff.reg_id.partner_id.id, 
                                                                        'email': staff.reg_id.email, 
-                                                                       'in_portal': True})]
+                                                                       'in_portal': True,
+                                                                       'staff_id': staff.id})]
                                                    })
         ctx = context
-        ctx = {'mail_template' : 'email_template_14', 'mail_tpl_module': '__export__'}
+        ctx = {'mail_template' : 'email_template_15', 'mail_tpl_module': '__export__'}
         if ctx.has_key('default_state'):
             del ctx['default_state']
             
