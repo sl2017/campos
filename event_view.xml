@@ -64,8 +64,8 @@
 				
 				</field>
 				<field name="user_id" position="after">
-					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}" readonly="1">
-								<tree>
+					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}">
+								<tree create="false">
 									<field name="age_group"/>
 									<field name="pre_reg"  sum="Number of Pre-reg"/>
 									<field name="number"  sum="Number of Participants"/>
