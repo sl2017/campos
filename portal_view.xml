@@ -178,6 +178,136 @@
 			<group colspan="6" col="6">
 				<group colspan="4" col="2">
 					<group colspan="4" col="2">
+					<field name="staff_id" groups="event.group_event_user" attrs="{'invisible': [('event_id2', '=', 1)]}"/>
+					<field name="registration_id" groups="event.group_event_user" attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<!-- options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}" /> -->
+					<!-- 
+					<field mode="form" name="partner_id"
+						on_change="onchange_partner_id(partner_id)"
+						context="{'default_parent_id': registration_id.partner_id, 'default_customer': True, 'default_is_company': False, 'name_only': 1}"
+						domain="[('parent_id','=',registration_id.partner_id),('is_company','=',False)]"
+						select="1" string="Select a Contact as Participant" />
+					<div><b>Or add a new participant below</b></div>
+					<newline/>
+					 -->
+						<field name="appr_leader" groups='event.group_event_manager' />
+						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
+
+
+						<label for="street" string="Address" />
+						<div>
+							<field name="street" placeholder="Street..." />
+							<field name="street2" />
+							<field name="zip_id" on_change="onchange_zip_id(zip_id)"
+								placeholder="City completion" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+
+							<div class="address_format">
+								<field name="zip" placeholder="ZIP" style="width: 20%%" />
+								<field name="city" placeholder="City" style="width: 40%%" />
+								<field name="state_id" class="oe_no_button" placeholder="State"
+									style="width: 37%%" options="{'no_open': True, 'create': False, 'create_edit': False}" on_change="onchange_state(state_id)" />
+
+							</div>
+							<field name="country_id" placeholder="Country" class="oe_no_button"
+								options="{'no_open': True, 'create': False, 'create_edit': False}" />
+						</div>
+						<field name="email" />
+						<field name="phone" />
+
+
+
+					<field name="birth" required="1"/>
+					<field name="age_group" invisible="1" />
+					<field name="leader"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<field name="rel_phone"  attrs="{'invisible': [('event_id2', '=', 2)]}"/>
+					<field name="memberno" attrs="{'readonly': True, 'invisible': [('imported_bm', '=', False)]}" />
+					<field name="imported_bm" invisible="1" />
+					<field name="event_id2" invisible="1"/>
+					</group>
+					<group  colspan="4" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+					    <field name="is_relative"/>
+						<field name="workwish"/>
+						<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<field name="functitle" groups='event.group_event_manager' /> 
+						<!--  <field name="withgroup"/>
+						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
+						<field name="profession"/>
+						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						</group>
+						<group string="Driving license" colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
+							<field name="drvlic_car"/>
+							<field name="drvlic_truck"/>
+							<field name="drvlic_bus"/>
+							<field name="drvlic_trailer"/>
+							<field name="drvlic_tractor"/>
+							<field name="drvlic_flift"/>
+							<field name="drvlic_other"/>
+						</group>
+					
+					<!-- <field name="patrol" /> -->
+			</group>
+			<group colspan="2" col="2">
+				<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+					<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2" class="oe_edit_only"/>
+				</group>
+			    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
+			    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2" class="oe_edit_only"/>
+				</group> 
+				<group colspan="2" col="2" string="Camp Period">
+					<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" attrs="{'invisible': [('event_id2', '=', 1)]}" class="oe_edit_only"/>
+				</group>
+				 
+				<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
+					<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2" class="oe_edit_only"/>
+				</group>
+				
+				<group colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}" class="oe_edit_only">
+					<button name="action_create_day_lines" type="object" string="Entire Camp"
+						help="" colspan="2" />
+				
+				</group>
+				<group colspan="2" col="2" class="oe_edit_only" attrs="{'invisible': [('event_id2', '=', 2)]}">
+					<button name="action_create_day_lines" type="object" string="All days"
+						help="" colspan="2" />
+				
+				</group>
+			</group>
+		</group>
+		</sheet>
+		<group groups='event.group_event_manager'>
+		<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups='event.group_event_manager'/>
+                        <field name="message_ids" widget="mail_thread" groups='event.group_event_manager'/>
+                    </div>
+        </group>            
+		</form>
+
+	</field>
+</record>
+
+<!-- To Create IST only -->
+
+<record model="ir.ui.view" id="portal_view_event_registration_participant_create">
+	<field name="name">portal.registration.participant.form</field>
+	<field name="model">dds_camp.event.participant</field>
+	<field name="priority" eval="17"/>
+	<field name="arch" type="xml">
+
+		<form string="Event Registration" version="7.0">
+		<header attrs="{'invisible': [('event_id2', '=', 1)]}">
+			<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
+            <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user,__export__.res_groups_34"/>
+            <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user,__export__.res_groups_34"/>
+                         
+			<field name="state" nolabel="1" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors='{"approved":"blue","rejected":"red"}'
+							 groups="event.group_event_user,__export__.res_groups_34"/>
+		</header>
+		
+			<sheet>
+			<group colspan="6" col="6">
+				<group colspan="4" col="2">
+					<group colspan="4" col="2">
 					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}" />
 					<!-- 
 					<field mode="form" name="partner_id"
@@ -247,29 +377,25 @@
 			</group>
 			<group colspan="2" col="2">
 				<group colspan="2" col="2" string="Teknik forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
-					<button name="action_create_day_teknik" type="object" string="All days (12/7 - 17/7)" help="" colspan="2"/>
+					<button name="action_create_day_teknik2" type="object" string="All days (12/7 - 17/7)" help="" colspan="2"/>
 				</group>
 			    <group colspan="2" col="2" string="Forlejr" attrs="{'invisible': [('event_id2', '=', 1)]}">
-			    	<button name="action_create_day_precamp" type="object" string="All days (18/7 - 21/7)" help="" colspan="2"/>
+			    	<button name="action_create_day_precamp2" type="object" string="All days (18/7 - 21/7)" help="" colspan="2"/>
 				</group> 
 				<group colspan="2" col="2" string="Camp Period">
-					<button name="action_create_day_maincamp" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" attrs="{'invisible': [('event_id2', '=', 1)]}"/>
+					<button name="action_create_day_maincamp2" type="object" string="All days (22/7 - 31/7)" help="" colspan="2" attrs="{'invisible': [('event_id2', '=', 1)]}"/>
 				</group>
 				 
 				<group colspan="2" col="2" string="Efterlejr"  attrs="{'invisible': [('event_id2', '=', 1)]}">
-					<button name="action_create_day_postcamp" type="object" string="All days (1/8 - 3/8)" help="" colspan="2"/>
+					<button name="action_create_day_postcamp2" type="object" string="All days (1/8 - 3/8)" help="" colspan="2"/>
 				</group>
 				
 				<group colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
-					<button name="action_create_day_lines" type="object" string="Entire Camp"
+					<button name="action_create_day_lines2" type="object" string="Entire Camp"
 						help="" colspan="2" />
 				
 				</group>
-				<group colspan="2" col="2" class="oe_edit_only" attrs="{'invisible': [('event_id2', '=', 2)]}">
-					<button name="action_create_day_lines" type="object" string="All days"
-						help="" colspan="2" />
 				
-				</group>
 			</group>
 		</group>
 		</sheet>
@@ -278,11 +404,13 @@
                         <field name="message_follower_ids" widget="mail_followers" groups='event.group_event_manager'/>
                         <field name="message_ids" widget="mail_thread" groups='event.group_event_manager'/>
                     </div>
-        </group>            
+        </group>
+        <footer> <button name="write" type="object" string="Save" class="oe_highlight"/> or <button name="cancel" string="Cancel" special="Cancel" class="oe_link"/> </footer>            
 		</form>
 
 	</field>
 </record>
+
 
 		<record model="ir.ui.view" id="portal_view_event_registration_tree">
 			<field name="name">portal.event.registration.tree</field>
@@ -602,14 +730,14 @@
 
 										</tree>
 									</field>
-									<field name="list_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_street': street, 'default_street2': street2, 'default_zip': zip, 'default_city': city, 'default_state_id': state_id, 'default_country_id': country_id, 'search_partype' : 'other'}" options="{'reload_on_button': true}">
-										<tree string="Participants">
+									<field name="list_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'default_street': street, 'default_street2': street2, 'default_zip': zip, 'default_city': city, 'default_state_id': state_id, 'default_country_id': country_id, 'search_partype' : 'other', 'form_view_ref':'dds_camp.portal_view_event_registration_participant_form'}" options="{'reload_on_button': true}">
+										<tree string="Participants" create="false">
 											<field name="name"/>
 											 <field name="day_summery"/>
 
 										</tree>
 									</field>
-									<!-- <button name="button_add_participant" string="Add Participant" type="object" />  -->
+									<button name="button_add_participant" string="Add Participant" type="object" /> 
 									<!-- 
 									<field name="view_line_ids" colspan="4" context="{'default_event_id2': 2, 'default_registration_id' : reg_id, 'default_state': 'draft', 'default_partype' : 'other', 'search_partype' : 'other'}">
 										<tree string="Participants">
@@ -688,6 +816,8 @@
 									<button name="action_create_login" type="object" string="Create login"
 												help="" colspan="2"/>
 									<field name="last_login"/>
+									<button name="action_reset_login" type="object" string="Reset login"
+												help="" colspan="2"/>
 									</group>
 									<group colspan="2" col="2">
 										<field name="camp_fee_min"/>

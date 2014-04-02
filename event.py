@@ -1296,6 +1296,13 @@ class dds_staff(osv.osv):
         
         day_obj = self.pool.get('dds_camp.event.participant.day')
         for participant in self.browse(cr, uid, ids):
+            if values.has_key('email'):
+                print "Updating email", values['email']
+                reg_obj = self.pool.get('event.registration')
+                partner_obj =  self.pool.get('res.partner')
+                reg_obj.write(cr, uid, [participant.reg_id.id], {'email': values['email']})
+                partner_obj.write(cr, uid, [participant.reg_id.partner_id.id], {'email': values['email']})
+                
             if participant.days_ids:
                 for d in participant.days_ids:
                     if values.has_key('date_' + d.date.replace('-','_')):
@@ -1453,6 +1460,37 @@ class dds_staff(osv.osv):
             del ctx['default_state']
             
         por_obj.action_apply(cr, SUPERUSER_ID, [por_id], ctx)
+        
+    def action_reset_login(self, cr, uid, ids, context):
+        staff = self.browse(cr, uid, ids)[0]
+        
+        if staff.user_created:
+            usr_obj = self.pool.get('res.users')
+            if staff.reg_id.partner_id:
+                for usr in staff.reg_id.partner_id.user_ids:
+                    usr_obj.unlink(cr, uid, [usr.id], context)
+            if staff.reg_id.partner_id.child_ids:
+                    for child in staff.reg_id.partner_id.child_ids:
+                        if child.user_ids:
+                            for usr in child.user_ids:    
+                                usr_obj.unlink(cr, uid, [usr.id], context)
+                                
+        por_obj = self.pool.get('portal.wizard')
+        # Create user
+        #print "PArtner", staff.reg_id.partner_id.email, staff.email, staff.reg_id.partner_id.id
+        por_id = por_obj.create(cr, SUPERUSER_ID, {'portal_id': 11,
+                                                   'user_ids': [(0, 0, {'partner_id': staff.reg_id.partner_id.id, 
+                                                                       'email': staff.reg_id.email, 
+                                                                       'in_portal': True,
+                                                                       'staff_id': staff.id})]
+                                                   })
+        ctx = context
+        ctx = {'mail_template' : 'email_template_15', 'mail_tpl_module': '__export__'}
+        if ctx.has_key('default_state'):
+            del ctx['default_state']
+            
+        por_obj.action_apply(cr, SUPERUSER_ID, [por_id], ctx)
+    
 
     def onchange_zip_id(self, cursor, uid, ids, zip_id, context=None):
         if not zip_id:
