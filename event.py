@@ -1166,6 +1166,36 @@ class event_registration(osv.osv):
     def button_unlink_friendship(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {'friendship_id': None})
         
+    def action_reset_troop_login(self, cr, uid, ids, context):
+        reg = self.browse(cr, uid, ids)[0]
+        
+        if reg.user_created:
+            usr_obj = self.pool.get('res.users')
+            if reg.partner_id:
+                for usr in reg.partner_id.user_ids:
+                    usr_obj.unlink(cr, uid, [usr.id], context)
+            if reg.partner_id.child_ids:
+                    for child in reg.partner_id.child_ids:
+                        if child.user_ids:
+                            for usr in child.user_ids:    
+                                usr_obj.unlink(cr, uid, [usr.id], context)
+                                
+        por_obj = self.pool.get('portal.wizard')
+        # Create user
+        #print "PArtner", staff.reg_id.partner_id.email, staff.email, staff.reg_id.partner_id.id
+        por_id = por_obj.create(cr, SUPERUSER_ID, {'portal_id': 11,
+                                                   'user_ids': [(0, 0, {'partner_id': reg.contact_partner_id.id, 
+                                                                       'email': reg.contact_partner_id.email, 
+                                                                       'in_portal': True,
+                                                                       })]
+                                                   })
+        ctx = context
+        ctx = {'mail_template' : 'set_password_email', 'mail_tpl_module': 'dds_camp'}
+        if ctx.has_key('default_state'):
+            del ctx['default_state']
+            
+        por_obj.action_apply(cr, SUPERUSER_ID, [por_id], ctx)
+        
     def name_get(self, cr, uid, ids, context=None):
         if isinstance(ids, (int, long)):
             ids = [ids]

@@ -153,6 +153,8 @@
 									<field name="internal_note"/>
 									<field name="user_created"/>
 									<field name="last_login"/>
+									<button name="action_reset_troop_login" type="object" string="Reset login"
+												help="" colspan="2"/>
 									</group>
 									<group colspan="2" col="2">
 										<field name="camp_fee_min"/>
