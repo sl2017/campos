@@ -33,14 +33,16 @@ class dds_camp_activity_activity(osv.osv):
     _description = 'Activities'
     _name = 'dds_camp.activity.activity'
     _order = 'name'
+    _inherit = 'mail.thread'
+    
     _columns = {
         'name': fields.char('Name', size=128),
         'committee_id' : fields.many2one('dds_camp.committee', 'Committee'),
         'desc': fields.text('Description', translate=True),
         'age_from': fields.integer('Age from'),
-        'age_from': fields.integer('Age to'),
+        'age_to': fields.integer('Age to'),
         'points' : fields.integer('Points'),
-        'audience': fields.selected([('par','Participants'),
+        'audience': fields.selection([('par','Participants'),
                                      ('staff','ITS'),
                                      ('all', 'All')], 'Audience')
                 
@@ -53,7 +55,7 @@ class dds_camp_activity_activity(osv.osv):
 class dds_camp_activity_period(osv.osv):
     """Activities"""
     _description = 'Activities'
-    _name = 'dds_camp.activity.activity'
+    _name = 'dds_camp.activity.period'
     _order = 'name'
     _columns = {
         'name': fields.char('Name', size=128),
@@ -88,7 +90,7 @@ class dds_camp_activity_instanse(osv.osv):
         'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved'),
         'seats_used': fields.function(_get_seats, string='Number of Participations', type='integer', multi='seats_reserved'),
         'activity_id' : fields.many2one('dds_camp.activity.activity', 'Activity'),
-        'period_id' : fields.many2one('dds_camp.activity.period', 'Activity'),
+        'period_id' : fields.many2one('dds_camp.activity.period', 'Period'),
         'staff_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_staff_rel',
                                       'act_ins_id','par_id','Staff'),
         'ticket_ids': fields.one2many('dds_camp.activity.ticket', 'act_ins_id', 'Tickets'),         
@@ -97,7 +99,7 @@ class dds_camp_activity_instanse(osv.osv):
 class dds_camp_activity_ticket(osv.osv): 
     """Activity Instanse"""
     _description = 'Activity Instanses'
-    _name = 'dds_camp.activity.instanse'
+    _name = 'dds_camp.activity.ticket'
     _order = 'name'
     _columns = {
         'name': fields.char('Name', size=128),

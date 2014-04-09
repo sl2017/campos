@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+		<menuitem name="Aktiviteter" id="menu_activity_root" parent="event.event_main_menu" sequence="25"/>
+
+		<!-- Activity -->		
+        <record model="ir.ui.view" id="dds_camp_activity_form">
+            <field name="name">dds_camp.activity.form</field>
+            <field name="model">dds_camp.activity.activity</field>
+            <field name="arch" type="xml">
+                <form string="Aktivitet" version="7.0">
+                    <sheet string="Aktivitet">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="committee_id"/>
+                            <field name="desc"/>
+                            <field name="age_from"/>
+                            <field name="age_to"/>
+                            <field name="points"/>
+                            <field name="audience"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_activity_tree">
+            <field name="name">dds_camp.activity.tree</field>
+            <field name="model">dds_camp.activity.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Activity">
+
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_activity_tree" model="ir.actions.act_window">
+            <field name="name">Aktivitet</field>
+
+            <field name="res_model">dds_camp.activity.activity</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_activity_tree" id="event_activity_menu"
+                  name="Aktiviteter" sequence="10" parent="menu_activity_root"/>
+
+		<!-- Activity Periods -->		
+        <record model="ir.ui.view" id="dds_camp_activity_period_form">
+            <field name="name">dds_camp.activty.period.form</field>
+            <field name="model">dds_camp.activity.period</field>
+            <field name="arch" type="xml">
+                <form string="Aktivitet" version="7.0">
+                    <sheet string="Aktivitetsperiode">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_begin"/>
+                            <field name="date_end"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_activity_period_tree">
+            <field name="name">dds_camp.activity.period.tree</field>
+            <field name="model">dds_camp.activity.period</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Period">
+
+                    <field name="name"/>
+                    <field name="date_begin"/>
+                    <field name="date_end"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_activity_period_tree" model="ir.actions.act_window">
+            <field name="name">Aktivitetsperiode</field>
+
+            <field name="res_model">dds_camp.activity.period</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_activity_period_tree" id="event_activity_period_menu"
+                  name="Aktivitetsperioder" sequence="20" parent="menu_activity_root"/>
+
+		<!-- Activity Instance -->		
+        <record model="ir.ui.view" id="dds_camp_activity_instanse_form">
+            <field name="name">dds_camp.activty.instanse.form</field>
+            <field name="model">dds_camp.activity.instanse</field>
+            <field name="arch" type="xml">
+                <form string="Aktivitets Instanser" version="7.0">
+                    <sheet string="Aktivitets instans">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="activity_id"/>
+                            <field name="period_id"/>
+                            <field name="seats_max"/>
+                            <field name="seats_used"/>
+                            <field name="seats_reserved"/>
+                            <field name="staff_ids"/>
+                            <field name="ticket_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_activity_instanse_tree">
+            <field name="name">dds_camp.activity.instanse.tree</field>
+            <field name="model">dds_camp.activity.instanse</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Instanse">
+
+                    <field name="name"/>
+                    <field name="activity_id"/>
+                    <field name="period_id"/>
+                    <field name="seats_max"/>
+                    <field name="seats_used"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_activity_instanse_tree" model="ir.actions.act_window">
+            <field name="name">Aktivitetsinstanse</field>
+
+            <field name="res_model">dds_camp.activity.instanse</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_activity_instanse_tree" id="event_activity_instanse_menu"
+                  name="Aktivitetsinstanser" sequence="30" parent="menu_activity_root"/>
+
+        <!-- Activity Ticket -->		
+        <record model="ir.ui.view" id="dds_camp_activity_ticket_form">
+            <field name="name">dds_camp.activty.ticket.form</field>
+            <field name="model">dds_camp.activity.ticket</field>
+            <field name="arch" type="xml">
+                <form string="Aktivitets Biletter" version="7.0">
+                    <sheet string="Aktivitets Billet">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="act_ins_id"/>
+                            <field name="seats"/>
+                            <field name="reserved_time"/>
+                            <field name="state"/>
+                            <field name="reg_id"/>
+                            <field name="par_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_activity_ticket_tree">
+            <field name="name">dds_camp.activity.ticket.tree</field>
+            <field name="model">dds_camp.activity.ticket</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Ticket">
+
+                    <field name="name"/>
+                    <field name="act_ins_id"/>
+                    <field name="reg_id"/>
+                    <field name="seats"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_activity_ticket_tree" model="ir.actions.act_window">
+            <field name="name">Billet</field>
+
+            <field name="res_model">dds_camp.activity.ticket</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_activity_ticket_tree" id="event_activity_ticket_menu"
+                  name="Billetter" sequence="50" parent="menu_activity_root"/>
+
+    </data>
+</openerp>

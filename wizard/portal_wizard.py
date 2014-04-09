@@ -26,6 +26,7 @@ class wizard_user(osv.osv_memory):
                 'signup_url': fields.char(size=240, string='Signup URL'),
                 'portal_url': fields.char(size=240, string='Portal URL'),
                 'user_id': fields.many2one('res.users', 'User'),
+                'staff_id': fields.many2one('dds_camp.staff', 'ITS'),
                 #'in_portal': fields.boolean('In Portal'),
                 }
     

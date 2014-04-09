@@ -40,7 +40,8 @@
                     "portal_view.xml", 
                     "wizard/portal_wizard.xml",
                     "report/participants_list_xls.xml",
-		      "wizard/welcome_view.xml"
+		            "wizard/welcome_view.xml",
+                    "dds_camp_activity_view.xml"
                     ],
     "installable": True,
     'auto_install': False,

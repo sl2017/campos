@@ -485,7 +485,8 @@ class dds_camp_event_participant(osv.osv):
             else:             
                 age = self._age(par.birth, '2014-07-22')
                 ag = 'unknown'
-                if age:
+                print 'Age:', age, age != False
+                if age >= 0:
                     if age <= 3:
                         ag = '00-03'
                     if age >= 4 and age <= 5:
@@ -529,7 +530,7 @@ class dds_camp_event_participant(osv.osv):
             else:
                 return date_begin.year - date_of_birth.year
         else:
-            return False
+            return -1
     
     def onchange_birth(self, cr, uid, ids, birth, context=None):
         age = self._age(birth, '2014-07-22')
@@ -651,6 +652,15 @@ class dds_camp_event_participant(osv.osv):
         ('participation_uniq', 'unique(registration_id, partner_id)', 'Participant must be unique!'),
     ]
     
+    def _check_birth_date(self, cr, uid, ids, context=None):
+        for par in self.browse(cr, uid, ids, context=context):
+            if par.birth  < datetime.date(datetime.date.today().year, 1, 1) or par.birth > datetime.date.today().strftime("%Y-%m-%d"):
+                return False
+        return True
+    
+    _constraints = [
+        (_check_birth_date, 'Error ! Invalid Birth date.', ['birth']),
+    ]
     _defaults = {'event_id2' : lambda *a: 1}
     
     def button_confirm(self, cr, uid, ids, context=None):

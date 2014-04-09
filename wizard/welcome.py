@@ -86,7 +86,7 @@ class wizard_signupstaff(osv.osv_memory):
                                                                            'in_portal': True})]
                                                        })
             ctx = context
-            ctx = {'mail_template' : 'email_template_14', 'mail_tpl_module': '__export__'}
+            ctx = {'mail_template' : context.get('mail_tempalte','email_template_14'), 'mail_tpl_module': '__export__'}
             if ctx.has_key('default_state'):
                 del ctx['default_state']
                 
@@ -96,6 +96,7 @@ class wizard_signupstaff(osv.osv_memory):
             reg_id = reg_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
                                                        'email': signup.email,
                                                        'partner_id': partner_id,
+                                                       'contact_partner_id':  partner_id,
                                                        'event_id' : 2,
                                                        #'user_id': partner.user_id
                                                        })
