@@ -164,7 +164,7 @@
 	<field name="model">dds_camp.event.participant</field>
 	<field name="arch" type="xml">
 
-		<form string="Event Registration" version="7.0">
+		<form string="Participant Registration" version="7.0">
 		<header attrs="{'invisible': [('event_id2', '=', 1)]}">
 			<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
             <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user,__export__.res_groups_34"/>
@@ -175,9 +175,8 @@
 		</header>
 		
 			<sheet>
-			<group colspan="6" col="6">
-				<group colspan="4" col="2">
-					<group colspan="4" col="2">
+			<group>
+				
 					<field name="staff_id" groups="event.group_event_user" attrs="{'invisible': [('event_id2', '=', 1)]}"/>
 					<field name="registration_id" groups="event.group_event_user" attrs="{'invisible': [('event_id2', '=', 2)]}"/>
 					<!-- options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}" /> -->
@@ -193,7 +192,13 @@
 						<field name="appr_leader" groups='event.group_event_manager' />
 						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
 
-
+						<notebook colspan="6">
+						<page string="Participant info">
+						<group colspan="6" col="6">
+							<group colspan="4" col="2">
+							<group colspan="4" col="2">
+			
+						
 						<label for="street" string="Address" />
 						<div>
 							<field name="street" placeholder="Street..." />
@@ -273,7 +278,21 @@
 				
 				</group>
 			</group>
-		</group>
+			</group>
+			</page>
+			<page string="Activities">
+				
+				<field name="ticket_ids" readonly="1" >
+					<tree>
+						<field name="actins_date_begin"/>
+						<field name="act_ins_id"/>
+					</tree>
+					</field>
+			</page>
+			</notebook>
+			
+			</group>
+		
 		</sheet>
 		<group groups='event.group_event_manager'>
 		<div class="oe_chatter">
@@ -525,6 +544,7 @@
 											<!-- <field name="patrol"/>  -->
 											<field name="day_summery"/>
 											<field name="state"/>
+											<field name="committee_id" string="Committee"/>
 											<field name="functitle"/>
 
 										</tree>
