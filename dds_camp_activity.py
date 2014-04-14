@@ -22,6 +22,7 @@
 
 import datetime
 from openerp.osv import fields, osv, orm
+from openerp.osv.fields import datetime as datetime_field
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -36,7 +37,7 @@ class dds_camp_activity_activity(osv.osv):
     _inherit = 'mail.thread'
     
     _columns = {
-        'name': fields.char('Name', size=128),
+        'name': fields.char('Name', size=128, translate=True),
         'committee_id' : fields.many2one('dds_camp.committee', 'Committee'),
         'desc': fields.text('Description', translate=True),
         'age_from': fields.integer('Age from'),
@@ -53,8 +54,8 @@ class dds_camp_activity_activity(osv.osv):
                  'audience': lambda *a: 'par'}
     
 class dds_camp_activity_period(osv.osv):
-    """Activities"""
-    _description = 'Activities'
+    """Activity Period"""
+    _description = 'Activity Period'
     _name = 'dds_camp.activity.period'
     _order = 'name'
     _columns = {
@@ -63,12 +64,50 @@ class dds_camp_activity_period(osv.osv):
         'date_end': fields.datetime('End Date/Time', required=True), 
         }
     
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+
+        res = []
+        for record in self.browse(cr, uid, ids, context=context):
+            date = record.date_begin.split(" ")[0]
+            date_end = record.date_end.split(" ")[0]
+            if date != date_end:
+                date += ' - ' + date_end
+            display_name = record.name + ' (' + date + ')'
+            res.append((record['id'], display_name))
+        return res
+    
     
 class dds_camp_activity_instanse(osv.osv): 
     """Activity Instanse"""
     _description = 'Activity Instanses'
     _name = 'dds_camp.activity.instanse'
     _order = 'name'
+    
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+
+        act_obj = self.pool.get('dds_camp.activity.activity')
+        per_obj = self.pool.get('dds_camp.activity.period')
+        res = []
+        for record in self.browse(cr, uid, ids, context=context):
+            dummy,act_name = act_obj.name_get(cr, uid, [record.activity_id.id], context)[0]
+            dummy,per_name = per_obj.name_get(cr, uid, [record.period_id.id], context)[0]
+            if record.name:
+                display_name = record.name + ' ' + act_name + ' - ' + per_name
+            else:
+                display_name = act_name + ' - ' + per_name     
+            res.append((record['id'], display_name))
+    
+        return res
     
     def _get_seats(self, cr, uid, ids, fields, args, context=None):
         """Get reserved, available, reserved but unconfirmed and used seats for each event tickets.
@@ -97,8 +136,8 @@ class dds_camp_activity_instanse(osv.osv):
         }   
     
 class dds_camp_activity_ticket(osv.osv): 
-    """Activity Instanse"""
-    _description = 'Activity Instanses'
+    """Activity Ticket"""
+    _description = 'Activity Ticket'
     _name = 'dds_camp.activity.ticket'
     _order = 'name'
     _columns = {
@@ -110,8 +149,9 @@ class dds_camp_activity_ticket(osv.osv):
                                     ('timeout', 'TimeOut'),
                                     ],'Ticket State'),
         'act_ins_id' : fields.many2one('dds_camp.activity.instanse', 'Activity'),
-        'reg_id' : fields.many2one('dds_camp.activity.instanse', 'Troop'),
+        'reg_id' : fields.many2one('event.registration', 'Troop'),
         'par_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_par_rel',
-                                      'act_ins_id','par_id','Participants'),
+                                      'ticket_id','par_id','Participants'),
+        'actins_date_begin' : fields.related('act_ins_id', 'period_id','date_begin', type='datetime', string='Start Date/Time'),
         
         } 

@@ -3,7 +3,8 @@
     <data>
 
 		<menuitem name="Aktiviteter" id="menu_activity_root" parent="event.event_main_menu" sequence="25"/>
-
+		<menuitem name="Aktiviteter" id="portal_activity_root" parent="portal.portal_menu" sequence="27" groups="dds_camp.group_dds_camp_activity"/>
+		
 		<!-- Activity -->		
         <record model="ir.ui.view" id="dds_camp_activity_form">
             <field name="name">dds_camp.activity.form</field>
@@ -54,6 +55,9 @@
 
         <menuitem action="action_activity_tree" id="event_activity_menu"
                   name="Aktiviteter" sequence="10" parent="menu_activity_root"/>
+        
+        <menuitem action="action_activity_tree" id="portal_activity_menu"
+                  name="Aktiviteter" sequence="10" parent="portal_activity_root"/>          
 
 		<!-- Activity Periods -->		
         <record model="ir.ui.view" id="dds_camp_activity_period_form">
@@ -100,6 +104,9 @@
         <menuitem action="action_activity_period_tree" id="event_activity_period_menu"
                   name="Aktivitetsperioder" sequence="20" parent="menu_activity_root"/>
 
+		<menuitem action="action_activity_period_tree" id="portal_activity_period_menu"
+                  name="Aktivitetsperioder" sequence="20" parent="portal_activity_root"/>
+		
 		<!-- Activity Instance -->		
         <record model="ir.ui.view" id="dds_camp_activity_instanse_form">
             <field name="name">dds_camp.activty.instanse.form</field>
@@ -152,6 +159,9 @@
         <menuitem action="action_activity_instanse_tree" id="event_activity_instanse_menu"
                   name="Aktivitetsinstanser" sequence="30" parent="menu_activity_root"/>
 
+		<menuitem action="action_activity_instanse_tree" id="portal_activity_instanse_menu"
+                  name="Aktivitetsinstanser" sequence="30" parent="portal_activity_root"/>
+		
         <!-- Activity Ticket -->		
         <record model="ir.ui.view" id="dds_camp_activity_ticket_form">
             <field name="name">dds_camp.activty.ticket.form</field>
@@ -159,6 +169,10 @@
             <field name="arch" type="xml">
                 <form string="Aktivitets Biletter" version="7.0">
                     <sheet string="Aktivitets Billet">
+                    	<header>
+                    		<field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="dds_camp.group_dds_camp_activity"/>
+                    	</header>
                         <div class="oe_right oe_button_box">
                             <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
                         </div>
@@ -167,9 +181,9 @@
                             <field name="act_ins_id"/>
                             <field name="seats"/>
                             <field name="reserved_time"/>
-                            <field name="state"/>
+                            
                             <field name="reg_id"/>
-                            <field name="par_ids"/>
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]"/>
                         </group>
                     </sheet>
                 </form>
@@ -202,6 +216,9 @@
 
         <menuitem action="action_activity_ticket_tree" id="event_activity_ticket_menu"
                   name="Billetter" sequence="50" parent="menu_activity_root"/>
-
+		
+		<menuitem action="action_activity_ticket_tree" id="portal_activity_ticket_menu"
+                  name="Billetter" sequence="50" parent="portal_activity_root"/>
+		
     </data>
 </openerp>

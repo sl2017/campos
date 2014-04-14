@@ -114,6 +114,19 @@ class dds_camp_committee(osv.osv):
     def _name_get_fnc(self, cr, uid, ids, prop, unknow_none, context=None):
         res = self.name_get(cr, uid, ids, context=context)
         return dict(res)
+    
+    def _calc_summery(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for com in self.browse(cr, uid, ids, context=context):
+            n = 0
+            if com.members_ids:
+                for mbr in com.members_ids:
+                    if mbr.state in ['sent','approved']:
+                        n += 1
+                
+            res[com.id] = {'member_no': n}    
+        return res
+        
     _order = 'sequence, complete_name'
     
     _columns = {
@@ -125,7 +138,8 @@ class dds_camp_committee(osv.osv):
         'parent_id': fields.many2one('dds_camp.committee', 'Hovedudvalg'),
         'child_ids': fields.one2many('dds_camp.committee', 'parent_id', 'Underudvalg'),
         'sequence': fields.integer('Sequence', select=True, help="Gives the sequence order."),
-        'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', store=True),     
+        'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', store=True),
+        'member_no': fields.function(_calc_summery, type="integer", string='# Member', method=True, multi='COM'),     
         
     }
     
@@ -616,7 +630,7 @@ class dds_camp_event_participant(osv.osv):
          'memberno' : fields.char('DDS Medlemsnummer', size=32),
          'imported_bm' : fields.boolean(u'Imported from Blåt Medlem'),
          'event_id' : fields.related('registration_id', 'event_id', type='many2one', relation='event.event', store=True, string='Event'),
-         'event_id2' : fields.related('registration_id', 'event_id','id', type='integer', string='Event'),   
+         'event_id2' : fields.related('registration_id', 'event_id','id', type='integer', string='Event type (1/2)'),   
          
          # Staff registraring
          'workwish' : fields.char('Want to work with', size=64),   
@@ -646,6 +660,10 @@ class dds_camp_event_participant(osv.osv):
          'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
          'is_relative' : fields.boolean(u'Deltager som pårørende'),       
          'staff_id': fields.many2one('dds_camp.staff', 'Tilmeldt under', select=True, ondelete='cascade'),
+         
+         #Activities
+         'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
+                                      'par_id', 'ticket_id', 'Tickets'),
     }
     
     _sql_constraints = [
@@ -654,7 +672,7 @@ class dds_camp_event_participant(osv.osv):
     
     def _check_birth_date(self, cr, uid, ids, context=None):
         for par in self.browse(cr, uid, ids, context=context):
-            if par.birth  < datetime.date(datetime.date.today().year, 1, 1) or par.birth > datetime.date.today().strftime("%Y-%m-%d"):
+            if par.birth  < datetime.date(datetime.date.today().year, 1, 1).strftime("%Y-%m-%d") or par.birth > datetime.date.today().strftime("%Y-%m-%d"):
                 return False
         return True
     
