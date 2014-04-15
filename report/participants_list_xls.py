@@ -57,6 +57,13 @@ class dds_camp_event_participant_xls_parser(report_sxw.rml_parse):
 
 class dds_camp_event_participant_xls(report_xls):
 
+    def _functitle(self, functitle):
+        map = {}
+        txt = ''
+        
+        
+        return txt
+    
     def __init__(self, name, table, rml=False, parser=False, header=True, store=False):
         super(dds_camp_event_participant_xls, self).__init__(name, table, rml, parser, header, store)
 
@@ -112,9 +119,26 @@ class dds_camp_event_participant_xls(report_xls):
                 'header': [1, 42, 'text', _render("_('City')")],
                 'lines': [1, 0, 'text', _render("line.city or ''")],
                 'totals': [1, 0, 'text', None]},
+
+               'phone': {
+                'header': [1, 42, 'text', _render("_('Phone')")],
+                'lines': [1, 0, 'text', _render("line.phone or ''")],
+                'totals': [1, 0, 'text', None]},
+               'email': {
+                'header': [1, 42, 'text', _render("_('Email')")],
+                'lines': [1, 0, 'text', _render("line.email or ''")],
+                'totals': [1, 0, 'text', None]},                                        
                'day_summery': {
                 'header': [1, 42, 'text', _render("_('Summery')")],
                 'lines': [1, 0, 'text', _render("line.day_summery or ''")],
+                'totals': [1, 0, 'text', None]},
+               'functitle': {                                   
+                'header': [1, 42, 'text', _render("_('Function')")],
+                'lines': [1, 0, 'text', _render("line.functitle or ''")],
+                'totals': [1, 0, 'text', None]},
+               'committee': {                
+                'header': [1, 42, 'text', _render("_('Committee')")],
+                'lines': [1, 0, 'text', _render("line.committee_id.complete_name or ''")],
                 'totals': [1, 0, 'text', None]},                                                                                                        
 #             'period': {
 #                 'header': [1, 12, 'text', _render("_('Period')")],

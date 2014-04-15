@@ -1571,4 +1571,3 @@ class dds_staff(osv.osv):
                 'domain' : {'organization_id' : [('country_id','=', bzip.country_id.id if bzip.country_id else False)]},
                 }
 dds_staff()
-    
