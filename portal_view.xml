@@ -289,6 +289,13 @@
 					</tree>
 					</field>
 			</page>
+			<page string="Administration" groups='event.group_event_manager,__export__.res_groups_34'>
+				<group>
+				<field name="par_agreements"/>
+				<field name="par_internal_note"/>
+				<field name="camp_fee" groups='event.group_event_manager'/>
+				</group>
+			</page>
 			</notebook>
 			
 			</group>
@@ -820,7 +827,7 @@
 									<group colspan="4">
 										
 										<field name='foreigners' attrs="{'invisible': True}"/>
-										<field name='agreements' attrs="{'readonly': '1'}"/>
+										<field name='par_agreements' attrs="{'readonly': '1'}"/>
 										
 
 									</group>
@@ -830,8 +837,8 @@
 									<group colspan="2" col="2">
 									<field name="signed_up"/>
 									<field name="foreigners"/>
-									<field name="agreements"/>
-									<field name="internal_note"/>
+									<field name="par_agreements"/>
+									<field name="par_internal_note"/>
 									<field name="user_created"/>
 									<button name="action_create_login" type="object" string="Create login"
 												help="" colspan="2"/>

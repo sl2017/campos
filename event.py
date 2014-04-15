@@ -666,6 +666,8 @@ class dds_camp_event_participant(osv.osv):
          'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
          'is_relative' : fields.boolean(u'Deltager som pårørende'),       
          'staff_id': fields.many2one('dds_camp.staff', 'Tilmeldt under', select=True, ondelete='cascade'),
+         'par_agreements': fields.text('What have been arranged'),
+         'par_internal_note' : fields.text('Internal note'),
          
          #Activities
          'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
