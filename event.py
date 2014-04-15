@@ -861,7 +861,7 @@ class dds_camp_event_participant(osv.osv):
         # override list in custom module to add/drop columns or change order
     def _report_xls_fields(self, cr, uid, context=None):
         return [
-            'name', 'birth', 'street', 'street2','zip','city','day_summery'
+            'name', 'birth', 'street', 'street2','zip','city','phone','email','day_summery','functitle','committee'
             #'journal', 'period', 'partner', 'account',
             #'date_maturity', 'debit', 'credit', 'balance',
             #'reconcile', 'reconcile_partial', 'analytic_account',

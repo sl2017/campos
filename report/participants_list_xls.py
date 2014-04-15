@@ -57,6 +57,13 @@ class dds_camp_event_participant_xls_parser(report_sxw.rml_parse):
 
 class dds_camp_event_participant_xls(report_xls):
 
+    def _functitle(self, functitle):
+        map = {}
+        txt = ''
+        
+        
+        return txt
+    
     def __init__(self, name, table, rml=False, parser=False, header=True, store=False):
         super(dds_camp_event_participant_xls, self).__init__(name, table, rml, parser, header, store)
 
