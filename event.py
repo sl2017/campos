@@ -496,6 +496,8 @@ class dds_camp_event_participant(osv.osv):
                 res[par.id] = {'day_summery' : text[1:]}
             if par.leader:
                 ag = '22+'
+                age = self._age(par.birth, '2014-07-22')
+
             else:             
                 age = self._age(par.birth, '2014-07-22')
                 ag = 'unknown'
@@ -532,7 +534,8 @@ class dds_camp_event_participant(osv.osv):
                     fee = 1500.00
                          
             res[par.id].update({'age_group': ag,
-                                'camp_fee': fee})
+                                'camp_fee': fee,
+                                'calc_age': age})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -620,6 +623,7 @@ class dds_camp_event_participant(osv.osv):
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
         'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART',store=True),
+        'calc_age' : fields.function(_calc_summery, type = 'int', string='Age', method=True, multi='PART'),                               
         'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),                               
 #         'age_group' : fields.selection([('06-08','Age 6 - 8'),
 #                                           ('09-10','Age 9 - 10'),
@@ -678,9 +682,9 @@ class dds_camp_event_participant(osv.osv):
                 return False
         return True
     
-    _constraints = [
-        (_check_birth_date, 'Error ! Invalid Birth date.', ['birth']),
-    ]
+    #_constraints = [
+    #    (_check_birth_date, 'Error ! Invalid Birth date.', ['birth']),
+    #]
     _defaults = {'event_id2' : lambda *a: 1}
     
     def button_confirm(self, cr, uid, ids, context=None):
@@ -859,7 +863,7 @@ class dds_camp_event_participant(osv.osv):
         # override list in custom module to add/drop columns or change order
     def _report_xls_fields(self, cr, uid, context=None):
         return [
-            'name', 'birth', 'street', 'street2','zip','city','day_summery'
+            'name', 'birth', 'street', 'street2','zip','city','phone','email','day_summery','functitle','committee'
             #'journal', 'period', 'partner', 'account',
             #'date_maturity', 'debit', 'credit', 'balance',
             #'reconcile', 'reconcile_partial', 'analytic_account',

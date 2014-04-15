@@ -233,7 +233,7 @@
 					    <field name="is_relative"/>
 						<field name="workwish"/>
 						<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
-						<field name="functitle" groups='event.group_event_manager' /> 
+						<field name="functitle" groups='event.group_event_manager,__export__.res_groups_34' /> 
 						<!--  <field name="withgroup"/>
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
