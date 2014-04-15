@@ -478,6 +478,7 @@ class dds_camp_event_participant(osv.osv):
         res = {}
         for par in self.browse(cr, uid, ids, context=context):
             dates= []
+            pdays = 0
             fee = 0
             text = ''
             age = 15 # Default to pay age
@@ -485,6 +486,8 @@ class dds_camp_event_participant(osv.osv):
             for d in par.days_ids:
                 if d.state:
                     dates.append(d.date)
+                    if d.date >= '2014-07-18' and d.date <= '2014-07-31':
+                        pdays += 1
                 else:
                     full = False
             if full:
@@ -519,20 +522,20 @@ class dds_camp_event_participant(osv.osv):
                         ag = '17-22'
                     if age > 22:
                         ag = '22+'
-            if age > 3 or not age:
-                if full:
-                    fee = 1500.00
-                elif text == ',25,26,27':    # Special pris for weekenden fredag – søndag 500 kr
-                    fee = 500.00
-                elif text == ',22,23,24,25,26,27':               # Tirsdag til Søndag 6 dage 1.050 kr
-                    fee = 1050.00
-                elif text == ',27,28,29,30,31':               # Søndag til Torsdag 5 dage 850 kr.
-                    fee = 850.00
-                elif text == ',26,27,28,29,30,31':               # Lørdag til Torsdag 6 dage 1.050 kr.
-                    fee = 1050.00    
-                elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
-                    fee = 1500.00
-                         
+            if age > 3 or age == -1:
+                if par.event_id2 == 1: # Normal deltager
+                    if full:
+                        fee = 1500.00 if age > 6 else 1010
+                    elif text == ',25,26,27':    # Special pris for weekenden fredag – søndag 500 kr
+                        fee = 500.00 if age > 6 else 335
+                    elif len(dates) >= 1 and len(dates) <= 7:               # Tirsdag til Søndag 6 dage 1.050 kr
+                        afee = [190,380,570,750,850,1050,1250]
+                        cfee = [127,255,382,503,570,704,838]
+                        fee = afee[len(dates) - 1] if age > 6 else cfee[len(dates) - 1]
+                    elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
+                        fee = 1500.00 if age > 6 else 1010
+                else: #Hjælper
+                    fee = pdays * (50 if age > 6 else 25)     
             res[par.id].update({'age_group': ag,
                                 'camp_fee': fee,
                                 'calc_age': age})
