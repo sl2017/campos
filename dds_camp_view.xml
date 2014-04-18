@@ -319,7 +319,7 @@
 								<button name="button_unlink_friendship" icon="STOCK_CLOSE" type="object" help="Remove Troop from Camp Area"/>
 							</tree>
 						</field>
-						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" context="{'show_friendship' : True, 'tree_view_ref': 'dds_camp.friendship_view_event_registration_tree'}"/>
+						<field name="addgroup_id" on_change="onchange_add_group(addgroup_id,group_ids)" domain="[('event_id','=',1)]" context="{'show_friendship' : True, 'tree_view_ref': 'dds_camp.friendship_view_event_registration_tree'}"/>
 						</group>
 						
 				</form>

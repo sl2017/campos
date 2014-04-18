@@ -46,14 +46,14 @@ This application is useful for managing large Scout Camps:
              ],
     "update_xml" : ["dds_camp_view.xml",
                     "event_view.xml",
-                    
+                    "security/dds_camp_security.xml",
                     "wizard/bmimport_view.xml",
                     "portal_view.xml", 
                     "wizard/portal_wizard.xml",
                     "report/participants_list_xls.xml",
 		            "wizard/welcome_view.xml",
                     "dds_camp_activity_view.xml",
-                    "security/dds_camp_security.xml"
+                    
                     ],
     "installable": True,
     'auto_install': False,

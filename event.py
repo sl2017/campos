@@ -522,30 +522,35 @@ class dds_camp_event_participant(osv.osv):
                         ag = '17-22'
                     if age > 22:
                         ag = '22+'
+            calc_age = age
             if age > 3 or age == -1:
+                if age == -1:
+                    age = 100
                 if par.event_id2 == 1: # Normal deltager
-                    if full:
-                        fee = 1500.00 if age > 6 else 1010
+                    if full or pdays == 0:
+                        fee = 1500.00 if age >= 6 else 1010
                     elif text == ',25,26,27':    # Special pris for weekenden fredag – søndag 500 kr
-                        fee = 500.00 if age > 6 else 335
+                        fee = 500.00 if age >= 6 else 335
                     elif len(dates) >= 1 and len(dates) <= 7:               # Tirsdag til Søndag 6 dage 1.050 kr
                         afee = [190,380,570,750,850,1050,1250]
                         cfee = [127,255,382,503,570,704,838]
-                        fee = afee[len(dates) - 1] if age > 6 else cfee[len(dates) - 1]
+                        fee = afee[len(dates) - 1] if age >= 6 else cfee[len(dates) - 1]
                     elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
-                        fee = 1500.00 if age > 6 else 1010
+                        fee = 1500.00 if age >= 6 else 1010
                 else: #Hjælper
-                    fee = pdays * (50 if age > 6 else 25)     
+                    fee = pdays * (50 if age >= 6 else 25)     
             res[par.id].update({'age_group': ag,
                                 'camp_fee': fee,
-                                'calc_age': age})
+                                'calc_age': calc_age,
+                                'camp_days': len(dates),
+                                'pay_days' : pdays})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
         if date_of_birth_str:
             date_of_birth = datetime.datetime.strptime(date_of_birth_str, '%Y-%m-%d').date()
             date_begin = datetime.datetime.strptime(date_begin_str, '%Y-%m-%d').date()
-            if date_of_birth >= date_begin.replace(year = date_of_birth.year):
+            if date_of_birth > date_begin.replace(year = date_of_birth.year):
                 return date_begin.year - date_of_birth.year - 1
             else:
                 return date_begin.year - date_of_birth.year
@@ -626,7 +631,9 @@ class dds_camp_event_participant(osv.osv):
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
         'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART',store=True),
-        'calc_age' : fields.function(_calc_summery, type = 'int', string='Age', method=True, multi='PART'),                               
+        'calc_age' : fields.function(_calc_summery, type = 'integer', string='Age', method=True, multi='PART'),
+        'camp_days' : fields.function(_calc_summery, type = 'integer', string='Camp days', method=True, multi='PART'),
+        'pay_days' : fields.function(_calc_summery, type = 'integer', string='Pay days', method=True, multi='PART'),                               
         'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),                               
 #         'age_group' : fields.selection([('06-08','Age 6 - 8'),
 #                                           ('09-10','Age 9 - 10'),

@@ -293,7 +293,13 @@
 				<group>
 				<field name="par_agreements"/>
 				<field name="par_internal_note"/>
-				<field name="camp_fee" groups='event.group_event_manager'/>
+				</group>
+				<group string="Prisberegning" groups='event.group_event_manager'>
+				<field name="calc_age" />
+				<field name="camp_days" />
+				<field name="pay_days" />
+				<field name="camp_fee" />
+				<field name="age_group" />
 				</group>
 			</page>
 			</notebook>
