@@ -233,6 +233,16 @@ class dds_camp_tshirtsize(osv.osv):
     }
 dds_camp_tshirtsize()
 
+class dds_camp_transport_option(osv.osv):
+    """ Transport options """
+    _description = 'Transport option'
+    _name = 'dds_camp.transport'
+    _order = 'name'
+    _columns = {
+        'name': fields.char('Name', size=64),
+    }
+dds_camp_transport_option()
+
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
     _inherit = 'event.event'
@@ -528,15 +538,15 @@ class dds_camp_event_participant(osv.osv):
                     age = 100
                 if par.event_id2 == 1: # Normal deltager
                     if full or pdays == 0:
-                        fee = 1500.00 if age >= 6 else 1010
+                        fee = 1500 if age >= 6 else 1010
                     elif text == ',25,26,27':    # Special pris for weekenden fredag – søndag 500 kr
-                        fee = 500.00 if age >= 6 else 335
+                        fee = 500 if age >= 6 else 335
                     elif len(dates) >= 1 and len(dates) <= 7:               # Tirsdag til Søndag 6 dage 1.050 kr
                         afee = [190,380,570,750,850,1050,1250]
                         cfee = [127,255,382,503,570,704,838]
                         fee = afee[len(dates) - 1] if age >= 6 else cfee[len(dates) - 1]
                     elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
-                        fee = 1500.00 if age >= 6 else 1010
+                        fee = 1500 if age >= 6 else 1010
                 else: #Hjælper
                     fee = pdays * (50 if age >= 6 else 25)     
             res[par.id].update({'age_group': ag,
@@ -1064,6 +1074,13 @@ class event_registration(osv.osv):
         'friendship_id' : fields.many2one('dds_camp.friendship', 'Friendship Grouping', ondelete='set null'), 
         'entry_dk': fields.char('Entry point in Denmark', 128),
         'exit_dk': fields.char('Exit point in Denmark', 128),       
+        
+        #Transport options
+#         'to_camp_transport_id' : fields.many2one('dds_camp.transport', 'To Camp Transport', ondelete='set null'),
+#         'to_camp_pickup_address': fields.text('To Camp Pickup Address'),
+#         'to_pamp_pickup_datetime' : fields.datetime('To Camp Pickup Date/Time'),
+#         'to_camp_transport_note' : fields.text('To Camp Notes'),
+        
     }
     
     def write(self, cr, uid, ids, values, context=None):
@@ -1211,7 +1228,30 @@ class event_registration(osv.osv):
         
     def button_unlink_friendship(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {'friendship_id': None})
+       
+    def button_reg_cancel(self, cr, uid, ids, context=None, *args):
+        print "Entering button_reg_cancel"
+        #remove users
+        reg = self.browse(cr, uid, ids)[0]
         
+        if reg.user_created:
+            usr_obj = self.pool.get('res.users')
+            if reg.partner_id:
+                for usr in reg.partner_id.user_ids:
+                    usr_obj.unlink(cr, uid, [usr.id], context)
+            if reg.partner_id.child_ids:
+                    for child in reg.partner_id.child_ids:
+                        if child.user_ids:
+                            for usr in child.user_ids:    
+                                usr_obj.unlink(cr, uid, [usr.id], context)
+        vals = []                        
+        if reg.participant_ids:
+            vals = [(2, par.id) for par in reg.participant_ids]                        
+        return self.write(cr, uid, ids, {'state': 'cancel',
+                                         'friendship_id': None,
+                                         'camparea_id': None,
+                                         'participant_ids' : vals})
+     
     def action_reset_troop_login(self, cr, uid, ids, context):
         reg = self.browse(cr, uid, ids)[0]
         
