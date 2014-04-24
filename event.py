@@ -233,15 +233,7 @@ class dds_camp_tshirtsize(osv.osv):
     }
 dds_camp_tshirtsize()
 
-class dds_camp_transport_option(osv.osv):
-    """ Transport options """
-    _description = 'Transport option'
-    _name = 'dds_camp.transport'
-    _order = 'name'
-    _columns = {
-        'name': fields.char('Name', size=64),
-    }
-dds_camp_transport_option()
+
 
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
