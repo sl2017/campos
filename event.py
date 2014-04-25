@@ -1230,7 +1230,7 @@ class event_registration(osv.osv):
         self.write(cr, uid, ids, {'friendship_id': None})
        
     def button_reg_cancel(self, cr, uid, ids, context=None, *args):
-        print "Entering button_reg_cancel"
+        
         #remove users
         reg = self.browse(cr, uid, ids)[0]
         
