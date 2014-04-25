@@ -30,31 +30,31 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 
-class dds_camp_transport_option(osv.osv):
+class dds_camp_transport_route(osv.osv):
     """ Transport Schedules/Routes """
     _description = 'Transport Schedules/Routes'
-    _name = 'dds_camp.transport'
-    _order = 'name'
+    _name = 'dds_camp.transport.route'
+    _order = 'departure'
     _columns = {
         'name': fields.char('Name', size=64),
-        'direction': fields.selection([('to', 'To Camp',
-                                        'from', 'From Camp'), 'Direction']),
+        'direction': fields.selection([('to', 'To Camp'),
+                                       ('from', 'From Camp')], 'Direction'),
         'departure': fields.datetime('Depature'),
-        'arrival': fields.datetime('Depature'),
+        'arrival': fields.datetime('Arrival'),
         
         'pickup_address': fields.text('Pickup Address'),
-        'destination_address': fields.text('Pickup Address'),
-        'ticket_ids': fields.one2many('dds_camp.transport.ticket', 'ticket_id', 'Tickets'),
+        'destination_address': fields.text('Destination Address'),
+        'ticket_ids': fields.one2many('dds_camp.transport.ticket', 'transport_id', 'Tickets'),
         'operator_partner_id': fields.many2one('res.partner', 'Operated by'),         
     }
 
-dds_camp_transport_option()
+dds_camp_transport_route()
 
 class dds_camp_transport_ticket(osv.osv):
     """ Transport Ticket """
-    _description = 'Transport Ticketss'
+    _description = 'Transport Tickets'
     _name = 'dds_camp.transport.ticket'
-    _order = 'name'
+    _order = 'departure'
     
     def _get_note_first_line(self, cr, uid, ids, name="", args={}, context=None):
         res = {}
@@ -66,23 +66,46 @@ class dds_camp_transport_ticket(osv.osv):
     
     _columns = {
         'name': fields.char('Name', size=64),
-        'direction': fields.selection([('to', 'To Camp',
-                                        'from', 'From Camp'), 'Direction']),
+        'transport_id': fields.many2one('dds_camp.transport.route', 'Transport'),
+        'direction': fields.related('transport_id', 'direction', readonly=True, type='selection', values=[('to', 'To Camp',
+                                        'from', 'From Camp')],  string = 'Direction'), 
         'departure': fields.datetime('Depature'),
-        'arrival': fields.datetime('Depature'),
+        'arrival': fields.datetime('Arrival'),
         
         'pickup_address': fields.text('Pickup Address'),
-        'destination_address': fields.text('Pickup Address'),
+        'destination_address': fields.text('Destination Address'),
+        
         'pickup_summery': fields.function(_get_note_first_line, 
             string='Pickup', 
             type='char', sixe=64, method=True, multi='ADDR', store=True),
         'destination_summery': fields.function(_get_note_first_line, 
             string='Destination', 
             type='char', sixe=64, method=True, multi='ADDR', store=True),        
-        'transport_id': fields.many2one('dds_camp.transport', 'Transport'),
+        
         'reg_id' : fields.many2one('event.registration', 'Troop'), 
         'note' : fields.text('Notes'), 
         'seats': fields.integer('Seats'),       
     }
+    
+    def onchange_transport_id(self, cr, uid, ids, transport_id, context=None):       
+                
+        res = {}
+        values = {}
+        print "on_ch", transport_id
+        tran_obj = self.pool.get('dds_camp.transport.route')
+        for tran in tran_obj.browse(cr,uid, [transport_id], context):
+            if tran.departure:
+                values['departure'] = tran.departure
+            if tran.arrival:
+                values['arrival'] = tran.arrival
+            if tran.pickup_address:
+                values['pickup_address'] = tran.pickup_address
+            if tran.destination_address:
+                values['destination_address'] = tran.destination_address    
+            
+            res['value'] = values
+        
+        print "res", res
+        return res     
 
 dds_camp_transport_ticket()

@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+		<menuitem name="Transport" id="menu_transport_root" parent="event.event_main_menu" sequence="27"/>
+		<!-- <menuitem name="Aktiviteter" id="portal_activity_root" parent="portal.portal_menu" sequence="27" groups="dds_camp.group_dds_camp_activity"/>  -->
+		
+		<!-- Transport Transport Schedules/Routes  -->		
+        <record model="ir.ui.view" id="dds_camp_transport_form">
+            <field name="name">dds_camp.transport.form</field>
+            <field name="model">dds_camp.transport.route</field>
+            <field name="arch" type="xml">
+                <form string="Transport" version="7.0">
+                    <sheet string="Transport">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="direction"/>
+                            <field name="operator_partner_id" context="{'show_address' : True, 'add_email': True}"/>
+                            <newline/>
+                            <field name="departure"/>
+                            <field name="arrival"/>
+                            <field name="pickup_address"/>
+                            <field name="destination_address"/>
+                            </group>
+                            <field name="ticket_ids" context="{'default_transport_id': id}">
+                            
+                            	<tree string="Tickets">
+                            		<field name="departure"/>
+                    				<field name="reg_id"/>
+                    				<field name="pickup_summery"/>
+                    				<field name="destination_summery"/>
+                    				
+                    				<field name="seats" sum="Seats" />
+                            	</tree>
+                            </field>>
+                        
+                    </sheet>
+                    <!-- 
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                     -->
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_transport_tree">
+            <field name="name">dds_camp.transport.tree</field>
+            <field name="model">dds_camp.transport.route</field>
+            <field name="arch" type="xml">
+                <tree string="Transport">
+					<field name="departure"/>
+                    <field name="name"/>
+					<field name="direction"/>
+					<field name="operator_partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_transport_tree" model="ir.actions.act_window">
+            <field name="name">Transport</field>
+
+            <field name="res_model">dds_camp.transport.route</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_transport_tree" id="event_transport_menu"
+                  name="Transport" sequence="10" parent="menu_transport_root"/>
+        
+        <!-- 
+        <menuitem action="action_activity_tree" id="portal_activity_menu"
+                  name="Aktiviteter" sequence="10" parent="portal_activity_root"/>          
+		 -->
+		<!-- Transport Tickets -->		
+        <record model="ir.ui.view" id="dds_camp_transport_ticket_form">
+            <field name="name">dds_camp.transport.ticket.form</field>
+            <field name="model">dds_camp.transport.ticket</field>
+            <field name="arch" type="xml">
+                <form string="Transport Ticket" version="7.0">
+                    <sheet string="Transport Ticket">
+                        <div class="oe_right oe_button_box">
+                            <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
+                        </div>
+                        <group>
+                            <field name="transport_id" on_change="onchange_transport_id(transport_id)"/>
+                            <field name="direction"/>
+                            <field name="reg_id"/>
+                            <field name="seats" />
+                            <field name="departure"/>
+                            <field name="pickup_address"/>
+                            <field name="arrival"/>
+                            <field name="destination_address"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="dds_camp_transport_ticket_tree">
+            <field name="name">dds_camp.transport.ticket.tree</field>
+            <field name="model">dds_camp.transport.ticket</field>
+            <field name="arch" type="xml">
+                <tree string="Transport Ticket">
+
+                    <field name="departure"/>
+                    <field name="transport_id"/>
+                    <field name="reg_id"/>
+                    <field name="pickup_summery"/>
+                    <field name="destination_summery"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_tranport_ticket_tree" model="ir.actions.act_window">
+            <field name="name">Transport Biletter</field>
+
+            <field name="res_model">dds_camp.transport.ticket</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem action="action_tranport_ticket_tree" id="event_transport_ticket_menu"
+                  name="Transport Biletter" sequence="20" parent="menu_transport_root"/>
+
+				
+    </data>
+</openerp>

@@ -1068,10 +1068,7 @@ class event_registration(osv.osv):
         'exit_dk': fields.char('Exit point in Denmark', 128),       
         
         #Transport options
-#         'to_camp_transport_id' : fields.many2one('dds_camp.transport', 'To Camp Transport', ondelete='set null'),
-#         'to_camp_pickup_address': fields.text('To Camp Pickup Address'),
-#         'to_pamp_pickup_datetime' : fields.datetime('To Camp Pickup Date/Time'),
-#         'to_camp_transport_note' : fields.text('To Camp Notes'),
+        'transport_ticket_ids': fields.one2many('dds_camp.transport.ticket', 'reg_id', 'Transport Tickets'),
         
     }
     
