@@ -53,6 +53,7 @@ This application is useful for managing large Scout Camps:
                     "report/participants_list_xls.xml",
 		            "wizard/welcome_view.xml",
                     "dds_camp_activity_view.xml",
+                    "transport_view.xml",
                     
                     ],
     "installable": True,

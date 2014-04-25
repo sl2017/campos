@@ -161,6 +161,15 @@
 										<field name="camp_fee_tot"/>
 										<field name="camp_fee_charged"/>
 									</group>	
+									<field name="transport_ticket_ids" context="{'default_reg_id': id}">
+										<tree string="Tickets">
+                            		<field name="departure"/>
+                    				<field name="transport_id"/>
+                    				<field name="pickup_summery"/>
+                    				<field name="destination_summery"/>
+                    				<field name="seats" />
+                            	</tree>
+									</field>
 								</group>
 							</page>
 							<page string="Camp Area">

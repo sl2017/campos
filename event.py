@@ -233,15 +233,7 @@ class dds_camp_tshirtsize(osv.osv):
     }
 dds_camp_tshirtsize()
 
-class dds_camp_transport_option(osv.osv):
-    """ Transport options """
-    _description = 'Transport option'
-    _name = 'dds_camp.transport'
-    _order = 'name'
-    _columns = {
-        'name': fields.char('Name', size=64),
-    }
-dds_camp_transport_option()
+
 
 class event_event(osv.osv):
     """ Inherits Event and adds DDS Camp information in the partner form """
@@ -1076,10 +1068,7 @@ class event_registration(osv.osv):
         'exit_dk': fields.char('Exit point in Denmark', 128),       
         
         #Transport options
-#         'to_camp_transport_id' : fields.many2one('dds_camp.transport', 'To Camp Transport', ondelete='set null'),
-#         'to_camp_pickup_address': fields.text('To Camp Pickup Address'),
-#         'to_pamp_pickup_datetime' : fields.datetime('To Camp Pickup Date/Time'),
-#         'to_camp_transport_note' : fields.text('To Camp Notes'),
+        'transport_ticket_ids': fields.one2many('dds_camp.transport.ticket', 'reg_id', 'Transport Tickets'),
         
     }
     
