@@ -37,7 +37,8 @@ This application is useful for managing large Scout Camps:
 * Troops
 * Participants
 * Activities
-* IST/Staffing    
+* IST/Staffing
+* Transportation    
 """,
     "init_xml" : [],
     "demo_xml" : [],
@@ -48,6 +49,7 @@ This application is useful for managing large Scout Camps:
                     "event_view.xml",
                     "security/dds_camp_security.xml",
                     "wizard/bmimport_view.xml",
+                    "wizard/activity_signup_view.xml",
                     "portal_view.xml", 
                     "wizard/portal_wizard.xml",
                     "report/participants_list_xls.xml",

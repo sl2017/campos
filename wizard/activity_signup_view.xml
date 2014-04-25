@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<record model="ir.ui.view" id="wizard_activity_signup_form">
+    <field name="name">wizard_activity_signup.form</field>
+    <field name="model">dds_camp.activity.signup</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Wizard with step" version="7.0">
+       <field invisible="1" name="state" />             
+	   <field name = "message" nolabel="1" readonly="1"/>
+	   <field name="reg_id" invisible="1"/>
+	   <field name="id" invisible="1"/> 
+       <group states="step1">
+       		
+          <field name="activity_id" />
+          
+          <field name="act_ins_id" domain="[('activity_id','=',activity_id),('seats_available','&gt;',0)]"/>
+          <field name="seats"/>                
+       </group>
+
+          <group states="step2">
+          <field name="members_ids" colspan="4" nolabel="1" options="{'create': false }" >
+          	<tree string="Participants" editable="top">
+                                        
+                                        <field name="par_id"/>
+                                                                                
+                                    </tree>
+                                    
+          </field>    
+          <field name="name"/>
+          </group>
+
+          <footer states="step1">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            <button name="action_signup" string="Next" type="object" />
+          </footer>
+
+          <footer states="step2">
+          	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+            <button name="action_done" string="Done" type="object" />
+          </footer>
+
+		<footer states="expired">
+          	<button icon="gtk-cancel" special="cancel" string="Close"/>
+            
+          </footer>
+      </form>
+    </field>
+   </record>
+
+<record model="ir.ui.view" id="wizard_activity_signup_tree">
+    <field name="name">Participants</field>
+    <field name="model">dds_camp.activity.signup.members</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+   	<tree string="Participants" create="false">
+                                        
+                                        <field name="par_id"/>
+                                        
+                                        
+                                    </tree>
+   	</field>
+   	</record>
+   	
+   <record id="action_activity_signup_wizard" model="ir.actions.act_window">
+            <field name="name">Activity Signup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dds_camp.activity.signup</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_activity_signup_form"/>
+            <field name="context">{'default_reg_id': active_id, 'default_state' : 'step1'}</field>
+            <field name="target">new</field>
+        </record>
+        
+    </data>
+</openerp>

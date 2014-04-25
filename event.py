@@ -162,7 +162,7 @@ class dds_camp_area(osv.osv):
     
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
-        print "addgroup", group_ids
+        #print "addgroup", group_ids
         return {'value': {'group_ids': group_ids,
                           'addgroup_id' : None
                           }
@@ -212,7 +212,7 @@ class dds_camp_friendship(osv.osv):
      
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
-        print "addgroup", group_ids
+        #print "addgroup", group_ids
         return {'value': {'group_ids': group_ids,
                           'addgroup_id' : None
                           }
@@ -328,11 +328,11 @@ class dds_camp_event_participant(osv.osv):
     _inherit = 'mail.thread'
     
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        print "fields_view_get entry:", view_id, toolbar
+        #print "fields_view_get entry:", view_id, toolbar
         res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
                                                                     context=context, toolbar=toolbar, submenu=submenu)
         
-        print "FORM: ", res['name'] 
+        #print "FORM: ", res['name'] 
         if res['name'] == u'portal.registration.participant.form' or res['name'] == u'portal.dds_camp.staff.form':
             #print "Form found!"
             #print "Context: ", context
@@ -347,7 +347,7 @@ class dds_camp_event_participant(osv.osv):
             event = self.pool.get('event.event').browse(cr, uid, [1])[0]
             from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
             to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-            print "dates", from_date, to_date
+            #print "dates", from_date, to_date
             
             if from_date:
                 dt = from_date
@@ -355,7 +355,7 @@ class dds_camp_event_participant(osv.osv):
                 while dt <= to_date:
                     res['fields'][dt.strftime('date_%Y_%m_%d')] = {'selectable': True, 'type': 'boolean', 'string': dt.strftime('%d/%m-%Y'), 'views': {}}
                     dt += delta
-                print res['arch']
+                #print res['arch']
                 doc = ET.XML(res['arch'])
                 #print "FindAll:",".//group[@string='"+ _('Camp Period') +"']"
                 for grp in doc.findall(".//group[@string='Camp Period']"):
@@ -397,7 +397,7 @@ class dds_camp_event_participant(osv.osv):
                         fld = ET.SubElement(grp, 'field', {'name': dt.strftime('date_%Y_%m_%d')})
                         setup_modifiers(fld, res['fields'][dt.strftime('date_%Y_%m_%d')])
                         dt += delta     
-                print ET.tostring(doc)              
+                #print ET.tostring(doc)              
                 res['arch'] = ET.tostring(doc) 
         return res
 
@@ -423,7 +423,7 @@ class dds_camp_event_participant(osv.osv):
             else:
                 from_date = datetime.datetime.strptime(participant.registration_id.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
                 to_date = datetime.datetime.strptime(participant.registration_id.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-                print "dates", from_date, to_date
+                #print "dates", from_date, to_date
                 dt = from_date
                 delta = datetime.timedelta(days=1)
                 while dt <= to_date:
@@ -485,6 +485,7 @@ class dds_camp_event_participant(osv.osv):
             text = ''
             age = 15 # Default to pay age
             full = True
+            spare_act_pts = 0
             for d in par.days_ids:
                 if d.state:
                     dates.append(d.date)
@@ -506,7 +507,7 @@ class dds_camp_event_participant(osv.osv):
             else:             
                 age = self._age(par.birth, '2014-07-22')
                 ag = 'unknown'
-                print 'Age:', age, age != False
+                #print 'Age:', age, age != False
                 if age >= 0:
                     if age <= 3:
                         ag = '00-03'
@@ -541,11 +542,19 @@ class dds_camp_event_participant(osv.osv):
                         fee = 1500 if age >= 6 else 1010
                 else: #Hjælper
                     fee = pdays * (50 if age >= 6 else 25)     
+                if full:
+                    spare_act_pts = 8 ## TODO: Calc by participations days
+                else:     
+                    spare_act_pts = 8 ## TODO: Calc by participations days
+                if par.ticket_ids:
+                    for tck in par.ticket_ids:
+                        spare_act_pts -= tck.act_ins_id.activity_id.points         
             res[par.id].update({'age_group': ag,
                                 'camp_fee': fee,
                                 'calc_age': calc_age,
                                 'camp_days': len(dates),
-                                'pay_days' : pdays})
+                                'pay_days' : pdays,
+                                'spare_act_pts': spare_act_pts})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -684,6 +693,7 @@ class dds_camp_event_participant(osv.osv):
          #Activities
          'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
                                       'par_id', 'ticket_id', 'Tickets'),
+         'spare_act_pts' : fields.function(_calc_summery, type = 'integer', string='Spare Activity Points', method=True, multi='PART'),
     }
     
     _sql_constraints = [
@@ -1070,6 +1080,8 @@ class event_registration(osv.osv):
         #Transport options
         'transport_ticket_ids': fields.one2many('dds_camp.transport.ticket', 'reg_id', 'Transport Tickets'),
         
+        #Activities
+        'activity_ticket_ids': fields.one2many('dds_camp.activity.ticket', 'reg_id', 'Activity Tickets'),
     }
     
     def write(self, cr, uid, ids, values, context=None):

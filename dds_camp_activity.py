@@ -141,7 +141,7 @@ class dds_camp_activity_ticket(osv.osv):
     _name = 'dds_camp.activity.ticket'
     _order = 'name'
     _columns = {
-        'name': fields.char('Name', size=128),
+        'name': fields.char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.'),
         'seats': fields.integer('Seats'),
         'reserved_time': fields.datetime('Reserved Date/Time'),
         'state': fields.selection([('open','Reserved'),

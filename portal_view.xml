@@ -149,6 +149,21 @@
 									<field name="camparea_id" options="{'no_open': True}"/>
 								</group>
 							</page>
+							<page string="Activites">
+								<group colspan="4">
+								
+								<field name="activity_ticket_ids" readonly="1" nolabel="1" >
+									<tree>
+										<field name="actins_date_begin"/>
+										<field name="act_ins_id"/>
+										<field name="seats"/>
+										<field name="name"/>
+										
+									</tree>
+								</field>
+								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
+								</group>
+								</page>
 							</notebook>
 						</group>
 
