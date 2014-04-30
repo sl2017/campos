@@ -146,9 +146,19 @@
 								<page string="Camp Area">
 								<group colspan="4">
 									<field name="tent_nb"/>
-									<field name="camparea_id" options="{'no_open': True}"/>
+									<field name='camparea_state' attrs="{'invisible': True}"/>
+									<field name="camparea_id" options="{'no_open': True}" attrs="{'invisible': [('camparea_state', '=', 'draft')]}"/>
+									<!--
+									<field name="camparea_group_ids" attrs="{'invisible': [('camparea_state', 'in', ['draft','named'])]}">
+										<tree>
+										<field name="name"/>
+										<field name="contact_partner_id"/>
+										</tree>
+									</field>
+									-->
 								</group>
 							</page>
+							<!-- 
 							<page string="Activites">
 								<group colspan="4">
 								
@@ -157,6 +167,7 @@
 										<field name="actins_date_begin"/>
 										<field name="act_ins_id"/>
 										<field name="seats"/>
+										<field name="state"/>
 										<field name="name"/>
 										
 									</tree>
@@ -164,6 +175,7 @@
 								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
 								</group>
 								</page>
+								 -->
 							</notebook>
 						</group>
 

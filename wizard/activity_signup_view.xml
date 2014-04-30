@@ -14,17 +14,22 @@
 	   <field name="id" invisible="1"/> 
        <group states="step1">
        		
-          <field name="activity_id" />
+          <field name="activity_id"  domain="[('audience','in', ['par','all'])]" on_change="onchange_activity_id(activity_id)"/>
           
+          <field name="info"/>
           <field name="act_ins_id" domain="[('activity_id','=',activity_id),('seats_available','&gt;',0)]"/>
           <field name="seats"/>                
        </group>
 
           <group states="step2">
-          <field name="members_ids" colspan="4" nolabel="1" options="{'create': false }" >
+          
+          <field name="valid_part"/> 
+          
+          
+          <field name="parti_ids" colspan="4" nolabel="1" options="{'create': false }" domain="[('str_id','in',valid_part)]">
           	<tree string="Participants" editable="top">
                                         
-                                        <field name="par_id"/>
+                                        <field name="name"/>
                                                                                 
                                     </tree>
                                     
@@ -57,7 +62,7 @@
     <field name="arch" type="xml">
    	<tree string="Participants" create="false">
                                         
-                                        <field name="par_id"/>
+                                        <field name="name"/>
                                         
                                         
                                     </tree>

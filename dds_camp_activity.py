@@ -155,3 +155,7 @@ class dds_camp_activity_ticket(osv.osv):
         'actins_date_begin' : fields.related('act_ins_id', 'period_id','date_begin', type='datetime', string='Start Date/Time'),
         
         } 
+    
+#      def run_scheduler(self, cr, uid, automatic=False, use_new_cursor=False, context=None):
+#         
+#         for tck in self.browse(cr, SUPERUSER_ID, [('state','=','open')(]

@@ -41,6 +41,7 @@
                 <tree string="Activity">
 
                     <field name="name"/>
+                    <field name="desc"/>
 
                 </tree>
             </field>
@@ -168,11 +169,12 @@
             <field name="model">dds_camp.activity.ticket</field>
             <field name="arch" type="xml">
                 <form string="Aktivitets Biletter" version="7.0">
-                    <sheet string="Aktivitets Billet">
+                    
                     	<header>
                     		<field name="state" widget="statusbar" clickable="True" 
                     			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="dds_camp.group_dds_camp_activity"/>
                     	</header>
+                    	<sheet string="Aktivitets Billet">
                         <div class="oe_right oe_button_box">
                             <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
                         </div>

@@ -158,7 +158,12 @@ class dds_camp_area(osv.osv):
         'email': fields.char('Email', size=128),
         'group_ids': fields.one2many('event.registration', 'camparea_id', 'Troops'),
         'addgroup_id' : fields.many2one('event.registration', 'Add Troop', ondelete='set null', domain=[('state','!=', 'cancel')]),
+        'state' : fields.selection([('draft','Draft'),
+                                     ('named', 'Named'),
+                                     ('confirmed', 'Confirmed')], "State"),
         }
+    
+    _defaults = {'state' : lambda *a: 'draft'}
     
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
@@ -176,7 +181,7 @@ class dds_camp_friendship(osv.osv):
     
     def _calc_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for record in self.browse(cr, uid, ids, context=context):
+        for record in self.browse(cr, SUPERUSER_ID, ids, context=context):
             name = "" 
             for grp in record.group_ids:
                 name = name + grp.name + " / "
@@ -554,7 +559,8 @@ class dds_camp_event_participant(osv.osv):
                                 'calc_age': calc_age,
                                 'camp_days': len(dates),
                                 'pay_days' : pdays,
-                                'spare_act_pts': spare_act_pts})
+                                'spare_act_pts': spare_act_pts,
+                                'str_id' : str(par.id)})
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -694,6 +700,7 @@ class dds_camp_event_participant(osv.osv):
          'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
                                       'par_id', 'ticket_id', 'Tickets'),
          'spare_act_pts' : fields.function(_calc_summery, type = 'integer', string='Spare Activity Points', method=True, multi='PART'),
+         'str_id': fields.function(_calc_summery, type='char', string='ID String', method=True, multi="PART"),
     }
     
     _sql_constraints = [
@@ -1072,7 +1079,17 @@ class event_registration(osv.osv):
         'tent_nb' : fields.integer('Number of tents'),        
         'parking' : fields.boolean('Do you need parking?'),
         'power' : fields.boolean('Do you need 230 V power - for a fee 50 kr.'),
+        
+        # Klynger
         'camparea_id' : fields.many2one('dds_camp.area', 'Camp Area', ondelete='set null'),
+        'camparea_group_ids' : fields.related('camparea_id', 'group_ids', 
+                type='one2many', relation='event.registration',
+                string='Camp Area Groups'),
+        'camparea_state': fields.related('camparea_id', 'state', readonly=True, type='selection', 
+                                         values=[('draft','Draft'),
+                                                 ('named', 'Named'),
+                                                 ('confirmed', 'Confirmed')],  string = 'Camp Area State'), 
+        
         'friendship_id' : fields.many2one('dds_camp.friendship', 'Friendship Grouping', ondelete='set null'), 
         'entry_dk': fields.char('Entry point in Denmark', 128),
         'exit_dk': fields.char('Exit point in Denmark', 128),       
