@@ -120,14 +120,20 @@ class dds_camp_activity_instanse(osv.osv):
             res[actins.id]['seats_available'] = actins.seats_max - \
                 (res[actins.id]['seats_reserved'] + res[actins.id]['seats_used']) \
                 if actins.seats_max > 0 else None
+            #res[actins.id]['name'] =     
         return res
+    
+    def _search_seats(self, cr, uid, obj, name, args, context=None):
+        print args
+        return [('id','in',[58,59,60])]
     
     _columns = {
         'name': fields.char('Name', size=128),
         'seats_max': fields.integer('Maximum Avalaible Seats'),
         'seats_reserved': fields.function(_get_seats, string='Reserved Seats', type='integer', multi='seats_reserved'),
-        'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved'),
+        'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved', fnct_search=_search_seats),
         'seats_used': fields.function(_get_seats, string='Number of Participations', type='integer', multi='seats_reserved'),
+        #'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', multi='seats_reserved'),
         'activity_id' : fields.many2one('dds_camp.activity.activity', 'Activity'),
         'period_id' : fields.many2one('dds_camp.activity.period', 'Period'),
         'staff_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_staff_rel',
@@ -156,6 +162,11 @@ class dds_camp_activity_ticket(osv.osv):
         
         } 
     
-#      def run_scheduler(self, cr, uid, automatic=False, use_new_cursor=False, context=None):
-#         
-#         for tck in self.browse(cr, SUPERUSER_ID, [('state','=','open')(]
+    def run_scheduler(self, cr, uid, automatic=False, use_new_cursor=False, context=None):
+        
+        exp_time = (datetime.datetime.now() - datetime.timedelta(minutes=15)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        print "Check expiring", exp_time
+        for tck in self.browse(cr, SUPERUSER_ID, self.search(cr, uid, [('state','=','open'),('reserved_time','<',exp_time)])):
+            print "Expiring", tck.id, tck.reserved_time, tck.name
+            self.write(cr, uid, [tck.id], {'state': 'timeout'})
+            

@@ -255,7 +255,7 @@
 						<field name="group_ids" options="{'reload_on_button': true}">
 							<tree  delete="false">
 								<field name="name" />
-								<field name="reg_number" sum="Total"/>
+								<field name="reg_number" sum="# Participants"/>
 								<button name="button_unlink_camparea" icon="STOCK_CLOSE" type="object" help="Remove Troop from Camp Area"/>
 							</tree>
 						</field>

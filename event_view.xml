@@ -160,16 +160,18 @@
 										<field name="camp_fee_min"/>
 										<field name="camp_fee_tot"/>
 										<field name="camp_fee_charged"/>
-									</group>	
-									<field name="transport_ticket_ids" context="{'default_reg_id': id}">
+									</group>
+									<group colspan="4" col="4" string="Transport">	
+									<field name="transport_ticket_ids" context="{'default_reg_id': id}" nolabel="1">
 										<tree string="Tickets">
-                            		<field name="departure"/>
-                    				<field name="transport_id"/>
-                    				<field name="pickup_summery"/>
-                    				<field name="destination_summery"/>
-                    				<field name="seats" />
-                            	</tree>
+		                            		<field name="departure"/>
+		                    				<field name="transport_id"/>
+		                    				<field name="pickup_summery"/>
+		                    				<field name="destination_summery"/>
+		                    				<field name="seats" />
+		                            	</tree>
 									</field>
+									</group>
 								</group>
 							</page>
 							<page string="Camp Area">
@@ -178,6 +180,23 @@
 									<field name="camparea_id"/>
 								</group>
 							</page>
+							<page string="Activites">
+								<group colspan="8" col="8">
+								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
+								<newline/>
+								<field name="activity_ticket_ids" readonly="1" nolabel="1" >
+									<tree>
+										<field name="actins_date_begin"/>
+										<field name="act_ins_id"/>
+										<field name="seats"/>
+										<field name="state"/>
+										<field name="name"/>
+										
+									</tree>
+								</field>
+								
+								</group>
+								</page>
 						</notebook>
 					</group>
 				</xpath>

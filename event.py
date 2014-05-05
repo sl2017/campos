@@ -31,7 +31,27 @@ from openerp.osv.orm import setup_modifiers
 from xml.etree import ElementTree as ET
 from urllib import urlopen
 
+# GROUP_HEAD ="""
+# <table>
+# """
+# GROUP_ROW ="""
+# <tr><td>%(group)s</td>
+# <td>%(contact)s, %(phone)s, %(email)s</td></tr>
+# """
+# 
+# GROUP_FOOT="""
+# </table>
+# """ 
 
+GROUP_HEAD =""
+GROUP_ROW ="""%(group)s
+ - %(contact)s, %(phone)s %(email)s
+
+"""
+
+GROUP_FOOT=""
+
+ 
 partmap = {('docTitle', 'name'),
            ('addressFull','street'),
            ('organizationAddress2','street2'),
@@ -152,6 +172,8 @@ class dds_camp_area(osv.osv):
     _description = 'Camp Area'
     _name = 'dds_camp.area'
     
+    
+            
     _columns = {
         'name': fields.char('Name', size=64, translate=True),
         'desc': fields.text('Description', translate=True),
@@ -161,6 +183,7 @@ class dds_camp_area(osv.osv):
         'state' : fields.selection([('draft','Draft'),
                                      ('named', 'Named'),
                                      ('confirmed', 'Confirmed')], "State"),
+        
         }
     
     _defaults = {'state' : lambda *a: 'draft'}
@@ -550,7 +573,14 @@ class dds_camp_event_participant(osv.osv):
                 if full:
                     spare_act_pts = 8 ## TODO: Calc by participations days
                 else:     
-                    spare_act_pts = 8 ## TODO: Calc by participations days
+                    spare_act_pts = 0 ## TODO: Calc by participations days
+                    for ad in ['23','24','25','26','28']:
+                        if ad in res[par.id]['day_summery']:
+                            spare_act_pts += 2
+                    if '30' in res[par.id]['day_summery']:
+                            spare_act_pts += 1
+                    if spare_act_pts:
+                        spare_act_pts -= 1                
                 if par.ticket_ids:
                     for tck in par.ticket_ids:
                         spare_act_pts -= tck.act_ins_id.activity_id.points         
@@ -592,6 +622,12 @@ class dds_camp_event_participant(osv.osv):
             
         res = {'values' : {'age_group': ag}}    
         return res
+    
+    def onchange_part_time_ist(self, cr, uid, pt_ist, context=None):
+        if pt_ist:
+            
+            return {'value':{'state':'draft'}}
+        return {}
     
     def onchange_state(self, cr, uid, ids, state_id, context=None):
         if state_id:
@@ -664,6 +700,7 @@ class dds_camp_event_participant(osv.osv):
          'event_id2' : fields.related('registration_id', 'event_id','id', type='integer', string='Event type (1/2)'),   
          
          # Staff registraring
+         'part_time_ist' : fields.boolean('Part Time IST'),
          'workwish' : fields.char('Want to work with', size=64),   
          'committee_id' : fields.many2one('dds_camp.committee', 'Have agreement with committee', track_visibility='onchange', ondelete='set null'),
          'state': fields.selection([('draft','Received'),
@@ -700,7 +737,7 @@ class dds_camp_event_participant(osv.osv):
          'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
                                       'par_id', 'ticket_id', 'Tickets'),
          'spare_act_pts' : fields.function(_calc_summery, type = 'integer', string='Spare Activity Points', method=True, multi='PART'),
-         'str_id': fields.function(_calc_summery, type='char', string='ID String', method=True, multi="PART"),
+         'str_id': fields.function(_calc_summery, type='char', string='ID String', method=True, multi="PART", store=True),
     }
     
     _sql_constraints = [
@@ -981,6 +1018,24 @@ class event_registration(osv.osv):
                            'last_login' : last_login,
                            'user_created' : users}
         return res
+    
+    def _calc_group_summery(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for myregs in self.browse(cr, SUPERUSER_ID, ids, context=context):
+            html = GROUP_HEAD
+            if myregs.camparea_id:
+                
+                if myregs.camparea_id.group_ids:
+                    for reg in myregs.camparea_id.group_ids:
+                        html += GROUP_ROW % {'group' : reg.name,
+                                             'contact': reg.contact_partner_id.name,
+                                             'phone': reg.contact_partner_id.phone if reg.contact_partner_id.phone else "",
+                                             'email': reg.contact_partner_id.email if reg.contact_partner_id.email else "",
+                                             }
+            html += GROUP_FOOT 
+            res[myregs.id] = {'camparea_groups': html}
+        
+        return res
             
     _columns = {
         'event_id2' : fields.related('event_id','id', type='integer', string='Event'),
@@ -1085,6 +1140,10 @@ class event_registration(osv.osv):
         'camparea_group_ids' : fields.related('camparea_id', 'group_ids', 
                 type='one2many', relation='event.registration',
                 string='Camp Area Groups'),
+        'camparea_groups' : fields.function(_calc_group_summery, type = 'text', string='Groups', method=True, multi='CA'),
+        #'camparea_summery' : fields.related('camparea_id', 'summery', 
+        #        type='text', 
+        #        string='Camp Area Groups Summery'),
         'camparea_state': fields.related('camparea_id', 'state', readonly=True, type='selection', 
                                          values=[('draft','Draft'),
                                                  ('named', 'Named'),

@@ -148,6 +148,7 @@
 									<field name="tent_nb"/>
 									<field name='camparea_state' attrs="{'invisible': True}"/>
 									<field name="camparea_id" options="{'no_open': True}" attrs="{'invisible': [('camparea_state', '=', 'draft')]}"/>
+									<field name="camparea_groups" attrs="{'invisible': [('camparea_state', 'in', ['draft','named'])]}"/>
 									<!--
 									<field name="camparea_group_ids" attrs="{'invisible': [('camparea_state', 'in', ['draft','named'])]}">
 										<tree>
@@ -158,10 +159,11 @@
 									-->
 								</group>
 							</page>
-							<!-- 
+							 
 							<page string="Activites">
-								<group colspan="4">
-								
+								<group colspan="8" col="8">
+								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
+								<newline/>
 								<field name="activity_ticket_ids" readonly="1" nolabel="1" >
 									<tree>
 										<field name="actins_date_begin"/>
@@ -172,10 +174,10 @@
 										
 									</tree>
 								</field>
-								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
+								
 								</group>
 								</page>
-								 -->
+							
 							</notebook>
 						</group>
 
@@ -192,7 +194,7 @@
 	<field name="arch" type="xml">
 
 		<form string="Participant Registration" version="7.0">
-		<header attrs="{'invisible': [('event_id2', '=', 1)]}">
+		<header attrs="{'invisible': [('event_id2', '=', 1),('part_time_ist','=',False)]}">
 			<button string="Send til udvalg" name="button_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager"/>
             <button string="Godkendt" name="button_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user,__export__.res_groups_34"/>
             <button string="Afvis" name="button_reject" states="sent,approved,draft" type="object" groups="event.group_event_user,__export__.res_groups_34"/>
@@ -308,6 +310,8 @@
 			</group>
 			</page>
 			<page string="Activities">
+			
+				<field name="spare_act_pts"/>
 				
 				<field name="ticket_ids" readonly="1" >
 					<tree>
@@ -317,9 +321,16 @@
 					</field>
 			</page>
 			<page string="Administration" groups='event.group_event_manager,__export__.res_groups_34'>
+				<group colspan="4" col="4">
 				<group>
 				<field name="par_agreements"/>
 				<field name="par_internal_note"/>
+				</group>
+				<group attrs="{'invisible': [('event_id2', '=', 2)]}">
+					<field name="part_time_ist" on_change="onchange_part_time_ist(part_time_ist)"/>
+					<field name="committee_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': [('part_time_ist', '=', False)]}"/>
+					<field name="functitle" groups='event.group_event_manager,__export__.res_groups_34' attrs="{'invisible': [('part_time_ist', '=', False)]}"/> 
+				</group>
 				</group>
 				<group string="Prisberegning" groups='event.group_event_manager'>
 				<field name="calc_age" />
@@ -328,6 +339,7 @@
 				<field name="camp_fee" />
 				<field name="age_group" />
 				</group>
+				
 			</page>
 			</notebook>
 			
@@ -601,7 +613,7 @@
                  	<field name="city"/>
                  	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
                  	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
-                 	<filter icon="terp-personal" string="Staff" help="Camp Staff" domain="[('event_id','=',2)]"/>
+                 	<filter icon="terp-personal" string="Staff" help="Camp Staff" domain="['|',('event_id','=',2),('part_time_ist','=',True)]"/>
                  	<group expand="0" string="Group By...">
                  	<filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
                     <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>

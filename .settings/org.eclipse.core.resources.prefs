@@ -9,3 +9,4 @@ encoding/__openerp__.py=utf-8
 encoding/dds_camp_activity.py=utf-8
 encoding/event.py=utf-8
 encoding/res_partner.py=utf-8
+encoding/transport.py=utf-8
