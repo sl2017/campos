@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-01 18:48+0000\n"
-"PO-Revision-Date: 2014-05-03 09:32+0100\n"
+"POT-Creation-Date: 2014-05-05 20:13+0000\n"
+"PO-Revision-Date: 2014-05-05 22:17+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,12 @@ msgid "Reserved Seats"
 msgstr "Reserverede pladser"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1186
+#: model:ir.model,name:dds_camp.model_dds_camp_transport_ticket
+msgid "Transport Ticketss"
+msgstr "Transport Ticketss"
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:1193
 #, python-format
 msgid "Registration Email"
 msgstr "Registration Email"
@@ -96,6 +101,11 @@ msgid "End Date/Time"
 msgstr "End Date/Time"
 
 #. module: dds_camp
+#: field:dds_camp.activity.signup,testact_id:0
+msgid "1. Test Select Activity"
+msgstr "1. Test Select Activity"
+
+#. module: dds_camp
 #: field:dds_camp.event.participant,patrol:0
 msgid "Patrol name"
 msgstr "Patrulje"
@@ -133,7 +143,6 @@ msgstr "Telt"
 
 #. module: dds_camp
 #: field:event.registration,transport_ticket_ids:0
-#: model:ir.model,name:dds_camp.model_dds_camp_transport_ticket
 msgid "Transport Tickets"
 msgstr "Transport Billetter"
 
@@ -191,7 +200,7 @@ msgid "Camp Fee Charged"
 msgstr "Lejafgift"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
+#: field:dds_camp.area,state:0 view:dds_camp.event.participant:0
 #: field:dds_camp.event.participant,state_id:0 view:dds_camp.staff:0
 #: view:res.partner:0
 msgid "State"
@@ -252,6 +261,11 @@ msgid "Activity Tickets"
 msgstr "Aktivitetsbillet"
 
 #. module: dds_camp
+#: model:ir.model,name:dds_camp.model_dds_camp_transport
+msgid "Transport option"
+msgstr "Transport option"
+
+#. module: dds_camp
 #: view:dds_camp.event.participant:0
 #: field:dds_camp.event.participant,calc_age:0
 #: view:dds_camp.event.participant.day:0
@@ -276,7 +290,17 @@ msgid "Internal note"
 msgstr "Intern note (E2014 Adm)"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1184
+#: code:addons/dds_camp/wizard/activity_signup.py:145
+#, python-format
+msgid ""
+"Click Add to add participants to this activity. Your reservation will expire "
+"in 15 min."
+msgstr ""
+"Klik på [Tilføj] for at tilføje deltagere til denne aktivitet. Din "
+"reservation vil udløe om 15 min. "
+
+#. module: dds_camp
+#: code:addons/dds_camp/event.py:1191
 #, python-format
 msgid "Group Econ. Contact"
 msgstr "Kasserer kontakt"
@@ -319,7 +343,7 @@ msgid "Staff"
 msgstr "Hjælper"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1180 view:dds_camp.event.participant:0
+#: code:addons/dds_camp/event.py:1187 view:dds_camp.event.participant:0
 #: view:dds_camp.event.participant.day:0
 #: field:dds_camp.event.participant.day,registration_id:0
 #, python-format
@@ -399,6 +423,23 @@ msgstr "Aktivitets Billet"
 #: field:dds_camp.event.agegroup,number:0
 msgid "Number of participants"
 msgstr "Deltagerantal"
+
+#. module: dds_camp
+#: model:email.template,body_html:dds_camp.new_ist_member
+msgid ""
+"                                      <p>                         Hej "
+"${object.committee_id.name},                     </p>                     "
+"<p>                         En ny hjælper er klar til "
+"godkendelse:                     </p>                     "
+"<p>                         ${object.name}                     </"
+"p>                                                  "
+msgstr ""
+"                                      <p>                         Hej "
+"${object.committee_id.name},                     </p>                     "
+"<p>                         En ny hjælper er klar til "
+"godkendelse:                     </p>                     "
+"<p>                         ${object.name}                     </"
+"p>                                                  "
 
 #. module: dds_camp
 #: view:dds_camp.municipality:0 field:event.registration,municipality_id:0
@@ -491,37 +532,6 @@ msgid "Reserved"
 msgstr "Reserveret"
 
 #. module: dds_camp
-#: model:email.template,body_html:dds_camp.new_ist_member
-msgid ""
-"\n"
-"                \n"
-"                    <p>\n"
-"                        Hej ${object.committee_id.name},\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        En ny hjælper er klar til godkendelse:\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        ${object.name}\n"
-"                    </p>\n"
-"                                    \n"
-"            "
-msgstr ""
-"\n"
-"                \n"
-"                    <p>\n"
-"                        Hej ${object.committee_id.name},\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        En ny hjælper er klar til godkendelse:\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        ${object.name}\n"
-"                    </p>\n"
-"                                    \n"
-"            "
-
-#. module: dds_camp
 #: selection:dds_camp.scout.org,worldorg:0
 msgid "WAGGGS/WOSM"
 msgstr "WAGGGS/WOSM"
@@ -556,6 +566,12 @@ msgstr "Tilmelding"
 #: selection:event.registration,organization:0
 msgid "Danske Baptisters Spejderkorps"
 msgstr "Danske Baptisters Spejderkorps"
+
+#. module: dds_camp
+#: field:dds_camp.activity.signup,allowed_ids:0
+#: field:dds_camp.activity.signup,valid_part:0
+msgid "Valid Partners"
+msgstr "Valid Partners"
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,camp_fee:0
@@ -646,11 +662,6 @@ msgid "Entry point in Denmark"
 msgstr "Entry point in Denmark"
 
 #. module: dds_camp
-#: view:dds_camp.event.participant:0
-msgid "Leaders"
-msgstr "Ledere"
-
-#. module: dds_camp
 #: view:dds_camp.event.participant:0 view:dds_camp.staff:0
 msgid "All days (22/7 - 31/7)"
 msgstr "Alle dage (22/7 - 31/7)"
@@ -682,7 +693,7 @@ msgstr "Arrangement"
 
 #. module: dds_camp
 #: view:dds_camp.transport.route:0
-#: field:dds_camp.transport.ticket,transport_id:0
+#: field:dds_camp.transport.ticket,transport_id:0 view:event.registration:0
 #: model:ir.actions.act_window,name:dds_camp.action_transport_tree
 #: model:ir.ui.menu,name:dds_camp.event_transport_menu
 #: model:ir.ui.menu,name:dds_camp.menu_transport_root
@@ -702,6 +713,7 @@ msgstr "Reset login"
 
 #. module: dds_camp
 #: view:dds_camp.activity.period:0
+#: model:ir.model,name:dds_camp.model_dds_camp_activity_period
 msgid "Activity Period"
 msgstr "Aktivitetsperiode"
 
@@ -746,7 +758,7 @@ msgid "Prisberegning"
 msgstr "Prisberegning"
 
 #. module: dds_camp
-#: field:event.registration,reg_number:0
+#: view:dds_camp.area:0 field:event.registration,reg_number:0
 msgid "# Participants"
 msgstr "Deltagerantal"
 
@@ -983,11 +995,17 @@ msgid "What do you do for living"
 msgstr "Erhverv"
 
 #. module: dds_camp
+#: field:event.registration,camparea_group_ids:0
+msgid "Camp Area Groups"
+msgstr "Camp Area Groups"
+
+#. module: dds_camp
 #: field:dds_camp.activity.signup,ticket_id:0
 msgid "Ticket"
 msgstr "Ticket"
 
 #. module: dds_camp
+#: field:dds_camp.activity.instanse,actins_date_begin:0
 #: field:dds_camp.activity.period,date_begin:0
 #: field:dds_camp.activity.ticket,actins_date_begin:0
 msgid "Start Date/Time"
@@ -1014,7 +1032,8 @@ msgstr "T Shirt"
 #. module: dds_camp
 #: field:dds_camp.activity.activity,name:0
 #: field:dds_camp.activity.instanse,name:0
-#: field:dds_camp.activity.period,name:0 field:dds_camp.area,name:0
+#: field:dds_camp.activity.period,name:0
+#: field:dds_camp.activity.signup.members,name:0 field:dds_camp.area,name:0
 #: field:dds_camp.bmimportwizard.members,name:0
 #: field:dds_camp.committee,name:0 field:dds_camp.event.participant,name:0
 #: field:dds_camp.event.participant.day,name:0
@@ -1092,35 +1111,9 @@ msgid "Aktiviteter"
 msgstr "Aktiviteter"
 
 #. module: dds_camp
-#: model:email.template,body_html:dds_camp.ist_member_approved
-msgid ""
-"\n"
-"                \n"
-"                    <p>\n"
-"                        Hej ${object.name},\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        Du er hermed optaget i ${object.committee_id.name}\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        \n"
-"                    </p>\n"
-"                                    \n"
-"            "
-msgstr ""
-"\n"
-"                \n"
-"                    <p>\n"
-"                        Hej ${object.name},\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        Du er hermed optaget i ${object.committee_id.name}\n"
-"                    </p>\n"
-"                    <p>\n"
-"                        \n"
-"                    </p>\n"
-"                                    \n"
-"            "
+#: model:ir.actions.act_window,name:dds_camp.action_activity_ticket_tree
+msgid "Billet"
+msgstr "Billet"
 
 #. module: dds_camp
 #: model:ir.model,name:dds_camp.model_dds_camp_event_agegroup
@@ -1161,7 +1154,6 @@ msgid "Open Order Detail"
 msgstr "Vis forhåndstilmelding"
 
 #. module: dds_camp
-#: model:ir.model,name:dds_camp.model_dds_camp_transport
 #: model:ir.model,name:dds_camp.model_dds_camp_transport_route
 msgid "Transport Schedules/Routes"
 msgstr "Transport Schedules/Routes"
@@ -1172,7 +1164,7 @@ msgid "Age 11 - 12"
 msgstr "11 - 12 år"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1182
+#: code:addons/dds_camp/event.py:1189
 #, python-format
 msgid "Group Contact"
 msgstr "Gruppe kontaktperson"
@@ -1290,9 +1282,15 @@ msgid "Christian Eggert Jørgensen"
 msgstr "Christian Eggert Jørgensen"
 
 #. module: dds_camp
-#: model:ir.model,name:dds_camp.model_dds_camp_activity_period
-msgid "Activity Periods"
-msgstr "Aktivitetsperioder"
+#: view:dds_camp.event.participant:0
+msgid "Leaders"
+msgstr "Ledere"
+
+#. module: dds_camp
+#: code:addons/dds_camp/wizard/activity_signup.py:180
+#, python-format
+msgid "Reservation has expired and activity is full."
+msgstr "Reservationen er udløbet og aktiviteten er fuldt optaget."
 
 #. module: dds_camp
 #: field:dds_camp.event.participant,drvlic_flift:0
@@ -1327,7 +1325,7 @@ msgid "Registration"
 msgstr "Tilmelding"
 
 #. module: dds_camp
-#: field:dds_camp.activity.signup,activity_id:0
+#: field:dds_camp.activity.signup,act_id:0
 msgid "1. Select Activity"
 msgstr "1. Vælg aktivitet"
 
@@ -1342,7 +1340,7 @@ msgid "FDF"
 msgstr "FDF"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:812 code:addons/dds_camp/event.py:1567
+#: code:addons/dds_camp/event.py:819 code:addons/dds_camp/event.py:1574
 #: view:dds_camp.staff:0
 #: model:ir.actions.act_window,name:dds_camp.action_add_other_participant
 #, python-format
@@ -1365,6 +1363,11 @@ msgid "Other participants"
 msgstr "Øvrige deltagere"
 
 #. module: dds_camp
+#: field:event.registration,camparea_state:0
+msgid "Camp Area State"
+msgstr "Camp Area State"
+
+#. module: dds_camp
 #: model:ir.model,name:dds_camp.model_dds_camp_activity_instanse
 msgid "Activity Instanses"
 msgstr "Aktivitetsplan"
@@ -1375,9 +1378,10 @@ msgid "Age to"
 msgstr "Til alder"
 
 #. module: dds_camp
-#: model:ir.actions.act_window,name:dds_camp.action_activity_ticket_tree
-msgid "Billet"
-msgstr "Billet"
+#: field:dds_camp.activity.signup,members_ids:0
+#: field:dds_camp.activity.signup,parti_ids:0
+msgid "Registered"
+msgstr "Registered"
 
 #. module: dds_camp
 #: field:event.registration,accommodation:0
@@ -1405,6 +1409,11 @@ msgstr "WAGGGS"
 #: view:event.registration:0
 msgid "Register Participant Details for this Group"
 msgstr "Register deltager oplysninger"
+
+#. module: dds_camp
+#: field:dds_camp.activity.signup,info:0
+msgid "Info"
+msgstr "Info"
 
 #. module: dds_camp
 #: model:ir.model,name:dds_camp.model_dds_camp_bmimportwizard
@@ -1503,6 +1512,11 @@ msgstr "Telefon"
 #: field:event.registration,hcap_desc:0
 msgid "Describe the handicap"
 msgstr "Beskriv handicap"
+
+#. module: dds_camp
+#: field:event.registration,camparea_groups:0
+msgid "Groups"
+msgstr "Groups"
 
 #. module: dds_camp
 #: model:ir.actions.report.xml,name:dds_camp.action_event_registration_list_xls
@@ -1664,6 +1678,11 @@ msgid "login"
 msgstr "login"
 
 #. module: dds_camp
+#: selection:dds_camp.area,state:0
+msgid "Named"
+msgstr "Named"
+
+#. module: dds_camp
 #: selection:dds_camp.scout.org,worldorg:0
 #: selection:event.registration,organization:0
 msgid "WOSM"
@@ -1708,6 +1727,23 @@ msgstr "Destination"
 #: selection:dds_camp.tshirtsize,sizetype:0
 msgid "Soft Shell"
 msgstr "Soft Shell"
+
+#. module: dds_camp
+#: model:email.template,body_html:dds_camp.ist_member_approved
+msgid ""
+"                                      <p>                         Hej "
+"${object.name},                     </p>                     "
+"<p>                         Du er hermed optaget i ${object.committee_id."
+"name}                     </p>                     "
+"<p>                                              </"
+"p>                                                  "
+msgstr ""
+"                                      <p>                         Hej "
+"${object.name},                     </p>                     "
+"<p>                         Du er hermed optaget i ${object.committee_id."
+"name}                     </p>                     "
+"<p>                                              </"
+"p>                                                  "
 
 #. module: dds_camp
 #: field:portal.wizard.user,company:0
@@ -1815,6 +1851,11 @@ msgid "TimeOut"
 msgstr "Udløbet"
 
 #. module: dds_camp
+#: selection:dds_camp.area,state:0
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: dds_camp
 #: model:ir.ui.menu,name:dds_camp.event_activity_period_menu
 #: model:ir.ui.menu,name:dds_camp.portal_activity_period_menu
 msgid "Aktivitetsperioder"
@@ -1866,6 +1907,11 @@ msgstr "Note til eget brug. Vil ikke blive læst/besvaret af lejrledelsen."
 #: model:ir.ui.menu,name:dds_camp.event_staff_menu
 msgid "IST (International Service Team)"
 msgstr "Hjælper"
+
+#. module: dds_camp
+#: field:dds_camp.event.participant,part_time_ist:0
+msgid "Part Time IST"
+msgstr "Part Time IST"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,zip_id:0
@@ -1976,6 +2022,11 @@ msgstr ""
 "igen."
 
 #. module: dds_camp
+#: selection:dds_camp.area,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: dds_camp
 #: selection:dds_camp.event.participant,functitle:0
 msgid "Hjælperbarn"
 msgstr "Hjælperbarn"
@@ -2017,7 +2068,8 @@ msgid "Age 0 - 3"
 msgstr "0 - 3 år"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:62
+#: code:addons/dds_camp/wizard/activity_signup.py:65
+#: code:addons/dds_camp/wizard/activity_signup.py:147
 #, python-format
 msgid ""
 "\n"
