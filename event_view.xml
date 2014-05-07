@@ -160,6 +160,7 @@
 										<field name="camp_fee_min"/>
 										<field name="camp_fee_tot"/>
 										<field name="camp_fee_charged"/>
+										<field name="camp_fee_1rate"/>
 									</group>
 									<group colspan="4" col="4" string="Transport">	
 									<field name="transport_ticket_ids" context="{'default_reg_id': id}" nolabel="1">

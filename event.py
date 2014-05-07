@@ -722,6 +722,7 @@ class dds_camp_event_participant(osv.osv):
          'functitle' : fields.selection([('fm','Formand'),
                                         ('um','Udvalgsmedlem'),
                                         ('hlp',u'Hjælper'),
+                                        ('ghlp',u'Gruppehjælper'),
                                         ('chld','Hjælperbarn'),
                                         ('rel',u'Pårørende'),
                                         ('ex', 'Ekstern (ikke betalende)'),
@@ -1119,6 +1120,8 @@ class event_registration(osv.osv):
         'camp_fee_min' : fields.float('Minimum Camp Fee'),
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
+        'camp_fee_1rate' : fields.float('Camp Fee 1. Rate'),
+
         'last_login' : fields.function(_calc_number, type = 'date', string='Last Login Date', method=True, multi='PART' ),
         'user_created' : fields.function(_calc_number, type = 'boolean', string='Users created', method=True, multi='PART' ),
         
