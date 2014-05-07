@@ -86,7 +86,7 @@ class dds_camp_activity_instanse(osv.osv):
     """Activity Instanse"""
     _description = 'Activity Instanses'
     _name = 'dds_camp.activity.instanse'
-    _order = 'name'
+    _order = 'actins_date_begin'
     
     def name_get(self, cr, uid, ids, context=None):
         if not ids:
@@ -125,7 +125,11 @@ class dds_camp_activity_instanse(osv.osv):
     
     def _search_seats(self, cr, uid, obj, name, args, context=None):
         print args
-        return [('id','in',[58,59,60])]
+        ids = []
+        for ai in self.browse(cr, uid, self.search(cr, uid, [], context=context), context=context):
+            if ai.seats_available > 0:
+                ids.append(ai.id)
+        return [('id','in', ids)]
     
     _columns = {
         'name': fields.char('Name', size=128),
@@ -138,14 +142,15 @@ class dds_camp_activity_instanse(osv.osv):
         'period_id' : fields.many2one('dds_camp.activity.period', 'Period'),
         'staff_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_staff_rel',
                                       'act_ins_id','par_id','Staff'),
-        'ticket_ids': fields.one2many('dds_camp.activity.ticket', 'act_ins_id', 'Tickets'),         
+        'ticket_ids': fields.one2many('dds_camp.activity.ticket', 'act_ins_id', 'Tickets'),
+        'actins_date_begin' : fields.related('period_id','date_begin', type='datetime', string='Start Date/Time', store=True),         
         }   
     
 class dds_camp_activity_ticket(osv.osv): 
     """Activity Ticket"""
     _description = 'Activity Ticket'
     _name = 'dds_camp.activity.ticket'
-    _order = 'name'
+    _order = 'actins_date_begin'
     _columns = {
         'name': fields.char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.'),
         'seats': fields.integer('Seats'),
@@ -158,7 +163,8 @@ class dds_camp_activity_ticket(osv.osv):
         'reg_id' : fields.many2one('event.registration', 'Troop'),
         'par_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_par_rel',
                                       'ticket_id','par_id','Participants'),
-        'actins_date_begin' : fields.related('act_ins_id', 'period_id','date_begin', type='datetime', string='Start Date/Time'),
+        'actins_date_begin' : fields.related('act_ins_id', 'period_id','date_begin', type='datetime', string='Start Date/Time', store=True),
+        'act_desc' : fields.related('act_ins_id', 'activity_id','desc', type='text', string='Description'),
         
         } 
     

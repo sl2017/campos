@@ -86,7 +86,7 @@ class activity_signup_wizard(osv.osv_memory):
               'ticket_id': fields.many2one('dds_camp.activity.ticket', 'Ticket', ondelete='cascade'),
               }
     
-    _defaults = {'message' : lambda *a: 'Select Activity, Period and number of required seats'}
+    _defaults = {'message' : lambda *a: _('Select Activity, Period and number of required seats')}
     
     def action_signup(self, cr, uid, ids, context=None):
         # your treatment to click  button next 

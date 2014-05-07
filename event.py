@@ -590,7 +590,7 @@ class dds_camp_event_participant(osv.osv):
                                 'camp_days': len(dates),
                                 'pay_days' : pdays,
                                 'spare_act_pts': spare_act_pts,
-                                'str_id' : str(par.id)})
+                                })
         return res
     
     def _age(self, date_of_birth_str, date_begin_str):
@@ -737,7 +737,7 @@ class dds_camp_event_participant(osv.osv):
          'ticket_ids': fields.many2many('dds_camp.activity.ticket','dds_camp_activity_par_rel',
                                       'par_id', 'ticket_id', 'Tickets'),
          'spare_act_pts' : fields.function(_calc_summery, type = 'integer', string='Spare Activity Points', method=True, multi='PART'),
-         'str_id': fields.function(_calc_summery, type='char', string='ID String', method=True, multi="PART", store=True),
+         
     }
     
     _sql_constraints = [

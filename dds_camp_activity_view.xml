@@ -179,13 +179,15 @@
                             <!--  <button name="%(dds_camp.action_committee_members_tree)d" type="action" string="Members"/> -->
                         </div>
                         <group>
-                            <field name="name"/>
                             <field name="act_ins_id"/>
-                            <field name="seats"/>
-                            <field name="reserved_time"/>
-                            
+                            <field name="act_desc"/>
                             <field name="reg_id"/>
+                            <field name="seats"/>
+                            <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
+                            
+                            
                             <field name="par_ids" domain="[('registration_id','=',reg_id)]"/>
+                            <field name="name"/>
                         </group>
                     </sheet>
                 </form>
