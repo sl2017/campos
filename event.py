@@ -985,13 +985,13 @@ class event_registration(osv.osv):
             pre = 0
             
             for ag in reg.agegroup_ids:
-                nbr = nbr + ag.number
+                #nbr = nbr + ag.number
                 pre = pre + ag.pre_reg
             
             fee = 0
             for par in reg.participant_ids:
                 fee = fee + par.camp_fee
-            
+                nbr += 1
             last_login = False
             users = False
             if reg.partner_id:
@@ -1115,8 +1115,8 @@ class event_registration(osv.osv):
         #Internal fields
         'agreements': fields.text('What have been arranged'),
         'internal_note' : fields.text('Internal note'),
-        'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART' ),
-        'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART' ),
+        'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART', store=True),
+        'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART', store=True),
         'camp_fee_min' : fields.float('Minimum Camp Fee'),
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
