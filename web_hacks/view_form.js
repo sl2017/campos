@@ -3236,7 +3236,10 @@ instance.web.form.FieldMany2One = instance.web.form.AbstractField.extend(instanc
         // doesn't work
     },
     show_error_displayer: function() {
-        new instance.web.form.M2ODialog(this).open();
+    	if ((typeof this.options.m2o_dialog === 'undefined' && this.can_create) ||
+                this.options.m2o_dialog) {
+    		new instance.web.form.M2ODialog(this).open();
+    	}
     },
     render_editable: function() {
         var self = this;

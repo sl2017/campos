@@ -182,11 +182,18 @@
                             <field name="act_ins_id"/>
                             <field name="act_desc"/>
                             <field name="reg_id"/>
-                            <field name="seats"/>
+                            <field name="seats" options="{'reload_on_button': true}/>
                             <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
                             
-                            
-                            <field name="par_ids" domain="[('registration_id','=',reg_id)]"/>
+                            <field name="id" invisible="1"/>
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            	<tree options="{'reload_on_button': true}>
+                            		<field name="name"/>
+ 									<field name="calc_age"/>
+ 									<field name="day_summery"/>
+ 									<button name="button_unlink_activityticket"  icon="STOCK_CLOSE" type="object" help="Remove Participant from Activity Booking"/>
+                            	</tree>
+                            	</field>
                             <field name="name"/>
                         </group>
                     </sheet>

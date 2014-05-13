@@ -14,10 +14,10 @@
 	   <field name="id" invisible="1"/> 
        <group states="step1">
        		
-          <field name="act_id"  domain="[('audience','in', ['par','all'])]"  options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+          <field name="act_id"  domain="[('audience','in', ['par','all'])]"  options="{'no_open': True, 'create': false, 'create_edit': false, 'no_quick_create': true}"/>
           
           <!-- <field name="testact_id"/> --> 
-          <field name="act_ins_id"  domain="[('activity_id','=',act_id),('seats_available','&gt;',0)]" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+          <field name="act_ins_id"  domain="[('activity_id','=',act_id),('seats_available','&gt;',0)]" options="{'no_open': True, 'create': false, 'create_edit': false, 'no_quick_create': true}"/>
           <field name="seats"/>                
        </group>
 

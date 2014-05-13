@@ -776,6 +776,19 @@ class dds_camp_event_participant(osv.osv):
     
     def button_reject(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
+    
+    def button_unlink_activityticket(self, cr, uid, ids, context=None):
+        print "button_unlink_activityticket", context
+        ticket_id = context.get('ticket_id')
+        tck_obj = self.pool.get('dds_camp.activity.ticket')
+        for tck in tck_obj.browse(cr, SUPERUSER_ID, tck_obj.search(cr, SUPERUSER_ID, [('id', '=', ticket_id)], context=context), context):
+            print "Updating seats", tck.id, len(tck.par_ids) - 1
+            tck_obj.write(cr, SUPERUSER_ID, [tck.id], {'seats': len(tck.par_ids) - 1,
+                                                       'par_ids': [(3, ids[0])]})
+        print "kill", ids, ticket_id                  
+        #return self.write(cr, uid, ids, {'ticket_ids': [(3, ticket_id)]})
+        return { 'type' :  'ir.actions.act_close_wizard_and_reload_view' }
+ 
         
     def action_select_all_days(self, cr, uid, ids, context):
        

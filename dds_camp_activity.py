@@ -53,6 +53,9 @@ class dds_camp_activity_activity(osv.osv):
                  'age_to' : lambda *a: 99,
                  'audience': lambda *a: 'par'}
     
+    def name_create(self, cr, uid, name, context=None):
+        raise osv.except_osv(_('Warning'), _("Quick creation disallowed."))
+    
 class dds_camp_activity_period(osv.osv):
     """Activity Period"""
     _description = 'Activity Period'
@@ -63,6 +66,9 @@ class dds_camp_activity_period(osv.osv):
         'date_begin': fields.datetime('Start Date/Time', required=True),
         'date_end': fields.datetime('End Date/Time', required=True), 
         }
+    
+    def name_create(self, cr, uid, name, context=None):
+        raise osv.except_osv(_('Warning'), _("Quick creation disallowed."))
     
     def name_get(self, cr, uid, ids, context=None):
         if not ids:

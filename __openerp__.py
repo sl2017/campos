@@ -26,7 +26,7 @@
     "author" : "Hans Henrik Gabelgaard",
     "website" : "http://www.blushoejspejderne.dk/",
     "category" : "Generic Modules/Others",
-    "depends" : ["base", "event", "mail","better_zip","portal","report_xls"],
+    "depends" : ["base", "event", "mail","better_zip","portal","report_xls","web"],
     'summary': 'Troops, Participants, Activities, Staff',
     "description" : """
 DDS Camp
@@ -58,6 +58,8 @@ This application is useful for managing large Scout Camps:
                     "transport_view.xml",
                     
                     ],
+    
+    'js': ['static/src/js/dds_camp.js'],
     "installable": True,
     'auto_install': False,
 }

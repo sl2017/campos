@@ -67,12 +67,18 @@ class activity_signup_wizard(osv.osv_memory):
         print "res", res
         return res     
 
+    def _check_seats(self, cr, uid, ids, context=None):
+        record = self.browse(cr, uid, ids, context=context)
+        for data in record:
+            if data.seats <= 0:
+                return False
+        return True
                     
     _columns = {
               'reg_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
               
               'name': fields.char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.'),
-              'seats': fields.integer('3. Reserve Seats'),
+              'seats': fields.integer('3. Reserve Seats', required=True),
               'state': fields.selection([('step1', 'step1'), ('step2', 'step2'), ('expired','Expired'), ('done','Done')]),
               'message': fields.char('Message', size=128),
               'info': fields.text('Info'),
@@ -88,6 +94,8 @@ class activity_signup_wizard(osv.osv_memory):
     
     _defaults = {'message' : lambda *a: _('Select Activity, Period and number of required seats')}
     
+    _constraints = [(_check_seats, 'Error: Reserved seats must be Positive', ['seats'])]
+    
     def action_signup(self, cr, uid, ids, context=None):
         # your treatment to click  button next 
         # ...
@@ -98,17 +106,28 @@ class activity_signup_wizard(osv.osv_memory):
         print "Wiz", wiz.act_id, wiz.act_ins_id, wiz.seats
          
         chk_pts = wiz.act_ins_id.activity_id.points
+        dt = wiz.act_ins_id.period_id.date_begin[0:6]
         #Build possible members
         allowed_ids = [] 
         if wiz.reg_id.participant_ids:
             for par in wiz.reg_id.participant_ids:
-                print "Testing:", par.name, par.calc_age, par.spare_act_pts
-                if par.calc_age < wiz.act_ins_id.activity_id.age_from or par.calc_age > wiz.act_ins_id.activity_id.age_to:
-                    print "kill", wiz.act_ins_id.activity_id.age_from, wiz.act_ins_id.activity_id.age_to
+                #Test aktivitetsdato mod deltagerdage
+                days_ok = True
+                if par.days_ids:
+                    for d in par.days_ids:
+                        if d.date == dt:
+                            days_ok = d.state
+                            break
+                if not days_ok:
                     continue
+                # Test alderskrav        
+                if par.calc_age < wiz.act_ins_id.activity_id.age_from or par.calc_age > wiz.act_ins_id.activity_id.age_to:
+                    continue
+                # Test aktivitetspoints
                 if chk_pts:
                     if par.spare_act_pts < chk_pts:
                         continue
+                # Test mod andre bookinger    
                 period_ok = True
                 if par.ticket_ids:
                     for tck in par.ticket_ids:
@@ -116,9 +135,7 @@ class activity_signup_wizard(osv.osv_memory):
                             period_ok = False
                             break
                 if not period_ok:
-                    print "kill period"
                     continue
-                print "Create", par.name, wiz.id, ids[0]
                 allowed_ids.append(par.id)
                 mbr_obj.create(cr, SUPERUSER_ID, {'wiz_id' : wiz.id,
                                                   'par_id' : par.id,
@@ -168,16 +185,21 @@ class activity_signup_wizard(osv.osv_memory):
         if wiz.ticket_id.state == 'open' or wiz.ac_ins_id.seats_available > 0:
             pars = [p.id for p in wiz.parti_ids]
             print "pars", pars
-            ticket_obj.write(cr, SUPERUSER_ID, [wiz.ticket_id.id], {'par_ids' : [(6,0, pars)],
-                                                                 'name' : wiz.name,
-                                                                 'seats' : len(pars),
-                                                                 'state' : 'done'})
-            self.write(cr, uid, ids, {'state': 'done', 
-                                      'message' : 'Activty booked!.',})
+            if len(pars):
+                ticket_obj.write(cr, SUPERUSER_ID, [wiz.ticket_id.id], {'par_ids' : [(6,0, pars)],
+                                                                        'name' : wiz.name,
+                                                                        'seats' : len(pars),
+                                                                        'state' : 'done'})
+                self.write(cr, uid, ids, {'state': 'done', 
+                                          'message' : 'Activity booked!.',})
+            else:
+                self.write(cr, uid, ids, {'state': 'done', 
+                                          'message' : 'No participants selected. Booking cancelled.',})
+                ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id])    
         else:    
             ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id])
             self.write(cr, uid, ids, {'state': 'expired', 
-                                      'message' : _('Reservation has expired and activity is full.'),
+                                      'message' : _('Reservation has expired and activity is fully booked.'),
                                       'ticket_id' : None,
                                       }) 
         
