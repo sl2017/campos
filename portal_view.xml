@@ -166,13 +166,14 @@
 								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
 								<newline/>
 								
-								<field name="activity_ticket_ids" readonly="1" nolabel="1" options="{'reload_on_button': True, 'always_reload': True}">
+								<field name="activity_ticket_ids" nolabel="1" options="{'reload_on_button': true, 'always_reload': true}">
 									<tree>
 										<field name="actins_date_begin"/>
 										<field name="act_ins_id"/>
 										<field name="seats"/>
 										<field name="state"/>
 										<field name="name"/>
+										<button name="button_unlink_ticket" icon="STOCK_CLOSE" type="object" confirm="Delete Activity Booking?" help="Delete Activity Booking"/>
 										
 									</tree>
 								</field>

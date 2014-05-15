@@ -783,8 +783,11 @@ class dds_camp_event_participant(osv.osv):
         tck_obj = self.pool.get('dds_camp.activity.ticket')
         for tck in tck_obj.browse(cr, SUPERUSER_ID, tck_obj.search(cr, SUPERUSER_ID, [('id', '=', ticket_id)], context=context), context):
             print "Updating seats", tck.id, len(tck.par_ids) - 1
-            tck_obj.write(cr, SUPERUSER_ID, [tck.id], {'seats': len(tck.par_ids) - 1,
-                                                       'par_ids': [(3, ids[0])]})
+            if (len(tck.par_ids) - 1) > 0:
+                tck_obj.write(cr, SUPERUSER_ID, [tck.id], {'seats': len(tck.par_ids) - 1,
+                                                           'par_ids': [(3, ids[0])]})
+            else:
+                tck_obj.unlink(cr, SUPERUSER_ID, [tck.id]) 
         print "kill", ids, ticket_id                  
         #return self.write(cr, uid, ids, {'ticket_ids': [(3, ticket_id)]})
         return { 'type' :  'ir.actions.act_close_wizard_and_reload_view' }

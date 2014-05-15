@@ -195,9 +195,9 @@ class activity_signup_wizard(osv.osv_memory):
             else:
                 self.write(cr, uid, ids, {'state': 'done', 
                                           'message' : 'No participants selected. Booking cancelled.',})
-                ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id])    
+                ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])    
         else:    
-            ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id])
+            ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])
             self.write(cr, uid, ids, {'state': 'expired', 
                                       'message' : _('Reservation has expired and activity is fully booked.'),
                                       'ticket_id' : None,

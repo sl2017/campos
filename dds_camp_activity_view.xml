@@ -23,6 +23,7 @@
                             <field name="age_to"/>
                             <field name="points"/>
                             <field name="audience"/>
+                            <field name="act_ins_ids"/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -182,12 +183,12 @@
                             <field name="act_ins_id"/>
                             <field name="act_desc"/>
                             <field name="reg_id"/>
-                            <field name="seats" options="{'reload_on_button': true}/>
+                            <field name="seats" options="{'reload_on_button': true}"/>
                             <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
                             
                             <field name="id" invisible="1"/>
                             <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
-                            	<tree options="{'reload_on_button': true}>
+                            	<tree options="{'reload_on_button': true}">
                             		<field name="name"/>
  									<field name="calc_age"/>
  									<field name="day_summery"/>

@@ -45,8 +45,8 @@ class dds_camp_activity_activity(osv.osv):
         'points' : fields.integer('Points'),
         'audience': fields.selection([('par','Participants'),
                                      ('staff','ITS'),
-                                     ('all', 'All')], 'Audience')
-                
+                                     ('all', 'All')], 'Audience'),
+        'act_ins_ids': fields.one2many('dds_camp.activity.instanse', 'activity_id', 'Instanses'),        
         }
     
     _defaults = {'age_from' : lambda *a: 0,
@@ -62,7 +62,7 @@ class dds_camp_activity_period(osv.osv):
     _name = 'dds_camp.activity.period'
     _order = 'name'
     _columns = {
-        'name': fields.char('Name', size=128),
+        'name': fields.char('Name', size=128, translate=True),
         'date_begin': fields.datetime('Start Date/Time', required=True),
         'date_end': fields.datetime('End Date/Time', required=True), 
         }
@@ -138,7 +138,7 @@ class dds_camp_activity_instanse(osv.osv):
         return [('id','in', ids)]
     
     _columns = {
-        'name': fields.char('Name', size=128),
+        'name': fields.char('Name', size=128, translate=True),
         'seats_max': fields.integer('Maximum Avalaible Seats'),
         'seats_reserved': fields.function(_get_seats, string='Reserved Seats', type='integer', multi='seats_reserved'),
         'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved', fnct_search=_search_seats),
@@ -174,6 +174,10 @@ class dds_camp_activity_ticket(osv.osv):
         
         } 
     
+    def button_unlink_ticket(self, cr, uid, ids, context=None):
+        self.unlink(cr, SUPERUSER_ID, ids)
+        
+    
     def run_scheduler(self, cr, uid, automatic=False, use_new_cursor=False, context=None):
         
         exp_time = (datetime.datetime.now() - datetime.timedelta(minutes=15)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
@@ -181,4 +185,9 @@ class dds_camp_activity_ticket(osv.osv):
         for tck in self.browse(cr, SUPERUSER_ID, self.search(cr, uid, [('state','=','open'),('reserved_time','<',exp_time)])):
             print "Expiring", tck.id, tck.reserved_time, tck.name
             self.write(cr, uid, [tck.id], {'state': 'timeout'})
+        
+        exp_time = (datetime.datetime.now() - datetime.timedelta(minutes=240)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        for tck in self.browse(cr, SUPERUSER_ID, self.search(cr, uid, [('state','=','timeout'),('reserved_time','<',exp_time)])):
+            print "Deleting", tck.id, tck.reserved_time, tck.name
+            self.unlink(cr, uid, [tck.id])
             
