@@ -221,7 +221,7 @@
 					<div><b>Or add a new participant below</b></div>
 					<newline/>
 					 -->
-						<field name="appr_leader" groups='event.group_event_manager' />
+						<field name="appr_leader" groups='event.group_event_manager,dds_camp.group_dds_camp_manager' />
 						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
 
 						<notebook colspan="6">

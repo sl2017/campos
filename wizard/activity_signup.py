@@ -92,7 +92,7 @@ class activity_signup_wizard(osv.osv_memory):
               'ticket_id': fields.many2one('dds_camp.activity.ticket', 'Ticket', ondelete='cascade'),
               }
     
-    _defaults = {'message' : lambda *a: _('Select Activity, Period and number of required seats')}
+    _defaults = {'message' : lambda self,cr,uid,context: _('Select Activity, Period and number of required seats')}
     
     _constraints = [(_check_seats, 'Error: Reserved seats must be Positive', ['seats'])]
     
@@ -191,10 +191,10 @@ class activity_signup_wizard(osv.osv_memory):
                                                                         'seats' : len(pars),
                                                                         'state' : 'done'})
                 self.write(cr, uid, ids, {'state': 'done', 
-                                          'message' : 'Activity booked!.',})
+                                          'message' : _('Activity booked!.'),})
             else:
                 self.write(cr, uid, ids, {'state': 'done', 
-                                          'message' : 'No participants selected. Booking cancelled.',})
+                                          'message' : _('No participants selected. Booking cancelled.'),})
                 ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])    
         else:    
             ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])

@@ -32,7 +32,7 @@
                     				<field name="reg_id"/>
                     				<field name="pickup_summery"/>
                     				<field name="destination_summery"/>
-                    				
+                    				<field name="arrival"/>
                     				<field name="seats" sum="Seats" />
                             	</tree>
                             </field>>
@@ -113,6 +113,7 @@
                     <field name="reg_id"/>
                     <field name="pickup_summery"/>
                     <field name="destination_summery"/>
+                    <field name="arrival"/>
 
                 </tree>
             </field>

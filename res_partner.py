@@ -50,7 +50,58 @@ class res_partner(osv.osv):
             res.append((record.id, name))
         return res
     
-    
+    def create_camp_invoice(self, cr, uid, ids, product_id=None, datas=None, context=None):
+        """ Create Customer Invoice for partners.
+        @param datas: datas has dictionary value which consist Id of Membership product, Line Name and Cost Amount of Membership.
+                      datas = {'invoice_product_id': None, 'amount': None, 'line_name' : 'text'}
+        """
+        invoice_obj = self.pool.get('account.invoice')
+        invoice_line_obj = self.pool.get('account.invoice.line')
+        invoice_tax_obj = self.pool.get('account.invoice.tax')
+        product_id = product_id or datas.get('invoice_product_id', False)
+        amount = datas.get('amount', 0.0)
+        invoice_list = []
+        if type(ids) in (int, long,):
+            ids = [ids]
+        for partner in self.browse(cr, uid, ids, context=context):
+            account_id = partner.property_account_receivable and partner.property_account_receivable.id or False
+            fpos_id = partner.property_account_position and partner.property_account_position.id or False
+            addr = self.address_get(cr, uid, [partner.id], ['invoice'])
+            
+            if not addr.get('invoice', False):
+                raise osv.except_osv(_('Error!'),
+                        _("Partner doesn't have an address to make the invoice."))
+            quantity = 1
+            line_value =  {
+                'product_id': product_id,
+            }
+
+            line_dict = invoice_line_obj.product_id_change(cr, uid, {},
+                            product_id, False, quantity, '', 'out_invoice', partner.id, fpos_id, price_unit=amount, context=context)
+            line_value.update(line_dict['value'])
+            line_value['price_unit'] = amount
+            if datas.get('line_name', False):
+                line_value['name'] = datas.get('line_name', False)
+            if line_value.get('invoice_line_tax_id', False):
+                tax_tab = [(6, 0, line_value['invoice_line_tax_id'])]
+                line_value['invoice_line_tax_id'] = tax_tab
+
+            invoice_id = invoice_obj.create(cr, uid, {
+                'partner_id': partner.id,
+                'account_id': account_id,
+                'fiscal_position': fpos_id or False
+                }, context=context)
+            line_value['invoice_id'] = invoice_id
+            invoice_line_id = invoice_line_obj.create(cr, uid, line_value, context=context)
+            invoice_obj.write(cr, uid, invoice_id, {'invoice_line': [(6, 0, [invoice_line_id])]}, context=context)
+            invoice_list.append(invoice_id)
+            if line_value['invoice_line_tax_id']:
+                tax_value = invoice_tax_obj.compute(cr, uid, invoice_id).values()
+                for tax in tax_value:
+                    invoice_tax_obj.create(cr, uid, tax, context=context)
+        #recompute the membership_state of those partners
+        #self.pool.get('res.partner').write(cr, uid, ids, {})
+        return invoice_list
     
 
 res_partner()

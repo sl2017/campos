@@ -149,6 +149,7 @@
 									<group colspan="2" col="2">
 									<field name="signed_up"/>
 									<field name="foreigners"/>
+									<field name="group_appr"/>
 									<field name="agreements"/>
 									<field name="internal_note"/>
 									<field name="user_created"/>
@@ -169,6 +170,7 @@
 		                    				<field name="transport_id"/>
 		                    				<field name="pickup_summery"/>
 		                    				<field name="destination_summery"/>
+		                    				<field name="arrival"/>
 		                    				<field name="seats" />
 		                            	</tree>
 									</field>

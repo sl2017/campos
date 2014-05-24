@@ -1177,6 +1177,8 @@ class event_registration(osv.osv):
         
         #Activities
         'activity_ticket_ids': fields.one2many('dds_camp.activity.ticket', 'reg_id', 'Activity Tickets'),
+        
+        'group_appr' : fields.boolean('Troop approved'),
     }
     
     def write(self, cr, uid, ids, values, context=None):
