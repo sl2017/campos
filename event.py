@@ -183,7 +183,7 @@ class dds_camp_area(osv.osv):
         'state' : fields.selection([('draft','Draft'),
                                      ('named', 'Named'),
                                      ('confirmed', 'Confirmed')], "State"),
-        
+        'coorgroup_id' : fields.many2one('event.registration', 'Coordinator', ondelete='set null'),
         }
     
     _defaults = {'state' : lambda *a: 'draft'}
@@ -997,8 +997,11 @@ class event_registration(osv.osv):
     def _calc_number(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for reg in self.browse(cr, uid, ids, context=context):
+            ldr_stat = ''
             nbr = 0
             pre = 0
+            ldr = 0
+            appr = 0
             
             for ag in reg.agegroup_ids:
                 #nbr = nbr + ag.number
@@ -1008,6 +1011,12 @@ class event_registration(osv.osv):
             for par in reg.participant_ids:
                 fee = fee + par.camp_fee
                 nbr += 1
+                if par.leader:
+                    ldr += 1
+                if par.appr_leader:
+                    appr += 1
+            
+            ldr_stat = "%d / %d" % (ldr, appr)        
             last_login = False
             users = False
             if reg.partner_id:
@@ -1033,7 +1042,8 @@ class event_registration(osv.osv):
                            'camp_fee_tot' : fee,
                            'camp_fee_charged' : max(fee, reg.camp_fee_min),
                            'last_login' : last_login,
-                           'user_created' : users}
+                           'user_created' : users,
+                           'leader_status' : ldr_stat}
         return res
     
     def _calc_group_summery(self, cr, uid, ids, field_name, arg, context):
@@ -1049,6 +1059,12 @@ class event_registration(osv.osv):
                                              'phone': reg.contact_partner_id.phone if reg.contact_partner_id.phone else "",
                                              'email': reg.contact_partner_id.email if reg.contact_partner_id.email else "",
                                              }
+                if myregs.camparea_id.coorgroup_id:
+                    if myregs.foreigners:
+                        html += "Coordinator: %(group)s" % {'group' : myregs.camparea_id.coorgroup_id.name}
+                    else:
+                        html += "Koordinator: %(group)s" % {'group' : myregs.camparea_id.coorgroup_id.name}    
+                    
             html += GROUP_FOOT 
             res[myregs.id] = {'camparea_groups': html}
         
@@ -1138,6 +1154,8 @@ class event_registration(osv.osv):
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
         'camp_fee_1rate' : fields.float('Camp Fee 1. Rate'),
 
+        'leader_status' : fields.function(_calc_number, type = 'char', size=32, string='Approval status', method=True, multi='PART' ),
+        
         'last_login' : fields.function(_calc_number, type = 'date', string='Last Login Date', method=True, multi='PART' ),
         'user_created' : fields.function(_calc_number, type = 'boolean', string='Users created', method=True, multi='PART' ),
         
@@ -1179,6 +1197,8 @@ class event_registration(osv.osv):
         'activity_ticket_ids': fields.one2many('dds_camp.activity.ticket', 'reg_id', 'Activity Tickets'),
         
         'group_appr' : fields.boolean('Troop approved'),
+        
+        'old_pots': fields.integer('Old pots', help="For use at the Senior activity sunday"),  
     }
     
     def write(self, cr, uid, ids, values, context=None):

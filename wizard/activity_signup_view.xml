@@ -18,6 +18,7 @@
           
           <!-- <field name="testact_id"/> --> 
           <field name="act_ins_id"  domain="[('activity_id','=',act_id),('seats_available','&gt;',0)]" options="{'no_open': True, 'create': false, 'create_edit': false, 'no_quick_create': true}"/>
+          <label string="Er der ingen valgmuligheder under periode er det fordi aktiviten er udsolgt i alle perioder" colspan="2"/>
           <field name="seats"/>                
        </group>
 

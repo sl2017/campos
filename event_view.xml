@@ -109,8 +109,9 @@
 									</group>
 								</group>
 							</page>
-							<page string="Special considerations" colspan="8" col="8">
-								<group colspan="8" col="8">
+							<page string="Special considerations" colspan="8" col="4">
+								<group colspan="8" col="4">
+								
 									<group>
 										<field name="hcap"/>
 										<field name="hcap_desc"/>
@@ -120,6 +121,7 @@
 										<field name="food_allergy"/>
 										<field name="food_allergy_desc"/>
 									</group>
+									
 								</group>
 
 							</page>
@@ -150,6 +152,7 @@
 									<field name="signed_up"/>
 									<field name="foreigners"/>
 									<field name="group_appr"/>
+									<field name='leader_status'/>
 									<field name="agreements"/>
 									<field name="internal_note"/>
 									<field name="user_created"/>
@@ -197,7 +200,11 @@
 										
 									</tree>
 								</field>
-								
+								<separator  colspan="8"/>
+										<group>
+											<field name='old_pots'/>
+											
+										</group>
 								</group>
 								</page>
 						</notebook>

@@ -92,8 +92,8 @@
 										</group>
 									</group>
 								</page>
-								<page string="Special considerations" colspan="8" col="8">
-									<group colspan="8" col="8">
+								<page string="Special considerations" colspan="8" col="4">
+									<group colspan="8" col="4">
 										<group>
 											<field name="hcap" />
 											<field name="hcap_desc" />
@@ -103,6 +103,7 @@
 											<field name="food_allergy" />
 											<field name="food_allergy_desc" />
 										</group>
+										
 									</group>
 
 								</page>
@@ -166,7 +167,7 @@
 								<button name="%(dds_camp.action_activity_signup_wizard)d" string="Activity Signup" type="action"/>
 								<newline/>
 								
-								<field name="activity_ticket_ids" nolabel="1" options="{'reload_on_button': true, 'always_reload': true}">
+								<field name="activity_ticket_ids" nolabel="1" options="{'reload_on_button': true, 'always_reload': true}" colspan="8">
 									<tree>
 										<field name="actins_date_begin"/>
 										<field name="act_ins_id"/>
@@ -177,6 +178,11 @@
 										
 									</tree>
 								</field>
+								<separator  colspan="8"/>
+										<group>
+											<field name='old_pots'/>
+											<label string="Gamle og nedslidte gryder til seniorarrangementet der ikke returneres." colspan="8"/>
+										</group>
 								
 								</group>
 								</page>
@@ -273,7 +279,8 @@
 						<!--  <field name="withgroup"/>
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
-						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"
+													 attrs="{'required': [('event_id2', '=', 2)]}"/>
 						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						</group>
 						<group string="Driving license" colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
@@ -443,7 +450,7 @@
 						<!--  <field name="withgroup"/>
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
-						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'required': [('event_id2', '=', 2)]}"/>
 						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 						</group>
 						<group string="Driving license" colspan="2" col="2" attrs="{'invisible': [('event_id2', '=', 1)]}">
@@ -751,7 +758,8 @@
 									<!--  <field name="withgroup"/>
 									<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/> -->
 									<field name="profession"/>
-									<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
+									<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" 
+																 attrs="{'required': [('event_id2', '=', 2)]}"/>
 									<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>
 									<field name="partype" invisible="1"/>
 									
@@ -761,7 +769,7 @@
 								<page string="Accommodation" attrs="{'invisible': [('event_id2', '=', 1)]}">
 									<group>
 									
-										<field name="accommodation"/>
+										<field name="accommodation" attrs="{'required': [('event_id2', '=', 2)]}"/>
 										<field name="parking"/>
 										<field name="power"/>
 										<field name="tent_nb"/>

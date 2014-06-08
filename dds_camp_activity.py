@@ -36,6 +36,25 @@ class dds_camp_activity_activity(osv.osv):
     _order = 'name'
     _inherit = 'mail.thread'
     
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+
+        res = []
+        for record in self.browse(cr, uid, ids, context=context):
+            sold_out = True
+            for actins in record.act_ins_ids:
+                if actins.seats_available > 0:
+                    sold_out = False
+            display_name = record.name
+            if sold_out:
+                display_name += _(' (This activity is fully booked)')
+            res.append((record['id'], display_name))
+        return res       
+                
     _columns = {
         'name': fields.char('Name', size=128, translate=True),
         'committee_id' : fields.many2one('dds_camp.committee', 'Committee'),
@@ -105,8 +124,12 @@ class dds_camp_activity_instanse(osv.osv):
         per_obj = self.pool.get('dds_camp.activity.period')
         res = []
         for record in self.browse(cr, uid, ids, context=context):
-            dummy,act_name = act_obj.name_get(cr, uid, [record.activity_id.id], context)[0]
-            dummy,per_name = per_obj.name_get(cr, uid, [record.period_id.id], context)[0]
+            act_name = ''
+            per_name = ''
+            if record.activity_id:
+                dummy,act_name = act_obj.name_get(cr, uid, [record.activity_id.id], context)[0]
+            if record.period_id:
+                dummy,per_name = per_obj.name_get(cr, uid, [record.period_id.id], context)[0]
             if record.name:
                 display_name = record.name + ' ' + act_name + ' - ' + per_name
             else:

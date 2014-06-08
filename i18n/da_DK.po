@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 19:44+0000\n"
-"PO-Revision-Date: 2014-05-15 21:47+0100\n"
+"POT-Creation-Date: 2014-06-04 19:53+0000\n"
+"PO-Revision-Date: 2014-06-04 21:59+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,10 +38,16 @@ msgid "Reserved Seats"
 msgstr "Reserverede pladser"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1212
+#: code:addons/dds_camp/event.py:1234
 #, python-format
 msgid "Registration Email"
 msgstr "Registration Email"
+
+#. module: dds_camp
+#: code:addons/dds_camp/dds_camp_activity.py:54
+#, python-format
+msgid " (This activity is fully booked)"
+msgstr " (Aktiviteten er udsolgt)"
 
 #. module: dds_camp
 #: view:dds_camp.staff:0
@@ -302,7 +308,7 @@ msgstr ""
 "reservation udløber om 15 min."
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1210
+#: code:addons/dds_camp/event.py:1232
 #, python-format
 msgid "Group Econ. Contact"
 msgstr "Kasserer kontakt"
@@ -345,7 +351,7 @@ msgid "Staff"
 msgstr "Hjælper"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1206 view:dds_camp.event.participant:0
+#: code:addons/dds_camp/event.py:1228 view:dds_camp.event.participant:0
 #: view:dds_camp.event.participant.day:0
 #: field:dds_camp.event.participant.day,registration_id:0
 #, python-format
@@ -376,6 +382,12 @@ msgstr "2. Vælg aktivitetsperiode"
 #: view:dds_camp.bmimportwizard:0
 msgid "Import"
 msgstr "Import"
+
+#. module: dds_camp
+#: field:dds_camp.area,group_ids:0 view:dds_camp.event.participant:0
+#: field:dds_camp.friendship,group_ids:0
+msgid "Troops"
+msgstr "Grupper"
 
 #. module: dds_camp
 #: field:dds_camp.bmimportwizard.members,state:0
@@ -497,13 +509,6 @@ msgstr "Alle dage"
 #: field:dds_camp.event.participant,committee_id:0
 msgid "Have agreement with committee"
 msgstr "Har aftale med udvalg"
-
-#. module: dds_camp
-#: field:dds_camp.activity.signup,message:0
-#: field:dds_camp.bmimportwizard,message:0
-#: field:dds_camp.wizard.signup.staff,message:0
-msgid "Message"
-msgstr "Message"
 
 #. module: dds_camp
 #: view:dds_camp.wizard.signup.staff:0 view:dds_camp.wizard.welcome:0
@@ -664,9 +669,10 @@ msgid "Car"
 msgstr "Personbil"
 
 #. module: dds_camp
-#: selection:dds_camp.bmimportwizard.members,state:0
-msgid "Tilmeldt"
-msgstr "Tilmeldt"
+#: view:event.event:0
+#: model:ir.actions.act_window,name:dds_camp.action_portal_event_registration_tree
+msgid "Registrations"
+msgstr "Tilmeldinger"
 
 #. module: dds_camp
 #: view:dds_camp.activity.signup:0 view:dds_camp.bmimportwizard:0
@@ -710,6 +716,16 @@ msgid "Entire Camp"
 msgstr "Hele lejren"
 
 #. module: dds_camp
+#: field:dds_camp.area,coorgroup_id:0
+msgid "Coordinator"
+msgstr "Coordinator"
+
+#. module: dds_camp
+#: field:event.registration,leader_status:0
+msgid "Approval status"
+msgstr "Godkendelsesstatus"
+
+#. module: dds_camp
 #: view:dds_camp.event.participant:0
 #: field:dds_camp.event.participant,event_id:0
 #: view:dds_camp.event.participant.day:0
@@ -740,6 +756,11 @@ msgid "Reset login"
 msgstr "Reset login"
 
 #. module: dds_camp
+#: view:event.registration:0
+msgid "Delete Activity Booking?"
+msgstr "Delete Activity Booking?"
+
+#. module: dds_camp
 #: view:dds_camp.activity.period:0
 msgid "Activity Period"
 msgstr "Aktivitetsperiode"
@@ -763,6 +784,20 @@ msgstr "Udenfor lejren"
 #: view:dds_camp.event.participant:0
 msgid "Camp Staff"
 msgstr "Hjælpere"
+
+#. module: dds_camp
+#: code:addons/dds_camp/report/participants_list_xls.py:268
+#: selection:dds_camp.activity.activity,audience:0
+#: view:dds_camp.activity.signup:0 view:dds_camp.activity.signup.members:0
+#: field:dds_camp.activity.ticket,par_ids:0 view:dds_camp.event.participant:0
+#: view:dds_camp.staff:0 field:dds_camp.staff,list_ids:0
+#: view:event.registration:0
+#: model:ir.actions.act_window,name:dds_camp.action_event_participants_tree
+#: model:ir.actions.act_window,name:dds_camp.action_portal_event_participants_tree
+#: model:ir.ui.menu,name:dds_camp.event_participants_tree_menu
+#, python-format
+msgid "Participants"
+msgstr "Deltagere"
 
 #. module: dds_camp
 #: view:dds_camp.wizard.signup.staff:0
@@ -806,11 +841,6 @@ msgid "DDS Gruppenr"
 msgstr "DDS Gruppenr"
 
 #. module: dds_camp
-#: field:dds_camp.activity.signup,seats:0
-msgid "3. Reserve Seats"
-msgstr "3. Reserver pladser"
-
-#. module: dds_camp
 #: view:dds_camp.activity.period:0
 #: model:ir.actions.act_window,name:dds_camp.action_activity_period_tree
 msgid "Aktivitetsperiode"
@@ -844,18 +874,9 @@ msgid "IST"
 msgstr "Hjælper"
 
 #. module: dds_camp
-#: code:addons/dds_camp/report/participants_list_xls.py:268
-#: selection:dds_camp.activity.activity,audience:0
-#: view:dds_camp.activity.signup:0 view:dds_camp.activity.signup.members:0
-#: field:dds_camp.activity.ticket,par_ids:0 view:dds_camp.event.participant:0
-#: view:dds_camp.staff:0 field:dds_camp.staff,list_ids:0
-#: view:event.registration:0
-#: model:ir.actions.act_window,name:dds_camp.action_event_participants_tree
-#: model:ir.actions.act_window,name:dds_camp.action_portal_event_participants_tree
-#: model:ir.ui.menu,name:dds_camp.event_participants_tree_menu
-#, python-format
-msgid "Participants"
-msgstr "Deltagere"
+#: field:dds_camp.transport.ticket,pickup_summery:0
+msgid "Pickup"
+msgstr "Opsamling"
 
 #. module: dds_camp
 #: field:dds_camp.activity.signup,state:0
@@ -956,6 +977,11 @@ msgid "Describe the allergy"
 msgstr "Beskriv allergien"
 
 #. module: dds_camp
+#: view:event.registration:0
+msgid "Delete Activity Booking"
+msgstr "Delete Activity Booking"
+
+#. module: dds_camp
 #: field:dds_camp.scout.org,sex:0
 msgid "Sex"
 msgstr "Køn"
@@ -1042,6 +1068,11 @@ msgstr "Start Dato/kl."
 #: field:dds_camp.activity.instanse,seats_max:0
 msgid "Maximum Avalaible Seats"
 msgstr "Max deltagerantal"
+
+#. module: dds_camp
+#: field:dds_camp.activity.activity,act_ins_ids:0
+msgid "Instanses"
+msgstr "Instanses"
 
 #. module: dds_camp
 #: field:dds_camp.transport.route,pickup_address:0
@@ -1192,7 +1223,7 @@ msgid "Age 11 - 12"
 msgstr "11 - 12 år"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1208
+#: code:addons/dds_camp/event.py:1230
 #, python-format
 msgid "Group Contact"
 msgstr "Gruppe kontaktperson"
@@ -1310,8 +1341,8 @@ msgid "Christian Eggert Jørgensen"
 msgstr "Christian Eggert Jørgensen"
 
 #. module: dds_camp
-#: code:addons/dds_camp/dds_camp_activity.py:57
-#: code:addons/dds_camp/dds_camp_activity.py:71
+#: code:addons/dds_camp/dds_camp_activity.py:76
+#: code:addons/dds_camp/dds_camp_activity.py:90
 #, python-format
 msgid "Quick creation disallowed."
 msgstr "Quick creation disallowed."
@@ -1369,7 +1400,7 @@ msgid "FDF"
 msgstr "FDF"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:836 code:addons/dds_camp/event.py:1593
+#: code:addons/dds_camp/event.py:836 code:addons/dds_camp/event.py:1615
 #: view:dds_camp.staff:0
 #: model:ir.actions.act_window,name:dds_camp.action_add_other_participant
 #, python-format
@@ -1578,6 +1609,11 @@ msgid "Active days"
 msgstr "Aktive dage"
 
 #. module: dds_camp
+#: field:event.registration,group_appr:0
+msgid "Troop approved"
+msgstr "Gruppe godkendt"
+
+#. module: dds_camp
 #: field:dds_camp.municipality,number:0
 msgid "Number"
 msgstr "Nummer"
@@ -1618,10 +1654,9 @@ msgid "Add Troop"
 msgstr "Tilføj gruppe"
 
 #. module: dds_camp
-#: field:dds_camp.area,group_ids:0 view:dds_camp.event.participant:0
-#: field:dds_camp.friendship,group_ids:0
-msgid "Troops"
-msgstr "Grupper"
+#: help:event.registration,old_pots:0
+msgid "For use at the Senior activity sunday"
+msgstr "Til brug på senioraktiviteten søndag"
 
 #. module: dds_camp
 #: field:event.registration,organization:0
@@ -1669,9 +1704,9 @@ msgid "Afvis"
 msgstr "Afvis"
 
 #. module: dds_camp
-#: selection:dds_camp.bmimportwizard.members,state:0
-msgid "Tilmeldes"
-msgstr "Tilmeldes"
+#: field:dds_camp.activity.signup,seats:0
+msgid "3. Reserve Seats"
+msgstr "3. Reserver pladser"
 
 #. module: dds_camp
 #: model:ir.module.category,name:dds_camp.module_dds_camp_category
@@ -1696,10 +1731,9 @@ msgid "Webshop nid"
 msgstr "Webshop nid"
 
 #. module: dds_camp
-#: view:event.event:0
-#: model:ir.actions.act_window,name:dds_camp.action_portal_event_registration_tree
-msgid "Registrations"
-msgstr "Tilmeldinger"
+#: selection:dds_camp.bmimportwizard.members,state:0
+msgid "Tilmeldt"
+msgstr "Tilmeldt"
 
 #. module: dds_camp
 #: field:portal.wizard.user,login:0
@@ -1818,6 +1852,12 @@ msgid "Messages"
 msgstr "Meddelse"
 
 #. module: dds_camp
+#: code:addons/dds_camp/res_partner.py:72
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: dds_camp
 #: view:dds_camp.event.participant:0
 msgid "Scout Leaders"
 msgstr "Spejderledere"
@@ -1863,6 +1903,11 @@ msgid "By my Troop"
 msgstr "Sammen med min gruppe"
 
 #. module: dds_camp
+#: field:event.registration,old_pots:0
+msgid "Old pots"
+msgstr "Gamle gryder (antal)"
+
+#. module: dds_camp
 #: field:event.registration,camp_fee_1rate:0
 msgid "Camp Fee 1. Rate"
 msgstr "Camp Fee 1. Rate"
@@ -1873,9 +1918,10 @@ msgid "Minimum Camp Fee"
 msgstr "Minimum lejrafgift"
 
 #. module: dds_camp
-#: selection:dds_camp.activity.ticket,state:0
-msgid "TimeOut"
-msgstr "Udløbet"
+#: code:addons/dds_camp/res_partner.py:73
+#, python-format
+msgid "Partner doesn't have an address to make the invoice."
+msgstr "Partner doesn't have an address to make the invoice."
 
 #. module: dds_camp
 #: selection:dds_camp.area,state:0
@@ -1953,8 +1999,8 @@ msgid "City/Location"
 msgstr "Postnr/by "
 
 #. module: dds_camp
-#: code:addons/dds_camp/dds_camp_activity.py:57
-#: code:addons/dds_camp/dds_camp_activity.py:71
+#: code:addons/dds_camp/dds_camp_activity.py:76
+#: code:addons/dds_camp/dds_camp_activity.py:90
 #, python-format
 msgid "Warning"
 msgstr "Warning"
@@ -1968,6 +2014,11 @@ msgstr "Udlændinge"
 #: view:dds_camp.staff:0 view:event.registration:0
 msgid "Accommodation"
 msgstr "Overnatning"
+
+#. module: dds_camp
+#: selection:dds_camp.activity.ticket,state:0
+msgid "TimeOut"
+msgstr "Udløbet"
 
 #. module: dds_camp
 #: selection:event.registration,organization:0
@@ -2020,9 +2071,11 @@ msgid "Seats"
 msgstr "Pladser"
 
 #. module: dds_camp
-#: field:dds_camp.transport.ticket,pickup_summery:0
-msgid "Pickup"
-msgstr "Opsamling"
+#: field:dds_camp.activity.signup,message:0
+#: field:dds_camp.bmimportwizard,message:0
+#: field:dds_camp.wizard.signup.staff,message:0
+msgid "Message"
+msgstr "Message"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0
@@ -2065,6 +2118,11 @@ msgstr ""
 #: selection:dds_camp.area,state:0
 msgid "Draft"
 msgstr "Draft"
+
+#. module: dds_camp
+#: selection:dds_camp.bmimportwizard.members,state:0
+msgid "Tilmeldes"
+msgstr "Tilmeldes"
 
 #. module: dds_camp
 #: selection:dds_camp.event.participant,functitle:0
@@ -2272,6 +2330,11 @@ msgstr "Tilmeldt under"
 #: model:ir.ui.menu,name:dds_camp.event_committee_menu_portal
 msgid "Udvalg"
 msgstr "Udvalg"
+
+#. module: dds_camp
+#: view:dds_camp.activity.ticket:0
+msgid "Remove Participant from Activity Booking"
+msgstr "Fjern deltager fra Booking"
 
 #. module: dds_camp
 #: code:addons/dds_camp/wizard/portal_wizard.py:43
