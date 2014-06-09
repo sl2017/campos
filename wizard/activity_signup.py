@@ -23,36 +23,37 @@ class activity_signup_wizard(osv.osv_memory):
     
     def _get_participants(self, cr, uid, ids, name, args, context=None):
         res = {}
-        wiz = self.browse(cr, uid, ids, context)[0] 
-        print "Wiz_gp", wiz.act_id, wiz.act_ins_id, 'Old', wiz.act_ins_id, wiz.seats
-        chk_pts = wiz.act_ins_id.activity_id.points
-        #Build possible members
-        if wiz.reg_id.participant_ids:
-            valid_part = ''
-            allowed_ids = [] 
-            for par in wiz.reg_id.participant_ids:
-                print "Testing:", par.name, par.calc_age, par.spare_act_pts
-                if par.calc_age < wiz.act_ins_id.activity_id.age_from or par.calc_age > wiz.act_ins_id.activity_id.age_to:
-                    print "kill", wiz.act_ins_id.activity_id.age_from, wiz.act_ins_id.activity_id.age_to
-                    continue
-                if chk_pts:
-                    if par.spare_act_pts < chk_pts:
+        if ids:
+            wiz = self.browse(cr, uid, ids, context)[0] 
+            print "Wiz_gp", wiz.act_id, wiz.act_ins_id, 'Old', wiz.act_ins_id, wiz.seats
+            chk_pts = wiz.act_ins_id.activity_id.points
+            #Build possible members
+            if wiz.reg_id.participant_ids:
+                valid_part = ''
+                allowed_ids = [] 
+                for par in wiz.reg_id.participant_ids:
+                    print "Testing:", par.name, par.calc_age, par.spare_act_pts
+                    if par.calc_age < wiz.act_ins_id.activity_id.age_from or par.calc_age > wiz.act_ins_id.activity_id.age_to:
+                        print "kill", wiz.act_ins_id.activity_id.age_from, wiz.act_ins_id.activity_id.age_to
                         continue
-                period_ok = True
-                if par.ticket_ids:
-                    for tck in par.ticket_ids:
-                        if tck.act_ins_id.period_id.date_begin <= wiz.act_ins_id.period_id.date_end and tck.act_ins_id.period_id.date_end >= wiz.act_ins_id.period_id.date_begin:
-                            period_ok = False
-                            break
-                if not period_ok:
-                    print "kill period"
-                    continue
-                print "Create", par.name, wiz.id, ids[0]
-                valid_part += ','.join(str(par.id))
-                allowed_ids.append(par.id)
-            res[wiz.id] = {'valid_part' : valid_part.strip(','),
-                           'allowed_ids': [(6, 0, allowed_ids)],
-                           }
+                    if chk_pts:
+                        if par.spare_act_pts < chk_pts:
+                            continue
+                    period_ok = True
+                    if par.ticket_ids:
+                        for tck in par.ticket_ids:
+                            if tck.act_ins_id.period_id.date_begin <= wiz.act_ins_id.period_id.date_end and tck.act_ins_id.period_id.date_end >= wiz.act_ins_id.period_id.date_begin:
+                                period_ok = False
+                                break
+                    if not period_ok:
+                        print "kill period"
+                        continue
+                    print "Create", par.name, wiz.id, ids[0]
+                    valid_part += ','.join(str(par.id))
+                    allowed_ids.append(par.id)
+                res[wiz.id] = {'valid_part' : valid_part.strip(','),
+                               'allowed_ids': [(6, 0, allowed_ids)],
+                               }
         return res    
     
     def onchange_activity_id(self, cr, uid, ids, activity_id, context=None):       
@@ -89,7 +90,7 @@ class activity_signup_wizard(osv.osv_memory):
               'act_id': fields.many2one('dds_camp.activity.activity', '1. Select Activity', required=True, select=True, ondelete='cascade'),
               'act_ins_id': fields.many2one('dds_camp.activity.instanse', '2. Select Period', required=True, select=True, ondelete='cascade'),
               'testact_id': fields.many2one('dds_camp.activity.instanse', '1. Test Select Activity',  ondelete='cascade'),
-              'ticket_id': fields.many2one('dds_camp.activity.ticket', 'Ticket', ondelete='cascade'),
+              'ticket_id': fields.many2one('dds_camp.activity.ticket', 'Ticket', ondelete='set null'),
               }
     
     _defaults = {'message' : lambda self,cr,uid,context: _('Select Activity, Period and number of required seats')}
@@ -178,7 +179,6 @@ class activity_signup_wizard(osv.osv_memory):
                }
         
     def action_done(self, cr, uid, ids, context=None):
-       
         wiz = self.browse(cr, uid, ids, context)[0]
         
         ticket_obj = self.pool.get('dds_camp.activity.ticket')
@@ -202,6 +202,7 @@ class activity_signup_wizard(osv.osv_memory):
                                       'message' : _('Reservation has expired and activity is fully booked.'),
                                       'ticket_id' : None,
                                       }) 
+        
         
         return {
               'type': 'ir.actions.act_window',
