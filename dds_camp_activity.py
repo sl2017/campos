@@ -126,14 +126,17 @@ class dds_camp_activity_instanse(osv.osv):
         for record in self.browse(cr, uid, ids, context=context):
             act_name = ''
             per_name = ''
+            limit_txt = ''
             if record.activity_id:
                 dummy,act_name = act_obj.name_get(cr, uid, [record.activity_id.id], context)[0]
             if record.period_id:
                 dummy,per_name = per_obj.name_get(cr, uid, [record.period_id.id], context)[0]
+            if record.seats_hard and not context.get('no_limit_check', False):
+                limit_txt = ' (Only %d seats left)' % (record.seats_available)    
             if record.name:
-                display_name = record.name + ' ' + act_name + ' - ' + per_name
+                display_name = record.name + ' ' + act_name + ' - ' + per_name + limit_txt
             else:
-                display_name = act_name + ' - ' + per_name     
+                display_name = act_name + ' - ' + per_name + limit_txt     
             res.append((record['id'], display_name))
     
         return res
@@ -163,6 +166,7 @@ class dds_camp_activity_instanse(osv.osv):
     _columns = {
         'name': fields.char('Name', size=128, translate=True),
         'seats_max': fields.integer('Maximum Avalaible Seats'),
+        'seats_hard': fields.boolean('Hard limit'),
         'seats_reserved': fields.function(_get_seats, string='Reserved Seats', type='integer', multi='seats_reserved'),
         'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved', fnct_search=_search_seats),
         'seats_used': fields.function(_get_seats, string='Number of Participations', type='integer', multi='seats_reserved'),

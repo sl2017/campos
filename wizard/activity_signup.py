@@ -73,6 +73,10 @@ class activity_signup_wizard(osv.osv_memory):
         for data in record:
             if data.seats <= 0:
                 return False
+            if data.act_ins_id.seats_hard and not data.ticket_id:
+                print "check seats", data.seats, data.act_ins_id.seats_available
+                if data.seats > data.act_ins_id.seats_available:
+                    return False
         return True
                     
     _columns = {
@@ -95,7 +99,7 @@ class activity_signup_wizard(osv.osv_memory):
     
     _defaults = {'message' : lambda self,cr,uid,context: _('Select Activity, Period and number of required seats')}
     
-    _constraints = [(_check_seats, 'Error: Reserved seats must be Positive', ['seats'])]
+    _constraints = [(_check_seats, 'Error: Reserved seats must be Positive and Less or equal to available seats', ['seats'])]
     
     def action_signup(self, cr, uid, ids, context=None):
         # your treatment to click  button next 
@@ -165,7 +169,12 @@ class activity_signup_wizard(osv.osv_memory):
                                   'info' : (wiz.act_id.desc if wiz.act_id.desc else "") + _('\nAge: %d - %d\nPoints: %d') % (wiz.act_id.age_from, wiz.act_id.age_to, wiz.act_id.points)
                                   }, context=context)
         actins_obj = self.pool.get('dds_camp.activity.instanse')
-        dummy,actins_name = actins_obj.name_get(cr, uid, [wiz.act_ins_id.id], context)[0]
+        if context:
+            ctx2 = context
+        else:
+            ctx2 = {}
+        ctx2['no_limit_check'] = True    
+        dummy,actins_name = actins_obj.name_get(cr, uid, [wiz.act_ins_id.id], ctx2)[0]
         return {
               'name': actins_name,
               'type': 'ir.actions.act_window',
@@ -181,28 +190,32 @@ class activity_signup_wizard(osv.osv_memory):
     def action_done(self, cr, uid, ids, context=None):
         wiz = self.browse(cr, uid, ids, context)[0]
         
-        ticket_obj = self.pool.get('dds_camp.activity.ticket')
-        if wiz.ticket_id.state == 'open' or wiz.ac_ins_id.seats_available > 0:
-            pars = [p.id for p in wiz.parti_ids]
-            print "pars", pars
-            if len(pars):
-                ticket_obj.write(cr, SUPERUSER_ID, [wiz.ticket_id.id], {'par_ids' : [(6,0, pars)],
-                                                                        'name' : wiz.name,
-                                                                        'seats' : len(pars),
-                                                                        'state' : 'done'})
-                self.write(cr, uid, ids, {'state': 'done', 
-                                          'message' : _('Activity booked!.'),})
-            else:
-                self.write(cr, uid, ids, {'state': 'done', 
-                                          'message' : _('No participants selected. Booking cancelled.'),})
-                ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])    
-        else:    
-            ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])
-            self.write(cr, uid, ids, {'state': 'expired', 
-                                      'message' : _('Reservation has expired and activity is fully booked.'),
-                                      'ticket_id' : None,
-                                      }) 
-        
+        if wiz.ac_ins_id.seats_hard and len(wiz.parti_ids) > (wiz.seats + wiz.ac_ins_id.seats_available):
+            self.write(cr, uid, ids, {'state': 'step2', 
+                                      'message' : _('Too many participants selected. Only %d seats reserved. Remove participants!.') % (wiz.seats),})
+        else:         
+            ticket_obj = self.pool.get('dds_camp.activity.ticket')
+            if wiz.ticket_id.state == 'open' or wiz.ac_ins_id.seats_available > 0:
+                pars = [p.id for p in wiz.parti_ids]
+                print "pars", pars
+                if len(pars):
+                    ticket_obj.write(cr, SUPERUSER_ID, [wiz.ticket_id.id], {'par_ids' : [(6,0, pars)],
+                                                                            'name' : wiz.name,
+                                                                            'seats' : len(pars),
+                                                                            'state' : 'done'})
+                    self.write(cr, uid, ids, {'state': 'done', 
+                                              'message' : _('Activity booked!.'),})
+                else:
+                    self.write(cr, uid, ids, {'state': 'done', 
+                                              'message' : _('No participants selected. Booking cancelled.'),})
+                    ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])    
+            else:    
+                ticket_obj.unlink(cr, SUPERUSER_ID, [wiz.ticket_id.id])
+                self.write(cr, uid, ids, {'state': 'expired', 
+                                          'message' : _('Reservation has expired and activity is fully booked.'),
+                                          'ticket_id' : None,
+                                          }) 
+            
         
         return {
               'type': 'ir.actions.act_window',

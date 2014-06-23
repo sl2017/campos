@@ -3,7 +3,7 @@
     <data>
 
 		<menuitem name="Aktiviteter" id="menu_activity_root" parent="event.event_main_menu" sequence="25"/>
-		<menuitem name="Aktiviteter" id="portal_activity_root" parent="portal.portal_menu" sequence="27" groups="dds_camp.group_dds_camp_activity"/>
+		<menuitem name="Aktiviteter" id="portal_activity_root" parent="portal.portal_menu" sequence="27" groups="dds_camp.group_dds_camp_activity,dds_camp.group_dds_camp_user"/>
 		
 		<!-- Activity -->		
         <record model="ir.ui.view" id="dds_camp_activity_form">
@@ -124,6 +124,7 @@
                             <field name="activity_id"/>
                             <field name="period_id"/>
                             <field name="seats_max"/>
+                            <field name="seats_hard"/>
                             <field name="seats_used"/>
                             <field name="seats_reserved"/>
                             <field name="staff_ids"/>

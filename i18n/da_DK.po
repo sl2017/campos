@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.saas~2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-04 19:53+0000\n"
-"PO-Revision-Date: 2014-06-04 21:59+0100\n"
+"POT-Creation-Date: 2014-06-22 18:37+0000\n"
+"PO-Revision-Date: 2014-06-22 20:43+0100\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,17 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: da_DK\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #. module: dds_camp
 #: field:event.registration,webshop_orderno:0
 msgid "Webshop Order No"
 msgstr "Webshop Order No"
-
-#. module: dds_camp
-#: constraint:dds_camp.activity.signup:0
-msgid "Error: Reserved seats must be Positive"
-msgstr "Error: Reserved seats must be Positive"
 
 #. module: dds_camp
 #: selection:dds_camp.event.agegroup,age_group:0
@@ -38,7 +33,7 @@ msgid "Reserved Seats"
 msgstr "Reserverede pladser"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1234
+#: code:addons/dds_camp/event.py:1288
 #, python-format
 msgid "Registration Email"
 msgstr "Registration Email"
@@ -92,7 +87,7 @@ msgid "Region"
 msgstr "Region"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:202
+#: code:addons/dds_camp/wizard/activity_signup.py:215
 #, python-format
 msgid "Reservation has expired and activity is fully booked."
 msgstr "Reservation er udløbet, og aktiviteten er fuldt booked."
@@ -298,7 +293,7 @@ msgid "Internal note"
 msgstr "Intern note (E2014 Adm)"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:162
+#: code:addons/dds_camp/wizard/activity_signup.py:167
 #, python-format
 msgid ""
 "Click Add to add participants to this activity. Your reservation will expire "
@@ -308,7 +303,7 @@ msgstr ""
 "reservation udløber om 15 min."
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1232
+#: code:addons/dds_camp/event.py:1286
 #, python-format
 msgid "Group Econ. Contact"
 msgstr "Kasserer kontakt"
@@ -351,7 +346,7 @@ msgid "Staff"
 msgstr "Hjælper"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1228 view:dds_camp.event.participant:0
+#: code:addons/dds_camp/event.py:1282 view:dds_camp.event.participant:0
 #: view:dds_camp.event.participant.day:0
 #: field:dds_camp.event.participant.day,registration_id:0
 #, python-format
@@ -368,7 +363,7 @@ msgid "Camp Area"
 msgstr "Klynge"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:197
+#: code:addons/dds_camp/wizard/activity_signup.py:210
 #, python-format
 msgid "No participants selected. Booking cancelled."
 msgstr "Ingen deltager valgt. Booking annulleret."
@@ -705,7 +700,7 @@ msgid "Gives the sequence order."
 msgstr "Gives the sequence order."
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:194
+#: code:addons/dds_camp/wizard/activity_signup.py:207
 #, python-format
 msgid "Activity booked!."
 msgstr "Aktiviteten er booked!"
@@ -758,7 +753,7 @@ msgstr "Reset login"
 #. module: dds_camp
 #: view:event.registration:0
 msgid "Delete Activity Booking?"
-msgstr "Delete Activity Booking?"
+msgstr "Slet aktivitetsbooking?"
 
 #. module: dds_camp
 #: view:dds_camp.activity.period:0
@@ -979,7 +974,7 @@ msgstr "Beskriv allergien"
 #. module: dds_camp
 #: view:event.registration:0
 msgid "Delete Activity Booking"
-msgstr "Delete Activity Booking"
+msgstr "Slet aktivitetsbooking"
 
 #. module: dds_camp
 #: field:dds_camp.scout.org,sex:0
@@ -997,6 +992,14 @@ msgstr "Annuller"
 #: field:portal.wizard.user,staff_id:0
 msgid "ITS"
 msgstr "ITS"
+
+#. module: dds_camp
+#: constraint:dds_camp.activity.signup:0
+msgid ""
+"Error: Reserved seats must be Positive and Less or equal to available seats"
+msgstr ""
+"Fejl: Reserverede pladser skal være postivit og minder end eller lig ledigt "
+"antal pladser."
 
 #. module: dds_camp
 #: field:event.registration,hcap:0
@@ -1223,7 +1226,7 @@ msgid "Age 11 - 12"
 msgstr "11 - 12 år"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:1230
+#: code:addons/dds_camp/event.py:1284
 #, python-format
 msgid "Group Contact"
 msgstr "Gruppe kontaktperson"
@@ -1400,7 +1403,7 @@ msgid "FDF"
 msgstr "FDF"
 
 #. module: dds_camp
-#: code:addons/dds_camp/event.py:836 code:addons/dds_camp/event.py:1615
+#: code:addons/dds_camp/event.py:840 code:addons/dds_camp/event.py:1669
 #: view:dds_camp.staff:0
 #: model:ir.actions.act_window,name:dds_camp.action_add_other_participant
 #, python-format
@@ -1855,7 +1858,7 @@ msgstr "Meddelse"
 #: code:addons/dds_camp/res_partner.py:72
 #, python-format
 msgid "Error!"
-msgstr "Error!"
+msgstr "Fejl!"
 
 #. module: dds_camp
 #: view:dds_camp.event.participant:0
@@ -1910,7 +1913,7 @@ msgstr "Gamle gryder (antal)"
 #. module: dds_camp
 #: field:event.registration,camp_fee_1rate:0
 msgid "Camp Fee 1. Rate"
-msgstr "Camp Fee 1. Rate"
+msgstr "Lejr afgift 1. rate"
 
 #. module: dds_camp
 #: field:event.registration,camp_fee_min:0
@@ -1926,7 +1929,7 @@ msgstr "Partner doesn't have an address to make the invoice."
 #. module: dds_camp
 #: selection:dds_camp.area,state:0
 msgid "Confirmed"
-msgstr "Confirmed"
+msgstr "Bekræftet"
 
 #. module: dds_camp
 #: model:ir.ui.menu,name:dds_camp.event_activity_period_menu
@@ -1964,7 +1967,7 @@ msgid "Followers"
 msgstr "Followers"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:95
+#: code:addons/dds_camp/wizard/activity_signup.py:100
 #, python-format
 msgid "Select Activity, Period and number of required seats"
 msgstr "Vælg aktivitet, periode og antal deltagere"
@@ -2166,8 +2169,16 @@ msgid "Age 0 - 3"
 msgstr "0 - 3 år"
 
 #. module: dds_camp
-#: code:addons/dds_camp/wizard/activity_signup.py:65
-#: code:addons/dds_camp/wizard/activity_signup.py:164
+#: code:addons/dds_camp/wizard/activity_signup.py:195
+#, python-format
+msgid ""
+"Too many participants selected. Only %d seats reserved. Remove participants!."
+msgstr ""
+"Too many participants selected. Only %d seats reserved. Remove participants!."
+
+#. module: dds_camp
+#: code:addons/dds_camp/wizard/activity_signup.py:66
+#: code:addons/dds_camp/wizard/activity_signup.py:169
 #, python-format
 msgid ""
 "\n"
