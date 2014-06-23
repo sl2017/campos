@@ -69,6 +69,7 @@
 					<group states="step1">
 						<field name="name"/>
 						<field name="email"/>
+						<field name="phone" required="1"/>
 						<field name="lang"/>
 					</group>
 				<group states="step2">

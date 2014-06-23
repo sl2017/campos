@@ -57,6 +57,7 @@ class wizard_signupstaff(osv.osv_memory):
     _columns = {
                 'name': fields.char('Name', size=128, required=True, select=True),
                 'email': fields.char('Email', size=240, required=True),
+                'phone': fields.char('Phone', size=64),
                 'state': fields.selection([('step1', 'step1'),('step2', 'step2')]),
                 'message': fields.char('Message', size=128),
                 'lang': fields.selection(_lang_get, 'Language',
@@ -77,6 +78,7 @@ class wizard_signupstaff(osv.osv_memory):
             # Create partner
             partner_id = partner_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
                                                                'email': signup.email,
+                                                               'phone' : signup.phone,
                                                                'lang': signup.lang,
                                                                'tz': 'Europe/Copenhagen'})
             # Create user
@@ -95,6 +97,7 @@ class wizard_signupstaff(osv.osv_memory):
             #partner = partner_obj.browse(cr, SUPERUSER_ID, [partner_id], context)[0]
             reg_id = reg_obj.create(cr, SUPERUSER_ID, {'name': signup.name,
                                                        'email': signup.email,
+                                                       'phone' : signup.phone,
                                                        'partner_id': partner_id,
                                                        'contact_partner_id':  partner_id,
                                                        'event_id' : 2,
@@ -108,6 +111,7 @@ class wizard_signupstaff(osv.osv_memory):
                                                        'registration_id': reg_id,
                                                        'state': 'draft',
                                                        'partype' : 'itshead',
+                                                       'phone' : signup.phone,
                                                        })
             # Create Staff
             staff_obj.create(cr, SUPERUSER_ID, {'reg_id' : reg_id,
