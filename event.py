@@ -554,7 +554,7 @@ class dds_camp_event_participant(osv.osv):
                     if age > 22:
                         ag = '22+'
             calc_age = age
-            if age > 3 or age == -1:
+            if age >= 3 or age == -1:
                 if age == -1:
                     age = 100
                 if par.event_id2 == 1: # Normal deltager
@@ -593,6 +593,8 @@ class dds_camp_event_participant(osv.osv):
                                 })
         return res
     
+     
+            
     def _age(self, date_of_birth_str, date_begin_str):
         if date_of_birth_str:
             date_of_birth = datetime.datetime.strptime(date_of_birth_str, '%Y-%m-%d').date()
@@ -604,6 +606,8 @@ class dds_camp_event_participant(osv.osv):
         else:
             return -1
     
+                
+        
     def onchange_birth(self, cr, uid, ids, birth, context=None):
         age = self._age(birth, '2014-07-22')
         ag = False
@@ -1069,7 +1073,56 @@ class event_registration(osv.osv):
             res[myregs.id] = {'camparea_groups': html}
         
         return res
-            
+    
+    def get_webshop_items(self, cr, uid, id, context):
+        groups = {}
+        list = []
+        for reg in self.browse(cr, uid, [id], context=context):
+            for par in reg.participant_ids:
+                if par.calc_age >= 3:
+                    if par.calc_age >= 6:
+                        if par.camp_fee == 500:
+                            k= "w-a"
+                        else:    
+                            k = "%d-a" %(par.pay_days)
+                    elif par.calc_age >= 3 and par.calc_age < 6:
+                        if par.camp_fee == 335:
+                            k= "w-c"
+                        else:    
+                            k = "%d-c" %(par.pay_days)
+                    if groups.has_key(k):
+                        groups[k] += 1
+                    else:
+                        groups[k] = 1
+        for k,v in groups.items():
+            i,o = k.split('-')
+            if i == '10': 
+                itxt = "Participant, Full camp"
+            elif i == "w":                   
+                itxt = "Participant, Weekend"
+            elif i == "1":    
+                itxt = "Participant, Part time, 1 day"
+            else:
+                itxt = "Participant, Part time, %s days" % (i)
+            if o == "a":
+                otxt = "6 or more years"
+            else:
+                otxt = "3-5 year"
+            list.append((itxt, otxt, v))
+        print list    
+        return list
+
+    def _calc_webshop_items(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for myregs in self.browse(cr, uid, ids, context=context):
+            lst = self.get_webshop_items(cr, uid, myregs.id, context)
+            html = ''
+            for line in lst:
+                html += "<tr><td>%s</td><td>%s</td><td>%d</td></tr>" % line
+                
+            res[myregs.id] = {'webshop_items': html}
+        return res
+                                         
     _columns = {
         'event_id2' : fields.related('event_id','id', type='integer', string='Event'),
         'webshop_orderno': fields.integer('Webshop Order No'),
@@ -1178,6 +1231,7 @@ class event_registration(osv.osv):
                 type='one2many', relation='event.registration',
                 string='Camp Area Groups'),
         'camparea_groups' : fields.function(_calc_group_summery, type = 'text', string='Groups', method=True, multi='CA'),
+        'webshop_items' : fields.function(_calc_webshop_items, type = 'text', string='Webshop Items', method=True, multi='WI'),
         #'camparea_summery' : fields.related('camparea_id', 'summery', 
         #        type='text', 
         #        string='Camp Area Groups Summery'),
