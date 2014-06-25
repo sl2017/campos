@@ -50,7 +50,7 @@ class dds_camp_activity_activity(osv.osv):
                 if actins.seats_available > 0:
                     sold_out = False
             display_name = record.name
-            if sold_out:
+            if sold_out and context.get('limit_check', False):
                 display_name += _(' (This activity is fully booked)')
             res.append((record['id'], display_name))
         return res       
@@ -131,7 +131,7 @@ class dds_camp_activity_instanse(osv.osv):
                 dummy,act_name = act_obj.name_get(cr, uid, [record.activity_id.id], context)[0]
             if record.period_id:
                 dummy,per_name = per_obj.name_get(cr, uid, [record.period_id.id], context)[0]
-            if record.seats_hard and not context.get('no_limit_check', False):
+            if record.seats_hard and context.get('limit_check', False):
                 limit_txt = ' (Only %d seats left)' % (record.seats_available)    
             if record.name:
                 display_name = record.name + ' ' + act_name + ' - ' + per_name + limit_txt
