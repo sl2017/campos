@@ -22,6 +22,7 @@
 
 import datetime
 from openerp.osv import fields, osv, orm
+from openerp import tools
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -660,7 +661,20 @@ class dds_camp_event_participant(osv.osv):
         par_ids = [day.participant_id.id for day in days if day.participant_id]
         return par_ids
     
-    
+    def _get_image(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = tools.image_get_resized_images(obj.image)
+        return result
+
+    def _set_image(self, cr, uid, id, name, value, args, context=None):
+        return self.write(cr, uid, [id], {'image': tools.image_resize_image_big(value)}, context=context)
+
+    def _has_image(self, cr, uid, ids, name, args, context=None):
+        result = {}
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = obj.image != False
+        return result
             
     _columns = {
         'registration_id': fields.many2one('event.registration', 'Registration', required=True, select=True, ondelete='cascade'),
@@ -743,6 +757,28 @@ class dds_camp_event_participant(osv.osv):
                                       'par_id', 'ticket_id', 'Tickets'),
          'spare_act_pts' : fields.function(_calc_summery, type = 'integer', string='Spare Activity Points', method=True, multi='PART'),
          
+         
+         # image: all image fields are base64 encoded and PIL-supported
+         # For use on Access Cards
+         'image': fields.binary("Image",
+            help="This field holds the image used as avatar for this contact, limited to 1024x1024px"),
+         'image_medium': fields.function(_get_image, fnct_inv=_set_image,
+            string="Medium-sized image", type="binary", multi="_get_image",
+            store={
+                'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+            },
+            help="Medium-sized image of this contact. It is automatically "\
+                 "resized as a 128x128px image, with aspect ratio preserved. "\
+                 "Use this field in form views or some kanban views."),
+         'image_small': fields.function(_get_image, fnct_inv=_set_image,
+            string="Small-sized image", type="binary", multi="_get_image",
+            store={
+                'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+            },
+            help="Small-sized image of this contact. It is automatically "\
+                 "resized as a 64x64px image, with aspect ratio preserved. "\
+                 "Use this field anywhere a small image is required."),
+         'has_image': fields.function(_has_image, type="boolean"),
     }
     
     _sql_constraints = [

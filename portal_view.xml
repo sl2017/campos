@@ -228,6 +228,7 @@
 					<newline/>
 					 -->
 						<field name="appr_leader" groups='event.group_event_manager,dds_camp.group_dds_camp_manager' />
+						<field name="image" widget='image' class="oe_avatar oe_left" options='{"preview_image": "image_medium"}' groups='event.group_event_manager'/>
 						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
 
 						<notebook colspan="6">
@@ -714,6 +715,7 @@
 					<field name="registration_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'invisible': True}"/>
 						<field name="appr_leader" groups='event.group_event_manager' />
 						<field name="partner_id" groups='event.group_event_manager' />
+						<field name="image" widget='image' class="oe_avatar oe_left" options='{"preview_image": "image_medium"}' groups='event.group_event_manager'/>
 						<field name="name" attr="{'readonly' : [('appr_Leader','=',True)]}" />
 
 

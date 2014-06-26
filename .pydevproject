@@ -5,4 +5,10 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/${PROJECT_DIR_NAME}</path>
 </pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>C:\Users\hhg\workspace\saas-2\addons</path>
+<path>C:\Users\hhg\workspace\saas-2\server\openerp</path>
+<path>C:\Users\hhg\workspace\saas-2\web\addons</path>
+<path>C:\Users\hhg\workspace\saas-2\server</path>
+</pydev_pathproperty>
 </pydev_project>
