@@ -190,12 +190,12 @@ class activity_signup_wizard(osv.osv_memory):
     def action_done(self, cr, uid, ids, context=None):
         wiz = self.browse(cr, uid, ids, context)[0]
         
-        if wiz.ac_ins_id.seats_hard and len(wiz.parti_ids) > (wiz.seats + wiz.ac_ins_id.seats_available):
+        if wiz.act_ins_id.seats_hard and len(wiz.parti_ids) > (wiz.seats + wiz.act_ins_id.seats_available):
             self.write(cr, uid, ids, {'state': 'step2', 
                                       'message' : _('Too many participants selected. Only %d seats reserved. Remove participants!.') % (wiz.seats),})
         else:         
             ticket_obj = self.pool.get('dds_camp.activity.ticket')
-            if wiz.ticket_id.state == 'open' or wiz.ac_ins_id.seats_available > 0:
+            if wiz.ticket_id.state == 'open' or wiz.act_ins_id.seats_available > 0:
                 pars = [p.id for p in wiz.parti_ids]
                 print "pars", pars
                 if len(pars):
