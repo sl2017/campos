@@ -1356,6 +1356,42 @@ class event_registration(osv.osv):
         'checkin_user' : fields.many2one('res.users', 'Checkin by', ondelete='set null'),
         'checkin_invoice' : fields.many2one('account.invoice', 'Checkin Invoice', ondelete='set null'),
         
+        #Arrival
+        'arrival_time_1' : fields.datetime('Ankomst dato/tid 1'),
+        'arrival_time_2' : fields.datetime('Ankomst dato/tid 2'),
+        'arrival_time_3' : fields.datetime('Ankomst dato/tid 3'),
+        'arrival_method_1' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Ankommer med 1'),
+        'arrival_method_2' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Ankommer med 2'),
+        'arrival_method_3' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Ankommer med 3'),
+        #departure
+        'departure_time_1' : fields.datetime('Afrejse dato/tid 1'),
+        'departure_time_2' : fields.datetime('Afrejse dato/tid 2'),
+        'departure_time_3' : fields.datetime('Afrejse dato/tid 3'),
+        'departure_method_1' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Afrejser med 1'),
+        'departure_method_2' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Afrejser med 2'),
+        'departure_method_3' : fields.selection([('bus','Bus'),
+                                               ('train','Train'),
+                                               ('car',u'Private car'),
+                                               ('other', 'Other')],'Afrejser med 3'),
+        'park_cars' : fields.integer('Antal privatbiler'),
+        'park_buss' : fields.integer('Antal busser'),
+        'park_trailers' : fields.integer('Antal trailere'),
+        'cargo': fields.boolean('Forventer at fremsende gods med fragtmand')
     }
     
     def write(self, cr, uid, ids, values, context=None):

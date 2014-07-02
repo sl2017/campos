@@ -223,6 +223,42 @@
 										</group>
 								</group>
 								</page>
+								<page string="Ankomst &amp; Afrejse"  colspan="8" col="4">
+										<group colspan="8" col="4">
+										<group string="Ankomst" colspan="2" col="2">
+											<label string="Ankomst 1" colspan="2"/>
+											<field name="arrival_time_1" string="Ankomst lejren (ca tidspunkt)"/>
+											<field name="arrival_method_1" string="Ankommer med"/>
+											<label string="Ankomst 2" colspan="2"/>
+											<field name="arrival_time_2" string="Ankomst lejren (ca tidspunkt)"/>
+											<field name="arrival_method_2" string="Ankommer med"/>
+											<label string="Ankomst 3" colspan="2"/>
+											<field name="arrival_time_3" string="Ankomst lejren (ca tidspunkt)"/>
+											<field name="arrival_method_3" string="Ankommer med"/>
+										</group>
+										<group string="Afrejse" colspan="2" col="2">
+											<label string="Afrejse 1" colspan="2"/>
+											<field name="departure_time_1" string="Afrejse lejren (ca tidspunkt)"/>
+											<field name="departure_method_1" string="Afrejser med"/>
+											<label string="Afrejse 2" colspan="2"/>
+											<field name="departure_time_2" string="Afrejse lejren (ca tidspunkt)"/>
+											<field name="departure_method_2" string="Afrejser med"/>
+											<label string="Afrejse 3" colspan="2"/>
+											<field name="departure_time_3" string="Afrejse lejren (ca tidspunkt)"/>
+											<field name="departure_method_3" string="Afrejser med"/>
+										</group>
+										</group>
+										<group colspan="8" col="4">
+										<group string="Parkering" colspan="2" col="2">
+											<field name="park_cars"/>
+											<field name="park_buss"/>
+											<field name="park_trailers"/>
+										</group>
+										<group string="Gods" colspan="2" col="2">
+											<field name="cargo"/>
+										</group>
+										</group>
+								</page>	
 						</notebook>
 					</group>
 				</xpath>
