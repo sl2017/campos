@@ -208,13 +208,13 @@ class dds_camp_activity_ticket(osv.osv):
     def run_scheduler(self, cr, uid, automatic=False, use_new_cursor=False, context=None):
         
         exp_time = (datetime.datetime.now() - datetime.timedelta(minutes=15)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        print "Check expiring", exp_time
+        #print "Check expiring", exp_time
         for tck in self.browse(cr, SUPERUSER_ID, self.search(cr, uid, [('state','=','open'),('reserved_time','<',exp_time)])):
-            print "Expiring", tck.id, tck.reserved_time, tck.name
+            #print "Expiring", tck.id, tck.reserved_time, tck.name
             self.write(cr, uid, [tck.id], {'state': 'timeout'})
         
         exp_time = (datetime.datetime.now() - datetime.timedelta(minutes=240)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         for tck in self.browse(cr, SUPERUSER_ID, self.search(cr, uid, [('state','=','timeout'),('reserved_time','<',exp_time)])):
-            print "Deleting", tck.id, tck.reserved_time, tck.name
+            #print "Deleting", tck.id, tck.reserved_time, tck.name
             self.unlink(cr, uid, [tck.id])
             
