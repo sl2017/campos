@@ -61,9 +61,17 @@
 				</field>
 				
 				<field name="nb_register" position="replace">
+					</field>
+				<field name="user_id" position="replace">
+					<group>
+					<div class="oe_right oe_button_box">
+					<button name="%(dds_camp.action_portal_event_participants_tree)d" type="action" string="Participants" help="Register Participant Details for this Group"/>
+					<button name="button_checkin_arrived" type="object" string="Arrived" help=""/>
+					<button name="button_checkin_completed" type="object" string="Checkin Completed" help=""/>
+					<button name="button_checkin_payment" type="object" string="Payment" help=""/>
+					</div>	
+					</group>		
 				
-				</field>
-				<field name="user_id" position="after">
 					<field name="agegroup_ids" colspan="4" nolabel="1" context="{'default_registration_id': id}">
 								<tree create="false">
 									<field name="age_group"/>
@@ -165,6 +173,14 @@
 										<field name="camp_fee_tot"/>
 										<field name="camp_fee_charged"/>
 										<field name="camp_fee_1rate"/>
+										<separator string="Checkin" colspan="2"/>
+										<field name="exp_arr_date"/>
+										<field name="checkin_time" readonly="1"/>
+										<field name="checkin_completed" readonly="1"/>
+										<field name="checkin_user" readonly="1"/>
+										<field name="checkin_invoice" readonly="1"/>
+										<field name="partner_credit"/>
+										
 									</group>
 									<group colspan="4" col="4" string="Transport">	
 									<field name="transport_ticket_ids" context="{'default_reg_id': id}" nolabel="1">

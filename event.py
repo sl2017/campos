@@ -431,6 +431,7 @@ class dds_camp_event_participant(osv.osv):
         return res
 
     def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+        print "read", ids
         if 'days_ids' not in fields:
             fields.append('days_ids')
         res = super(dds_camp_event_participant, self).read(cr, uid, ids, fields, context=context, load=load)
@@ -507,6 +508,17 @@ class dds_camp_event_participant(osv.osv):
         
     def _calc_summery(self, cr, uid, ids, field_name, arg, context):
         res = {}
+        ftitldict = {'fm':'Udvalgsformand',
+                     'um':'Udvalgsmedlem',
+                     'hlp': u'Hjælper',
+                     'ghlp':u'Gruppehjælper',
+                     'chld': u'Hjælperbarn',
+                     'rel': u'Pårørende',
+                     'ex': 'Ekstern',
+                     'lc':'Lejrchef',
+                     'kon': 'Konsulent',
+                     'dag': 'Dagjælper'}
+        
         for par in self.browse(cr, uid, ids, context=context):
             dates= []
             pdays = 0
@@ -515,11 +527,19 @@ class dds_camp_event_participant(osv.osv):
             age = 15 # Default to pay age
             full = True
             spare_act_pts = 0
+            exp_arr_date = False
+            functitletxt = ''
+            if par.functitle:
+                functitletxt = ftitldict[par.functitle]
             for d in par.days_ids:
                 if d.state:
                     dates.append(d.date)
                     if d.date >= '2014-07-18' and d.date <= '2014-07-31':
                         pdays += 1
+                    if exp_arr_date:
+                        exp_arr_date = min(exp_arr_date, d.date)
+                    else:
+                        exp_arr_date = d.date        
                 else:
                     full = False
             if full:
@@ -529,6 +549,18 @@ class dds_camp_event_participant(osv.osv):
                 for d in dates:
                     text += ',' + d[8:]
                 res[par.id] = {'day_summery' : text[1:]}
+            dates.sort()
+            dn = 0
+            text2 = ''
+            if par.functitle != 'dag':
+                for d in dates:
+                    dn += 1
+                    if dn == 11:
+                        text2 += '<br/>' + d[8:]
+                    else:
+                        text2 += ',' + d[8:]
+                    
+            res[par.id].update({'day_summerytxt' : text2[1:]})    
             if par.leader:
                 ag = '22+'
                 age = self._age(par.birth, '2014-07-22')
@@ -570,7 +602,10 @@ class dds_camp_event_participant(osv.osv):
                     elif len(dates) > 7:                # Ved deltagelse i 8 dage eller mere betales der fuld pris 1.500 kr. 
                         fee = 1500 if age >= 6 else 1010
                 else: #Hjælper
-                    fee = pdays * (50 if age >= 6 else 25)     
+                    if par.functitle in ['ex','dag']:
+                        fee = 0
+                    else:
+                        fee = pdays * (50 if age >= 6 else 25)     
                 if full:
                     spare_act_pts = 8 ## TODO: Calc by participations days
                 else:     
@@ -584,13 +619,16 @@ class dds_camp_event_participant(osv.osv):
                         spare_act_pts -= 1                
                 if par.ticket_ids:
                     for tck in par.ticket_ids:
-                        spare_act_pts -= tck.act_ins_id.activity_id.points         
+                        if tck.act_ins_id and tck.act_ins_id.activity_id:
+                            spare_act_pts -= tck.act_ins_id.activity_id.points         
             res[par.id].update({'age_group': ag,
                                 'camp_fee': fee,
                                 'calc_age': calc_age,
                                 'camp_days': len(dates),
                                 'pay_days' : pdays,
                                 'spare_act_pts': spare_act_pts,
+                                'exp_arr_date': exp_arr_date,
+                                'functitletxt': functitletxt,
                                 })
         return res
     
@@ -699,13 +737,16 @@ class dds_camp_event_participant(osv.osv):
         'appr_leader' : fields.boolean('Leder godkendt', track_visibility='onchange'),
         'leader' : fields.boolean('Is Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
-        'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
+        'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'),
+        'day_summerytxt': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'), 
                                        #store = {'dds_camp_event_participant_day' : (_get_pars_from_days,['state'],10)}),
         'age_group' : fields.function(_calc_summery, type = 'char', size=16, string='Age group', method=True, multi='PART',store=True),
         'calc_age' : fields.function(_calc_summery, type = 'integer', string='Age', method=True, multi='PART'),
         'camp_days' : fields.function(_calc_summery, type = 'integer', string='Camp days', method=True, multi='PART'),
         'pay_days' : fields.function(_calc_summery, type = 'integer', string='Pay days', method=True, multi='PART'),                               
-        'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),                               
+        'camp_fee' : fields.function(_calc_summery, type = 'float', string='Camp fee', method=True, multi='PART'),
+        'exp_arr_date' : fields.function(_calc_summery, type = 'date', string='Expected arrival', method=True, multi='PART' ),
+        'functitletxt': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'),                               
 #         'age_group' : fields.selection([('06-08','Age 6 - 8'),
 #                                           ('09-10','Age 9 - 10'),
 #                                           ('11-12',u'Age 11 - 12'),
@@ -745,7 +786,8 @@ class dds_camp_event_participant(osv.osv):
                                         ('rel',u'Pårørende'),
                                         ('ex', 'Ekstern (ikke betalende)'),
                                         ('lc','Lejrchef'),
-                                        ('kon', 'Konsulent')],'Function'),
+                                        ('kon', 'Konsulent'),
+                                        ('dag', u'Daghjælper (uden mad)')],'Function'),
          'partype' : fields.selection([('',''), ('itshead', 'ITS Head'),('other', 'ITS Other')], 'Record Type'),
          'is_relative' : fields.boolean(u'Deltager som pårørende'),       
          'staff_id': fields.many2one('dds_camp.staff', 'Tilmeldt under', select=True, ondelete='cascade'),
@@ -760,25 +802,27 @@ class dds_camp_event_participant(osv.osv):
          
          # image: all image fields are base64 encoded and PIL-supported
          # For use on Access Cards
-         'image': fields.binary("Image",
-            help="This field holds the image used as avatar for this contact, limited to 1024x1024px"),
-         'image_medium': fields.function(_get_image, fnct_inv=_set_image,
-            string="Medium-sized image", type="binary", multi="_get_image",
-            store={
-                'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
-            },
-            help="Medium-sized image of this contact. It is automatically "\
-                 "resized as a 128x128px image, with aspect ratio preserved. "\
-                 "Use this field in form views or some kanban views."),
-         'image_small': fields.function(_get_image, fnct_inv=_set_image,
-            string="Small-sized image", type="binary", multi="_get_image",
-            store={
-                'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
-            },
-            help="Small-sized image of this contact. It is automatically "\
-                 "resized as a 64x64px image, with aspect ratio preserved. "\
-                 "Use this field anywhere a small image is required."),
-         'has_image': fields.function(_has_image, type="boolean"),
+        'image': fields.binary("Image",
+           help="This field holds the image used as avatar for this contact, limited to 1024x1024px"),
+        'image_medium': fields.function(_get_image, fnct_inv=_set_image,
+           string="Medium-sized image", type="binary", multi="_get_image",
+           store={
+               'dds_camp.event.participant': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+           },
+           help="Medium-sized image of this contact. It is automatically "\
+                "resized as a 128x128px image, with aspect ratio preserved. "\
+                "Use this field in form views or some kanban views."),
+        'image_small': fields.function(_get_image, fnct_inv=_set_image,
+           string="Small-sized image", type="binary", multi="_get_image",
+           store={
+               'dds_camp.event.participant': (lambda self, cr, uid, ids, c={}: ids, ['image'], 10),
+           },
+           help="Small-sized image of this contact. It is automatically "\
+                "resized as a 64x64px image, with aspect ratio preserved. "\
+                "Use this field anywhere a small image is required."),
+        'has_image': fields.function(_has_image, type="boolean"),
+        
+        
     }
     
     _sql_constraints = [
@@ -1042,6 +1086,8 @@ class event_registration(osv.osv):
             pre = 0
             ldr = 0
             appr = 0
+            exp_arr_date = False
+            partner_credit = 0
             
             for ag in reg.agegroup_ids:
                 #nbr = nbr + ag.number
@@ -1055,11 +1101,16 @@ class event_registration(osv.osv):
                     ldr += 1
                 if par.appr_leader:
                     appr += 1
+                if exp_arr_date:
+                    exp_arr_date = min(exp_arr_date, par.exp_arr_date)
+                else:
+                    exp_arr_date = par.exp_arr_date    
             
             ldr_stat = "%d / %d" % (ldr, appr)        
             last_login = False
             users = False
             if reg.partner_id:
+                partner_credit = reg.partner_id.credit
                 for usr in reg.partner_id.user_ids:
                     users = True 
                     if usr.login_date:
@@ -1083,7 +1134,11 @@ class event_registration(osv.osv):
                            'camp_fee_charged' : max(fee, reg.camp_fee_min),
                            'last_login' : last_login,
                            'user_created' : users,
-                           'leader_status' : ldr_stat}
+                           'leader_status' : ldr_stat,
+                           'exp_arr_date': exp_arr_date,
+                           'partner_credit' : partner_credit,
+                           'partner_credit_old': partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0),
+                           'camp_fee_to_pay': max(fee - reg.camp_fee_min, 0) + partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0)}
         return res
     
     def _calc_group_summery(self, cr, uid, ids, field_name, arg, context):
@@ -1242,6 +1297,10 @@ class event_registration(osv.osv):
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
         'camp_fee_1rate' : fields.float('Camp Fee 1. Rate'),
+        'partner_credit' : fields.function(_calc_number, type = 'float', string='Balance', method=True, multi='PART' ),
+        'partner_credit_old' : fields.function(_calc_number, type = 'float', string='Balance (Prior)', method=True, multi='PART' ),
+        'camp_fee_to_pay' : fields.function(_calc_number, type = 'float', string='To Pay', method=True, multi='PART' ),
+        
 
         'leader_status' : fields.function(_calc_number, type = 'char', size=32, string='Approval status', method=True, multi='PART' ),
         
@@ -1289,6 +1348,14 @@ class event_registration(osv.osv):
         'group_appr' : fields.boolean('Troop approved'),
         
         'old_pots': fields.integer('Old pots', help="For use at the Senior activity sunday"),  
+        
+        #checkin
+        'exp_arr_date' : fields.function(_calc_number, type = 'date', string='Expected arrival', method=True, multi='PART' ),
+        'checkin_time' : fields.datetime('Checkin Date/time'),
+        'checkin_completed' : fields.boolean('Checkin completed'),
+        'checkin_user' : fields.many2one('res.users', 'Checkin by', ondelete='set null'),
+        'checkin_invoice' : fields.many2one('account.invoice', 'Checkin Invoice', ondelete='set null'),
+        
     }
     
     def write(self, cr, uid, ids, values, context=None):
@@ -1490,6 +1557,58 @@ class event_registration(osv.osv):
             
         por_obj.action_apply(cr, SUPERUSER_ID, [por_id], ctx)
         
+    def button_checkin_arrived(self, cr, uid, ids, context=None):
+        self.write(cr, uid, ids, {'checkin_time': fields.datetime.now()})
+        
+    def button_checkin_completed(self, cr, uid, ids, context=None):
+        
+        reg = self.browse(cr, uid, ids)[0]
+        if reg.camp_fee_tot > reg.camp_fee_min:
+            partner_obj = self.pool.get('res.partner')
+            datas = {'invoice_product_id': 2,
+                     'line_name' : u'Slutopgørelse',
+                     'amount': reg.camp_fee_tot - reg.camp_fee_min 
+                     }
+            inv_id = partner_obj.create_camp_invoice(cr, uid, [reg.partner_id.id], datas=datas, context=context)
+            inv_obj = self.pool.get('account.invoice')
+            inv_obj.signal_invoice_open(cr, uid, inv_id)
+            self.write(cr, uid, ids, {'checkin_completed': True,
+                                      'checkin_invoice' : inv_id[0],
+                                      'checkin_user' : uid})
+            return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='To pay: %0.2f' % (reg.partner_id.credit))
+        else:
+            if reg.partner_id.credit > 0:
+                return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='To pay: %0.2f' % (reg.partner_id.credit))
+            else:    
+                return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='Nothing to pay')
+    
+    def button_checkin_payment(self, cr, uid, ids, context=None):
+        
+        reg = self.browse(cr, uid, ids)[0]
+        dummy, view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_voucher', 'view_vendor_receipt_form')
+        
+        return {'name':_("Pay Invoice"),
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'account.voucher',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'target': 'new',
+                'domain': '[]',
+                'context': {
+                    #'payment_expected_currency': inv.currency_id.id,
+                    'default_partner_id': reg.partner_id.id,
+                    'default_amount': reg.partner_id.credit,
+                    #'default_reference': inv.name,
+                    'close_after_process': True,
+                    #'invoice_type': inv.type,
+                    #'invoice_id': inv.id,
+                    'default_type': 'receipt',
+                    'type': 'receipt'
+                    }
+                }
+            
     def name_get(self, cr, uid, ids, context=None):
         if isinstance(ids, (int, long)):
             ids = [ids]
