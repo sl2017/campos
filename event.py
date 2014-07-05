@@ -1088,6 +1088,8 @@ class event_registration(osv.osv):
             appr = 0
             exp_arr_date = False
             partner_credit = 0
+            softshell = 0
+            softshell_qty = 0
             
             for ag in reg.agegroup_ids:
                 #nbr = nbr + ag.number
@@ -1105,7 +1107,9 @@ class event_registration(osv.osv):
                     exp_arr_date = min(exp_arr_date, par.exp_arr_date)
                 else:
                     exp_arr_date = par.exp_arr_date    
-            
+                if par.softshell_size_id:
+                    softshell += 400
+                    softshell_qty += 1
             ldr_stat = "%d / %d" % (ldr, appr)        
             last_login = False
             users = False
@@ -1127,7 +1131,9 @@ class event_registration(osv.osv):
                                     if last_login:
                                         last_login = max(last_login, usr.login_date)
                                     else:
-                                        last_login = usr.login_date                        
+                                        last_login = usr.login_date  
+            if reg.power:
+                fee += 50                      
             res[reg.id] = {'reg_number': nbr,
                            'pre_reg_number': pre,
                            'camp_fee_tot' : fee,
@@ -1138,7 +1144,10 @@ class event_registration(osv.osv):
                            'exp_arr_date': exp_arr_date,
                            'partner_credit' : partner_credit,
                            'partner_credit_old': partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0),
-                           'camp_fee_to_pay': max(fee - reg.camp_fee_min, 0) + partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0)}
+                           'camp_fee_to_pay': max(fee - reg.camp_fee_min, 0) + partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0) + softshell,
+                           'camp_fee_rest': max(fee - reg.camp_fee_min, 0) + softshell,
+                           'softshell_pay' : softshell,
+                           'softshell_qty' : softshell_qty}
         return res
     
     def _calc_group_summery(self, cr, uid, ids, field_name, arg, context):
@@ -1296,11 +1305,13 @@ class event_registration(osv.osv):
         'camp_fee_min' : fields.float('Minimum Camp Fee'),
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
         'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
+        'camp_fee_rest' : fields.function(_calc_number, type = 'float', string='Camp Fee Rest Collection', method=True, multi='PART' ),
         'camp_fee_1rate' : fields.float('Camp Fee 1. Rate'),
         'partner_credit' : fields.function(_calc_number, type = 'float', string='Balance', method=True, multi='PART' ),
         'partner_credit_old' : fields.function(_calc_number, type = 'float', string='Balance (Prior)', method=True, multi='PART' ),
         'camp_fee_to_pay' : fields.function(_calc_number, type = 'float', string='To Pay', method=True, multi='PART' ),
-        
+        'softshell_pay' : fields.function(_calc_number, type = 'float', string='Softshell Payment', method=True, multi='PART' ),
+        'softshell_qty' : fields.function(_calc_number, type = 'integer', string='Softshell qty', method=True, multi='PART' ),
 
         'leader_status' : fields.function(_calc_number, type = 'char', size=32, string='Approval status', method=True, multi='PART' ),
         
@@ -1601,11 +1612,29 @@ class event_registration(osv.osv):
         reg = self.browse(cr, uid, ids)[0]
         if reg.camp_fee_tot > reg.camp_fee_min:
             partner_obj = self.pool.get('res.partner')
-            datas = {'invoice_product_id': 2,
-                     'line_name' : u'Slutopgørelse',
-                     'amount': reg.camp_fee_tot - reg.camp_fee_min 
-                     }
-            inv_id = partner_obj.create_camp_invoice(cr, uid, [reg.partner_id.id], datas=datas, context=context)
+            if reg.event_id2 == 1:
+                datas = {'invoice_product_id': 2,
+                         'line_name' : u'Slutopgørelse',
+                         'amount': reg.camp_fee_tot - reg.camp_fee_min 
+                         }
+                inv_id = partner_obj.create_camp_invoice(cr, uid, [reg.partner_id.id], datas=datas, context=context)
+            else:
+                datas = [{'invoice_product_id': 3,
+                         'line_name' : u'Slutopgørelse',
+                         'amount': reg.camp_fee_tot - reg.camp_fee_min - (50 if reg.power else 0)
+                         }]
+                if reg.power:
+                    datas.append({'invoice_product_id': 5,
+                         'line_name' : u'Strøm',
+                         'amount': 50
+                         })
+                if reg.softshell_pay:
+                    datas.append({'invoice_product_id': 4,
+                         'line_name' : u'Softshell',
+                         'amount': 400,
+                         'quantity': reg.softshell_qty
+                         })    
+                inv_id = partner_obj.create_camp_invoice_mul(cr, uid, [reg.partner_id.id], data=datas, context=context)
             inv_obj = self.pool.get('account.invoice')
             inv_obj.signal_invoice_open(cr, uid, inv_id)
             self.write(cr, uid, ids, {'checkin_completed': True,

@@ -173,6 +173,8 @@
 										<field name="camp_fee_tot"/>
 										<field name="camp_fee_charged"/>
 										<field name="camp_fee_1rate"/>
+										<field name="softshell_pay"/>
+										<field name="camp_fee_to_pay"/>
 										<separator string="Checkin" colspan="2"/>
 										<field name="exp_arr_date"/>
 										<field name="checkin_time" readonly="1"/>

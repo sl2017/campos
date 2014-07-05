@@ -316,7 +316,7 @@
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
 						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}"
-													 attrs="{'required': [('event_id2', '=', 2)]}" readonly="1"/>
+													  readonly="1"/>
 						<label string="Der kan ikke mere bestilles en hjælper T-shirts,da de er sendt til trykning"  colspan="2"/>
 						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" readonly="1"/>
 						<label string="Bestillingsfristen er udløbet" colspan="2"/>
@@ -488,7 +488,7 @@
 						<!--  <field name="withgroup"/>
 						<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/>  -->
 						<field name="profession"/>
-						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" attrs="{'required': [('event_id2', '=', 2)]}" readonly="1"/>
+						<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" readonly="1"/>
 						<label string="Der kan ikke mere bestilles en hjælper T-shirts,da de er sendt til trykning"  colspan="2"/>
 						<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" readonly="1"/>
 						<label string="Bestillingsfristen er udløbet" colspan="2"/>
@@ -800,8 +800,8 @@
 									<field name="group_id" options="{'no_open': True, 'create': False, 'create_edit': False}"/> -->
 									<field name="profession"/>
 									<field name="tshirt_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" 
-																 attrs="{'required': [('event_id2', '=', 2)]}" readonly="1"/>
-																 <label string="Der kan ikke mere bestilles en hjælper T-shirts,da de er sendt til trykning"/>
+																 readonly="1"/>
+																 <label string="Der kan ikke mere bestilles en hjælper T-shirts,da de er sendt til trykning" colspan="2"/>
 									<field name="softshell_size_id" options="{'no_open': True, 'create': False, 'create_edit': False}" readonly="1"/>
 									<label string="Bestillingsfristen er udløbet" colspan="2"/>
 									<field name="partype" invisible="1"/>
