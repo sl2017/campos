@@ -431,7 +431,7 @@ class dds_camp_event_participant(osv.osv):
         return res
 
     def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
-        print "read", ids
+        #print "read", ids
         if 'days_ids' not in fields:
             fields.append('days_ids')
         res = super(dds_camp_event_participant, self).read(cr, uid, ids, fields, context=context, load=load)
@@ -735,6 +735,7 @@ class dds_camp_event_participant(osv.osv):
 
         'patrol' : fields.char('Patrol name', size=64),
         'appr_leader' : fields.boolean('Leder godkendt', track_visibility='onchange'),
+        'att_received' : fields.boolean('Attest modtaget', track_visibility='onchange'),
         'leader' : fields.boolean('Is Leader'),
         'days_ids': fields.one2many('dds_camp.event.participant.day', 'participant_id', 'Participation'),
         'day_summery': fields.function(_calc_summery, type = 'char', size=64, string='Summery', method=True, multi='PART'),
@@ -1060,6 +1061,15 @@ class dds_camp_event_participant(osv.osv):
                
 dds_camp_event_participant()
     
+# class account_invoice(osv.osv):
+#     _inherit = 'account.invoice'
+#  
+#     _columns = {
+#         'eventreg_id': fields.many2one('event.registration', 'Registration', select=True, ondelete='set null'),
+#         }
+#   
+# account_invoice()
+                    
 class event_registration(osv.osv):
     """ Inherits Event and adds DDS Camp information in the Registration form """
     _inherit = 'event.registration'
@@ -1090,7 +1100,14 @@ class event_registration(osv.osv):
             partner_credit = 0
             softshell = 0
             softshell_qty = 0
+            camp_fee_priorreq = reg.camp_fee_min
+            camp_fee_total = 0
+            camp_fee_rest = 0
             
+            for inv in reg.checkin_invoice_ids:
+                if inv.state != 'cancel':
+                    camp_fee_priorreq += inv.amount_total
+                    
             for ag in reg.agegroup_ids:
                 #nbr = nbr + ag.number
                 pre = pre + ag.pre_reg
@@ -1133,7 +1150,9 @@ class event_registration(osv.osv):
                                     else:
                                         last_login = usr.login_date  
             if reg.power:
-                fee += 50                      
+                fee += 50
+            camp_fee_total = max(fee - reg.camp_fee_min, 0) + softshell
+            camp_fee_rest = camp_fee_total - camp_fee_priorreq                      
             res[reg.id] = {'reg_number': nbr,
                            'pre_reg_number': pre,
                            'camp_fee_tot' : fee,
@@ -1144,10 +1163,15 @@ class event_registration(osv.osv):
                            'exp_arr_date': exp_arr_date,
                            'partner_credit' : partner_credit,
                            'partner_credit_old': partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0),
-                           'camp_fee_to_pay': max(fee - reg.camp_fee_min, 0) + partner_credit - (reg.checkin_invoice.residual if reg.checkin_invoice else 0) + softshell,
-                           'camp_fee_rest': max(fee - reg.camp_fee_min, 0) + softshell,
+                           'camp_fee_to_pay': camp_fee_rest + partner_credit,
+                           #'camp_fee_rest': max(fee - reg.camp_fee_min, 0) + softshell,
                            'softshell_pay' : softshell,
-                           'softshell_qty' : softshell_qty}
+                           'softshell_qty' : softshell_qty,
+                           
+                           #new fields
+                           'camp_fee_total' : camp_fee_total,
+                           'camp_fee_rest' : camp_fee_rest,
+                           'camp_fee_priorreq' : camp_fee_priorreq}
         return res
     
     def _calc_group_summery(self, cr, uid, ids, field_name, arg, context):
@@ -1304,8 +1328,10 @@ class event_registration(osv.osv):
         'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART', store=True),
         'camp_fee_min' : fields.float('Minimum Camp Fee'),
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
-        'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee Charged', method=True, multi='PART' ),
+        'camp_fee_charged' : fields.function(_calc_number, type = 'float', string='Camp Fee', method=True, multi='PART' ),
+        'camp_fee_total' : fields.function(_calc_number, type = 'float', string='Total', method=True, multi='PART' ),
         'camp_fee_rest' : fields.function(_calc_number, type = 'float', string='Camp Fee Rest Collection', method=True, multi='PART' ),
+        'camp_fee_priorreq' : fields.function(_calc_number, type = 'float', string='Camp Fee Prior', method=True, multi='PART' ),
         'camp_fee_1rate' : fields.float('Camp Fee 1. Rate'),
         'partner_credit' : fields.function(_calc_number, type = 'float', string='Balance', method=True, multi='PART' ),
         'partner_credit_old' : fields.function(_calc_number, type = 'float', string='Balance (Prior)', method=True, multi='PART' ),
@@ -1366,6 +1392,7 @@ class event_registration(osv.osv):
         'checkin_completed' : fields.boolean('Checkin completed'),
         'checkin_user' : fields.many2one('res.users', 'Checkin by', ondelete='set null'),
         'checkin_invoice' : fields.many2one('account.invoice', 'Checkin Invoice', ondelete='set null'),
+        'checkin_invoice_ids': fields.many2many('account.invoice', 'dds_camp_account_inv_rel', 'reg_id', 'inv_id', 'Checkin invoices'),
         
         #Arrival
         'arrival_time_1' : fields.datetime('Ankomst dato/tid 1'),
@@ -1610,47 +1637,71 @@ class event_registration(osv.osv):
     def button_checkin_completed(self, cr, uid, ids, context=None):
         
         reg = self.browse(cr, uid, ids)[0]
-        if reg.camp_fee_tot > reg.camp_fee_min:
+        print "Checkin completed start", ids, uid
+        #if reg.checkin_invoice and reg.checkin_invoice.state not in ['cancel']: 
+        #    return self.pool.get('warning_box').error(cr, uid, title='Checkin Already Completed', message='Please cancel invoice %s before performing re-checkin' % (reg.checkin_invoice.number))
+        self.write(cr, uid, ids, {'checkin_completed': True,
+                                  'checkin_user' : uid})
+        if reg.camp_fee_total > reg.camp_fee_priorreq:
             partner_obj = self.pool.get('res.partner')
             if reg.event_id2 == 1:
                 datas = {'invoice_product_id': 2,
                          'line_name' : u'Slutopgørelse',
-                         'amount': reg.camp_fee_tot - reg.camp_fee_min 
+                         'amount': reg.camp_fee_total - reg.camp_fee_priorreq 
                          }
                 inv_id = partner_obj.create_camp_invoice(cr, uid, [reg.partner_id.id], datas=datas, context=context)
             else:
-                datas = [{'invoice_product_id': 3,
-                         'line_name' : u'Slutopgørelse',
-                         'amount': reg.camp_fee_tot - reg.camp_fee_min - (50 if reg.power else 0)
-                         }]
-                if reg.power:
-                    datas.append({'invoice_product_id': 5,
-                         'line_name' : u'Strøm',
-                         'amount': 50
-                         })
-                if reg.softshell_pay:
-                    datas.append({'invoice_product_id': 4,
-                         'line_name' : u'Softshell',
-                         'amount': 400,
-                         'quantity': reg.softshell_qty
-                         })    
-                inv_id = partner_obj.create_camp_invoice_mul(cr, uid, [reg.partner_id.id], data=datas, context=context)
+                if reg.checkin_invoice:
+                    datas = [{'invoice_product_id': 3,
+                             'line_name' : u'Slutopgørelse',
+                             'amount': reg.camp_fee_total - reg.camp_fee_priorreq 
+                             }]
+                    inv_id = partner_obj.create_camp_invoice_mul(cr, uid, [reg.partner_id.id], data=datas, context=context)
+                else:
+                    datas = [{'invoice_product_id': 3,
+                             'line_name' : u'Slutopgørelse',
+                             'amount': reg.camp_fee_tot - reg.camp_fee_min - (50 if reg.power else 0)
+                             }]
+                    if reg.power:
+                        datas.append({'invoice_product_id': 5,
+                             'line_name' : u'Strøm',
+                             'amount': 50
+                             })
+                    if reg.softshell_pay:
+                        datas.append({'invoice_product_id': 4,
+                             'line_name' : u'Softshell',
+                             'amount': 400,
+                             'quantity': reg.softshell_qty
+                             })    
+                    inv_id = partner_obj.create_camp_invoice_mul(cr, uid, [reg.partner_id.id], data=datas, context=context)
             inv_obj = self.pool.get('account.invoice')
             inv_obj.signal_invoice_open(cr, uid, inv_id)
-            self.write(cr, uid, ids, {'checkin_completed': True,
-                                      'checkin_invoice' : inv_id[0],
-                                      'checkin_user' : uid})
+            if reg.checkin_invoice:
+                self.write(cr, uid, ids, {'checkin_completed': True,
+                                          'checkin_invoice_ids': [(4, inv_id[0], {})],
+                                          'checkin_user' : uid})
+            else:
+                self.write(cr, uid, ids, {'checkin_completed': True,
+                                          'checkin_invoice' : inv_id[0],
+                                          'checkin_invoice_ids': [(4, inv_id[0], {})],
+                                          'checkin_user' : uid})
             return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='To pay: %0.2f' % (reg.partner_id.credit))
         else:
             if reg.partner_id.credit > 0:
                 return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='To pay: %0.2f' % (reg.partner_id.credit))
             else:    
                 return self.pool.get('warning_box').info(cr, uid, title='Checkin Completed', message='Nothing to pay')
-    
+        self.write(cr, uid, ids, {'checkin_completed': True,
+                                  'checkin_user' : uid})
+        print "Checkin completed", ids, uid
+        
     def button_checkin_payment(self, cr, uid, ids, context=None):
         
         reg = self.browse(cr, uid, ids)[0]
         dummy, view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_voucher', 'view_vendor_receipt_form')
+        
+        if not reg.checkin_completed:
+            return self.pool.get('warning_box').error(cr, uid, title='Missing Checkin', message='Please complete Checkin before processing Payment')
         
         return {'name':_("Pay Invoice"),
                 'view_mode': 'form',

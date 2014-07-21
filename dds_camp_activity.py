@@ -163,6 +163,31 @@ class dds_camp_activity_instanse(osv.osv):
                 ids.append(ai.id)
         return [('id','in', ids)]
     
+    def _calc_agegroup(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+    
+        for actins in self.browse(cr, uid, ids, context=context):    
+            ag06_08 = 0
+            ag09_10 = 0
+            ag11_12 = 0
+            ag13_16 = 0
+            ag17_22 = 0
+            ag22p = 0
+            for tck in actins.ticket_ids:
+                ag06_08 += tck.ag06_08 
+                ag09_10 += tck.ag09_10    
+                ag11_12 += tck.ag11_12
+                ag13_16 += tck.ag13_16
+                ag17_22 += tck.ag17_22
+                ag22p += tck.ag22p
+            res[actins.id] = {'ag06_08': ag06_08,
+                              'ag09_10': ag09_10,
+                               'ag11_12': ag11_12, 
+                               'ag13_16': ag13_16, 
+                               'ag17_22':ag17_22,
+                               'ag22p': ag22p
+                               }           
+        return res
     _columns = {
         'name': fields.char('Name', size=128, translate=True),
         'seats_max': fields.integer('Maximum Avalaible Seats'),
@@ -176,7 +201,13 @@ class dds_camp_activity_instanse(osv.osv):
         'staff_ids': fields.many2many('dds_camp.event.participant','dds_camp_activity_staff_rel',
                                       'act_ins_id','par_id','Staff'),
         'ticket_ids': fields.one2many('dds_camp.activity.ticket', 'act_ins_id', 'Tickets'),
-        'actins_date_begin' : fields.related('period_id','date_begin', type='datetime', string='Start Date/Time', store=True),         
+        'actins_date_begin' : fields.related('period_id','date_begin', type='datetime', string='Start Date/Time', store=True),
+        'ag06_08' : fields.function(_calc_agegroup, type = 'integer', string='Age 6-8', method=True, multi='AGE'),
+        'ag09_10' : fields.function(_calc_agegroup, type = 'integer', string='Age 9-10', method=True, multi='AGE'),
+        'ag11_12' : fields.function(_calc_agegroup, type = 'integer', string='Age 11-12', method=True, multi='AGE'),
+        'ag13_16' : fields.function(_calc_agegroup, type = 'integer', string='Age 13-16', method=True, multi='AGE'),
+        'ag17_22' : fields.function(_calc_agegroup, type = 'integer', string='Age 17-22', method=True, multi='AGE'),
+        'ag22p' : fields.function(_calc_agegroup, type = 'integer', string='Age 22+', method=True, multi='AGE'),         
         }   
     
 class dds_camp_activity_ticket(osv.osv): 
@@ -184,6 +215,40 @@ class dds_camp_activity_ticket(osv.osv):
     _description = 'Activity Ticket'
     _name = 'dds_camp.activity.ticket'
     _order = 'actins_date_begin'
+    
+    def _calc_agegroup(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+    
+        for tck in self.browse(cr, uid, ids, context=context):    
+            ag06_08 = 0
+            ag09_10 = 0
+            ag11_12 = 0
+            ag13_16 = 0
+            ag17_22 = 0
+            ag22p = 0
+            for par in tck.par_ids:
+                if par.age_group =='06-08':
+                    ag06_08 += 1
+                elif par.age_group =='09-10':
+                    ag09_10 += 1    
+                elif par.age_group =='11-12':
+                    ag11_12 += 1
+                elif par.age_group =='13-16':
+                    ag13_16 += 1
+                elif par.age_group =='17-22':
+                    ag17_22 += 1
+                elif par.age_group =='22+':
+                    ag22p += 1
+            res[tck.id] = {'ag06_08': ag06_08,
+                           'ag09_10': ag09_10,
+                           'ag11_12': ag11_12, 
+                           'ag13_16': ag13_16, 
+                           'ag17_22':ag17_22,
+                           'ag22p': ag22p
+                           }           
+        return res
+    
+    
     _columns = {
         'name': fields.char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.'),
         'seats': fields.integer('Seats'),
@@ -198,7 +263,12 @@ class dds_camp_activity_ticket(osv.osv):
                                       'ticket_id','par_id','Participants'),
         'actins_date_begin' : fields.related('act_ins_id', 'period_id','date_begin', type='datetime', string='Start Date/Time', store=True),
         'act_desc' : fields.related('act_ins_id', 'activity_id','desc', type='text', string='Description'),
-        
+        'ag06_08' : fields.function(_calc_agegroup, type = 'integer', string='Age 6-8', method=True, multi='AGE'),
+        'ag09_10' : fields.function(_calc_agegroup, type = 'integer', string='Age 9-10', method=True, multi='AGE'),
+        'ag11_12' : fields.function(_calc_agegroup, type = 'integer', string='Age 11-12', method=True, multi='AGE'),
+        'ag13_16' : fields.function(_calc_agegroup, type = 'integer', string='Age 13-16', method=True, multi='AGE'),
+        'ag17_22' : fields.function(_calc_agegroup, type = 'integer', string='Age 17-22', method=True, multi='AGE'),
+        'ag22p' : fields.function(_calc_agegroup, type = 'integer', string='Age 22+', method=True, multi='AGE'),
         } 
     
     def button_unlink_ticket(self, cr, uid, ids, context=None):

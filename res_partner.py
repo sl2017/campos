@@ -134,8 +134,10 @@ class res_partner(osv.osv):
             for datas in data:
                 quantity = datas.get('quantity', 1)
                 amount = datas.get('amount', 0.0)
+                print "Create line, ", quantity, amount
                 line_value =  {
                                'product_id': datas['invoice_product_id'],
+                               'quantity': quantity
                                }
 
                 line_dict = invoice_line_obj.product_id_change(cr, uid, {},
