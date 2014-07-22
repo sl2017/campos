@@ -284,6 +284,7 @@
 
 			<field name="res_model">dds_camp.event.participant</field>
 			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,kanban</field>
 		</record>
 		
 		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"

@@ -1151,9 +1151,10 @@ class event_registration(osv.osv):
                                         last_login = usr.login_date  
             if reg.power:
                 fee += 50
-            camp_fee_total = max(fee - reg.camp_fee_min, 0) + softshell
+            camp_fee_total = max(fee, reg.camp_fee_min) + softshell
             camp_fee_rest = camp_fee_total - camp_fee_priorreq                      
             res[reg.id] = {'reg_number': nbr,
+                           'reg_number2': nbr,
                            'pre_reg_number': pre,
                            'camp_fee_tot' : fee,
                            'camp_fee_charged' : max(fee, reg.camp_fee_min),
@@ -1325,6 +1326,7 @@ class event_registration(osv.osv):
         'agreements': fields.text('What have been arranged'),
         'internal_note' : fields.text('Internal note'),
         'reg_number': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART', store=True),
+        'reg_number2': fields.function(_calc_number, type = 'integer', string='# Participants', method=True, multi='PART'),
         'pre_reg_number': fields.function(_calc_number, type = 'integer', string='# Pre-registred', method=True, multi='PART', store=True),
         'camp_fee_min' : fields.float('Minimum Camp Fee'),
         'camp_fee_tot': fields.function(_calc_number, type = 'float', string='Camp Fee Total', method=True, multi='PART' ),
@@ -1642,7 +1644,7 @@ class event_registration(osv.osv):
         #    return self.pool.get('warning_box').error(cr, uid, title='Checkin Already Completed', message='Please cancel invoice %s before performing re-checkin' % (reg.checkin_invoice.number))
         self.write(cr, uid, ids, {'checkin_completed': True,
                                   'checkin_user' : uid})
-        if reg.camp_fee_total > reg.camp_fee_priorreq:
+        if reg.camp_fee_total <> reg.camp_fee_priorreq:
             partner_obj = self.pool.get('res.partner')
             if reg.event_id2 == 1:
                 datas = {'invoice_product_id': 2,

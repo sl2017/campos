@@ -128,7 +128,7 @@
 
 			<field name="res_model">dds_camp.event.participant</field>
 			<field name="view_type">form</field>
-    		<field name="view_mode">tree,form</field>
+    		<field name="view_mode">kanban,tree,form</field>
     		<field name="view_id" ref="dds_camp_event_participant_form2"/>
     		<field name="search_view_id" ref="dds_camp_event_participant_search"/>
             <field name="context">{}</field>
