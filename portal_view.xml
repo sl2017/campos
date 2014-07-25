@@ -707,7 +707,7 @@
 										</field>
 										</record>		
 										
-		<!-- Partner Kanban View -->
+		<!-- Participant Kanban View -->
         <record model="ir.ui.view" id="dds_camp_event_participant_kanban_view">
             <field name="name">dds_camp.event.participant.kanban</field>
             <field name="model">dds_camp.event.participant</field>
