@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    DDS Member
-#    Copyright (C) 2011 Hans Henrik Gabelgaard
+#    DDS Camp
+#    Copyright (C) 2014 Hans Henrik Gabelgaard
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -191,7 +191,7 @@ class dds_camp_area(osv.osv):
     
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
-        #print "addgroup", group_ids
+        
         return {'value': {'group_ids': group_ids,
                           'addgroup_id' : None
                           }
@@ -241,7 +241,7 @@ class dds_camp_friendship(osv.osv):
      
     def onchange_add_group(self, cr, uid, ids, addgroup_id, group_ids, context=None):
         group_ids.append([4,addgroup_id,False])
-        #print "addgroup", group_ids
+        
         return {'value': {'group_ids': group_ids,
                           'addgroup_id' : None
                           }
@@ -357,22 +357,13 @@ class dds_camp_event_participant(osv.osv):
     _inherit = 'mail.thread'
     
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        #print "fields_view_get entry:", view_id, toolbar
+        
         res = super(dds_camp_event_participant, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type,
                                                                     context=context, toolbar=toolbar, submenu=submenu)
         
-        #print "FORM: ", res['name'] 
+        
         if res['name'] == u'portal.registration.participant.form' or res['name'] == u'portal.dds_camp.staff.form':
-            #print "Form found!"
-            #print "Context: ", context
-#             reg_id = context.get('active_id', False)
-#             
-#             if reg_id:
-#                 reg = self.pool.get('event.registration').browse(cr, uid, [reg_id])[0]
-#                 from_date = datetime.datetime.strptime(reg.event_id.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
-#                 to_date = datetime.datetime.strptime(reg.event_id.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
-#                 print "dates", from_date, to_date
-#             if not reg_id:
+            
             event = self.pool.get('event.event').browse(cr, uid, [1])[0]
             from_date = datetime.datetime.strptime(event.date_begin, DEFAULT_SERVER_DATETIME_FORMAT).date()
             to_date = datetime.datetime.strptime(event.date_end, DEFAULT_SERVER_DATETIME_FORMAT).date()  
@@ -863,7 +854,7 @@ class dds_camp_event_participant(osv.osv):
         return self.write(cr, uid, ids, {'state': 'rejected'}, context=context)
     
     def button_unlink_activityticket(self, cr, uid, ids, context=None):
-        print "button_unlink_activityticket", context
+        
         ticket_id = context.get('ticket_id')
         tck_obj = self.pool.get('dds_camp.activity.ticket')
         for tck in tck_obj.browse(cr, SUPERUSER_ID, tck_obj.search(cr, SUPERUSER_ID, [('id', '=', ticket_id)], context=context), context):
@@ -873,7 +864,7 @@ class dds_camp_event_participant(osv.osv):
                                                            'par_ids': [(3, ids[0])]})
             else:
                 tck_obj.unlink(cr, SUPERUSER_ID, [tck.id]) 
-        print "kill", ids, ticket_id                  
+                        
         #return self.write(cr, uid, ids, {'ticket_ids': [(3, ticket_id)]})
         return { 'type' :  'ir.actions.act_close_wizard_and_reload_view' }
  
@@ -892,7 +883,7 @@ class dds_camp_event_participant(osv.osv):
                 dt += delta
         
         res['value'] = values
-        print res
+        
         return res
         
     def create_day_lines(self, cr, uid, ids, from_dt, to_dt, context):
@@ -904,7 +895,6 @@ class dds_camp_event_participant(osv.osv):
         else:
             from_date = datetime.datetime.strptime(from_dt, DEFAULT_SERVER_DATE_FORMAT).date()
             to_date = datetime.datetime.strptime(to_dt, DEFAULT_SERVER_DATE_FORMAT).date()  
-            print "dates", from_date, to_date
             dt = from_date
             delta = datetime.timedelta(days=1)
             while dt <= to_date:

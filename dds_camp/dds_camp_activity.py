@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    DDS Camp
-#    Copyright (C) 2011 Hans Henrik Gabelgaard
+#    Copyright (C) 2014 Hans Henrik Gabelgaard
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -156,7 +156,7 @@ class dds_camp_activity_instanse(osv.osv):
         return res
     
     def _search_seats(self, cr, uid, obj, name, args, context=None):
-        print args
+        
         ids = []
         for ai in self.browse(cr, uid, self.search(cr, uid, [], context=context), context=context):
             if ai.seats_available > 0:

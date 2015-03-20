@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    DDS Member
-#    Copyright (C) 2011 Hans Henrik Gabelgaard
+#    DDS Camp
+#    Copyright (C) 2014 Hans Henrik Gabelgaard
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
