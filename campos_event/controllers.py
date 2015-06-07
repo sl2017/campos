@@ -3,7 +3,7 @@
 #
 #     This file is part of CampOS Event, an Odoo module.
 #
-#     Copyright (c) 2015 Stein & Gabelgaard ApS 
+#     Copyright (c) 2015 Stein & Gabelgaard ApS
 #                        http://www.steingabelgaard.dk
 #                        Hans Henrik Gaelgaard
 #

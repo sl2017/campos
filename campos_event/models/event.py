@@ -29,15 +29,19 @@ from openerp import models, fields, api
 
 
 class event_registration(models.Model):
+
     '''
 
     '''
     _inherit = 'event.registration'
 
-    participant_ids = fields.One2many('campos.event.participant', 'registration_id')
+    participant_ids = fields.One2many(
+        'campos.event.participant',
+        'registration_id')
 
 
 class event_participant(models.Model):
+
     '''
 
     '''
@@ -45,4 +49,3 @@ class event_participant(models.Model):
     _inherits = {'res.partner': 'partner_id'}
 
     registration_id = fields.Many2one('event.registration')
- 
