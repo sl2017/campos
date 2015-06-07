@@ -28,14 +28,14 @@
 
     'description': """
         Loads Danish as secondary languages
-        Enables "Technical features" for Administrator and sets the timezone to Europe/Copenhagen
+        Enables "Technical features" for Administrator and sets the timezone
+        to Europe/Copenhagen
         Removes the Odoo online bindings
-         
+
         Requires the following OCA repos:
             server-tools
-            
-            
-            
+
+
     """,
 
     'author': "Hans Henrik Gabelgaard",
