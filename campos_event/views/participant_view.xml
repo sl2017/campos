@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- <record id="view_id" model="ir.ui.view"> <field name="name">name of 
+			view (CampOS Event)</field> <field name="model">model</field> <field name="inherit_id" 
+			ref="inherit_module.inherit_id"/> <field name="arch" type="xml"> <xpath expr="//field[@name='name']" 
+			position="after"> <field name="field"/> </xpath> </field> </record> -->
+
+		<record id="action_event_participants_tree" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<!-- Registration inherited form -->
+
+		<record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit1</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_event_registration_form" />
+			<field name="arch" type="xml">
+				<field name="partner_id" position="before">
+					<div class="oe_right oe_button_box">
+						<button name="%(campos_event.action_event_participants_tree)d"
+							type="action" string="Participants"
+							help="Register Participant Details for this Group" />
+
+
+					</div>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_event_registration_participant_form">
+			<field name="name">registration.participant.form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+
+				<form string="Participant Registration" version="7.0">
+					<sheet>
+						<group>
+							<field name="registration_id" />
+							<field name="name" />
+						</group>
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+		<record id="campos_event_participant_tree" model="ir.ui.view">
+			<field name="name">campos.event.participant.tree</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+				<tree string="Participants">
+					<field name="name" />
+					<field name="registration_id" />
+					<field name="city" />
+
+				</tree>
+			</field>
+		</record>
+
+
+
+		
+
+		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"
+			name="Participants" sequence="50" parent="event.event_main_menu"
+			groups="event.group_event_manager" />
+	</data>
+
+
+</openerp>
