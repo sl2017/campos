@@ -28,7 +28,7 @@
 from openerp import models, fields, api
 
 
-class event_registration(models.Model):
+class EventRegistration(models.Model):
 
     '''
 
@@ -40,7 +40,7 @@ class event_registration(models.Model):
         'registration_id')
 
 
-class event_participant(models.Model):
+class EventParticipant(models.Model):
 
     '''
 
@@ -49,3 +49,16 @@ class event_participant(models.Model):
     _inherits = {'res.partner': 'partner_id'}
 
     registration_id = fields.Many2one('event.registration')
+    committee_id = fields.Many2one('campos.committee', 
+                                   'Have agreement with committee',
+                                   track_visibility='onchange',
+                                   ondelete='set null')
+    state =  fields.Selection([('draft','Received'),
+                               ('sent','Sent to committee'),
+                               ('approved','Approved by the committee'),
+                               ('rejected', 'Rejected')],
+                              'Approval Procedure',
+                              track_visibility='onchange')
+    
+                         
+                                    

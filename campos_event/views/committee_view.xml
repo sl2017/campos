@@ -1,0 +1,6 @@
+
+
+
+
+<menuitem action="action_committee_tree" id="event_committee_menu_portal"
+			name="Udvalg" sequence="80" parent="menu_portal_registration" />	
