@@ -49,6 +49,7 @@
     'depends': ['base',
                 'disable_openerp_online',
                 'admin_technical_features',
+                'campos_event',
                 ],
 
     # always loaded

@@ -45,14 +45,20 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'mail',
         'event',
     ],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'data/campos.municipality.csv',
+        'data/campos.scout.org.csv',
         'templates.xml',
         'views/participant_view.xml',
+        'views/committee_view.xml',
+        'views/municipality_view.xml',
+        "views/scout_org_view.xml"
     ],
     # only loaded in demonstration mode
     'demo': [

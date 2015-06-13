@@ -29,35 +29,72 @@ from openerp import models, fields, api
 
 
 class CampCommittee(models.Model):
+
     """ Committee """
     _description = 'Committee'
     _name = 'campos.committee'
     _inherit = 'mail.thread'
 
     name = fields.Char('Name', size=64, translate=True)
+    code = fields.Char('Code', size=64, translate=True)
     desc = fields.Text('Description', translate=True)
-    email = fields.Char('Email', size=128),
-    member_ids = fields.One2many('campos.event.participant', 'committee_id', 'Members'),
-    template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null', 
+    email = fields.Char('Email', size=128)
+    member_ids = fields.One2many(
+        'campos.event.participant',
+        'committee_id',
+        'Members')
+    template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null',
                                   domain=[('model_id', '=', 'campos.event.participant')])
     parent_id = fields.Many2one('campos.committee', 'Main Committee')
-    child_ids = fields.One2many('campos.committee', 'parent_id', 'Subcommittees')
-    sequence = fields.Integer('Sequence', select=True, help="Gives the sequence order.")
-    display_name = fields.Char(string="Full Name", compute = '_compute_display_name', store=True)
-    member_no = fields.Integer(string='# Member', compute = '_compute_member_no')
-    
+    child_ids = fields.One2many(
+        'campos.committee',
+        'parent_id',
+        'Subcommittees')
+    sequence = fields.Integer(
+        'Sequence',
+        select=True,
+        help="Gives the sequence order.")
+    display_name = fields.Char(
+        string="Full Name",
+        compute='_compute_display_name',
+        store=True)
+    member_no = fields.Integer(string='# Member', compute='_compute_member_no')
+
     @api.one
-    @api.depends('name', 'parent_id.name')
+    @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):
-        names = [self.parent_id.name, self.name]
+
+        def _compute_codename(comm):
+            if comm.code:
+                return "%s - %s" % (comm.code, comm.name)
+            else:
+                return comm.name
+
+        names = [self.parent_id.display_name, _compute_codename(self)]
         self.display_name = ' / '.join(filter(None, names))
-    
+
+    @api.multi
+    @api.depends('name', 'code')
+    def name_get(self):
+        def _compute_codename(comm):
+            if comm.code:
+                return "%s - %s" % (comm.code, comm.name)
+            else:
+                return comm.name
+
+        result = []
+        for comm in self:
+
+            names = [comm.parent_id.display_name, _compute_codename(comm)]
+            result.append((comm.id, ' / '.join(filter(None, names))))
+
+        return result
+
     @api.one
     @api.depends('member_ids')
     def _compute_member_no(self):
-        self.member_no=len(self.member_ids.filtered(lambda record: record.state in ['sent','approved']))
-        
-        
-        
-             
-            
+        self.member_no = len(
+            self.member_ids.filtered(
+                lambda record: record.state in [
+                    'sent',
+                    'approved']))

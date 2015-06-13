@@ -25,7 +25,7 @@
 		</record>
 
 		<menuitem action="action_municipality_tree" id="event_municipality_menu"
-			name="Municipality" sequence="40" parent="base.menu_marketing_config_root" />
+			name="Municipality" sequence="40" parent="event.event_configuration" />
 			
 	</data>
 </openerp>

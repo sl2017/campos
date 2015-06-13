@@ -44,6 +44,8 @@
 						<group>
 							<field name="registration_id" />
 							<field name="name" />
+							<field name="state"/>
+							<field name="committee_id" string="Committee"/>
 						</group>
 					</sheet>
 
@@ -65,12 +67,69 @@
 		</record>
 
 
+<record id="campos_event_participant_form2" model="ir.ui.view">
+            <field name="name">campos.event.participant.form2</field>
+            <field name="model">campos.event.participant</field>
+            <field name="arch" type="xml">	
+			<tree string="Participants">
+											<field name="name"/>
+											<!-- 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
+											<!-- <field name="patrol"/> 
+											<field name="day_summery"/> -->
+											<field name="state"/>
+											<field name="committee_id" string="Committee"/>
+											<!-- <field name="functitle"/> -->
 
+										</tree>
+										</field>
+										</record>
+		<record id="campos_event_participant_search" model="ir.ui.view">
+            <field name="name">campos.event.participant.tree.search</field>
+            <field name="model">campos.event.participant</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="name"/>
+                 	<field name="registration_id"/>
+                 	<field name="city"/>
+                 	<!-- 
+                 	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
+                 	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
+                 	<filter icon="terp-personal" string="Staff" help="Camp Staff" domain="['|',('event_id','=',2),('part_time_ist','=',True)]"/>
+                 	 -->
+                 	<group expand="0" string="Group By...">
+                 	<filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
+                    <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+                 	<!-- 
+                 	<filter name="fAge" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age_group'}"/>
+                 	 -->
+                 	 
+                 	
+                 	</group>
+                 </search>
+            </field>
+            </record>  
 		
 
 		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"
 			name="Participants" sequence="50" parent="event.event_main_menu"
 			groups="event.group_event_manager" />
+			
+	<record id="action_committee_members_tree" model="ir.actions.act_window">
+			<field name="name">Members</field>
+
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">kanban,tree,form</field>
+    		<field name="view_id" ref="campos_event_participant_form2"/>
+    		<field name="search_view_id" ref="campos_event_participant_search"/>
+            <field name="context">{}</field>
+            <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id),('state','in',['sent','approved'])]</field>
+        
+		</record>	
 	</data>
 
 

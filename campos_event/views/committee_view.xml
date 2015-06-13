@@ -1,6 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		
+
+
+		<record model="ir.ui.view" id="campos_committee_form">
+			<field name="name">campos.committee.form</field>
+			<field name="model">campos.committee</field>
+			<field name="arch" type="xml">
+				<form string="Udvalg" version="7.0">
+					<sheet string="Udvalg">
+						
+						<label for="code" class="oe_edit_only" string="Committee Code and Name"/>
+                    	<h1>
+                        <field name="code" class="oe_inline" placeholder="Committee code" style="width: 6em"/> -
+                        <field name="name" class="oe_inline" placeholder="Committee name"/>
+                    	</h1>
+                    	<div class="oe_right oe_button_box">
+							<button name="%(campos_event.action_committee_members_tree)d"
+								type="action" string="Members" /> 
+						</div>
+						<group>
+							<field name="desc" />
+							<field name="email" />
+							<field name="template_id" />
+							<field name="parent_id" />
+							<field name="child_ids" />
+							<field name="member_no" />
+							<field name="sequence" />
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
 
 
 
+		<record model="ir.ui.view" id="campos_committee_tree">
+			<field name="name">campos.committee.tree</field>
+			<field name="model">campos.committee</field>
+			<field name="arch" type="xml">
+				<tree string="Committee">
 
-<menuitem action="action_committee_tree" id="event_committee_menu_portal"
-			name="Udvalg" sequence="80" parent="menu_portal_registration" />	
+					<field name="display_name" />
+					<field name="member_no" />
+					<field name="sequence" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_committee_tree" model="ir.actions.act_window">
+			<field name="name">Committees</field>
+
+			<field name="res_model">campos.committee</field>
+			<field name="view_type">form</field>
+
+
+		</record>
+
+		<menuitem action="action_committee_tree" id="event_committee_menu"
+			name="Committees" sequence="60" parent="event.event_main_menu" />
+
+	</data>
+</openerp>
