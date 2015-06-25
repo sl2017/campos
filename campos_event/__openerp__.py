@@ -58,7 +58,8 @@
         'views/participant_view.xml',
         'views/committee_view.xml',
         'views/municipality_view.xml',
-        "views/scout_org_view.xml"
+        "views/scout_org_view.xml",
+        "views/res_partner_view.xml"
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -40,12 +40,49 @@
 			<field name="arch" type="xml">
 
 				<form string="Participant Registration" version="7.0">
+				<header>
+				 <field name="state" widget="statusbar" attrs="{'invisible': [('staff', '=', False)]}"/>
+				</header>
 					<sheet>
 						<group>
 							<field name="registration_id" />
-							<field name="name" />
-							<field name="state"/>
-							<field name="committee_id" string="Committee"/>
+							<div class="oe_title oe_left">
+                        		<div class="oe_edit_only">
+                        		 <label for="name"/>
+                        		 </div> 
+                        		<h1>
+                            <field name="name" default_focus="1" placeholder="Name"/>
+                            <field name="is_company" attrs="{'invisible': True}"/>
+                        	</h1> 
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" on_change="onchange_address(use_parent_address, parent_id)"/>
+                        	 
+                        	</div>
+                        	<newline/>
+                        	  <label for="street" string="Address"/>
+                            <div>
+                                <div class="oe_edit_only">
+                                    <field name="use_parent_address" class="oe_inline" on_change="onchange_address(use_parent_address, parent_id)" attrs="{'invisible': ['|', ('is_company', '=', True),('parent_id', '=', False)]}"/>
+                                    <label for="use_parent_address" attrs="{'invisible': ['|', ('is_company', '=', True), ('parent_id', '=', False)]}"/>
+                                </div>
+                                <button name="open_parent" type="object" string="(edit company address)" class="oe_link oe_edit_only" attrs="{'invisible': ['|',('parent_id','=', False),('use_parent_address','=',False)]}"/>
+                                <field name="street" placeholder="Street..." attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <field name="street2" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <div class="address_format">
+                                    <field name="city" placeholder="City" style="width: 40%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{&quot;no_open&quot;: True}" on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="zip" placeholder="ZIP" style="width: 20%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                </div>
+                                <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                            </div>
+                            <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
+                            <field name="mobile"/>
+                            <field name="fax"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email"/>
+							<field name="participant"/>
+				 		    <field name="staff"/>
+							
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 						</group>
 					</sheet>
 
