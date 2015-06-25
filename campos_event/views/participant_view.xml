@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- <record id="view_id" model="ir.ui.view"> <field name="name">name of 
+			view (CampOS Event)</field> <field name="model">model</field> <field name="inherit_id" 
+			ref="inherit_module.inherit_id"/> <field name="arch" type="xml"> <xpath expr="//field[@name='name']" 
+			position="after"> <field name="field"/> </xpath> </field> </record> -->
+
+		<record id="action_event_participants_tree" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<!-- Registration inherited form -->
+
+		<record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit1</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_event_registration_form" />
+			<field name="arch" type="xml">
+				<field name="partner_id" position="before">
+					<div class="oe_right oe_button_box">
+						<button name="%(campos_event.action_event_participants_tree)d"
+							type="action" string="Participants"
+							help="Register Participant Details for this Group" />
+
+
+					</div>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_event_registration_participant_form">
+			<field name="name">registration.participant.form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+
+				<form string="Participant Registration" version="7.0">
+				<header>
+				 <field name="state" widget="statusbar" attrs="{'invisible': [('staff', '=', False)]}"/>
+				</header>
+					<sheet>
+						<group>
+							<field name="registration_id" />
+							<div class="oe_title oe_left">
+                        		<div class="oe_edit_only">
+                        		 <label for="name"/>
+                        		 </div> 
+                        		<h1>
+                            <field name="name" default_focus="1" placeholder="Name"/>
+                            <field name="is_company" attrs="{'invisible': True}"/>
+                        	</h1> 
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" on_change="onchange_address(use_parent_address, parent_id)"/>
+                        	 
+                        	</div>
+                        	<newline/>
+                        	  <label for="street" string="Address"/>
+                            <div>
+                                <div class="oe_edit_only">
+                                    <field name="use_parent_address" class="oe_inline" on_change="onchange_address(use_parent_address, parent_id)" attrs="{'invisible': ['|', ('is_company', '=', True),('parent_id', '=', False)]}"/>
+                                    <label for="use_parent_address" attrs="{'invisible': ['|', ('is_company', '=', True), ('parent_id', '=', False)]}"/>
+                                </div>
+                                <button name="open_parent" type="object" string="(edit company address)" class="oe_link oe_edit_only" attrs="{'invisible': ['|',('parent_id','=', False),('use_parent_address','=',False)]}"/>
+                                <field name="street" placeholder="Street..." attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <field name="street2" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <div class="address_format">
+                                    <field name="city" placeholder="City" style="width: 40%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{&quot;no_open&quot;: True}" on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="zip" placeholder="ZIP" style="width: 20%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                </div>
+                                <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                            </div>
+                            <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
+                            <field name="mobile"/>
+                            <field name="fax"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email"/>
+							<field name="participant"/>
+				 		    <field name="staff"/>
+							
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+						</group>
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+		<record id="campos_event_participant_tree" model="ir.ui.view">
+			<field name="name">campos.event.participant.tree</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+				<tree string="Participants">
+					<field name="name" />
+					<field name="registration_id" />
+					<field name="city" />
+
+				</tree>
+			</field>
+		</record>
+
+
+<record id="campos_event_participant_form2" model="ir.ui.view">
+            <field name="name">campos.event.participant.form2</field>
+            <field name="model">campos.event.participant</field>
+            <field name="arch" type="xml">	
+			<tree string="Participants">
+											<field name="name"/>
+											<!-- 
+												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+											-->
+											<!-- <field name="patrol"/> 
+											<field name="day_summery"/> -->
+											<field name="state"/>
+											<field name="committee_id" string="Committee"/>
+											<!-- <field name="functitle"/> -->
+
+										</tree>
+										</field>
+										</record>
+		<record id="campos_event_participant_search" model="ir.ui.view">
+            <field name="name">campos.event.participant.tree.search</field>
+            <field name="model">campos.event.participant</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="name"/>
+                 	<field name="registration_id"/>
+                 	<field name="city"/>
+                 	<!-- 
+                 	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
+                 	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
+                 	<filter icon="terp-personal" string="Staff" help="Camp Staff" domain="['|',('event_id','=',2),('part_time_ist','=',True)]"/>
+                 	 -->
+                 	<group expand="0" string="Group By...">
+                 	<filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
+                    <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+                 	<!-- 
+                 	<filter name="fAge" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age_group'}"/>
+                 	 -->
+                 	 
+                 	
+                 	</group>
+                 </search>
+            </field>
+            </record>  
+		
+
+		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"
+			name="Participants" sequence="50" parent="event.event_main_menu"
+			groups="event.group_event_manager" />
+			
+	<record id="action_committee_members_tree" model="ir.actions.act_window">
+			<field name="name">Members</field>
+
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">kanban,tree,form</field>
+    		<field name="view_id" ref="campos_event_participant_form2"/>
+    		<field name="search_view_id" ref="campos_event_participant_search"/>
+            <field name="context">{}</field>
+            <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id),('state','in',['sent','approved'])]</field>
+        
+		</record>	
+	</data>
+
+
+</openerp>

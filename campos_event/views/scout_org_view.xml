@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+
+<!-- Scout Organizations -->
+		
+		<record id="scoutorg_search" model="ir.ui.view">
+            <field name="name">campos.scout.org.tree.search</field>
+            <field name="model">campos.scout.org</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                 <search string="Search">
+                 	<field name="name" />
+					<field name="country_id" />
+                 </search>
+            </field>
+        </record>
+             	
+		<record model="ir.ui.view" id="scoutorg_tree">
+			<field name="name">scoutorg.tree</field>
+			<field name="model">campos.scout.org</field>
+			<field name="arch" type="xml">
+				<tree string="Scout Organizations">
+					
+					<field name="name" />
+					<field name="country_id" />
+					<field name="sex" />
+					<field name="worldorg" />
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_scoutorg_tree" model="ir.actions.act_window">
+			<field name="name">Scout Organizations</field>
+
+			<field name="res_model">campos.scout.org</field>
+			<field name="view_type">form</field>
+			<field name="search_view_id" ref="scoutorg_search"/>
+
+		</record>
+
+		<menuitem action="action_scoutorg_tree" id="event_scoutorg_menu"
+			name="Scout Orgs" sequence="50" parent="event.event_configuration" />
+			</data>
+			</openerp>			
+			
