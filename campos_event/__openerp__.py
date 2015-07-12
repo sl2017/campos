@@ -54,7 +54,7 @@
         # 'security/ir.model.access.csv',
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',
-        'templates.xml',
+        'views/templates.xml',
         'views/participant_view.xml',
         'views/committee_view.xml',
         'views/municipality_view.xml',

@@ -31,6 +31,7 @@ from openerp import models, fields, api
 class EventRegistration(models.Model):
 
     '''
+    Scout Group or Jobber "Head" registration
 
     '''
     _inherit = 'event.registration'
@@ -39,26 +40,6 @@ class EventRegistration(models.Model):
         'campos.event.participant',
         'registration_id')
 
-
-class EventParticipant(models.Model):
-
-    '''
-
-    '''
-    _name = 'campos.event.participant'
-    _inherits = {'res.partner': 'partner_id'}
-
-    registration_id = fields.Many2one('event.registration')
-    committee_id = fields.Many2one('campos.committee',
-                                   'Have agreement with committee',
-                                   track_visibility='onchange',
-                                   ondelete='set null')
-    state = fields.Selection([('draft', 'Received'),
-                              ('sent', 'Sent to committee'),
-                              ('approved', 'Approved by the committee'),
-                              ('rejected', 'Rejected')],
-                             'Approval Procedure',
-                             track_visibility='onchange')
     country_id = fields.Many2one('res.country', 'Country')
     organization_id = fields.Many2one(
         'campos.scout.org',
@@ -89,4 +70,67 @@ class EventParticipant(models.Model):
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
 
-#
+
+class EventParticipant(models.Model):
+
+    '''
+    Detail participant/Jobber Info
+    '''
+    _name = 'campos.event.participant'
+    _inherits = {'res.partner': 'partner_id'}
+
+    registration_id = fields.Many2one('event.registration')
+
+    # Scout Leader Fiedls
+
+    appr_leader = fields.Boolean('Leder godkendt', track_visibility='onchange')
+    att_received = fields.Boolean(
+        'Attest modtaget',
+        track_visibility='onchange')
+    leader = fields.Boolean('Is Leader')
+
+    # Jobber fields
+    committee_id = fields.Many2one('campos.committee',
+                                   'Have agreement with committee',
+                                   track_visibility='onchange',
+                                   ondelete='set null')
+    state = fields.Selection([('draft', 'Received'),
+                              ('sent', 'Sent to committee'),
+                              ('approved', 'Approved by the committee'),
+                              ('rejected', 'Rejected')],
+                             'Approval Procedure',
+                             track_visibility='onchange', default='draft')
+
+    workwish = fields.Text('Want to work with')
+    profession = fields.Char(
+        'Profession',
+        size=64,
+        help='What do you do for living')
+
+    par_internal_note = fields.Text('Internal note')
+
+    @api.multi
+    def action_confirm(self):
+        self.ensure_one()
+        template = self.env.ref('campos.new_staff_member')
+        assert template._name == 'email.template'
+
+        template.send_mail(self.id)
+
+        self.state = 'sent'
+        return True
+
+    @api.multi
+    def action_approve(self):
+        self.ensure_one()
+        template = self.committee_id.template_id
+        if template:
+            template.send_mail(self.id)
+
+        self.state = 'approved'
+        return True
+
+    def action_reject(self):
+        self.ensure_one()
+        self.state = 'rejected'
+        return True
