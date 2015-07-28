@@ -34,9 +34,7 @@ class ResPartner(models.Model):
     Add Type Fields to Partner
     '''
     _inherit = 'res.partner'
-    
+
     scoutgroup = fields.Boolean()
     participant = fields.Boolean()
     staff = fields.Boolean()
-    
-    

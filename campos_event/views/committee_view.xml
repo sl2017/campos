@@ -66,5 +66,27 @@
 		<menuitem action="action_committee_tree" id="event_committee_menu"
 			name="Committees" sequence="60" parent="event.event_main_menu" />
 
+
+		<!-- Email template for new IST assigned to Committe -->
+        <record id="new_staff_member" model="email.template">
+            <field name="name">New staff assigned to Committee</field>
+            <field name="model">campos.event.participant</field>
+            <field name="email_from"><![CDATA[${object.company} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_to">${object.committee_id.email|safe}</field>
+            <field name="subject"><![CDATA[Ny hjælper til godkendelse]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.committee_id.name},
+                    </p>
+                    <p>
+                        En ny hjælper er klar til godkendelse:
+                    </p>
+                    <p>
+                        ${object.name}
+                    </p>
+                                    ]]>
+            </field>
+        </record>
 	</data>
 </openerp>

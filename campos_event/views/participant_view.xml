@@ -8,7 +8,7 @@
 
 		<record id="action_event_participants_tree" model="ir.actions.act_window">
 			<field name="name">Participants</field>
-
+			<field name="context">{'search_default_registration_id': active_id, 'default_registration_id': active_id}</field>
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -22,7 +22,7 @@
 			<field name="type">form</field>
 			<field name="inherit_id" ref="event.view_event_registration_form" />
 			<field name="arch" type="xml">
-				<field name="partner_id" position="before">
+				<xpath expr="/form/sheet/h1" position="after">
 					<div class="oe_right oe_button_box">
 						<button name="%(campos_event.action_event_participants_tree)d"
 							type="action" string="Participants"
@@ -30,7 +30,17 @@
 
 
 					</div>
-				</field>
+				</xpath>
+				<xpath expr="/form/sheet/group" position="after">
+				<notebook>
+				<page string="Camp Info">
+				 <group>
+				 	<field name="scoutgroup"/>
+				 	<field name="staff"/>
+				 	</group>
+				 </page>
+				 </notebook>
+				 </xpath>
 			</field>
 		</record>
 
@@ -41,7 +51,12 @@
 
 				<form string="Participant Registration" version="7.0">
 				<header>
+				 <button string="Send to Committee" name="action_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager" attrs="{'invisible': [('staff', '=', False)]}"/>
+           		 <button string="Approve" name="action_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
+             	 <button string="reject" name="action_reject" states="sent,approved,draft" type="object" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
+           
 				 <field name="state" widget="statusbar" attrs="{'invisible': [('staff', '=', False)]}"/>
+				 
 				</header>
 					<sheet>
 						<group>
