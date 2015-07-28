@@ -89,11 +89,9 @@ class CampOsEvent(http.Controller):
             'staff' : True,
             'scoutgroup': False,
             'participant' : False,
-             
         }
         for f in ['email', 'name', 'phone']:
             value[f] = post.get(f)
-        
         partner_id = env['res.partner'].create(value).id
         
         value = {
@@ -101,15 +99,17 @@ class CampOsEvent(http.Controller):
                  'partner_id' : partner_id,
                  'contact_partner_id' : partner_id,
                  'econ_partner_id' : partner_id,
-                 
                  } 
+        for f in ['name']:
+            value[f] = post.get(f)
         reg_id = env['event.registration'].create(value).id
+        
         value = {
                  'partner_id' : partner_id,
                  'registration_id' : reg_id,
                  }
         for f in ['workwish', 'committee_id']:
             value[f] = post.get(f)
-        
         part_id = env['campos.event.participant'].create(value).id
+
         return request.render("campos_event.jobber_thankyou", {})    

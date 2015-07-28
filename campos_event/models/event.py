@@ -40,6 +40,9 @@ class EventRegistration(models.Model):
         'campos.event.participant',
         'registration_id')
 
+    name = fields.Char(related='partner_id.name', store=True)
+    scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
+    staff = fields.Boolean(related='partner_id.staff')
     country_id = fields.Many2one('res.country', 'Country')
     organization_id = fields.Many2one(
         'campos.scout.org',
@@ -134,3 +137,24 @@ class EventParticipant(models.Model):
         self.ensure_one()
         self.state = 'rejected'
         return True
+    
+    @api.multi
+    @api.depends('partner_id.name')
+    def name_get(self):
+        
+        result = []
+        for part in self:
+            result.append((part.id, part.partner_id.display_name))
+
+        return result
+    
+    @api.v7
+    def onchange_address(self, cr, uid, ids, use_parent_address, parent_id, context=None):
+        """ Wrapper on the user.partner onchange_address, because some calls to the
+            partner form view applied to the user may trigger the
+            partner.onchange_type method, but applied to the user object.
+        """
+        partner_ids = [user.partner_id.id for user in self.browse(cr, uid, ids, context=context)]
+        return self.pool['res.partner'].onchange_address(cr, uid, partner_ids, use_parent_address, parent_id, context=context)
+
+    
