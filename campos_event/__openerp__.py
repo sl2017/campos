@@ -47,6 +47,7 @@
         'base',
         'mail',
         'event',
+        'website',
     ],
 
     # always loaded
