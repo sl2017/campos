@@ -33,45 +33,56 @@ from openerp.addons.web.http import request
 from openerp.addons.website.controllers.main import Website as controllers
 from openerp.addons.website.models.website import slug
 
+
 class CampOsEvent(http.Controller):
-#     @http.route('/camp_os_event/camp_os_event/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+    #     @http.route('/camp_os_event/camp_os_event/', auth='public')
+    #     def index(self, **kw):
+    #         return "Hello, world"
 
-#     @http.route('/camp_os_event/camp_os_event/objects/', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('camp_os_event.listing', {
-#             'root': '/camp_os_event/camp_os_event',
-#             'objects': http.request.env['camp_os_event.camp_os_event'].search([]),
-#         })
+    #     @http.route('/camp_os_event/camp_os_event/objects/', auth='public')
+    #     def list(self, **kw):
+    #         return http.request.render('camp_os_event.listing', {
+    #             'root': '/camp_os_event/camp_os_event',
+    #             'objects': http.request.env['camp_os_event.camp_os_event'].search([]),
+    #         })
 
-#     @http.route('/camp_os_event/camp_os_event/objects/<model("camp_os_event.camp_os_event"):obj>/', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('camp_os_event.object', {
-#             'object': obj
-#         })
+    #     @http.route('/camp_os_event/camp_os_event/objects/<model("camp_os_event.camp_os_event"):obj>/', auth='public')
+    #     def object(self, obj, **kw):
+    #         return http.request.render('camp_os_event.object', {
+    #             'object': obj
+    #         })
 
-    @http.route('/campos/jobber/signup', type='http', auth="public", website=True)
+    @http.route(
+        '/campos/jobber/signup', type='http', auth="public", website=True)
     def jobber_signup(self, **kwargs):
         error = {}
         default = {}
-        
+
         committee = request.registry['campos.committee']
-        committee_ids = committee.search(request.cr, SUPERUSER_ID, [], context=request.context)
-        committees = committee.browse(request.cr, SUPERUSER_ID, committee_ids, context=request.context)
-        
+        committee_ids = committee.search(
+            request.cr,
+            SUPERUSER_ID,
+            [],
+            context=request.context)
+        committees = committee.browse(
+            request.cr,
+            SUPERUSER_ID,
+            committee_ids,
+            context=request.context)
+
         if 'website_campos_jobber_signup_error' in request.session:
             error = request.session.pop('website_campos_jobber_signup_error')
-            default = request.session.pop('website_campos_jobber_signup_default')
-            
+            default = request.session.pop(
+                'website_campos_jobber_signup_default')
+
         return request.render("campos_event.jobber_signup", {
             'committees': committees,
             'error': error,
             'default': default,
         })
-        
-        
-    @http.route('/campos/jobber/thankyou', methods=['POST'], type='http', auth="public", website=True)
+
+    @http.route('/campos/jobber/thankyou',
+                methods=['POST'], type='http', auth="public", website=True)
     def jobs_thankyou(self, **post):
         error = {}
         for field_name in ["name", "phone", "email"]:
@@ -79,37 +90,37 @@ class CampOsEvent(http.Controller):
                 error[field_name] = 'missing'
         if error:
             request.session['website_campos_jobber_signup_error'] = error
-            
+
             request.session['website_campos_jobber_signup_default'] = post
             return request.redirect('/campos/jobber/signup')
 
         # public user can't create applicants (duh)
         env = request.env(user=SUPERUSER_ID)
         value = {
-            'staff' : True,
+            'staff': True,
             'scoutgroup': False,
-            'participant' : False,
+            'participant': False,
         }
         for f in ['email', 'name', 'phone']:
             value[f] = post.get(f)
         partner_id = env['res.partner'].create(value).id
-        
+
         value = {
-                 'event_id' : 1,
-                 'partner_id' : partner_id,
-                 'contact_partner_id' : partner_id,
-                 'econ_partner_id' : partner_id,
-                 } 
+            'event_id': 1,
+            'partner_id': partner_id,
+            'contact_partner_id': partner_id,
+            'econ_partner_id': partner_id,
+        }
         for f in ['name']:
             value[f] = post.get(f)
         reg_id = env['event.registration'].create(value).id
-        
+
         value = {
-                 'partner_id' : partner_id,
-                 'registration_id' : reg_id,
-                 }
+            'partner_id': partner_id,
+            'registration_id': reg_id,
+        }
         for f in ['workwish', 'committee_id']:
             value[f] = post.get(f)
         part_id = env['campos.event.participant'].create(value).id
 
-        return request.render("campos_event.jobber_thankyou", {})    
+        return request.render("campos_event.jobber_thankyou", {})
