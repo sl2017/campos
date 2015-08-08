@@ -8,6 +8,7 @@ Contents:
 
    struktur
    
+   modules
    
 Indices and tables
 ==================
