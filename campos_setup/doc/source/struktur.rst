@@ -2,15 +2,15 @@ Event, tilmelding, deltagere og kantaktpersoner
 ===============================================
 
 I forhold til E2014 er der foretaget nogle forbedringer/foenklinger i modellen:
-Der er kun behov for en aktivitet (model: event.event) og ikke et særskilt "hjælperarrangementet"
-I stedet har vi en markering på tilmeldingen om det er en hjælpertilmelding eller gruppetilmeldingen)
+Der er kun behov for en aktivitet (model: event.event) og ikke et sÃ¦rskilt "hjÃ¦lperarrangementet"
+I stedet har vi en markering pï¿½ tilmeldingen om det er en hjï¿½lpertilmelding eller gruppetilmeldingen)
 
-Tilmeldingen (model: event.registration) er "betaleren" og kan bære flere deltagere. Vil være en spejdergruppe eller en hjælper:
+Tilmeldingen (model: event.registration) er "betaleren" og kan bÃ¦re flere deltagere. Vil vÃ¦re en spejdergruppe eller en hjÃ¦lper:
 
 .. image:: images/campinfo.png
 
-Deltageren (model: campos.event.participant) kan så (for jobbere) knyttes til et udvalg (med godkendelse og mail flows - Disse mails skal også lige forfattes)
+Deltageren (model: campos.event.participant) kan sï¿½ (for jobbere) knyttes til et udvalg (med godkendelse og mail flows - Disse mails skal ogsï¿½ lige forfattes)
 
-Både Tilmelding og Deltager "nedarver" fra Odoo's generelle kontaktperson object (res.partner), som er det der bærer navn, adresse, telefon , email etc.
+BÃ¥de Tilmelding og Deltager "nedarver" fra Odoo's generelle kontaktperson object (res.partner), som er det der bÃ¦rer navn, adresse, telefon , email etc.
 
-Så i tilfældet en "single" hjælper vil der blive oprettet en Tilmeldingsrecord og en Deltagerrecord, der vil nedarve fra den SAMME res.partner
+SÃ¥ i tilfÃ¦ldet en "single" hjÃ¦lper vil der blive oprettet en Tilmeldingsrecord og en Deltagerrecord, der vil nedarve fra den SAMME res.partner
