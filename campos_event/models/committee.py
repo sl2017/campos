@@ -63,6 +63,9 @@ class CampCommittee(models.Model):
     @api.one
     @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):
+        '''
+        Returns the Full path in committee hierarchy
+        '''
 
         def _compute_codename(comm):
             if comm.code:
@@ -76,6 +79,9 @@ class CampCommittee(models.Model):
     @api.multi
     @api.depends('name', 'code')
     def name_get(self):
+        '''
+        The name is the topmost committees code + full path name
+        '''
         def _compute_codename(comm):
             if comm.code:
                 return "%s - %s" % (comm.code, comm.name)
@@ -93,6 +99,9 @@ class CampCommittee(models.Model):
     @api.one
     @api.depends('member_ids')
     def _compute_member_no(self):
+        '''
+        Count members in the Committee
+        '''
         self.member_no = len(
             self.member_ids.filtered(
                 lambda record: record.state in [
