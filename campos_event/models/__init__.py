@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+""" Models for Event handling 
+..  automodule:: package
+
+"""
 from . import scout_org
 from . import municipality
 from . import res_partner
