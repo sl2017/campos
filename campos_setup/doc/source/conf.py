@@ -40,13 +40,16 @@ sys.path.append(sphinxodoo_root_path)
 # extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
-              'sphinxodoo.ext.autodoc']
+              'sphinxodoo.ext.autodoc',
+              'sphinx.ext.autosummary']
 
+autosummary_generate = True
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
