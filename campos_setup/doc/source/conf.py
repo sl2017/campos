@@ -43,7 +43,8 @@ sys.path.append(os.path.join(sphinxodoo_root_path, 'openerp', 'addons'))
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinxodoo.ext.autodoc',
-              'sphinx.ext.autosummary']
+              ]
+              
 
 autosummary_generate = True
 # Add any paths that contain templates here, relative to this directory.
