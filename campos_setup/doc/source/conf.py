@@ -31,6 +31,8 @@ sphinxodoo_addons_path = [
 #          if not x.startswith('.') and os.path.isdir(os.path.join(sg_path, x))]
 sphinxodoo_addons = ['campos_setup','campos_event']
 sys.path.append(sphinxodoo_root_path)
+sys.path.append(os.path.join(sphinxodoo_root_path, 'openerp', 'addons'))
+
 # -- General configuration ----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
