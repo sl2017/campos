@@ -43,7 +43,7 @@
 		</record>
 
 		<menuitem action="action_scoutorg_tree" id="event_scoutorg_menu"
-			name="Scout Orgs" sequence="50" parent="event.event_configuration" />
+			name="Scout Orgs" sequence="50" parent="menu_campos_config_event" />
 			</data>
 			</openerp>			
 			

@@ -33,83 +33,125 @@ from openerp.addons.web.http import request
 from openerp.addons.website.controllers.main import Website as controllers
 from openerp.addons.website.models.website import slug
 
+
 class CampOsEvent(http.Controller):
-#     @http.route('/camp_os_event/camp_os_event/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+    #     @http.route('/camp_os_event/camp_os_event/', auth='public')
+    #     def index(self, **kw):
+    #         return "Hello, world"
 
-#     @http.route('/camp_os_event/camp_os_event/objects/', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('camp_os_event.listing', {
-#             'root': '/camp_os_event/camp_os_event',
-#             'objects': http.request.env['camp_os_event.camp_os_event'].search([]),
-#         })
+    #     @http.route('/camp_os_event/camp_os_event/objects/', auth='public')
+    #     def list(self, **kw):
+    #         return http.request.render('camp_os_event.listing', {
+    #             'root': '/camp_os_event/camp_os_event',
+    #             'objects': http.request.env['camp_os_event.camp_os_event'].search([]),
+    #         })
 
-#     @http.route('/camp_os_event/camp_os_event/objects/<model("camp_os_event.camp_os_event"):obj>/', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('camp_os_event.object', {
-#             'object': obj
-#         })
+    #     @http.route('/camp_os_event/camp_os_event/objects/<model("camp_os_event.camp_os_event"):obj>/', auth='public')
+    #     def object(self, obj, **kw):
+    #         return http.request.render('camp_os_event.object', {
+    #             'object': obj
+    #         })
 
-    @http.route('/campos/jobber/signup', type='http', auth="public", website=True)
-    def jobber_signup(self, **kwargs):
+    @http.route(
+        ['/campos/jobber/signup',
+         '/campos/jobber/signup/<model("campos.job"):job>'],
+        type='http', auth="public", website=True)
+    def jobber_signup(self, job=None, **kwargs):
         error = {}
         default = {}
+        comm_id = False
         
+        if job:
+            comm_id = job.committee_id.id
+
         committee = request.registry['campos.committee']
-        committee_ids = committee.search(request.cr, SUPERUSER_ID, [], context=request.context)
-        committees = committee.browse(request.cr, SUPERUSER_ID, committee_ids, context=request.context)
-        
+        committee_ids = committee.search(
+            request.cr,
+            SUPERUSER_ID,
+            [],
+            context=request.context)
+        committees = committee.browse(
+            request.cr,
+            SUPERUSER_ID,
+            committee_ids,
+            context=request.context)
+
         if 'website_campos_jobber_signup_error' in request.session:
             error = request.session.pop('website_campos_jobber_signup_error')
-            default = request.session.pop('website_campos_jobber_signup_default')
-            
+            default = request.session.pop(
+                'website_campos_jobber_signup_default')
+
         return request.render("campos_event.jobber_signup", {
             'committees': committees,
             'error': error,
             'default': default,
+            'job' : job,
+            'comm_id' : comm_id,
         })
-        
-        
-    @http.route('/campos/jobber/thankyou', methods=['POST'], type='http', auth="public", website=True)
+
+    @http.route('/campos/jobber/thankyou',
+                methods=['POST'], type='http', auth="public", website=True)
     def jobs_thankyou(self, **post):
         error = {}
-        for field_name in ["name", "phone", "email"]:
+        for field_name in ["name", "phone", "email", "street", "zip", "city"]:
             if not post.get(field_name):
                 error[field_name] = 'missing'
         if error:
             request.session['website_campos_jobber_signup_error'] = error
-            
+
             request.session['website_campos_jobber_signup_default'] = post
             return request.redirect('/campos/jobber/signup')
 
         # public user can't create applicants (duh)
         env = request.env(user=SUPERUSER_ID)
         value = {
-            'staff' : True,
+            'staff': True,
             'scoutgroup': False,
-            'participant' : False,
+            'participant': False,
         }
-        for f in ['email', 'name', 'phone']:
+        for f in ['email', 'name', 'phone', 'street', 'zip', 'city']:
             value[f] = post.get(f)
         partner_id = env['res.partner'].create(value).id
-        
+
         value = {
-                 'event_id' : 1,
-                 'partner_id' : partner_id,
-                 'contact_partner_id' : partner_id,
-                 'econ_partner_id' : partner_id,
-                 } 
+            'event_id': 1,
+            'partner_id': partner_id,
+            'contact_partner_id': partner_id,
+            'econ_partner_id': partner_id,
+        }
         for f in ['name']:
             value[f] = post.get(f)
         reg_id = env['event.registration'].create(value).id
-        
+
         value = {
-                 'partner_id' : partner_id,
-                 'registration_id' : reg_id,
-                 }
-        for f in ['workwish', 'committee_id']:
+            'partner_id': partner_id,
+            'registration_id': reg_id,
+        }
+        for f in ['workwish', 'committee_id', 'job_id']:
             value[f] = post.get(f)
         part_id = env['campos.event.participant'].create(value).id
 
-        return request.render("campos_event.jobber_thankyou", {})    
+        return request.render("campos_event.jobber_thankyou", {})
+
+
+    @http.route(
+        ['/campos/jobber/joblist',
+         '/campos/jobber/joblist/<model("campos.job.tag"):tag>'], 
+         type='http', auth="public", website=True)
+    def jobber_joblist(self, tag=None, **kwargs):
+        request = http.request
+        
+        if tag:
+            jobs = tag.job_ids
+            list_title = "Latest jobs tagged: " + tag.name
+        else:
+            jobs = request.env['campos.job'].search([('active','=', True)])
+            list_title = "Latest jobs"
+            
+        return request.render("campos_event.jobber_latest_jobs", {'jobs' : jobs,
+                                                                  'list_title' : list_title})    
+        
+        
+        
+        
+        

@@ -81,6 +81,7 @@ class EventParticipant(models.Model):
     '''
     _name = 'campos.event.participant'
     _inherits = {'res.partner': 'partner_id'}
+    _inherit = ['mail.thread', 'ir.needaction_mixin']
 
     registration_id = fields.Many2one('event.registration')
 
@@ -104,6 +105,14 @@ class EventParticipant(models.Model):
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
 
+    job_id = fields.Many2one('campos.job',
+                             'Job',
+                             ondelete='set null')
+    newsletter  = fields.Boolean()
+    
+    sharepoint_mail = fields.Boolean()
+    sharepoint_mailaddress = fields.Char()
+    
     workwish = fields.Text('Want to work with')
     profession = fields.Char(
         'Profession',
@@ -115,7 +124,7 @@ class EventParticipant(models.Model):
     @api.multi
     def action_confirm(self):
         self.ensure_one()
-        template = self.env.ref('campos.new_staff_member')
+        template = self.env.ref('campos_event.new_staff_member')
         assert template._name == 'email.template'
 
         template.send_mail(self.id)
@@ -137,24 +146,50 @@ class EventParticipant(models.Model):
         self.ensure_one()
         self.state = 'rejected'
         return True
-    
+
     @api.multi
     @api.depends('partner_id.name')
     def name_get(self):
-        
+
         result = []
         for part in self:
             result.append((part.id, part.partner_id.display_name))
 
         return result
-    
+
     @api.v7
-    def onchange_address(self, cr, uid, ids, use_parent_address, parent_id, context=None):
+    def onchange_address(
+            self, cr, uid, ids, use_parent_address, parent_id, context=None):
         """ Wrapper on the user.partner onchange_address, because some calls to the
             partner form view applied to the user may trigger the
             partner.onchange_type method, but applied to the user object.
         """
-        partner_ids = [user.partner_id.id for user in self.browse(cr, uid, ids, context=context)]
-        return self.pool['res.partner'].onchange_address(cr, uid, partner_ids, use_parent_address, parent_id, context=context)
-
-    
+        partner_ids = [
+            user.partner_id.id for user in self.browse(
+                cr,
+                uid,
+                ids,
+                context=context)]
+        return self.pool['res.partner'].onchange_address(
+            cr, uid, partner_ids, use_parent_address, parent_id, context=context)
+        
+    @api.model
+    def _needaction_domain_get(self):
+        """
+        Show a count of Participants that need action on the menu badge.
+        
+        For Event Managers (Followers of the Event): 
+            Participants in status "Received" or "Rejected"
+        For Committee Managers (Followers of Committee): 
+            Participants in status "Sent to Committee"
+        
+        """
+        
+        regs = self.env['event.registration'].search([('event_id.message_follower_ids', '=', self.env.user.partner_id.id)])
+        coms =  self.env['campos.committee'].search([('message_follower_ids', '=', self.env.user.partner_id.id)])
+        
+        return ['|', 
+                '&', ('registration_id', 'in', regs.ids),('state', 'in',['draft','rejected']),
+                '&', ('committee_id', 'in', coms.ids),('state', 'in',['sent']),
+                ]
+        

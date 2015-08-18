@@ -28,8 +28,7 @@
     'name': "CampOS Event",
 
     'summary': """
- 		Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+                Scout Camp Management Solution""",
 
     # 'description': put the module description in README.rst
 
@@ -53,14 +52,18 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',
+        'views/campos_menu.xml',
         'views/templates.xml',
         'views/participant_view.xml',
         'views/committee_view.xml',
         'views/municipality_view.xml',
         "views/scout_org_view.xml",
-        "views/res_partner_view.xml"
+        "views/res_partner_view.xml",
+        "views/job_view.xml",
+        "views/job_template.xml",
     ],
     # only loaded in demonstration mode
     'demo': [
