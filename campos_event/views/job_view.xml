@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<!-- Job tag -->
+		<record model="ir.ui.view" id="job_tag_tree">
+			<field name="name">job_tag.tree</field>
+			<field name="model">campos.job.tag</field>
+			<field name="arch" type="xml">
+				<tree string="Job tags">
+					<field name="name" />
+					<field name="parent_id" />
+					<field name="active" />
+
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="campos_job_tag_form">
+			<field name="name">campos.job.tag.form</field>
+			<field name="model">campos.job.tag</field>
+			<field name="arch" type="xml">
+				<form string="Job Tag" version="7.0">
+					<sheet string="Job Tag">
+					<group>
+					<field name="name" />
+					<field name="parent_id" />
+					
+					</group>
+					</sheet>
+					</form>
+					</field>
+					</record>
+		
+		<record id="action_job_tag_tree" model="ir.actions.act_window">
+			<field name="name">Job Tags</field>
+
+			<field name="res_model">campos.job.tag</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_job_tag_tree" id="event_job_tag_menu"
+			name="Job Tags" sequence="80" parent="menu_campos_comittee" />
+
+		<!-- Job -->
+		<record model="ir.ui.view" id="job_tree">
+			<field name="name">job.tree</field>
+			<field name="model">campos.job</field>
+			<field name="arch" type="xml">
+				<tree string="Jobs">
+					<field name="name" />
+					<field name="committee_id" />
+
+
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="campos_job_form">
+			<field name="name">campos.job.form</field>
+			<field name="model">campos.job</field>
+			<field name="arch" type="xml">
+				<form string="Job" version="7.0">
+					<sheet string="Job">
+						
+						<label for="name" class="oe_edit_only" string="Name"/>
+                    	<h1>
+                        <field name="name" class="oe_inline" placeholder="Job
+                         name"/>
+                    	</h1>
+                    	<div class="oe_right oe_button_box">
+							<!-- <button name="%(campos_event.action_committee_members_tree)d"
+								type="action" string="Members" /> --> 
+						</div>
+						<group>
+							<field name="active" />
+							<field name="desc" />
+							<field name="signup_button"/>
+							<field name="committee_id" />
+							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..."/> />
+							
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_job_tree" model="ir.actions.act_window">
+			<field name="name">Jobs</field>
+
+			<field name="res_model">campos.job</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_job_tree" id="event_job_menu"
+			name="Jobs" sequence="70" parent="menu_campos_comittee" />
+			
+	</data>
+</openerp>

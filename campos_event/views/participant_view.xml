@@ -14,6 +14,14 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		
+		<record id="action_event_participants_tree2" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+			
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
 		<!-- Registration inherited form -->
 
 		<record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
@@ -39,6 +47,8 @@
 				 	<field name="staff"/>
 				 	</group>
 				 </page>
+				 
+				 
 				 </notebook>
 				 </xpath>
 			</field>
@@ -98,6 +108,16 @@
 				 		    <field name="staff"/>
 							
 							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<notebook>
+							<page string="Sharepoint">
+								 <group>
+								  
+								 	<field name="sharepoint_mail"/>
+								 	<field name="sharepoint_mailaddress"/>
+								 </group>
+								 </page>
+							</notebook>
 						</group>
 					</sheet>
 
@@ -166,8 +186,8 @@
             </record>  
 		
 
-		<menuitem action="action_event_participants_tree" id="event_participants_tree_menu"
-			name="Participants" sequence="50" parent="event.event_main_menu"
+		<menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
+			name="Participants" sequence="50" parent="menu_campos_event"
 			groups="event.group_event_manager" />
 			
 	<record id="action_committee_members_tree" model="ir.actions.act_window">

@@ -63,15 +63,16 @@
 
 		</record>
 
+		<menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10"/>
 		<menuitem action="action_committee_tree" id="event_committee_menu"
-			name="Committees" sequence="60" parent="event.event_main_menu" />
+			name="Committees" sequence="60" parent="menu_campos_comittee" />
 
 
 		<!-- Email template for new IST assigned to Committe -->
         <record id="new_staff_member" model="email.template">
             <field name="name">New staff assigned to Committee</field>
             <field name="model">campos.event.participant</field>
-            <field name="email_from"><![CDATA[${object.company} <${(object.company_id.email or user.email)|safe}>]]></field>
+            <field name="email_from"><![CDATA[tilmelding@sl2017.dk]]></field>
             <field name="email_to">${object.committee_id.email|safe}</field>
             <field name="subject"><![CDATA[Ny hjælper til godkendelse]]></field>
             <field name="body_html">
