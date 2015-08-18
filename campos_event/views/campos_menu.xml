@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Top menu item -->
+        <menuitem name="CampOS"
+            id="menu_campos"
+            groups="base.group_user"
+            sequence="45"/>
+            
+        <menuitem name="Events" id="menu_campos_event" parent="menu_campos" sequence="10"/>
+        <menuitem name="Events" id="menu_campos_event_event" action="event.action_event_view" parent="menu_campos_event" sequence="10"/>
+        <menuitem name="Registrations"
+            id="menu_action_registration" parent="menu_campos_event" sequence="20"
+            action="event.action_registration" groups="event.group_event_manager,event.group_event_user"/>
+        
+        
+        <menuitem name="Configuration" id="menu_campos_config" parent="menu_campos" sequence="60"/>
+        <menuitem name="Events" id="menu_campos_config_event" parent="menu_campos_config" sequence="60"/>
+        
+        </data>
+        </openerp>
+        
+            

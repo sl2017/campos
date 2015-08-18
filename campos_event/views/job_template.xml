@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<!-- Overview of all blog posts -->
+<template id="jobber_latest_jobs" name="Latest Jobs">
+    <t t-call="website.layout">
+        <div id="wrap">
+            <div class="oe_structure"/>
+            <section data-snippet-id="title" class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1><span t-raw="list_title"/></h1>
+                    </div>
+                </div>
+            </section>
+            <section class="container">
+                <div class="row">
+                    <t t-set="count" t-value="0"/>
+                    <t t-foreach="jobs" t-as="job">
+                      <div class="col-md-4">
+                        <h4>
+                            <span t-field="job.name"/>
+                            
+                        </h4>
+                        <div class="text-muted">
+                            <span class="fa fa-calendar"> <span t-field="job.create_date"/> &amp;nbsp;</span>
+                        
+                        </div>
+                        <div class="text-muted fa fa-tags">
+                        	<t t-foreach="job.tag_ids" t-as="tag">
+                            	<a t-att-href="'/campos/jobber/joblist/' + slug(tag)" t-field="tag.name"/>
+                           	</t>
+                        </div>
+                        <span t-raw="job.desc" />
+                        <a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)"><i class="fa fa-arrow-right">&amp;nbsp;</i><span t-field="job.signup_button"/></a>
+                      </div>
+                      <t t-set="count" t-value="count+1"/>
+                      <div class="clearfix" t-if="(count % 3) == 0"/>
+                    </t>
+                </div>
+            </section>
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+
+</data>
+</openerp>
