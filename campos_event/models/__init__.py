@@ -8,4 +8,4 @@ from . import municipality
 from . import res_partner
 from . import event
 from . import committee
-from . import job
+from . import camposjob
