@@ -38,3 +38,4 @@ class ResPartner(models.Model):
     scoutgroup = fields.Boolean()
     participant = fields.Boolean()
     staff = fields.Boolean()
+    skype = fields.Char()

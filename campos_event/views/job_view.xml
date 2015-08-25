@@ -66,8 +66,7 @@
 						
 						<label for="name" class="oe_edit_only" string="Name"/>
                     	<h1>
-                        <field name="name" class="oe_inline" placeholder="Job
-                         name"/>
+                        <field name="name" class="oe_inline" placeholder="Job name"/>
                     	</h1>
                     	<div class="oe_right oe_button_box">
 							<!-- <button name="%(campos_event.action_committee_members_tree)d"

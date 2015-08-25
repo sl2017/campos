@@ -80,9 +80,11 @@ class EventParticipant(models.Model):
     Detail participant/Jobber Info
     '''
     _name = 'campos.event.participant'
+    _description = 'Event Participant'
     _inherits = {'res.partner': 'partner_id'}
     _inherit = ['mail.thread', 'ir.needaction_mixin']
 
+    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration')
 
     # Scout Leader Fiedls
