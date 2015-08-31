@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+type = PO
+
+[campos.campos_event]
+file_filter = campos_event/i18n/<lang>.po
+source_file = campos_event/i18n/campos_event.pot
+source_lang = en
+
