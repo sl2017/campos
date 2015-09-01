@@ -93,7 +93,7 @@ class CampOsEvent(http.Controller):
                 methods=['POST'], type='http', auth="public", website=True)
     def jobs_thankyou(self, **post):
         error = {}
-        for field_name in ["name", "phone", "email", "street", "zip", "city"]:
+        for field_name in ["name", "phone", "email", "street", "zip", "city", "mobile"]:
             if not post.get(field_name):
                 error[field_name] = 'missing'
         if error:
@@ -109,7 +109,7 @@ class CampOsEvent(http.Controller):
             'scoutgroup': False,
             'participant': False,
         }
-        for f in ['email', 'name', 'phone', 'street', 'zip', 'city']:
+        for f in ['email', 'name', 'phone', 'street', 'zip', 'city', 'mobile','skype']:
             value[f] = post.get(f)
         partner_id = env['res.partner'].create(value).id
 

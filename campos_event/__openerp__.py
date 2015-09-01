@@ -51,7 +51,8 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/campos_event_security.xml',
+        'security/ir.model.access.csv',
         
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',

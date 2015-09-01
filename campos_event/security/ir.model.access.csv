@@ -1,2 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_camp_os_event_camp_os_event,camp_os_event.camp_os_event,model_camp_os_event_camp_os_event,,1,0,0,0
+access_campos_job_public,campos_job_public,campos_event.model_campos_job,,1,0,0,0
+access_campos_job_tag_public,campos_job_tag_public,campos_event.model_campos_job_tag,,1,0,0,0
+access_campos_committee_public,campos_committee_public,campos_event.model_campos_committee,,1,0,0,0
+access_campos_job_manager,campos_job_manager,campos_event.model_campos_job,,1,1,1,0
+access_campos_job_tag_manager,campos_job_tag_manager,campos_event.model_campos_job_tag,,1,1,1,0
+access_campos_manager_manager,campos_manager_manager,campos_event.model_campos_committee,,1,1,0,0
+access_campos_job_manager,campos_job_manager,campos_event.model_campos_job,,1,1,1,0
+access_campos_job_tag_manager,campos_job_tag_manager,campos_event.model_campos_job_tag,,1,1,1,0
+access_campos_manager_manager,campos_manager_manager,campos_event.model_campos_committee,,1,1,0,0
