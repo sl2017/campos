@@ -112,8 +112,12 @@ class EventParticipant(models.Model):
                              ondelete='set null')
     newsletter  = fields.Boolean()
     
-    sharepoint_mail = fields.Boolean()
+    sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
     sharepoint_mailaddress = fields.Char()
+    sharepoint_mail_created = fields.Date()
+    
+    zexpense_access_wanted = fields.Boolean('zExpense access wanted')
+    zexpense_access_created = fields.Date()
     
     workwish = fields.Text('Want to work with')
     profession = fields.Char(

@@ -37,6 +37,7 @@ class CampCommittee(models.Model):
 
     name = fields.Char('Name', size=64, translate=True)
     code = fields.Char('Code', size=64, translate=True)
+    account = fields.Char('Account', size=64, translate=True)
     desc = fields.Text('Description', translate=True)
     email = fields.Char('Email', size=128)
     member_ids = fields.One2many(
@@ -59,6 +60,8 @@ class CampCommittee(models.Model):
         compute='_compute_display_name',
         store=True)
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
+    contact_id = fields.Many2one('res.partner', string='Contact', ondelete='restrict') # Relation to inherited res.partner
+    job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
 
     @api.one
     @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
