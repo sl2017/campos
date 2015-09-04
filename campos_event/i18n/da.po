@@ -1,0 +1,784 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_event
+# 
+# Translators:
+# christian Eggert Jørgensen <christian@eggert.dk>, 2015
+# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
+# Lars Wive Marcussen <larswm@larswm.dk>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: CampOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-31 20:16+0000\n"
+"PO-Revision-Date: 2015-09-01 18:37+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.new_staff_member
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.committee_id.name},\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        En ny hjælper er klar til godkendelse:\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        ${object.name}\n"
+"                    </p>\n"
+"                                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_latest_jobs
+msgid "&nbsp;"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "(edit company address)"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.job,active:0 field:campos.job.tag,active:0
+msgid "Active"
+msgstr "Aktive"
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_activity
+msgid "Activity Coordinator"
+msgstr "Aktivitetskoordinator"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Address"
+msgstr "Adresse"
+
+#. module: campos_event
+#: field:campos.event.participant,state:0
+msgid "Approval Procedure"
+msgstr "Godkendelsesprocedure"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Approve"
+msgstr "Godkend"
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Approved by the committee"
+msgstr "Godkendt af udvalget"
+
+#. module: campos_event
+#: field:campos.event.participant,att_received:0
+msgid "Attest modtaget"
+msgstr "Attest modtaget"
+
+#. module: campos_event
+#: view:event.registration:campos_event.view_dds_camp_reg_info_form1
+#: view:res.partner:campos_event.view_campos_res_partner_form1
+msgid "Camp Info"
+msgstr "Lejr info"
+
+#. module: campos_event
+#: model:ir.module.category,name:campos_event.module_campos_category
+#: model:ir.ui.menu,name:campos_event.menu_campos
+msgid "CampOS"
+msgstr "CampOS"
+
+#. module: campos_event
+#: field:campos.job.tag,child_ids:0
+msgid "Child Categories"
+msgstr "Underkategorier"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: view:website:campos_event.jobber_signup
+msgid "City"
+msgstr "By"
+
+#. module: campos_event
+#: field:campos.committee,code:0
+msgid "Code"
+msgstr "Kode"
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_tree
+#: view:campos.event.participant:campos_event.campos_event_participant_form2
+#: field:campos.job,committee_id:0
+#: model:ir.model,name:campos_event.model_campos_committee
+msgid "Committee"
+msgstr "Udvalg"
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_form
+msgid "Committee Code and Name"
+msgstr "Udvalgskode og navn"
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_committee
+msgid "Committee Coordinator"
+msgstr "Udvalgskoordinator"
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_form
+msgid "Committee code"
+msgstr "Udvalgskode"
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_form
+msgid "Committee name"
+msgstr "Udvalgsnavn"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Committee:"
+msgstr "Udvalg"
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_tree
+#: model:ir.ui.menu,name:campos_event.event_committee_menu
+#: model:ir.ui.menu,name:campos_event.menu_campos_comittee
+msgid "Committees"
+msgstr "Udvalg"
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_config
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: campos_event
+#: field:event.registration,contact_partner_id:0
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_thankyou
+msgid "Continue To Our Website"
+msgstr "Fortsæt til forsiden"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: field:campos.scout.org,country_id:0 field:event.registration,country_id:0
+msgid "Country"
+msgstr "Land"
+
+#. module: campos_event
+#: field:campos.committee,create_uid:0
+#: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
+#: field:campos.job.tag,create_uid:0 field:campos.municipality,create_uid:0
+#: field:campos.scout.org,create_uid:0
+msgid "Created by"
+msgstr "Oprette af"
+
+#. module: campos_event
+#: field:campos.committee,create_date:0
+#: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
+#: field:campos.job.tag,create_date:0 field:campos.municipality,create_date:0
+#: field:campos.scout.org,create_date:0
+msgid "Created on"
+msgstr "Oprettet d."
+
+#. module: campos_event
+#: field:event.registration,ddsgroup:0
+msgid "DDS Gruppenr"
+msgstr "DDS Gruppenr."
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_municipality
+msgid "DK Kommuner"
+msgstr "Kommunekode"
+
+#. module: campos_event
+#: help:campos.committee,message_last_post:0
+#: help:campos.event.participant,message_last_post:0
+#: help:campos.job,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Dato for seneste post"
+
+#. module: campos_event
+#: field:campos.committee,desc:0 field:campos.job,desc:0
+msgid "Description"
+msgstr "Beskrivelse"
+
+#. module: campos_event
+#: field:event.registration,scout_division:0
+msgid "Division/District"
+msgstr "Division/Distrikt"
+
+#. module: campos_event
+#: field:event.registration,econ_partner_id:0
+msgid "Economic Contact"
+msgstr "Økonomikontakt"
+
+#. module: campos_event
+#: field:campos.committee,email:0
+msgid "Email"
+msgstr "Email"
+
+#. module: campos_event
+#: field:campos.committee,template_id:0
+msgid "Email Template"
+msgstr "Email skabelon"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_search
+msgid "Event"
+msgstr "Arrangement"
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_event_registration
+msgid "Event Registration"
+msgstr "Arrangement tilmelding"
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_config_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_event_event
+msgid "Events"
+msgstr "Arrangementer"
+
+#. module: campos_event
+#: field:campos.committee,message_follower_ids:0
+#: field:campos.event.participant,message_follower_ids:0
+#: field:campos.job,message_follower_ids:0
+msgid "Followers"
+msgstr "Følgere"
+
+#. module: campos_event
+#: field:campos.committee,display_name:0
+msgid "Full Name"
+msgstr "Fuldt navn"
+
+#. module: campos_event
+#: help:campos.committee,sequence:0
+msgid "Gives the sequence order."
+msgstr "Giver rækkefølgen"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_search
+msgid "Group"
+msgstr "Grupper"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_search
+msgid "Group By..."
+msgstr "Grupper efter"
+
+#. module: campos_event
+#: field:campos.event.participant,committee_id:0
+msgid "Have agreement with committee"
+msgstr "Har aftale med udvalg"
+
+#. module: campos_event
+#: help:campos.committee,message_summary:0
+#: help:campos.event.participant,message_summary:0
+#: help:campos.job,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee,id:0 field:campos.event.participant,id:0
+#: field:campos.job,id:0 field:campos.job.tag,id:0
+#: field:campos.municipality,id:0 field:campos.scout.org,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: campos_event
+#: help:campos.committee,message_unread:0
+#: help:campos.event.participant,message_unread:0
+#: help:campos.job,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,par_internal_note:0
+msgid "Internal note"
+msgstr "Intern note"
+
+#. module: campos_event
+#: field:campos.event.participant,leader:0
+msgid "Is Leader"
+msgstr "Er leder"
+
+#. module: campos_event
+#: field:campos.committee,message_is_follower:0
+#: field:campos.event.participant,message_is_follower:0
+#: field:campos.job,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Er følger"
+
+#. module: campos_event
+#: field:campos.event.participant,job_id:0
+#: view:campos.job:campos_event.campos_job_form
+#: model:ir.model,name:campos_event.model_campos_job
+msgid "Job"
+msgstr "Job"
+
+#. module: campos_event
+#: view:campos.job.tag:campos_event.campos_job_tag_form
+msgid "Job Tag"
+msgstr "Job kategori"
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_job_tag_tree
+#: model:ir.model,name:campos_event.model_campos_job_tag
+#: model:ir.ui.menu,name:campos_event.event_job_tag_menu
+msgid "Job Tags"
+msgstr "Job kategorier"
+
+#. module: campos_event
+#: view:campos.job:campos_event.campos_job_form
+msgid "Job name"
+msgstr "Navn på job"
+
+#. module: campos_event
+#: view:campos.job.tag:campos_event.job_tag_tree
+msgid "Job tags"
+msgstr "Job kategorier"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Jobber Signup"
+msgstr "Jobber tilmelding"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Jobber Signup Form"
+msgstr "Tilmeldings formular for Jobbere"
+
+#. module: campos_event
+#: view:campos.job:campos_event.job_tree field:campos.job.tag,job_ids:0
+#: model:ir.actions.act_window,name:campos_event.action_job_tree
+#: model:ir.ui.menu,name:campos_event.event_job_menu
+msgid "Jobs"
+msgstr "Job"
+
+#. module: campos_event
+#: field:campos.committee,message_last_post:0
+#: field:campos.event.participant,message_last_post:0
+#: field:campos.job,message_last_post:0
+msgid "Last Message Date"
+msgstr "Dato for sidste meddelelse"
+
+#. module: campos_event
+#: field:campos.committee,write_uid:0
+#: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
+#: field:campos.job.tag,write_uid:0 field:campos.municipality,write_uid:0
+#: field:campos.scout.org,write_uid:0
+msgid "Last Updated by"
+msgstr "Sidst opdateret af"
+
+#. module: campos_event
+#: field:campos.committee,write_date:0
+#: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
+#: field:campos.job.tag,write_date:0 field:campos.municipality,write_date:0
+#: field:campos.scout.org,write_date:0
+msgid "Last Updated on"
+msgstr "Senest opdateret"
+
+#. module: campos_event
+#: field:campos.event.participant,appr_leader:0
+msgid "Leder godkendt"
+msgstr "Leder godkendt"
+
+#. module: campos_event
+#: field:campos.job.tag,parent_left:0
+msgid "Left parent"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee,parent_id:0
+msgid "Main Committee"
+msgstr "Hovedudvalg"
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_manager
+msgid "Manager"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_form
+#: field:campos.committee,member_ids:0
+#: model:ir.actions.act_window,name:campos_event.action_committee_members_tree
+msgid "Members"
+msgstr "Medlem"
+
+#. module: campos_event
+#: field:campos.committee,message_ids:0
+#: field:campos.event.participant,message_ids:0 field:campos.job,message_ids:0
+msgid "Messages"
+msgstr "Beskeder"
+
+#. module: campos_event
+#: help:campos.committee,message_ids:0
+#: help:campos.event.participant,message_ids:0 help:campos.job,message_ids:0
+msgid "Messages and communication history"
+msgstr "Beskeder og kommunikations historie"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Mobile"
+msgstr "Mobil telefon"
+
+#. module: campos_event
+#: view:campos.municipality:campos_event.municipality_tree
+#: field:event.registration,municipality_id:0
+#: model:ir.actions.act_window,name:campos_event.action_municipality_tree
+#: model:ir.ui.menu,name:campos_event.event_municipality_menu
+msgid "Municipality"
+msgstr "Kommune"
+
+#. module: campos_event
+#: field:campos.committee,name:0
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: view:campos.job:campos_event.campos_job_form field:campos.job,name:0
+#: field:campos.job.tag,name:0 field:campos.municipality,name:0
+#: field:campos.scout.org,name:0
+msgid "Name"
+msgstr "Navn"
+
+#. module: campos_event
+#: field:campos.event.participant,newsletter:0
+msgid "Newsletter"
+msgstr "Nyhedsbrev"
+
+#. module: campos_event
+#: field:campos.municipality,number:0
+msgid "Number"
+msgstr "Antal"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.new_staff_member
+msgid "Ny hjælper til godkendelse"
+msgstr "Ny hjælper til godkendelse"
+
+#. module: campos_event
+#: selection:campos.scout.org,worldorg:0
+msgid "Other"
+msgstr "Andre"
+
+#. module: campos_event
+#: field:campos.job.tag,parent_id:0
+msgid "Parent Category"
+msgstr ""
+
+#. module: campos_event
+#: field:res.partner,participant:0
+msgid "Participant"
+msgstr "Deltager"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Participant Registration"
+msgstr "Deltager registrering"
+
+#. module: campos_event
+#: field:event.registration,participant_ids:0
+msgid "Participant ids"
+msgstr "Deltager identifikation"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_form2
+#: view:campos.event.participant:campos_event.campos_event_participant_tree
+#: view:event.registration:campos_event.view_dds_camp_reg_info_form1
+#: model:ir.actions.act_window,name:campos_event.action_event_participants_tree
+#: model:ir.actions.act_window,name:campos_event.action_event_participants_tree2
+#: model:ir.ui.menu,name:campos_event.event_participants_tree_menu
+msgid "Participants"
+msgstr "Deltagere"
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,partner_id:0
+msgid "Partner id"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,profession:0
+msgid "Profession"
+msgstr "Beskæftigelse"
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Received"
+msgstr "Modtaget"
+
+#. module: campos_event
+#: field:event.registration,region:0
+msgid "Region"
+msgstr "Region"
+
+#. module: campos_event
+#: view:event.registration:campos_event.view_dds_camp_reg_info_form1
+msgid "Register Participant Details for this Group"
+msgstr "Deltager information for denne gruppe"
+
+#. module: campos_event
+#: field:campos.event.participant,registration_id:0
+msgid "Registration id"
+msgstr "Registration ID"
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_action_registration
+msgid "Registrations"
+msgstr "Registreringer"
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Rejected"
+msgstr "Afslået"
+
+#. module: campos_event
+#: field:campos.job.tag,parent_right:0
+msgid "Right parent"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.module.category,description:campos_event.module_campos_category
+msgid "Scout Camp Management"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Scout Group"
+msgstr "Spejder gruppe"
+
+#. module: campos_event
+#: field:event.registration,organization_id:0
+msgid "Scout Organization"
+msgstr "Korps"
+
+#. module: campos_event
+#: view:campos.scout.org:campos_event.scoutorg_tree
+#: model:ir.actions.act_window,name:campos_event.action_scoutorg_tree
+#: model:ir.model,name:campos_event.model_campos_scout_org
+msgid "Scout Organizations"
+msgstr "Korps"
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.event_scoutorg_menu
+msgid "Scout Orgs"
+msgstr "Korps"
+
+#. module: campos_event
+#: field:res.partner,scoutgroup:0
+msgid "Scoutgroup"
+msgstr "Spejdergruppe"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_search
+#: view:campos.scout.org:campos_event.scoutorg_search
+msgid "Search"
+msgstr "Søg"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Send to Committee"
+msgstr "Send til udvalg"
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Sent to committee"
+msgstr "Sendt til udvalg"
+
+#. module: campos_event
+#: field:campos.committee,sequence:0
+msgid "Sequence"
+msgstr "Sekvens"
+
+#. module: campos_event
+#: field:campos.scout.org,sex:0
+msgid "Sex"
+msgstr "Køn"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Sharepoint"
+msgstr "Skal på sharepoint"
+
+#. module: campos_event
+#: field:campos.event.participant,sharepoint_mail:0
+msgid "Sharepoint mail"
+msgstr "Sharepoint mail adresse"
+
+#. module: campos_event
+#: field:campos.event.participant,sharepoint_mailaddress:0
+msgid "Sharepoint mailaddress"
+msgstr "Sharepoint mailadresse"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Short Introduction"
+msgstr "Kort introduktion"
+
+#. module: campos_event
+#: field:campos.job,signup_button:0
+msgid "Signup button"
+msgstr "Knap til tilmelding"
+
+#. module: campos_event
+#: field:res.partner,skype:0 view:website:campos_event.jobber_signup
+msgid "Skype"
+msgstr "Skype adresse"
+
+#. module: campos_event
+#: field:res.partner,staff:0
+msgid "Staff"
+msgstr "Stab"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "State"
+msgstr "Stat"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Street..."
+msgstr "Gade"
+
+#. module: campos_event
+#: field:campos.committee,child_ids:0
+msgid "Subcommittees"
+msgstr "Arbejdsgruppe"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Submit"
+msgstr "SEND"
+
+#. module: campos_event
+#: field:campos.committee,message_summary:0
+#: field:campos.event.participant,message_summary:0
+#: field:campos.job,message_summary:0
+msgid "Summary"
+msgstr "Optælling"
+
+#. module: campos_event
+#: field:campos.job,tag_ids:0
+msgid "Tags"
+msgstr "Kategorier"
+
+#. module: campos_event
+#: view:campos.job:campos_event.campos_job_form
+msgid "Tags..."
+msgstr "Kategorier..."
+
+#. module: campos_event
+#: view:website:campos_event.jobber_thankyou
+msgid "Thank you!"
+msgstr "Mange tak"
+
+#. module: campos_event
+#: help:campos.job,active:0 help:campos.job.tag,active:0
+msgid "The active field allows you to hide the category without removing it."
+msgstr "Det aktive felt tillader dig at skjule kategorien, uden at fjerne den"
+
+#. module: campos_event
+#: view:campos.committee:campos_event.campos_committee_form
+msgid "Udvalg"
+msgstr "Udvalg"
+
+#. module: campos_event
+#: field:campos.committee,message_unread:0
+#: field:campos.event.participant,message_unread:0
+#: field:campos.job,message_unread:0
+msgid "Unread Messages"
+msgstr "Ulæst besked"
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_user
+msgid "User"
+msgstr "Bruger"
+
+#. module: campos_event
+#: selection:campos.scout.org,worldorg:0
+msgid "WAGGGS"
+msgstr "WAGGGS"
+
+#. module: campos_event
+#: selection:campos.scout.org,worldorg:0
+msgid "WAGGGS/WOSM"
+msgstr "WAGGGS/WOSM"
+
+#. module: campos_event
+#: selection:campos.scout.org,worldorg:0
+msgid "WOSM"
+msgstr "WOSM"
+
+#. module: campos_event
+#: field:campos.event.participant,workwish:0
+msgid "Want to work with"
+msgstr "Ønsker at arbejde med"
+
+#. module: campos_event
+#: help:campos.event.participant,profession:0
+msgid "What do you do for living"
+msgstr "Beskæftigelse"
+
+#. module: campos_event
+#: field:campos.scout.org,worldorg:0
+msgid "World Organization"
+msgstr "Verdens organisation"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Your Address"
+msgstr "Din adresse"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Your Email"
+msgstr "Din mail"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Your Name"
+msgstr "Dit navn"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Your Phone"
+msgstr "Din telefon"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_thankyou
+msgid ""
+"Your job application has been successfully registered,\n"
+"                        we will get back to you soon."
+msgstr "Din jobber ansøgning er blevet registreret vi venter tilbage hurtigst muligt."
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "ZIP"
+msgstr "Postnr"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Zipcode"
+msgstr "Postnr."
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "e.g. +32.81.81.37.00"
+msgstr "fx +45 12 12 12 12"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "reject"
+msgstr "Afvis"
