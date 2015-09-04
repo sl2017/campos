@@ -39,3 +39,26 @@ class ResPartner(models.Model):
     participant = fields.Boolean()
     staff = fields.Boolean()
     skype = fields.Char()
+    
+    def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        res = []
+        for record in self.browse(cr, uid, ids, context=context):
+            name = record.name
+            if record.parent_id and not record.is_company and not context.get('without_company'):
+                name =  "%s, %s" % (record.parent_id.name, name)
+            if context.get('show_address'):
+                name = name + "\n" + self._display_address(cr, uid, record, without_company=True, context=context)
+                name = name.replace('\n\n','\n')
+                name = name.replace('\n\n','\n')
+            if context.get('show_email') and record.email:
+                name = "%s <%s>" % (name, record.email)
+            if context.get('add_email') and record.email:
+                name = "%s\n<%s>" % (name, record.email)    
+            if context.get('name_only'):
+                name = record.name    
+            res.append((record.id, name))
+        return res
