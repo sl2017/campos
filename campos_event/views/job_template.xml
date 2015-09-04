@@ -16,6 +16,7 @@
             </section>
             <section class="container">
                 <div class="row">
+                <div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
                     <t t-set="count" t-value="0"/>
                     <t t-foreach="jobs" t-as="job">
                       <div class="col-md-4">
@@ -32,6 +33,8 @@
                             	<a t-att-href="'/campos/jobber/joblist/' + slug(tag)" t-field="tag.name"/>
                            	</t>
                         </div>
+                        <br/>
+                        <span>Udvalg: <a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)" t-field="job.committee_id"/> </span>
                         <span t-raw="job.desc" />
                         <a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)"><i class="fa fa-arrow-right">&amp;nbsp;</i><span t-field="job.signup_button"/></a>
                       </div>
@@ -39,12 +42,51 @@
                       <div class="clearfix" t-if="(count % 3) == 0"/>
                     </t>
                 </div>
+                </div>
             </section>
             <div class="oe_structure"/>
         </div>
     </t>
 </template>
 
+<!-- Option:Right Column for extra info -->
+
+<template id="index_right" name="Right Column"
+        inherit_id="campos_event.jobber_latest_jobs" active="False" customize_show="True">
+    <xpath expr="//div[@id='main_column']" position="attributes">
+        <attribute name="class">col-sm-8</attribute>
+    </xpath>
+    <xpath expr="//div[@id='main_column']" position="after">
+        <div class="col-lg-3 col-lg-offset-1 col-sm-4" id="blog_right_column"/>
+    </xpath>
+</template>
+
+<!-- Option:Right Column: tags -->
+<template id="opt_blog_rc_tags" name="Tags"
+        inherit_id="campos_event.index_right" active="False" customize_show="True">
+    <xpath expr="//div[@id='blog_right_column']" position="inside">
+        <section class="mt32">
+        <h4>Kategorier</h4>
+        <ul class="nav nav-pills nav-stacked">
+            <li> <a t-attf-href="/campos/jobber/joblist">Alle jobs</a></li> 
+            <t t-foreach="nav_comm" t-as="nav_comm">
+            
+            <li style="display: inline-block;">
+            <a t-att-href="'/campos/jobber/jobcom/' + slug(nav_comm)" t-field="nav_comm.name"/> 
+            </li>
+            </t>
+            
+            
+            <t t-foreach="nav_tags" t-as="nav_tag">
+            
+            <li  style="display: inline-block;">
+                <a t-att-href="'/campos/jobber/joblist/' + slug(nav_tag)" t-field="nav_tag.name"/>
+            </li>
+            </t>
+        </ul>
+        </section>
+    </xpath>
+</template>
 
 </data>
 </openerp>

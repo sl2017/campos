@@ -60,6 +60,7 @@ class CampOsEvent(http.Controller):
         error = {}
         default = {}
         comm_id = False
+        scoutorg_id = False
         
         if job:
             comm_id = job.committee_id.id
@@ -76,6 +77,18 @@ class CampOsEvent(http.Controller):
             committee_ids,
             context=request.context)
 
+        scout_org = request.registry['campos.scout.org']
+        scout_org_ids = scout_org.search(
+            request.cr,
+            SUPERUSER_ID,
+            [('country_id.code', '=', 'DK')],
+            context=request.context)
+        scoutorgs = scout_org.browse(
+            request.cr,
+            SUPERUSER_ID,
+            scout_org_ids,
+            context=request.context)
+
         if 'website_campos_jobber_signup_error' in request.session:
             error = request.session.pop('website_campos_jobber_signup_error')
             default = request.session.pop(
@@ -87,6 +100,8 @@ class CampOsEvent(http.Controller):
             'default': default,
             'job' : job,
             'comm_id' : comm_id,
+            'scoutorgs' : scoutorgs,
+            'scoutorg_id': scoutorg_id,
         })
 
     @http.route('/campos/jobber/thankyou',
@@ -119,7 +134,7 @@ class CampOsEvent(http.Controller):
             'contact_partner_id': partner_id,
             'econ_partner_id': partner_id,
         }
-        for f in ['name']:
+        for f in ['name', 'organization_id']:
             value[f] = post.get(f)
         reg_id = env['event.registration'].create(value).id
 
@@ -127,7 +142,7 @@ class CampOsEvent(http.Controller):
             'partner_id': partner_id,
             'registration_id': reg_id,
         }
-        for f in ['workwish', 'committee_id', 'job_id']:
+        for f in ['committee_id', 'job_id']:
             value[f] = post.get(f)
         part_id = env['campos.event.participant'].create(value).id
 
@@ -136,20 +151,32 @@ class CampOsEvent(http.Controller):
 
     @http.route(
         ['/campos/jobber/joblist',
-         '/campos/jobber/joblist/<model("campos.job.tag"):tag>'], 
+         '/campos/jobber/joblist/<model("campos.job.tag"):tag>',
+         '/campos/jobber/jobcom/<model("campos.committee"):comm>'], 
          type='http', auth="public", website=True)
-    def jobber_joblist(self, tag=None, **kwargs):
+    def jobber_joblist(self, tag=None, comm=None, **kwargs):
         request = http.request
         
         if tag:
             jobs = tag.job_ids
             list_title = "Latest jobs tagged: " + tag.name
+        elif comm:
+            jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
+            list_title = "Latest jobs for: " + comm.name
+        
+        
+        
         else:
             jobs = request.env['campos.job'].search([('active','=', True)])
             list_title = "Latest jobs"
             
+        nav_tags = request.env['campos.job.tag'].search([])
+        nav_comm = request.env['campos.committee'].search([('parent_id', '=', False)])
+            
         return request.render("campos_event.jobber_latest_jobs", {'jobs' : jobs,
-                                                                  'list_title' : list_title})    
+                                                                  'list_title' : list_title,
+                                                                  'nav_tags' : nav_tags,
+                                                                  'nav_comm' : nav_comm})    
         
         
         
