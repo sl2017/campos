@@ -151,7 +151,7 @@ class CampOsEvent(http.Controller):
 
     @http.route(
         ['/campos/jobber/joblist',
-         '/campos/jobber/joblist/<model("campos.job.tag"):tag>'
+         '/campos/jobber/joblist/<model("campos.job.tag"):tag>',
          '/campos/jobber/jobcom/<model("campos.committee"):comm>'], 
          type='http', auth="public", website=True)
     def jobber_joblist(self, tag=None, comm=None, **kwargs):
@@ -160,9 +160,9 @@ class CampOsEvent(http.Controller):
         if tag:
             jobs = tag.job_ids
             list_title = "Latest jobs tagged: " + tag.name
-        elif tag:
+        elif comm:
             jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
-            list_title = "Latest jobs tagged: " + tag.name
+            list_title = "Latest jobs for: " + comm.name
         
         
         
