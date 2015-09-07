@@ -35,6 +35,7 @@
                         </div>
                         <br/>
                         <span>Udvalg: <a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)" t-field="job.committee_id"/> </span>
+                        <br/>
                         <span t-raw="job.desc" />
                         <a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)"><i class="fa fa-arrow-right">&amp;nbsp;</i><span t-field="job.signup_button"/></a>
                       </div>
