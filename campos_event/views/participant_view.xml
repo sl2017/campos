@@ -54,6 +54,22 @@
 				 </xpath>
 			</field>
 		</record>
+		
+		<record model="ir.ui.view" id="view_event_participant_reject_form">
+			<field name="name">registration.participant.reject.form</field>
+			<field name="model">campos.event.par.reject</field>
+			<field name="arch" type="xml">
+				<form string="Staff rejection" version="7.0">
+				<group>
+				<field name="participant_id" invisible="1"/>
+				<field name="committee_id" invisible="1"/>
+				<field name="reason"/>
+				</group>
+				<footer> <button name="write" type="object" string="Save" class="oe_highlight"/> or <button name="cancel" string="Cancel" special="Cancel" class="oe_link"/> </footer>
+				</form>
+				</field>
+				</record>
+				
 
 		<record model="ir.ui.view" id="view_event_registration_participant_form">
 			<field name="name">registration.participant.form</field>
@@ -64,12 +80,13 @@
 				<header>
 				 <button string="Send to Committee" name="action_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager" attrs="{'invisible': [('staff', '=', False)]}"/>
            		 <button string="Approve" name="action_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
-             	 <button string="reject" name="action_reject" states="sent,approved,draft" type="object" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
+             	 <button string="Reject" name="action_reject" states="sent,approved,draft" type="object" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
            
 				 <field name="state" widget="statusbar" attrs="{'invisible': [('staff', '=', False)]}"/>
 				 
 				</header>
 					<sheet>
+						<group>
 						<group>
 							<field name="registration_id" />
 							<div class="oe_title oe_left">
@@ -107,17 +124,40 @@
                             <field name="email" widget="email"/>
 							<field name="participant"/>
 				 		    <field name="staff"/>
-							
+							</group>
+							<group>
 							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
-							<notebook>
+							</group>
+							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
 								 <group>
 								  
 								 	<field name="sharepoint_mail"/>
 								 	<field name="sharepoint_mailaddress"/>
+								 	<field name="sharepoint_mail_created"/>
 								 </group>
 								 </page>
+								 <page string="zExpense">
+								 <group>
+								  
+								 	<field name="zexpense_access_wanted"/>
+								 	<field name="zexpense_access_created"/>
+								 </group>
+								 </page>
+								 <page string="Rejects">
+								 <group col="5" colspan="4">
+									<field name="reject_ids">
+									<tree create="false" colspan="4">
+									<field name="create_date"/>
+									<field name="create_uid"/>
+								 	<field name="committee_id"/>
+								 	<field name="reason"/>
+									</tree>								  
+								 	</field>
+								 </group>
+								 </page>
+								 
 							</notebook>
 						</group>
 					</sheet>
