@@ -61,8 +61,8 @@
 			<field name="arch" type="xml">
 				<form string="Staff rejection" version="7.0">
 				<group>
-				<field name="participant_id"/>
-				<field name="committee_id"/>
+				<field name="participant_id" invisible="1"/>
+				<field name="committee_id" invisible="1"/>
 				<field name="reason"/>
 				</group>
 				<footer> <button name="write" type="object" string="Save" class="oe_highlight"/> or <button name="cancel" string="Cancel" special="Cancel" class="oe_link"/> </footer>
