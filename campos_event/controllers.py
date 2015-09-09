@@ -32,7 +32,7 @@ from openerp.addons.web.controllers.main import login_redirect
 from openerp.addons.web.http import request
 from openerp.addons.website.controllers.main import Website as controllers
 from openerp.addons.website.models.website import slug
-
+from openerp.tools.translate import _
 
 class CampOsEvent(http.Controller):
     #     @http.route('/camp_os_event/camp_os_event/', auth='public')
@@ -159,16 +159,16 @@ class CampOsEvent(http.Controller):
         
         if tag:
             jobs = tag.job_ids
-            list_title = "Latest jobs tagged: " + tag.name
+            list_title = _("Jobs tagged: ") + tag.name
         elif comm:
             jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
-            list_title = "Latest jobs for: " + comm.name
+            list_title = _t("Jobs for: ") + comm.name
         
         
         
         else:
             jobs = request.env['campos.job'].search([('active','=', True)])
-            list_title = "Latest jobs"
+            list_title = _("Job list")
             
         nav_tags = request.env['campos.job.tag'].search([])
         nav_comm = request.env['campos.committee'].search([('parent_id', '=', False)])

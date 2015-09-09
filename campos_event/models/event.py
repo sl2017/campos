@@ -26,6 +26,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.tools.translate import _
 
 
 class EventRegistration(models.Model):
@@ -38,7 +39,7 @@ class EventRegistration(models.Model):
 
     participant_ids = fields.One2many(
         'campos.event.participant',
-        'registration_id')
+        'registration_id', string="Participants")
 
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
@@ -74,6 +75,31 @@ class EventRegistration(models.Model):
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
 
 
+class EventParticipantReject(models.Model):
+
+    '''
+    Jobber Reject
+    '''
+    _name = 'campos.event.par.reject'
+    _description = 'Event Participant Reject'
+    
+    reason = fields.Text(required=True)
+    committee_id = fields.Many2one('campos.committee',
+                                   'Committee',
+                                   ondelete='set null')
+    participant_id = fields.Many2one('campos.event.participant',
+                                     'Paricipant',
+                                     ondelete='set null')
+
+    @api.multi
+    def write(self, vals):
+        ret =  models.Model.write(self, vals)
+        for rej in self:
+            print "rejCreate ", rej.participant_id.name
+            rej.participant_id.state = 'rejected'
+        return ret
+    
+    
 class EventParticipant(models.Model):
 
     '''
@@ -100,6 +126,7 @@ class EventParticipant(models.Model):
                                    'Have agreement with committee',
                                    track_visibility='onchange',
                                    ondelete='set null')
+    reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     state = fields.Selection([('draft', 'Received'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),
@@ -148,11 +175,26 @@ class EventParticipant(models.Model):
         self.state = 'approved'
         return True
 
+    @api.multi
     def action_reject(self):
         self.ensure_one()
-        self.state = 'rejected'
-        return True
+        return {
+            'name':_("Reject %s" % self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'campos.event.par.reject',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': {
+                    'default_participant_id': self.id,
+                    'default_committee_id': self.committee_id.id,
+                    }
+            }
 
+    
+    
     @api.multi
     @api.depends('partner_id.name')
     def name_get(self):
