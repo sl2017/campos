@@ -159,16 +159,16 @@ class CampOsEvent(http.Controller):
         
         if tag:
             jobs = tag.job_ids
-            list_title = _("Latest jobs tagged: ") + tag.name
+            list_title = _("Jobs tagged: ") + tag.name
         elif comm:
             jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
-            list_title = _t("Latest jobs for: ") + comm.name
+            list_title = _t("Jobs for: ") + comm.name
         
         
         
         else:
             jobs = request.env['campos.job'].search([('active','=', True)])
-            list_title = _t("Latest jobs")
+            list_title = _("Job list")
             
         nav_tags = request.env['campos.job.tag'].search([])
         nav_comm = request.env['campos.committee'].search([('parent_id', '=', False)])
