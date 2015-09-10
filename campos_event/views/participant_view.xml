@@ -83,7 +83,7 @@
            		 <button string="Approve" name="action_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
              	 <button string="Reject" name="action_reject" states="sent,approved,draft" type="object" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
            
-				 <field name="state" widget="statusbar" attrs="{'invisible': [('staff', '=', False)]}"/>
+				 <field name="state" widget="statusbar" statusbar_colors="{'rejected':'red','approved':'blue'}" attrs="{'invisible': [('staff', '=', False)]}"/>
 				 
 				</header>
 					<sheet>

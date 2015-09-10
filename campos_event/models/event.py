@@ -147,6 +147,7 @@ class EventParticipant(models.Model):
     zexpense_access_created = fields.Date()
     
     workwish = fields.Text('Want to work with')
+    my_comm_contact = fields.Char('Aggreement with/Coantact in Committee')
     profession = fields.Char(
         'Profession',
         size=64,
