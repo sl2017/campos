@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-10 02:00+0000\n"
-"PO-Revision-Date: 2015-09-10 02:00+0000\n"
+"PO-Revision-Date: 2015-09-10 14:50+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -37,12 +37,12 @@ msgid ""
 "                    </p>\n"
 "                                    \n"
 "            "
-msgstr ""
+msgstr "\n\n<p>\nHej ${object.committee_id.name},\n</p>\n<p>\nEn ny hjælper er klar til godkendelse:\n</p>\n<p>\n${object.name}\n</p>"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "&nbsp;"
-msgstr ""
+msgstr "&nbsp;"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -62,7 +62,7 @@ msgstr "Adresse"
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Alle jobs"
-msgstr ""
+msgstr "Alle jobs"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -154,12 +154,12 @@ msgstr "Arrangement"
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_event_participant
 msgid "Event Participant"
-msgstr ""
+msgstr "Begivenheds deltager"
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_event_par_reject
 msgid "Event Participant Reject"
-msgstr ""
+msgstr "Begivenheds deltager afvist"
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_event_registration
@@ -231,7 +231,7 @@ msgstr "Job"
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Kategorier"
-msgstr ""
+msgstr "Kategorier"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_manager
@@ -285,7 +285,7 @@ msgstr "Deltagere"
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -300,17 +300,17 @@ msgstr "Registreringer"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Reject"
-msgstr ""
+msgstr "Afvisning"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Rejects"
-msgstr ""
+msgstr "Afvisning / Afvisninger"
 
 #. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Save"
-msgstr ""
+msgstr "Gem"
 
 #. module: campos_event
 #: model:ir.module.category,description:campos_event.module_campos_category
@@ -358,12 +358,12 @@ msgstr "Skype adresse"
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Spejderkorps:"
-msgstr ""
+msgstr "Spejderkorps:"
 
 #. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Staff rejection"
-msgstr ""
+msgstr "Personale afvisning"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -398,7 +398,7 @@ msgstr "Udvalg"
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Udvalg:"
-msgstr ""
+msgstr "Udvalg:"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_user
@@ -410,35 +410,35 @@ msgstr "Bruger"
 msgid ""
 "Your\n"
 "\t\t\t\t\t\t\t\t\t\t\tAddress"
-msgstr ""
+msgstr "Din\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Adresse"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid ""
 "Your\n"
 "\t\t\t\t\t\t\t\t\t\t\tEmail"
-msgstr ""
+msgstr "Din\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Email"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid ""
 "Your\n"
 "\t\t\t\t\t\t\t\t\t\t\tName"
-msgstr ""
+msgstr "Dit\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Navn"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid ""
 "Your\n"
 "\t\t\t\t\t\t\t\t\t\t\tPhone"
-msgstr ""
+msgstr "Dit\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Telefonnummer"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_thankyou
 msgid ""
 "Your job application has been successfully registered,\n"
 "\t\t\t\t\t\t\t\twe will get back to you soon."
-msgstr ""
+msgstr "Din ansøgning er registeret succesfuldt,\n⇥⇥⇥⇥⇥⇥⇥⇥du hører fra os snarest."
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -453,7 +453,7 @@ msgstr "Postnr."
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "col-sm-8"
-msgstr ""
+msgstr "col-sm-8"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -463,4 +463,4 @@ msgstr "fx +45 12 12 12 12"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "zExpense"
-msgstr ""
+msgstr "zExpense"
