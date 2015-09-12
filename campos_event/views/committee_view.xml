@@ -71,6 +71,23 @@
 			name="Committees" sequence="60" parent="menu_campos_comittee" />
 
 
+		<record model="ir.ui.view" id="view_campos_committee_function_form">
+			<field name="name">campos.committee.function.form</field>
+			<field name="model">campos.committee.function</field>
+			<field name="arch" type="xml">
+				<form string="Staff rejection" version="7.0">
+				<header> <button name="write" type="object" string="Save" class="oe_highlight"/></header>
+				<group>
+				<field name="participant_id" invisible="1"/>
+				<field name="committee_id" invisible="1"/>
+				<field name="function_type_id"/>
+				<field name="job_id"/>
+				</group>
+				
+				</form>
+				</field>
+				</record>
+
 		<!-- Email template for new IST assigned to Committe -->
         <record id="new_staff_member" model="email.template">
             <field name="name">New staff assigned to Committee</field>
