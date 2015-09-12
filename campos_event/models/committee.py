@@ -110,3 +110,37 @@ class CampCommittee(models.Model):
                 lambda record: record.state in [
                     'sent',
                     'approved']))
+        
+        
+class CampCommitteeFunctionType(models.Model):
+
+    """ Committee Job Functions"""
+    _description = 'Committee FunctionsType'
+    _name = 'campos.committee.function.type'
+    
+    name = fields.Char('Function Title')
+    
+class CampCommitteeFunction(models.Model):
+
+    """ Committee Participant Function"""
+    _description = 'Committee Functions'
+    _name = 'campos.committee.function'
+    
+    name = fields.Char()
+    participant_id = fields.Many2one('campos.event.participant', ondelete='cascade')
+    committee_id = fields.Many2one('campos.committee',
+                                   'Committee',
+                                   ondelete='cascade')
+    function_type_id = fields.Many2one('campos.committee.function.type', string="Function", ondelete='cascade')
+    job_id = fields.Many2one('campos.job',
+                         'Job',
+                         ondelete='set null')
+        
+    @api.multi
+    def write(self, vals):
+        ret =  models.Model.write(self, vals)
+        for app in self:
+            app.participant_id.state = 'approved'
+        return ret    
+        
+    

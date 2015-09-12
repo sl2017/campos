@@ -162,7 +162,7 @@ class CampOsEvent(http.Controller):
             list_title = _("Jobs tagged: ") + tag.name
         elif comm:
             jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
-            list_title = _t("Jobs for: ") + comm.name
+            list_title = _("Jobs for: ") + comm.name
         
         
         

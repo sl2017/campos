@@ -90,7 +90,10 @@ class EventParticipantReject(models.Model):
     participant_id = fields.Many2one('campos.event.participant',
                                      'Paricipant',
                                      ondelete='set null')
-
+    job_id = fields.Many2one('campos.job',
+                             'Job',
+                             ondelete='set null')
+    
     @api.multi
     def write(self, vals):
         ret =  models.Model.write(self, vals)
@@ -111,7 +114,7 @@ class EventParticipant(models.Model):
     _inherit = ['mail.thread', 'ir.needaction_mixin']
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
-    registration_id = fields.Many2one('event.registration')
+    registration_id = fields.Many2one('event.registration','Registration')
 
     # Scout Leader Fiedls
 
@@ -127,6 +130,7 @@ class EventParticipant(models.Model):
                                    track_visibility='onchange',
                                    ondelete='set null')
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
+    jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
     state = fields.Selection([('draft', 'Received'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),
@@ -147,7 +151,7 @@ class EventParticipant(models.Model):
     zexpense_access_created = fields.Date()
     
     workwish = fields.Text('Want to work with')
-    my_comm_contact = fields.Char('Aggreement with/Coantact in Committee')
+    my_comm_contact = fields.Char('Aggreement with')
     profession = fields.Char(
         'Profession',
         size=64,
@@ -169,11 +173,27 @@ class EventParticipant(models.Model):
     @api.multi
     def action_approve(self):
         self.ensure_one()
-        template = self.committee_id.template_id
-        if template:
-            template.send_mail(self.id)
-
-        self.state = 'approved'
+        return {
+            'name':_("Approval of %s" % self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'campos.committee.function',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': {
+                    'default_participant_id': self.id,
+                    'default_committee_id': self.committee_id.id,
+                    'defualt_job_id' : self.job_id.id,
+                    }
+            }
+        
+#         template = self.committee_id.template_id
+#         if template:
+#             template.send_mail(self.id)
+# 
+#         self.state = 'approved'
         return True
 
     @api.multi

@@ -64,6 +64,7 @@
 				<group>
 				<field name="participant_id" invisible="1"/>
 				<field name="committee_id" invisible="1"/>
+				<field name="job_id" invisible="1"/>
 				<field name="reason"/>
 				</group>
 				
@@ -77,19 +78,14 @@
 			<field name="model">campos.event.participant</field>
 			<field name="arch" type="xml">
 
-				<form string="Participant Registration" version="7.0">
-				<header>
-				 <button string="Send to Committee" name="action_confirm" states="draft,rejected" type="object" class="oe_highlight" groups="event.group_event_manager" attrs="{'invisible': [('staff', '=', False)]}"/>
-           		 <button string="Approve" name="action_approve" states="sent" type="object" class="oe_highlight" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
-             	 <button string="Reject" name="action_reject" states="sent,approved,draft" type="object" groups="event.group_event_user" attrs="{'invisible': [('staff', '=', False)]}"/>
-           
-				 <field name="state" widget="statusbar" statusbar_colors="{'rejected':'red','approved':'blue'}" attrs="{'invisible': [('staff', '=', False)]}"/>
-				 
+				<form string="Participant Registration">
+				<header attrs="{'invisible': [('staff', '=', False)]}">
+				 <button name="action_confirm" states="draft,rejected" string="Send to Committee"   type="object" class="oe_highlight" groups="event.group_event_manager" />
+           		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="event.group_event_user"/>
+             	 <button name="action_reject" states="sent,approved,draft" string="Reject"   type="object" groups="event.group_event_user" />
+				 <field name="state" widget="statusbar" statusbar_colors="{'rejected':'red','approved':'blue'}"/>
 				</header>
 					<sheet>
-						<group>
-						<group>
-							<field name="registration_id" />
 							<div class="oe_title oe_left">
                         		<div class="oe_edit_only">
                         		 <label for="name"/>
@@ -98,10 +94,14 @@
                             <field name="name" default_focus="1" placeholder="Name"/>
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	</h1> 
-                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" on_change="onchange_address(use_parent_address, parent_id)"/>
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" />
                         	 
                         	</div>
                         	<newline/>
+                        	<group>
+							<group>
+							<field name="registration_id" />
+							
                         	  <label for="street" string="Address"/>
                             <div>
                                 <div class="oe_edit_only">
@@ -112,9 +112,9 @@
                                 <field name="street" placeholder="Street..." attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                                 <field name="street2" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                                 <div class="address_format">
-                                    <field name="city" placeholder="City" style="width: 40%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{&quot;no_open&quot;: True}" on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                                    <field name="zip" placeholder="ZIP" style="width: 20%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="zip" placeholder="ZIP" style="width: 27%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="city" placeholder="City" style="width: 70%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
@@ -127,8 +127,18 @@
 				 		    <field name="staff"/>
 							</group>
 							<group>
+							<separator string="Application" colspan="2"/>
 							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<separator string="Job/Committee" colspan="2"/>
+							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
+							
+							<tree>
+								<field name="committee_id"/>
+								<field name="function_type_id"/>
+							</tree>
+							</field>
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
