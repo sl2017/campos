@@ -131,6 +131,7 @@ class EventParticipant(models.Model):
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
     state = fields.Selection([('draft', 'Received'),
+                              ('standby','Standby'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),
                               ('rejected', 'Rejected')],
@@ -168,6 +169,13 @@ class EventParticipant(models.Model):
 
         self.state = 'sent'
         return True
+
+    @api.multi
+    def action_standby(self):
+        self.ensure_one()
+        self.state = 'standby'
+        return True
+
 
     @api.multi
     def action_approve(self):

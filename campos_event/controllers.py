@@ -111,7 +111,7 @@ class CampOsEvent(http.Controller):
         for field_name in ["name", "email", "street", "zip", "city"]:
             if not post.get(field_name):
                 error[field_name] = 'missing'
-        if not post.get('phone') or post.get('mobile'):
+        if not (post.get('phone') or post.get('mobile')):
                 error['phone'] = 'missing'
                 error['mobile'] = 'missing'
         if error:
