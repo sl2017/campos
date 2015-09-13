@@ -185,7 +185,7 @@ class EventParticipant(models.Model):
             'context': {
                     'default_participant_id': self.id,
                     'default_committee_id': self.committee_id.id,
-                    'defualt_job_id' : self.job_id.id,
+                    'default_job_id' : self.job_id.id,
                     }
             }
         
