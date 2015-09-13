@@ -98,7 +98,6 @@ class EventParticipantReject(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for rej in self:
-            print "rejCreate ", rej.participant_id.name
             rej.participant_id.state = 'rejected'
         return ret
     
