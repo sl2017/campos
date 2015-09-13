@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 02:00+0000\n"
-"PO-Revision-Date: 2015-09-10 14:50+0000\n"
+"POT-Creation-Date: 2015-09-13 02:00+0000\n"
+"PO-Revision-Date: 2015-09-13 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -60,9 +60,19 @@ msgid "Address"
 msgstr "Adresse"
 
 #. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Agreement with/My contact in the Committee"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
-msgid "Alle jobs"
-msgstr "Alle jobs"
+msgid "All Jobs"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Application"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -91,6 +101,7 @@ msgstr "By"
 #: view:campos.committee:campos_event.campos_committee_tree
 #: view:campos.event.participant:campos_event.campos_event_participant_form2
 #: model:ir.model,name:campos_event.model_campos_committee
+#: view:website:campos_event.jobber_signup
 msgid "Committee"
 msgstr "Udvalg"
 
@@ -105,6 +116,16 @@ msgid "Committee Coordinator"
 msgstr "Udvalgskoordinator"
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_function
+msgid "Committee Functions"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_function_type
+msgid "Committee FunctionsType"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee code"
 msgstr "Udvalgskode"
@@ -113,11 +134,6 @@ msgstr "Udvalgskode"
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee name"
 msgstr "Udvalgsnavn"
-
-#. module: campos_event
-#: view:website:campos_event.jobber_signup
-msgid "Committee:"
-msgstr "Udvalg"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.action_committee_tree
@@ -212,6 +228,11 @@ msgid "Job tags"
 msgstr "Job kategorier"
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Job/Committee"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Jobber Signup"
 msgstr "Jobber tilmelding"
@@ -227,11 +248,6 @@ msgstr "Tilmeldings formular for Jobbere"
 #: model:ir.ui.menu,name:campos_event.event_job_menu
 msgid "Jobs"
 msgstr "Job"
-
-#. module: campos_event
-#: view:website:campos_event.jobber_latest_jobs
-msgid "Kategorier"
-msgstr "Kategorier"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_manager
@@ -266,6 +282,11 @@ msgstr "Navn"
 #: model:email.template,subject:campos_event.new_staff_member
 msgid "Ny hjælper til godkendelse"
 msgstr "Ny hjælper til godkendelse"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Organization"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -308,6 +329,7 @@ msgid "Rejects"
 msgstr "Afvisning / Afvisninger"
 
 #. module: campos_event
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Save"
 msgstr "Gem"
@@ -356,19 +378,10 @@ msgid "Skype"
 msgstr "Skype adresse"
 
 #. module: campos_event
-#: view:website:campos_event.jobber_signup
-msgid "Spejderkorps:"
-msgstr "Spejderkorps:"
-
-#. module: campos_event
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Staff rejection"
 msgstr "Personale afvisning"
-
-#. module: campos_event
-#: view:campos.event.participant:campos_event.view_event_registration_participant_form
-msgid "State"
-msgstr "Stat"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -379,6 +392,11 @@ msgstr "Gade"
 #: view:website:campos_event.jobber_signup
 msgid "Submit"
 msgstr "SEND"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_latest_jobs
+msgid "Tags"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
@@ -407,31 +425,23 @@ msgstr "Bruger"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid ""
-"Your\n"
-"\t\t\t\t\t\t\t\t\t\t\tAddress"
-msgstr "Din\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Adresse"
+msgid "Your\tEmail"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid ""
-"Your\n"
-"\t\t\t\t\t\t\t\t\t\t\tEmail"
-msgstr "Din\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Email"
+msgid "Your Address"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid ""
-"Your\n"
-"\t\t\t\t\t\t\t\t\t\t\tName"
-msgstr "Dit\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Navn"
+msgid "Your Name"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid ""
-"Your\n"
-"\t\t\t\t\t\t\t\t\t\t\tPhone"
-msgstr "Dit\n⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥⇥Telefonnummer"
+msgid "Your Phone"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_thankyou

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 02:00+0000\n"
-"PO-Revision-Date: 2015-09-10 02:00+0000\n"
+"POT-Creation-Date: 2015-09-13 02:00+0000\n"
+"PO-Revision-Date: 2015-09-13 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -53,8 +53,18 @@ msgid "Address"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Agreement with/My contact in the Committee"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
-msgid "Alle jobs"
+msgid "All Jobs"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Application"
 msgstr ""
 
 #. module: campos_event
@@ -84,6 +94,7 @@ msgstr ""
 #: view:campos.committee:campos_event.campos_committee_tree
 #: view:campos.event.participant:campos_event.campos_event_participant_form2
 #: model:ir.model,name:campos_event.model_campos_committee
+#: view:website:campos_event.jobber_signup
 msgid "Committee"
 msgstr ""
 
@@ -98,6 +109,16 @@ msgid "Committee Coordinator"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_function
+msgid "Committee Functions"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_function_type
+msgid "Committee FunctionsType"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee code"
 msgstr ""
@@ -105,11 +126,6 @@ msgstr ""
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee name"
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.jobber_signup
-msgid "Committee:"
 msgstr ""
 
 #. module: campos_event
@@ -205,6 +221,11 @@ msgid "Job tags"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Job/Committee"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Jobber Signup"
 msgstr ""
@@ -219,11 +240,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:campos_event.action_job_tree
 #: model:ir.ui.menu,name:campos_event.event_job_menu
 msgid "Jobs"
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.jobber_latest_jobs
-msgid "Kategorier"
 msgstr ""
 
 #. module: campos_event
@@ -258,6 +274,11 @@ msgstr ""
 #. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
 msgid "Ny hjælper til godkendelse"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Organization"
 msgstr ""
 
 #. module: campos_event
@@ -301,6 +322,7 @@ msgid "Rejects"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Save"
 msgstr ""
@@ -349,18 +371,9 @@ msgid "Skype"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.jobber_signup
-msgid "Spejderkorps:"
-msgstr ""
-
-#. module: campos_event
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 msgid "Staff rejection"
-msgstr ""
-
-#. module: campos_event
-#: view:campos.event.participant:campos_event.view_event_registration_participant_form
-msgid "State"
 msgstr ""
 
 #. module: campos_event
@@ -371,6 +384,11 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Submit"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_latest_jobs
+msgid "Tags"
 msgstr ""
 
 #. module: campos_event
@@ -400,26 +418,22 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid "Your\n"
-"											Address"
+msgid "Your	Email"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid "Your\n"
-"											Email"
+msgid "Your Address"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid "Your\n"
-"											Name"
+msgid "Your Name"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid "Your\n"
-"											Phone"
+msgid "Your Phone"
 msgstr ""
 
 #. module: campos_event
