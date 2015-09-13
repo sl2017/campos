@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 10:48+0000\n"
-"PO-Revision-Date: 2015-09-13 10:48+0000\n"
+"POT-Creation-Date: 2015-09-13 19:01+0000\n"
+"PO-Revision-Date: 2015-09-13 19:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:177
+#: code:addons/campos_event/models/event.py:176
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -545,6 +545,7 @@ msgstr ""
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 #: field:campos.committee,member_ids:0
+#: field:campos.committee,part_function_ids:0
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 #: model:ir.actions.act_window,name:campos_event.action_committee_member_tree
 msgid "Members"
@@ -706,7 +707,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:203
+#: code:addons/campos_event/models/event.py:202
 #, python-format
 msgid "Reject %s"
 msgstr ""
