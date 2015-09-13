@@ -66,6 +66,7 @@ class CampCommittee(models.Model):
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     contact_id = fields.Many2one('res.partner', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
+    part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
 
     @api.one
     @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
@@ -104,16 +105,12 @@ class CampCommittee(models.Model):
         return result
 
     @api.one
-    @api.depends('member_ids')
+    @api.depends('part_function_ids')
     def _compute_member_no(self):
         '''
         Count members in the Committee
         '''
-        self.member_no = len(
-            self.member_ids.filtered(
-                lambda record: record.state in [
-                    'sent',
-                    'approved']))
+        self.member_no = len(self.part_function_ids)
         
         
 class CampCommitteeFunctionType(models.Model):
