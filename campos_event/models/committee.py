@@ -27,6 +27,10 @@
 
 from openerp import models, fields, api
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class CampCommittee(models.Model):
 
@@ -62,6 +66,7 @@ class CampCommittee(models.Model):
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     contact_id = fields.Many2one('res.partner', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
+    part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
 
     @api.one
     @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
@@ -100,16 +105,12 @@ class CampCommittee(models.Model):
         return result
 
     @api.one
-    @api.depends('member_ids')
+    @api.depends('part_function_ids')
     def _compute_member_no(self):
         '''
         Count members in the Committee
         '''
-        self.member_no = len(
-            self.member_ids.filtered(
-                lambda record: record.state in [
-                    'sent',
-                    'approved']))
+        self.member_no = len(self.part_function_ids)
         
         
 class CampCommitteeFunctionType(models.Model):
@@ -135,6 +136,8 @@ class CampCommitteeFunction(models.Model):
     job_id = fields.Many2one('campos.job',
                          'Job',
                          ondelete='set null')
+    email = fields.Char('Email', related='participant_id.partner_id.email')
+    mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
         
     @api.multi
     def write(self, vals):
@@ -142,5 +145,21 @@ class CampCommitteeFunction(models.Model):
         for app in self:
             app.participant_id.state = 'approved'
         return ret    
+    
+    @api.multi
+    def action_open_participant(self):
+        self.ensure_one()
+        _logger.info("In action_open_participant X [%d] %d %s " %(self.env.context.get('active_id'), self.participant_id.id, self.participant_id.name))
+        return {
+            'name': self.participant_id.name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'campos.event.participant',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'domain': '[]',
+            'res_id': self.participant_id.id,
+            'context': {'active_id': self.participant_id.id}, 
+            }
         
     

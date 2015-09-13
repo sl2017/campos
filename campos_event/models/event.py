@@ -98,7 +98,6 @@ class EventParticipantReject(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for rej in self:
-            print "rejCreate ", rej.participant_id.name
             rej.participant_id.state = 'rejected'
         return ret
     
@@ -185,7 +184,7 @@ class EventParticipant(models.Model):
             'context': {
                     'default_participant_id': self.id,
                     'default_committee_id': self.committee_id.id,
-                    'defualt_job_id' : self.job_id.id,
+                    'default_job_id' : self.job_id.id,
                     }
             }
         

@@ -37,14 +37,14 @@
 										<label class="col-md-3 col-sm-4 control-label" for="phone">Your Phone</label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('phone')"
-												class="form-control" name="phone" required="True" />
+												class="form-control" name="phone" />
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('mobile') and 'has-error' or ''}">
 										<label class="col-md-3 col-sm-4 control-label" for="mobile">Mobile</label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('mobile')"
-												class="form-control" name="mobile" required="True" />
+												class="form-control" name="mobile" />
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('street') and 'has-error' or ''}">
