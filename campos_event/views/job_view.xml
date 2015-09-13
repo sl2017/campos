@@ -69,15 +69,14 @@
                         <field name="name" class="oe_inline" placeholder="Job name"/>
                     	</h1>
                     	<div class="oe_right oe_button_box">
-							<!-- <button name="%(campos_event.action_committee_members_tree)d"
-								type="action" string="Members" /> --> 
+							
 						</div>
 						<group>
 							<field name="active" />
 							<field name="desc" />
 							<field name="signup_button"/>
 							<field name="committee_id" />
-							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..."/> />
+							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..."/>
 							
 						</group>
 					</sheet>

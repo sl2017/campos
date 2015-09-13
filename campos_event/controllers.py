@@ -108,9 +108,12 @@ class CampOsEvent(http.Controller):
                 methods=['POST'], type='http', auth="public", website=True)
     def jobs_thankyou(self, **post):
         error = {}
-        for field_name in ["name", "phone", "email", "street", "zip", "city", "mobile"]:
+        for field_name in ["name", "email", "street", "zip", "city"]:
             if not post.get(field_name):
                 error[field_name] = 'missing'
+        if not post.get('phone') or post.get('mobile'):
+                error['phone'] = 'missing'
+                error['mobile'] = 'missing'
         if error:
             request.session['website_campos_jobber_signup_error'] = error
 

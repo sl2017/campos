@@ -2,6 +2,33 @@
 <openerp>
 	<data>
 
+
+		<record id="action_committee_member_tree" model="ir.actions.act_window">
+			<field name="name">Members</field>
+
+			<field name="res_model">campos.committee.function</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">tree</field>
+    		
+            <field name="context">{}</field>
+            <field name="domain">[('committee_id','=',active_id)]</field>
+        
+		</record>	
+		
+	<record model="ir.ui.view" id="campos_committee_member_tree">
+			<field name="name">campos.committee.member</field>
+			<field name="model">campos.committee.function</field>
+			<field name="arch" type="xml">
+				<tree string="Members">
+					<field name="committee_id" />
+					<field name="function_type_id" />
+					<field name="participant_id" />
+					<field name="email" />
+					<field name="mobile" />
+					<button name="action_open_participant" string="Open" type="object" class="oe_highlight"/>
+				</tree>
+			</field>
+		</record>
 		
 
 
@@ -18,8 +45,10 @@
                         <field name="name" class="oe_inline" placeholder="Committee name"/>
                     	</h1>
                     	<div class="oe_right oe_button_box">
-							<button name="%(campos_event.action_committee_members_tree)d"
-								type="action" string="Members" /> 
+                    		<button name="%(campos_event.action_committee_member_tree)d"
+								type="action" string="Members" />
+							<button name="%(campos_event.action_committee_applicant_tree)d"
+								type="action" string="Applicants" /> 
 						</div>
 						<group>
 							<field name="desc" />
@@ -75,7 +104,7 @@
 			<field name="name">campos.committee.function.form</field>
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
-				<form string="Staff rejection" version="7.0">
+				<form string="Staff approval" version="7.0">
 				<header> <button name="write" type="object" string="Save" class="oe_highlight"/></header>
 				<group>
 				<field name="participant_id" invisible="1"/>
@@ -87,6 +116,28 @@
 				</form>
 				</field>
 				</record>
+
+		<!--  Job Functions Type -->
+		
+		<record model="ir.ui.view" id="campos_committee_functions_type_tree">
+			<field name="name">campos.committee.functions.type.tree</field>
+			<field name="model">campos.committee.function.type</field>
+			<field name="arch" type="xml">
+				<tree string="Functions type">
+
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_committee_functions_type_tree" model="ir.actions.act_window">
+			<field name="name">Functions types</field>
+			<field name="res_model">campos.committee.function.type</field>
+			<field name="view_type">form</field>
+		</record>
+		
+		<menuitem action="action_committee_functions_type_tree" id="event_committee_function_type_menu"
+			name="Function types" sequence="100" parent="menu_campos_comittee" />
 
 		<!-- Email template for new IST assigned to Committe -->
         <record id="new_staff_member" model="email.template">
