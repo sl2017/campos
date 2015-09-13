@@ -143,6 +143,9 @@ class CampCommitteeFunction(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for app in self:
+            template = self.env.ref('campos_event.new_staff_member')
+            assert template._name == 'email.template'
+            template.send_mail(app.id)
             app.participant_id.state = 'approved'
         return ret    
     
