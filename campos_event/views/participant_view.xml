@@ -135,7 +135,7 @@
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							
-							<tree>
+							<tree create="false">
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
 							</tree>
