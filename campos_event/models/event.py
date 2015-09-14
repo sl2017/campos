@@ -158,6 +158,10 @@ class EventParticipant(models.Model):
         help='What do you do for living')
 
     par_internal_note = fields.Text('Internal note')
+    
+    @api.onchange('committee_id')
+    def onchange_committee_id(self):
+        self.state = 'draft'
 
     @api.multi
     def action_confirm(self):
