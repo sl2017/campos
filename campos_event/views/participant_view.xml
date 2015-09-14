@@ -80,11 +80,11 @@
 
 				<form string="Participant Registration">
 				<header attrs="{'invisible': [('staff', '=', False)]}">
-				 <button name="action_confirm" states="draft,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="event.group_event_manager" />
+				 <button name="action_confirm" states="draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="event.group_event_manager" />
            		 <button name="action_standby" states="draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="event.group_event_manager" />
            		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="event.group_event_user"/>
              	 <button name="action_reject" states="sent,approved,draft" string="Reject"   type="object" groups="event.group_event_user" />
-				 <field name="state" widget="statusbar" statusbar_colors="{'rejected':'red','approved':'blue'}"/>
+				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue'}"/>
 				</header>
 					<sheet>
 							<div class="oe_title oe_left">
