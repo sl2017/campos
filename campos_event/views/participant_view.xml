@@ -134,12 +134,12 @@
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
-							
 							<tree create="false">
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
 							</tree>
 							</field>
+							<field name="standby_until" states="standby" />
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
@@ -168,6 +168,16 @@
 									</tree>								  
 								 	</field>
 								 </group>
+								 </page>
+								 <page string="Agreements">
+								 	<group>
+										<field name="agreements" nolabel="1"/>	
+								 	</group>	
+								 </page>
+								 <page string="Internal Note" groups="campos_event.group_campos_manager">
+								 	<group>
+										<field name="internal_note" nolabel="1"/>	
+								 	</group>	
 								 </page>
 								 
 							</notebook>
