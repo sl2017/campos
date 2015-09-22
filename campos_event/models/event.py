@@ -128,6 +128,7 @@ class EventParticipant(models.Model):
                                    'Have agreement with committee',
                                    track_visibility='onchange',
                                    ondelete='set null')
+    sent_to_comm_date = fields.Date('Sent to Committee')
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
     state = fields.Selection([('draft', 'Received'),
@@ -137,7 +138,11 @@ class EventParticipant(models.Model):
                               ('rejected', 'Rejected')],
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
-
+    
+    standby_until = fields.Date()
+    agreements = fields.Text()
+    internal_note = fields.Text()
+    
     job_id = fields.Many2one('campos.job',
                              'Job',
                              ondelete='set null')
@@ -162,6 +167,7 @@ class EventParticipant(models.Model):
     @api.onchange('committee_id')
     def onchange_committee_id(self):
         self.state = 'draft'
+        self.sent_to_comm_date = False
 
     @api.multi
     def action_confirm(self):
@@ -172,6 +178,7 @@ class EventParticipant(models.Model):
         template.send_mail(self.id)
 
         self.state = 'sent'
+        self.sent_to_comm_date = fields.Date.context_today(self)
         return True
 
     @api.multi
