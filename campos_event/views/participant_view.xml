@@ -72,6 +72,25 @@
 				</field>
 				</record>
 				
+		<record model="ir.ui.view" id="view_event_participant_standby_form">
+			<field name="name">registration.participant.reject.form</field>
+			<field name="model">campos.event.participant</field>
+			 <field name="priority" eval="20"/> 
+			<field name="arch" type="xml">
+				<form string="Staff rejection" version="7.0">
+				<header> 
+					<button name="write" type="object" string="Save" class="oe_highlight"/>
+					<button name="action_send_standby_mail" type="object" string="Send Mail" class="oe_highlight"/>
+				
+				</header>
+				<group>
+				<field name="standby_until"/>
+				</group>
+				
+				</form>
+				</field>
+				</record>
+				
 
 		<record model="ir.ui.view" id="view_event_registration_participant_form">
 			<field name="name">registration.participant.form</field>
@@ -138,7 +157,7 @@
 							<tree create="false">
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
-								<field name="com_contact_id"  context="{'show_address' : True, 'without_company':True, 'add_email': True}"/>
+								<field name="com_contact" />
 							</tree>
 							</field>
 							<field name="standby_until" states="standby" />
@@ -269,7 +288,28 @@
             <field name="context">{}</field>
             <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id),('state','in',['sent'])]</field>
         
-		</record>	
+		</record>
+		
+		<!-- Email template for new Standby mail -->
+        <record id="staff_on_standby" model="email.template">
+            <field name="name">Standby</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[tilmelding@sl2017.dk]]></field>
+            <field name="email_to">${object.partner_id.email|safe}</field>
+            <field name="subject"><![CDATA[Standby]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name},
+                    </p>
+                    <p>
+                        Vi har sat dig på standby. Du vil høre fra os senere
+                    </p>
+                    
+                                    ]]>
+            </field>
+        </record>
+			
 	</data>
 
 

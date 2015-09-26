@@ -39,6 +39,7 @@ class ResPartner(models.Model):
     participant = fields.Boolean()
     staff = fields.Boolean()
     skype = fields.Char()
+    complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
     def name_get(self, cr, uid, ids, context=None):
         if context is None:
@@ -62,3 +63,9 @@ class ResPartner(models.Model):
                 name = record.name    
             res.append((record.id, name))
         return res
+
+    @api.one
+    @api.depends('name', 'email', 'mobile')
+    def _get_complete_contact(self):
+        self.complete_contact = '\n'.join(filter(None, [self.name, self.email, self.mobile]))
+      

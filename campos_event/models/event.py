@@ -188,8 +188,46 @@ class EventParticipant(models.Model):
     def action_standby(self):
         self.ensure_one()
         self.state = 'standby'
-        return True
+        view = self.env.ref('campos_event.view_event_participant_standby_form')
+        return {
+            'name':_("Set to standby: %s" % self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': view.id,
+            'res_model': 'campos.event.participant',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'res_id': self.id,
+            }
 
+    @api.multi
+    def action_send_standby_mail(self):
+        """ Open a window to compose an email, with the edi invoice template
+            message loaded by default
+        """
+        assert len(self) == 1, 'This option should only be used for a single id at a time.'
+        template = self.env.ref('campos_event.staff_on_standby', False)
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ctx = dict(
+            default_model='campos.event.participant',
+            default_res_id=self.id,
+            default_use_template=bool(template),
+            default_template_id=template.id,
+            default_composition_mode='comment',
+            
+        )
+        return {
+            'name': _('Compose Email'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }
 
     @api.multi
     def action_approve(self):
