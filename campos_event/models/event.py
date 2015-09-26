@@ -114,6 +114,9 @@ class EventParticipant(models.Model):
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration','Registration')
+    reg_organization_id = fields.Many2one(
+        'campos.scout.org',
+        'Scout Organization', related='registration_id.organization_id')
 
     # Scout Leader Fiedls
 
@@ -280,3 +283,9 @@ class EventParticipant(models.Model):
                 '&', ('committee_id', 'in', coms.ids),('state', 'in',['sent']),
                 ]
         
+    def message_get_suggested_recipients(self, cr, uid, ids, context=None):
+        recipients = super(EventParticipant, self).message_get_suggested_recipients(cr, uid, ids, context=context)
+        for lead in self.browse(cr, uid, ids, context=context):
+                if lead.partner_id:
+                    self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
+        return recipients

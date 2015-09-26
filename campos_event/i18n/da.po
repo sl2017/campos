@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-14 02:00+0000\n"
-"PO-Revision-Date: 2015-09-19 15:52+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2015-09-23 02:00+0000\n"
+"PO-Revision-Date: 2015-09-23 02:00+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,6 +63,11 @@ msgstr "Adresse"
 #: view:website:campos_event.jobber_signup
 msgid "Agreement with/My contact in the Committee"
 msgstr "Aftale med/kontaktperson"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Agreements"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
@@ -219,6 +224,11 @@ msgstr "Grupper"
 #: view:campos.event.participant:campos_event.campos_event_participant_search
 msgid "Group By..."
 msgstr "Grupper efter"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Internal Note"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
