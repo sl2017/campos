@@ -28,6 +28,8 @@
 from openerp import models, fields, api
 from openerp.tools.translate import _
 
+import logging
+_logger = logging.getLogger(__name__)
 
 class EventRegistration(models.Model):
 
@@ -44,6 +46,7 @@ class EventRegistration(models.Model):
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
     staff = fields.Boolean(related='partner_id.staff')
+    staff_qty_pre_reg = fields.Integer('Number of Staff - Pre-registration')
     country_id = fields.Many2one('res.country', 'Country')
     organization_id = fields.Many2one(
         'campos.scout.org',
@@ -131,6 +134,10 @@ class EventParticipant(models.Model):
                                    'Have agreement with committee',
                                    track_visibility='onchange',
                                    ondelete='set null')
+    comm_approver_ids = fields.Many2many(
+        'campos.committee', 'committee_approvers_rel',
+        'member_id', 'committee_id',
+        'Approver for')
     sent_to_comm_date = fields.Date('Sent to Committee')
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
@@ -138,7 +145,8 @@ class EventParticipant(models.Model):
                               ('standby','Standby'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),
-                              ('rejected', 'Rejected')],
+                              ('rejected', 'Rejected'),
+                              ('deregistered', 'Deregistered')],
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
     
@@ -178,7 +186,9 @@ class EventParticipant(models.Model):
         template = self.env.ref('campos_event.new_staff_member')
         assert template._name == 'email.template'
 
-        template.send_mail(self.id)
+        partner_list = ','.join([str(par.partner_id.id) for par in self.committee_id.approvers_ids])
+        _logger.info('Partner list: %s', partner_list)
+        template.with_context({'partner_list': partner_list}).send_mail(self.id)
 
         self.state = 'sent'
         self.sent_to_comm_date = fields.Date.context_today(self)
@@ -273,7 +283,38 @@ class EventParticipant(models.Model):
                     }
             }
 
-    
+    @api.multi
+    def action_create_user(self):
+        for par in self:
+            old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
+            if len(old_user) == 0:
+                new_user = self.env['res.users'].create({'login': par.email,
+                                                         'partner_id': par.partner_id.id,
+                                                         'groups_id': [(4, self.env.ref('base.group_portal').id)]})
+                new_user.with_context({'create_user': True}).action_reset_password()
+            else:
+                old_user.action_reset_password()
+                
+    @api.multi
+    def action_deregister_participant(self):
+        for par in self:
+            old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
+            if len(old_user):
+                old_user.write({'active': False})
+            par.state = 'deregistered'
+            par.jobfunc_ids.write({'active': False})
+            if par.sharepoint_mailaddress:
+                template = self.env.ref('campos_event.deregister_sharepoint')
+                assert template._name == 'email.template'
+                template.send_mail(par.id)
+            if par.zexpense_access_wanted or par.zexpense_access_created:
+                template = self.env.ref('campos_event.deregister_zexpense')
+                assert template._name == 'email.template'
+                template.send_mail(par.id)
+            par.comm_approver_ids = None
+            for comm in self.env['campos.committee'].search(['contact_id', '=', par.partner_id.id]):
+                comm.contact_id = False
+                
     
     @api.multi
     @api.depends('partner_id.name')

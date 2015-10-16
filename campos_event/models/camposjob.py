@@ -64,3 +64,23 @@ class CamposJob(models.Model):
                                    'Committee',
                                    ondelete='set null')
     signup_button = fields.Char(default='Signup')
+    
+    job_where = fields.Char('Where')
+    job_when = fields.Char('When')
+    min_qty_jobbere = fields.Integer('Minimum numbers of staff')
+    wanted_qty_jobbere = fields.Integer('Wanted numbers of staff')
+    max_qty_jobbere = fields.Integer('Maximun numbers of staff')
+    
+    date_public = fields.Date('Publication at')
+    date_closing = fields.Date('Close at')
+    
+    confirmed_job_qty = fields.Integer("Confirmed Applicants", compute='_compute_applicants')
+    openapplications_qty = fields.Integer("Open Applicants", compute='_compute_applicants')
+    
+    @api.one
+    def _compute_applicants(self):
+        self.confirmed_job_qty = self.env['campos.committee.function'].search_count([('job_id', '=', self.id)])
+        self.openapplications_qty = self.env['campos.event.participant'].search_count([('job_id', '=', self.id),('state', 'in', ['draft','sent','standby'])])
+     
+    
+    
