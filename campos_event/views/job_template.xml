@@ -36,7 +36,10 @@
                         <br/>
                         <span>Udvalg: <a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)" t-field="job.committee_id"/> </span>
                         <br/>
-                        <span t-raw="job.desc" />
+                        
+                        <span t-raw="job.desc" /><br/>
+                        <b>Hvor:</b><span t-field="job.job_where"/><br/>
+                        <b>Hvornår:</b><span t-field="job.job_when"/><br/>
                         <a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)"><i class="fa fa-arrow-right">&amp;nbsp;</i><span t-field="job.signup_button"/></a>
                       </div>
                       <t t-set="count" t-value="count+1"/>

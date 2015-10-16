@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 02:00+0000\n"
-"PO-Revision-Date: 2015-09-23 02:00+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2015-09-27 02:00+0000\n"
+"PO-Revision-Date: 2015-09-28 09:36+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,22 @@ msgid ""
 "                                    \n"
 "            "
 msgstr "\n\n<p>\nHej ${object.committee_id.name},\n</p>\n<p>\nEn ny hjælper er klar til godkendelse:\n</p>\n<p>\n${object.name}\n</p>"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.staff_on_standby
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name},\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        Vi har sat dig på standby. Du vil høre fra os senere\n"
+"                    </p>\n"
+"                    \n"
+"                                    \n"
+"            "
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
@@ -67,7 +83,7 @@ msgstr "Aftale med/kontaktperson"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Agreements"
-msgstr ""
+msgstr "Aftale med"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
@@ -83,7 +99,7 @@ msgstr "Ansøgere"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Application"
-msgstr ""
+msgstr "Ansøgning"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -228,7 +244,7 @@ msgstr "Grupper efter"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Internal Note"
-msgstr ""
+msgstr "Interne noter"
 
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
@@ -368,6 +384,7 @@ msgstr "Afvisning / Afvisninger"
 #. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
+#: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Save"
 msgstr "Gem"
 
@@ -400,6 +417,11 @@ msgid "Search"
 msgstr "Søg"
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_participant_standby_form
+msgid "Send Mail"
+msgstr "Send mail"
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Send to Committee"
 msgstr "Send til udvalg"
@@ -407,7 +429,7 @@ msgstr "Send til udvalg"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Set standby"
-msgstr ""
+msgstr "Sæt på Standby"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -426,8 +448,14 @@ msgstr "Stabs godkendelse"
 
 #. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
+#: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Staff rejection"
 msgstr "Personale afvisning"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.staff_on_standby
+msgid "Standby"
+msgstr "Standby"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -477,7 +505,7 @@ msgstr "Adresse"
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Your Email"
-msgstr ""
+msgstr "Din mailadresse"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup

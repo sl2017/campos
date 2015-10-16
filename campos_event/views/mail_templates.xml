@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data noupdate="1">
+
+		<!-- Email template for new IST assigned to Committe -->
+        <record id="new_staff_member" model="email.template">
+            <field name="name">New staff assigned to Committee</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="partner_to">${ctx.partner_list}</field>
+            <field name="subject"><![CDATA[Ny hjælper til godkendelse]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.committee_id.name},
+                    </p>
+                    <p>
+                        En ny hjælper er klar til godkendelse:
+                    </p>
+                    <p>
+                        ${object.name}
+                    </p>
+                                    ]]>
+            </field>
+        </record>
+        
+        <!-- Email template for new Standby mail -->
+        <record id="staff_on_standby" model="email.template">
+            <field name="name">Standby</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">${object.partner_id.email|safe}</field>
+            <field name="subject"><![CDATA[Standby]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name},
+                    </p>
+                    <p>
+                        Vi har sat dig på standby. Du vil høre fra os senere
+                    </p>
+                    
+                                    ]]>
+            </field>
+        </record>
+        
+        
+        <!-- Email template for deregister sharepoint -->
+        <record id="deregister_sharepoint" model="email.template">
+            <field name="name">Deregister Sharepoint</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">kml@sl2017</field>
+            <field name="subject">Nedlæggelse af SL2017 mail</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej Kristian
+                    </p>    
+					<p>	                        
+                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}
+                    </p>
+                    ]]>
+            </field>
+        </record>
+			
+		<!-- Email template for deregister zExpense -->
+        <record id="deregister_zexpense" model="email.template">
+            <field name="name">Deregister zExpense</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">info@sl2017.dk</field>
+            <field name="subject">Nedlæggelse af zExpense adgang</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej
+                    </p>    
+					<p>	                        
+                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}
+                    </p>
+                    ]]>
+            </field>
+        </record>
+
+
+	
+	</data>
+</openerp>

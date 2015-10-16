@@ -38,16 +38,21 @@ class CampCommittee(models.Model):
     _description = 'Committee'
     _name = 'campos.committee'
     _inherit = 'mail.thread'
+    _order = 'sequence'
 
     name = fields.Char('Name', size=64, translate=True)
     code = fields.Char('Code', size=64, translate=True)
     account = fields.Char('Account', size=64, translate=True)
     desc = fields.Text('Description', translate=True)
-    email = fields.Char('Email', size=128)
+    #email = fields.Char('Email', size=128)
     member_ids = fields.One2many(
         'campos.event.participant',
         'committee_id',
         'Members')
+    approvers_ids = fields.Many2many(
+        'campos.event.participant', 'committee_approvers_rel',
+        'committee_id','member_id',
+        'Approvers')
     template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null',
                                   domain=[('model_id', '=', 'campos.event.participant')])
     parent_id = fields.Many2one('campos.committee', 'Main Committee')
@@ -64,6 +69,7 @@ class CampCommittee(models.Model):
         compute='_compute_display_name',
         store=True)
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
+    applicants_count = fields.Integer(string='# Applicants', compute='_compute_member_no')
     contact_id = fields.Many2one('res.partner', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
@@ -105,12 +111,13 @@ class CampCommittee(models.Model):
         return result
 
     @api.one
-    @api.depends('part_function_ids')
+    @api.depends('part_function_ids','member_ids')
     def _compute_member_no(self):
         '''
         Count members in the Committee
         '''
         self.member_no = len(self.part_function_ids)
+        self.applicants_count = self.env['campos.event.participant'].search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
         
         
 class CampCommitteeFunctionType(models.Model):
@@ -126,6 +133,7 @@ class CampCommitteeFunction(models.Model):
     """ Committee Participant Function"""
     _description = 'Committee Functions'
     _name = 'campos.committee.function'
+    _order = 'committee_id'
     
     name = fields.Char()
     participant_id = fields.Many2one('campos.event.participant', ondelete='cascade')
@@ -139,6 +147,7 @@ class CampCommitteeFunction(models.Model):
     email = fields.Char('Email', related='participant_id.partner_id.email')
     mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
     com_contact = fields.Text(string='Contact', related='committee_id.contact_id.complete_contact')
+    active = fields.Boolean()
         
     @api.multi
     def write(self, vals):
