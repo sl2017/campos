@@ -66,18 +66,44 @@
 						
 						<label for="name" class="oe_edit_only" string="Name"/>
                     	<h1>
-                        <field name="name" class="oe_inline" placeholder="Job name"/>
+                        <field name="name" placeholder="Job name" colspan="4" style="width: 90%%"/>
                     	</h1>
                     	<div class="oe_right oe_button_box">
-							
+                    		<button name="%(campos_event.action_job_member_tree)d"
+								type="action" class="oe_stat_button"  icon="fa-user">
+								<field string="Confirmed jobs" name="confirmed_job_qty" widget="statinfo"/>
+							</button>		
+							<button name="%(campos_event.action_job_applicant_tree)d"
+								type="action" class="oe_stat_button"  icon="fa-user"> 
+								<field string="Applicants" name="openapplications_qty" widget="statinfo"/>
+							</button>
 						</div>
-						<group>
-							<field name="active" />
-							<field name="desc" />
+						<group col="4">
+							<group colspan="2">
+								<field name="committee_id" />
+							</group>
+							<group colspan="2">
+								<field name="active" />
+							</group> 
+							<field name="desc" colspan="4"/>
+							<group colspan="2">
+								<field name="job_where" />
+							</group>
+							<group colspan="2">
+								<field name="job_when" />
+							</group>
 							<field name="signup_button"/>
-							<field name="committee_id" />
-							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..."/>
-							
+							<newline/>
+							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..." colspan="4"/>
+							<group colspan="2">
+								<field name="date_public"/>
+								<field name="date_closing"/>
+							</group>
+							<group colspan="2">
+								<field name="min_qty_jobbere" />
+								<field name="wanted_qty_jobbere" />
+								<field name="max_qty_jobbere" />
+							</group>
 						</group>
 					</sheet>
 					<div class="oe_chatter">

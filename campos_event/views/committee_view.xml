@@ -14,6 +14,18 @@
             <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id)]</field>
         
 		</record>	
+
+		<record id="action_job_member_tree" model="ir.actions.act_window">
+			<field name="name">Members</field>
+
+			<field name="res_model">campos.committee.function</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">tree</field>
+    		
+            <field name="context">{}</field>
+            <field name="domain">[('job_id','=',active_id)]</field>
+        
+		</record>	
 		
 	<record model="ir.ui.view" id="campos_committee_member_tree">
 			<field name="name">campos.committee.member</field>
@@ -46,13 +58,17 @@
                     	</h1>
                     	<div class="oe_right oe_button_box">
                     		<button name="%(campos_event.action_committee_member_tree)d"
-								type="action" string="Members" />
+								type="action" class="oe_stat_button"  icon="fa-user">
+								<field string="Members" name="member_no" widget="statinfo"/>
+							</button>		
 							<button name="%(campos_event.action_committee_applicant_tree)d"
-								type="action" string="Applicants" /> 
+								type="action" class="oe_stat_button"  icon="fa-user"> 
+								<field string="Applicants" name="applicants_count" widget="statinfo"/>
+							</button>
 						</div>
 						<group>
 							<field name="desc" />
-							<field name="email" />
+							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" />
 							<field name="template_id" />
 							<field name="parent_id" />
 							<field name="child_ids" />
@@ -143,7 +159,7 @@
         <record id="new_staff_member" model="email.template">
             <field name="name">New staff assigned to Committee</field>
             <field name="model_id" ref="campos_event.model_campos_event_participant"/>
-            <field name="email_from"><![CDATA[tilmelding@sl2017.dk]]></field>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
             <field name="email_to">${object.committee_id.email|safe}</field>
             <field name="subject"><![CDATA[Ny hjælper til godkendelse]]></field>
             <field name="body_html">

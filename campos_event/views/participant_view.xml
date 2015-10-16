@@ -46,6 +46,7 @@
 				 	<field name="organization_id"/>
 				 	<field name="scoutgroup"/>
 				 	<field name="staff"/>
+				 	<field name="staff_qty_pre_reg" />
 				 	</group>
 				 </page>
 				 
@@ -103,7 +104,10 @@
            		 <button name="action_standby" states="draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="event.group_event_manager" />
            		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="event.group_event_user"/>
              	 <button name="action_reject" states="sent,approved,draft" string="Reject"   type="object" groups="event.group_event_user" />
-				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue'}"/>
+             	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager" />
+             	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager" confirm="Deregister participant and revoke access?"/>
+             	 
+				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
 				</header>
 					<sheet>
 							<div class="oe_title oe_left">
@@ -277,7 +281,7 @@
 			name="Participants" sequence="50" parent="menu_campos_event"
 			groups="event.group_event_manager" />
 			
-	<record id="action_committee_applicant_tree" model="ir.actions.act_window">
+		<record id="action_committee_applicant_tree" model="ir.actions.act_window">
 			<field name="name">Applicants</field>
 
 			<field name="res_model">campos.event.participant</field>
@@ -290,26 +294,21 @@
         
 		</record>
 		
-		<!-- Email template for new Standby mail -->
-        <record id="staff_on_standby" model="email.template">
-            <field name="name">Standby</field>
-            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
-            <field name="email_from"><![CDATA[tilmelding@sl2017.dk]]></field>
-            <field name="email_to">${object.partner_id.email|safe}</field>
-            <field name="subject"><![CDATA[Standby]]></field>
-            <field name="body_html">
-                <![CDATA[
-                    <p>
-                        Hej ${object.name},
-                    </p>
-                    <p>
-                        Vi har sat dig på standby. Du vil høre fra os senere
-                    </p>
-                    
-                                    ]]>
-            </field>
-        </record>
-			
+		<record id="action_job_applicant_tree" model="ir.actions.act_window">
+			<field name="name">Applicants</field>
+
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+    		<field name="view_mode">kanban,tree,form</field>
+    		<field name="view_id" ref="campos_event_participant_form2"/>
+    		<field name="search_view_id" ref="campos_event_participant_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('job_id','=',active_id),('state','in',['draft','sent','standby'])]</field>
+        
+		</record>
+		
+		
+		
 	</data>
 
 
