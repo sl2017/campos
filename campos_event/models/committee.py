@@ -56,6 +56,8 @@ class CampCommittee(models.Model):
     template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null',
                                   domain=[('model_id', '=', 'campos.event.participant')])
     parent_id = fields.Many2one('campos.committee', 'Main Committee')
+    committee_type_id = fields.Many2one('campos.committee.type', 'Type')
+    
     child_ids = fields.One2many(
         'campos.committee',
         'parent_id',
@@ -118,7 +120,14 @@ class CampCommittee(models.Model):
         '''
         self.member_no = len(self.part_function_ids)
         self.applicants_count = self.env['campos.event.participant'].search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
-        
+
+class CampCommitteeType(models.Model):
+
+    """ Committee Types"""
+    _description = 'Committee Type'
+    _name = 'campos.committee.type'
+    
+    name = fields.Char('Committee Type')        
         
 class CampCommitteeFunctionType(models.Model):
 
@@ -127,6 +136,8 @@ class CampCommitteeFunctionType(models.Model):
     _name = 'campos.committee.function.type'
     
     name = fields.Char('Function Title')
+    
+
     
 class CampCommitteeFunction(models.Model):
 
@@ -153,9 +164,12 @@ class CampCommitteeFunction(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for app in self:
-            template = self.env.ref('campos_event.new_staff_member')
+            template = self.committee_id.template_id
             assert template._name == 'email.template'
-            template.send_mail(app.id)
+            try:
+                template.send_mail(app.id)
+            except:
+                pass
             app.participant_id.state = 'approved'
         return ret    
     

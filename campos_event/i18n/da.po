@@ -11,15 +11,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-27 02:00+0000\n"
-"PO-Revision-Date: 2015-09-28 09:36+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2015-10-18 02:00+0000\n"
+"PO-Revision-Date: 2015-10-18 02:00+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.deregister_zexpense
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}\n"
+"                    </p>\n"
+"                    \n"
+"            "
+msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.new_staff_member
@@ -52,6 +67,21 @@ msgid ""
 "                    </p>\n"
 "                    \n"
 "                                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.deregister_sharepoint
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej Kristian\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}\n"
+"                    </p>\n"
+"                    \n"
 "            "
 msgstr ""
 
@@ -92,7 +122,9 @@ msgstr "Alle jobs"
 
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
+#: view:campos.job:campos_event.campos_job_form
 #: model:ir.actions.act_window,name:campos_event.action_committee_applicant_tree
+#: model:ir.actions.act_window,name:campos_event.action_job_applicant_tree
 msgid "Applicants"
 msgstr "Ansøgere"
 
@@ -175,6 +207,11 @@ msgid "Configuration"
 msgstr "Konfiguration"
 
 #. module: campos_event
+#: view:campos.job:campos_event.campos_job_form
+msgid "Confirmed jobs"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_thankyou
 msgid "Continue To Our Website"
 msgstr "Fortsæt til forsiden"
@@ -185,9 +222,24 @@ msgid "Country"
 msgstr "Land"
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Create User"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_municipality
 msgid "DK Kommuner"
 msgstr "Kommunekode"
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Deregister Participant"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Deregister participant and revoke access?"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.campos_event_participant_search
@@ -240,6 +292,16 @@ msgstr "Grupper"
 #: view:campos.event.participant:campos_event.campos_event_participant_search
 msgid "Group By..."
 msgstr "Grupper efter"
+
+#. module: campos_event
+#: view:website:campos_event.jobber_latest_jobs
+msgid "Hvor:"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_latest_jobs
+msgid "Hvornår:"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -305,6 +367,7 @@ msgstr "Leder"
 #: view:campos.committee:campos_event.campos_committee_form
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 #: model:ir.actions.act_window,name:campos_event.action_committee_member_tree
+#: model:ir.actions.act_window,name:campos_event.action_job_member_tree
 msgid "Members"
 msgstr "Medlem"
 
@@ -325,6 +388,16 @@ msgstr "Kommune"
 #: view:campos.job:campos_event.campos_job_form
 msgid "Name"
 msgstr "Navn"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.deregister_sharepoint
+msgid "Nedlæggelse af SL2017 mail"
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.deregister_zexpense
+msgid "Nedlæggelse af zExpense adgang"
+msgstr ""
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
