@@ -71,6 +71,7 @@
 							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" />
 							<field name="template_id" />
 							<field name="parent_id" />
+							<field name="committee_type_id"/>
 							<field name="child_ids" />
 							<field name="member_no" />
 							<field name="sequence" />
@@ -96,9 +97,27 @@
 				<tree string="Committee">
 
 					<field name="display_name" />
+					<field name="committee_type_id"/>
 					<field name="member_no" />
-					<field name="sequence" />
+					<field name="sequence" invisible="1"/>
+					<field name="name" invisible="1"/>
+					<field name="code" invisible="1"/>
+					<field name="parent_id" invisible="1"/>
+					
 				</tree>
+			</field>
+		</record>
+
+		<record id="campos_committee_search" model="ir.ui.view">
+			<field name="name">Committee Search</field>
+			<field name="model">campos.committee</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="display_name" />
+					<field name="code"/>
+					<field name="parent_id"/>
+					<field name="committee_type_id"/>
+				</search>
 			</field>
 		</record>
 
@@ -132,6 +151,28 @@
 				</form>
 				</field>
 				</record>
+
+		<!--  Committee Type -->
+		<record model="ir.ui.view" id="campos_committee_type_tree">
+			<field name="name">campos.committee.type.tree</field>
+			<field name="model">campos.committee.type</field>
+			<field name="arch" type="xml">
+				<tree string="Committee type">
+
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_committee_type_tree" model="ir.actions.act_window">
+			<field name="name">Committee types</field>
+			<field name="res_model">campos.committee.type</field>
+			<field name="view_type">form</field>
+		</record>
+		
+		<menuitem action="action_committee_type_tree" id="event_committee_type_menu"
+			name="Committee types" sequence="110" parent="menu_campos_comittee" />
+
 
 		<!--  Job Functions Type -->
 		

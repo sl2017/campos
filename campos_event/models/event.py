@@ -161,6 +161,8 @@ class EventParticipant(models.Model):
     
     sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
     sharepoint_mailaddress = fields.Char()
+    sharepoint_clienttype = fields.Selection([('client', 'Client'),
+                                              ('online', 'Online')], "Sharepoint Client")
     sharepoint_mail_created = fields.Date()
     sharepoint_mail_requested = fields.Datetime()
     
