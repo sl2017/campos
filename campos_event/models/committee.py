@@ -158,7 +158,7 @@ class CampCommitteeFunction(models.Model):
     email = fields.Char('Email', related='participant_id.partner_id.email')
     mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
     com_contact = fields.Text(string='Contact', related='committee_id.contact_id.complete_contact')
-    active = fields.Boolean()
+    active = fields.Boolean(default=True)
         
     @api.multi
     def write(self, vals):
