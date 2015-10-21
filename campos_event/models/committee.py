@@ -153,9 +153,12 @@ class CampCommitteeFunction(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for app in self:
-            template = self.env.ref('campos_event.new_staff_member')
+            template = self.committee_id.template_id
             assert template._name == 'email.template'
-            template.send_mail(app.id)
+            try:
+                template.send_mail(app.id)
+            except:
+                pass
             app.participant_id.state = 'approved'
         return ret    
     

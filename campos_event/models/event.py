@@ -162,9 +162,11 @@ class EventParticipant(models.Model):
     sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
     sharepoint_mailaddress = fields.Char()
     sharepoint_mail_created = fields.Date()
+    sharepoint_mail_requested = fields.Datetime()
     
     zexpense_access_wanted = fields.Boolean('zExpense access wanted')
     zexpense_access_created = fields.Date()
+    zexpense_access_requested = fields.Datetime()
     
     workwish = fields.Text('Want to work with')
     my_comm_contact = fields.Char('Aggreement with')
@@ -188,7 +190,10 @@ class EventParticipant(models.Model):
 
         partner_list = ','.join([str(par.partner_id.id) for par in self.committee_id.approvers_ids])
         _logger.info('Partner list: %s', partner_list)
-        template.with_context({'partner_list': partner_list}).send_mail(self.id)
+        try:
+            template.with_context({'partner_list': partner_list}).send_mail(self.id)
+        except:
+            pass
 
         self.state = 'sent'
         self.sent_to_comm_date = fields.Date.context_today(self)
@@ -306,11 +311,17 @@ class EventParticipant(models.Model):
             if par.sharepoint_mailaddress:
                 template = self.env.ref('campos_event.deregister_sharepoint')
                 assert template._name == 'email.template'
-                template.send_mail(par.id)
+                try:
+                    template.send_mail(par.id)
+                except:
+                    pass
             if par.zexpense_access_wanted or par.zexpense_access_created:
                 template = self.env.ref('campos_event.deregister_zexpense')
                 assert template._name == 'email.template'
-                template.send_mail(par.id)
+                try:
+                    template.send_mail(par.id)
+                except:
+                    pass
             par.comm_approver_ids = None
             for comm in self.env['campos.committee'].search(['contact_id', '=', par.partner_id.id]):
                 comm.contact_id = False
