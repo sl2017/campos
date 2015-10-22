@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 02:00+0000\n"
-"PO-Revision-Date: 2015-10-18 02:00+0000\n"
+"POT-Creation-Date: 2015-10-22 02:00+0000\n"
+"PO-Revision-Date: 2015-10-22 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -175,6 +175,11 @@ msgid "Committee FunctionsType"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_type
+msgid "Committee Type"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee code"
 msgstr ""
@@ -182,6 +187,17 @@ msgstr ""
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee name"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.committee.type:campos_event.campos_committee_type_tree
+msgid "Committee type"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_type_tree
+#: model:ir.ui.menu,name:campos_event.event_committee_type_menu
+msgid "Committee types"
 msgstr ""
 
 #. module: campos_event

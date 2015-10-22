@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 02:00+0000\n"
-"PO-Revision-Date: 2015-10-18 02:00+0000\n"
+"POT-Creation-Date: 2015-10-22 02:00+0000\n"
+"PO-Revision-Date: 2015-10-22 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -185,6 +185,11 @@ msgid "Committee FunctionsType"
 msgstr "Udvalgs funktionstype type"
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_type
+msgid "Committee Type"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee code"
 msgstr "Udvalgskode"
@@ -193,6 +198,17 @@ msgstr "Udvalgskode"
 #: view:campos.committee:campos_event.campos_committee_form
 msgid "Committee name"
 msgstr "Udvalgsnavn"
+
+#. module: campos_event
+#: view:campos.committee.type:campos_event.campos_committee_type_tree
+msgid "Committee type"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_type_tree
+#: model:ir.ui.menu,name:campos_event.event_committee_type_menu
+msgid "Committee types"
+msgstr ""
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.action_committee_tree
@@ -209,7 +225,7 @@ msgstr "Konfiguration"
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
 msgid "Confirmed jobs"
-msgstr ""
+msgstr "Godkendt job"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_thankyou
@@ -224,7 +240,7 @@ msgstr "Land"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Create User"
-msgstr ""
+msgstr "Opret bruger"
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_municipality
@@ -234,12 +250,12 @@ msgstr "Kommunekode"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Deregister Participant"
-msgstr ""
+msgstr "Afmeld deltager"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Deregister participant and revoke access?"
-msgstr ""
+msgstr "Afmeld deltager og fjern adgang til systemet"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.campos_event_participant_search
@@ -296,12 +312,12 @@ msgstr "Grupper efter"
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Hvor:"
-msgstr ""
+msgstr "Hvor:"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Hvornår:"
-msgstr ""
+msgstr "Hvornår:"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -392,12 +408,12 @@ msgstr "Navn"
 #. module: campos_event
 #: model:email.template,subject:campos_event.deregister_sharepoint
 msgid "Nedlæggelse af SL2017 mail"
-msgstr ""
+msgstr "Nedlæggelse af SL2017 Mail/sharepoint"
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.deregister_zexpense
 msgid "Nedlæggelse af zExpense adgang"
-msgstr ""
+msgstr "Nedlæggelse af Zexpense adgang"
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
