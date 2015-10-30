@@ -244,6 +244,7 @@
 											<!-- <field name="patrol"/> 
 											<field name="day_summery"/> -->
 											<field name="state"/>
+											<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
 											<field name="committee_id" string="Committee"/>
 											<!-- <field name="functitle"/> -->
 

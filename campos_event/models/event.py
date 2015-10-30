@@ -326,7 +326,7 @@ class EventParticipant(models.Model):
                 except:
                     pass
             par.comm_approver_ids = None
-            for comm in self.env['campos.committee'].search(['contact_id', '=', par.partner_id.id]):
+            for comm in self.env['campos.committee'].search([('contact_id', '=', par.partner_id.id)]):
                 comm.contact_id = False
                 
     

@@ -28,6 +28,7 @@
 from openerp import models, fields, api
 
 
+
 class CamposJobTag(models.Model):
 
     """ Job Tags """
@@ -76,11 +77,24 @@ class CamposJob(models.Model):
     
     confirmed_job_qty = fields.Integer("Confirmed Applicants", compute='_compute_applicants')
     openapplications_qty = fields.Integer("Open Applicants", compute='_compute_applicants')
+    openjob = fields.Boolean('Open', compute='_compute_applicants')
     
     @api.one
+    @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')
     def _compute_applicants(self):
-        self.confirmed_job_qty = self.env['campos.committee.function'].search_count([('job_id', '=', self.id)])
+        confirmed_job_qty = self.env['campos.committee.function'].search_count([('job_id', '=', self.id)])
+        self.confirmed_job_qty = confirmed_job_qty
         self.openapplications_qty = self.env['campos.event.participant'].search_count([('job_id', '=', self.id),('state', 'in', ['draft','sent','standby'])])
+        openjob = True
+        if self.date_public and self.date_public > fields.Date.today(): 
+            openjob = False
+        if self.date_closing and self.date_closing < fields.Date.today():
+            openjob = False
+        if self.max_qty_jobbere and self.max_qty_jobbere <= confirmed_job_qty:
+            openjob = False
+        self.openjob = openjob    
+            
+            
      
     
     
