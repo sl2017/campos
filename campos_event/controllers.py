@@ -34,6 +34,10 @@ from openerp.addons.website.controllers.main import Website as controllers
 from openerp.addons.website.models.website import slug
 from openerp.tools.translate import _
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class CampOsEvent(http.Controller):
     #     @http.route('/camp_os_event/camp_os_event/', auth='public')
     #     def index(self, **kw):
@@ -58,7 +62,7 @@ class CampOsEvent(http.Controller):
         type='http', auth="public", website=True)
     def jobber_signup(self, job=None, **kwargs):
         error = {}
-        default = {}
+        default = {'staff_qty_pre_reg': '1'}
         comm_id = False
         scoutorg_id = False
         
@@ -137,7 +141,7 @@ class CampOsEvent(http.Controller):
             'contact_partner_id': partner_id,
             'econ_partner_id': partner_id,
         }
-        for f in ['name', 'organization_id']:
+        for f in ['name', 'organization_id', 'staff_qty_pre_reg']:
             value[f] = post.get(f)
         reg_id = env['event.registration'].create(value).id
 
@@ -164,15 +168,18 @@ class CampOsEvent(http.Controller):
             jobs = tag.job_ids
             list_title = _("Jobs tagged: ") + tag.name
         elif comm:
-            jobs = request.env['campos.job'].search([('active','=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
+            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
             list_title = _("Jobs for: ") + comm.name
         
         
         
         else:
-            jobs = request.env['campos.job'].search([('active','=', True)])
+            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True)])
             list_title = _("Job list")
             
+        for j in jobs:
+            _logger.info("job %s %s", j.name, j.openjob)
+        jobs = jobs.filtered(lambda r: r.openjob == True)
         nav_tags = request.env['campos.job.tag'].search([])
         nav_comm = request.env['campos.committee'].search([('parent_id', '=', False)])
             

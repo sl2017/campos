@@ -73,10 +73,9 @@
 							<field name="parent_id" />
 							<field name="committee_type_id"/>
 							<field name="child_ids" />
-							<field name="member_no" />
 							<field name="sequence" />
 							<field name="account"/>
-							<field name="contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
+							<field name="par_contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
 										options='{"always_reload": True, "highlight_first_line": True}'/>/>
 						</group>
 					</sheet>
@@ -130,9 +129,21 @@
 
 		</record>
 
+			<record id="action_committee_function_tree" model="ir.actions.act_window">
+			<field name="name">Committee Members</field>
+
+			<field name="res_model">campos.committee.function</field>
+			<field name="view_type">form</field>
+
+
+		</record>
+		
 		<menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10"/>
 		<menuitem action="action_committee_tree" id="event_committee_menu"
 			name="Committees" sequence="60" parent="menu_campos_comittee" />
+			
+			<menuitem action="action_committee_function_tree" id="event_committee_member_menu"
+			name="Committee Members" sequence="65" parent="menu_campos_comittee" />
 
 
 		<record model="ir.ui.view" id="view_campos_committee_function_form">

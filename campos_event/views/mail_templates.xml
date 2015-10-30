@@ -83,6 +83,37 @@
             </field>
         </record>
 
+		<record id="email_template_participant" model="email.template">
+            <field name="name">Participant Mail</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">${object.partner_id.email|safe}</field>
+            <field name="subject"><![CDATA[Deltager mail]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name},
+                    </p>
+                    
+                                    ]]>
+            </field>
+        </record>
+        
+
+		<act_window name="Mass Mailing"
+                res_model="mail.compose.message"
+                src_model="campos.event.participant"
+                view_mode="form"
+                multi="True"
+                target="new"
+                key2="client_action_multi"
+                id="participant_mas_mailing"
+                context="{
+                            'default_composition_mode': 'mass_mail',
+                            'default_partner_to': '${object.partner_id.id or \'\'}',
+                            'default_use_template': True,
+                            'default_template_id': ref('campos_event.email_template_participant'),
+                        }"/>
 
 	
 	</data>

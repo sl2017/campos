@@ -178,6 +178,14 @@ class EventParticipant(models.Model):
         help='What do you do for living')
 
     par_internal_note = fields.Text('Internal note')
+    complete_contact = fields.Text("contact", compute='_get_complete_contact')
+    
+    
+    @api.one
+    @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
+    def _get_complete_contact(self):
+        self.complete_contact = '\n'.join(filter(None, [self.name, self.sharepoint_mailaddress if self.sharepoint_mailaddress else self.email, self.mobile]))
+    
     
     @api.onchange('committee_id')
     def onchange_committee_id(self):
@@ -297,6 +305,7 @@ class EventParticipant(models.Model):
             if len(old_user) == 0:
                 new_user = self.env['res.users'].create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
+                                                         'participant_id' : par.id,
                                                          'groups_id': [(4, self.env.ref('base.group_portal').id)]})
                 new_user.with_context({'create_user': True}).action_reset_password()
             else:
@@ -325,7 +334,7 @@ class EventParticipant(models.Model):
                 except:
                     pass
             par.comm_approver_ids = None
-            for comm in self.env['campos.committee'].search(['contact_id', '=', par.partner_id.id]):
+            for comm in self.env['campos.committee'].search([('contact_id', '=', par.partner_id.id)]):
                 comm.contact_id = False
                 
     
@@ -335,7 +344,7 @@ class EventParticipant(models.Model):
 
         result = []
         for part in self:
-            result.append((part.id, part.partner_id.display_name))
+            result.append((part.id, part.complete_contact if context.get('add_email') else part.partner_id.display_name))
 
         return result
 

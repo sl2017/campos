@@ -51,11 +51,27 @@
 				<tree string="Jobs">
 					<field name="name" />
 					<field name="committee_id" />
+					<field name="openjob" />
 
 
 				</tree>
 			</field>
 		</record>
+		
+		<record model="ir.ui.view" id="job_search">
+			<field name="name">job.search</field>
+			<field name="model">campos.job</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="committee_id" />
+					<filter string="Open Jobs" domain="[('openjob', '=', True)]" />
+					<filter string="Closed Jobs" domain="[('openjob', '=', False)]" />
+					<filter string="Inactive" domain="[('active', '=', False)]" />
+				</search>
+			</field>
+		</record>
+		
 
 		<record model="ir.ui.view" id="campos_job_form">
 			<field name="name">campos.job.form</field>
@@ -98,6 +114,7 @@
 							<group colspan="2">
 								<field name="date_public"/>
 								<field name="date_closing"/>
+								<field name="openjob"/>
 							</group>
 							<group colspan="2">
 								<field name="min_qty_jobbere" />
@@ -119,6 +136,8 @@
 
 			<field name="res_model">campos.job</field>
 			<field name="view_type">form</field>
+    		<field name="view_mode">tree,form</field>
+    		
 
 		</record>
 
