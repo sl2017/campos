@@ -297,6 +297,7 @@ class EventParticipant(models.Model):
             if len(old_user) == 0:
                 new_user = self.env['res.users'].create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
+                                                         'participant_id' : par.id,
                                                          'groups_id': [(4, self.env.ref('base.group_portal').id)]})
                 new_user.with_context({'create_user': True}).action_reset_password()
             else:
@@ -325,7 +326,7 @@ class EventParticipant(models.Model):
                 except:
                     pass
             par.comm_approver_ids = None
-            for comm in self.env['campos.committee'].search(['contact_id', '=', par.partner_id.id]):
+            for comm in self.env['campos.committee'].search([('contact_id', '=', par.partner_id.id)]):
                 comm.contact_id = False
                 
     
