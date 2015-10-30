@@ -75,7 +75,7 @@
 							<field name="child_ids" />
 							<field name="sequence" />
 							<field name="account"/>
-							<field name="contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
+							<field name="par_contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
 										options='{"always_reload": True, "highlight_first_line": True}'/>/>
 						</group>
 					</sheet>

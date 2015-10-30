@@ -72,7 +72,7 @@ class CampCommittee(models.Model):
         store=True)
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     applicants_count = fields.Integer(string='# Applicants', compute='_compute_member_no')
-    contact_id = fields.Many2one('res.partner', string='Contact', ondelete='restrict') # Relation to inherited res.partner
+    par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
 
@@ -157,7 +157,7 @@ class CampCommitteeFunction(models.Model):
                          ondelete='set null')
     email = fields.Char('Email', related='participant_id.partner_id.email')
     mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
-    com_contact = fields.Text(string='Contact', related='committee_id.contact_id.complete_contact')
+    com_contact = fields.Text(string='Contact', related='committee_id.par_contact_id.complete_contact')
     active = fields.Boolean(default=True)
         
     @api.multi
@@ -176,7 +176,6 @@ class CampCommitteeFunction(models.Model):
     @api.multi
     def action_open_participant(self):
         self.ensure_one()
-        _logger.info("In action_open_participant X [%d] %d %s " %(self.env.context.get('active_id'), self.participant_id.id, self.participant_id.name))
         return {
             'name': self.participant_id.name,
             'view_mode': 'form',
