@@ -344,7 +344,7 @@ class EventParticipant(models.Model):
 
         result = []
         for part in self:
-            result.append((part.id, part.complete_contact if context.get('add_email') else part.partner_id.display_name))
+            result.append((part.id, part.complete_contact if self.env.context.get('add_email') else part.partner_id.display_name))
 
         return result
 
