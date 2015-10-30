@@ -147,7 +147,7 @@ class CampCommitteeFunction(models.Model):
     _order = 'committee_id'
     
     name = fields.Char()
-    participant_id = fields.Many2one('campos.event.participant', ondelete='cascade')
+    participant_id = fields.Many2one('campos.event.participant', ondelete='cascade', string="Participant")
     committee_id = fields.Many2one('campos.committee',
                                    'Committee',
                                    ondelete='cascade')
