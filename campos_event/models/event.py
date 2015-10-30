@@ -178,6 +178,14 @@ class EventParticipant(models.Model):
         help='What do you do for living')
 
     par_internal_note = fields.Text('Internal note')
+    complete_contact = fields.Text("contact", compute='_get_complete_contact')
+    
+    
+    @api.one
+    @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
+    def _get_complete_contact(self):
+        self.complete_contact = '\n'.join(filter(None, [self.name, self.sharepoint_mailaddress if self.sharepoint_mailaddress else self.email, self.mobile]))
+    
     
     @api.onchange('committee_id')
     def onchange_committee_id(self):
@@ -336,7 +344,7 @@ class EventParticipant(models.Model):
 
         result = []
         for part in self:
-            result.append((part.id, part.partner_id.display_name))
+            result.append((part.id, part.complete_contact if context.get('add_email') else part.partner_id.display_name))
 
         return result
 
