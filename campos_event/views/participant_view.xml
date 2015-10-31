@@ -217,6 +217,100 @@
 			</field>
 		</record>
 
+	<record model="ir.ui.view" id="portal_event_registration_participant_form">
+			<field name="name">registration.participant.form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+
+				<form string="Participant Registration">
+					<sheet>
+							<div class="oe_title oe_left">
+                        		<div class="oe_edit_only">
+                        		 <label for="name"/>
+                        		 </div> 
+                        		<h1>
+                            <field name="name" default_focus="1" placeholder="Name" colspan="4" style="width: 70%%"/>
+                            <field name="is_company" attrs="{'invisible': True}"/>
+                        	</h1> 
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" />
+                        	 
+                        	</div>
+                        	<newline/>
+                        	<group>
+							<group>
+							<field name="registration_id" />
+							
+                        	  <label for="street" string="Address"/>
+                            <div>
+                                <div class="oe_edit_only">
+                                    <field name="use_parent_address" class="oe_inline" on_change="onchange_address(use_parent_address, parent_id)" attrs="{'invisible': ['|', ('is_company', '=', True),('parent_id', '=', False)]}"/>
+                                    <label for="use_parent_address" attrs="{'invisible': ['|', ('is_company', '=', True), ('parent_id', '=', False)]}"/>
+                                </div>
+                                <button name="open_parent" type="object" string="(edit company address)" class="oe_link oe_edit_only" attrs="{'invisible': ['|',('parent_id','=', False),('use_parent_address','=',False)]}"/>
+                                <field name="street" placeholder="Street..." attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <field name="street2" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <div class="address_format">
+                                    <field name="zip" placeholder="ZIP" style="width: 27%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="city" placeholder="City" style="width: 70%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+
+                                </div>
+                                <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                            </div>
+                            <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
+                            <field name="mobile"/>
+                            <field name="skype"/>
+                            <field name="user_ids" invisible="1"/>
+                            <field name="email" widget="email"/>
+                            <field name="reg_organization_id"/>
+							<field name="participant"/>
+				 		    <field name="staff"/>
+							</group>
+							<group>
+							<separator string="Application" colspan="2"/>
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<separator string="Job/Committee" colspan="2"/>
+							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
+							<tree create="false">
+								<field name="committee_id"/>
+								<field name="function_type_id"/>
+								<field name="com_contact" />
+							</tree>
+							</field>
+							<field name="standby_until" states="standby" />
+							</group>
+							<notebook colspan="4" col="4">
+							<page string="Sharepoint">
+								 <group>
+								  
+								 	<field name="sharepoint_mail"/>
+								 	<field name="sharepoint_mailaddress"/>
+								 	<field name="sharepoint_clienttype"/>
+								 	<field name="sharepoint_mail_created"/>
+								 </group>
+								 </page>
+								 <page string="zExpense">
+								 <group>
+								  
+								 	<field name="zexpense_access_wanted"/>
+								 	<field name="zexpense_access_created"/>
+								 </group>
+								 </page>
+								 <page string="Agreements">
+								 	<group>
+										<field name="agreements" nolabel="1"/>	
+								 	</group>	
+								 </page>
+								 
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
 		<record id="campos_event_participant_tree" model="ir.ui.view">
 			<field name="name">campos.event.participant.tree</field>
 			<field name="model">campos.event.participant</field>

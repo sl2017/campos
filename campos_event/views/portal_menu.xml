@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	        
+        <act_window name="Participant"
+			res_model="campos.event.participant"
+			id="action_portal_participant_tree_view"
+			view_id="portal_event_registration_participant_form"/>
+	
+		<menuitem id="portal_SL2017_menu_top" name="SL2017" parent="portal.portal_menu" sequence="5"/>
+    	<menuitem id="portal_participant_menu" name="Participant" parent="portal_SL2017_menu_top" action="action_portal_participant_tree_view" sequence="15"/>
+    </data>
+</openerp>

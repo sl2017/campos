@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 02:00+0000\n"
-"PO-Revision-Date: 2015-10-22 02:00+0000\n"
+"POT-Creation-Date: 2015-10-31 02:00+0000\n"
+"PO-Revision-Date: 2015-10-31 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -42,6 +42,18 @@ msgid "\n"
 "                    <p>\n"
 "                        ${object.name}\n"
 "                    </p>\n"
+"                                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.email_template_participant
+msgid "\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name},\n"
+"                    </p>\n"
+"                    \n"
 "                                    \n"
 "            "
 msgstr ""
@@ -147,6 +159,11 @@ msgid "City"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Closed Jobs"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_tree
 #: view:campos.event.participant:campos_event.campos_event_participant_form2
 #: model:ir.model,name:campos_event.model_campos_committee
@@ -172,6 +189,12 @@ msgstr ""
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_committee_function_type
 msgid "Committee FunctionsType"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_function_tree
+#: model:ir.ui.menu,name:campos_event.event_committee_member_menu
+msgid "Committee Members"
 msgstr ""
 
 #. module: campos_event
@@ -235,6 +258,11 @@ msgstr ""
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_municipality
 msgid "DK Kommuner"
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.email_template_participant
+msgid "Deltager mail"
 msgstr ""
 
 #. module: campos_event
@@ -310,6 +338,11 @@ msgid "Hvornår:"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Inactive"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Internal Note"
 msgstr ""
@@ -370,6 +403,11 @@ msgid "Manager"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.participant_mas_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 #: model:ir.actions.act_window,name:campos_event.action_committee_member_tree
@@ -406,6 +444,11 @@ msgid "Nedlæggelse af zExpense adgang"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Number of persons in team"
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
 msgid "Ny hjælper til godkendelse"
 msgstr ""
@@ -413,6 +456,11 @@ msgstr ""
 #. module: campos_event
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 msgid "Open"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Open Jobs"
 msgstr ""
 
 #. module: campos_event
@@ -574,6 +622,11 @@ msgstr ""
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_user
 msgid "User"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_res_users
+msgid "Users"
 msgstr ""
 
 #. module: campos_event
