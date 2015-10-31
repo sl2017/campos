@@ -75,7 +75,8 @@ class CampCommittee(models.Model):
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
-
+    website_published = fields.Boolean('Visible in Website')
+    
     @api.one
     @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):
@@ -136,6 +137,7 @@ class CampCommitteeFunctionType(models.Model):
     _name = 'campos.committee.function.type'
     
     name = fields.Char('Function Title')
+    chairman = fields.Boolean()
     
 
     
