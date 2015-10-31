@@ -142,10 +142,7 @@
 					<div class="oe_structure">
 						<div class="container">
 							<h1>Thank you!</h1>
-							<p>
-								Your job application has been successfully registered,
-								we will get back to you soon.
-							</p>
+							<p>Your job application has been successfully registered, we will get back to you soon.</p>
 						</div>
 						<section data-snippet-id="cta" class="oe_dark">
 							<div class="container">

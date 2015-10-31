@@ -220,6 +220,7 @@
 	<record model="ir.ui.view" id="portal_event_registration_participant_form">
 			<field name="name">registration.participant.form</field>
 			<field name="model">campos.event.participant</field>
+			<field name="priority">17</field>
 			<field name="arch" type="xml">
 
 				<form string="Participant Registration">

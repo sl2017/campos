@@ -67,7 +67,8 @@
         "views/job_view.xml",
         "views/job_template.xml",
         "views/mail_templates.xml",
-        "views/portal_menu.xml"
+        "views/portal_menu.xml",
+        "views/res_users_view.xml",
     ],
     # only loaded in demonstration mode
     'demo': [

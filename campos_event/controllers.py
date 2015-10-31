@@ -73,7 +73,7 @@ class CampOsEvent(http.Controller):
         committee_ids = committee.search(
             request.cr,
             SUPERUSER_ID,
-            [],
+            [('website_published', '=', True)],
             context=request.context)
         committees = committee.browse(
             request.cr,
@@ -149,7 +149,7 @@ class CampOsEvent(http.Controller):
             'partner_id': partner_id,
             'registration_id': reg_id,
         }
-        for f in ['committee_id', 'job_id']:
+        for f in ['committee_id', 'job_id', 'my_comm_contact']:
             value[f] = post.get(f)
         part_id = env['campos.event.participant'].create(value).id
 
@@ -181,7 +181,8 @@ class CampOsEvent(http.Controller):
             _logger.info("job %s %s", j.name, j.openjob)
         jobs = jobs.filtered(lambda r: r.openjob == True)
         nav_tags = request.env['campos.job.tag'].search([])
-        nav_comm = request.env['campos.committee'].search([('parent_id', '=', False)])
+        nav_tags = nav_tags.filtered(lambda r: any([j.openjob for j in r.job_ids]))
+        nav_comm = request.env['campos.committee'].search([('parent_id', '=', False),('website_published', '=', True)])
             
         return request.render("campos_event.jobber_latest_jobs", {'jobs' : jobs,
                                                                   'list_title' : list_title,
