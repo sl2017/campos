@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 02:00+0000\n"
-"PO-Revision-Date: 2015-10-22 02:00+0000\n"
+"POT-Creation-Date: 2015-10-31 02:00+0000\n"
+"PO-Revision-Date: 2015-10-31 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -53,6 +53,19 @@ msgid ""
 "                                    \n"
 "            "
 msgstr "\n\n<p>\nHej ${object.committee_id.name},\n</p>\n<p>\nEn ny hjælper er klar til godkendelse:\n</p>\n<p>\n${object.name}\n</p>"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.email_template_participant
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name},\n"
+"                    </p>\n"
+"                    \n"
+"                                    \n"
+"            "
+msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.staff_on_standby
@@ -157,6 +170,11 @@ msgid "City"
 msgstr "By"
 
 #. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Closed Jobs"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_tree
 #: view:campos.event.participant:campos_event.campos_event_participant_form2
 #: model:ir.model,name:campos_event.model_campos_committee
@@ -183,6 +201,12 @@ msgstr "Funktion i udvalg"
 #: model:ir.model,name:campos_event.model_campos_committee_function_type
 msgid "Committee FunctionsType"
 msgstr "Udvalgs funktionstype type"
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_function_tree
+#: model:ir.ui.menu,name:campos_event.event_committee_member_menu
+msgid "Committee Members"
+msgstr ""
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_committee_type
@@ -246,6 +270,11 @@ msgstr "Opret bruger"
 #: model:ir.model,name:campos_event.model_campos_municipality
 msgid "DK Kommuner"
 msgstr "Kommunekode"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.email_template_participant
+msgid "Deltager mail"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -320,6 +349,11 @@ msgid "Hvornår:"
 msgstr "Hvornår:"
 
 #. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Inactive"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Internal Note"
 msgstr "Interne noter"
@@ -380,6 +414,11 @@ msgid "Manager"
 msgstr "Leder"
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.participant_mas_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 #: model:ir.actions.act_window,name:campos_event.action_committee_member_tree
@@ -416,6 +455,11 @@ msgid "Nedlæggelse af zExpense adgang"
 msgstr "Nedlæggelse af Zexpense adgang"
 
 #. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Number of persons in team"
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
 msgid "Ny hjælper til godkendelse"
 msgstr "Ny hjælper til godkendelse"
@@ -424,6 +468,11 @@ msgstr "Ny hjælper til godkendelse"
 #: view:campos.committee.function:campos_event.campos_committee_member_tree
 msgid "Open"
 msgstr "Åben"
+
+#. module: campos_event
+#: view:campos.job:campos_event.job_search
+msgid "Open Jobs"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -585,6 +634,11 @@ msgstr "Udvalg:"
 #: model:res.groups,name:campos_event.group_campos_user
 msgid "User"
 msgstr "Bruger"
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_res_users
+msgid "Users"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
