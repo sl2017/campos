@@ -47,6 +47,7 @@
         'mail',
         'event',
         'website',
+        'portal',
     ],
 
     # always loaded
@@ -66,6 +67,7 @@
         "views/job_view.xml",
         "views/job_template.xml",
         "views/mail_templates.xml",
+        "views/portal_menu.xml"
     ],
     # only loaded in demonstration mode
     'demo': [
