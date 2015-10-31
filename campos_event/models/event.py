@@ -150,25 +150,25 @@ class EventParticipant(models.Model):
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
     
-    standby_until = fields.Date()
-    agreements = fields.Text()
-    internal_note = fields.Text()
+    standby_until = fields.Date('Standby until')
+    agreements = fields.Text('Agreements')
+    internal_note = fields.Text('Internal Note')
     
     job_id = fields.Many2one('campos.job',
                              'Job',
                              ondelete='set null')
-    newsletter  = fields.Boolean()
+    newsletter  = fields.Boolean('Newsletter')
     
     sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
-    sharepoint_mailaddress = fields.Char()
+    sharepoint_mailaddress = fields.Char('Sharepoint mail address')
     sharepoint_clienttype = fields.Selection([('client', 'Client'),
                                               ('online', 'Online')], "Sharepoint Client")
-    sharepoint_mail_created = fields.Date()
-    sharepoint_mail_requested = fields.Datetime()
+    sharepoint_mail_created = fields.Date('Sharepoint mail created')
+    sharepoint_mail_requested = fields.Datetime('Sharepoint mail requested')
     
     zexpense_access_wanted = fields.Boolean('zExpense access wanted')
-    zexpense_access_created = fields.Date()
-    zexpense_access_requested = fields.Datetime()
+    zexpense_access_created = fields.Date('zExpense access created')
+    zexpense_access_requested = fields.Datetime('zExpense access requested')
     
     workwish = fields.Text('Want to work with')
     my_comm_contact = fields.Char('Aggreement with')
@@ -334,8 +334,8 @@ class EventParticipant(models.Model):
                 except:
                     pass
             par.comm_approver_ids = None
-            for comm in self.env['campos.committee'].search([('contact_id', '=', par.partner_id.id)]):
-                comm.contact_id = False
+            for comm in self.env['campos.committee'].search([('par_contact_id.id', '=', par.id)]):
+                comm.par_contact_id = False
                 
     
     @api.multi
