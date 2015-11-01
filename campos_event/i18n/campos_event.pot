@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 02:00+0000\n"
-"PO-Revision-Date: 2015-10-31 02:00+0000\n"
+"POT-Creation-Date: 2015-11-01 02:00+0000\n"
+"PO-Revision-Date: 2015-11-01 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -93,6 +93,7 @@ msgid "&nbsp;"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "(edit company address)"
 msgstr ""
@@ -103,6 +104,7 @@ msgid "Activity Coordinator"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Address"
 msgstr ""
@@ -113,6 +115,7 @@ msgid "Agreement with/My contact in the Committee"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Agreements"
 msgstr ""
@@ -131,6 +134,7 @@ msgid "Applicants"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Application"
 msgstr ""
@@ -153,6 +157,7 @@ msgid "CampOS"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: view:website:campos_event.jobber_signup
 msgid "City"
@@ -246,6 +251,7 @@ msgid "Continue To Our Website"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Country"
 msgstr ""
@@ -376,6 +382,7 @@ msgid "Job tags"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Job/Committee"
 msgstr ""
@@ -428,6 +435,7 @@ msgid "Municipality"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: view:campos.job:campos_event.campos_job_form
 msgid "Name"
@@ -469,6 +477,13 @@ msgid "Organization"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_portal_participant_tree_view
+#: model:ir.ui.menu,name:campos_event.portal_participant_menu
+msgid "Participant"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Participant Registration"
 msgstr ""
@@ -509,6 +524,11 @@ msgid "Rejects"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.portal_SL2017_menu_top
+msgid "SL2017"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
@@ -521,6 +541,7 @@ msgid "Scout Camp Management"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Scout Group"
 msgstr ""
@@ -559,6 +580,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Sharepoint"
 msgstr ""
@@ -585,6 +607,7 @@ msgid "Standby"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Street..."
 msgstr ""
@@ -651,11 +674,11 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_thankyou
-msgid "Your job application has been successfully registered,\n"
-"								we will get back to you soon."
+msgid "Your job application has been successfully registered, we will get back to you soon."
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "ZIP"
 msgstr ""
@@ -671,11 +694,13 @@ msgid "col-sm-8"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "e.g. +32.81.81.37.00"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "zExpense"
 msgstr ""
