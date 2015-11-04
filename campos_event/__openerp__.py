@@ -54,6 +54,7 @@
     'data': [
         'security/campos_event_security.xml',
         'security/ir.model.access.csv',
+        'security/ir.rule.csv',
         
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',

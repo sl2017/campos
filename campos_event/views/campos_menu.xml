@@ -9,10 +9,14 @@
             sequence="45"/>
             
         <menuitem name="Events" id="menu_campos_event" parent="menu_campos" sequence="10"/>
-        <menuitem name="Events" id="menu_campos_event_event" action="event.action_event_view" parent="menu_campos_event" sequence="10"/>
+        <menuitem name="Events" id="menu_campos_event_event" action="event.action_event_view" parent="menu_campos_event" sequence="10" groups="campos_event.group_campos_manager"/>
         <menuitem name="Registrations"
             id="menu_action_registration" parent="menu_campos_event" sequence="20"
-            action="event.action_registration" groups="event.group_event_manager,event.group_event_user"/>
+            action="event.action_registration"  groups="campos_event.group_campos_manager"/>
+            
+        <menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
+			name="Participants" sequence="50" parent="menu_campos_event"
+			groups="campos_event.group_campos_user" />
         
         
         <menuitem name="Configuration" id="menu_campos_config" parent="menu_campos" sequence="60"/>

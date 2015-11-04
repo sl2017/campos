@@ -119,8 +119,8 @@ class CampCommittee(models.Model):
         '''
         Count members in the Committee
         '''
-        self.member_no = len(self.part_function_ids)
-        self.applicants_count = self.env['campos.event.participant'].search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
+        self.member_no = len(self.sudo().part_function_ids)
+        self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
 
 class CampCommitteeType(models.Model):
 
