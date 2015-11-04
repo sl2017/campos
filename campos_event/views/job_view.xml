@@ -40,9 +40,7 @@
 
 		</record>
 
-		<menuitem action="action_job_tag_tree" id="event_job_tag_menu"
-			name="Job Tags" sequence="80" parent="menu_campos_comittee" />
-
+		
 		<!-- Job -->
 		<record model="ir.ui.view" id="job_tree">
 			<field name="name">job.tree</field>
@@ -141,8 +139,7 @@
 
 		</record>
 
-		<menuitem action="action_job_tree" id="event_job_menu"
-			name="Jobs" sequence="70" parent="menu_campos_comittee" />
+		
 			
 	</data>
 </openerp>

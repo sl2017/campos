@@ -24,8 +24,7 @@
 
 		</record>
 
-		<menuitem action="action_municipality_tree" id="event_municipality_menu"
-			name="Municipality" sequence="40" parent="menu_campos_config_event" />
+		
 			
 	</data>
 </openerp>
