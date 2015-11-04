@@ -82,9 +82,9 @@ class CamposJob(models.Model):
     @api.one
     @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')
     def _compute_applicants(self):
-        confirmed_job_qty = self.env['campos.committee.function'].search_count([('job_id', '=', self.id)])
+        confirmed_job_qty = self.env['campos.committee.function'].sudo().search_count([('job_id', '=', self.id)])
         self.confirmed_job_qty = confirmed_job_qty
-        self.openapplications_qty = self.env['campos.event.participant'].search_count([('job_id', '=', self.id),('state', 'in', ['draft','sent','standby'])])
+        self.openapplications_qty = self.env['campos.event.participant'].sudo().search_count([('job_id', '=', self.id),('state', 'in', ['draft','sent','standby'])])
         openjob = True
         if self.date_public and self.date_public > fields.Date.today(): 
             openjob = False

@@ -54,10 +54,11 @@
     'data': [
         'security/campos_event_security.xml',
         'security/ir.model.access.csv',
+        'security/ir.rule.csv',
         
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',
-        'views/campos_menu.xml',
+        
         'views/templates.xml',
         'views/participant_view.xml',
         'views/committee_view.xml',
@@ -69,6 +70,7 @@
         "views/mail_templates.xml",
         "views/portal_menu.xml",
         "views/res_users_view.xml",
+        'views/campos_menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
