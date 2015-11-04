@@ -141,7 +141,8 @@ class EventParticipant(models.Model):
     sent_to_comm_date = fields.Date('Sent to Committee')
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
-    state = fields.Selection([('draft', 'Received'),
+    state = fields.Selection([('reg','Registered'),
+                              ('draft', 'Received'),
                               ('standby','Standby'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),

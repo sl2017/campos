@@ -140,13 +140,7 @@
 
 		</record>
 		
-		<menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10"/>
-		<menuitem action="action_committee_tree" id="event_committee_menu"
-			name="Committees" sequence="60" parent="menu_campos_comittee" />
-			
-			<menuitem action="action_committee_function_tree" id="event_committee_member_menu"
-			name="Committee Members" sequence="65" parent="menu_campos_comittee" />
-
+		
 
 		<record model="ir.ui.view" id="view_campos_committee_function_form">
 			<field name="name">campos.committee.function.form</field>
@@ -183,9 +177,7 @@
 			<field name="view_type">form</field>
 		</record>
 		
-		<menuitem action="action_committee_type_tree" id="event_committee_type_menu"
-			name="Committee types" sequence="110" parent="menu_campos_comittee" />
-
+		
 
 		<!--  Job Functions Type -->
 		
@@ -206,8 +198,7 @@
 			<field name="view_type">form</field>
 		</record>
 		
-		<menuitem action="action_committee_functions_type_tree" id="event_committee_function_type_menu"
-			name="Function types" sequence="100" parent="menu_campos_comittee" />
+		
 
 		<!-- Email template for new IST assigned to Committe -->
         <record id="new_staff_member" model="email.template">

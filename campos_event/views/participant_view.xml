@@ -96,6 +96,7 @@
 		<record model="ir.ui.view" id="view_event_registration_participant_form">
 			<field name="name">registration.participant.form</field>
 			<field name="model">campos.event.participant</field>
+			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_manager'))]"/>
 			<field name="arch" type="xml">
 
 				<form string="Participant Registration">
@@ -183,8 +184,8 @@
 								 	<field name="zexpense_access_created"/>
 								 </group>
 								 </page>
-								 <page string="Rejects">
-								 <group col="5" colspan="4">
+								 <page string="Rejects" groups="campos_event.group_campos_manager">
+								 <group col="5" colspan="4" >
 									<field name="reject_ids">
 									<tree create="false" colspan="4">
 									<field name="create_date"/>
@@ -218,7 +219,7 @@
 		</record>
 
 	<record model="ir.ui.view" id="portal_event_registration_participant_form">
-			<field name="name">registration.participant.form</field>
+			<field name="name">registration.participant.form portal</field>
 			<field name="model">campos.event.participant</field>
 			<field name="priority">17</field>
 			<field name="arch" type="xml">
@@ -239,7 +240,7 @@
                         	<newline/>
                         	<group>
 							<group>
-							<field name="registration_id" />
+							<field name="registration_id" invisible="1"/>
 							
                         	  <label for="street" string="Address"/>
                             <div>
@@ -291,13 +292,7 @@
 								 	<field name="sharepoint_mail_created"/>
 								 </group>
 								 </page>
-								 <page string="zExpense">
-								 <group>
-								  
-								 	<field name="zexpense_access_wanted"/>
-								 	<field name="zexpense_access_created"/>
-								 </group>
-								 </page>
+								 
 								 <page string="Agreements">
 								 	<group>
 										<field name="agreements" nolabel="1"/>	
@@ -374,9 +369,7 @@
             </record>  
 		
 
-		<menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
-			name="Participants" sequence="50" parent="menu_campos_event"
-			groups="event.group_event_manager" />
+		
 			
 		<record id="action_committee_applicant_tree" model="ir.actions.act_window">
 			<field name="name">Applicants</field>
