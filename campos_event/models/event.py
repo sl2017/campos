@@ -25,11 +25,21 @@
 #
 ##############################################################################
 
+import random
+from urlparse import urljoin
+import werkzeug
+
 from openerp import models, fields, api
 from openerp.tools.translate import _
 
 import logging
 _logger = logging.getLogger(__name__)
+
+
+def random_token():
+    # the token has an entropy of about 120 bits (6 bits/char * 20 chars)
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
 
 class EventRegistration(models.Model):
 
@@ -182,6 +192,25 @@ class EventParticipant(models.Model):
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
+    #confirm links
+    confirm_token = fields.Char()
+    reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
+    zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
+    sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
+    
+    @api.one
+    def _compute_confirm_urls(self):
+        if not self.confirm_token:
+            token = random_token()
+            while self.search_count([('confirm_token', '=', token)]):
+                token = random_token()
+            self.confirm_token = token
+        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        query = dict(db=self.env._cr.dbname)
+        self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.zepense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        
     @api.model
     def create(self, vals):
         par = super(EventParticipant, self).create(vals)
