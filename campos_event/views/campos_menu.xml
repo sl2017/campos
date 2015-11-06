@@ -20,41 +20,45 @@
 	    
 		    <menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
 				name="Participants" sequence="50" parent="menu_campos_event"
-				groups="campos_event.group_campos_user" />
+				groups="campos_event.group_campos_manager,campos_event.group_campos_committee" />
+	    
+	    	<menuitem action="action_event_participants_staff_tree" id="event_participants_staff_tree_menu"
+				name="My signup" sequence="50" parent="menu_campos_event"
+				groups="campos_event.group_campos_staff" />
 	    
 	    <!-- Committee menu items -->
-        <menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10"/>
+        <menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			
 			<menuitem action="action_committee_tree" id="event_committee_menu"
-				name="Committees" sequence="60" parent="menu_campos_comittee" />
+				name="Committees" sequence="60" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 				
 			<menuitem action="action_committee_function_tree" id="event_committee_member_menu"
-			name="Committee Members" sequence="65" parent="menu_campos_comittee" />
+			name="Committee Members" sequence="65" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
         
         	<menuitem action="action_job_tree" id="event_job_menu"
-			name="Jobs" sequence="70" parent="menu_campos_comittee" />
+			name="Jobs" sequence="70" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			
         	<menuitem action="action_job_tag_tree" id="event_job_tag_menu"
-				name="Job Tags" sequence="80" parent="menu_campos_comittee" />
+				name="Job Tags" sequence="80" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
         
 	        <menuitem action="action_committee_functions_type_tree" id="event_committee_function_type_menu"
-				name="Function types" sequence="100" parent="menu_campos_comittee" />
+				name="Function types" sequence="100" parent="menu_campos_comittee"  groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 	        
 	        <menuitem action="action_committee_type_tree" id="event_committee_type_menu"
-			name="Committee types" sequence="110" parent="menu_campos_comittee" />
+			name="Committee types" sequence="110" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			
 	        
             
         
         <!-- Config menu items -->
         <menuitem name="Configuration" id="menu_campos_config" parent="menu_campos" sequence="60"/>
-        	<menuitem name="Events" id="menu_campos_config_event" parent="menu_campos_config" sequence="60"/>
+        	<menuitem name="Events" id="menu_campos_config_event" parent="menu_campos_config" sequence="60" groups="campos_event.group_campos_admin"/>
         
 	        <menuitem action="action_municipality_tree" id="event_municipality_menu"
-				name="Municipality" sequence="40" parent="menu_campos_config_event" />
+				name="Municipality" sequence="40" parent="menu_campos_config_event" groups="campos_event.group_campos_admin"/>
 				
 			<menuitem action="action_scoutorg_tree" id="event_scoutorg_menu"
-				name="Scout Orgs" sequence="50" parent="menu_campos_config_event" />
+				name="Scout Orgs" sequence="50" parent="menu_campos_config_event" groups="campos_event.group_campos_admin"/>
         </data>
         </openerp>
         
