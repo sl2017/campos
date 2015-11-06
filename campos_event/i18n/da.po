@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 02:00+0000\n"
-"PO-Revision-Date: 2015-11-01 02:00+0000\n"
+"POT-Creation-Date: 2015-11-06 02:00+0000\n"
+"PO-Revision-Date: 2015-11-06 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -491,7 +491,7 @@ msgstr "Organisation"
 #: model:ir.actions.act_window,name:campos_event.action_portal_participant_tree_view
 #: model:ir.ui.menu,name:campos_event.portal_participant_menu
 msgid "Participant"
-msgstr ""
+msgstr "Deltager"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.portal_event_registration_participant_form
@@ -537,7 +537,7 @@ msgstr "Afvisning / Afvisninger"
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.portal_SL2017_menu_top
 msgid "SL2017"
-msgstr ""
+msgstr "SL2017"
 
 #. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form
@@ -688,7 +688,7 @@ msgstr "Fastnet telefon"
 msgid ""
 "Your job application has been successfully registered, we will get back to "
 "you soon."
-msgstr ""
+msgstr "Din job ansøgning er blevet modtaget . Vi vender tilbage med yderligere information snarest."
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.portal_event_registration_participant_form
@@ -713,7 +713,6 @@ msgid "e.g. +32.81.81.37.00"
 msgstr "fx +45 12 12 12 12"
 
 #. module: campos_event
-#: view:campos.event.participant:campos_event.portal_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "zExpense"
 msgstr "zExpense"
