@@ -175,6 +175,7 @@
 								 	<field name="sharepoint_mailaddress"/>
 								 	<field name="sharepoint_clienttype"/>
 								 	<field name="sharepoint_mail_created"/>
+								 	<field name="private_mailaddress" />
 								 </group>
 								 </page>
 								 <page string="zExpense">

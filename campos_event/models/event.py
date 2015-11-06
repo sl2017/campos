@@ -166,6 +166,7 @@ class EventParticipant(models.Model):
                                               ('online', 'Online')], "Sharepoint Client")
     sharepoint_mail_created = fields.Date('Sharepoint mail created')
     sharepoint_mail_requested = fields.Datetime('Sharepoint mail requested')
+    private_mailaddress = fields.Char('Private mail address')
     
     zexpense_access_wanted = fields.Boolean('zExpense access wanted')
     zexpense_access_created = fields.Date('zExpense access created')
@@ -181,6 +182,15 @@ class EventParticipant(models.Model):
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
+    @api.model
+    def create(self, vals):
+        par = super(EventParticipant, self).create(vals)
+        if not par.registration_id:
+            par.registration_id = self.env['event.registration'].create({
+                'event_id': 1,
+                'partner_id': par.partner_id.id,
+                'contact_partner_id': par.partner_id.id,
+                'econ_partner_id': par.partner_id.id,})
     
     @api.one
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
@@ -304,11 +314,17 @@ class EventParticipant(models.Model):
         for par in self:
             old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
             if len(old_user) == 0:
+                # Swap mails?
+                if not par.private_mailaddress and '@sl2017.dk' not in par.email:
+                    par.private_mailaddress = par.email
+                    if par.sharepoint_mailaddress:
+                        par.email = par.sharepoint_mailaddress
                 new_user = self.env['res.users'].create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
                                                          'participant_id' : par.id,
                                                          'groups_id': [(4, self.env.ref('base.group_portal').id)]})
-                new_user.with_context({'create_user': True}).action_reset_password()
+                #new_user.with_context({'create_user': True}).action_reset_password()
+                
             else:
                 old_user.action_reset_password()
                 
