@@ -2,3 +2,5 @@
 "campos_event.par_access","Participant access","campos_event.model_campos_event_participant","[('partner_id.id','=', user.partner_id.id)]","campos_event.group_campos_user","True","True","False","False"
 "campos_event.com_access","Committee access","campos_event.model_campos_event_participant","[('id','in', user.participant_ids.ids)]","campos_event.group_campos_committee","True","True","True","False"
 "campos_event.mgr_access","CampOS Manager Access All","campos_event.model_campos_event_participant","[(1, '=', 1)]","campos_event.group_campos_manager","True","True","True","False"
+"campos_event.own_function","CampOS Own Committee Function","campos_event.model_campos_committee_function","[('participant_id.id', '=', user.participant_id.id)]","campos_event.group_campos_user","True","True","True","True"
+"campos_event.com_members","CampOS Committee members","campos_event.model_campos_committee_function","[('committee_id', 'in', user.committee_ids.ids)]","campos_event.group_campos_committee","True","True","True","True"
