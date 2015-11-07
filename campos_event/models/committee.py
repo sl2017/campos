@@ -172,7 +172,11 @@ class CampCommitteeFunction(models.Model):
                 template.send_mail(app.id)
             except:
                 pass
-            app.participant_id.state = 'approved'
+            app.participant_id.write({'committee_id': False,
+                                      'job_id': False,
+                                      'my_comm_contact': False,
+                                      'state': 'approved'
+                                      })
         return ret    
     
     @api.multi
