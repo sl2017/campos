@@ -101,10 +101,10 @@
 
 				<form string="Participant Registration">
 				<header attrs="{'invisible': [('staff', '=', False)]}">
-				 <button name="action_confirm" states="draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
-           		 <button name="action_standby" states="draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
+				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
+           		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
            		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
-             	 <button name="action_reject" states="sent,approved,draft" string="Reject"   type="object" groups="campos_event.group_campos_committee" />
+             	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject"   type="object" groups="campos_event.group_campos_committee" />
              	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager" />
              	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager" confirm="Deregister participant and revoke access?"/>
              	 
@@ -147,7 +147,17 @@
                             <field name="mobile"/>
                             <field name="skype"/>
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" widget="email"/>
+                            <field name="email" />
+                            <!-- 
+                            <label for="email"/>
+                            <div>
+                                    <button class="oe_inline oe_link"
+                                        name="%(mail.action_email_compose_message_wizard)d"
+                                        icon="terp-mail-message-new" context= '{"default_email_to":email}' type="action">
+                                        <field name="email" class="oe_inline oe_link"/>
+                                     </button>
+                                </div>
+                             -->    
                             <field name="reg_organization_id"/>
 							<field name="participant"/>
 				 		    <field name="staff"/>
