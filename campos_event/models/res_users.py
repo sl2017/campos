@@ -28,10 +28,12 @@ class ResUsers(models.Model):
         members = set()
         self.committee_ids = coms
         for c in coms:
-            for f in c.part_function_ids:
-                members.add(f.participant_id.id)
-        _logger.info("Part list (%d): %s", len(members), list(members))
+            for f in c.sudo().part_function_ids:
+                members.add(f.sudo().participant_id.id)
+        _logger.info("Part list for %s (%d): %s", self.name, len(members), list(members))
         self.participant_ids = self.env['campos.event.participant'].sudo().browse(list(members))
+        _logger.info("Part list for %s : %s", self.name, self.participant_ids.ids)
+        return list(members)
             
         
     
