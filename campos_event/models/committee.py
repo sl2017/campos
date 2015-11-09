@@ -169,7 +169,7 @@ class CampCommitteeFunction(models.Model):
             template = app.committee_id.template_id
             assert template._name == 'email.template'
             try:
-                template.send_mail(app.id)
+                template.send_mail(app.participant_id.id)
             except:
                 pass
             app.participant_id.write({'committee_id': False,
