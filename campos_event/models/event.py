@@ -221,6 +221,7 @@ class EventParticipant(models.Model):
                 'partner_id': par.partner_id.id,
                 'contact_partner_id': par.partner_id.id,
                 'econ_partner_id': par.partner_id.id,})
+        return par
     
     @api.one
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')

@@ -166,7 +166,7 @@ class CampCommitteeFunction(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for app in self:
-            template = self.committee_id.template_id
+            template = app.committee_id.template_id
             assert template._name == 'email.template'
             try:
                 template.send_mail(app.id)
