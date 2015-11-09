@@ -28,6 +28,8 @@ class ResUsers(models.Model):
         members = set()
         self.committee_ids = coms
         for c in coms:
+            for a in c.sudo().member_ids:
+                members.add(a.sudo().id)
             for f in c.sudo().part_function_ids:
                 members.add(f.sudo().participant_id.id)
         _logger.info("Part list for %s (%d): %s", self.name, len(members), list(members))
