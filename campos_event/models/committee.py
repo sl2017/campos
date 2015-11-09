@@ -166,12 +166,13 @@ class CampCommitteeFunction(models.Model):
     def write(self, vals):
         ret =  models.Model.write(self, vals)
         for app in self:
-            template = app.committee_id.template_id
-            assert template._name == 'email.template'
-            try:
-                template.send_mail(app.participant_id.id)
-            except:
-                pass
+            if self.env.context.get('new_func'):
+                template = app.committee_id.template_id
+                assert template._name == 'email.template'
+                try:
+                    template.send_mail(app.participant_id.id)
+                except:
+                    pass
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
                                       'my_comm_contact': False,
