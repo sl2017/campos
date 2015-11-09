@@ -148,6 +148,7 @@ class CampOsEvent(http.Controller):
         value = {
             'partner_id': partner_id,
             'registration_id': reg_id,
+            'state' : 'reg',
         }
         for f in ['committee_id', 'job_id', 'my_comm_contact']:
             value[f] = post.get(f)
@@ -192,4 +193,29 @@ class CampOsEvent(http.Controller):
         
         
         
+    @http.route(
+        ['/campos/confirm/<mode>/<token>'],
+         type='http', auth="public", website=True)
+    def confirm_reg(self, mode=None, token=None, **kwargs):
+        request = http.request
         
+        if token:
+            par = request.env['event.participant'].sudo().search([('confirm_token', '=', token)])
+            if len(par) == 1:
+                if mode == 'reg':
+                    par.sudo().state = 'draft'
+                    return request.render("campos_event.reg_confirmed", {'par': par})
+                if mode == 'zx':
+                    return request.render("campos_event.zx_confirm_prompt", {'par': par,
+                                                                             'mode': mode})
+                if mode == 'sp':
+                    return request.render("campos_event.sp_confirm_prompt", {'par': par,
+                                                                             'mode': mode})
+                    
+        return request.render("campos_event.unknown_token")
+    
+    
+    
+        
+                
+                    

@@ -25,11 +25,21 @@
 #
 ##############################################################################
 
+import random
+from urlparse import urljoin
+import werkzeug
+
 from openerp import models, fields, api
 from openerp.tools.translate import _
 
 import logging
 _logger = logging.getLogger(__name__)
+
+
+def random_token():
+    # the token has an entropy of about 120 bits (6 bits/char * 20 chars)
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
 
 class EventRegistration(models.Model):
 
@@ -166,10 +176,12 @@ class EventParticipant(models.Model):
                                               ('online', 'Online')], "Sharepoint Client")
     sharepoint_mail_created = fields.Date('Sharepoint mail created')
     sharepoint_mail_requested = fields.Datetime('Sharepoint mail requested')
+    private_mailaddress = fields.Char('Private mail address')
     
     zexpense_access_wanted = fields.Boolean('zExpense access wanted')
     zexpense_access_created = fields.Date('zExpense access created')
     zexpense_access_requested = fields.Datetime('zExpense access requested')
+    zexpense_firsttime_pwd = fields.Char('zExpense First time password')
     
     workwish = fields.Text('Want to work with')
     my_comm_contact = fields.Char('Aggreement with')
@@ -181,6 +193,34 @@ class EventParticipant(models.Model):
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
+    #confirm links
+    confirm_token = fields.Char()
+    reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
+    zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
+    sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
+    
+    @api.one
+    def _compute_confirm_urls(self):
+        if not self.confirm_token:
+            token = random_token()
+            while self.search_count([('confirm_token', '=', token)]):
+                token = random_token()
+            self.confirm_token = token
+        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        query = dict(db=self.env._cr.dbname)
+        self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.zepense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        
+    @api.model
+    def create(self, vals):
+        par = super(EventParticipant, self).create(vals)
+        if not par.registration_id:
+            par.registration_id = self.env['event.registration'].create({
+                'event_id': 1,
+                'partner_id': par.partner_id.id,
+                'contact_partner_id': par.partner_id.id,
+                'econ_partner_id': par.partner_id.id,})
     
     @api.one
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
@@ -304,11 +344,18 @@ class EventParticipant(models.Model):
         for par in self:
             old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
             if len(old_user) == 0:
+                # Swap mails?
+                if not par.private_mailaddress and '@sl2017.dk' not in par.email:
+                    par.private_mailaddress = par.email
+                    if par.sharepoint_mailaddress:
+                        par.email = par.sharepoint_mailaddress
                 new_user = self.env['res.users'].create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
                                                          'participant_id' : par.id,
-                                                         'groups_id': [(4, self.env.ref('base.group_portal').id)]})
-                new_user.with_context({'create_user': True}).action_reset_password()
+                                                         #'groups_id': [(4, self.env.ref('base.group_portal').id)]
+                                                         })
+                #new_user.with_context({'create_user': True}).action_reset_password()
+                
             else:
                 old_user.action_reset_password()
                 
