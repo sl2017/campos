@@ -164,14 +164,18 @@ class CampCommitteeFunction(models.Model):
         
     @api.multi
     def write(self, vals):
-        ret =  models.Model.write(self, vals)
+        _logger.info("New func Write Entered %s", vals.keys())
+        ret =  super(CampCommitteeFunction, self).write(vals)
         for app in self:
-            template = app.committee_id.template_id
-            assert template._name == 'email.template'
-            try:
-                template.send_mail(app.id)
-            except:
-                pass
+            if vals.has_key('new_func'):
+                _logger.info("New func mail %s %s", app.committee_id.name, app.participant_id.name)
+                template = app.committee_id.template_id
+                assert template._name == 'email.template'
+                try:
+                    template.send_mail(app.participant_id.id)
+                except:
+                    _logger.info("New func mail %s %s FAILED", app.committee_id.name, app.participant_id.name)
+                    pass
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
                                       'my_comm_contact': False,

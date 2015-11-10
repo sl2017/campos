@@ -388,6 +388,7 @@
                  	<field name="name"/>
                  	<field name="registration_id"/>
                  	<field name="city"/>
+                 	<field name="state" />
                  	<!-- 
                  	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
                  	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
