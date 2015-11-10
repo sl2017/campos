@@ -42,6 +42,24 @@
 			</field>
 		</record>
 		
+		<record id="campos_committee_member_search" model="ir.ui.view">
+			<field name="name">Committee Search</field>
+			<field name="model">campos.committee.function</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="committee_id" />
+					<field name="function_type_id"/>
+					<field name="participant_id"/>
+					<field name="email"/>
+					<group expand="0" string="Group By...">
+                 	<filter name="fFunc" string="Function" icon="terp-personal" domain="[]" context="{'group_by':'function_type_id'}"/>
+                    <filter name="fCommittee" string="Committee" icon="terp-personal" domain="[]" context="{'group_by':'committee_id'}"/>
+                    <filter name="fParticipant" string="Participant" icon="terp-personal" domain="[]" context="{'group_by':'participant_id'}"/>
+                 	</group>
+				</search>
+			</field>
+		</record>
+		
 
 
 		<record model="ir.ui.view" id="campos_committee_form">
@@ -147,7 +165,7 @@
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<form string="Staff approval" version="7.0">
-				<header> <button name="write" type="object" string="Save" class="oe_highlight"/></header>
+				<header> <button name="write" type="object" string="Save" class="oe_highlight oe_edit_only" /></header>
 				<group>
 				<field name="participant_id" invisible="1"/>
 				<field name="committee_id" invisible="1"/>
