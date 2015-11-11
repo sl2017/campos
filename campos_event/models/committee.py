@@ -41,8 +41,8 @@ class CampCommittee(models.Model):
     _order = 'sequence'
 
     name = fields.Char('Name', size=64, translate=True)
-    code = fields.Char('Code', size=64, translate=True)
-    account = fields.Char('Account', size=64, translate=True)
+    code = fields.Char('Code', size=64)
+    account = fields.Char('Account', size=64)
     desc = fields.Text('Description', translate=True)
     #email = fields.Char('Email', size=128)
     member_ids = fields.One2many(
@@ -78,7 +78,7 @@ class CampCommittee(models.Model):
     website_published = fields.Boolean('Visible in Website')
     
     @api.one
-    @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
+    @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):
         '''
         Returns the Full path in committee hierarchy

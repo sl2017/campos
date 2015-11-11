@@ -124,6 +124,7 @@ class EventParticipant(models.Model):
     _description = 'Event Participant'
     _inherits = {'res.partner': 'partner_id'}
     _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _order = 'name'
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration','Registration')
