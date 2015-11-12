@@ -41,8 +41,8 @@ class CampCommittee(models.Model):
     _order = 'sequence'
 
     name = fields.Char('Name', size=64, translate=True)
-    code = fields.Char('Code', size=64, translate=True)
-    account = fields.Char('Account', size=64, translate=True)
+    code = fields.Char('Code', size=64)
+    account = fields.Char('Account', size=64)
     desc = fields.Text('Description', translate=True)
     #email = fields.Char('Email', size=128)
     member_ids = fields.One2many(
@@ -78,7 +78,7 @@ class CampCommittee(models.Model):
     website_published = fields.Boolean('Visible in Website')
     
     @api.one
-    @api.depends('name', 'code', 'parent_id.display_name', 'parent_id.code')
+    @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):
         '''
         Returns the Full path in committee hierarchy
@@ -176,12 +176,30 @@ class CampCommitteeFunction(models.Model):
                 except:
                     _logger.info("New func mail %s %s FAILED", app.committee_id.name, app.participant_id.name)
                     pass
+                if app.participant_id.sharepoint_mail and not app.participant_id.sharepoint_mail_created:
+                    template = self.env.ref('campos_event.request_sharepoint')
+                    assert template._name == 'email.template'
+                    try:
+                        template.send_mail(app.participant_id.id)
+                    except:
+                        pass
+                    app.participant_id.sharepoint_mail_requested = fields.Datetime.now()
+                else:
+                    if app.participant_id.zexpense_access_wanted and not app.participant_id.zexpense_access_created:
+                        template = self.env.ref('campos_event.request_zexpense')
+                        assert template._name == 'email.template'
+                        try:
+                            template.send_mail(app.participant_id.id)
+                        except:
+                            pass
+                        app.participant_id.zexpense_access_requested = fields.Datetime.now()
+                    app.participant_id.action_create_user()
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
                                       'my_comm_contact': False,
                                       'state': 'approved'
                                       })
-        return ret    
+        return ret
     
     @api.multi
     def action_open_participant(self):

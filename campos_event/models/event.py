@@ -124,6 +124,7 @@ class EventParticipant(models.Model):
     _description = 'Event Participant'
     _inherits = {'res.partner': 'partner_id'}
     _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _order = 'name'
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration','Registration')
@@ -198,6 +199,7 @@ class EventParticipant(models.Model):
     reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
+    #participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
     
     @api.one
     def _compute_confirm_urls(self):
@@ -223,6 +225,36 @@ class EventParticipant(models.Model):
                 'econ_partner_id': par.partner_id.id,})
         return par
     
+    @api.multi
+    def write(self, vals):
+        _logger.info("Par Write Entered %s", vals.keys())
+        ret =  super(EventParticipant, self).write(vals)
+        for par in self:
+            if 'sharepoint_mail_created' in vals and par.sharepoint_mail_created:
+                template = self.env.ref('campos_event.info_sharepoint')
+                assert template._name == 'email.template'
+                try:
+                    template.send_mail(par.id)
+                except:
+                    pass
+                if par.zexpense_access_wanted and not par.zexpense_access_created:
+                    template = self.env.ref('campos_event.request_zexpense')
+                    assert template._name == 'email.template'
+                    try:
+                        template.send_mail(par.id)
+                    except:
+                        pass
+                    par.zexpense_access_requested = fields.Datetime.now()
+                par.action_create_user()
+            if 'zexpense_access_created' in vals and par.zexpense_access_created:
+                template = self.env.ref('campos_event.info_zexpense')
+                assert template._name == 'email.template'
+                try:
+                    template.send_mail(par.id)
+                except:
+                    pass
+        return ret
+                
     @api.one
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
     def _get_complete_contact(self):

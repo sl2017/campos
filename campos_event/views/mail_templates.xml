@@ -44,6 +44,80 @@
             </field>
         </record>
         
+        <!-- Email template for sharepoint request-->
+        <record id="request_sharepoint" model="email.template">
+            <field name="name">Deregister Sharepoint</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">kml@sl2017</field>
+            <field name="subject">Oprettelse af SL2017 mail</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej Kristian
+                    </p>    
+					<p>	                        
+                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}
+                    </p>
+                    ]]>
+            </field>
+        </record>
+			
+		<!-- Email template for  zExpense Request-->
+        <record id="request_zexpense" model="email.template">
+            <field name="name">Request zExpense</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">info@sl2017.dk</field>
+            <field name="subject">Oprettelse af zExpense adgang</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej
+                    </p>    
+					<p>	                        
+                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}
+                    </p>
+                    ]]>
+            </field>
+        </record>
+        
+        <!-- Email template for sharepoint info-->
+        <record id="info_sharepoint" model="email.template">
+            <field name="name">Deregister Sharepoint</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">kml@sl2017</field>
+            <field name="subject">Info om din SL2017 mail</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name}
+                    </p>    
+					<p>	                        
+                         ${object.sharepoint_mailaddress}
+                    </p>
+                    ]]>
+            </field>
+        </record>
+			
+		<!-- Email template for  zExpense info-->
+        <record id="info_zexpense" model="email.template">
+            <field name="name">Request zExpense</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">info@sl2017.dk</field>
+            <field name="subject">Din adgang til zExpense</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name}
+                    </p>    
+                    ]]>
+            </field>
+        </record>
+        
+        
         
         <!-- Email template for deregister sharepoint -->
         <record id="deregister_sharepoint" model="email.template">
