@@ -383,7 +383,7 @@ class EventParticipant(models.Model):
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress
-                new_user = self.env['res.users'].create({'login': par.email,
+                new_user = self.env['res.users'].sudo().create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
                                                          'participant_id' : par.id,
                                                          #'groups_id': [(4, self.env.ref('base.group_portal').id)]
