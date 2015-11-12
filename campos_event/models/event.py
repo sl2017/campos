@@ -244,6 +244,7 @@ class EventParticipant(models.Model):
                         template.send_mail(par.id)
                     except:
                         pass
+                    par.zexpense_access_requested = fields.Datetime.now()
                 par.action_create_user()
             if 'zexpense_access_created' in vals and par.zexpense_access_created:
                 template = self.env.ref('campos_event.info_zexpense')

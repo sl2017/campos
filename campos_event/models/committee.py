@@ -183,6 +183,7 @@ class CampCommitteeFunction(models.Model):
                         template.send_mail(app.participant_id.id)
                     except:
                         pass
+                    app.participant_id.sharepoint_mail_requested = fields.Datetime.now()
                 else:
                     if app.participant_id.zexpense_access_wanted and not app.participant_id.zexpense_access_created:
                         template = self.env.ref('campos_event.request_zexpense')
@@ -191,6 +192,7 @@ class CampCommitteeFunction(models.Model):
                             template.send_mail(app.participant_id.id)
                         except:
                             pass
+                        app.participant_id.zexpense_access_requested = fields.Datetime.now()
                     app.participant_id.action_create_user()
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
