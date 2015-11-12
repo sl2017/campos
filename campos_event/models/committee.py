@@ -176,12 +176,28 @@ class CampCommitteeFunction(models.Model):
                 except:
                     _logger.info("New func mail %s %s FAILED", app.committee_id.name, app.participant_id.name)
                     pass
+                if app.participant_id.sharepoint_mail and not app.participant_id.sharepoint_mail_created:
+                    template = self.env.ref('campos_event.request_sharepoint')
+                    assert template._name == 'email.template'
+                    try:
+                        template.send_mail(app.participant_id.id)
+                    except:
+                        pass
+                else:
+                    if app.participant_id.zexpense_access_wanted and not app.participant_id.zexpense_access_created:
+                        template = self.env.ref('campos_event.request_zexpense')
+                        assert template._name == 'email.template'
+                        try:
+                            template.send_mail(app.participant_id.id)
+                        except:
+                            pass
+                    app.participant_id.action_create_user()
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
                                       'my_comm_contact': False,
                                       'state': 'approved'
                                       })
-        return ret    
+        return ret
     
     @api.multi
     def action_open_participant(self):
