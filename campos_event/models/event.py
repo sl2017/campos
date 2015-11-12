@@ -376,7 +376,7 @@ class EventParticipant(models.Model):
     @api.multi
     def action_create_user(self):
         for par in self:
-            old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
+            old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
             if len(old_user) == 0:
                 # Swap mails?
                 if not par.private_mailaddress and '@sl2017.dk' not in par.email:
