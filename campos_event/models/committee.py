@@ -193,7 +193,9 @@ class CampCommitteeFunction(models.Model):
                         except:
                             pass
                         app.participant_id.zexpense_access_requested = fields.Datetime.now()
-                    app.participant_id.action_create_user()
+                    old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
+                    if len(old_user) == 0:
+                        app.participant_id.action_create_user()
             app.participant_id.write({'committee_id': False,
                                       'job_id': False,
                                       'my_comm_contact': False,
