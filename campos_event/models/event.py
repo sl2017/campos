@@ -139,7 +139,8 @@ class EventParticipant(models.Model):
         'Attest modtaget',
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
-
+    birthdate = fields.Date('Date of birth')
+    
     # Jobber fields
     committee_id = fields.Many2one('campos.committee',
                                    'Have agreement with committee',
