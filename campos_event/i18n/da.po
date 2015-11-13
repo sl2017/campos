@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 02:00+0000\n"
-"PO-Revision-Date: 2015-11-11 02:00+0000\n"
+"POT-Creation-Date: 2015-11-13 02:00+0000\n"
+"PO-Revision-Date: 2015-11-13 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,21 @@ msgid ""
 msgstr ""
 
 #. module: campos_event
+#: model:email.template,body_html:campos_event.request_zexpense
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}\n"
+"                    </p>\n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,body_html:campos_event.new_staff_member
 msgid ""
 "\n"
@@ -53,6 +68,33 @@ msgid ""
 "                                    \n"
 "            "
 msgstr "\n\n<p>\nHej ${object.committee_id.name},\n</p>\n<p>\nEn ny hjælper er klar til godkendelse:\n</p>\n<p>\n${object.name}\n</p>"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.info_sharepoint
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name}\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                         ${object.sharepoint_mailaddress}\n"
+"                    </p>\n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.info_zexpense
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name}\n"
+"                    </p>    \n"
+"                    \n"
+"            "
+msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.email_template_participant
@@ -93,6 +135,21 @@ msgid ""
 "                    </p>    \n"
 "\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}\n"
+"                    </p>\n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.request_sharepoint
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej Kristian\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
 "            "
@@ -299,6 +356,11 @@ msgid "Deregister participant and revoke access?"
 msgstr "Afmeld deltager og fjern adgang til systemet"
 
 #. module: campos_event
+#: model:email.template,subject:campos_event.info_zexpense
+msgid "Din adgang til zExpense"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.campos_event_participant_search
 msgid "Event"
 msgstr "Arrangement"
@@ -375,6 +437,11 @@ msgstr "Hvornår:"
 #: view:campos.job:campos_event.job_search
 msgid "Inactive"
 msgstr "Inaktive"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.info_sharepoint
+msgid "Info om din SL2017 mail"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -498,6 +565,16 @@ msgstr "Åben"
 #: view:campos.job:campos_event.job_search
 msgid "Open Jobs"
 msgstr "Åbne job"
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.request_sharepoint
+msgid "Oprettelse af SL2017 mail"
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.request_zexpense
+msgid "Oprettelse af zExpense adgang"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
