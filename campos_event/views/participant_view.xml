@@ -277,7 +277,7 @@
                             <field name="skype"/>
                             <field name="user_ids" invisible="1"/>
                             <field name="email" widget="email"/>
-                            <field name="reg_organization_id" options="{'no_open': True}"/>
+                            <field name="reg_organization_id" options="{'no_open': True}" string="Scout Organization"/>
 							<field name="participant" invisible="1"/>
 				 		    <field name="staff" invisible="1"/>
 							</group>
@@ -285,7 +285,7 @@
 							<separator string="Application" colspan="2"/>
 							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
-							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aggreement with"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							<tree create="false">

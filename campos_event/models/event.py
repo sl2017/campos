@@ -196,7 +196,7 @@ class EventParticipant(models.Model):
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
     #confirm links
-    confirm_token = fields.Char()
+    confirm_token = fields.Char('Confirm Token', compute='_compute_confirm_urls', store=True)
     reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
@@ -204,16 +204,17 @@ class EventParticipant(models.Model):
     
     @api.one
     def _compute_confirm_urls(self):
-        if not self.confirm_token:
+        if not self.sudo().confirm_token:
             token = random_token()
-            while self.search_count([('confirm_token', '=', token)]):
+            while self.sudo().search_count([('confirm_token', '=', token)]):
                 token = random_token()
-            self.confirm_token = token
+            
+            self.sudo().write({'confirm_token': token})
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
-        query = dict(db=self.env._cr.dbname)
-        self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
-        self.zepense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
-        self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s%s"' % (self.confirm_token, werkzeug.url_encode(query)))
+        query = {'db': self._cr.dbname}
+        self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.zepense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         
     @api.model
     def create(self, vals):
@@ -224,6 +225,7 @@ class EventParticipant(models.Model):
                 'partner_id': par.partner_id.id,
                 'contact_partner_id': par.partner_id.id,
                 'econ_partner_id': par.partner_id.id,})
+            #par.staff = True
         return par
     
     @api.multi
