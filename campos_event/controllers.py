@@ -154,14 +154,14 @@ class CampOsEvent(http.Controller):
             value[f] = post.get(f)
         part = env['campos.event.participant'].create(value)
         
-        template = self.env.ref('campos_event.request_signupconfirm')
+        template = part.env.ref('campos_event.request_signupconfirm')
         assert template._name == 'email.template'
         try:
             template.send_mail(part.id)
         except:
             pass
 
-        return request.render("campos_event.jobber_thankyou", {})
+        return request.render("campos_event.jobber_thankyou", {'par': part})
 
 
     @http.route(
