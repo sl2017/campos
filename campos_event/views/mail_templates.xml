@@ -44,6 +44,26 @@
             </field>
         </record>
         
+        <!-- Email template for signup confirm request-->
+        <record id="request_signupconfirm" model="email.template">
+            <field name="name">Deregister Sharepoint</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">${object.partner_id.email|safe}</field>
+            <field name="subject">Velkommen til SL2017</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej ${object.name},
+                    </p>    
+					<p>	                        
+                        Bekræft venligst din tilmelding som jobber ved at klikke på dette link: ${object.reg_confirm_url}
+                    </p>
+                    
+                    ]]>
+            </field>
+        </record>
+        
         <!-- Email template for sharepoint request-->
         <record id="request_sharepoint" model="email.template">
             <field name="name">Deregister Sharepoint</field>

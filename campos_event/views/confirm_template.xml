@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<template id="reg_confirmed">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you, <span t-field="par.name"/>!</h1>
+							<p>Your job application has been successfully confirmed, we will get back to you soon.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+	<template id="zx_confirm_prompt">
+			<t t-call="website.layout">
+				<t t-set="additional_title">zExpense confirmation</t>
+				<div id="wrap">
+					<div class="oe_structure" />
+					<div class="container">
+						<h1 class="text-center">
+							zExpense config for <span t-field="par.name"/>
+						</h1>
+
+						<div class="row">
+							<section id="forms">
+								<!-- TODO Multilingual form action support ? -->
+								<form class="form-horizontal mt32" action="/campos/submit/confirm/zx"
+									method="post" enctype="multipart/form-data">
+									<p>Login mail: <span t-field="par.email"/></p>
+									<div t-attf-class="form-group #{error.get('zexpense_firsttime_pwd') and 'has-error' or ''} col-lg-6">
+                                        <label class="control-label" for="zexpense_firsttime_pwd">First time password</label>
+                                        <input type="text" name="zexpense_firsttime_pwd" class="form-control" t-att-value="zexpense_firsttime_pwd or par.zexpense_firsttime_pwd" />
+                                    </div>
+
+									<div class="form-group">
+										<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+									<input type="hidden" t-att-value="par and par.id or False"
+										name="par_id" />
+								</form>
+							</section>
+						</div>
+					</div>
+					<div class="oe_structure" />
+				</div>
+			</t>
+		</template>
+		
+		
+		<template id="sp_confirm_prompt">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Sharepoint confirmation</t>
+				<div id="wrap">
+					<div class="oe_structure" />
+					<div class="container">
+						<h1 class="text-center">
+							Sharepoint config for <span t-field="par.name"/>
+						</h1>
+
+						<div class="row">
+							<section id="forms">
+								<!-- TODO Multilingual form action support ? -->
+								<form class="form-horizontal mt32" action="/campos/submit/confirm/sp"
+									method="post" enctype="multipart/form-data">
+									<div t-attf-class="form-group #{error.get('sharepoint_mail_address') and 'has-error' or ''} col-lg-6">
+                                        <label class="control-label" for="contact_name">Sharepoint Email</label>
+                                        <input type="email" name="sharepoint_mailaddress" class="form-control" t-att-value="sharepoint_mailaddress or par.sharepoint_mailaddress" />
+                                    </div>
+
+									<div class="form-group">
+										<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+									<input type="hidden" t-att-value="par and par.id or False"
+										name="par_id" />
+								</form>
+							</section>
+						</div>
+					</div>
+					<div class="oe_structure" />
+				</div>
+			</t>
+		</template>
+
+		<template id="reg_confirmed">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you, <span t-field="par.name"/>!</h1>
+							<p>Your job application has been successfully confirmed, we will get back to you soon.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+
+<template id="participant updated">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you!</h1>
+							<p> <span t-field="par.name"/> has been successfully updated.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+				
+		<template id="unknown_token">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Unknown Token!</h1>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+	</data>
+</openerp>
