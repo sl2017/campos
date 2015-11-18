@@ -152,7 +152,14 @@ class CampOsEvent(http.Controller):
         }
         for f in ['committee_id', 'job_id', 'my_comm_contact']:
             value[f] = post.get(f)
-        part_id = env['campos.event.participant'].create(value).id
+        part = env['campos.event.participant'].create(value)
+        
+        template = self.env.ref('campos_event.request_signupconfirm')
+        assert template._name == 'email.template'
+        try:
+            template.send_mail(part.id)
+        except:
+            pass
 
         return request.render("campos_event.jobber_thankyou", {})
 
@@ -198,21 +205,54 @@ class CampOsEvent(http.Controller):
          type='http', auth="public", website=True)
     def confirm_reg(self, mode=None, token=None, **kwargs):
         request = http.request
+        error = {}
+        default = {}
         
         if token:
-            par = request.env['event.participant'].sudo().search([('confirm_token', '=', token)])
+            _logger.info("Token %s", token)
+            par = request.env['campos.event.participant'].sudo().search([('confirm_token', '=', token)])
             if len(par) == 1:
                 if mode == 'reg':
                     par.sudo().state = 'draft'
                     return request.render("campos_event.reg_confirmed", {'par': par})
                 if mode == 'zx':
                     return request.render("campos_event.zx_confirm_prompt", {'par': par,
-                                                                             'mode': mode})
+                                                                             'mode': mode,
+                                                                             'token': token,
+                                                                             'error': error,
+                                                                             'default': default,
+                                                                             })
                 if mode == 'sp':
                     return request.render("campos_event.sp_confirm_prompt", {'par': par,
-                                                                             'mode': mode})
+                                                                             'mode': mode,
+                                                                             'token': token,
+                                                                             'error': error,
+                                                                             'default': default,
+                                                                             })
                     
         return request.render("campos_event.unknown_token")
+    
+    @http.route(
+        ['/campos/submit/confirm/<mode>'],
+         type='http', auth="public", website=True)
+    def confirm_submit(self, mode=None, **post):
+        request = http.request
+        fieldlist = {'sp': ['sharepoint_mailaddress'], 
+                     'zx': ['zexpense_firsttime_pwd']}
+        
+        env = request.env(user=SUPERUSER_ID)
+        
+        if post:
+            _logger.info('Confirm par: %d', post.get('par_id'))
+            par = env['campos.event.participant'].browse(int(post.get('par_id')))
+            values = {}
+            for f in fieldlist[mode]:
+                values[f] = post.get(f)
+                _logger
+            par.write(values)
+            
+            return request.render("campos_event.participant updated", {'par': par})
+        
     
     
     
