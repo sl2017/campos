@@ -154,14 +154,14 @@ class CampOsEvent(http.Controller):
             value[f] = post.get(f)
         part = env['campos.event.participant'].create(value)
         
-        template = self.env.ref('campos_event.request_signupconfirm')
+        template = part.env.ref('campos_event.request_signupconfirm')
         assert template._name == 'email.template'
         try:
             template.send_mail(part.id)
         except:
             pass
 
-        return request.render("campos_event.jobber_thankyou", {})
+        return request.render("campos_event.jobber_thankyou", {'par': part})
 
 
     @http.route(
@@ -213,7 +213,8 @@ class CampOsEvent(http.Controller):
             par = request.env['campos.event.participant'].sudo().search([('confirm_token', '=', token)])
             if len(par) == 1:
                 if mode == 'reg':
-                    par.sudo().state = 'draft'
+                    if par.state == 'reg':
+                        par.sudo().state = 'draft'
                     return request.render("campos_event.reg_confirmed", {'par': par})
                 if mode == 'zx':
                     return request.render("campos_event.zx_confirm_prompt", {'par': par,
@@ -252,7 +253,7 @@ class CampOsEvent(http.Controller):
             par.write(values)
             
             return request.render("campos_event.participant updated", {'par': par})
-        
+        return request.render("campos_event.unknown_token")
     
     
     
