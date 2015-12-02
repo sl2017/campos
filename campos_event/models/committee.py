@@ -76,6 +76,9 @@ class CampCommittee(models.Model):
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
     website_published = fields.Boolean('Visible in Website')
+    partner_list = fields.Char(
+        string="Approver list",
+        compute='_compute_partner_list')
     
     @api.one
     @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
@@ -122,6 +125,11 @@ class CampCommittee(models.Model):
         self.member_no = len(self.sudo().part_function_ids)
         self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
 
+    @api.one
+    @api.depends('approvers_ids')
+    def _compute_partner_list(self):    
+        self.partner_list = ','.join([str(par.partner_id.id) for par in self.approvers_ids])
+        
 class CampCommitteeType(models.Model):
 
     """ Committee Types"""
