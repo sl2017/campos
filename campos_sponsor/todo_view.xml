@@ -2,7 +2,7 @@
 <openerp>
 <data>
 
-<record id="view_form_todo_task" model="ir.ui.view">
+<record id="view_form_sponsor_create" model="ir.ui.view">
 <field name="name">New Sponsor Form</field>
 			<field name="model">model.sponsor</field>
 			<field name="arch" type="xml">
@@ -30,17 +30,17 @@
 
 
 <!-- Action to open To-do Task list -->
-<act_window id="action_todo_task"
-	name="Sponsors"
+<act_window id="action_sponsor_create"
+	name="SL2017 Sponsors"
 	res_model="model.sponsor"
 	view_mode="tree,form" />
 
 <!-- Menu item to open To-do Task list -->
-<menuitem id="menu _todo_task"
-	name="Sponsors"
+<menuitem id="menu_sponsor_create"
+	name="SL2017 Sponsors"
 	parent="mail.mail_feeds"
 	sequence="20"
-	action="action_todo_task" />
+	action="action_sponsor_create" />
 
 </data>
 </openerp>
