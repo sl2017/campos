@@ -196,11 +196,11 @@ class CampCommitteeFunction(models.Model):
                     old_user =  self.env['res.users'].sudo().search([('participant_id', '=', app.participant_id.id)])
                     if len(old_user) == 0:
                         app.participant_id.action_create_user()
-            app.participant_id.write({'committee_id': False,
-                                      'job_id': False,
-                                      'my_comm_contact': False,
-                                      'state': 'approved'
-                                      })
+                app.participant_id.write({'committee_id': False,
+                                          'job_id': False,
+                                          'my_comm_contact': False,
+                                          'state': 'approved'
+                                          })
         return ret
     
     @api.multi
