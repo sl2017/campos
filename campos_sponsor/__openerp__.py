@@ -1,11 +1,11 @@
 {
-	'name': 'To-Do Application',
-	'description': 'Manage your personal Tasks with this module.',
+	'name': 'CampOS Sponsors',
+	'description': 'Administrer sponsorer og fonde med dette modul, udviklet til SL2017.',
 	'author': 'ITL',
 	'depends': [
 			'mail',
 			'base',
 			],
 	'application': True,
-	'data': ['todo_view.xml'],
+	'data': ['view_createsponsor.xml'],
 }
