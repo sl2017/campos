@@ -5,7 +5,7 @@ class TodoTask(models.Model):
 	_name = 'model.sponsor'
 	#Fields
 	#Fields ved oprettelse/forside
-	sponsor_name = fields.Char('Sponsor fond/firma', PlaceHolder="Sponsor fond/firma", required=True)
+	sponsor_name = fields.Char('Sponsor fond/firma', required=True)
 	sponsor_street = fields.Char('Vejnavn', required=True)
 	sponsor_city = fields.Char('By', required=True)
 	sponsor_zip = fields.Char('Postnummer', required=True)
@@ -38,7 +38,7 @@ class TodoTask(models.Model):
 										('modydelse2','Modydelse 2')],
 										'Modydelse',
 										default='modydelse_ingen')
-	sponsor_kommentar = fields.Char('Bemærkninger til sponsor')
+	sponsor_kommentar = fields.Text('Bemærkninger til sponsor')
 	sponsor_type = fields.Selection([('type_reserveret', 'Reserveret Fond'),
 									('type_hoved', 'Hoved Sponsor'),
 									('type_event', 'Event eller Aktivitets Sponsor'),
@@ -46,12 +46,12 @@ class TodoTask(models.Model):
 								'Sponsor type',
 								default='type_basis',
 								required=True)
-	sponsor_type_begrund = fields.Char('Begrundelse for typevalg', required=True)
+	sponsor_type_begrund = fields.Text('Begrundelse for typevalg', required=True)
 	sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', required=True)
 	
 	#Fields for administrator
 	sponsor_last = fields.Boolean('Sponsor Låst', default=False)
-	sponsor_last_begrund = fields.Char('Låst begrundelse', required=False)
+	sponsor_last_begrund = fields.Text('låst begrundelse', required=False)
 	sponsor_bevilliget = fields.Integer('Bevilliget værdi', required=False)
 	sponsor_adminnote = fields.Char('Udvalgsnote (skjult)', required=False)
 	

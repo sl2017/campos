@@ -15,7 +15,8 @@
 						<field name="sponsor_state" widget="statusbar" statusbar_visible="state_potentiel,state_ansogning,state_bevilling,state_afvist"/>
 					</header>
 					<sheet>
-						<h1>Potentiel sponsor/fond navn</h1>
+						<h1 style="margin-bottom: 10px;">Potentiel sponsorat/fond</h1>
+						<h3>Sponsornavn</h3>
 						<field name="sponsor_name"/>
 						<group>
 							<group>
@@ -23,10 +24,10 @@
 								<field name="sponsor_city"/>
 								<field name="sponsor_zip"/>
 								<field name="sponsor_url"/>
-							</group>
-							<group>
 								<field name="sponsor_kontaktperson"/>
 								<field name="sponsor_kategori"/>
+							</group>
+							<group>
 								<field name="sponsor_tema"/>
 								<field name="sponsor_type"/>
 								<field name="sponsor_type_begrund"/>
@@ -39,10 +40,12 @@
 							</group>
 							<group>
 								<field name="sponsor_udfyldtaf"/>
-								<field name="sponsor_kommentar"/>
 							</group>
 						</group>
-						
+						<h3>Bemærkninger til sponsorat</h3>
+						<field name="sponsor_kommentar"/>
+						<hr/>
+						<h3>Udvalgsfelter</h3>
 						<group name="group_adminfields">
 							<group>
 								<field name="sponsor_bevilliget"/>
