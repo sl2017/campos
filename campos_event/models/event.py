@@ -218,6 +218,13 @@ class EventParticipant(models.Model):
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
     #participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
     
+    meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
+    
+    @api.one
+    def _compute_meeting_registration(self):
+        self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
+        
+    
     @api.one
     def _compute_confirm_urls(self):
         if not self.sudo().confirm_token:
@@ -491,3 +498,5 @@ class EventParticipant(models.Model):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
+    
+    

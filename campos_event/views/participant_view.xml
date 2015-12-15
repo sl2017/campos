@@ -224,10 +224,27 @@
 										<field name="agreements" nolabel="1"/>	
 								 	</group>	
 								 </page>
-								 <page string="Internal Note" groups="campos_event.group_campos_manager">
+								 <page string="Internal Note" groups="campos_event.group_campos_manager,campos_event.group_campos_committee">
 								 	<group>
 										<field name="internal_note" nolabel="1"/>	
+											
 								 	</group>	
+								 </page>
+								 <page string="Meetings" groups="campos_event.group_campos_manager">
+								 	<group>
+								 		<field name="meeting_registration_ids" nolabel="1">
+								 			<tree create="false">
+								 				 <field name="event_id"/>
+								 				 <field name="state"/>
+								 				 <button name="registration_open" string="Confirm Registration" states="draft" type="object" icon="gtk-apply"/>
+                    							 <button name="button_reg_close" string="Attended the Event" states="open" type="object" icon="gtk-jump-to"/>
+                    							 <button name="button_reg_cancel" string="Cancel Registration" states="draft,open" type="object" icon="gtk-cancel"/>
+								 			</tree>
+								 		
+								 		</field>
+								 	
+								 	</group>
+								 
 								 </page>
 								 
 							</notebook>
