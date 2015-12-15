@@ -41,6 +41,19 @@ def random_token():
     chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
 
+class EventEvent(models.Model):
+
+    '''
+    Event ID
+
+    '''
+    _inherit = 'event.event'
+    
+    survey_id = fields.Many2one('survey.survey', 'Signup survay')
+
+
+
+
 class EventRegistration(models.Model):
 
     '''
@@ -86,6 +99,9 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
+    
+    reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
+    reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
 
 class EventParticipantReject(models.Model):
@@ -201,6 +217,13 @@ class EventParticipant(models.Model):
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
     #participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
+    
+    meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
+    
+    @api.one
+    def _compute_meeting_registration(self):
+        self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
+        
     
     @api.one
     def _compute_confirm_urls(self):
@@ -382,7 +405,7 @@ class EventParticipant(models.Model):
             old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
             if len(old_user) == 0:
                 # Swap mails?
-                if not par.private_mailaddress and '@sl2017.dk' not in par.email:
+                if (not par.private_mailaddress or par.private_mailaddress == par.email) and '@sl2017.dk' not in par.email:
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress
@@ -475,3 +498,5 @@ class EventParticipant(models.Model):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
+    
+    
