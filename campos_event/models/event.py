@@ -99,6 +99,9 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
+    
+    reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
+    reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
 
 class EventParticipantReject(models.Model):

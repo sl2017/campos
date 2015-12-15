@@ -43,7 +43,7 @@
 		</record>
 		
 		<record id="campos_committee_member_search" model="ir.ui.view">
-			<field name="name">Committee Search</field>
+			<field name="name">Committee Func Search</field>
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<search>
@@ -51,8 +51,8 @@
 					<field name="function_type_id"/>
 					<field name="participant_id"/>
 					<field name="email"/>
-					<field name="approvers_ids"/>
-<field name="par_contact_id"/>
+					
+
 					<group expand="0" string="Group By...">
                  	<filter name="fFunc" string="Function" icon="terp-personal" domain="[]" context="{'group_by':'function_type_id'}"/>
                     <filter name="fCommittee" string="Committee" icon="terp-personal" domain="[]" context="{'group_by':'committee_id'}"/>
@@ -138,6 +138,8 @@
 					<field name="code"/>
 					<field name="parent_id"/>
 					<field name="committee_type_id"/>
+					<field name="approvers_ids"/>
+					<field name="par_contact_id"/>
 				</search>
 			</field>
 		</record>
