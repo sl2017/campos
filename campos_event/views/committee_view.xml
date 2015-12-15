@@ -51,6 +51,8 @@
 					<field name="function_type_id"/>
 					<field name="participant_id"/>
 					<field name="email"/>
+					<field name="approvers_ids"/>
+<field name="par_contact_id"/>
 					<group expand="0" string="Group By...">
                  	<filter name="fFunc" string="Function" icon="terp-personal" domain="[]" context="{'group_by':'function_type_id'}"/>
                     <filter name="fCommittee" string="Committee" icon="terp-personal" domain="[]" context="{'group_by':'committee_id'}"/>
@@ -168,9 +170,9 @@
 				<header> <button name="write" type="object" string="Save" class="oe_highlight oe_edit_only" /></header>
 				<group>
 				<field name="participant_id" invisible="1"/>
-				<field name="committee_id" invisible="1"/>
-				<field name="function_type_id"/>
-				<field name="job_id"/>
+				<field name="committee_id" invisible="0" required="1"/>
+				<field name="function_type_id" required="1"/>
+				<field name="job_id" options="{'no_create': True}"/>
 				</group>
 				
 				</form>

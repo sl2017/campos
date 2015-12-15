@@ -193,14 +193,22 @@ class CampCommitteeFunction(models.Model):
                         pass
                     app.participant_id.sharepoint_mail_requested = fields.Datetime.now()
                 else:
-                    if app.participant_id.zexpense_access_wanted and not app.participant_id.zexpense_access_created:
-                        template = self.env.ref('campos_event.request_zexpense')
-                        assert template._name == 'email.template'
-                        try:
-                            template.send_mail(app.participant_id.id)
-                        except:
-                            pass
-                        app.participant_id.zexpense_access_requested = fields.Datetime.now()
+                    if app.participant_id.zexpense_access_wanted:
+                        if not app.participant_id.zexpense_access_created:
+                            template = self.env.ref('campos_event.request_zexpense')
+                            assert template._name == 'email.template'
+                            try:
+                                template.send_mail(app.participant_id.id)
+                            except:
+                                pass
+                            app.participant_id.zexpense_access_requested = fields.Datetime.now()
+                        else:
+                            template = self.env.ref('campos_event.request_zexpense_change')
+                            assert template._name == 'email.template'
+                            try:
+                                template.send_mail(app.participant_id.id)
+                            except:
+                                pass
                     old_user =  self.env['res.users'].sudo().search([('participant_id', '=', app.participant_id.id)])
                     if len(old_user) == 0:
                         app.participant_id.action_create_user()

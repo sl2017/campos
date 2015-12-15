@@ -101,12 +101,12 @@
 
 				<form string="Participant Registration">
 				<header attrs="{'invisible': [('staff', '=', False)]}">
-				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
+				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" />
            		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
            		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
              	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject"   type="object" groups="campos_event.group_campos_committee" />
              	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager" />
-             	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager" confirm="Deregister participant and revoke access?"/>
+             	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" confirm="Deregister participant and revoke access?"/>
              	 
 				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
 				</header>
@@ -143,7 +143,7 @@
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
-                            <field name="birthdate" />
+                            <field name="birthdate" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
                             <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
                             <field name="mobile"/>
                             <field name="skype"/>
@@ -170,7 +170,7 @@
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
-							<tree create="false">
+							<tree>
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
 								<field name="com_contact" />
@@ -363,22 +363,23 @@
             <field name="name">campos.event.participant.form2</field>
             <field name="model">campos.event.participant</field>
             <field name="arch" type="xml">	
-			<tree string="Participants">
-											<field name="name"/>
-											<!-- 
-												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
-												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
-											-->
-											<!-- <field name="patrol"/> 
-											<field name="day_summery"/> -->
-											<field name="state"/>
-											<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
-											<field name="committee_id" string="Committee"/>
-											<!-- <field name="functitle"/> -->
-
-										</tree>
-										</field>
-										</record>
+				<tree fonts="bold:message_unread==True" string="Participants">
+					<field name="message_unread" invisible="1"/>	
+					<field name="name"/>
+					<!-- 
+						context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+						domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+					-->
+					<!-- <field name="patrol"/> 
+					<field name="day_summery"/> -->
+					<field name="state"/>
+					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
+					<field name="committee_id" string="Committee"/>
+					<!-- <field name="functitle"/> -->
+	
+				</tree>
+			</field>
+		</record>
 										
 										
 		<record id="campos_event_participant_search" model="ir.ui.view">

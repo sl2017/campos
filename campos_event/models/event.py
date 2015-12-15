@@ -41,6 +41,19 @@ def random_token():
     chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
 
+class EventEvent(models.Model):
+
+    '''
+    Event ID
+
+    '''
+    _inherit = 'event.event'
+    
+    survey_id = fields.Many2one('survey.survey', 'Signup survay')
+
+
+
+
 class EventRegistration(models.Model):
 
     '''
@@ -382,7 +395,7 @@ class EventParticipant(models.Model):
             old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
             if len(old_user) == 0:
                 # Swap mails?
-                if not par.private_mailaddress and '@sl2017.dk' not in par.email:
+                if (not par.private_mailaddress or par.private_mailaddress == par.email) and '@sl2017.dk' not in par.email:
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress

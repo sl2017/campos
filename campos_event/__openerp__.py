@@ -48,6 +48,9 @@
         'event',
         'website',
         'portal',
+        'survey',
+        'website_event_register_free',
+        
     ],
 
     # always loaded
