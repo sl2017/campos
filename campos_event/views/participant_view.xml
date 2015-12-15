@@ -110,14 +110,13 @@
 			<field name="model">campos.event.participant</field>
 			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_committee'))]"/>
 			<field name="arch" type="xml">
-
 				<form string="Participant Registration">
 				<header attrs="{'invisible': [('staff', '=', False)]}">
-				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" />
-           		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
-           		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
-             	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject"   type="object" groups="campos_event.group_campos_committee" />
-             	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager" />
+				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
+           		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager"/>
+           		 <button name="action_approve" states="sent" string="Approve" type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
+             	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject" type="object" groups="campos_event.group_campos_committee"/>
+             	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager"/>
              	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" confirm="Deregister participant and revoke access?"/>
              	 
 				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
@@ -128,16 +127,16 @@
                         		 <label for="name"/>
                         		 </div> 
                         		<h1>
-                            <field name="name" default_focus="1" placeholder="Name" colspan="4" style="width: 90%%"/>
+                            <field name="name" default_focus="1" placeholder="Name" colspan="4" style="width: 90%"/>
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	</h1> 
-                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" />
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}"/>
                         	 
                         	</div>
                         	<newline/>
                         	<group>
 							<group>
-							<field name="registration_id" />
+							<field name="registration_id"/>
 							
                         	  <label for="street" string="Address"/>
                             <div>
@@ -155,40 +154,40 @@
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
-                            <field name="birthdate" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+                            <field name="birthdate" string="Fødselsdato" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
                             <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
                             <field name="mobile"/>
                             <field name="skype"/>
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" />
+                            <field name="email"/>
                             <!-- 
                             <label for="email"/>
                             <div>
                                     <button class="oe_inline oe_link"
-                                        name="%(mail.action_email_compose_message_wizard)d"
+                                        name="84"
                                         icon="terp-mail-message-new" context= '{"default_email_to":email}' type="action">
                                         <field name="email" class="oe_inline oe_link"/>
                                      </button>
                                 </div>
                              -->    
-                            <field name="reg_organization_id"/>
+                            <field name="reg_organization_id" string="Korps"/>
 							<field name="participant"/>
 				 		    <field name="staff"/>
 							</group>
 							<group>
 							<separator string="Application" colspan="2"/>
-							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}" string="Ønsker aftale med udvalg"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
-							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							<tree>
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
-								<field name="com_contact" />
+								<field name="com_contact"/>
 							</tree>
 							</field>
-							<field name="standby_until" states="standby" />
+							<field name="standby_until" states="standby"/>
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
@@ -198,7 +197,7 @@
 								 	<field name="sharepoint_mailaddress"/>
 								 	<field name="sharepoint_clienttype"/>
 								 	<field name="sharepoint_mail_created"/>
-								 	<field name="private_mailaddress" />
+								 	<field name="private_mailaddress"/>
 								 </group>
 								 </page>
 								 <page string="zExpense">
@@ -209,7 +208,7 @@
 								 </group>
 								 </page>
 								 <page string="Rejects" groups="campos_event.group_campos_manager">
-								 <group col="5" colspan="4" >
+								 <group col="5" colspan="4">
 									<field name="reject_ids">
 									<tree create="false" colspan="4">
 									<field name="create_date"/>
@@ -235,10 +234,11 @@
 						</group>
 					</sheet>
 					<div class="oe_chatter">
-						<field name="message_follower_ids" widget="mail_followers" />
-						<field name="message_ids" widget="mail_thread" />
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
 					</div>
 				</form>
+				
 			</field>
 		</record>
 
