@@ -46,7 +46,7 @@
         
         <!-- Email template for signup confirm request-->
         <record id="request_signupconfirm" model="email.template">
-            <field name="name">DConfirm Registration</field>
+            <field name="name">Confirm Registration</field>
             <field name="model_id" ref="campos_event.model_campos_event_participant"/>
             <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
             <field name="email_to">${object.partner_id.email|safe}</field>
@@ -98,6 +98,29 @@
 					<p>	                        
                         ${object.name} skal oprettes - ${object.sharepoint_mailaddress}
                     </p>
+                    ]]>
+            </field>
+        </record>
+        
+        <!-- Email template for  zExpense Request-->
+        <record id="request_zexpense_change" model="email.template">
+            <field name="name">Request zExpense</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[jobber-tilmelding@sl2017.dk]]></field>
+            <field name="email_to">info@sl2017.dk</field>
+            <field name="subject">Ændring af zExpense adgang</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej
+                    </p>    
+					<p>	                        
+                        ${object.name} skal opdateres - ${object.sharepoint_mailaddress}
+                    </p>
+                    <p>Udvalg:</p>
+% for job in object.jobfunc_ids:
+<p>${job.committee_id.display_name}: ${job.function_type_id.name}</p>
+% endfor
                     ]]>
             </field>
         </record>

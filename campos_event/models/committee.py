@@ -76,6 +76,9 @@ class CampCommittee(models.Model):
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
     website_published = fields.Boolean('Visible in Website')
+    partner_list = fields.Char(
+        string="Approver list",
+        compute='_compute_partner_list')
     
     @api.one
     @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
@@ -122,6 +125,11 @@ class CampCommittee(models.Model):
         self.member_no = len(self.sudo().part_function_ids)
         self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
 
+    @api.one
+    @api.depends('approvers_ids')
+    def _compute_partner_list(self):    
+        self.partner_list = ','.join([str(par.partner_id.id) for par in self.approvers_ids])
+        
 class CampCommitteeType(models.Model):
 
     """ Committee Types"""
@@ -185,22 +193,30 @@ class CampCommitteeFunction(models.Model):
                         pass
                     app.participant_id.sharepoint_mail_requested = fields.Datetime.now()
                 else:
-                    if app.participant_id.zexpense_access_wanted and not app.participant_id.zexpense_access_created:
-                        template = self.env.ref('campos_event.request_zexpense')
-                        assert template._name == 'email.template'
-                        try:
-                            template.send_mail(app.participant_id.id)
-                        except:
-                            pass
-                        app.participant_id.zexpense_access_requested = fields.Datetime.now()
+                    if app.participant_id.zexpense_access_wanted:
+                        if not app.participant_id.zexpense_access_created:
+                            template = self.env.ref('campos_event.request_zexpense')
+                            assert template._name == 'email.template'
+                            try:
+                                template.send_mail(app.participant_id.id)
+                            except:
+                                pass
+                            app.participant_id.zexpense_access_requested = fields.Datetime.now()
+                        else:
+                            template = self.env.ref('campos_event.request_zexpense_change')
+                            assert template._name == 'email.template'
+                            try:
+                                template.send_mail(app.participant_id.id)
+                            except:
+                                pass
                     old_user =  self.env['res.users'].sudo().search([('participant_id', '=', app.participant_id.id)])
                     if len(old_user) == 0:
                         app.participant_id.action_create_user()
-            app.participant_id.write({'committee_id': False,
-                                      'job_id': False,
-                                      'my_comm_contact': False,
-                                      'state': 'approved'
-                                      })
+                app.participant_id.write({'committee_id': False,
+                                          'job_id': False,
+                                          'my_comm_contact': False,
+                                          'state': 'approved'
+                                          })
         return ret
     
     @api.multi

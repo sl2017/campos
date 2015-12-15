@@ -40,6 +40,7 @@ class ResPartner(models.Model):
     staff = fields.Boolean(default=True)
     skype = fields.Char()
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
+    event_registration_ids = fields.One2many('event.registration', 'partner_id', string='Event registrations')
     
     def name_get(self, cr, uid, ids, context=None):
         if context is None:
