@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+	<template id="partner_register_form" name="Event registration">
+            <t t-call="website.layout">
+                <div id="wrap">
+                <form t-attf-action="/event/#{event.id}/register/register_free" method="post" class="container">
+                     <h1>Review the amount of tickets to register</h1>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label class="control-label" for="name">Quantity</label>
+                            <select name="tickets" class="form-control" t-if="event.seats_available > 0">
+                                <t t-foreach="range(1, event.seats_available > 9 and 11 or event.seats_available + 1)" t-as="nb">
+                                    <option t-esc="nb" t-att="{'selected': 'selected'} if str(tickets) == str(nb) else {}" />
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <h1>Confirm Your Details</h1>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('name') and 'has-error' or ''}">
+                            <label class="control-label" for="name">Your Name</label>
+                            <input type="text" name="name" class="form-control" t-att-value="post.get('name')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('parent_name') and 'has-error' or ''}">
+                            <label class="control-label" for="parent_name">Your company / organisation</label>
+                            <input type="text" name="parent_name" class="form-control" t-att-value="post.get('parent_name')" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('email') and 'has-error' or ''}">
+                            <label class="control-label" for="email">Email</label>
+                            <input type="email" name="email" class="form-control" t-att-value="post.get('email')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('phone') and 'has-error' or ''}">
+                            <label class="control-label" for="phone">Phone</label>
+                            <input type="text" name="phone" class="form-control" t-att-value="post.get('phone')" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">Register <span class="fa fa-long-arrow-right"/></button>
+                </form>
+                </div>
+            </t>
+        </template>
+     </data>
+</openerp>
