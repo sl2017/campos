@@ -49,7 +49,7 @@ class EventEvent(models.Model):
     '''
     _inherit = 'event.event'
     
-    survey_id = fields.Many2one('survey.survey', 'Signup survay')
+    survey_id = fields.Many2one('survey.survey', 'Signup survey')
 
 
 
