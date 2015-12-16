@@ -146,7 +146,15 @@ class CampCommitteeFunctionType(models.Model):
     
     name = fields.Char('Function Title')
     chairman = fields.Boolean()
-    
+
+class CampCommitteeJobTitle(models.Model):
+
+    """ Committee Job Title"""
+    _description = 'Committee Job Title'
+    _name = 'campos.committee.job.title'
+   
+    name = fields.Char('Job Title')
+
 
     
 class CampCommitteeFunction(models.Model):
@@ -163,12 +171,16 @@ class CampCommitteeFunction(models.Model):
                                    ondelete='cascade')
     function_type_id = fields.Many2one('campos.committee.function.type', string="Function", ondelete='cascade')
     job_id = fields.Many2one('campos.job',
-                         'Job',
+                         'Job annonce',
                          ondelete='set null')
     email = fields.Char('Email', related='participant_id.partner_id.email')
     mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
     com_contact = fields.Text(string='Contact', related='committee_id.par_contact_id.complete_contact')
     active = fields.Boolean(default=True)
+    job_title_id = fields.Many2one('campos.committee.job.title',
+                         'Job Title',
+                         ondelete='set null')
+
         
     @api.multi
     def write(self, vals):

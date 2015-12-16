@@ -144,6 +144,7 @@ class EventParticipant(models.Model):
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration','Registration')
+    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
         'Scout Organization', related='registration_id.organization_id')
