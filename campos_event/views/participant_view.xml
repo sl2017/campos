@@ -173,10 +173,11 @@
                             <field name="reg_organization_id" string="Korps"/>
 							<field name="participant"/>
 				 		    <field name="staff"/>
+				 		    <field name="staff_qty_pre_reg"/>
 							</group>
 							<group>
 							<separator string="Application" colspan="2"/>
-							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}" string="Ønsker aftale med udvalg"/>
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}" string="Ønsker aftale med udvalg" options="{'no_create': True}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
 							<separator string="Job/Committee" colspan="2"/>

@@ -3,13 +3,31 @@
 from openerp import http
 from openerp.addons.website_event_register_free.controllers.website_event import WebsiteEvent
 
+import datetime
 import logging
 
 _logger = logging.getLogger(__name__)
 
-CONFIRM_FIELDS = ['name', 'email', 'phone']
+CONFIRM_FIELDS = ['name', 'email', 'phone', 'mobile', 'street', 'street2', 'zip', 'city', 'skype', 'reg_organization_id', 'birthdate']
 
 class WebsiteEventEx(WebsiteEvent):
+    
+    def _validate(self, name, post, force_check=False):
+        if name in post or force_check:
+            if name == 'name' and not post.get('name', '').strip():
+                return False
+            if name == 'email' and not post.get('email', '').strip():
+                return False
+            if name == 'tickets' and (
+                    not post.get('tickets', '').isdigit() or
+                    int(post.get('tickets')) <= 0):
+                return False
+            if name == 'birthdate' and post.get('birthdate'):
+                try:
+                    datetime.datetime.strptime(post.get('birthdate'), '%Y-%m-%d')
+                except ValueError:
+                    return False
+        return True
 
     @http.route(['/event/<model("event.event"):event>/register/register_free'],
                 type='http', auth="user", website=True)
@@ -19,6 +37,7 @@ class WebsiteEventEx(WebsiteEvent):
 
         reg_obj = http.request.env['event.registration']
         registration_vals = {}
+        reg_organization_id = False
         if (http.request.env.ref('base.public_user') !=
                 http.request.env.user and
                 validate('tickets', force_check=True)):
@@ -32,6 +51,7 @@ class WebsiteEventEx(WebsiteEvent):
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id)
         if registration_vals and post.get('name', False):
+            # TOD Handle re-registrations registration = reg_obj.sudo().search([('event_id', '=', registration_vals['event_id']),('partner_id') ])
             registration = reg_obj.sudo().create(registration_vals)
             if registration.partner_id:
                 registration._onchange_partner()
@@ -56,13 +76,20 @@ class WebsiteEventEx(WebsiteEvent):
                 http.request.env.user and http.request.env.user.participant_id):
             for f in CONFIRM_FIELDS:
                 post[f] = getattr(http.request.env.user.participant_id, f)
+            reg_organization_id = http.request.env.user.participant_id.reg_organization_id.id
                 
+        scoutorgs = http.request.env['campos.scout.org'].sudo().search(
+            [('country_id.code', '=', 'DK')])
+        
+        _logger.info('Post: %s', post)
         values = {
             'event': event,
             'range': range,
             'tickets': post.get('tickets', 1),
             'validate': validate,
             'post': post,
+            'scoutorgs' : scoutorgs,
+            'reg_organization_id' : reg_organization_id
         }
         return http.request.render(
             'campos_event.partner_register_form', values)
