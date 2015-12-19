@@ -32,7 +32,7 @@
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<tree string="Members">
-					<field name="committee_id" />
+					<field name="committee_id" operator="child_of"/>
 					<field name="function_type_id" />
 					<field name="participant_id" />
 					<field name="email" />
@@ -51,6 +51,7 @@
 					<field name="function_type_id"/>
 					<field name="participant_id"/>
 					<field name="email"/>
+					
 					
 
 					<group expand="0" string="Group By...">
@@ -136,7 +137,8 @@
 				<search>
 					<field name="display_name" />
 					<field name="code"/>
-					<field name="parent_id"/>
+					<field name="account"/>
+					<field name="parent_id" operator="child_of"/>
 					<field name="committee_type_id"/>
 					<field name="approvers_ids"/>
 					<field name="par_contact_id"/>
