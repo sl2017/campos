@@ -58,7 +58,7 @@ class CampCommittee(models.Model):
         'Approvers')
     template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null',
                                   domain=[('model_id', '=', 'campos.event.participant')])
-    parent_id = fields.Many2one('campos.committee', 'Main Committee')
+    parent_id = fields.Many2one('campos.committee', 'Main Committee', ondelete='restrict')
     committee_type_id = fields.Many2one('campos.committee.type', 'Type')
     
     child_ids = fields.One2many(
