@@ -39,9 +39,12 @@ class CampCommittee(models.Model):
     _name = 'campos.committee'
     _inherit = 'mail.thread'
     _order = 'sequence'
+    _parent_store = True
 
     name = fields.Char('Name', size=64, translate=True)
     code = fields.Char('Code', size=64)
+    parent_left = fields.Integer('Parent Left', index=True)
+    parent_right = fields.Integer('Parent Right', index=True)
     account = fields.Char('Account', size=64)
     desc = fields.Text('Description', translate=True)
     #email = fields.Char('Email', size=128)
@@ -116,6 +119,14 @@ class CampCommittee(models.Model):
 
         return result
 
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        recs = self.browse()
+        if name:
+            recs = self.search([('display_name', operator, name)] + args, limit=limit)
+        return recs.name_get()
+    
     @api.one
     @api.depends('part_function_ids','member_ids')
     def _compute_member_no(self):
