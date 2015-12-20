@@ -5,7 +5,7 @@ class SponsorMain(models.Model):
 	_name = 'model.sponsor'
 	_inherit=['mail.thread', 'ir.needaction_mixin']
 	_inherits={'res.partner':'partner_id'}
-	partner_id = fields.Many2one('res.partner', ondelete='restrict')
+	partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')
 	#Fields
 	
 	#name = fields.Char('partner_id.name', track_visibility='onchange', required=True, store=True)
