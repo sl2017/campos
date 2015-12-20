@@ -4,21 +4,30 @@ from openerp import models, fields, api
 class SponsorMain(models.Model):
 	_name = 'model.sponsor'
 	_inherit=['mail.thread', 'ir.needaction_mixin']
-	#_inherit={'res.partner':'partner_id'}
-	#partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')
+	_inherits={'res.partner':'partner_id'}
+	partner_id = fields.Many2one('res.partner', ondelete='restrict')
 	#Fields
+	
+	name = fields.Char('partner_id.name', track_visibility='onchange', required=True, store=True)
+	street = fields.Char('Vejnavn', track_visibility='onchange',required=True)
+	city = fields.Char('By', track_visibility='onchange',required=True)
+	zip = fields.Char('Postnummer', track_visibility='onchange',required=True)
+	
+	
 	#Fields for administrator
 	sponsor_adminnote = fields.Text('Udvalgsnote (skjult)', track_visibility='onchange',required=False)
 	
 	#Fields ved oprettelse/forside
+	'''
 	sponsor_name = fields.Char('Sponsor fond/firma', track_visibility='onchange',required=True)
 	sponsor_street = fields.Char('Vejnavn', track_visibility='onchange',required=True)
 	sponsor_city = fields.Char('By', track_visibility='onchange',required=True)
 	sponsor_zip = fields.Char('Postnummer', track_visibility='onchange',required=True)
+	'''
 	sponsor_cvr = fields.Char('CVR nr.', track_visibility='onchange',required=True)
 	sponsor_url = fields.Char('Webside', track_visibility='onchange',required=False)
 	sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange',required=True)
-	sponsor_kontaktperson_sl2017 = fields.Many2one('res.partner','SL2017 kontaktperson', track_visibility='onchange',required=True)
+	sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange',required=True)
 	sponsor_udvalg_ansvarlig = fields.Many2one('campos.committee',
                                    'Ansvarligt udvalg',
                                    ondelete='set null',

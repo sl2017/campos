@@ -18,12 +18,16 @@
 					<sheet>
 						<h1 style="margin-bottom: 10px;">Potentiel sponsorat/fond</h1>
 						<h3>Sponsornavn</h3>
-						<h2><field name="sponsor_name"/></h2>
+						<!--<h2><field name="sponsor_name"/></h2>-->
+						<h2><field name="name"/></h2>
 						<group>
 							<group>
-								<field name="sponsor_street"/>
+								<!--<field name="sponsor_street"/>
 								<field name="sponsor_city"/>
-								<field name="sponsor_zip"/>
+								<field name="sponsor_zip"/>-->
+								<field name="street"/>
+								<field name="city"/>
+								<field name="zip"/>
 								<field name="sponsor_cvr"/>
 								<field name="sponsor_kontaktperson_sponsor"/>
 								<field name="sponsor_kontaktperson_sl2017"/>
@@ -69,7 +73,7 @@
 			<field name="model">model.sponsor</field>
 			<field name="arch" type="xml">
 				<tree>
-					<field name="sponsor_name"/>
+					<field name="name"/>
 					<field name="sponsor_kategori"/>
 					<field name="sponsor_type"/>
 					<field name="sponsor_kontaktperson_sl2017"/>
