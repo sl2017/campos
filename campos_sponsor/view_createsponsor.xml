@@ -18,16 +18,12 @@
 					<sheet>
 						<h1 style="margin-bottom: 10px;">Potentiel sponsorat/fond</h1>
 						<h3>Sponsornavn</h3>
-						<!--<h2><field name="sponsor_name"/></h2>-->
-						<h2><field name="name"/></h2>
+						<h2><field name="name" attrs="{'required':True}"/></h2>
 						<group>
 							<group>
-								<!--<field name="sponsor_street"/>
-								<field name="sponsor_city"/>
-								<field name="sponsor_zip"/>-->
-								<field name="street"/>
-								<field name="city"/>
-								<field name="zip"/>
+								<field name="street" attrs="{'required':True}"/>
+								<field name="city" attrs="{'required':True}"/>
+								<field name="zip" attrs="{'required':True}"/>
 								<field name="sponsor_cvr"/>
 								<field name="sponsor_kontaktperson_sponsor"/>
 								<field name="sponsor_kontaktperson_sl2017"/>
@@ -96,7 +92,7 @@
 		<!-- Menu item to open Sponsor list -->
 		<menuitem id="menu_sponsor_create"
 			name="SL2017 Sponsors"
-			parent="mail.mail_feeds"
+			parent="campos_event.menu_campos_comittee"
 			sequence="20"
 			action="action_sponsor_create" />
 
