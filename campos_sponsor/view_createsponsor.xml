@@ -35,13 +35,13 @@
 								<!--<field name="sponsor_tema"/>-->
 								<field name="sponsor_temaer" widget="many2many_tags"/>
 								<field name="sponsor_type" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
-								<field name="sponsor_type_begrund" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
+								<field name="sponsor_type_begrund"/>
 							</group>
 						</group>
 						<group>
 							<group>
 								<field name="sponsor_ansogt"/>
-								<field name="sponsor_bevilliget"/>
+								<field name="sponsor_bevilliget" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
 							</group>
 							<group>
 								<field name="sponsor_modydelser" widget="many2many_tags"/>

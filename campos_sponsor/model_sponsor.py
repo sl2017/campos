@@ -5,10 +5,10 @@ class SponsorMain(models.Model):
 	_name = 'model.sponsor'
 	_inherit=['mail.thread', 'ir.needaction_mixin']
 	#_inherit={'res.partner':'partner_id'}
+	#partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')
 	#Fields
 	#Fields for administrator
 	sponsor_adminnote = fields.Text('Udvalgsnote (skjult)', track_visibility='onchange',required=False)
-	#partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')
 	
 	#Fields ved oprettelse/forside
 	sponsor_name = fields.Char('Sponsor fond/firma', track_visibility='onchange',required=True)
