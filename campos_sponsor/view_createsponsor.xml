@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<record id="view_form_sponsor_create" model="ir.ui.view">
+			<field name="name">Create new sponsor</field>
+			<field name="model">model.sponsor</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="btn_opretansogning" type="object" string="Opret som ansøgning" attrs="{'invisible':[('sponsor_state','==','state_ansogning')]}" class="oe_highlight" />
+						<button name="btn_bevillig" type="object" string="Sponsorat bevilliget" attrs="{'invisible':[('sponsor_state','!=','state_ansogning')]}" class="oe_highlight" />
+						<button name="btn_afvis" type="object" string="Afvis ansøgning" attrs="{'invisible':[('sponsor_state','!=','state_ansogning')]}" class="oe_highlight" />
+						<button name="btn_laas" type="object" string="Lås ansøgning" attrs="{'invisible':[('sponsor_state','==','state_laast')]}" class="oe_highlight" />
+						<button name="btn_aaben" type="object" string="Genåben og opret som potentiel" attrs="{'invisible':[('sponsor_state','!=','state_laast')]}" class="oe_highlight" />
+						<field name="sponsor_state" widget="statusbar" statusbar_visible="state_potentiel,state_ansogning,state_bevilliget"/>
+					</header>
+					<sheet>
+						<h1 style="margin-bottom: 10px;">Potentiel sponsorat/fond</h1>
+						<h3>Sponsornavn</h3>
+						<h2><field name="name" attrs="{'required':True}"/></h2>
+						<group>
+							<group>
+								<field name="street" attrs="{'required':True}"/>
+								<field name="city" attrs="{'required':True}"/>
+								<field name="zip" attrs="{'required':True}"/>
+								<field name="sponsor_cvr"/>
+								<field name="sponsor_kontaktperson_sponsor"/>
+								<field name="sponsor_kontaktperson_sl2017"/>
+								<field name="sponsor_udvalg_ansvarlig"/>
+								<field name="sponsor_url"/>
+							</group>
+							<group>
+								<field name="sponsor_kategori"/>
+								<!--<field name="sponsor_tema"/>-->
+								<field name="sponsor_temaer" widget="many2many_tags"/>
+								<field name="sponsor_type" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
+								<field name="sponsor_type_begrund"/>
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="sponsor_ansogt"/>
+								<field name="sponsor_bevilliget" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
+							</group>
+							<group>
+								<field name="sponsor_modydelser" widget="many2many_tags"/>
+								<field name="sponsor_udfyldtaf"/>
+							</group>
+						</group>
+						<h3>Bemærkninger til sponsorat</h3>
+						<field name="sponsor_kommentar"/>
+						<hr/>
+						<h3>Udvalgsfelter</h3>
+						<group name="group_adminfields">
+							<field name="sponsor_adminnote"/>
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_sponsor_overview" model="ir.ui.view">
+			<field name="name">Sponsor Tree view</field>
+			<field name="model">model.sponsor</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="sponsor_kategori"/>
+					<field name="sponsor_type"/>
+					<field name="sponsor_kontaktperson_sl2017"/>
+					<field name="sponsor_udvalg_ansvarlig"/>
+					<field name="sponsor_state"/>
+				</tree>
+			</field>
+		</record>
+
+		
+		
+
+
+		<!-- Action to open Sponsor list -->
+		<act_window id="action_sponsor_create"
+			name="SL2017 Sponsors oversigt"
+			res_model="model.sponsor"
+			view_mode="tree,form" />
+
+		<!-- Menu item to open Sponsor list -->
+		<menuitem id="menu_sponsor_create"
+			name="SL2017 Sponsors"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_sponsor_create" />
+
+	</data>
+</openerp>
