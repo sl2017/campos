@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 02:00+0000\n"
-"PO-Revision-Date: 2015-12-16 02:00+0000\n"
+"POT-Creation-Date: 2015-12-20 02:00+0000\n"
+"PO-Revision-Date: 2015-12-20 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -265,7 +265,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:361
+#: code:addons/campos_event/models/event.py:362
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -298,6 +298,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,att_received:0
 msgid "Attest modtaget"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "Birthdate"
 msgstr ""
 
 #. module: campos_event
@@ -387,6 +392,11 @@ msgid "Committee FunctionsType"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_committee_job_title
+msgid "Committee Job Title"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.action_committee_function_tree
 #: model:ir.ui.menu,name:campos_event.event_committee_member_menu
 msgid "Committee Members"
@@ -432,7 +442,7 @@ msgid "Committees"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:346
+#: code:addons/campos_event/models/event.py:347
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -493,6 +503,7 @@ msgstr ""
 #: field:campos.committee,create_uid:0
 #: field:campos.committee.function,create_uid:0
 #: field:campos.committee.function.type,create_uid:0
+#: field:campos.committee.job.title,create_uid:0
 #: field:campos.committee.type,create_uid:0
 #: field:campos.event.par.reject,create_uid:0
 #: field:campos.event.participant,create_uid:0
@@ -507,6 +518,7 @@ msgstr ""
 #: field:campos.committee,create_date:0
 #: field:campos.committee.function,create_date:0
 #: field:campos.committee.function.type,create_date:0
+#: field:campos.committee.job.title,create_date:0
 #: field:campos.committee.type,create_date:0
 #: field:campos.event.par.reject,create_date:0
 #: field:campos.event.participant,create_date:0
@@ -718,6 +730,7 @@ msgstr ""
 #: field:campos.committee,id:0
 #: field:campos.committee.function,id:0
 #: field:campos.committee.function.type,id:0
+#: field:campos.committee.job.title,id:0
 #: field:campos.committee.type,id:0
 #: field:campos.event.par.reject,id:0
 #: field:campos.event.participant,id:0
@@ -774,7 +787,6 @@ msgid "Is a Follower"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.committee.function,job_id:0
 #: field:campos.event.par.reject,job_id:0
 #: field:campos.event.participant,job_id:0
 #: view:campos.job:campos_event.campos_job_form
@@ -792,6 +804,17 @@ msgstr ""
 #: model:ir.model,name:campos_event.model_campos_job_tag
 #: model:ir.ui.menu,name:campos_event.event_job_tag_menu
 msgid "Job Tags"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee.function,job_title_id:0
+#: field:campos.committee.job.title,name:0
+msgid "Job Title"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee.function,job_id:0
+msgid "Job annonce"
 msgstr ""
 
 #. module: campos_event
@@ -863,6 +886,7 @@ msgstr ""
 #: field:campos.committee,write_uid:0
 #: field:campos.committee.function,write_uid:0
 #: field:campos.committee.function.type,write_uid:0
+#: field:campos.committee.job.title,write_uid:0
 #: field:campos.committee.type,write_uid:0
 #: field:campos.event.par.reject,write_uid:0
 #: field:campos.event.participant,write_uid:0
@@ -877,6 +901,7 @@ msgstr ""
 #: field:campos.committee,write_date:0
 #: field:campos.committee.function,write_date:0
 #: field:campos.committee.function.type,write_date:0
+#: field:campos.committee.job.title,write_date:0
 #: field:campos.committee.type,write_date:0
 #: field:campos.event.par.reject,write_date:0
 #: field:campos.event.participant,write_date:0
@@ -953,6 +978,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.partner_register_form
 msgid "Mobile"
 msgstr ""
 
@@ -1044,6 +1070,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.partner_register_form
 msgid "Organization"
 msgstr ""
 
@@ -1058,12 +1085,22 @@ msgid "Parent Category"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee,parent_left:0
+msgid "Parent Left"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee,parent_right:0
+msgid "Parent Right"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.par.reject,participant_id:0
 msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:499
+#: code:addons/campos_event/models/event.py:500
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:res.partner,participant:0
@@ -1124,11 +1161,6 @@ msgid "Publication at"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.partner_register_form
-msgid "Quantity"
-msgstr ""
-
-#. module: campos_event
 #: field:campos.event.par.reject,reason:0
 msgid "Reason"
 msgstr ""
@@ -1184,7 +1216,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:388
+#: code:addons/campos_event/models/event.py:389
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1198,11 +1230,6 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,reject_ids:0
 msgid "Rejects"
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.partner_register_form
-msgid "Review the amount of tickets to register"
 msgstr ""
 
 #. module: campos_event
@@ -1288,7 +1315,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:318
+#: code:addons/campos_event/models/event.py:319
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -1351,12 +1378,13 @@ msgstr ""
 
 #. module: campos_event
 #: field:event.event,survey_id:0
-msgid "Signup survay"
+msgid "Signup survey"
 msgstr ""
 
 #. module: campos_event
 #: field:res.partner,skype:0
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.partner_register_form
 msgid "Skype"
 msgstr ""
 
@@ -1394,9 +1422,19 @@ msgid "Standby until"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "Street"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Street..."
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "Street2"
 msgstr ""
 
 #. module: campos_event
@@ -1574,11 +1612,6 @@ msgid "Your Phone"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.partner_register_form
-msgid "Your company / organisation"
-msgstr ""
-
-#. module: campos_event
 #: view:website:campos_event.reg_confirmed
 msgid "Your job application has been successfully confirmed, we will get back to you soon."
 msgstr ""
@@ -1595,8 +1628,18 @@ msgid "ZIP"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "Zip"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "city"
 msgstr ""
 
 #. module: campos_event
@@ -1667,5 +1710,10 @@ msgstr ""
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Ønsker aftale med udvalg"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.partner_register_form
+msgid "åååå-mm-dd"
 msgstr ""
 
