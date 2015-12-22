@@ -38,6 +38,7 @@ class ResPartner(models.Model):
     scoutgroup = fields.Boolean()
     participant = fields.Boolean()
     staff = fields.Boolean(default=True)
+    sponsor = fields.Boolean()
     skype = fields.Char()
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     
