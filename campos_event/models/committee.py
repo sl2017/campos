@@ -122,9 +122,10 @@ class CampCommittee(models.Model):
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
-        recs = self.browse()
         if name:
             recs = self.search([('display_name', operator, name)] + args, limit=limit)
+        else:
+            recs = self.search([])
         return recs.name_get()
     
     @api.one
