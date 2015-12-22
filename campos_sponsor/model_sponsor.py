@@ -18,7 +18,7 @@ class SponsorMain(models.Model):
 	sponsor_adminnote = fields.Text('Udvalgsnote (skjult)', track_visibility='onchange',required=False)
 	
 	#Fields ved oprettelse/forside
-	sponsor_cvr = fields.Char('CVR nr.', track_visibility='onchange',required=True)
+	sponsor_cvr = fields.Char('CVR nr.', track_visibility='onchange')
 	sponsor_url = fields.Char('Webside', track_visibility='onchange',required=False)
 	sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange',required=True)
 	sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange',required=True)
