@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-20 02:00+0000\n"
-"PO-Revision-Date: 2015-12-20 09:46+0000\n"
+"PO-Revision-Date: 2015-12-21 19:57+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -410,7 +410,7 @@ msgstr "Udvalgs funktionstype type"
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_committee_job_title
 msgid "Committee Job Title"
-msgstr ""
+msgstr "job titel"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.action_committee_function_tree
@@ -1069,7 +1069,7 @@ msgstr "Oprettelse af zExpense adgang"
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Organization"
-msgstr "Organisation"
+msgstr "Korps"
 
 #. module: campos_event
 #: selection:campos.scout.org,worldorg:0
@@ -1426,7 +1426,7 @@ msgstr "Gade"
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Street..."
-msgstr "Gade"
+msgstr "sted"
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
