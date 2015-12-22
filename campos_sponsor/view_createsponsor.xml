@@ -26,7 +26,7 @@
 								<field name="city" attrs="{'required':True}"/>
 								<field name="country_id" attra="{'required':True}" options="{'no_create': True}"/>
 								<field name="sponsor_cvr"/>
-								<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}"/>
+								<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}" domain="[('sponsor','=',True)]"/>
 								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
 								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
 								<field name="sponsor_url"/>
@@ -51,9 +51,9 @@
 						</group>
 						<h3>Bemærkninger til sponsorat</h3>
 						<field name="sponsor_kommentar"/>
-						<hr/>
-						<h3>Udvalgsfelter</h3>
-						<group name="group_adminfields">
+						<group name="group_adminfields" groups="campos_sponsor.group_campos_sponsorudvalg">
+							<hr/>
+							<h3>Udvalgsfelter</h3>
 							<field name="sponsor_adminnote"/>
 						</group>
 					</sheet>

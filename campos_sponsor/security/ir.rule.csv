@@ -1,3 +1,3 @@
 "id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
-"campos_sponsor_public_access","Alle brugeres rettigheder til sponsormodul","model_model_sponsor","[('sponsor_state','=','state_potentiel')]",,"False","True","True","False"
+"campos_sponsor_public_access","Alle brugeres rettigheder til sponsormodul","model_model_sponsor","[('sponsor_state','=','state_potentiel'),'&&',('user.id','=','sponsor_udfyldtaf')]",,"False","True","True","False"
 "campos_sponsor_udvalg_access","Rettigheder til sponsorudvalg","model_model_sponsor","[(1,'=',1)]","campos_sponsor.group_campos_sponsorudvalg","False","True","True","True"
