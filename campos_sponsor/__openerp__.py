@@ -5,7 +5,7 @@
 	'depends': [
 			'mail',
 			'base',
-			'campos_event'
+			'campos_event',
 			],
 	'application': True,
 	'data': [
