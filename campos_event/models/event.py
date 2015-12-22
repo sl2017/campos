@@ -423,9 +423,9 @@ class EventParticipant(models.Model):
     @api.multi
     def action_deregister_participant(self):
         for par in self:
-            old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
+            old_user =  self.env['res.users'].suspend_security().search([('participant_id', '=', par.id)])
             if len(old_user):
-                old_user.write({'active': False})
+                old_user.suspend_security().write({'active': False})
             par.state = 'deregistered'
             par.jobfunc_ids.write({'active': False})
             if par.sharepoint_mailaddress:
