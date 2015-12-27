@@ -185,6 +185,7 @@
 							<tree>
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
+								<field name="job_title_id"/>
 								<field name="com_contact"/>
 							</tree>
 							</field>
