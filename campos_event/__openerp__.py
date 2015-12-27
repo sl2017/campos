@@ -50,6 +50,7 @@
         'portal',
         'survey',
         'website_event_register_free',
+        'base_suspend_security',
         
     ],
 

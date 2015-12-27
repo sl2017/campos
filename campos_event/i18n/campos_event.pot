@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-20 02:00+0000\n"
-"PO-Revision-Date: 2015-12-20 02:00+0000\n"
+"POT-Creation-Date: 2015-12-23 02:00+0000\n"
+"PO-Revision-Date: 2015-12-23 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1389,6 +1389,11 @@ msgid "Skype"
 msgstr ""
 
 #. module: campos_event
+#: field:res.partner,sponsor:0
+msgid "Sponsor"
+msgstr ""
+
+#. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_staff
 #: field:res.partner,staff:0
 msgid "Staff"
@@ -1649,7 +1654,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
-msgid "e.g. +32.81.81.37.00"
+msgid "e.g. +45 12 34 56 78"
 msgstr ""
 
 #. module: campos_event

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-20 02:00+0000\n"
-"PO-Revision-Date: 2015-12-21 19:57+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2015-12-23 02:00+0000\n"
+"PO-Revision-Date: 2015-12-23 02:00+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1385,6 +1385,11 @@ msgid "Skype"
 msgstr "Skype adresse"
 
 #. module: campos_event
+#: field:res.partner,sponsor:0
+msgid "Sponsor"
+msgstr ""
+
+#. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_staff
 #: field:res.partner,staff:0
 msgid "Staff"
@@ -1647,8 +1652,8 @@ msgstr "col-sm-8"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
-msgid "e.g. +32.81.81.37.00"
-msgstr "fx +45 12 12 12 12"
+msgid "e.g. +45 12 34 56 78"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
