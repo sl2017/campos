@@ -192,6 +192,11 @@ class CampCommitteeFunction(models.Model):
     job_title_id = fields.Many2one('campos.committee.job.title',
                          'Job Title',
                          ondelete='set null')
+    
+    sharepoint_mail = fields.Selection([('yes', 'Yes'),('no', 'No')], string='Sharepoint mail wanted')
+    sharepoint_mailaddress = fields.Char('Sharepoint mail address', related='participant_id.sharepoint_mailaddress')
+    zexpense_access_wanted = fields.Selection([('yes', 'Yes'),('no', 'No')], string='zExpense access wanted')
+    
 
         
     @api.multi
@@ -200,6 +205,10 @@ class CampCommitteeFunction(models.Model):
         ret =  super(CampCommitteeFunction, self).write(vals)
         for app in self:
             if vals.has_key('new_func'):
+                if app.sharepoint_mail:
+                    app.participant_id.sharepoint_mail = True if app.sharepoint_mail == 'yes' else False
+                if app.zexpense_access_wanted:
+                    app.participant_id.zexpense_access_wanted = True if app.zexpense_access_wanted == 'yes' else False
                 _logger.info("New func mail %s %s", app.committee_id.name, app.participant_id.name)
                 template = app.committee_id.template_id
                 assert template._name == 'email.template'

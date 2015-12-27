@@ -358,21 +358,29 @@ class EventParticipant(models.Model):
     @api.multi
     def action_approve(self):
         self.ensure_one()
-        return {
-            'name':_("Approval of %s" % self.name),
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_model': 'campos.committee.function',
-            'type': 'ir.actions.act_window',
-            'nodestroy': True,
-            'target': 'new',
-            'domain': '[]',
-            'context': {
+        form = self.env.ref('campos_event.view_campos_committee_function_form2', False)
+        context = {
                     'default_participant_id': self.id,
                     'default_committee_id': self.committee_id.id,
                     'default_job_id': self.job_id.id,
                     'new_func': True,
                     }
+        if self.sharepoint_mail:
+            context['default_sharepoint_mail'] = "yes"
+        if self.zexpense_access_wanted:
+            context['default_zexpense_access_wanted'] = "yes"
+        return {
+            'name':_("Approval of %s" % self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'views': [(form.id, 'form')],
+            'view_id': form.id,
+            'res_model': 'campos.committee.function',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': context
             }
         
 #         template = self.committee_id.template_id
