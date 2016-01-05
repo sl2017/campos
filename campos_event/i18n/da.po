@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-23 02:00+0000\n"
-"PO-Revision-Date: 2015-12-23 02:00+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2015-12-28 02:00+0000\n"
+"PO-Revision-Date: 2015-12-28 09:01+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -281,7 +281,7 @@ msgid "Approval Procedure"
 msgstr "Godkendelses procedure"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:362
+#: code:addons/campos_event/models/event.py:373
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -799,7 +799,7 @@ msgstr ""
 #: view:campos.job:campos_event.campos_job_form
 #: model:ir.model,name:campos_event.model_campos_job
 msgid "Job"
-msgstr "Job"
+msgstr "Job annonce"
 
 #. module: campos_event
 #: view:campos.job.tag:campos_event.campos_job_tag_form
@@ -1021,6 +1021,12 @@ msgid "Newsletter"
 msgstr "Nyhedsbrev"
 
 #. module: campos_event
+#: selection:campos.committee.function,sharepoint_mail:0
+#: selection:campos.committee.function,zexpense_access_wanted:0
+msgid "No"
+msgstr "Nej"
+
+#. module: campos_event
 #: field:campos.municipality,number:0
 msgid "Number"
 msgstr "Antal"
@@ -1097,7 +1103,7 @@ msgid "Paricipant"
 msgstr "Deltager"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:500
+#: code:addons/campos_event/models/event.py:508
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:res.partner,participant:0
@@ -1213,7 +1219,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:389
+#: code:addons/campos_event/models/event.py:397
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1235,7 +1241,7 @@ msgid "Right parent"
 msgstr ""
 
 #. module: campos_event
-#: view:campos.committee.function:campos_event.view_campos_committee_function_form
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form2
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Save"
@@ -1364,6 +1370,7 @@ msgid "Sharepoint mail requested"
 msgstr "Anmodning om SharePoint mailadresse"
 
 #. module: campos_event
+#: field:campos.committee.function,sharepoint_mail:0
 #: field:campos.event.participant,sharepoint_mail:0
 msgid "Sharepoint mail wanted"
 msgstr "Ønsker SharePoint mail"
@@ -1387,7 +1394,7 @@ msgstr "Skype adresse"
 #. module: campos_event
 #: field:res.partner,sponsor:0
 msgid "Sponsor"
-msgstr ""
+msgstr "Sponsor"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_staff
@@ -1402,6 +1409,7 @@ msgstr "Stabs deltager"
 
 #. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form2
 msgid "Staff approval"
 msgstr "Udvalgs godkendelse"
 
@@ -1590,6 +1598,12 @@ msgid "World Organization"
 msgstr "Verdensorganisation"
 
 #. module: campos_event
+#: selection:campos.committee.function,sharepoint_mail:0
+#: selection:campos.committee.function,zexpense_access_wanted:0
+msgid "Yes"
+msgstr "Ja"
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
 msgstr "Adresse"
@@ -1653,7 +1667,7 @@ msgstr "col-sm-8"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "e.g. +45 12 34 56 78"
-msgstr ""
+msgstr "fx +45 12 34 56 78"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -1691,6 +1705,7 @@ msgid "zExpense access requested"
 msgstr "Anmodning om zExpense adgang "
 
 #. module: campos_event
+#: field:campos.committee.function,zexpense_access_wanted:0
 #: field:campos.event.participant,zexpense_access_wanted:0
 msgid "zExpense access wanted"
 msgstr "Ønske om adgang til zExpense"

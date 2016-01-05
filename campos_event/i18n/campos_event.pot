@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-23 02:00+0000\n"
-"PO-Revision-Date: 2015-12-23 02:00+0000\n"
+"POT-Creation-Date: 2015-12-28 02:00+0000\n"
+"PO-Revision-Date: 2015-12-28 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -265,7 +265,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:362
+#: code:addons/campos_event/models/event.py:373
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -1024,6 +1024,12 @@ msgid "Newsletter"
 msgstr ""
 
 #. module: campos_event
+#: selection:campos.committee.function,sharepoint_mail:0
+#: selection:campos.committee.function,zexpense_access_wanted:0
+msgid "No"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.municipality,number:0
 msgid "Number"
 msgstr ""
@@ -1100,7 +1106,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:500
+#: code:addons/campos_event/models/event.py:508
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:res.partner,participant:0
@@ -1216,7 +1222,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:389
+#: code:addons/campos_event/models/event.py:397
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1238,7 +1244,7 @@ msgid "Right parent"
 msgstr ""
 
 #. module: campos_event
-#: view:campos.committee.function:campos_event.view_campos_committee_function_form
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form2
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Save"
@@ -1367,6 +1373,7 @@ msgid "Sharepoint mail requested"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee.function,sharepoint_mail:0
 #: field:campos.event.participant,sharepoint_mail:0
 msgid "Sharepoint mail wanted"
 msgstr ""
@@ -1406,6 +1413,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form
+#: view:campos.committee.function:campos_event.view_campos_committee_function_form2
 msgid "Staff approval"
 msgstr ""
 
@@ -1596,6 +1604,12 @@ msgid "World Organization"
 msgstr ""
 
 #. module: campos_event
+#: selection:campos.committee.function,sharepoint_mail:0
+#: selection:campos.committee.function,zexpense_access_wanted:0
+msgid "Yes"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
 msgstr ""
@@ -1693,6 +1707,7 @@ msgid "zExpense access requested"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee.function,zexpense_access_wanted:0
 #: field:campos.event.participant,zexpense_access_wanted:0
 msgid "zExpense access wanted"
 msgstr ""
