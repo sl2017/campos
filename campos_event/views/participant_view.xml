@@ -274,8 +274,9 @@
                         		<div class="oe_edit_only">
                         		 <label for="name"/>
                         		 </div> 
-                        		<h1>
-                        	</div>	
+                        	</div>
+                        	<h1>
+                        		
                             <field name="name" default_focus="1" placeholder="Name" colspan="4"/>
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	</h1> 
