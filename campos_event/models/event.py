@@ -186,7 +186,7 @@ class EventParticipant(models.Model):
     
     job_id = fields.Many2one('campos.job',
                              'Job',
-                             ondelete='set null')
+                             ondelete='set null', help=u'Hvilken annonce er der søgt på')
     newsletter  = fields.Boolean('Newsletter')
     
     sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
