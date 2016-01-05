@@ -68,7 +68,7 @@ class EventRegistration(models.Model):
 
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
-    staff = fields.Boolean(related='partner_id.staff')
+    staff = fields.Boolean(related='partner_id.staff', help='Personen er jobber')
     staff_qty_pre_reg = fields.Integer('Number of Staff - Pre-registration')
     country_id = fields.Many2one('res.country', 'Country')
     organization_id = fields.Many2one(
