@@ -147,7 +147,7 @@ class EventParticipant(models.Model):
     staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
-        'Scout Organization', related='registration_id.organization_id')
+        'Scout Organization', related='registration_id.organization_id', help=u"Her skal du udfylde det spejderkorps du er medlem af")
 
     # Scout Leader Fiedls
 
