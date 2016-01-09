@@ -51,9 +51,9 @@
 						</group>
 						<h3>Bemærkninger til sponsorat</h3>
 						<field name="sponsor_kommentar"/>
-						<hr/>
-						<h3>Udvalgsfelter</h3>
-						<group name="group_adminfields">
+						<group name="group_adminfields" groups="campos_sponsor.group_campos_sponsorudvalg">
+							<hr/>
+							<h3>Udvalgsfelter</h3>
 							<field name="sponsor_adminnote"/>
 						</group>
 					</sheet>
