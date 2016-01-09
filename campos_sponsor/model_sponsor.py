@@ -20,13 +20,12 @@ class SponsorMain(models.Model):
 	#Fields ved oprettelse/forside
 	sponsor_cvr = fields.Char('CVR nr.', track_visibility='onchange')
 	sponsor_url = fields.Char('Webside', track_visibility='onchange',required=False)
-	sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange',required=True)
-	sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange',required=True)
+	sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange')
+	sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange')
 	sponsor_udvalg_ansvarlig = fields.Many2one('campos.committee',
                                    'Ansvarligt udvalg',
                                    ondelete='set null',
-                                   track_visibility='onchange',
-                                   required=True)
+                                   track_visibility='onchange')
 	sponsor_kategori = fields.Selection([('kategori_pengeinstitut', 'Pengeinstitut'),
 										('kategori_forsikring','Forsikring'),
 										('kategori_fodevare',u'Fødevarer'),
