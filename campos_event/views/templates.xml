@@ -84,10 +84,10 @@
 												class="form-control" name="skype" />
 										</div>
 									</div>
-									<!-- <div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
-										for="workwish">Short Introduction</label> <div class="col-md-7 col-sm-8"> 
-										<textarea class="form-control" t-esc="default.get('workwish')" name="workwish" 
-										style="min-height: 120px"/> </div> </div> -->
+									<div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
+										for="qualifications">My qualifications</label> <div class="col-md-7 col-sm-8"> 
+										<textarea class="form-control" t-esc="default.get('qualifications')" name="qualifications" 
+										style="min-height: 120px"/> </div> </div>
 									<div class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="committee_id">Organization</label>
 										<div class="col-md-7 col-sm-8">

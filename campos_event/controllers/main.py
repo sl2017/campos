@@ -150,7 +150,7 @@ class CampOsEvent(http.Controller):
             'registration_id': reg_id,
             'state' : 'reg',
         }
-        for f in ['committee_id', 'job_id', 'my_comm_contact']:
+        for f in ['committee_id', 'job_id', 'my_comm_contact', 'qualifications']:
             value[f] = post.get(f)
         part = env['campos.event.participant'].create(value)
         

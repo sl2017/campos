@@ -211,6 +211,7 @@ class EventParticipant(models.Model):
 
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
+    qualifications = fields.Text('Qualifications')
     
     #confirm links
     confirm_token = fields.Char('Confirm Token', compute='_compute_confirm_urls', store=True)

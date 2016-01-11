@@ -181,6 +181,7 @@
 							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}" string="Ønsker aftale med udvalg" options="{'no_create': True}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
+							<field name="qualifications"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							<tree>
