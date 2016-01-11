@@ -165,5 +165,16 @@
 				</div>
 			</t>
 		</template>
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
+		</template>
 	</data>
 </openerp>

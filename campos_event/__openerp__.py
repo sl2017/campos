@@ -51,6 +51,7 @@
         'survey',
         'website_event_register_free',
         'base_suspend_security',
+        'website_jquery_ui',
         
     ],
 
