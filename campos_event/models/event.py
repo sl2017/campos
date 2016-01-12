@@ -214,7 +214,7 @@ class EventParticipant(models.Model):
     qualifications = fields.Text('Qualifications')
     
     #confirm links
-    confirm_token = fields.Char('Confirm Token', compute='_compute_confirm_urls', store=True)
+    confirm_token = fields.Char('Confirm Token')
     reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
