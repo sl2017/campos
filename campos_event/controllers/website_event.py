@@ -51,8 +51,12 @@ class WebsiteEventEx(WebsiteEvent):
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id)
         if registration_vals and post.get('name', False):
-            # TOD Handle re-registrations registration = reg_obj.sudo().search([('event_id', '=', registration_vals['event_id']),('partner_id') ])
-            registration = reg_obj.sudo().create(registration_vals)
+            # TOD Handle re-registrations 
+            registration = reg_obj.sudo().search([('event_id', '=', registration_vals['event_id']),('partner_id', '=', http.request.env.user.partner_id.id ) ])
+            if not registration:
+                registration = reg_obj.sudo().create(registration_vals)
+            else:
+                registration = registration[0]
             if registration.partner_id:
                 registration._onchange_partner()
             if (http.request.env.ref('base.public_user') !=
@@ -63,9 +67,13 @@ class WebsiteEventEx(WebsiteEvent):
                 http.request.env.user.participant_id.write(vals)
             #registration.registration_open()
             if registration.event_id.survey_id:
-                user_input = http.request.env['survey.user_input'].create({'survey_id': registration.event_id.survey_id.id,
+                if registration.reg_survey_input_id:
+                    user_input = registration.reg_survey_input_id
+                    user_input.state = 'new'
+                else:
+                    user_input = http.request.env['survey.user_input'].create({'survey_id': registration.event_id.survey_id.id,
                                                                            'partner_id': http.request.env.user.partner_id.id})
-                registration.reg_survey_input_id = user_input
+                    registration.reg_survey_input_id = user_input
                 return http.request.redirect('/survey/fill/%s/%s' % (registration.event_id.survey_id.id, user_input.token))
             else:
                 return http.request.render(
