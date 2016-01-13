@@ -32,7 +32,7 @@
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<tree string="Members">
-					<field name="committee_id" />
+					<field name="committee_id" operator="child_of"/>
 					<field name="function_type_id" />
 					<field name="participant_id" />
 					<field name="email" />
@@ -43,7 +43,7 @@
 		</record>
 		
 		<record id="campos_committee_member_search" model="ir.ui.view">
-			<field name="name">Committee Search</field>
+			<field name="name">Committee Func Search</field>
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<search>
@@ -51,6 +51,9 @@
 					<field name="function_type_id"/>
 					<field name="participant_id"/>
 					<field name="email"/>
+					
+					
+
 					<group expand="0" string="Group By...">
                  	<filter name="fFunc" string="Function" icon="terp-personal" domain="[]" context="{'group_by':'function_type_id'}"/>
                     <filter name="fCommittee" string="Committee" icon="terp-personal" domain="[]" context="{'group_by':'committee_id'}"/>
@@ -134,8 +137,11 @@
 				<search>
 					<field name="display_name" />
 					<field name="code"/>
-					<field name="parent_id"/>
+					<field name="account"/>
+					<field name="parent_id" operator="child_of"/>
 					<field name="committee_type_id"/>
+					<field name="approvers_ids"/>
+					<field name="par_contact_id"/>
 				</search>
 			</field>
 		</record>
@@ -165,12 +171,34 @@
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
 				<form string="Staff approval" version="7.0">
+				<group>
+				<field name="participant_id" invisible="1"/>
+				<field name="committee_id" invisible="0" required="1"/>
+				<field name="function_type_id" required="1"/>
+				<field name="job_title_id" />
+				<field name="job_id" options="{'no_create': True}"/>
+				</group>
+				
+				</form>
+				</field>
+				</record>
+				
+		<record model="ir.ui.view" id="view_campos_committee_function_form2">
+			<field name="name">campos.committee.function.form2</field>
+			<field name="model">campos.committee.function</field>
+			<field name="priority">17</field>
+			<field name="arch" type="xml">
+				<form string="Staff approval" version="7.0">
 				<header> <button name="write" type="object" string="Save" class="oe_highlight oe_edit_only" /></header>
 				<group>
 				<field name="participant_id" invisible="1"/>
-				<field name="committee_id" invisible="1"/>
-				<field name="function_type_id"/>
-				<field name="job_id"/>
+				<field name="committee_id" invisible="0" required="1"/>
+				<field name="function_type_id" required="1"/>
+				<field name="job_title_id"/>
+				<field name="job_id" options="{'no_create': True}"/>
+				<field name="sharepoint_mail" widget="radio" required="1"/>
+				<field name="sharepoint_mailaddress" attrs="{'invisible': [('sharepoint_mail', '!=', 'yes')]}"/>
+				<field name="zexpense_access_wanted" widget="radio" required="1"/>
 				</group>
 				
 				</form>

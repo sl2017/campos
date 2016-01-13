@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_campos_sponsor_public,campos_sponsor_public,model_model_sponsor,,1,1,1,1
+access_campos_sponsor_temaer,campos_sponsor_temaer,model_sponsor_temaer,,1,1,1,0
+access_campos_sponsor_modydelser,campos_sponsor_modydelser,model_sponsor_modydelser,,1,1,1,0

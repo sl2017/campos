@@ -48,6 +48,11 @@
         'event',
         'website',
         'portal',
+        'survey',
+        'website_event_register_free',
+        'base_suspend_security',
+        'website_jquery_ui',
+        
     ],
 
     # always loaded
@@ -69,9 +74,11 @@
         "views/job_template.xml",
         "views/mail_templates.xml",
         "views/confirm_template.xml",
+        "views/event_view.xml",
         #"views/portal_menu.xml",
         "views/res_users_view.xml",
         'views/campos_menu.xml',
+        'views/event_partner_reg_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

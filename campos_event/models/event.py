@@ -41,6 +41,19 @@ def random_token():
     chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
 
+class EventEvent(models.Model):
+
+    '''
+    Event ID
+
+    '''
+    _inherit = 'event.event'
+    
+    survey_id = fields.Many2one('survey.survey', 'Signup survey')
+
+
+
+
 class EventRegistration(models.Model):
 
     '''
@@ -86,6 +99,9 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
+    
+    reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
+    reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
 
 class EventParticipantReject(models.Model):
@@ -128,6 +144,7 @@ class EventParticipant(models.Model):
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration','Registration')
+    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
         'Scout Organization', related='registration_id.organization_id')
@@ -194,13 +211,21 @@ class EventParticipant(models.Model):
 
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
+    qualifications = fields.Text('Qualifications')
     
     #confirm links
-    confirm_token = fields.Char('Confirm Token', compute='_compute_confirm_urls', store=True)
+    confirm_token = fields.Char('Confirm Token')
     reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
     #participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
+    
+    meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
+    
+    @api.one
+    def _compute_meeting_registration(self):
+        self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
+        
     
     @api.one
     def _compute_confirm_urls(self):
@@ -334,21 +359,29 @@ class EventParticipant(models.Model):
     @api.multi
     def action_approve(self):
         self.ensure_one()
-        return {
-            'name':_("Approval of %s" % self.name),
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_model': 'campos.committee.function',
-            'type': 'ir.actions.act_window',
-            'nodestroy': True,
-            'target': 'new',
-            'domain': '[]',
-            'context': {
+        form = self.env.ref('campos_event.view_campos_committee_function_form2', False)
+        context = {
                     'default_participant_id': self.id,
                     'default_committee_id': self.committee_id.id,
                     'default_job_id': self.job_id.id,
                     'new_func': True,
                     }
+        if self.sharepoint_mail:
+            context['default_sharepoint_mail'] = "yes"
+        if self.zexpense_access_wanted:
+            context['default_zexpense_access_wanted'] = "yes"
+        return {
+            'name':_("Approval of %s" % self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'views': [(form.id, 'form')],
+            'view_id': form.id,
+            'res_model': 'campos.committee.function',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': context
             }
         
 #         template = self.committee_id.template_id
@@ -382,7 +415,7 @@ class EventParticipant(models.Model):
             old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
             if len(old_user) == 0:
                 # Swap mails?
-                if not par.private_mailaddress and '@sl2017.dk' not in par.email:
+                if (not par.private_mailaddress or par.private_mailaddress == par.email) and '@sl2017.dk' not in par.email:
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress
@@ -399,9 +432,9 @@ class EventParticipant(models.Model):
     @api.multi
     def action_deregister_participant(self):
         for par in self:
-            old_user =  self.env['res.users'].search([('partner_id', '=', par.id)])
+            old_user =  self.env['res.users'].suspend_security().search([('participant_id', '=', par.id)])
             if len(old_user):
-                old_user.write({'active': False})
+                old_user.suspend_security().write({'active': False})
             par.state = 'deregistered'
             par.jobfunc_ids.write({'active': False})
             if par.sharepoint_mailaddress:
@@ -475,3 +508,5 @@ class EventParticipant(models.Model):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
+    
+    

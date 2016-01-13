@@ -114,10 +114,10 @@ class CampOsEvent(http.Controller):
         error = {}
         for field_name in ["name", "email", "street", "zip", "city"]:
             if not post.get(field_name):
-                error[field_name] = 'missing'
+                error[field_name] = 'Missing %s' % field_name
         if not (post.get('phone') or post.get('mobile')):
-                error['phone'] = 'missing'
-                error['mobile'] = 'missing'
+                error['phone'] = 'Missing phone or mobile number'
+                error['mobile'] = 'At least one of phone or mobile is neesed '
         if error:
             request.session['website_campos_jobber_signup_error'] = error
 
@@ -150,7 +150,7 @@ class CampOsEvent(http.Controller):
             'registration_id': reg_id,
             'state' : 'reg',
         }
-        for f in ['committee_id', 'job_id', 'my_comm_contact']:
+        for f in ['committee_id', 'job_id', 'my_comm_contact', 'qualifications']:
             value[f] = post.get(f)
         part = env['campos.event.participant'].create(value)
         

@@ -49,7 +49,19 @@
 				 	<field name="staff_qty_pre_reg" />
 				 	</group>
 				 </page>
+				 <page string="Registration Survey">
+				 	<group>
+				 		<field name="reg_user_input_line_ids" nolabel="1">
+				 			<tree>
+				 				<field name="question_id"/>
+				 				<field name="value_suggested" string="reply"/>
+				 			</tree>
+				 		
+				 		</field>
+				 	
+				 	</group>
 				 
+				 </page>
 				 
 				 </notebook>
 				 </xpath>
@@ -98,15 +110,14 @@
 			<field name="model">campos.event.participant</field>
 			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_committee'))]"/>
 			<field name="arch" type="xml">
-
 				<form string="Participant Registration">
 				<header attrs="{'invisible': [('staff', '=', False)]}">
-				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
-           		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager" />
-           		 <button name="action_approve" states="sent" string="Approve"   type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
-             	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject"   type="object" groups="campos_event.group_campos_committee" />
-             	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager" />
-             	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager" confirm="Deregister participant and revoke access?"/>
+				 <button name="action_confirm" states="reg,draft,standby,rejected" string="Send to Committee" type="object" class="oe_highlight" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
+           		 <button name="action_standby" states="reg,draft,rejected" string="Set standby" type="object" class="oe_highlight" groups="campos_event.group_campos_manager"/>
+           		 <button name="action_approve" states="sent" string="Approve" type="object" class="oe_highlight" groups="campos_event.group_campos_committee"/>
+             	 <button name="action_reject" states="reg,sent,approved,draft" string="Reject" type="object" groups="campos_event.group_campos_committee"/>
+             	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager"/>
+             	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" confirm="Deregister participant and revoke access?"/>
              	 
 				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
 				</header>
@@ -114,18 +125,19 @@
 							<div class="oe_title oe_left">
                         		<div class="oe_edit_only">
                         		 <label for="name"/>
-                        		 </div> 
+                        		 </div>
+ 							</div>                        
                         		<h1>
-                            <field name="name" default_focus="1" placeholder="Name" colspan="4" style="width: 90%%"/>
+                            <field name="name" default_focus="1" placeholder="Name" colspan="4"/>
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	</h1> 
-                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" />
+                        	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" invisible="1"/>
                         	 
-                        	</div>
+                        	
                         	<newline/>
                         	<group>
 							<group>
-							<field name="registration_id" />
+							<field name="registration_id"/>
 							
                         	  <label for="street" string="Address"/>
                             <div>
@@ -143,40 +155,43 @@
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
-                            <field name="birthdate" />
-                            <field name="phone" placeholder="e.g. +32.81.81.37.00"/>
+                            <field name="birthdate" string="Fødselsdato" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+                            <field name="phone" placeholder="e.g. +45 12 34 56 78"/>
                             <field name="mobile"/>
                             <field name="skype"/>
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" />
+                            <field name="email" required="1"/>
                             <!-- 
                             <label for="email"/>
                             <div>
                                     <button class="oe_inline oe_link"
-                                        name="%(mail.action_email_compose_message_wizard)d"
+                                        name="84"
                                         icon="terp-mail-message-new" context= '{"default_email_to":email}' type="action">
                                         <field name="email" class="oe_inline oe_link"/>
                                      </button>
                                 </div>
                              -->    
-                            <field name="reg_organization_id"/>
+                            <field name="reg_organization_id" string="Korps"/>
 							<field name="participant"/>
 				 		    <field name="staff"/>
+				 		    <field name="staff_qty_pre_reg"/>
 							</group>
 							<group>
 							<separator string="Application" colspan="2"/>
-							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="committee_id" attrs="{'invisible': [('staff', '=', False)]}" string="Ønsker aftale med udvalg" options="{'no_create': True}"/>
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
-							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}"/>
+							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
+							<field name="qualifications"/>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
-							<tree create="false">
+							<tree>
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
-								<field name="com_contact" />
+								<field name="job_title_id"/>
+								<field name="com_contact"/>
 							</tree>
 							</field>
-							<field name="standby_until" states="standby" />
+							<field name="standby_until" states="standby"/>
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
@@ -186,7 +201,7 @@
 								 	<field name="sharepoint_mailaddress"/>
 								 	<field name="sharepoint_clienttype"/>
 								 	<field name="sharepoint_mail_created"/>
-								 	<field name="private_mailaddress" />
+								 	<field name="private_mailaddress"/>
 								 </group>
 								 </page>
 								 <page string="zExpense">
@@ -197,7 +212,7 @@
 								 </group>
 								 </page>
 								 <page string="Rejects" groups="campos_event.group_campos_manager">
-								 <group col="5" colspan="4" >
+								 <group col="5" colspan="4">
 									<field name="reject_ids">
 									<tree create="false" colspan="4">
 									<field name="create_date"/>
@@ -213,20 +228,38 @@
 										<field name="agreements" nolabel="1"/>	
 								 	</group>	
 								 </page>
-								 <page string="Internal Note" groups="campos_event.group_campos_manager">
+								 <page string="Internal Note" groups="campos_event.group_campos_manager,campos_event.group_campos_committee">
 								 	<group>
 										<field name="internal_note" nolabel="1"/>	
+											
 								 	</group>	
+								 </page>
+								 <page string="Meetings" groups="campos_event.group_campos_manager">
+								 	<group>
+								 		<field name="meeting_registration_ids" nolabel="1">
+								 			<tree create="false">
+								 				 <field name="event_id"/>
+								 				 <field name="state"/>
+								 				 <button name="registration_open" string="Confirm Registration" states="draft" type="object" icon="gtk-apply"/>
+                    							 <button name="button_reg_close" string="Attended the Event" states="open" type="object" icon="gtk-jump-to"/>
+                    							 <button name="button_reg_cancel" string="Cancel Registration" states="draft,open" type="object" icon="gtk-cancel"/>
+								 			</tree>
+								 		
+								 		</field>
+								 	
+								 	</group>
+								 
 								 </page>
 								 
 							</notebook>
 						</group>
 					</sheet>
 					<div class="oe_chatter">
-						<field name="message_follower_ids" widget="mail_followers" />
-						<field name="message_ids" widget="mail_thread" />
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
 					</div>
 				</form>
+				
 			</field>
 		</record>
 
@@ -242,13 +275,15 @@
                         		<div class="oe_edit_only">
                         		 <label for="name"/>
                         		 </div> 
-                        		<h1>
-                            <field name="name" default_focus="1" placeholder="Name" colspan="4" style="width: 70%%"/>
+                        	</div>
+                        	<h1>
+                        		
+                            <field name="name" default_focus="1" placeholder="Name" colspan="4"/>
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	</h1> 
                         	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" invisible="1" />
                         	 
-                        	</div>
+                        	
                         	<newline/>
                         	<group>
 							<group>
@@ -363,22 +398,23 @@
             <field name="name">campos.event.participant.form2</field>
             <field name="model">campos.event.participant</field>
             <field name="arch" type="xml">	
-			<tree string="Participants">
-											<field name="name"/>
-											<!-- 
-												context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
-												domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
-											-->
-											<!-- <field name="patrol"/> 
-											<field name="day_summery"/> -->
-											<field name="state"/>
-											<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
-											<field name="committee_id" string="Committee"/>
-											<!-- <field name="functitle"/> -->
-
-										</tree>
-										</field>
-										</record>
+				<tree fonts="bold:message_unread==True" string="Participants">
+					<field name="message_unread" invisible="1"/>	
+					<field name="name"/>
+					<!-- 
+						context="{'default_parent_id': parent.partner_id, 'default_customer': True, 'name_only': True}"
+						domain="[('parent_id','=',parent.partner_id),('is_company','=',False)]"/>  
+					-->
+					<!-- <field name="patrol"/> 
+					<field name="day_summery"/> -->
+					<field name="state"/>
+					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
+					<field name="committee_id" string="Committee"/>
+					<!-- <field name="functitle"/> -->
+	
+				</tree>
+			</field>
+		</record>
 										
 										
 		<record id="campos_event_participant_search" model="ir.ui.view">

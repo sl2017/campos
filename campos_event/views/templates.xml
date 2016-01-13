@@ -18,6 +18,14 @@
 								<!-- TODO Multilingual form action support ? -->
 								<form class="form-horizontal mt32" action="/campos/jobber/thankyou"
 									method="post" enctype="multipart/form-data">
+									<t t-if="error">
+										<div class="alert alert-danger">
+			  								<a href="#" class="close" data-dismiss="alert" aria-label="close">&amp;times;</a>
+			  								<ul t-foreach="error" t-as="e">
+			  									<li t-esc="error.get(e)" />
+			  								</ul>
+										</div>
+									</t>
 
 									<div t-attf-class="form-group #{error.get('name') and 'has-error' or ''}">
 										<label class="col-md-3 col-sm-4 control-label" for="name">Your Name</label>
@@ -76,10 +84,10 @@
 												class="form-control" name="skype" />
 										</div>
 									</div>
-									<!-- <div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
-										for="workwish">Short Introduction</label> <div class="col-md-7 col-sm-8"> 
-										<textarea class="form-control" t-esc="default.get('workwish')" name="workwish" 
-										style="min-height: 120px"/> </div> </div> -->
+									<div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
+										for="qualifications">My qualifications</label> <div class="col-md-7 col-sm-8"> 
+										<textarea class="form-control" t-esc="default.get('qualifications')" name="qualifications" 
+										style="min-height: 120px"/> </div> </div>
 									<div class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="committee_id">Organization</label>
 										<div class="col-md-7 col-sm-8">
@@ -156,6 +164,17 @@
 					</div>
 				</div>
 			</t>
+		</template>
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
 		</template>
 	</data>
 </openerp>

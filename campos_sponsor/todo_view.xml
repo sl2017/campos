@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+<record id="view_form_sponsor_create" model="ir.ui.view">
+<field name="name">New Sponsor Form</field>
+			<field name="model">model.sponsor</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="btn_next" type="object" string="Næste status" class="oe_highlight" />
+						<button name="btn_prev" type="object" string="Forrige status" class="oe_highlight" />
+						<button name="btn_luk" type="object" string="Sæt på holdt" class="oe_highlight" />
+						<button name="btn_aaben" type="object" string="Genåben sponsorat" class="oe_highlight" />
+					</header>
+					<sheet>
+						<group name="group_top">
+							<group name="group_left">
+								<field name="name"/>
+							</group>
+							<group name="group-right">
+								<field name="name"/>
+								<field name="partner_id"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+</record>
+
+
+<!-- Action to open To-do Task list -->
+<act_window id="action_sponsor_create"
+	name="SL2017 Sponsors"
+	res_model="model.sponsor"
+	view_mode="tree,form" />
+
+<!-- Menu item to open To-do Task list -->
+<menuitem id="menu_sponsor_create"
+	name="SL2017 Sponsors"
+	parent="mail.mail_feeds"
+	sequence="20"
+	action="action_sponsor_create" />
+
+</data>
+</openerp>

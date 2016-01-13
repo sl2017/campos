@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+	<template id="partner_register_form" name="Event registration">
+            <t t-call="website.layout">
+                <div id="wrap">
+                <form t-attf-action="/event/#{event.id}/register/register_free" method="post" class="container">
+                    
+                    <h1>Confirm Your Details</h1>
+                    <input type="hidden" t-att-value="tickets" name="tickets" />
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('name') and 'has-error' or ''}">
+                            <label class="control-label" for="name">Your Name</label>
+                            <input type="text" name="name" class="form-control" t-att-value="post.get('name')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('reg_organization_id') and 'has-error' or ''}" >
+										<label class="control-label" for="reg_organization_id">Organization</label>
+										<select class="form-control" name="organization_id">
+												<t t-foreach="scoutorgs or []" t-as="scoutorg">
+													<option t-att-value="scoutorg.id" t-att-selected="scoutorg.id == reg_organization_id">
+														<t t-esc="scoutorg.name" />
+													</option>
+												</t>
+											</select>
+						</div>
+					</div>
+					<div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('phone') and 'has-error' or ''}">
+                            <label class="control-label" for="phone">Phone</label>
+                            <input type="text" name="phone" class="form-control" t-att-value="post.get('phone')" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('mobile') and 'has-error' or ''}">
+                            <label class="control-label" for="mobile">Mobile</label>
+                            <input type="mobile" name="mobile" class="form-control" t-att-value="post.get('mobile')" required="required" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('email') and 'has-error' or ''}">
+                            <label class="control-label" for="email">Email</label>
+                            <input type="text" name="email" class="form-control" t-att-value="post.get('email')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('skype') and 'has-error' or ''}">
+                            <label class="control-label" for="skype">Skype</label>
+                            <input type="text" name="skype" class="form-control" t-att-value="post.get('skype')" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('street') and 'has-error' or ''}">
+                            <label class="control-label" for="street">Street</label>
+                            <input type="text" name="street" class="form-control" t-att-value="post.get('street')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('street2') and 'has-error' or ''}">
+                            <label class="control-label" for="street2">Street2</label>
+                            <input type="text" name="street2" class="form-control" t-att-value="post.get('street2')" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('zip') and 'has-error' or ''}">
+                            <label class="control-label" for="zip">Zip</label>
+                            <input type="text" name="zip" class="form-control" t-att-value="post.get('zip')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('city') and 'has-error' or ''}">
+                            <label class="control-label" for="city">city</label>
+                            <input type="text" name="city" class="form-control" t-att-value="post.get('city')" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('birthdate') and 'has-error' or ''}">
+                            <label class="control-label" for="birthdate">Birthdate</label>
+                            <input type="date" id="birthdate" name="birthdate" placeholder="åååå-mm-dd" class="form-control" t-att-value="post.get('birthdate')" required="required" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">Register <span class="fa fa-long-arrow-right"/></button>
+                </form>
+                </div>
+            </t>
+        </template>
+     </data>
+</openerp>
