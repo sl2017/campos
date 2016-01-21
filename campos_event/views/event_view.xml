@@ -11,6 +11,9 @@
 				<field name="email_confirmation_id" position="after">
 					<field name="survey_id"/>
 				</field>
+				<field name="seats_used" position="after">
+					<button name="action_export_survey" type="object" string="Export"/>
+				</field>
 			</field>		
 		</record>
 	</data>
