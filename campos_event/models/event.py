@@ -32,6 +32,14 @@ import werkzeug
 from openerp import models, fields, api
 from openerp.tools.translate import _
 
+import base64
+try:
+    import xlwt
+except ImportError:
+    xlwt = None
+import re
+from cStringIO import StringIO
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -50,9 +58,117 @@ class EventEvent(models.Model):
     _inherit = 'event.event'
     
     survey_id = fields.Many2one('survey.survey', 'Signup survey')
+    attachment_id = fields.Many2one( 'ir.attachment', string="Attachments" )
+    
+    @api.multi
+    def action_export_survey(self):
+        fields = []
+        self.ensure_one()
+        
+        #Standard field
+        fields = [{'id': "s1", 'fieldname': 'Navn'}, 
+                  {'id': "s2", 'fieldname': 'Udvalg'}, 
+                  {'id': "s3", 'fieldname': 'Funktion'},
+                  {'id': "s4", 'fieldname': 'adresse'},
+                  {'id': 's5', 'fieldname': 'Postnr'},
+                  {'id': 's6', 'fieldname': 'By'},
+                  {'id': 's7', 'fieldname': 'Email'},
+                  {'id': 's8', 'fieldname': 'Tlf'},
+                  {'id': 's9', 'fieldname': 'Mobil'},
+                  ]
+        for page in self.survey_id.page_ids:
+            for q in page.question_ids:
+                if q.type == 'multiple_choice':
+                    for l in q.labels_ids:
+                        fields.append({'q': q,
+                                       'label': l,
+                                       'id': "%d-%d" % (q.id, l.id),
+                                       'fieldname': "%s/%s" % (q.question, l.value)})
+                else:
+                    fields.append({'q': q,
+                                   'id': "%d" % (q.id),
+                                   'fieldname': "%s" % (q.question)})
+                if q.comments_allowed:
+                    fields.append({'q': q,
+                                   'id': "%d-comm" % (q.id),
+                                   'fieldname': "%s" % (q.comments_message)})
 
+        rows=[]
+        for reg in self.registration_ids:
+            row = {}
+            row['s1'] = reg.partner_id.name
+            row['s4'] = ''.join(filter(None, [reg.partner_id.street, reg.partner_id.street2]))
+            row['s5'] = reg.partner_id.zip
+            row['s6'] = reg.partner_id.city
+            row['s7'] = reg.partner_id.email
+            row['s8'] = reg.partner_id.phone
+            row['s9'] = reg.partner_id.mobile 
+            participant = self.env['campos.event.participant'].search([('partner_id', '=', reg.partner_id.id)])
+            if participant:
+                comm_list = None
+                func_list = None
+                for j in participant[0].jobfunc_ids:
+                    comm_list = '|'.join(filter(None, [comm_list, j.committee_id.display_name]))
+                    func_list = '|'.join(filter(None, [func_list, j.function_type_id.name]))
+                row['s2'] = comm_list
+                row['s3'] = func_list
+            if reg.reg_survey_input_id:
+                for ans in reg.reg_user_input_line_ids:
+                    if ans.question_id.comments_allowed and ans.answer_type == 'text':
+                        row['%d-comm' % (ans.question_id.id)] = ans.value_text 
+                    if ans.question_id.type == 'multiple_choice':
+                        row['%d-%d' % (ans.question_id.id, ans.value_suggested.id)] = 'X'
+                    elif ans.question_id.type == 'simple_choice': 
+                        row['%d' % (ans.question_id.id)] = ans.value_suggested.value
+                    elif ans.answer_type == 'text':
+                        row['%d' % (ans.question_id.id)] = ans.value_text
+            rows.append(row)
+                        
+        data = base64.encodestring(self.from_data(fields, rows ) )
+        attach_vals = {
+                 'name':'%s.xls' % ( self.name ),
+                 'datas':data,
+                 'datas_fname':'%s.xls' % ( self.name ),
+                 }
 
+        doc_id = self.env['ir.attachment'].create( attach_vals )
+        if self.attachment_id :
+            try :
+                self.attachment_id.unlink()
+            except :
+                pass
+        self.write( {'attachment_id':doc_id.id} )
+        return {
+            'type' : 'ir.actions.act_url',
+            'url':   '/web/binary/saveas?model=ir.attachment&field=datas&filename_field=name&id=%s' % ( doc_id.id ),
+            'target': 'self',
+            }
+        
+    def from_data(self, fields, rows):
+        workbook = xlwt.Workbook()
+        worksheet = workbook.add_sheet( 'Sheet 1' )
+        header_title = xlwt.easyxf( "font: bold on; pattern: pattern solid, fore_colour gray25;align:horizontal left, indent 1,vertical center" )
+        for i, field in enumerate(fields):
+            worksheet.write( 0, i, field['fieldname'], header_title )
+            worksheet.col( i ).width = 8000  # around 220 pixels
+        base_style = xlwt.easyxf( 'align: horizontal left,wrap yes,indent 1,vertical center' )
+        date_style = xlwt.easyxf( 'align: horizontal left,wrap yes, indent 1,vertical center', num_format_str='YYYY-MM-DD' )
+        datetime_style = xlwt.easyxf( 'align: horizontal left,wrap yes,indent 1,vertical center', num_format_str='YYYY-MM-DD HH:mm:SS' )
+        worksheet.row( 0 ).height = 400
+        for row_index, row in enumerate( rows ):
+            worksheet.row( row_index + 1 ).height = 350
+            for cell_index, field in enumerate( fields ):
+                cell_style = base_style
+                if row.has_key(field['id']):
+                    worksheet.write( row_index + 1, cell_index, row[field['id']], cell_style )
+        fp = StringIO()
+        workbook.save( fp )
+        fp.seek( 0 )
+        data = fp.read()
+        fp.close()
+        return data
 
+            
 
 class EventRegistration(models.Model):
 
