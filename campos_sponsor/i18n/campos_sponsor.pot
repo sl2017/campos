@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 02:00+0000\n"
-"PO-Revision-Date: 2016-01-12 02:00+0000\n"
+"POT-Creation-Date: 2016-01-24 02:00+0000\n"
+"PO-Revision-Date: 2016-01-24 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,49 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: campos_sponsor
+#: field:sponsor.modydelser,active:0
+#: field:sponsor.temaer,active:0
+msgid "Active"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Afvis ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_state:0
+msgid "Afvist"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_udvalg_ansvarlig:0
+msgid "Ansvarligt udvalg"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_state:0
+msgid "Ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_ansogt:0
+msgid "Ansøgt værdi i DKK"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_type:0
+msgid "Basis Sponsor"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_type_begrund:0
+msgid "Begrundelse for typevalg"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_kommentar:0
+msgid "Bemærkninger til sponsor"
 msgstr ""
 
 #. module: campos_sponsor
@@ -26,8 +67,78 @@ msgid "Bemærkninger til sponsorat"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,sponsor_bevilliget:0
+msgid "Bevilliget værdi"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_state:0
+msgid "Bevilling"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Byggemarked"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_cvr:0
+msgid "CVR nr."
+msgstr ""
+
+#. module: campos_sponsor
+#: field:sponsor.modydelser,child_ids:0
+#: field:sponsor.temaer,child_ids:0
+msgid "Child Categories"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,create_uid:0
+#: field:sponsor.modydelser,create_uid:0
+#: field:sponsor.temaer,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,create_date:0
+#: field:sponsor.modydelser,create_date:0
+#: field:sponsor.temaer,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_sponsor
 #: model:ir.model,name:campos_sponsor.model_model_sponsor
 msgid "Email Thread"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_type:0
+msgid "Event eller Aktivitets Sponsor"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Fonde"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Forsikring"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Fødevarer"
 msgstr ""
 
 #. module: campos_sponsor
@@ -36,8 +147,75 @@ msgid "Genåben og opret som potentiel"
 msgstr ""
 
 #. module: campos_sponsor
+#: help:model.sponsor,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_type:0
+msgid "Hoved Sponsor"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,id:0
+#: field:sponsor.modydelser,id:0
+#: field:sponsor.temaer,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,write_uid:0
+#: field:sponsor.modydelser,write_uid:0
+#: field:sponsor.temaer,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,write_date:0
+#: field:sponsor.modydelser,write_date:0
+#: field:sponsor.temaer,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:sponsor.modydelser,parent_left:0
+#: field:sponsor.temaer,parent_left:0
+msgid "Left parent"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Lås ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_state:0
+msgid "Låst"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,message_ids:0
+msgid "Messages and communication history"
 msgstr ""
 
 #. module: campos_sponsor
@@ -46,13 +224,66 @@ msgid "Modydelser"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:sponsor.modydelser,name:0
+#: field:sponsor.temaer,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Non-Food"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Opret som ansøgning"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:sponsor.modydelser,parent_id:0
+#: field:sponsor.temaer,parent_id:0
+msgid "Parent Category"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Partner"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,partner_id:0
+msgid "Partner id"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Pengeinstitut"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_state:0
+msgid "Potentiel"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Potentiel sponsorat/fond"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Puljer"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_type:0
+msgid "Reserveret Fond"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:sponsor.modydelser,parent_right:0
+#: field:sponsor.temaer,parent_right:0
+msgid "Right parent"
 msgstr ""
 
 #. module: campos_sponsor
@@ -66,8 +297,48 @@ msgid "SL2017 Sponsors oversigt"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,sponsor_kontaktperson_sl2017:0
+msgid "SL2017 kontaktperson"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_kontaktperson_name:0
+msgid "Sponsor kontaktperson navn"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_kontaktperson_tlf:0
+msgid "Sponsor kontaktperson tlf"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_modydelser:0
+msgid "Sponsor modydelser"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_state:0
+msgid "Sponsor state"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_temaer:0
+msgid "Sponsor temaer"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_type:0
+msgid "Sponsor type"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Sponsorat bevilliget"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_kategori:0
+msgid "Sponsorat kategori"
 msgstr ""
 
 #. module: campos_sponsor
@@ -81,12 +352,63 @@ msgid "Sponsorudvalg"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: campos_sponsor
 #: model:ir.model,name:campos_sponsor.model_sponsor_temaer
 msgid "Temaer"
 msgstr ""
 
 #. module: campos_sponsor
+#: help:sponsor.modydelser,active:0
+#: help:sponsor.temaer,active:0
+msgid "The active field allows you to hide the category without removing it."
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_udfyldtaf:0
+msgid "Udfyldt af"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Udvalgsfelter"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_adminnote:0
+msgid "Udvalgsnote (skjult)"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_url:0
+msgid "Webside"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,website_message_ids:0
+msgid "Website communication history"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sponsor_kontaktperson_mail:0
+msgid "sponsor kontaktperson email"
+msgstr ""
+
+#. module: campos_sponsor
+#: selection:model.sponsor,sponsor_kategori:0
+msgid "Øvrige Sponsorer"
 msgstr ""
 
