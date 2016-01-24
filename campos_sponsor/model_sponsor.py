@@ -75,7 +75,7 @@ class SponsorMain(models.Model):
 								track_visibility='onchange',
 								required=False)
 	sponsor_type_begrund = fields.Text('Begrundelse for typevalg', track_visibility='onchange')
-	sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', track_visibility='onchange', required=True)
+	#sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', track_visibility='onchange', required=True)
 	sponsor_bevilliget = fields.Integer(u'Bevilliget værdi', track_visibility='onchange', required=False)
 	
 	
