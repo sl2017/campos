@@ -33,8 +33,8 @@
 								<field name="sponsor_url"/>
 							</group>
 							<group>
-								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
 								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
+								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
 								<field name="sponsor_kategori"/>
 								<!--<field name="sponsor_tema"/>-->
 								<field name="sponsor_temaer" widget="many2many_tags"/>
