@@ -54,10 +54,12 @@
 				 		<field name="reg_user_input_line_ids" nolabel="1">
 				 			<tree>
 				 				<field name="question_id"/>
-				 				<field name="value_suggested" string="reply"/>
+				 				<field name="value_suggested" string="Reply"/>
+				 				<field name="value_text" string="Comment" />
 				 			</tree>
-				 		
 				 		</field>
+				 		<newline/>
+				 		<button name="action_edit_survey_response" type="object" string="Rediger svar" />
 				 	
 				 	</group>
 				 
