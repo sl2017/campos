@@ -73,8 +73,10 @@ class EventEvent(models.Model):
                   {'id': 's5', 'fieldname': 'Postnr'},
                   {'id': 's6', 'fieldname': 'By'},
                   {'id': 's7', 'fieldname': 'Email'},
+                  {'id': 's7p', 'fieldname': 'Privat Email'},
                   {'id': 's8', 'fieldname': 'Tlf'},
                   {'id': 's9', 'fieldname': 'Mobil'},
+                  {'id': 's10', 'fieldname': 'Opdateret'},
                   ]
         for page in self.survey_id.page_ids:
             for q in page.question_ids:
@@ -105,6 +107,7 @@ class EventEvent(models.Model):
             row['s9'] = reg.partner_id.mobile 
             participant = self.env['campos.event.participant'].search([('partner_id', '=', reg.partner_id.id)])
             if participant:
+                row['s7p'] = participant[0].private_mailaddress
                 comm_list = None
                 func_list = None
                 for j in participant[0].jobfunc_ids:
@@ -113,15 +116,18 @@ class EventEvent(models.Model):
                 row['s2'] = comm_list
                 row['s3'] = func_list
             if reg.reg_survey_input_id:
+                row['s10'] = reg.reg_survey_input_id.write_date
                 for ans in reg.reg_user_input_line_ids:
                     if ans.question_id.comments_allowed and ans.answer_type == 'text':
                         row['%d-comm' % (ans.question_id.id)] = ans.value_text 
-                    if ans.question_id.type == 'multiple_choice':
+                    if ans.question_id.type == 'multiple_choice' and ans.value_suggested:
                         row['%d-%d' % (ans.question_id.id, ans.value_suggested.id)] = 'X'
-                    elif ans.question_id.type == 'simple_choice': 
+                    elif ans.question_id.type == 'simple_choice' and ans.value_suggested: 
                         row['%d' % (ans.question_id.id)] = ans.value_suggested.value
-                    elif ans.answer_type == 'text':
+                        _logger.info('%s ROW simple: %d %s', row['s1'], ans.question_id.id, ans.value_suggested.value )
+                    elif ans.question_id.type in ['free_text','textbox'] and ans.value_text:
                         row['%d' % (ans.question_id.id)] = ans.value_text
+                        _logger.info('%s ROW text: %d %s', row['s1'], ans.question_id.id, ans.value_text)
             rows.append(row)
                         
         data = base64.encodestring(self.from_data(fields, rows ) )
@@ -159,7 +165,7 @@ class EventEvent(models.Model):
             worksheet.row( row_index + 1 ).height = 350
             for cell_index, field in enumerate( fields ):
                 cell_style = base_style
-                if row.has_key(field['id']):
+                if row.has_key(field['id']) and field['id']:
                     worksheet.write( row_index + 1, cell_index, row[field['id']], cell_style )
         fp = StringIO()
         workbook.save( fp )
@@ -167,6 +173,7 @@ class EventEvent(models.Model):
         data = fp.read()
         fp.close()
         return data
+    
 
             
 
@@ -219,6 +226,16 @@ class EventRegistration(models.Model):
     reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
     reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
+    @api.multi
+    def action_edit_survey_response(self):
+        fields = []
+        self.ensure_one()
+        if self.reg_survey_input_id:
+            self.reg_survey_input_id.state = 'new'
+            return {'type': 'ir.actions.act_url', 
+                    'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token), 
+                    'nodestroy': True, 
+                    'target': 'new' }
 
 class EventParticipantReject(models.Model):
 
