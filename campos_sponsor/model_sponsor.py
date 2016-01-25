@@ -20,8 +20,12 @@ class SponsorMain(models.Model):
 	#Fields ved oprettelse/forside
 	sponsor_cvr = fields.Char('CVR nr.', track_visibility='onchange')
 	sponsor_url = fields.Char('Webside', track_visibility='onchange',required=False)
-	sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange')
-	sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange')
+	#sponsor_kontaktperson_sponsor = fields.Many2one('res.partner','Kontaktperson fra sponsor', track_visibility='onchange')
+	sponsor_kontaktperson_name = fields.Char('Sponsor kontaktperson navn',track_visibility='onchange',required=True)
+	sponsor_kontaktperson_tlf = fields.Char('Sponsor kontaktperson tlf',track_visibility='onchange',required=True)
+	sponsor_kontaktperson_mail = fields.Char('sponsor kontaktperson email',track_visibility='onchange',required=True)
+	#sponsor_kontaktperson_sl2017 = fields.Many2one('campos.event.participant','SL2017 kontaktperson', track_visibility='onchange')
+	sponsor_kontaktperson_sl2017 = fields.Many2one('res.partner','SL2017 kontaktperson', track_visibility='onchange')
 	sponsor_udvalg_ansvarlig = fields.Many2one('campos.committee',
                                    'Ansvarligt udvalg',
                                    ondelete='set null',
@@ -39,7 +43,7 @@ class SponsorMain(models.Model):
 									track_visibility='onchange',
 									default='kategori_pengeinstitut',
 									required=True)
-	sponsor_temaer = fields.Many2many('sponsor.temaer', required=True)
+	sponsor_temaer = fields.Many2many('sponsor.temaer')
 	'''
 	sponsor_tema = fields.Selection([('tema_spejder','Spejder og verden'),
 									('tema_demokrati','Unge og demokrati'),
@@ -71,7 +75,7 @@ class SponsorMain(models.Model):
 								track_visibility='onchange',
 								required=False)
 	sponsor_type_begrund = fields.Text('Begrundelse for typevalg', track_visibility='onchange')
-	sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', track_visibility='onchange', required=True)
+	#sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', track_visibility='onchange', required=True)
 	sponsor_bevilliget = fields.Integer(u'Bevilliget værdi', track_visibility='onchange', required=False)
 	
 	
@@ -83,6 +87,8 @@ class SponsorMain(models.Model):
 									('state_laast',u'Låst')],
 									track_visibility='onchange',
 									default='state_potentiel')
+	
+	
 	
 	
 	#KNAPPER

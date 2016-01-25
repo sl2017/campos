@@ -26,12 +26,15 @@
 								<field name="city" attrs="{'required':True}"/>
 								<field name="country_id" attra="{'required':True}" options="{'no_create': True}"/>
 								<field name="sponsor_cvr"/>
-								<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}"/>
-								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
-								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
+								<!--<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}"/>-->
+								<field name="sponsor_kontaktperson_name"/>
+								<field name="sponsor_kontaktperson_tlf"/>
+								<field name="sponsor_kontaktperson_mail"/>
 								<field name="sponsor_url"/>
 							</group>
 							<group>
+								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
+								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
 								<field name="sponsor_kategori"/>
 								<!--<field name="sponsor_tema"/>-->
 								<field name="sponsor_temaer" widget="many2many_tags"/>
@@ -46,7 +49,7 @@
 							</group>
 							<group>
 								<field name="sponsor_modydelser" widget="many2many_tags"/>
-								<field name="sponsor_udfyldtaf" options="{'no_create': True}"/>
+								<!--<field name="sponsor_udfyldtaf" options="{'no_create': True}"/>-->
 							</group>
 						</group>
 						<h3>Bemærkninger til sponsorat</h3>
