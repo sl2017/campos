@@ -49,7 +49,7 @@
 							</group>
 							<group>
 								<field name="sponsor_modydelser" widget="many2many_tags"/>
-								<field name="sponsor_udfyldtaf" options="{'no_create': True}"/>
+								<!--<field name="sponsor_udfyldtaf" options="{'no_create': True}"/>-->
 							</group>
 						</group>
 						<h3>Bemærkninger til sponsorat</h3>
