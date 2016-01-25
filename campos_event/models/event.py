@@ -97,6 +97,8 @@ class EventEvent(models.Model):
 
         rows=[]
         for reg in self.registration_ids:
+            if reg.state == 'cancel':
+                continue
             row = {}
             row['s1'] = reg.partner_id.name
             row['s4'] = ''.join(filter(None, [reg.partner_id.street, reg.partner_id.street2]))
