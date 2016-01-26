@@ -47,6 +47,7 @@
 				 	<field name="scoutgroup"/>
 				 	<field name="staff"/>
 				 	<field name="staff_qty_pre_reg" />
+				 	<field name="camp_area_id" domain="[('event_id','=', event_id)]" context="{'default_event_id': event_id}"/>
 				 	</group>
 				 </page>
 				 <page string="Registration Survey">

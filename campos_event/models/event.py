@@ -59,6 +59,9 @@ class EventEvent(models.Model):
     
     survey_id = fields.Many2one('survey.survey', 'Signup survey')
     attachment_id = fields.Many2one( 'ir.attachment', string="Attachments" )
+    camp_area_ids = fields.One2many(
+        'campos.camp.area',
+        'event_id', string="Rooms/Camp Areas")
     
     @api.multi
     def action_export_survey(self):
@@ -69,6 +72,7 @@ class EventEvent(models.Model):
         fields = [{'id': "s1", 'fieldname': 'Navn'}, 
                   {'id': "s2", 'fieldname': 'Udvalg'}, 
                   {'id': "s3", 'fieldname': 'Funktion'},
+                  {'id': "s3r", 'fieldname': 'Rum'},
                   {'id': "s4", 'fieldname': 'adresse'},
                   {'id': 's5', 'fieldname': 'Postnr'},
                   {'id': 's6', 'fieldname': 'By'},
@@ -101,6 +105,7 @@ class EventEvent(models.Model):
                 continue
             row = {}
             row['s1'] = reg.partner_id.name
+            row['s3r'] = reg.camp_area_id.name
             row['s4'] = ''.join(filter(None, [reg.partner_id.street, reg.partner_id.street2]))
             row['s5'] = reg.partner_id.zip
             row['s6'] = reg.partner_id.city
@@ -228,6 +233,12 @@ class EventRegistration(models.Model):
     reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
     reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
+    camp_area_id = fields.Many2one(
+        'campos.camp.area',
+        'Room/Camp Area',
+        select=True,
+        ondelete='set null')
+    
     @api.multi
     def action_edit_survey_response(self):
         fields = []
