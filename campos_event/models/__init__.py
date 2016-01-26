@@ -10,3 +10,4 @@ from . import event
 from . import committee
 from . import camposjob
 from . import res_users
+from . import camp_area
