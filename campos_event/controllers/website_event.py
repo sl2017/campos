@@ -38,6 +38,7 @@ class WebsiteEventEx(WebsiteEvent):
         reg_obj = http.request.env['event.registration']
         registration_vals = {}
         reg_organization_id = False
+        noshow = True if post.get('action', False) == 'noshow' else False
         if (http.request.env.ref('base.public_user') !=
                 http.request.env.user and
                 validate('tickets', force_check=True)):
@@ -52,9 +53,11 @@ class WebsiteEventEx(WebsiteEvent):
                 event, post, http.request.env.user.id)
         if registration_vals and post.get('name', False):
             # TOD Handle re-registrations 
-            registration = reg_obj.sudo().search([('event_id', '=', registration_vals['event_id']),('partner_id', '=', http.request.env.user.partner_id.id ) ])
+            registration = reg_obj.suspend_security().search([('event_id', '=', registration_vals['event_id']),('partner_id', '=', http.request.env.user.partner_id.id ) ])
             if not registration:
-                registration = reg_obj.sudo().create(registration_vals)
+                if noshow:
+                    registration_vals['state'] = 'cancel'
+                registration = reg_obj.suspend_security().create(registration_vals)
             else:
                 registration = registration[0]
             if registration.partner_id:
@@ -65,8 +68,11 @@ class WebsiteEventEx(WebsiteEvent):
                 for f in CONFIRM_FIELDS:
                     vals[f] = post.get(f)
                 http.request.env.user.participant_id.write(vals)
-            #registration.registration_open()
-            if registration.event_id.survey_id:
+            if noshow:
+                registration.state = 'cancel'
+            else:
+                registration.registration_open()
+            if registration.event_id.survey_id and not noshow:
                 if registration.reg_survey_input_id:
                     user_input = registration.reg_survey_input_id
                     user_input.state = 'new'
