@@ -196,6 +196,13 @@ class EventRegistration(models.Model):
         'campos.event.participant',
         'registration_id', string="Participants")
 
+    state = fields.Selection([
+            ('draft', 'Unconfirmed'),
+            ('cancel', 'Cancelled'),
+            ('open', 'Confirmed'),
+            ('done', 'Attended'),
+        ], string='Status', default='draft', readonly=True, copy=False, track_visibility='onchange')
+    
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
     staff = fields.Boolean(related='partner_id.staff')
