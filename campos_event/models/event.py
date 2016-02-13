@@ -70,6 +70,7 @@ class EventEvent(models.Model):
         
         #Standard field
         fields = [{'id': "s1", 'fieldname': 'Navn'}, 
+                  {'id': 's1s', 'fieldname': 'Status'},
                   {'id': "s2", 'fieldname': 'Udvalg'}, 
                   {'id': "s3", 'fieldname': 'Funktion'},
                   {'id': "s3r", 'fieldname': 'Rum'},
@@ -101,8 +102,8 @@ class EventEvent(models.Model):
 
         rows=[]
         for reg in self.registration_ids:
-            if reg.state == 'cancel':
-                continue
+            #if reg.state == 'cancel':
+            #    continue
             row = {}
             row['s1'] = reg.partner_id.name
             row['s3r'] = reg.camp_area_id.name
@@ -111,7 +112,8 @@ class EventEvent(models.Model):
             row['s6'] = reg.partner_id.city
             row['s7'] = reg.partner_id.email
             row['s8'] = reg.partner_id.phone
-            row['s9'] = reg.partner_id.mobile 
+            row['s9'] = reg.partner_id.mobile
+            row['s1s'] = reg.state 
             participant = self.env['campos.event.participant'].search([('partner_id', '=', reg.partner_id.id)])
             if participant:
                 row['s7p'] = participant[0].private_mailaddress
@@ -196,6 +198,13 @@ class EventRegistration(models.Model):
         'campos.event.participant',
         'registration_id', string="Participants")
 
+    state = fields.Selection([
+            ('draft', 'Unconfirmed'),
+            ('cancel', 'Cancelled'),
+            ('open', 'Confirmed'),
+            ('done', 'Attended'),
+        ], string='Status', default='draft', readonly=True, copy=False, track_visibility='onchange')
+    
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
     staff = fields.Boolean(related='partner_id.staff')
