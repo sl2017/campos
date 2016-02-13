@@ -47,6 +47,7 @@
 				 	<field name="scoutgroup"/>
 				 	<field name="staff"/>
 				 	<field name="staff_qty_pre_reg" />
+				 	<field name="camp_area_id" domain="[('event_id','=', event_id)]" context="{'default_event_id': event_id}"/>
 				 	</group>
 				 </page>
 				 <page string="Registration Survey">
@@ -54,10 +55,12 @@
 				 		<field name="reg_user_input_line_ids" nolabel="1">
 				 			<tree>
 				 				<field name="question_id"/>
-				 				<field name="value_suggested" string="reply"/>
+				 				<field name="value_suggested" string="Reply"/>
+				 				<field name="value_text" string="Comment" />
 				 			</tree>
-				 		
 				 		</field>
+				 		<newline/>
+				 		<button name="action_edit_survey_response" type="object" string="Rediger svar" />
 				 	
 				 	</group>
 				 

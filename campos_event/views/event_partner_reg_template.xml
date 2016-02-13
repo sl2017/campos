@@ -5,8 +5,8 @@
             <t t-call="website.layout">
                 <div id="wrap">
                 <form t-attf-action="/event/#{event.id}/register/register_free" method="post" class="container">
-                    
-                    <h1>Confirm Your Details</h1>
+                    <h1><span t-esc="event.name"/></h1>
+                    <h2>Confirm Your Details</h2>
                     <input type="hidden" t-att-value="tickets" name="tickets" />
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('name') and 'has-error' or ''}">
@@ -70,7 +70,11 @@
                             <input type="date" id="birthdate" name="birthdate" placeholder="åååå-mm-dd" class="form-control" t-att-value="post.get('birthdate')" required="required" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg pull-right">Register <span class="fa fa-long-arrow-right"/></button>
+                    <div class="btn-group pull-right">
+                    <button type="submit" name="action" value="noshow" class="btn btn-danger btn-primary-spacing btn-lg">Deltager IKKE</button>
+                    <span> </span>
+                    <button type="submit" name="action" value="register" class="btn btn-primary btn-primary-spacing btn-lg">Deltager <span class="fa fa-long-arrow-right"/></button>
+                    </div>
                 </form>
                 </div>
             </t>
