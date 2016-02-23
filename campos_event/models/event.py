@@ -137,6 +137,9 @@ class EventEvent(models.Model):
                     elif ans.question_id.type in ['free_text','textbox', 'text'] and ans.value_text:
                         row['%d' % (ans.question_id.id)] = ans.value_text
                         _logger.info('%s ROW text: %d %s', row['s1'], ans.question_id.id, ans.value_text)
+                    elif ans.question_id.type in ['free_text'] and ans.value_free_text:
+                        row['%d' % (ans.question_id.id)] = ans.value_free_text
+                        _logger.info('%s ROW FREE text: %d %s', row['s1'], ans.question_id.id, ans.value_free_text)
             rows.append(row)
                         
         data = base64.encodestring(self.from_data(fields, rows ) )
