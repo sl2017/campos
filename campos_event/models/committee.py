@@ -175,6 +175,7 @@ class CampCommitteeFunction(models.Model):
     _description = 'Committee Functions'
     _name = 'campos.committee.function'
     _order = 'committee_id'
+    _inherit = 'mail.thread'
     
     name = fields.Char()
     participant_id = fields.Many2one('campos.event.participant', ondelete='cascade', string="Participant")
