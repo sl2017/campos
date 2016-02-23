@@ -134,7 +134,7 @@ class EventEvent(models.Model):
                     elif ans.question_id.type == 'simple_choice' and ans.value_suggested: 
                         row['%d' % (ans.question_id.id)] = ans.value_suggested.value
                         _logger.info('%s ROW simple: %d %s', row['s1'], ans.question_id.id, ans.value_suggested.value )
-                    elif ans.question_id.type in ['free_text','textbox'] and ans.value_text:
+                    elif ans.question_id.type in ['free_text','textbox', 'text'] and ans.value_text:
                         row['%d' % (ans.question_id.id)] = ans.value_text
                         _logger.info('%s ROW text: %d %s', row['s1'], ans.question_id.id, ans.value_text)
             rows.append(row)
@@ -252,12 +252,14 @@ class EventRegistration(models.Model):
     def action_edit_survey_response(self):
         fields = []
         self.ensure_one()
-        if self.reg_survey_input_id:
-            self.reg_survey_input_id.state = 'new'
-            return {'type': 'ir.actions.act_url', 
-                    'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token), 
-                    'nodestroy': True, 
-                    'target': 'new' }
+        if not self.reg_survey_input_id:
+            self.reg_survey_input_id = self.env['survey.user_input'].create({'survey_id': self.event_id.survey_id.id,
+                                                                             'partner_id': self.partner_id.id})
+        self.reg_survey_input_id.state = 'new'
+        return {'type': 'ir.actions.act_url', 
+                'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token), 
+                'nodestroy': True, 
+                'target': 'new' }
 
 class EventParticipantReject(models.Model):
 
