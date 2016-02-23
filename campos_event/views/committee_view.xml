@@ -91,7 +91,7 @@
 						<group>
 							<field name="desc" />
 							<field name="website_published"/>
-							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" />
+							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" domain="[('state', '=', 'approved')]"/>
 							<field name="template_id" />
 							<field name="parent_id" />
 							<field name="committee_type_id"/>
@@ -99,7 +99,7 @@
 							<field name="sequence" />
 							<field name="account"/>
 							<field name="par_contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
-										options='{"always_reload": True, "highlight_first_line": True}'/>/>
+										options='{"always_reload": True, "highlight_first_line": True}' domain="[('state', '=', 'approved')]"/>
 						</group>
 					</sheet>
 					<div class="oe_chatter">
