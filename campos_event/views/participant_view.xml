@@ -413,7 +413,7 @@
 					<field name="state"/>
 					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
 					<field name="committee_id" string="Committee"/>
-					<!-- <field name="functitle"/> -->
+					<field name="message_last_post"/>
 	
 				</tree>
 			</field>
