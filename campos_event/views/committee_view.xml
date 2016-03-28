@@ -8,7 +8,7 @@
 
 			<field name="res_model">campos.committee.function</field>
 			<field name="view_type">form</field>
-    		<field name="view_mode">tree</field>
+    		<field name="view_mode">tree,form,geoengine</field>
     		
             <field name="context">{}</field>
             <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id)]</field>
@@ -41,6 +41,40 @@
 				</tree>
 			</field>
 		</record>
+		
+		<!-- GeoEngine views -->
+        <record id="campos_committee_member_tree_geo" model="ir.ui.view">
+            <field name="name">Committee Member view</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name" select="1"/>
+                    <field name="participant_id" label="Name"/>
+                    <field name="committee_id" />
+                    <field name="function_type_id />"
+                </geoengine>
+            </field>
+            <field eval="16" name="priority"/>
+            <field name="model">campos.committee.function</field>
+        </record>
+
+        <record id="geoengine_vector_layer_committee_member" model="geoengine.vector.layer">
+            <field name="geo_field_id"
+                   ref="campos_event.field_campos_committee_function_geo_point"/>
+            <field name="name">Committee Members</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="campos_committee_member_tree_geo"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+
+        <record id="geoengine_raster_layer_committee_member" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Committee Members background</field>
+            <field name="view_id" ref="campos_committee_member_tree_geo"/>
+            <field eval="0" name="overlay"/>
+        </record>
+		
 		
 		<record id="campos_committee_member_search" model="ir.ui.view">
 			<field name="name">Committee Func Search</field>
@@ -160,6 +194,7 @@
 
 			<field name="res_model">campos.committee.function</field>
 			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,geoengine</field>
 
 
 		</record>
@@ -217,6 +252,7 @@
 			</field>
 		</record>
 
+		
 		<record id="action_committee_type_tree" model="ir.actions.act_window">
 			<field name="name">Committee types</field>
 			<field name="res_model">campos.committee.type</field>
