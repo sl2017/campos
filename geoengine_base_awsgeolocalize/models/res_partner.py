@@ -94,3 +94,11 @@ class ResPartner(geo_model.GeoModel):
 
     geo_point = geo_fields.GeoPoint(
         readonly=True, store=True, compute='_get_geo_point')
+    
+    @api.multi
+    def write(self, vals):
+        res = super(ResPartner, self).write(vals)
+        if set(vals.keys()) & set(['street', 'city', 'zip', 'country_id']):
+            for p in self:
+                p.geocode_address()
+        return res
