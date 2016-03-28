@@ -8,6 +8,7 @@ from . import municipality
 from . import res_partner
 from . import event
 from . import committee
+from . import committeefunction
 from . import camposjob
 from . import res_users
 from . import camp_area

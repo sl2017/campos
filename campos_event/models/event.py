@@ -29,6 +29,7 @@ import random
 from urlparse import urljoin
 import werkzeug
 
+from openerp.addons.base_geoengine import geo_model
 from openerp import models, fields, api
 from openerp.tools.translate import _
 
@@ -291,7 +292,7 @@ class EventParticipantReject(models.Model):
         return ret
     
     
-class EventParticipant(models.Model):
+class EventParticipant(geo_model.GeoModel):
 
     '''
     Detail participant/Jobber Info
