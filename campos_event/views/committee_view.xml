@@ -8,7 +8,7 @@
 
 			<field name="res_model">campos.committee.function</field>
 			<field name="view_type">form</field>
-    		<field name="view_mode">tree</field>
+    		<field name="view_mode">tree,form,geoengine</field>
     		
             <field name="context">{}</field>
             <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id)]</field>
@@ -48,7 +48,9 @@
             <field name="arch" type="xml">
                 <geoengine version="7.0">
                     <field name="name" select="1"/>
-                    <field name="participant_id"/>
+                    <field name="participant_id" label="Name"/>
+                    <field name="committee_id" />
+                    <field name="function_type_id />"
                 </geoengine>
             </field>
             <field eval="16" name="priority"/>
@@ -192,6 +194,7 @@
 
 			<field name="res_model">campos.committee.function</field>
 			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,geoengine</field>
 
 
 		</record>
