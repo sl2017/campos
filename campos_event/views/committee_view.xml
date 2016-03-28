@@ -50,7 +50,7 @@
                     <field name="name" select="1"/>
                     <field name="participant_id" label="Name"/>
                     <field name="committee_id" />
-                    <field name="function_type_id />"
+                    <field name="function_type_id" />
                 </geoengine>
             </field>
             <field eval="16" name="priority"/>
