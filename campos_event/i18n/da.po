@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-26 02:00+0000\n"
-"PO-Revision-Date: 2016-01-26 02:00+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"PO-Revision-Date: 2016-03-12 09:08+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -314,7 +314,7 @@ msgstr "lukkede job"
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_tree
@@ -489,7 +489,7 @@ msgstr "Arrangementer"
 #. module: campos_event
 #: view:event.event:campos_event.view_event_form
 msgid "Export"
-msgstr ""
+msgstr "eksport"
 
 #. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
@@ -756,17 +756,17 @@ msgstr "Telefon"
 #. module: campos_event
 #: field:res.users,website_published:0
 msgid "Publish"
-msgstr ""
+msgstr "Publiceret"
 
 #. module: campos_event
 #: help:res.users,website_published:0
 msgid "Publish on the website"
-msgstr ""
+msgstr "Publiceres på hjemmeside"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Rediger svar"
-msgstr ""
+msgstr "rediger svar"
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
@@ -801,7 +801,7 @@ msgstr "Afvisning / Afvisninger"
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Reply"
-msgstr ""
+msgstr "Svar"
 
 #. module: campos_event
 #: view:campos.committee.function:campos_event.view_campos_committee_function_form2
@@ -889,7 +889,7 @@ msgstr "Skype adresse"
 #. module: campos_event
 #: field:res.users,speaker:0
 msgid "Speaker"
-msgstr ""
+msgstr "Taler"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_staff
@@ -1096,7 +1096,7 @@ msgstr "Er blevet opdateret uden problemer"
 #. module: campos_event
 #: field:res.users,self:0
 msgid "unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form

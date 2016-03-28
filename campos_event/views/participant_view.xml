@@ -19,7 +19,7 @@
 			
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,geoengine</field>
 		</record>
 		
 		<!-- Registration inherited form -->
@@ -106,6 +106,20 @@
 				</form>
 				</field>
 				</record>
+				
+		<record id="ir_ui_view_geo_participant" model="ir.ui.view">
+            <field name="name">Participant view</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name" select="1"/>
+                    <field name="website"/>
+                    <field name="zip"/>
+                    <field name="city"/>
+                </geoengine>
+            </field>
+            <field eval="16" name="priority"/>
+            <field name="model">campos.event.participant</field>
+        </record>
 				
 
 		<record model="ir.ui.view" id="view_event_registration_participant_form">
@@ -253,7 +267,9 @@
 								 	</group>
 								 
 								 </page>
-								 
+								 <page string="Map">
+                        			<field name="geo_point" widget="geo_edit_map"/>
+                    			 </page>								 
 							</notebook>
 						</group>
 					</sheet>
@@ -265,7 +281,34 @@
 				
 			</field>
 		</record>
+		
+		
 
+		<record id="geoengine_vector_layer_participant" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Participant background</field>
+            <field name="view_id" ref="view_event_registration_participant_form"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
+        <record id="geoengine_vector_participant" model="geoengine.vector.layer">
+            <field name="geo_field_id"
+                ref="campos_event.field_res_users_geo_point"/>
+            <field name="name">Participant location</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_geo_participant"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        
+        <record id="geoengine_vector_layer_participant_tree" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Participant background</field>
+            <field name="view_id" ref="ir_ui_view_geo_participant"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
 	<record model="ir.ui.view" id="staff_event_registration_participant_form">
 			<field name="name">registration.participant.form Staff</field>
 			<field name="model">campos.event.participant</field>
@@ -413,7 +456,7 @@
 					<field name="state"/>
 					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
 					<field name="committee_id" string="Committee"/>
-					<!-- <field name="functitle"/> -->
+					<field name="message_last_post"/>
 	
 				</tree>
 			</field>
