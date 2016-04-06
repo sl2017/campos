@@ -6,6 +6,10 @@ class SponsorMain(models.Model):
 	_inherit=['mail.thread', 'ir.needaction_mixin']
 	_inherits={'res.partner':'partner_id'}
 	partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')
+	
+	#boolean isSponsor. If true, modul = sponsor. If false, modul = partner
+	sponsor_issponsor = fields.Boolean('Er sponsor', help="Dette felt bestemmer om element er sponsor. Hvis det ikke er markeret, er dette element et partnerskab.", track_visibility='onchange',  default=True)
+	
 	#Fields
 	
 	#name = fields.Char('partner_id.name', track_visibility='onchange', required=True, store=True)
@@ -111,6 +115,21 @@ class SponsorMain(models.Model):
 	@api.one
 	def btn_aaben(self):
 		self.sponsor_state='state_potentiel'
+		
+	@api.one
+	def btn_tosponsor(self):
+		self.sponsor_issponsor=True
+		
+	@api.one
+	def btn_topartner(self):
+		self.sponsor_issponsor=False
+		
+		
+		
+		
+	
+	#Partnerskabsmodul
+	
 		
 		
 class SponsorTema(models.Model):
