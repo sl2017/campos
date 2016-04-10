@@ -28,7 +28,7 @@
 								<field name="street" attrs="{'required':True}"/>
 								<field name="zip" attrs="{'required':True}"/>
 								<field name="city" attrs="{'required':True}"/>
-								<field name="country_id" attra="{'required':True}" options="{'no_create': True}"/>
+								<field name="country_id" options="{'no_create': True}" attrs="{'required':[('sponsor_issponsor','==',True)], 'invisible':[('sponsor_issponsor','==',False)]}"/>
 								<field name="sponsor_cvr"/>
 								<!--<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}"/>-->
 								<field name="sponsor_kontaktperson_name"/>
@@ -39,16 +39,15 @@
 							<group>
 								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
 								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
-								<field name="sponsor_kategori"/>
-								<!--<field name="sponsor_tema"/>-->
-								<field name="sponsor_temaer" widget="many2many_tags"/>
-								<field name="sponsor_type" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
-								<field name="sponsor_type_begrund"/>
+								<field name="sponsor_kategori" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
+								<field name="sponsor_temaer" widget="many2many_tags" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
+								<field name="sponsor_type" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')], 'invisible':[('sponsor_issponsor','==',False)]}"/>
+								<field name="sponsor_type_begrund" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
 							</group>
 						</group>
-						<group>
+						<group attrs="{'invisible':[('sponsor_issponsor','==',False)]}">
 							<group>
-								<field name="sponsor_ansogt"/>
+								<field name="sponsor_ansogt" attrs="{'required':[('sponsor_issponsor','==',True)]}"/>
 								<field name="sponsor_bevilliget" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')]}"/>
 							</group>
 							<group>
@@ -56,15 +55,21 @@
 								<!--<field name="sponsor_udfyldtaf" options="{'no_create': True}"/>-->
 							</group>
 						</group>
-						<h3>Bemærkninger til sponsorat</h3>
-						<field name="sponsor_kommentar"/>
+						<h3 attrs="{'invisible':[('sponsor_issponsor','==',False)]}">Bemærkninger til sponsorat</h3>
+						<field name="sponsor_kommentar" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
 						<group name="group_adminfields" groups="campos_sponsor.group_campos_sponsorudvalg">
 							<hr/>
 							<h3>Udvalgsfelter</h3>
 							<field name="sponsor_adminnote"/>
-							<h4>Is Sponsor</h4>
+							<h4>Is Sponsor:</h4>
 							<field name="sponsor_issponsor" />
 						</group>
+						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Idé til aktivitet</h3>
+						<field name="partner_aktivitet" attrs="{'required':[('sponsor_issponsor','==',True)], 'invisible':[('sponsor_issponsor','==',True)]}"/>
+						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Ønsker fra partnerskabet</h3>
+						<field name="partner_onsker" attrs="{'required':[('sponsor_issponsor','==',True)], 'invisible':[('sponsor_issponsor','==',True)]}"/>
+						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Bemærkninger</h3>
+						<field name="partner_bemarkninger" attrs="{'invisible':[('sponsor_issponsor','==',True)]}"/>
 					</sheet>
 					<div class="oe_chatter">
 						<field name="message_follower_ids" widget="mail_followers"/>

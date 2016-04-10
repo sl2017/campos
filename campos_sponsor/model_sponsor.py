@@ -76,11 +76,10 @@ class SponsorMain(models.Model):
 									('type_event', 'Event eller Aktivitets Sponsor'),
 									('type_basis', 'Basis Sponsor')],
 								'Sponsor type',
-								track_visibility='onchange',
-								required=False)
+								track_visibility='onchange')
 	sponsor_type_begrund = fields.Text('Begrundelse for typevalg', track_visibility='onchange')
 	#sponsor_udfyldtaf = fields.Many2one('res.partner','Udfyldt af', track_visibility='onchange', required=True)
-	sponsor_bevilliget = fields.Integer(u'Bevilliget værdi', track_visibility='onchange', required=False)
+	sponsor_bevilliget = fields.Integer(u'Bevilliget værdi', track_visibility='onchange')
 	
 	
 	#State
@@ -129,6 +128,9 @@ class SponsorMain(models.Model):
 		
 	
 	#Partnerskabsmodul
+	partner_aktivitet = fields.Text(u'Idé til aktivitet',track_visibility='onchange')
+	partner_onsker = fields.Text(u'Ønsker ud af partnerskabet',track_visibility='onchange')
+	partner_bemarkninger = fields.Text(u'Bemærkninger',track_visibility='onchange')
 	
 		
 		
