@@ -8,14 +8,27 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
-						<button name="btn_opretansogning" type="object" string="Opret som ansøgning" attrs="{'invisible':[('sponsor_state','==','state_ansogning')]}" class="oe_highlight" />
-						<button name="btn_bevillig" type="object" string="Sponsorat bevilliget" attrs="{'invisible':[('sponsor_state','!=','state_ansogning')]}" class="oe_highlight" />
-						<button name="btn_afvis" type="object" string="Afvis ansøgning" attrs="{'invisible':[('sponsor_state','!=','state_ansogning')]}" class="oe_highlight" />
-						<button name="btn_laas" type="object" string="Lås ansøgning" attrs="{'invisible':[('sponsor_state','==','state_laast')]}" class="oe_highlight" />
-						<button name="btn_aaben" type="object" string="Genåben og opret som potentiel" attrs="{'invisible':[('sponsor_state','!=','state_laast')]}" class="oe_highlight" />
+						<!--Sponsor-->
+						<button name="btn_sponsor_opretansogning" type="object" string="Opret som ansøgning" attrs="{'invisible':['|',('sponsor_state','==','state_ansogning'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
+						<button name="btn_sponsor_bevillig" type="object" string="Sponsorat bevilliget" attrs="{'invisible':['|',('sponsor_state','!=','state_ansogning'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
+						<button name="btn_sponsor_afvis" type="object" string="Afvis ansøgning" attrs="{'invisible':['|',('sponsor_state','!=','state_ansogning'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
+						<button name="btn_sponsor_laas" type="object" string="Lås ansøgning" attrs="{'invisible':['|',('sponsor_state','==','state_laast'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
+						<button name="btn_sponsor_aaben" type="object" string="Genåben og opret som potentiel" attrs="{'invisible':['|',('sponsor_state','!=','state_laast'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
+						
+						<!--Partner-->
+						<button name="btn_partner_behandles" type="object" string="Behandles" attrs="{'invisible':['|',('partner_state','==','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
+						<button name="btn_partner_godkendt" type="object" string="Godkend partnerskab" attrs="{'invisible':['|',('partner_state','!=','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
+						<button name="btn_partner_afvis" type="object" string="Afvis ansøgning" attrs="{'invisible':['|',('partner_state','!=','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
+						<button name="btn_partner_laas" type="object" string="Lås ansøgning" attrs="{'invisible':['|',('partner_state','==','state_laast'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
+						<button name="btn_partner_aaben" type="object" string="Genåben og opret som potentiel" attrs="{'invisible':['|',('partner_state','!=','state_laast'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
+						
+						<!--General-->
 						<button name="btn_tosponsor" type="object" string="Lav til sponsor" attrs="{'invisible':[('sponsor_issponsor','==',True)]}" class="oe_highlight" />
 						<button name="btn_topartner" type="object" string="Lav til partnerskab" attrs="{'invisible':[('sponsor_issponsor','==',False)]}" class="oe_highlight" />
-						<field name="sponsor_state" widget="statusbar" statusbar_visible="state_potentiel,state_ansogning,state_bevilliget"/>
+						
+						<!--State fields-->
+						<field name="partner_state" widget="statusbar" attrs="{'invisible':[('sponsor_issponsor','==',True)]}" statusbar_visible="state_potentiel,state_behandles,state_godkendt"/>
+						<field name="sponsor_state" widget="statusbar" attrs="{'invisible':[('sponsor_issponsor','==',False)]}" statusbar_visible="state_potentiel,state_ansogning,state_bevilliget"/>
 					</header>
 					<sheet>
 						<h1 style="margin-bottom: 10px;" attrs="{'invisible':[('sponsor_issponsor','==',False)]}">Sponsorat/fond</h1>
@@ -23,12 +36,16 @@
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',False)]}">Sponsornavn</h3>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Partnerskabsnavn</h3>
 						<h2><field name="name" attrs="{'required':True}"/></h2>
+						<div>
+							<label string="Er et sponsorat: "/>
+                    		<field name="sponsor_issponsor"/>
+						</div>
 						<group>
 							<group>
 								<field name="street" attrs="{'required':True}"/>
 								<field name="zip" attrs="{'required':True}"/>
 								<field name="city" attrs="{'required':True}"/>
-								<field name="country_id" options="{'no_create': True}" attrs="{'required':[('sponsor_issponsor','==',True)], 'invisible':[('sponsor_issponsor','==',False)]}"/>
+								<field name="country_id" options="{'no_create': True}" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
 								<field name="sponsor_cvr"/>
 								<!--<field name="sponsor_kontaktperson_sponsor" context="{'form_view_ref':'base.view_partner_simple_form','default_sponsor':True, 'default_staff':False}"/>-->
 								<field name="sponsor_kontaktperson_name"/>
@@ -39,7 +56,7 @@
 							<group>
 								<field name="sponsor_udvalg_ansvarlig" options="{'no_create': True}"/>
 								<field name="sponsor_kontaktperson_sl2017" options="{'no_create': True}"/>
-								<field name="sponsor_kategori" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
+								<field name="sponsor_kategori" attrs="{'invisible':[('sponsor_issponsor','==',False)],'required':[('sponsor_issponsor','==',True)]}"/>
 								<field name="sponsor_temaer" widget="many2many_tags" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
 								<field name="sponsor_type" attrs="{'required': [('sponsor_state', '!=', 'state_potentiel')], 'invisible':[('sponsor_issponsor','==',False)]}"/>
 								<field name="sponsor_type_begrund" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
@@ -61,8 +78,6 @@
 							<hr/>
 							<h3>Udvalgsfelter</h3>
 							<field name="sponsor_adminnote"/>
-							<h4>Is Sponsor:</h4>
-							<field name="sponsor_issponsor" />
 						</group>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Idé til aktivitet</h3>
 						<field name="partner_aktivitet" attrs="{'required':[('sponsor_issponsor','==',True)], 'invisible':[('sponsor_issponsor','==',True)]}"/>
