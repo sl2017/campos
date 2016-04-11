@@ -134,6 +134,12 @@ class SponsorMain(models.Model):
 	partner_aktivitet = fields.Text(u'Idé til aktivitet',track_visibility='onchange')
 	partner_onsker = fields.Text(u'Ønsker ud af partnerskabet',track_visibility='onchange')
 	partner_bemarkninger = fields.Text(u'Bemærkninger',track_visibility='onchange')
+	partner_nextsteps = fields.Text(u'Næste skridt',track_visibility='onchange')
+	partner_bidrag_1 = fields.Boolean(u'Idé',track_visibility='onchange')
+	partner_bidrag_2 = fields.Boolean(u'Bemanding på lejr',track_visibility='onchange')
+	partner_bidrag_3 = fields.Boolean(u'Materialer',track_visibility='onchange')
+	partner_bidrag_4 = fields.Boolean(u'Viden/sparring',track_visibility='onchange')
+	partner_bidrag_5 = fields.Boolean(u'Diverse',track_visibility='onchange')
 	#State
 	partner_state = fields.Selection([('state_potentiel',u'Ansøgning'),
 									('state_behandles','Behandles'),
