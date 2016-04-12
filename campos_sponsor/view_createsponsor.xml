@@ -108,6 +108,11 @@
 			</field>
 		</record>
 		
+		
+		
+		
+		
+		
 		<record id="view_sponsor_overview" model="ir.ui.view">
 			<field name="name">Sponsor Tree view</field>
 			<field name="model">model.sponsor</field>
@@ -126,6 +131,13 @@
 		
 		
 
+		<!-- Menu item to open Partner list -->
+		<menuitem id="menu_sponsorpartner_create"
+			name="Sponsor og Partner"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_sponsor_create" />
+		
 
 		<!-- Action to open Sponsor list -->
 		<act_window id="action_sponsor_create"
@@ -136,9 +148,45 @@
 		<!-- Menu item to open Sponsor list -->
 		<menuitem id="menu_sponsor_create"
 			name="SL2017 Sponsors"
-			parent="campos_event.menu_campos_comittee"
+			parent="menu_sponsorpartner_create"
 			sequence="20"
 			action="action_sponsor_create" />
+			
+			
+			
+		
+		
+		<record id="view_partner_overview" model="ir.ui.view">
+			<field name="name">Partner Tree view</field>
+			<field name="model">model.sponsor</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="partner_aktivitet"/>
+					<field name="partner_bidrag_1"/>
+					<field name="partner_bidrag_2"/>
+					<field name="partner_bidrag_3"/>
+					<field name="partner_bidrag_4"/>
+					<field name="partner_bidrag_5"/>
+					<field name="partner_state"/>
+				</tree>
+			</field>
+		</record>
+		
+			
+		<!-- Action to open Partner list -->
+		<act_window id="action_partner_create"
+			name="SL2017 Partner oversigt"
+			res_model="model.sponsor"
+			view_mode="tree,form" />
+
+		<!-- Menu item to open Partner list -->
+		<menuitem id="menu_partner_create"
+			name="SL2017 Partnere"
+			parent="menu_sponsorpartner_create"
+			sequence="20"
+			action="action_partner_create" />
+			
 
 	</data>
 </openerp>
