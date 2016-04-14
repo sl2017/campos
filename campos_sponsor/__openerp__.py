@@ -1,6 +1,6 @@
 {
 	'name': 'CampOS Sponsors',
-	'description': 'Administrer sponsorer og fonde med dette modul, udviklet til SL2017.',
+	'description': 'Administrer sponsorater, fonde og partnerskaber med dette modul. Udviklet specifikt til SL2017.',
 	'author': 'Patrick Bassing',
 	'depends': [
 			'mail',
