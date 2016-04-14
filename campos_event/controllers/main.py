@@ -25,7 +25,7 @@
 ##############################################################################
 
 
-from openerp import tools
+from openerp import tools, fields
 from openerp import SUPERUSER_ID
 from openerp.addons.web import http
 from openerp.addons.web.controllers.main import login_redirect
@@ -240,6 +240,8 @@ class CampOsEvent(http.Controller):
         request = http.request
         fieldlist = {'sp': ['sharepoint_mailaddress'], 
                      'zx': ['zexpense_firsttime_pwd']}
+        datefield = {'sp': ['sharepoint_mail_created'], 
+                     'zx': ['zexpense_access_created']}
         
         env = request.env(user=SUPERUSER_ID)
         
@@ -249,7 +251,8 @@ class CampOsEvent(http.Controller):
             values = {}
             for f in fieldlist[mode]:
                 values[f] = post.get(f)
-                _logger
+            values[datefield[mode]] = fields.Date.today()
+            _logger.info("Confirm par val %s", values)
             par.write(values)
             
             return request.render("campos_event.participant updated", {'par': par})
