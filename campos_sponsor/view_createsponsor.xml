@@ -87,7 +87,7 @@
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',False)]}">Bemærkninger til sponsorat</h3>
 						<field name="sponsor_kommentar" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Idé til aktivitet</h3>
-						<field name="partner_aktivitet" attrs="{'required':[('sponsor_issponsor','==',False)], 'invisible':[('sponsor_issponsor','==',True)]}"/>
+						<field name="partner_aktivitet" attrs="{'invisible':[('sponsor_issponsor','==',True)]}"/>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Ønsker fra partnerskabet</h3>
 						<field name="partner_onsker" attrs="{'invisible':[('sponsor_issponsor','==',True)]}"/>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Næste skridt</h3>
@@ -131,23 +131,29 @@
 		
 		
 
+		
+		
+
+		<!-- Action to open Sponsor list -->
+		<act_window id="action_sponsor_create"
+			name="SL2017 Sponsor oversigt"
+			res_model="model.sponsor"
+			view_mode="tree,form" 
+			domain="[('sponsor_issponsor','=',True)]"
+			view_id="view_sponsor_overview" />
+			
+			
 		<!-- Menu item to open Partner list -->
 		<menuitem id="menu_sponsorpartner_create"
 			name="Sponsor og Partner"
 			parent="campos_event.menu_campos_comittee"
 			sequence="20"
 			action="action_sponsor_create" />
-		
-
-		<!-- Action to open Sponsor list -->
-		<act_window id="action_sponsor_create"
-			name="SL2017 Sponsors oversigt"
-			res_model="model.sponsor"
-			view_mode="tree,form" />
+			
 
 		<!-- Menu item to open Sponsor list -->
 		<menuitem id="menu_sponsor_create"
-			name="SL2017 Sponsors"
+			name="SL2017 Sponsor"
 			parent="menu_sponsorpartner_create"
 			sequence="20"
 			action="action_sponsor_create" />
@@ -178,11 +184,14 @@
 		<act_window id="action_partner_create"
 			name="SL2017 Partner oversigt"
 			res_model="model.sponsor"
-			view_mode="tree,form" />
+			view_mode="tree,form"
+			view_id="view_partner_overview"
+			domain="[('sponsor_issponsor','=',False)]"
+			context="{'default_sponsor_issponsor':False}" />
 
 		<!-- Menu item to open Partner list -->
 		<menuitem id="menu_partner_create"
-			name="SL2017 Partnere"
+			name="SL2017 Partner"
 			parent="menu_sponsorpartner_create"
 			sequence="20"
 			action="action_partner_create" />
