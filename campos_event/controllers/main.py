@@ -169,7 +169,7 @@ class CampOsEvent(http.Controller):
          '/campos/jobber/joblist/<model("campos.job.tag"):tag>',
          '/campos/jobber/jobcom/<model("campos.committee"):comm>'], 
          type='http', auth="public", website=True)
-    def jobber_joblist(self, tag=None, comm=None, **kwargs):
+    def jobber_joblist(self, tag=None, comm=None,  search=None, **kwargs):
         request = http.request
         
         if tag:
@@ -178,11 +178,12 @@ class CampOsEvent(http.Controller):
         elif comm:
             jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
             list_title = _("Jobs for: ") + comm.name
-        
-        
+        elif search:
+            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|','|',('name', 'ilike', search),('teaser', 'ilike', search),('desc', 'ilike', search)])
+            list_title = _("Search Result")
         
         else:
-            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True)])
+            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True)], order='write_date DESC')
             list_title = _("Job list")
             
         for j in jobs:
@@ -197,6 +198,16 @@ class CampOsEvent(http.Controller):
                                                                   'nav_tags' : nav_tags,
                                                                   'nav_comm' : nav_comm})    
         
+    @http.route(
+        ['/campos/jobber/view/<model("campos.job"):job>'],
+        type='http', auth="public", website=True)
+    def jobber_jobview(self, job=None, **kwargs):
+        nav_tags = request.env['campos.job.tag'].search([])
+        nav_tags = nav_tags.filtered(lambda r: any([j.openjob for j in r.job_ids]))
+        nav_comm = request.env['campos.committee'].search([('parent_id', '=', False),('website_published', '=', True)])
+        return request.render("campos_event.jobber_job_view", {'job' : job,
+                                                               'nav_tags' : nav_tags,
+                                                               'nav_comm' : nav_comm})   
         
         
         
@@ -240,8 +251,8 @@ class CampOsEvent(http.Controller):
         request = http.request
         fieldlist = {'sp': ['sharepoint_mailaddress'], 
                      'zx': ['zexpense_firsttime_pwd']}
-        datefield = {'sp': ['sharepoint_mail_created'], 
-                     'zx': ['zexpense_access_created']}
+        datefield = {'sp': 'sharepoint_mail_created', 
+                     'zx': 'zexpense_access_created'}
         
         env = request.env(user=SUPERUSER_ID)
         
