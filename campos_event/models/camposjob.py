@@ -58,6 +58,7 @@ class CamposJob(models.Model):
     _inherit = 'mail.thread'
 
     name = fields.Char('Name', size=64)
+    teaser = fields.Char('Teaser', size=128)
     desc = fields.Html('Description')
     active = fields.Boolean('Active', help="The active field allows you to hide the category without removing it.", default=True)
     tag_ids = fields.Many2many('campos.job.tag', 'campos_job_tag_rel', 'job_id', 'tag_id', string='Tags')
