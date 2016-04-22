@@ -94,12 +94,13 @@
 						</div>
 						<group col="4">
 							<group colspan="2">
-								<field name="committee_id" />
+								<field name="committee_id" required="1"/>
 							</group>
 							<group colspan="2">
 								<field name="active" />
 							</group> 
-							<field name="desc" colspan="4"/>
+							<field name="teaser" colspan="4" required="1"/>
+							<field name="desc" colspan="4" required="1"/>
 							<group colspan="2">
 								<field name="job_where" />
 							</group>
