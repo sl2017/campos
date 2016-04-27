@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<record id="view_issue_form2" model="ir.ui.view">
+    <field name="model">project.issue</field>
+    <field name="inherit_id" ref="project_issue.project_issue_form_view"/>
+    <field name="arch" type="xml">
+        <field name="email_from" position="after">
+            <field name="model_reference" invisible="1"/>
+            <label for="issue_origin"
+                   attrs="{'invisible': ['|',
+                                         ('model_reference', '=', False),
+                                         ('name', '=', False)]}"/>
+            <span>
+                <field name="issue_origin"
+                       attrs="{'invisible': ['|',
+                                             ('model_reference', '=', False),
+                                             ('name', '=', False)]}"/>
+                <button name="goto_document" type="object" string="Open"
+                        attrs="{'invisible': [('model_reference', '=', False)]}"
+                        class="oe_read_only" colspan="1"
+                        help="Go to the window from which the issue has been defined."/>
+            </span>
+        </field>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="issue_from_elsewhere">
+    <field name="name">Model to issue creation</field>
+    <field name="res_model">project.issue</field>
+    <field name="view_mode">form</field>
+</record>
+
+    </data>
+</openerp>
