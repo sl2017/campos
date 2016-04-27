@@ -56,6 +56,7 @@
         'geoengine_partner',
         'web_widget_color',
         'project_issue',
+        'project_model_to_issue',
         
     ],
 

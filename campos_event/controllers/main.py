@@ -298,6 +298,7 @@ class CampOsEvent(http.Controller):
                     'description': post.get('description'),
                     'project_id': env.ref('campos_event.project_job_ask').id,
                     'user_id': user,
+                    'model_reference': '%s,%d' % ('campos.job', job.id)
                 }
                 env['project.issue'].create(value)
                 return request.render("campos_event.jobber_job_ask_thankyou")

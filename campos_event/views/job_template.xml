@@ -297,7 +297,7 @@
 										</div>
 									</div>
 									<div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
-										for="description">My question</label> <div class="col-md-7 col-sm-8"> 
+										for="description">Your question</label> <div class="col-md-7 col-sm-8"> 
 										<textarea class="form-control" t-esc="default.get('description')" name="description" required="True"  
 										style="min-height: 120px" maxlength="250"/> </div> </div>
 									<div class="form-group">
