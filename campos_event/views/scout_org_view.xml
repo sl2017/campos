@@ -27,9 +27,28 @@
 					<field name="country_id" />
 					<field name="sex" />
 					<field name="worldorg" />
+					<field name="color" widget="color"/>
 
 
 				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="scoutorg_form">
+			<field name="name">scoutorg.form</field>
+			<field name="model">campos.scout.org</field>
+			<field name="arch" type="xml">
+				<form string="Scout Organizations">
+					<sheet>
+					<group>
+					<field name="name" />
+					<field name="country_id" />
+					<field name="sex" />
+					<field name="worldorg" />
+					<field name="color" widget="color"/>
+					</group>
+				</sheet>
+				</form>
 			</field>
 		</record>
 

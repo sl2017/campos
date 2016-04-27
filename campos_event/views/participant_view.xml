@@ -294,7 +294,7 @@
         
         <record id="geoengine_vector_participant" model="geoengine.vector.layer">
             <field name="geo_field_id"
-                ref="campos_event.field_res_users_geo_point"/>
+                ref="campos_event.field_campos_event_participant_geo_point"/>
             <field name="name">Participant location</field>
             <field eval="6" name="sequence"/>
             <field name="view_id" ref="ir_ui_view_geo_participant"/>
@@ -369,7 +369,7 @@
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aggreement with"/>
 							<separator string="Job/Committee" colspan="2"/>
-							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
+							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3" attrs="{'readonly': [('state',' not in', 'approved')]}">
 							<tree create="false">
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
