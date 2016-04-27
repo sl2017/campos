@@ -42,3 +42,4 @@ class CamposScoutOrg(models.Model):
                                  ('wosm', 'WOSM'),
                                  ('w/w', 'WAGGGS/WOSM'),
                                  ('other', 'Other')], string='World Organization')
+    color = fields.Char('Color')

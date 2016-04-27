@@ -309,6 +309,7 @@ class EventParticipant(geo_model.GeoModel):
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
         'Scout Organization', related='registration_id.organization_id')
+    scout_color = fields.Char('Scout Org Color', related='registration_id.organization_id.color')
 
     # Scout Leader Fiedls
 
@@ -399,7 +400,7 @@ class EventParticipant(geo_model.GeoModel):
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
         query = {'db': self._cr.dbname}
         self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
-        self.zepense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.zexpense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         
     @api.model

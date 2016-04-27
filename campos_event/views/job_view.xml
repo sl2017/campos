@@ -91,6 +91,10 @@
 								type="action" class="oe_stat_button"  icon="fa-user"> 
 								<field string="Applicants" name="openapplications_qty" widget="statinfo"/>
 							</button>
+							<button name="open_issues"
+								type="object" class="oe_stat_button"  icon="fa-question"> 
+								<field string="Questions" name="issue_qty" widget="statinfo"/>
+							</button>
 						</div>
 						<group col="4">
 							<group colspan="2">
@@ -110,6 +114,8 @@
 							<field name="signup_button"/>
 							<newline/>
 							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..." colspan="4"/>
+							<field name="par_contact_id" required="1"/>
+							<newline/>
 							<group colspan="2">
 								<field name="date_public"/>
 								<field name="date_closing"/>
