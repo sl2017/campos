@@ -26,9 +26,11 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.addons.base_geoengine import geo_model
+from openerp.addons.base_geoengine import fields as geo_fields
 
 
-class CamposMunicipality(models.Model):
+class CamposMunicipality(geo_model.GeoModel):
 
     """ Kommuner """
     _description = 'DK Kommuner'
@@ -37,3 +39,4 @@ class CamposMunicipality(models.Model):
 
     name = fields.Char('Name', size=64)
     number = fields.Integer('Number')
+    the_geom = geo_fields.GeoMultiPolygon('NPA Shape')

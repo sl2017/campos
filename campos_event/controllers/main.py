@@ -184,7 +184,7 @@ class CampOsEvent(http.Controller):
         
         else:
             jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True)], order='write_date DESC')
-            list_title = _("Job list")
+            list_title = _("Ledige job")
             
         for j in jobs:
             _logger.info("job %s %s", j.name, j.openjob)
@@ -268,9 +268,41 @@ class CampOsEvent(http.Controller):
             
             return request.render("campos_event.participant updated", {'par': par})
         return request.render("campos_event.unknown_token")
+
     
-    
-    
-        
+    @http.route(['/campos/jobber/ask', 
+                 '/campos/jobber/ask/<model("campos.job"):job>'],
+                type='http', auth="public", website=True)
+    def jobs_ask(self, job=None, **post):
+        error = {}
+        default = {}
+        if post:
+            for field_name in ["name", "email", "description"]:
+                if not post.get(field_name):
+                    error[field_name] = 'Missing %s' % field_name
+                default[field_name] = post.get(field_name, False)
+                     
+            if not error:
+            
+                # public user can't create applicants (duh)
+                env = request.env(user=SUPERUSER_ID)
+                job = env['campos.job'].search([('id', '=', int(post.get('job_id')))])
                 
-                    
+                if job.par_contact_id:
+                    user = env['res.users'].sudo().search([('participant_id', '=', job.par_contact_id.id)]).id
+                else:
+                    user = False
+                value = {
+                    'name': "WEB Question re %s" % job.name,
+                    'email_from': "%s <%s>" % (post.get('name'), post.get('email')),
+                    'description': post.get('description'),
+                    'project_id': env.ref('campos_event.project_job_ask').id,
+                    'user_id': user,
+                    'model_reference': '%s,%d' % ('campos.job', job.id)
+                }
+                env['project.issue'].create(value)
+                return request.render("campos_event.jobber_job_ask_thankyou")
+        
+        return request.render("campos_event.jobber_job_ask", {'error': error,
+                                                              'default': default,
+                                                              'job': job,})
