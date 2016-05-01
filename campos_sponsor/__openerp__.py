@@ -12,5 +12,6 @@
         'security/campos_sponsor_security.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
-        'view_createsponsor.xml'],
+        'view_createsponsor.xml'
+        'partner_registration.xml'],
 }

@@ -86,6 +86,7 @@
 						</group>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',False)]}">Bemærkninger til sponsorat</h3>
 						<field name="sponsor_kommentar" attrs="{'invisible':[('sponsor_issponsor','==',False)]}"/>
+						
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Idé til aktivitet</h3>
 						<field name="partner_aktivitet" attrs="{'invisible':[('sponsor_issponsor','==',True)]}"/>
 						<h3 attrs="{'invisible':[('sponsor_issponsor','==',True)]}">Ønsker fra partnerskabet</h3>
