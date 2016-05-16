@@ -189,6 +189,8 @@
                                 </div>
                              -->    
                             <field name="reg_organization_id" string="Korps"/>
+                            <field name="workas_planner"/>
+                            <field name="workas_jobber"/>
 							<field name="participant" groups="campos_event.group_campos_admin"/>
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
 

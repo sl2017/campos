@@ -146,7 +146,7 @@ class CampCommittee(models.Model):
         Count members in the Committee
         '''
         self.member_no = len(self.sudo().part_function_ids)
-        self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', '=', self.id),('state', 'in', ['sent'])])
+        self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', 'child_of', self.id),('state', 'in', ['sent'])])
 
     @api.one
     @api.depends('approvers_ids')
