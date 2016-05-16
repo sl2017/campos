@@ -150,8 +150,11 @@ class CampOsEvent(http.Controller):
             'registration_id': reg_id,
             'state' : 'reg',
         }
-        for f in ['committee_id', 'job_id', 'my_comm_contact', 'qualifications']:
+        for f in ['committee_id', 'job_id', 'my_comm_contact', 'qualifications', 'workas_planner', 'workas_jobber']:
             value[f] = post.get(f)
+        if post.get('workas_both'):
+            value['workas_planner'] = True
+            value['workas_jobber'] = True
         part = env['campos.event.participant'].create(value)
         
         template = part.env.ref('campos_event.request_signupconfirm')
