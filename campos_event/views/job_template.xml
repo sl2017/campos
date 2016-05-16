@@ -116,11 +116,11 @@
 								<b>Hvornår: </b>
 								<span t-field="job.job_when" />
 								<br />
-								<a class="btn btn-primary" t-att-href="'/campos/jobber/signup/' + slug(job)">
+								<a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)">
 									<i class="fa fa-arrow-right">&amp;nbsp;</i>
 									<span t-field="job.signup_button" />
 								</a>
-								<a class="btn" t-att-href="'/campos/jobber/ask/' + slug(job)">I need more info</a>
+								<a class="btn btn-primary" t-att-href="'/campos/jobber/ask/' + slug(job)">I need more info</a>
 								<div class="oe_share s_share">
                   <h4> 
                     <a class="oe_share_facebook" t-attf-href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_Blank"><i class="fa fa-facebook-square"/> </a>
