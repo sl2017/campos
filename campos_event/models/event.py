@@ -252,6 +252,8 @@ class EventRegistration(models.Model):
         select=True,
         ondelete='set null')
     
+    
+    
     @api.multi
     def action_edit_survey_response(self):
         fields = []
@@ -374,6 +376,9 @@ class EventParticipant(geo_model.GeoModel):
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     qualifications = fields.Text('Qualifications')
+    
+    workas_planner = fields.Boolean('Camp Planner')
+    workas_jobber = fields.Boolean('Jobber on Camp')
     
     #confirm links
     confirm_token = fields.Char('Confirm Token')
