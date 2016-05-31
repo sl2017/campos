@@ -166,7 +166,7 @@
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('contact_mobile') and 'has-error' or ''}">
                             <label class="control-label" for="contact_mobile">Mobile phone</label>
-                            <input type="text" name="contact_mobile" class="form-control" t-att-value="post.get('contact_mobile')" required="required/>
+                            <input type="text" name="contact_mobile" class="form-control" t-att-value="post.get('contact_mobile')" required="required"/>
                         </div>
                     </div>
                     <div class="row">
