@@ -213,12 +213,19 @@ class EventRegistration(models.Model):
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
     staff = fields.Boolean(related='partner_id.staff')
     staff_qty_pre_reg = fields.Integer('Number of Staff - Pre-registration')
+    scout_qty_pre_reg = fields.Integer('Number of Staff - Pre-registration')
+    leader_qty_pre_reg = fields.Integer('Number of Staff - Pre-registration')
     country_id = fields.Many2one('res.country', 'Country')
     organization_id = fields.Many2one(
         'campos.scout.org',
         'Scout Organization')
 
     scout_division = fields.Char('Division/District', size=64)
+    natorg = fields.Char('National Organization', size=64)
+    intl_org = fields.Many2one(
+        'campos.scout.org',
+        'Scout Organization')
+    friendship = fields.Char('Friendship group', size=64)
     municipality_id = fields.Many2one(
         'campos.municipality',
         'Municipality',
