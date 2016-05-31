@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 13:04+0000\n"
-"PO-Revision-Date: 2016-04-29 13:04+0000\n"
+"POT-Creation-Date: 2016-05-18 02:00+0000\n"
+"PO-Revision-Date: 2016-05-18 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -298,11 +298,6 @@ msgid "Answers"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.jobber_job_view
-msgid "Any Question regarding this job? Submit your question here!"
-msgstr ""
-
-#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 #: view:campos.job:campos_event.campos_job_form
 #: model:ir.actions.act_window,name:campos_event.action_committee_applicant_tree
@@ -322,7 +317,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:536
+#: code:addons/campos_event/models/event.py:541
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -381,6 +376,11 @@ msgstr ""
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 #: view:res.partner:campos_event.view_campos_res_partner_form1
 msgid "Camp Info"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,workas_planner:0
+msgid "Camp Planner"
 msgstr ""
 
 #. module: campos_event
@@ -582,7 +582,7 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:510
+#: code:addons/campos_event/models/event.py:515
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -996,6 +996,11 @@ msgid "Hvornår:"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.jobber_job_view
+msgid "I need more info"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.camp.area,id:0
 #: field:campos.committee,id:0
 #: field:campos.committee.function,id:0
@@ -1141,6 +1146,11 @@ msgid "Jobber Signup Form"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,workas_jobber:0
+msgid "Jobber on Camp"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,job_ids:0
 #: view:campos.job:campos_event.job_tree
 #: field:campos.job.tag,job_ids:0
@@ -1150,13 +1160,13 @@ msgid "Jobs"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:180
+#: code:addons/campos_event/controllers/main.py:183
 #, python-format
 msgid "Jobs for: "
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:177
+#: code:addons/campos_event/controllers/main.py:180
 #, python-format
 msgid "Jobs tagged: "
 msgstr ""
@@ -1233,7 +1243,7 @@ msgid "Leder godkendt"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:187
+#: code:addons/campos_event/controllers/main.py:190
 #, python-format
 msgid "Ledige job"
 msgstr ""
@@ -1490,7 +1500,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:671
+#: code:addons/campos_event/models/event.py:676
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1671,7 +1681,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:560
+#: code:addons/campos_event/models/event.py:565
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1791,7 +1801,7 @@ msgid "Search"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:183
+#: code:addons/campos_event/controllers/main.py:186
 #, python-format
 msgid "Search Result"
 msgstr ""
@@ -1837,7 +1847,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:482
+#: code:addons/campos_event/models/event.py:487
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2221,8 +2231,23 @@ msgid "WOSM"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Want to work as both."
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Want to work at the Camp."
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,workwish:0
 msgid "Want to work with"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobber_signup
+msgid "Want to work with the planning of the Camp."
 msgstr ""
 
 #. module: campos_event
