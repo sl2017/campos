@@ -65,6 +65,17 @@
 				 	</group>
 				 
 				 </page>
+				 <page string="Intl. Pre-registration">
+				 <group>
+				 	<field name="contact_partner_id" context="{'show_email': True, 'show_address': True}"/>
+				 	<newline/>
+				 	<field name="scout_qty_pre_reg"/>
+				 	<field name="leader_qty_pre_reg"/>
+				 	<field name="natorg"/>
+				 	<field name="intl_org"/>
+				 	<field name="friendship"/>
+				 </group>
+				 </page>
 				 
 				 </notebook>
 				 </xpath>
