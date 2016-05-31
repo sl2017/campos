@@ -65,6 +65,17 @@
 				 	</group>
 				 
 				 </page>
+				 <page string="Intl. Pre-registration">
+				 <group>
+				 	<field name="contact_partner_id" context="{'show_email': True, 'show_address': True}"/>
+				 	<newline/>
+				 	<field name="scout_qty_pre_reg"/>
+				 	<field name="leader_qty_pre_reg"/>
+				 	<field name="natorg"/>
+				 	<field name="intl_org"/>
+				 	<field name="friendship"/>
+				 </group>
+				 </page>
 				 
 				 </notebook>
 				 </xpath>
@@ -189,12 +200,11 @@
                                 </div>
                              -->    
                             <field name="reg_organization_id" string="Korps"/>
-                            <field name="workas_planner"/>
-                            <field name="workas_jobber"/>
-							<field name="participant" groups="campos_event.group_campos_admin"/>
+                            <field name="participant" groups="campos_event.group_campos_admin"/>
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
-
+							<!--
 				 		    <field name="staff_qty_pre_reg"/>
+				 		    -->
 							</group>
 							<group>
 							<separator string="Application" colspan="2"/>
@@ -202,6 +212,10 @@
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
 							<field name="qualifications"/>
+							<group col="4" colspan="4">
+							<field name="workas_planner"/>
+                            <field name="workas_jobber"/>
+							</group>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							<tree>

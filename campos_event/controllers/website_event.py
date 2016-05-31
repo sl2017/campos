@@ -107,3 +107,74 @@ class WebsiteEventEx(WebsiteEvent):
         }
         return http.request.render(
             'campos_event.partner_register_form', values)
+        
+        
+        
+    @http.route(['/event/<model("event.event"):event>/register/intl_groups'],
+                type='http', auth="public", website=True)
+    def event_register_intl_groups(self, event, **post):
+        def validate(name, force_check=False):
+            return self._validate(name, post, force_check=force_check)
+
+        error = {}
+        reg_obj = http.request.env['event.registration']
+        registration_vals = {}
+        post['name'] = post.get('group_name', '')
+        post['email'] = post.get('contact_email', '')
+        post['phone'] = post.get('contact_mobile', '')
+        post['tickets'] = '1'
+        if (http.request.env.ref('base.public_user') !=
+                http.request.env.user and
+                validate('tickets', force_check=True)):
+            # if logged in, use that info
+            registration_vals = reg_obj._prepare_registration(
+                event, post, http.request.env.user.id,
+                partner=http.request.env.user.partner_id)
+        
+        if all(map(lambda f: validate(f, force_check=True),
+                   ['name', 'email', 'tickets'])):
+            # otherwise, create a simple registration
+            registration_vals = reg_obj._prepare_registration(
+                event, post, http.request.env.user.id)
+        _logger.info("Reg: %s - post: %s", registration_vals, post)
+        if registration_vals:
+            partner_obj = http.request.env['res.partner']
+            group = partner_obj.sudo().create({'name': post.get('name'),
+                                               'scoutgroup': True})
+            registration_vals['partner_id'] = group.id
+            for f in ['country_id', 'intl_org', 'natorg', 'friendship']:
+                registration_vals[f] = post.get('group_%s' % (f), False)
+            for f in ['scout_qty_pre_reg', 'leader_qty_pre_reg']:
+                registration_vals[f] = int(post.get('group_%s' % (f), '0'))
+            cvals = {}
+            post['contact_country_id'] = post.get('group_country_id', False)
+            for f in ['name', 'email', 'mobile', 'street', 'zip', 'city', 'country_id', 'lang']:
+                cvals[f] = post.get('contact_%s' % (f), False)
+            contact = partner_obj.sudo().create(cvals)
+            registration_vals['contact_partner_id'] = contact.id
+            registration = reg_obj.sudo().create(registration_vals)
+            
+            if registration.partner_id:
+                registration._onchange_partner()
+            registration.registration_open()
+            return http.request.render(
+                'website_event_register_free.partner_register_confirm',
+                {'registration': registration})
+        
+        countries = http.request.env['res.country'].search([])
+        intl_orgs = http.request.env['campos.scout.org'].search([('country_id', '=', False)])
+        languages = http.request.env['res.lang'].search([])
+        values = {
+            'event': event,
+            'range': range,
+            'countries': countries,
+            'intl_orgs': intl_orgs,
+            'tickets': post.get('tickets', 1),
+            'validate': validate,
+            'post': post,
+            'languages': languages,
+            'error': error,
+        }
+        return http.request.render(
+            'campos_event.intl_groups_register_form', values)
+
