@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<template id="reg_confirmed">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Tak, <span t-field="par.name"/>!</h1>
+							<p>Din anmodning om partnerskab er nu bekræftet. Vi vender tilbage til dig hurtigst muligt.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Fortsæt til forsiden</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+				
+		<template id="unknown_token">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Ukendt token!</h1>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Fortsæt til forsiden</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+	</data>
+</openerp>
