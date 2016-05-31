@@ -114,7 +114,7 @@
 							<field name="signup_button"/>
 							<newline/>
 							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..." colspan="4"/>
-							<field name="par_contact_id" required="1"/>
+							<field name="par_contact_id" required="1" domain="[('state', '=', 'approved')]"/>
 							<newline/>
 							<group colspan="2">
 								<field name="date_public"/>
