@@ -57,22 +57,26 @@ class EventEvent(models.Model):
 
     '''
     _inherit = 'event.event'
-    
+
     survey_id = fields.Many2one('survey.survey', 'Signup survey')
-    attachment_id = fields.Many2one( 'ir.attachment', string="Attachments" )
+    attachment_id = fields.Many2one('ir.attachment', string="Attachments")
     camp_area_ids = fields.One2many(
         'campos.camp.area',
         'event_id', string="Rooms/Camp Areas")
-    
+
+    regform = fields.Selection([('register_free', 'Std. Free Register'),
+                                ('register_meeting', 'Meeting register (with survey)'),
+                                ('intl_groups', 'International Groups')], string='Registration Form', default='register_meeting')
+
     @api.multi
     def action_export_survey(self):
         fields = []
         self.ensure_one()
-        
-        #Standard field
-        fields = [{'id': "s1", 'fieldname': 'Navn'}, 
+
+        # Standard field
+        fields = [{'id': "s1", 'fieldname': 'Navn'},
                   {'id': 's1s', 'fieldname': 'Status'},
-                  {'id': "s2", 'fieldname': 'Udvalg'}, 
+                  {'id': "s2", 'fieldname': 'Udvalg'},
                   {'id': "s3", 'fieldname': 'Funktion'},
                   {'id': "s3r", 'fieldname': 'Rum'},
                   {'id': "s4", 'fieldname': 'adresse'},
@@ -101,9 +105,9 @@ class EventEvent(models.Model):
                                    'id': "%d-comm" % (q.id),
                                    'fieldname': "%s" % (q.comments_message)})
 
-        rows=[]
+        rows = []
         for reg in self.registration_ids:
-            #if reg.state == 'cancel':
+            # if reg.state == 'cancel':
             #    continue
             row = {}
             row['s1'] = reg.partner_id.name
@@ -114,7 +118,7 @@ class EventEvent(models.Model):
             row['s7'] = reg.partner_id.email
             row['s8'] = reg.partner_id.phone
             row['s9'] = reg.partner_id.mobile
-            row['s1s'] = reg.state 
+            row['s1s'] = reg.state
             participant = self.env['campos.event.participant'].search([('partner_id', '=', reg.partner_id.id)])
             if participant:
                 row['s7p'] = participant[0].private_mailaddress
@@ -129,66 +133,66 @@ class EventEvent(models.Model):
                 row['s10'] = reg.reg_survey_input_id.write_date
                 for ans in reg.reg_user_input_line_ids:
                     if ans.question_id.comments_allowed and ans.answer_type == 'text':
-                        row['%d-comm' % (ans.question_id.id)] = ans.value_text 
+                        row['%d-comm' % (ans.question_id.id)] = ans.value_text
                     if ans.question_id.type == 'multiple_choice' and ans.value_suggested:
                         row['%d-%d' % (ans.question_id.id, ans.value_suggested.id)] = 'X'
-                    elif ans.question_id.type == 'simple_choice' and ans.value_suggested: 
+                    elif ans.question_id.type == 'simple_choice' and ans.value_suggested:
                         row['%d' % (ans.question_id.id)] = ans.value_suggested.value
-                        _logger.info('%s ROW simple: %d %s', row['s1'], ans.question_id.id, ans.value_suggested.value )
-                    elif ans.question_id.type in ['free_text','textbox', 'text'] and ans.value_text:
+                        _logger.info('%s ROW simple: %d %s', row['s1'], ans.question_id.id, ans.value_suggested.value)
+                    elif ans.question_id.type in ['free_text', 'textbox', 'text'] and ans.value_text:
                         row['%d' % (ans.question_id.id)] = ans.value_text
                         _logger.info('%s ROW text: %d %s', row['s1'], ans.question_id.id, ans.value_text)
                     elif ans.question_id.type in ['free_text'] and ans.value_free_text:
                         row['%d' % (ans.question_id.id)] = ans.value_free_text
                         _logger.info('%s ROW FREE text: %d %s', row['s1'], ans.question_id.id, ans.value_free_text)
             rows.append(row)
-                        
-        data = base64.encodestring(self.from_data(fields, rows ) )
+
+        data = base64.encodestring(self.from_data(fields, rows))
         attach_vals = {
-                 'name':'%s.xls' % ( self.name ),
+                 'name':'%s.xls' % (self.name),
                  'datas':data,
-                 'datas_fname':'%s.xls' % ( self.name ),
+                 'datas_fname':'%s.xls' % (self.name),
                  }
 
-        doc_id = self.env['ir.attachment'].create( attach_vals )
+        doc_id = self.env['ir.attachment'].create(attach_vals)
         if self.attachment_id :
             try :
                 self.attachment_id.unlink()
             except :
                 pass
-        self.write( {'attachment_id':doc_id.id} )
+        self.write({'attachment_id':doc_id.id})
         return {
             'type' : 'ir.actions.act_url',
-            'url':   '/web/binary/saveas?model=ir.attachment&field=datas&filename_field=name&id=%s' % ( doc_id.id ),
+            'url':   '/web/binary/saveas?model=ir.attachment&field=datas&filename_field=name&id=%s' % (doc_id.id),
             'target': 'self',
             }
-        
+
     def from_data(self, fields, rows):
         workbook = xlwt.Workbook()
-        worksheet = workbook.add_sheet( 'Sheet 1' )
-        header_title = xlwt.easyxf( "font: bold on; pattern: pattern solid, fore_colour gray25;align:horizontal left, indent 1,vertical center" )
+        worksheet = workbook.add_sheet('Sheet 1')
+        header_title = xlwt.easyxf("font: bold on; pattern: pattern solid, fore_colour gray25;align:horizontal left, indent 1,vertical center")
         for i, field in enumerate(fields):
-            worksheet.write( 0, i, field['fieldname'], header_title )
-            worksheet.col( i ).width = 8000  # around 220 pixels
-        base_style = xlwt.easyxf( 'align: horizontal left,wrap yes,indent 1,vertical center' )
-        date_style = xlwt.easyxf( 'align: horizontal left,wrap yes, indent 1,vertical center', num_format_str='YYYY-MM-DD' )
-        datetime_style = xlwt.easyxf( 'align: horizontal left,wrap yes,indent 1,vertical center', num_format_str='YYYY-MM-DD HH:mm:SS' )
-        worksheet.row( 0 ).height = 400
-        for row_index, row in enumerate( rows ):
-            worksheet.row( row_index + 1 ).height = 350
-            for cell_index, field in enumerate( fields ):
+            worksheet.write(0, i, field['fieldname'], header_title)
+            worksheet.col(i).width = 8000  # around 220 pixels
+        base_style = xlwt.easyxf('align: horizontal left,wrap yes,indent 1,vertical center')
+        date_style = xlwt.easyxf('align: horizontal left,wrap yes, indent 1,vertical center', num_format_str='YYYY-MM-DD')
+        datetime_style = xlwt.easyxf('align: horizontal left,wrap yes,indent 1,vertical center', num_format_str='YYYY-MM-DD HH:mm:SS')
+        worksheet.row(0).height = 400
+        for row_index, row in enumerate(rows):
+            worksheet.row(row_index + 1).height = 350
+            for cell_index, field in enumerate(fields):
                 cell_style = base_style
                 if row.has_key(field['id']) and field['id']:
-                    worksheet.write( row_index + 1, cell_index, row[field['id']], cell_style )
+                    worksheet.write(row_index + 1, cell_index, row[field['id']], cell_style)
         fp = StringIO()
-        workbook.save( fp )
-        fp.seek( 0 )
+        workbook.save(fp)
+        fp.seek(0)
         data = fp.read()
         fp.close()
         return data
-    
 
-            
+
+
 
 class EventRegistration(models.Model):
 
@@ -208,7 +212,7 @@ class EventRegistration(models.Model):
             ('open', 'Confirmed'),
             ('done', 'Attended'),
         ], string='Status', default='draft', readonly=True, copy=False, track_visibility='onchange')
-    
+
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
     staff = fields.Boolean(related='partner_id.staff')
@@ -249,7 +253,7 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
-    
+
     reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
     reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
@@ -258,9 +262,9 @@ class EventRegistration(models.Model):
         'Room/Camp Area',
         select=True,
         ondelete='set null')
-    
-    
-    
+
+
+
     @api.multi
     def action_edit_survey_response(self):
         fields = []
@@ -269,9 +273,9 @@ class EventRegistration(models.Model):
             self.reg_survey_input_id = self.env['survey.user_input'].create({'survey_id': self.event_id.survey_id.id,
                                                                              'partner_id': self.partner_id.id})
         self.reg_survey_input_id.state = 'new'
-        return {'type': 'ir.actions.act_url', 
-                'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token), 
-                'nodestroy': True, 
+        return {'type': 'ir.actions.act_url',
+                'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token),
+                'nodestroy': True,
                 'target': 'new' }
 
 class EventParticipantReject(models.Model):
@@ -281,7 +285,7 @@ class EventParticipantReject(models.Model):
     '''
     _name = 'campos.event.par.reject'
     _description = 'Event Participant Reject'
-    
+
     reason = fields.Text(required=True)
     committee_id = fields.Many2one('campos.committee',
                                    'Committee',
@@ -292,15 +296,15 @@ class EventParticipantReject(models.Model):
     job_id = fields.Many2one('campos.job',
                              'Job',
                              ondelete='set null')
-    
+
     @api.multi
     def write(self, vals):
-        ret =  models.Model.write(self, vals)
+        ret = models.Model.write(self, vals)
         for rej in self:
             rej.participant_id.state = 'rejected'
         return ret
-    
-    
+
+
 class EventParticipant(geo_model.GeoModel):
 
     '''
@@ -312,8 +316,8 @@ class EventParticipant(geo_model.GeoModel):
     _inherit = ['mail.thread', 'ir.needaction_mixin']
     _order = 'name'
 
-    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict') # Relation to inherited res.partner
-    registration_id = fields.Many2one('event.registration','Registration')
+    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')  # Relation to inherited res.partner
+    registration_id = fields.Many2one('event.registration', 'Registration')
     staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
@@ -328,7 +332,7 @@ class EventParticipant(geo_model.GeoModel):
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
     birthdate = fields.Date('Date of birth')
-    
+
     # Jobber fields
     committee_id = fields.Many2one('campos.committee',
                                    'Have agreement with committee',
@@ -341,25 +345,25 @@ class EventParticipant(geo_model.GeoModel):
     sent_to_comm_date = fields.Date('Sent to Committee')
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
-    state = fields.Selection([('reg','Registered'),
+    state = fields.Selection([('reg', 'Registered'),
                               ('draft', 'Received'),
-                              ('standby','Standby'),
+                              ('standby', 'Standby'),
                               ('sent', 'Sent to committee'),
                               ('approved', 'Approved by the committee'),
                               ('rejected', 'Rejected'),
                               ('deregistered', 'Deregistered')],
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
-    
+
     standby_until = fields.Date('Standby until')
     agreements = fields.Text('Agreements')
     internal_note = fields.Text('Internal Note')
-    
+
     job_id = fields.Many2one('campos.job',
                              'Job',
                              ondelete='set null')
-    newsletter  = fields.Boolean('Newsletter')
-    
+    newsletter = fields.Boolean('Newsletter')
+
     sharepoint_mail = fields.Boolean('Sharepoint mail wanted')
     sharepoint_mailaddress = fields.Char('Sharepoint mail address')
     sharepoint_clienttype = fields.Selection([('client', 'Client'),
@@ -367,12 +371,12 @@ class EventParticipant(geo_model.GeoModel):
     sharepoint_mail_created = fields.Date('Sharepoint mail created')
     sharepoint_mail_requested = fields.Datetime('Sharepoint mail requested')
     private_mailaddress = fields.Char('Private mail address')
-    
+
     zexpense_access_wanted = fields.Boolean('zExpense access wanted')
     zexpense_access_created = fields.Date('zExpense access created')
     zexpense_access_requested = fields.Datetime('zExpense access requested')
     zexpense_firsttime_pwd = fields.Char('zExpense First time password')
-    
+
     workwish = fields.Text('Want to work with')
     my_comm_contact = fields.Char('Aggreement with')
     profession = fields.Char(
@@ -383,38 +387,38 @@ class EventParticipant(geo_model.GeoModel):
     par_internal_note = fields.Text('Internal note')
     complete_contact = fields.Text("contact", compute='_get_complete_contact')
     qualifications = fields.Text('Qualifications')
-    
+
     workas_planner = fields.Boolean('Camp Planner')
     workas_jobber = fields.Boolean('Jobber on Camp')
-    
-    #confirm links
+
+    # confirm links
     confirm_token = fields.Char('Confirm Token')
     reg_confirm_url = fields.Char('Confirm registration URL', compute='_compute_confirm_urls')
     zexpense_confirm_url = fields.Char('Confirm zExpense URL', compute='_compute_confirm_urls')
     sharepoint_confirm_url = fields.Char('Confirm sharepoint URL', compute='_compute_confirm_urls')
-    #participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
-    
+    # participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
+
     meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
-    
+
     @api.one
     def _compute_meeting_registration(self):
         self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
-        
-    
+
+
     @api.one
     def _compute_confirm_urls(self):
         if not self.sudo().confirm_token:
             token = random_token()
             while self.sudo().search_count([('confirm_token', '=', token)]):
                 token = random_token()
-            
+
             self.sudo().write({'confirm_token': token})
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
         query = {'db': self._cr.dbname}
-        self.reg_confirm_url = urljoin(base_url,'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
-        self.zexpense_confirm_url = urljoin(base_url,'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
-        self.sharepoint_confirm_url = urljoin(base_url,'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
-        
+        self.reg_confirm_url = urljoin(base_url, 'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.zexpense_confirm_url = urljoin(base_url, 'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+        self.sharepoint_confirm_url = urljoin(base_url, 'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+
     @api.model
     def create(self, vals):
         par = super(EventParticipant, self).create(vals)
@@ -423,14 +427,14 @@ class EventParticipant(geo_model.GeoModel):
                 'event_id': 1,
                 'partner_id': par.partner_id.id,
                 'contact_partner_id': par.partner_id.id,
-                'econ_partner_id': par.partner_id.id,})
-            #par.staff = True
+                'econ_partner_id': par.partner_id.id, })
+            # par.staff = True
         return par
-    
+
     @api.multi
     def write(self, vals):
         _logger.info("Par Write Entered %s", vals.keys())
-        ret =  super(EventParticipant, self).write(vals)
+        ret = super(EventParticipant, self).write(vals)
         for par in self:
             if 'sharepoint_mail_created' in vals and par.sharepoint_mail_created:
                 template = self.env.ref('campos_event.info_sharepoint')
@@ -456,13 +460,13 @@ class EventParticipant(geo_model.GeoModel):
                 except:
                     pass
         return ret
-                
+
     @api.one
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
     def _get_complete_contact(self):
         self.complete_contact = '\n'.join(filter(None, [self.name, self.sharepoint_mailaddress if self.sharepoint_mailaddress else self.email, self.mobile]))
-    
-    
+
+
     @api.onchange('committee_id')
     def onchange_committee_id(self):
         self.state = 'draft'
@@ -516,7 +520,7 @@ class EventParticipant(geo_model.GeoModel):
             default_use_template=bool(template),
             default_template_id=template.id,
             default_composition_mode='comment',
-            
+
         )
         return {
             'name': _('Compose Email'),
@@ -557,11 +561,11 @@ class EventParticipant(geo_model.GeoModel):
             'domain': '[]',
             'context': context
             }
-        
+
 #         template = self.committee_id.template_id
 #         if template:
 #             template.send_mail(self.id)
-# 
+#
 #         self.state = 'approved'
         return True
 
@@ -586,7 +590,7 @@ class EventParticipant(geo_model.GeoModel):
     @api.multi
     def action_create_user(self):
         for par in self:
-            old_user =  self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
+            old_user = self.env['res.users'].sudo().search([('participant_id', '=', par.id)])
             if len(old_user) == 0:
                 # Swap mails?
                 if (not par.private_mailaddress or par.private_mailaddress == par.email) and '@sl2017.dk' not in par.email:
@@ -596,17 +600,17 @@ class EventParticipant(geo_model.GeoModel):
                 new_user = self.env['res.users'].sudo().create({'login': par.email,
                                                          'partner_id': par.partner_id.id,
                                                          'participant_id' : par.id,
-                                                         #'groups_id': [(4, self.env.ref('base.group_portal').id)]
+                                                         # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
                                                          })
-                #new_user.with_context({'create_user': True}).action_reset_password()
-                
+                # new_user.with_context({'create_user': True}).action_reset_password()
+
             else:
                 old_user.action_reset_password()
-                
+
     @api.multi
     def action_deregister_participant(self):
         for par in self:
-            old_user =  self.env['res.users'].suspend_security().search([('participant_id', '=', par.id)])
+            old_user = self.env['res.users'].suspend_security().search([('participant_id', '=', par.id)])
             if len(old_user):
                 old_user.suspend_security().write({'active': False})
             par.state = 'deregistered'
@@ -628,8 +632,8 @@ class EventParticipant(geo_model.GeoModel):
             par.comm_approver_ids = None
             for comm in self.env['campos.committee'].search([('par_contact_id.id', '=', par.id)]):
                 comm.par_contact_id = False
-                
-    
+
+
     @api.multi
     @api.depends('partner_id.name')
     def name_get(self):
@@ -655,7 +659,7 @@ class EventParticipant(geo_model.GeoModel):
                 context=context)]
         return self.pool['res.partner'].onchange_address(
             cr, uid, partner_ids, use_parent_address, parent_id, context=context)
-        
+
     @api.model
     def _needaction_domain_get(self):
         """
@@ -667,20 +671,19 @@ class EventParticipant(geo_model.GeoModel):
             Participants in status "Sent to Committee"
         
         """
-        
+
         regs = self.env['event.registration'].search([('event_id.message_follower_ids', '=', self.env.user.partner_id.id)])
-        coms =  self.env['campos.committee'].search([('message_follower_ids', '=', self.env.user.partner_id.id)])
-        
-        return ['|', 
-                '&', ('registration_id', 'in', regs.ids),('state', 'in',['draft','rejected']),
-                '&', ('committee_id', 'in', coms.ids),('state', 'in',['sent']),
+        coms = self.env['campos.committee'].search([('message_follower_ids', '=', self.env.user.partner_id.id)])
+
+        return ['|',
+                '&', ('registration_id', 'in', regs.ids), ('state', 'in', ['draft', 'rejected']),
+                '&', ('committee_id', 'in', coms.ids), ('state', 'in', ['sent']),
                 ]
-        
+
     def message_get_suggested_recipients(self, cr, uid, ids, context=None):
         recipients = super(EventParticipant, self).message_get_suggested_recipients(cr, uid, ids, context=context)
         for lead in self.browse(cr, uid, ids, context=context):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
-    
-    
+
