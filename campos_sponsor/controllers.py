@@ -51,9 +51,9 @@ class partnercontroller(http.Controller):
         _logger.info("Creating sponsor object")
         part = env['model.sponsor'].create(value)
         
-        '''
+        
         _logger.info("Trying to send confirmation mail")
-        template = part.env.ref('campos_event.request_signupconfirm')
+        template = part.env.ref('campos_sponsor.request_partnerconfirm')
         assert template._name == 'email.template'
         try:
             _logger.info("Sending mail...")
@@ -63,14 +63,14 @@ class partnercontroller(http.Controller):
             _logger.info("Mail sending failed")
             pass
         
-        '''
+        
         _logger.info("Rendering thankyou page")
         return request.render("campos_sponsor.partners_thankyou", {'par':part})
     
     
     
     
-    '''
+    
     
     @http.route(
         ['/campos/confirm/<mode>/<token>'],
@@ -91,5 +91,5 @@ class partnercontroller(http.Controller):
                     
         return request.render("campos_sponsor.unknown_token")
     
-    '''
+    
     

@@ -14,6 +14,7 @@
         'security/ir.rule.csv',
         'controllers.py',
         'view_createsponsor.xml',
-        'partner_template.xml'
+        'partner_template.xml',
+        'mail_templates.xml'
         ],
 }
