@@ -119,7 +119,7 @@ class WebsiteEventEx(WebsiteEvent):
         error = {}
         reg_obj = http.request.env['event.registration']
         registration_vals = {}
-        _logger.info("Post? %s", http.request.httprequest.method) 
+        _logger.info("Post? %s", http.request.httprequest.method)
         if post.get('group_name', False):
             post['name'] = post.get('group_name', '')
             post['email'] = post.get('contact_email', '')
@@ -139,13 +139,14 @@ class WebsiteEventEx(WebsiteEvent):
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id)
         _logger.info("Reg: %s - post: %s", registration_vals, post)
-        
+
         if http.request.httprequest.method == 'POST' and registration_vals:
             partner_obj = http.request.env['res.partner']
             group = partner_obj.sudo().create({'name': post.get('name'),
-                                               'scoutgroup': True})
+                                               'scoutgroup': True,
+                                               'country_id': post.get('group_country_id', False), })
             registration_vals['partner_id'] = group.id
-            for f in ['country_id', 'intl_org', 'natorg', 'friendship']:
+            for f in ['intl_org', 'natorg', 'friendship']:
                 registration_vals[f] = post.get('group_%s' % (f), False)
             for f in ['scout_qty_pre_reg', 'leader_qty_pre_reg']:
                 registration_vals[f] = int(post.get('group_%s' % (f), '0'))
