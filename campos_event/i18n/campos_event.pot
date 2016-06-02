@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 02:00+0000\n"
-"PO-Revision-Date: 2016-05-18 02:00+0000\n"
+"POT-Creation-Date: 2016-06-02 02:00+0000\n"
+"PO-Revision-Date: 2016-06-02 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:541
+#: code:addons/campos_event/models/event.py:548
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -434,6 +434,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,city:0
+#: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "City"
 msgstr ""
@@ -582,7 +583,7 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:515
+#: code:addons/campos_event/models/event.py:522
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -665,7 +666,13 @@ msgstr ""
 #: field:campos.event.participant,country_id:0
 #: field:campos.scout.org,country_id:0
 #: field:event.registration,country_id:0
+#: view:website:campos_event.intl_groups_register_form
 msgid "Country"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Country..."
 msgstr ""
 
 #. module: campos_event
@@ -820,6 +827,7 @@ msgstr ""
 #: field:campos.event.participant,email:0
 #: field:event.registration,contact_email:0
 #: field:event.registration,econ_email:0
+#: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.partner_register_form
 msgid "Email"
 msgstr ""
@@ -891,6 +899,16 @@ msgstr ""
 #: field:campos.event.participant,message_follower_ids:0
 #: field:campos.job,message_follower_ids:0
 msgid "Followers"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,friendship:0
+msgid "Friendship group"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Friendship group participating in the camp"
 msgstr ""
 
 #. module: campos_event
@@ -1066,6 +1084,11 @@ msgid "Internal note"
 msgstr ""
 
 #. module: campos_event
+#: view:event.registration:campos_event.view_dds_camp_reg_info_form1
+msgid "Intl. Pre-registration"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,leader:0
 msgid "Is Leader"
 msgstr ""
@@ -1179,6 +1202,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,lang:0
 msgid "Language"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Language..."
 msgstr ""
 
 #. module: campos_event
@@ -1304,6 +1332,11 @@ msgid "Meetings"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Member of"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
 #: field:campos.committee,member_ids:0
 #: field:campos.committee,part_function_ids:0
@@ -1340,6 +1373,11 @@ msgstr ""
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Mobile"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Mobile phone"
 msgstr ""
 
 #. module: campos_event
@@ -1381,6 +1419,16 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_event
+#: field:event.registration,natorg:0
+msgid "National Organization"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "National Scout Organization"
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,subject:campos_event.deregister_sharepoint
 msgid "Nedlæggelse af SL2017 mail"
 msgstr ""
@@ -1413,13 +1461,20 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,staff_qty_pre_reg:0
+#: field:event.registration,leader_qty_pre_reg:0
+#: field:event.registration,scout_qty_pre_reg:0
 #: field:event.registration,staff_qty_pre_reg:0
 msgid "Number of Staff - Pre-registration"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.jobber_signup
-msgid "Number of persons in team"
+#: view:website:campos_event.intl_groups_register_form
+msgid "Number of leaders/scoutsmasters"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Number of scouts/girlguides"
 msgstr ""
 
 #. module: campos_event
@@ -1500,7 +1555,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:676
+#: code:addons/campos_event/models/event.py:683
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1569,6 +1624,11 @@ msgstr ""
 msgid "Policy to receive emails for new messages pushed to your personal Inbox:\n"
 "- Never: no emails are sent\n"
 "- All Messages: for every notification you receive in your Inbox"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Preferred language"
 msgstr ""
 
 #. module: campos_event
@@ -1646,6 +1706,11 @@ msgid "Region"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Register"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Register Participant Details for this Group"
 msgstr ""
@@ -1681,7 +1746,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:565
+#: code:addons/campos_event/models/event.py:572
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1769,6 +1834,7 @@ msgstr ""
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: field:campos.event.participant,reg_organization_id:0
+#: field:event.registration,intl_org:0
 #: field:event.registration,organization_id:0
 msgid "Scout Organization"
 msgstr ""
@@ -1812,6 +1878,11 @@ msgid "Select this if you want to set company's address information  for this co
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Select..."
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Send Mail"
 msgstr ""
@@ -1847,7 +1918,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:487
+#: code:addons/campos_event/models/event.py:494
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2338,8 +2409,14 @@ msgid "Yes"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Your Contact Details"
 msgstr ""
 
 #. module: campos_event
@@ -2349,6 +2426,7 @@ msgid "Your Email"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
@@ -2358,6 +2436,16 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Your Phone"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Your Scout Group"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Your Scout Groups name"
 msgstr ""
 
 #. module: campos_event
@@ -2393,6 +2481,7 @@ msgid "Zip"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"
 msgstr ""
