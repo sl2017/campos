@@ -119,24 +119,27 @@ class WebsiteEventEx(WebsiteEvent):
         error = {}
         reg_obj = http.request.env['event.registration']
         registration_vals = {}
-        post['name'] = post.get('group_name', '')
-        post['email'] = post.get('contact_email', '')
-        post['phone'] = post.get('contact_mobile', '')
-        post['tickets'] = '1'
-        if (http.request.env.ref('base.public_user') !=
+        _logger.info("Post? %s", http.request.httprequest.method) 
+        if post.get('group_name', False):
+            post['name'] = post.get('group_name', '')
+            post['email'] = post.get('contact_email', '')
+            post['phone'] = post.get('contact_mobile', '')
+            post['tickets'] = '1'
+        if http.request.httprequest.method == 'POST' and (http.request.env.ref('base.public_user') !=
                 http.request.env.user and
-                validate('tickets', force_check=True)):
+                validate('name', force_check=True)):
             # if logged in, use that info
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id,
                 partner=http.request.env.user.partner_id)
 
-        if all(map(lambda f: validate(f, force_check=True),
+        if http.request.httprequest.method == 'POST' and all(map(lambda f: validate(f, force_check=True),
                    ['name', 'email', 'tickets'])):
             # otherwise, create a simple registration
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id)
         _logger.info("Reg: %s - post: %s", registration_vals, post)
+        
         if http.request.httprequest.method == 'POST' and registration_vals:
             partner_obj = http.request.env['res.partner']
             group = partner_obj.sudo().create({'name': post.get('name'),
