@@ -9,6 +9,7 @@
 			<field name="inherit_id" ref="event.view_event_form" />
 			<field name="arch" type="xml">
 				<field name="email_confirmation_id" position="after">
+					<field name="regform"/>
 					<field name="survey_id"/>
 				</field>
 				<field name="seats_used" position="after">

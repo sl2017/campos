@@ -132,12 +132,12 @@
 					</div>	
 					<div class="row">
                         <div t-attf-class="form-group col-lg-6 #{error.get('group_scout_qty_pre_reg') and 'has-error' or ''}">
-										<label class="control-label" for="group_scout_qty_pre_reg">Number of scouts/girlguides</label>
+										<label class="control-label" for="group_scout_qty_pre_reg">Estimated number of scouts/girlguides</label>
 											<input type="text" t-att-value="post.get('group_scout_qty_pre_reg')"
 												class="form-control" name="group_scout_qty_pre_reg" required="required"/>
 									</div>
 						<div t-attf-class="form-group col-lg-6 #{error.get('group_leader_qty_pre_reg') and 'has-error' or ''}">
-										<label class="control-label" for="group_leader_qty_pre_reg">Number of leaders/scoutsmasters</label>
+										<label class="control-label" for="group_leader_qty_pre_reg">Estimated number of leaders/scoutsmasters</label>
 										
 											<input type="text" t-att-value="post.get('group_leader_qty_pre_reg')"
 												class="form-control" name="group_leader_qty_pre_reg" required="required"/>
