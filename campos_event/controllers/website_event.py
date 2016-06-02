@@ -67,6 +67,9 @@ class WebsiteEventEx(WebsiteEvent):
                 vals = {}
                 for f in CONFIRM_FIELDS:
                     vals[f] = post.get(f)
+                vals['reg_organization_id'] = int(post.get('reg_organization_id', False))
+
+                _logger.info('Par val: %s', vals)
                 http.request.env.user.participant_id.write(vals)
             if noshow:
                 registration.state = 'cancel'
@@ -90,7 +93,7 @@ class WebsiteEventEx(WebsiteEvent):
                 http.request.env.user and http.request.env.user.participant_id):
             for f in CONFIRM_FIELDS:
                 post[f] = getattr(http.request.env.user.participant_id, f)
-            reg_organization_id = http.request.env.user.participant_id.reg_organization_id.id
+            post['reg_organization_id'] = str(http.request.env.user.participant_id.reg_organization_id.id)
 
         scoutorgs = http.request.env['campos.scout.org'].sudo().search(
             [('country_id.code', '=', 'DK')])
@@ -103,7 +106,7 @@ class WebsiteEventEx(WebsiteEvent):
             'validate': validate,
             'post': post,
             'scoutorgs' : scoutorgs,
-            'reg_organization_id' : reg_organization_id
+            # 'reg_organization_id' : reg_organization_id
         }
         return http.request.render(
             'campos_event.partner_register_form', values)
@@ -144,7 +147,8 @@ class WebsiteEventEx(WebsiteEvent):
             partner_obj = http.request.env['res.partner']
             group = partner_obj.sudo().create({'name': post.get('name'),
                                                'scoutgroup': True,
-                                               'country_id': post.get('group_country_id', False), })
+                                               'country_id': post.get('group_country_id', False),
+                                               })
             registration_vals['partner_id'] = group.id
             for f in ['intl_org', 'natorg', 'friendship']:
                 registration_vals[f] = post.get('group_%s' % (f), False)
