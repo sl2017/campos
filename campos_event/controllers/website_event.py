@@ -137,7 +137,7 @@ class WebsiteEventEx(WebsiteEvent):
             registration_vals = reg_obj._prepare_registration(
                 event, post, http.request.env.user.id)
         _logger.info("Reg: %s - post: %s", registration_vals, post)
-        if registration_vals:
+        if http.request.httprequest.method == 'POST' and registration_vals:
             partner_obj = http.request.env['res.partner']
             group = partner_obj.sudo().create({'name': post.get('name'),
                                                'scoutgroup': True})
