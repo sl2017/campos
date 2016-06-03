@@ -19,7 +19,7 @@
 			
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,geoengine</field>
 		</record>
 		
 		<!-- Registration inherited form -->
@@ -65,6 +65,17 @@
 				 	</group>
 				 
 				 </page>
+				 <page string="Intl. Pre-registration">
+				 <group>
+				 	<field name="contact_partner_id" context="{'show_email': True, 'show_address': True}"/>
+				 	<newline/>
+				 	<field name="scout_qty_pre_reg"/>
+				 	<field name="leader_qty_pre_reg"/>
+				 	<field name="natorg"/>
+				 	<field name="intl_org"/>
+				 	<field name="friendship"/>
+				 </group>
+				 </page>
 				 
 				 </notebook>
 				 </xpath>
@@ -106,6 +117,20 @@
 				</form>
 				</field>
 				</record>
+				
+		<record id="ir_ui_view_geo_participant" model="ir.ui.view">
+            <field name="name">Participant view</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name" select="1"/>
+                    <field name="website"/>
+                    <field name="zip"/>
+                    <field name="city"/>
+                </geoengine>
+            </field>
+            <field eval="16" name="priority"/>
+            <field name="model">campos.event.participant</field>
+        </record>
 				
 
 		<record model="ir.ui.view" id="view_event_registration_participant_form">
@@ -175,9 +200,11 @@
                                 </div>
                              -->    
                             <field name="reg_organization_id" string="Korps"/>
-							<field name="participant"/>
-				 		    <field name="staff"/>
+                            <field name="participant" groups="campos_event.group_campos_admin"/>
+				 		    <field name="staff" groups="campos_event.group_campos_admin" />
+							<!--
 				 		    <field name="staff_qty_pre_reg"/>
+				 		    -->
 							</group>
 							<group>
 							<separator string="Application" colspan="2"/>
@@ -185,6 +212,10 @@
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aftale med/Kontaktperson"/>
 							<field name="qualifications"/>
+							<group col="4" colspan="4">
+							<field name="workas_planner"/>
+                            <field name="workas_jobber"/>
+							</group>
 							<separator string="Job/Committee" colspan="2"/>
 							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
 							<tree>
@@ -253,7 +284,9 @@
 								 	</group>
 								 
 								 </page>
-								 
+								 <page string="Map">
+                        			<field name="geo_point" widget="geo_edit_map"/>
+                    			 </page>								 
 							</notebook>
 						</group>
 					</sheet>
@@ -265,7 +298,34 @@
 				
 			</field>
 		</record>
+		
+		
 
+		<record id="geoengine_vector_layer_participant" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Participant background</field>
+            <field name="view_id" ref="view_event_registration_participant_form"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
+        <record id="geoengine_vector_participant" model="geoengine.vector.layer">
+            <field name="geo_field_id"
+                ref="campos_event.field_campos_event_participant_geo_point"/>
+            <field name="name">Participant location</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_geo_participant"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        
+        <record id="geoengine_vector_layer_participant_tree" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Participant background</field>
+            <field name="view_id" ref="ir_ui_view_geo_participant"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
 	<record model="ir.ui.view" id="staff_event_registration_participant_form">
 			<field name="name">registration.participant.form Staff</field>
 			<field name="model">campos.event.participant</field>
@@ -325,7 +385,7 @@
 							<field name="job_id" attrs="{'invisible': [('staff', '=', False)]}"/>
 							<field name="my_comm_contact" attrs="{'invisible': [('staff', '=', False)]}" string="Aggreement with"/>
 							<separator string="Job/Committee" colspan="2"/>
-							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3">
+							<field name="jobfunc_ids" nolabel="1" colspan="2" col="3" attrs="{'readonly': [('state',' not in', 'approved')]}">
 							<tree create="false">
 								<field name="committee_id"/>
 								<field name="function_type_id"/>
@@ -413,7 +473,7 @@
 					<field name="state"/>
 					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
 					<field name="committee_id" string="Committee"/>
-					<!-- <field name="functitle"/> -->
+					<field name="message_last_post"/>
 	
 				</tree>
 			</field>

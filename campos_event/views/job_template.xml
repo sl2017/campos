@@ -1,96 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-<data>
+	<data>
 
-<!-- Overview of all blog posts -->
-<template id="jobber_latest_jobs" name="Latest Jobs">
-    <t t-call="website.layout">
-        <div id="wrap">
-            <div class="oe_structure"/>
-            <section data-snippet-id="title" class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h1><span t-raw="list_title"/></h1>
-                    </div>
-                </div>
-            </section>
-            <section class="container">
-                <div class="row">
-                <div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
-                    <t t-set="count" t-value="0"/>
-                    <t t-foreach="jobs" t-as="job">
-                      <div class="col-md-4">
-                        <h4>
-                            <span t-field="job.name"/>
-                            
-                        </h4>
-                        <div class="text-muted">
-                            <span class="fa fa-calendar"> <span t-field="job.create_date"/> &amp;nbsp;</span>
-                        
-                        </div>
-                        <div class="text-muted fa fa-tags">
-                        	<t t-foreach="job.tag_ids" t-as="tag">
-                            	<a t-att-href="'/campos/jobber/joblist/' + slug(tag)" t-field="tag.name"/>
-                           	</t>
-                        </div>
-                        <br/>
-                        <span>Udvalg: <a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)" t-field="job.committee_id"/> </span>
-                        <br/>
-                        
-                        <span t-raw="job.desc" /><br/>
-                        <b>Hvor:</b><span t-field="job.job_where"/><br/>
-                        <b>Hvornår:</b><span t-field="job.job_when"/><br/>
-                        <a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)"><i class="fa fa-arrow-right">&amp;nbsp;</i><span t-field="job.signup_button"/></a>
-                      </div>
-                      <t t-set="count" t-value="count+1"/>
-                      <div class="clearfix" t-if="(count % 3) == 0"/>
-                    </t>
-                </div>
-                </div>
-            </section>
-            <div class="oe_structure"/>
-        </div>
-    </t>
-</template>
+		<!-- Overview of all blog posts -->
+		<template id="jobber_latest_jobs" name="Latest Jobs">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure" />
+					<section data-snippet-id="title" class="container">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<h1>
+									<span t-raw="list_title" />
+								</h1>
+							</div>
+						</div>
+					</section>
+					<section class="container">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
+								<t t-set="count" t-value="0" />
+								<t t-foreach="jobs" t-as="job">
+									<div class="col-md-4 panel panel-default">
+										<a t-att-href="'/campos/jobber/view/' + slug(job)"><h4>
+											<span t-field="job.name" />
+										</h4></a>
+										<div class="text-muted">
+											<span class="fa fa-calendar">
+												<span t-field="job.create_date" />
+												&amp;nbsp;
+											</span>
 
-<!-- Option:Right Column for extra info -->
+										</div>
+										<div class="text-muted fa fa-tags">
+											<t t-foreach="job.tag_ids" t-as="tag">
+												<a t-att-href="'/campos/jobber/joblist/' + slug(tag)"
+													t-field="tag.name" />
+											</t>
+										</div>
+										<br />
+										<span>
+											Udvalg:
+											<a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)"
+												t-field="job.committee_id" />
+										</span>
+										<br />
 
-<template id="index_right" name="Right Column"
-        inherit_id="campos_event.jobber_latest_jobs" active="False" customize_show="True">
-    <xpath expr="//div[@id='main_column']" position="attributes">
-        <attribute name="class">col-sm-8</attribute>
-    </xpath>
-    <xpath expr="//div[@id='main_column']" position="after">
-        <div class="col-lg-3 col-lg-offset-1 col-sm-4" id="blog_right_column"/>
-    </xpath>
-</template>
+										<span t-field="job.teaser" />
+										<br />
+										<b>Hvor:</b>
+										<span t-field="job.job_where" />
+										<br />
+										<b>Hvornår:</b>
+										<span t-field="job.job_when" />
+										<br />
+										<a class="btn btn-success " t-att-href="'/campos/jobber/view/' + slug(job)">
+											<i class="fa fa-arrow-right">&amp;nbsp;</i>
+											Read more...
+										</a>
+										<br/>
+										&amp;nbsp;
+									</div>
+									<t t-set="count" t-value="count+1" />
+									<div class="clearfix" t-if="(count % 3) == 0" />
+								</t>
+							</div>
+						</div>
+					</section>
+					<div class="oe_structure" />
+				</div>
+			</t>
+		</template>
 
-<!-- Option:Right Column: tags -->
-<template id="opt_blog_rc_tags" name="Tags"
-        inherit_id="campos_event.index_right" active="False" customize_show="True">
-    <xpath expr="//div[@id='blog_right_column']" position="inside">
-        <section class="mt32">
-        <h4>Tags</h4>
-        <ul class="nav nav-pills nav-stacked">
-            <li> <a t-attf-href="/campos/jobber/joblist">All Jobs</a></li> 
-            <t t-foreach="nav_comm" t-as="nav_comm">
-            
-            <li style="display: inline-block;">
-            <a t-att-href="'/campos/jobber/jobcom/' + slug(nav_comm)" t-field="nav_comm.name"/> 
-            </li>
-            </t>
-            
-            
-            <t t-foreach="nav_tags" t-as="nav_tag">
-            
-            <li  style="display: inline-block;">
-                <a t-att-href="'/campos/jobber/joblist/' + slug(nav_tag)" t-field="nav_tag.name"/>
-            </li>
-            </t>
-        </ul>
-        </section>
-    </xpath>
-</template>
+		<template id="jobber_job_view" name="Job view">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure" />
+					<section data-snippet-id="title" class="container">
+								<h4>
+									<span t-field="job.name" />
 
-</data>
+								</h4>
+					</section>
+					<section class="container">
+					
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
+													<div class="text-muted">
+									<span class="fa fa-calendar">
+										<span t-field="job.create_date" />
+										&amp;nbsp;
+									</span>
+
+								</div>
+								<div class="text-muted fa fa-tags">
+									<t t-foreach="job.tag_ids" t-as="tag">
+										<a t-att-href="'/campos/jobber/joblist/' + slug(tag)"
+											t-field="tag.name" />
+									</t>
+								</div>
+								<br />
+								<span>
+									Udvalg:
+									<a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)"
+										t-field="job.committee_id" />
+								</span>
+								<br />
+								<b><span t-field="job.teaser" /></b>
+								<br />
+								<span t-raw="job.desc" />
+								<br />
+								<b>Hvor: </b>
+								<span t-field="job.job_where" />
+								<br />
+								<b>Hvornår: </b>
+								<span t-field="job.job_when" />
+								<br />
+								<a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)">
+									<i class="fa fa-arrow-right">&amp;nbsp;</i>
+									<span t-field="job.signup_button" />
+								</a>
+								<a class="btn btn-primary" t-att-href="'/campos/jobber/ask/' + slug(job)">I need more info</a>
+								<div class="oe_share s_share">
+                  <h4> 
+                    <a class="oe_share_facebook" t-attf-href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_Blank"><i class="fa fa-facebook-square"/> </a>
+                    <a class="oe_share_twitter" t-attf-href="https://twitter.com/intent/tweet?text={{job.name}}&amp;url={url}" target="_Blank"><i class="fa fa-twitter"/> </a>
+                    <a class="oe_share_linkedin" t-attf-href="http://www.linkedin.com/shareArticle?mini=true&amp;url={url}&amp;title={{job.name}}" target="_Blank"><i class="fa fa-linkedin"/> </a>
+                    <a class="oe_share_google" t-attf-href="https://plus.google.com/share?url={url}" target="_Blank"><i class="fa fa-google-plus-square"/> </a>
+                    <a t-attf-href="mailto:?body={url}&amp;subject={{job.name}}"><i class="fa fa-envelope-o"></i></a>                    
+                  </h4>  
+                  
+				</div>
+				
+							</div>
+						</div>
+					</section>
+				</div>
+			</t>
+		</template>
+
+		<!-- Option:Right Column for extra info -->
+
+		<template id="index_right" name="Right Column"
+			inherit_id="campos_event.jobber_latest_jobs" active="False"
+			customize_show="True">
+			<xpath expr="//div[@id='main_column']" position="attributes">
+				<attribute name="class">col-sm-8</attribute>
+			</xpath>
+			<xpath expr="//div[@id='main_column']" position="after">
+				<div class="col-lg-3 col-lg-offset-1 col-sm-4" id="blog_right_column" />
+			</xpath>
+		</template>
+
+		<template id="index_right2" name="Right Column"
+			inherit_id="campos_event.jobber_job_view" active="False"
+			customize_show="True">
+			<xpath expr="//div[@id='main_column']" position="attributes">
+				<attribute name="class">col-sm-8</attribute>
+			</xpath>
+			<xpath expr="//div[@id='main_column']" position="after">
+				<div class="col-lg-3 col-lg-offset-1 col-sm-4" id="blog_right_column" />
+			</xpath>
+		</template>
+		
+		<!-- Option:Right Column: tags -->
+		<template id="opt_blog_rc_tags" name="Tags"
+			inherit_id="campos_event.index_right" active="False" customize_show="True">
+			<xpath expr="//div[@id='blog_right_column']" position="inside">
+				<section class="mt32">
+				<!-- Search box -->
+				<div class="row">
+		                
+		                    <form t-attf-action="/campos/jobber/joblist" role="search" method="get">
+		                        <div class="input-group">
+		                            <input type="text" class="form-control" name="search" t-attf-placeholder="search" t-att-value="search"/>
+		                            <span class="input-group-btn">
+		                                <button class="btn btn-primary" type="submit">
+		                                    <i class="fa fa-search"></i>
+		                                </button>
+		                            </span>
+		                        </div>
+		                    </form>
+		                
+					</div>
+					<h4>Tags</h4>
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a t-attf-href="/campos/jobber/joblist">All Jobs</a>
+						</li>
+						<t t-foreach="nav_comm" t-as="nav_comm">
+
+							<li style="display: inline-block;">
+								<a t-att-href="'/campos/jobber/jobcom/' + slug(nav_comm)"
+									t-field="nav_comm.short_name" />
+							</li>
+						</t>
+
+
+						<t t-foreach="nav_tags" t-as="nav_tag">
+
+							<li style="display: inline-block;">
+								<a t-att-href="'/campos/jobber/joblist/' + slug(nav_tag)"
+									t-field="nav_tag.name" />
+							</li>
+						</t>
+					</ul>
+				</section>
+			</xpath>
+		</template>
+	
+		<!-- Option:Right Column: tags -->
+		<template id="opt_blog_rc_tags2" name="Tags"
+			inherit_id="campos_event.index_right2" active="False" customize_show="True">
+			<xpath expr="//div[@id='blog_right_column']" position="inside">
+				<section class="mt32">
+				
+				<!-- Search box -->
+				<div class="row">
+		                
+		                    <form t-attf-action="/campos/jobber/joblist" role="search" method="get">
+		                        <div class="input-group">
+		                            <input type="text" class="form-control" name="search" t-attf-placeholder="search" t-att-value="search"/>
+		                            <span class="input-group-btn">
+		                                <button class="btn btn-primary" type="submit">
+		                                    <i class="fa fa-search"></i>
+		                                </button>
+		                            </span>
+		                        </div>
+		                    </form>
+		                
+					</div>
+					
+					
+                
+					<h4>Tags</h4>
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a t-attf-href="/campos/jobber/joblist">All Jobs</a>
+						</li>
+						<t t-foreach="nav_comm" t-as="nav_comm">
+
+							<li style="display: inline-block;">
+								<a t-att-href="'/campos/jobber/jobcom/' + slug(nav_comm)"
+									t-field="nav_comm.short_name" />
+							</li>
+						</t>
+
+
+						<t t-foreach="nav_tags" t-as="nav_tag">
+
+							<li style="display: inline-block;">
+								<a t-att-href="'/campos/jobber/joblist/' + slug(nav_tag)"
+									t-field="nav_tag.name" />
+							</li>
+						</t>
+					</ul>
+				</section>
+			</xpath>
+		</template>
+		
+		<template id="jobber_job_ask">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Request more info</t>
+				<div id="wrap">
+					<div class="oe_structure" />
+					<div class="container">
+						<h1 class="text-center">
+							Send question regarding: <span t-field="job.name"/>
+						</h1>
+
+						<div class="row">
+							<section id="forms">
+								<!-- TODO Multilingual form action support ? -->
+								<form class="form-horizontal mt32" action="/campos/jobber/ask"
+									method="post" enctype="multipart/form-data">
+									<t t-if="error">
+										<div class="alert alert-danger">
+			  								<a href="#" class="close" data-dismiss="alert" aria-label="close">&amp;times;</a>
+			  								<ul t-foreach="error" t-as="e">
+			  									<li t-esc="error.get(e)" />
+			  								</ul>
+										</div>
+									</t>
+
+									<div t-attf-class="form-group #{error.get('name') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="name">Your Name</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('name')"
+												class="form-control" name="name" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('email') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="email">Your Email</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="email" t-att-value="default.get('email')"
+												class="form-control" name="email" required="True" />
+										</div>
+									</div>
+									<div class="form-group"> <label class="col-md-3 col-sm-4 control-label" 
+										for="description">Your question</label> <div class="col-md-7 col-sm-8"> 
+										<textarea class="form-control" t-esc="default.get('description')" name="description" required="True"  
+										style="min-height: 120px" maxlength="250"/> </div> </div>
+									<div class="form-group">
+										<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+									<input type="hidden" t-att-value="job and job.id or False"
+										name="job_id" />
+								</form>
+							</section>
+						</div>
+					</div>
+					<div class="oe_structure" />
+				</div>
+			</t>
+		</template>
+		
+		<template id="jobber_job_ask_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you!</h1>
+							<p>Your request has been submitted, we will get back to you soon.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		
+	</data>
 </openerp>

@@ -52,6 +52,11 @@
         'website_event_register_free',
         'base_suspend_security',
         'website_jquery_ui',
+        'base_geoengine',
+        'geoengine_partner',
+        'web_widget_color',
+        'project_issue',
+        'project_model_to_issue',
         
     ],
 
@@ -63,6 +68,7 @@
         
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',
+        'data/job_ask_project.xml',
         
         'views/templates.xml',
         'views/participant_view.xml',

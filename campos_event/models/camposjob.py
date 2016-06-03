@@ -26,6 +26,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.tools.translate import _
 
 
 
@@ -58,6 +59,7 @@ class CamposJob(models.Model):
     _inherit = 'mail.thread'
 
     name = fields.Char('Name', size=64)
+    teaser = fields.Char('Teaser', size=128)
     desc = fields.Html('Description')
     active = fields.Boolean('Active', help="The active field allows you to hide the category without removing it.", default=True)
     tag_ids = fields.Many2many('campos.job.tag', 'campos_job_tag_rel', 'job_id', 'tag_id', string='Tags')
@@ -77,7 +79,9 @@ class CamposJob(models.Model):
     
     confirmed_job_qty = fields.Integer("Confirmed Applicants", compute='_compute_applicants')
     openapplications_qty = fields.Integer("Open Applicants", compute='_compute_applicants')
+    issue_qty = fields.Integer("Questions", compute='_compute_issue')
     openjob = fields.Boolean('Open', compute='_compute_applicants')
+    par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     
     @api.one
     @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')
@@ -92,9 +96,23 @@ class CamposJob(models.Model):
             openjob = False
         if self.max_qty_jobbere and self.max_qty_jobbere <= confirmed_job_qty:
             openjob = False
-        self.openjob = openjob    
-            
-            
-     
+        self.openjob = openjob
+        
+    @api.one
+    def _compute_issue(self):
+        self.issue_qty = self.env['project.issue'].search_count([('model_reference', '=', 'campos.job,%d' % self.id)])
+        
+    @api.multi
+    def open_issues(self):
+        self.ensure_one()
+        return {
+                'name':_("Questions re %s") % self.name,
+                'view_mode': 'kanban,tree,form',
+                'view_type': 'form',
+                'res_model': 'project.issue',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'domain': [('model_reference', '=', 'campos.job,%d' % self.id)],
+                }
     
     
