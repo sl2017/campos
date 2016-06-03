@@ -29,9 +29,11 @@ class WebsiteEventEx(WebsiteEvent):
                     return False
         return True
 
-    @http.route(['/event/<model("event.event"):event>/register/register_meeting'],
+    @http.route(['/event/<model("event.event"):event>/register/register_meeting',
+                 '/event/<model("event.event"):event>/register/register_free'],
                 type='http', auth="user", website=True)
-    def event_register_meeting(self, event, **post):
+    def event_register_free(self, event, **post):
+        # TODO: Rename back: def event_register_meeting(self, event, **post):
         def validate(name, force_check=False):
             return self._validate(name, post, force_check=force_check)
 
