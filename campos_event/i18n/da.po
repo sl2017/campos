@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 02:00+0000\n"
-"PO-Revision-Date: 2016-06-02 02:00+0000\n"
+"POT-Creation-Date: 2016-06-03 02:00+0000\n"
+"PO-Revision-Date: 2016-06-03 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -331,7 +331,7 @@ msgid "Approval Procedure"
 msgstr "Godkendelses procedure"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:548
+#: code:addons/campos_event/models/event.py:552
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -598,7 +598,7 @@ msgid "Complete Address"
 msgstr "Fuld adresse"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:522
+#: code:addons/campos_event/models/event.py:526
 #, python-format
 msgid "Compose Email"
 msgstr "Lav Email"
@@ -687,7 +687,7 @@ msgstr "Land"
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country..."
-msgstr ""
+msgstr "Land..."
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -811,7 +811,7 @@ msgstr "Din adgang til zExpense"
 #: field:campos.municipality,display_name:0
 #: field:campos.scout.org,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_event
 #: field:event.registration,scout_division:0
@@ -846,6 +846,16 @@ msgstr "Email skabelon"
 #. module: campos_event
 #: field:campos.event.participant,employee:0
 msgid "Employee"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Estimated number of leaders/scoutsmasters"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Estimated number of scouts/girlguides"
 msgstr ""
 
 #. module: campos_event
@@ -910,12 +920,12 @@ msgstr ""
 #. module: campos_event
 #: field:event.registration,friendship:0
 msgid "Friendship group"
-msgstr ""
+msgstr "Venskabsgruppe"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Friendship group participating in the camp"
-msgstr ""
+msgstr "Venskabsgruppe der deltager i lejren"
 
 #. module: campos_event
 #: field:campos.committee,display_name:0
@@ -1024,7 +1034,7 @@ msgstr "Hvornår:"
 #. module: campos_event
 #: view:website:campos_event.jobber_job_view
 msgid "I need more info"
-msgstr ""
+msgstr "Jeg ønsker mere information"
 
 #. module: campos_event
 #: field:campos.camp.area,id:0 field:campos.committee,id:0
@@ -1092,9 +1102,14 @@ msgid "Internal note"
 msgstr "Interne noter"
 
 #. module: campos_event
+#: selection:event.event,regform:0
+msgid "International Groups"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Intl. Pre-registration"
-msgstr ""
+msgstr "International foreløbig registrering"
 
 #. module: campos_event
 #: field:campos.event.participant,leader:0
@@ -1214,7 +1229,7 @@ msgstr "Sprog"
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Language..."
-msgstr ""
+msgstr "Sprog..."
 
 #. module: campos_event
 #: field:campos.committee,message_last_post:0
@@ -1325,9 +1340,14 @@ msgid ""
 msgstr ""
 
 #. module: campos_event
+#: selection:event.event,regform:0
+msgid "Meeting register (with survey)"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,meeting_registration_ids:0
 msgid "Meeting registration ids"
-msgstr ""
+msgstr "Møderegistreringsnummer"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -1337,7 +1357,7 @@ msgstr "Møde"
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Member of"
-msgstr ""
+msgstr "Medlem af"
 
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
@@ -1379,7 +1399,7 @@ msgstr "Mobil telefon"
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Mobile phone"
-msgstr ""
+msgstr "Mobil telefon"
 
 #. module: campos_event
 #: view:campos.municipality:campos_event.municipality_tree
@@ -1419,12 +1439,12 @@ msgstr "Navn"
 #. module: campos_event
 #: field:event.registration,natorg:0
 msgid "National Organization"
-msgstr ""
+msgstr "National organisation"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "National Scout Organization"
-msgstr ""
+msgstr "National spejder organisation"
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.deregister_sharepoint
@@ -1464,16 +1484,6 @@ msgstr "Antal"
 #: field:event.registration,staff_qty_pre_reg:0
 msgid "Number of Staff - Pre-registration"
 msgstr "Har kontakt til flere hjælpere antal:"
-
-#. module: campos_event
-#: view:website:campos_event.intl_groups_register_form
-msgid "Number of leaders/scoutsmasters"
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.intl_groups_register_form
-msgid "Number of scouts/girlguides"
-msgstr ""
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
@@ -1553,7 +1563,7 @@ msgid "Paricipant"
 msgstr "Deltager"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:683
+#: code:addons/campos_event/models/event.py:687
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1627,7 +1637,7 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Preferred language"
-msgstr ""
+msgstr "Foretrukket sprog"
 
 #. module: campos_event
 #: field:campos.event.participant,private_mailaddress:0
@@ -1723,6 +1733,11 @@ msgid "Registration"
 msgstr "Registrering"
 
 #. module: campos_event
+#: field:event.event,regform:0
+msgid "Registration Form"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Registration Survey"
 msgstr "Registrering undersøgelse"
@@ -1743,7 +1758,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:572
+#: code:addons/campos_event/models/event.py:576
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1916,7 +1931,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:494
+#: code:addons/campos_event/models/event.py:498
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2083,6 +2098,11 @@ msgstr "Standby indtil"
 #. module: campos_event
 #: field:campos.event.participant,state_id:0
 msgid "State"
+msgstr ""
+
+#. module: campos_event
+#: selection:event.event,regform:0
+msgid "Std. Free Register"
 msgstr ""
 
 #. module: campos_event
@@ -2447,12 +2467,12 @@ msgstr "Fastnet telefon"
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Group"
-msgstr ""
+msgstr "Navn på spejdergruppe"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Groups name"
-msgstr ""
+msgstr "Din spejdergruppes navn"
 
 #. module: campos_event
 #: view:website:campos_event.reg_confirmed

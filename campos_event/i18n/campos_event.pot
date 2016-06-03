@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 02:00+0000\n"
-"PO-Revision-Date: 2016-06-02 02:00+0000\n"
+"POT-Creation-Date: 2016-06-03 02:00+0000\n"
+"PO-Revision-Date: 2016-06-03 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:548
+#: code:addons/campos_event/models/event.py:552
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -583,7 +583,7 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:522
+#: code:addons/campos_event/models/event.py:526
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -843,6 +843,16 @@ msgid "Employee"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Estimated number of leaders/scoutsmasters"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.intl_groups_register_form
+msgid "Estimated number of scouts/girlguides"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.camp.area,event_id:0
 #: view:campos.event.participant:campos_event.campos_event_participant_search
 #: model:ir.model,name:campos_event.model_event_event
@@ -1084,6 +1094,11 @@ msgid "Internal note"
 msgstr ""
 
 #. module: campos_event
+#: selection:event.event,regform:0
+msgid "International Groups"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Intl. Pre-registration"
 msgstr ""
@@ -1322,6 +1337,11 @@ msgid "Medium-sized image of this contact. It is automatically resized as a 128x
 msgstr ""
 
 #. module: campos_event
+#: selection:event.event,regform:0
+msgid "Meeting register (with survey)"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,meeting_registration_ids:0
 msgid "Meeting registration ids"
 msgstr ""
@@ -1468,16 +1488,6 @@ msgid "Number of Staff - Pre-registration"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.intl_groups_register_form
-msgid "Number of leaders/scoutsmasters"
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.intl_groups_register_form
-msgid "Number of scouts/girlguides"
-msgstr ""
-
-#. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
 msgid "Ny hjælper til godkendelse"
 msgstr ""
@@ -1555,7 +1565,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:683
+#: code:addons/campos_event/models/event.py:687
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1726,6 +1736,11 @@ msgid "Registration"
 msgstr ""
 
 #. module: campos_event
+#: field:event.event,regform:0
+msgid "Registration Form"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Registration Survey"
 msgstr ""
@@ -1746,7 +1761,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:572
+#: code:addons/campos_event/models/event.py:576
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1918,7 +1933,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:494
+#: code:addons/campos_event/models/event.py:498
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2088,6 +2103,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,state_id:0
 msgid "State"
+msgstr ""
+
+#. module: campos_event
+#: selection:event.event,regform:0
+msgid "Std. Free Register"
 msgstr ""
 
 #. module: campos_event
