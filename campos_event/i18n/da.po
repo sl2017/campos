@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-03 02:00+0000\n"
-"PO-Revision-Date: 2016-06-03 02:00+0000\n"
+"POT-Creation-Date: 2016-06-04 02:00+0000\n"
+"PO-Revision-Date: 2016-06-04 02:00+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -1478,9 +1478,17 @@ msgid "Number"
 msgstr "Antal"
 
 #. module: campos_event
-#: field:campos.event.participant,staff_qty_pre_reg:0
 #: field:event.registration,leader_qty_pre_reg:0
+msgid "Number of Leaders - Pre-registration"
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,scout_qty_pre_reg:0
+msgid "Number of Scouts - Pre-registration"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,staff_qty_pre_reg:0
 #: field:event.registration,staff_qty_pre_reg:0
 msgid "Number of Staff - Pre-registration"
 msgstr "Har kontakt til flere hjælpere antal:"
