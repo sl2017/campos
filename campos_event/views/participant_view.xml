@@ -374,7 +374,8 @@
                             <field name="mobile"/>
                             <field name="skype"/>
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" widget="email"/>
+                            <field name="email" widget="email" attrs="{'readonly': [('email','ilike','%@sl2017.dk')]}"/>
+                            <field name="private_mailaddress" widget="email" attrs="{'readonly': [('email','not ilike','%@sl2017.dk')]}"/>
                             <field name="reg_organization_id" options="{'no_open': True}" string="Scout Organization"/>
 							<field name="participant" invisible="1"/>
 				 		    <field name="staff" invisible="1"/>
@@ -395,15 +396,6 @@
 							<field name="standby_until" states="standby" />
 							</group>
 							<notebook colspan="4" col="4">
-							<page string="Sharepoint">
-								 <group>
-								  
-								 	<field name="sharepoint_mail" readonly="1"/>
-								 	<field name="sharepoint_mailaddress" readonly="1"/>
-								 	<field name="sharepoint_clienttype" readonly="1"/>
-								 	<field name="sharepoint_mail_created" readonly="1"/>
-								 </group>
-								 </page>
 								 
 								 <page string="Agreements">
 								 	<group>
