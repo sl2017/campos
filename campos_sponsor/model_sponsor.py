@@ -97,6 +97,10 @@ class SponsorMain(models.Model):
 	
 	#KNAPPER PARTNER
 	@api.one
+	def btn_partner_bekraft(self):
+		self.partner_state='state_behandles'
+		
+	@api.one
 	def btn_partner_behandles(self):
 		self.partner_state='state_behandles'
 		

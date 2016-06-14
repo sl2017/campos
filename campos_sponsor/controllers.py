@@ -28,13 +28,11 @@ class partnercontroller(http.Controller):
         methods=['POST'], type='http', auth="public", website=True)
     def partner_thankyou(self, **post):
         
-        _logger.info("Creating environment")
         env = request.env(user=SUPERUSER_ID)
         
-        
-        _logger.info("Creating value")
         value = {
-            'sponsor_issponsor': False
+            'sponsor_issponsor': False,
+            'partner_state': 'state_waiting'
         }
         
         _logger.info("Filling value")
@@ -52,19 +50,14 @@ class partnercontroller(http.Controller):
         part = env['model.sponsor'].create(value)
         
         
-        _logger.info("Trying to send confirmation mail")
         template = part.env.ref('campos_sponsor.request_partnerconfirm')
         assert template._name == 'email.template'
         try:
-            _logger.info("Sending mail...")
             template.send_mail(part.id)
-            _logger.info("Mail sent!")  
         except:
-            _logger.info("Mail sending failed")
             pass
         
         
-        _logger.info("Rendering thankyou page")
         return request.render("campos_sponsor.partners_thankyou", {'par':part})
     
     

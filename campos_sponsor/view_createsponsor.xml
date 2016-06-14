@@ -16,6 +16,7 @@
 						<button name="btn_sponsor_aaben" type="object" string="Til potentiel" attrs="{'invisible':['|',('sponsor_state','=','state_potentiel'),('sponsor_issponsor','==',False)]}" class="oe_highlight" />
 						
 						<!--Partner-->
+						<button name="btn_partner_bekraft" type="object" string="Bekræft partnerskab" attrs="{'invisible':['|',('partner_state','!=','state_waiting'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
 						<button name="btn_partner_behandles" type="object" string="Behandles" attrs="{'invisible':['|',('partner_state','==','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
 						<button name="btn_partner_godkendt" type="object" string="Godkend partnerskab" attrs="{'invisible':['|',('partner_state','!=','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
 						<button name="btn_partner_afvis" type="object" string="Afvis ansøgning" attrs="{'invisible':['|',('partner_state','!=','state_behandles'),('sponsor_issponsor','==',True)]}" class="oe_highlight" />
@@ -187,7 +188,7 @@
 			res_model="model.sponsor"
 			view_mode="tree,form"
 			view_id="view_partner_overview"
-			domain="[('sponsor_issponsor','=',False)]"
+			domain="[('partner_state','!=','state_waiting'),('sponsor_issponsor','=',False)]"
 			context="{'default_sponsor_issponsor':False}" />
 
 		<!-- Menu item to open Partner list -->
