@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="activity_signup" name="Activity signup">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Activity Signup</t>
+				<div id="wrap" style="margin-bottom:100px;">
+					<div class="oe_structure" />
+					<div class="container">
+					
+						<h1 class="text-center">
+							Activity Signup Form
+						</h1>
+						
+						
+						<div class="row">
+							<section id="forms">
+								<form class="form-horizontal mt32" action="/page/campos-activity-thankyou"
+									method="post" enctype="multipart/form-data">
+														
+														
+																		
+									
+									<!--Activity name-->
+									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_name">Name of activity</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_name" required="True" />
+										</div>
+									</div>									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_groupname">Group/organisation name</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_groupname" required="True" />
+										</div>
+									</div>
+									
+									
+									
+									
+									<!--Contact information-->
+									<div style="margin-top: 30px; margin-bottom: 50px;">
+										<div style="width: 50%; float: left;">
+											<center><h3>Contact person 1</h3></center>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_name">Name</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_name" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_road">Road</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_road" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_city">City</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_city" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_zip">ZIP</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_zip" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_email">Email</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_email" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact1_tlf">Phone</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact1_tlf" required="True" />
+												</div>
+											</div>
+										</div>
+										<div style="width: 50%; float: right;">
+											<center><h3>Contact person 2</h3></center>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_name">Name</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_name" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_road">Road</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_road" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_city">City</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_city" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_zip">ZIP</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_zip" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_email">Email</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_email" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_contact2_tlf">Phone</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_contact2_tlf" required="True" />
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<!--Opening hours-->
+									<div style="margin-top: 50px; width: 100%; float: left;">
+										<center><h3>Opening hours</h3></center>
+										<center><h4>If there are any questions you cannot answer yet, please fill out with "To be discussed".</h4></center>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_sunday">Sunday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_sunday" required="False" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_monday">Monday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_monday" required="False" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_tuesday">Tuesday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_tuesday" required="False" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_wednesday">Wednesday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_wednesday" required="False" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_thursday">Thursday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_thursday" required="False" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="activity_open_friday">Friday</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="activity_open_friday" required="False" />
+										</div>
+									</div>
+									
+									
+									
+									<!--Activity information-->
+									
+									<div style="margin-top: 100px;">
+										<div style="width: 50%; float: left;">
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_age">Primary age group for activity</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_age" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_capacity_day">Amount of participants per day</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_capacity_day" required="True" />
+												</div>
+											</div>
+										</div>
+										<div style="width: 50%; float: right;">
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_expense_total">Total expense</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_expense_total" required="True" />
+												</div>
+											</div>
+											<div t-attf-class="form-group">
+												<label class="col-md-3 col-sm-4 control-label" for="activity_expense_scout">Expense per participant</label>
+												<div class="col-md-7 col-sm-8">
+													<input type="text" class="form-control" name="activity_expense_scout" required="True" />
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<!--Filled out by-->
+									<div style="float: right; width: 40%; margin-top: 100px;">
+										<h4>Filled out by</h4>
+										<input type="text" class="form-control" name="activity_filled" required="True" />
+									</div>
+									
+									
+									
+									<!--Submit button-->
+									<div class="col-md-12 text-center mt16 mb16">
+										<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+									</div>
+									
+									
+									
+								</form>
+							</section>
+							
+								
+							
+							
+						</div>
+							
+					</div>
+					<div class="oe_structure" />
+				</div>
+						
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="activity_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1 class="text-center">Thanks!</h1>
+							<h4 class="text-center">Your application of activity has been registered! We will get back to you as fast as possible.</h4>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue to our website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
+		</template>
+	</data>
+</openerp>

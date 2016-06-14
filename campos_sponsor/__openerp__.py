@@ -15,6 +15,8 @@
         'controllers.py',
         'view_createsponsor.xml',
         'partner_template.xml',
-        'mail_templates.xml'
+        'mail_templates.xml',
+        'view_createactivity.xml',
+        'activity_template.xml'
         ],
 }

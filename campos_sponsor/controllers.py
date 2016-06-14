@@ -35,7 +35,7 @@ class partnercontroller(http.Controller):
             'partner_state': 'state_waiting'
         }
         
-        _logger.info("Filling value")
+
         for f in ['name', 'sponsor_cvr', 
                   'street', 'zip', 'city', 'sponsor_url',
                   'sponsor_kontaktperson_name', 'sponsor_kontaktperson_mail', 'sponsor_kontaktperson_tlf',
@@ -46,7 +46,7 @@ class partnercontroller(http.Controller):
             value[f] = post.get(f)
             
         
-        _logger.info("Creating sponsor object")
+
         part = env['model.sponsor'].create(value)
         
         
@@ -86,3 +86,51 @@ class partnercontroller(http.Controller):
     
     
     
+    
+    
+    
+class activitycontroller(http.Controller):    
+    signupurl = '/campos/activity/signup'
+    thankyouurl = '/page/campos-activity-thankyou'
+    confirmurl = '/campos/confirm/<mode>/<token>'
+    
+    
+    @http.route('/campos/activity/signup',
+        type='http', auth="public", website=True)
+    def index(self, **kw):
+        return request.render('campos_sponsor.activity_signup', {
+        })
+        
+    
+
+
+
+    @http.route('/page/campos-activity-thankyou',
+        methods=['POST'], type='http', auth="public", website=True)
+    def activity_thankyou(self, **post):
+        
+        env = request.env(user=SUPERUSER_ID)
+        
+        value = {
+            'activity_state': 'state_waiting'
+        }
+        
+
+        for f in ['activity_name', 'activity_groupname', 
+                  'activity_contact1_name', 'activity_contact1_road', 'activity_contact1_city', 'activity_contact1_zip', 'activity_contact1_email', 'activity_contact1_tlf',
+                  'activity_contact2_name', 'activity_contact2_road', 'activity_contact2_city', 'activity_contact2_zip', 'activity_contact2_email', 'activity_contact2_tlf',
+                  'activity_open_sunday', 'activity_open_monday', 'activity_open_tuesday', 'activity_open_wednesday', 'activity_open_thursday', 'activity_open_friday',
+                  'activity_age', 'activity_capacity_day', 'activity_expense_total', 'activity_expense_scout',
+                  'activity_filled',
+                  
+                  ]:
+            value[f] = post.get(f)
+            
+        
+
+        part = env['model.activity'].create(value)
+        
+        return request.render("campos_sponsor.activity_thankyou", {'par':part})
+    
+        
+        

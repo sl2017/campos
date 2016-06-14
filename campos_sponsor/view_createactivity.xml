@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_form_activity_create" model="ir.ui.view">
+            <field name="name">Create new activity</field>
+            <field name="model">model.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    <!--State fields-->
+                        <field name="activity_state" widget="statusbar" statusbar_visible="state_application,state_processing,state_approved"/>
+                    </header>
+                    <sheet>
+                        <h1 style="margin-bottom: 20px;">Activity</h1>
+                        <h3>Activity name</h3>
+                        <h2 style="margin-bottom: 10px;"><field name="activity_name" attrs="{'required':True}"/></h2>                        
+                        <div>
+                        	<h4>Name of group/organisation</h4>
+                        	<field name="activity_groupname" attrs="{'required':True}"/>
+						</div>
+						
+                        
+                        <!-- CONTACT INFORMATION -->
+                        <group>
+                        	<group>
+                        		<h3>Contact person 1</h3><br/>
+                        		<field name="activity_contact1_name" attrs="{'required':True}"/>
+                        		<field name="activity_contact1_road" attrs="{'required':True}"/>
+                        		<field name="activity_contact1_city" attrs="{'required':True}"/>
+                        		<field name="activity_contact1_zip" attrs="{'required':True}"/>
+                        		<field name="activity_contact1_email" attrs="{'required':True}"/>
+                        		<field name="activity_contact1_tlf" attrs="{'required':True}"/>
+                        	</group>
+                        	<group>
+                        		<h3>Contact person 2</h3><br/>
+                        		<field name="activity_contact2_name" attrs="{'required':True}"/>
+                        		<field name="activity_contact2_road" attrs="{'required':True}"/>
+                        		<field name="activity_contact2_city" attrs="{'required':True}"/>
+                        		<field name="activity_contact2_zip" attrs="{'required':True}"/>
+                        		<field name="activity_contact2_email" attrs="{'required':True}"/>
+                        		<field name="activity_contact2_tlf" attrs="{'required':True}"/>
+                        	</group>
+                        </group>
+                        
+                        <hr/>
+                        <!-- OPENING HOURS -->
+                        <h2>Activity open hours</h2><br/>
+                        <group>
+                        	<field name="activity_open_sunday" attrs="{'required':False}"/>
+                        	<field name="activity_open_monday" attrs="{'required':False}"/>
+                        	<field name="activity_open_tuesday" attrs="{'required':False}"/>
+                        	<field name="activity_open_wednesday" attrs="{'required':False}"/>
+                        	<field name="activity_open_thursday" attrs="{'required':False}"/>
+                        	<field name="activity_open_friday" attrs="{'required':False}"/>
+                        </group>
+                        
+                        <hr/>
+                        <!-- ACTIVITY INFORMATION -->
+                        <h2>Activity information</h2><br/>
+                        <group>
+                        	<group>
+                        		<field name="activity_age" attrs="{'required':True}"/>
+                        		<field name="activity_capacity_day" attrs="{'required':True}"/>
+                        		<field name="activity_filled" attrs="{'required':True}"/>
+                        	</group>
+                        	<group>
+                        		<field name="activity_expense_total" attrs="{'required':True}"/>
+                        		<field name="activity_expense_scout" attrs="{'required':True}"/>
+                        	</group>
+                        </group>
+                        
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_activity_overview" model="ir.ui.view">
+			<field name="name">Activity Tree view</field>
+			<field name="model">model.activity</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="activity_name"/>
+					<field name="activity_open_sunday"/>
+					<field name="activity_open_monday"/>
+					<field name="activity_open_tuesday"/>
+					<field name="activity_open_wednesday"/>
+					<field name="activity_open_thursday"/>
+					<field name="activity_open_friday"/>
+					<field name="activity_age"/>
+					<field name="activity_capacity_day"/>
+					<field name="activity_expense_total"/>
+					<field name="activity_state"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<!-- Action to open Activity list -->
+		<act_window id="action_activity_create"
+			name="SL2017 Activity overview"
+			res_model="model.activity"
+			view_mode="tree,form"
+			view_id="view_activity_overview" />
+			
+			
+		<!-- Menu item to open Activity list -->
+		<menuitem id="menu_activity_create"
+			name="Activities"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_activity_create" />
+			
+			
+			
+        
+    </data>
+</openerp>
