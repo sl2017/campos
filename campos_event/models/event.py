@@ -439,6 +439,7 @@ class EventParticipant(geo_model.GeoModel):
                     template.send_mail(par.id)
                 except:
                     pass
+                par.action_create_user()
                 if par.zexpense_access_wanted and not par.zexpense_access_created:
                     template = self.env.ref('campos_event.request_zexpense')
                     assert template._name == 'email.template'
@@ -447,7 +448,7 @@ class EventParticipant(geo_model.GeoModel):
                     except:
                         pass
                     par.zexpense_access_requested = fields.Datetime.now()
-                par.action_create_user()
+        
             if 'zexpense_access_created' in vals and par.zexpense_access_created:
                 template = self.env.ref('campos_event.info_zexpense')
                 assert template._name == 'email.template'
