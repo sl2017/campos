@@ -7,3 +7,8 @@ file_filter = campos_event/i18n/<lang>.po
 source_file = campos_event/i18n/campos_event.pot
 source_lang = en
 
+[campos.campos_sponsor]
+file_filter = campos_sponsor/i18n/<lang>.po
+source_file = campos_sponsor/i18n/campos_sponsor.pot
+source_lang = en
+

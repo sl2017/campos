@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-04 02:00+0000\n"
-"PO-Revision-Date: 2016-06-14 15:27+0000\n"
+"PO-Revision-Date: 2016-06-21 08:38+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -203,7 +203,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,member_no:0
 msgid "# Member"
-msgstr ""
+msgstr "# medlem"
 
 #. module: campos_event
 #: field:campos.event.participant,task_count:0 field:res.users,task_count:0
@@ -259,13 +259,13 @@ msgstr "Adresse"
 #. module: campos_event
 #: field:campos.event.participant,type:0
 msgid "Address Type"
-msgstr ""
+msgstr "Adresse type"
 
 #. module: campos_event
 #: field:campos.committee.function,geo_point:0
 #: field:campos.event.participant,geo_point:0
 msgid "Addresses coordinate"
-msgstr ""
+msgstr "Kooridinater på adresse"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_admin
@@ -851,12 +851,12 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Estimated number of leaders/scoutsmasters"
-msgstr ""
+msgstr "Forventede antal af ledere/"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Estimated number of scouts/girlguides"
-msgstr ""
+msgstr "Forventede antal af spejdere"
 
 #. module: campos_event
 #: field:campos.camp.area,event_id:0
@@ -1104,7 +1104,7 @@ msgstr "Interne noter"
 #. module: campos_event
 #: selection:event.event,regform:0
 msgid "International Groups"
-msgstr ""
+msgstr "International gruppe"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -1309,7 +1309,7 @@ msgstr "Hoved udvalg"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Map"
-msgstr ""
+msgstr "Kort"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.participant_mas_mailing
@@ -1703,7 +1703,7 @@ msgstr "Grund"
 #. module: campos_event
 #: field:campos.event.participant,notify_email:0
 msgid "Receive Inbox Notifications by Email"
-msgstr ""
+msgstr "Modtag mail om post i indbakke "
 
 #. module: campos_event
 #: selection:campos.event.participant,state:0
@@ -1743,7 +1743,7 @@ msgstr "Registrering"
 #. module: campos_event
 #: field:event.event,regform:0
 msgid "Registration Form"
-msgstr ""
+msgstr "Registrerings blanket"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
