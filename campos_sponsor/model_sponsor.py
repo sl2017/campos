@@ -97,6 +97,10 @@ class SponsorMain(models.Model):
 	
 	#KNAPPER PARTNER
 	@api.one
+	def btn_partner_bekraft(self):
+		self.partner_state='state_potentiel'
+		
+	@api.one
 	def btn_partner_behandles(self):
 		self.partner_state='state_behandles'
 		
@@ -141,7 +145,8 @@ class SponsorMain(models.Model):
 	partner_bidrag_4 = fields.Boolean(u'Viden/sparring',track_visibility='onchange')
 	partner_bidrag_5 = fields.Boolean(u'Diverse',track_visibility='onchange')
 	#State
-	partner_state = fields.Selection([('state_potentiel',u'Ansøgning'),
+	partner_state = fields.Selection([('state_waiting',u'Afventer bekræftelse'),
+									('state_potentiel',u'Ansøgning'),
 									('state_behandles','Behandles'),
 									('state_godkendt','Godkendt'),
 									('state_afvist','Afvist'),

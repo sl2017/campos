@@ -192,8 +192,6 @@ class EventEvent(models.Model):
         return data
 
 
-
-
 class EventRegistration(models.Model):
 
     '''
@@ -207,11 +205,12 @@ class EventRegistration(models.Model):
         'registration_id', string="Participants")
 
     state = fields.Selection([
-            ('draft', 'Unconfirmed'),
-            ('cancel', 'Cancelled'),
-            ('open', 'Confirmed'),
-            ('done', 'Attended'),
-        ], string='Status', default='draft', readonly=True, copy=False, track_visibility='onchange')
+        ('draft', 'Unconfirmed'),
+        ('cancel', 'Cancelled'),
+        ('open', 'Confirmed'),
+        ('done', 'Attended'),
+    ], string='Status', default='draft', readonly=True, copy=False,
+        track_visibility='onchange')
 
     name = fields.Char(related='partner_id.name', store=True)
     scoutgroup = fields.Boolean(related='partner_id.scoutgroup')
@@ -262,8 +261,6 @@ class EventRegistration(models.Model):
         'Room/Camp Area',
         select=True,
         ondelete='set null')
-
-
 
     @api.multi
     def action_edit_survey_response(self):
@@ -404,7 +401,6 @@ class EventParticipant(geo_model.GeoModel):
     def _compute_meeting_registration(self):
         self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
 
-
     @api.one
     def _compute_confirm_urls(self):
         if not self.sudo().confirm_token:
@@ -443,6 +439,7 @@ class EventParticipant(geo_model.GeoModel):
                     template.send_mail(par.id)
                 except:
                     pass
+                par.action_create_user()
                 if par.zexpense_access_wanted and not par.zexpense_access_created:
                     template = self.env.ref('campos_event.request_zexpense')
                     assert template._name == 'email.template'
@@ -451,7 +448,7 @@ class EventParticipant(geo_model.GeoModel):
                     except:
                         pass
                     par.zexpense_access_requested = fields.Datetime.now()
-                par.action_create_user()
+        
             if 'zexpense_access_created' in vals and par.zexpense_access_created:
                 template = self.env.ref('campos_event.info_zexpense')
                 assert template._name == 'email.template'
@@ -465,7 +462,6 @@ class EventParticipant(geo_model.GeoModel):
     @api.depends('name', 'email', 'mobile', 'sharepoint_mailaddress')
     def _get_complete_contact(self):
         self.complete_contact = '\n'.join(filter(None, [self.name, self.sharepoint_mailaddress if self.sharepoint_mailaddress else self.email, self.mobile]))
-
 
     @api.onchange('committee_id')
     def onchange_committee_id(self):
@@ -495,7 +491,7 @@ class EventParticipant(geo_model.GeoModel):
         self.state = 'standby'
         view = self.env.ref('campos_event.view_event_participant_standby_form')
         return {
-            'name':_("Set to standby: %s" % self.name),
+            'name': _("Set to standby: %s" % self.name),
             'view_mode': 'form',
             'view_type': 'form',
             'view_id': view.id,
@@ -504,7 +500,7 @@ class EventParticipant(geo_model.GeoModel):
             'nodestroy': True,
             'target': 'new',
             'res_id': self.id,
-            }
+        }
 
     @api.multi
     def action_send_standby_mail(self):
@@ -539,17 +535,17 @@ class EventParticipant(geo_model.GeoModel):
         self.ensure_one()
         form = self.env.ref('campos_event.view_campos_committee_function_form2', False)
         context = {
-                    'default_participant_id': self.id,
-                    'default_committee_id': self.committee_id.id,
-                    'default_job_id': self.job_id.id,
-                    'new_func': True,
-                    }
+            'default_participant_id': self.id,
+            'default_committee_id': self.committee_id.id,
+            'default_job_id': self.job_id.id,
+            'new_func': True,
+        }
         if self.sharepoint_mail:
             context['default_sharepoint_mail'] = "yes"
         if self.zexpense_access_wanted:
             context['default_zexpense_access_wanted'] = "yes"
         return {
-            'name':_("Approval of %s" % self.name),
+            'name': _("Approval of %s" % self.name),
             'view_mode': 'form',
             'view_type': 'form',
             'views': [(form.id, 'form')],
@@ -560,20 +556,13 @@ class EventParticipant(geo_model.GeoModel):
             'target': 'new',
             'domain': '[]',
             'context': context
-            }
-
-#         template = self.committee_id.template_id
-#         if template:
-#             template.send_mail(self.id)
-#
-#         self.state = 'approved'
-        return True
+        }
 
     @api.multi
     def action_reject(self):
         self.ensure_one()
         return {
-            'name':_("Reject %s" % self.name),
+            'name': _("Reject %s" % self.name),
             'view_mode': 'form',
             'view_type': 'form',
             'res_model': 'campos.event.par.reject',
@@ -584,8 +573,8 @@ class EventParticipant(geo_model.GeoModel):
             'context': {
                     'default_participant_id': self.id,
                     'default_committee_id': self.committee_id.id,
-                    }
             }
+        }
 
     @api.multi
     def action_create_user(self):
@@ -612,7 +601,8 @@ class EventParticipant(geo_model.GeoModel):
         for par in self:
             old_user = self.env['res.users'].suspend_security().search([('participant_id', '=', par.id)])
             if len(old_user):
-                old_user.suspend_security().write({'active': False})
+                old_user.suspend_security().write({'active': False,
+                                                   'login' : '%s-invalid-%d' % (old_user.login, old_user.id)})
             par.state = 'deregistered'
             par.jobfunc_ids.write({'active': False})
             if par.sharepoint_mailaddress:
