@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	
+		<record id="view_tree_lost_category" model="ir.ui.view">
+			<field name="name">Item Category Tree</field>
+			<field name="model">lost.category</field>
+			<field name="arch" type="xml">
+				<tree default_order='name' editable='top'>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+	
+		<record id="view_form_lost_category" model="ir.ui.view">
+			<field name="name">Item Category Form</field>
+			<field name="model">lost.category</field>
+			<field name="arch" type="xml">
+				<form string="Item Category">
+					<sheet>
+						<group>
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<act_window id="action_lost_categories" 
+			name="Item Categories" 
+			res_model="lost.category"
+			view_mode="tree,form" />
+		
+	</data>
+</openerp>

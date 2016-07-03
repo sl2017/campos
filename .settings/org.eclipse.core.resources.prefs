@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//campos_event/__init__.py=utf-8
+encoding//campos_event/__openerp__.py=utf-8
+encoding//campos_event/controllers/main.py=utf-8
+encoding//campos_event/models/__init__.py=utf-8
+encoding//campos_event/models/camp_area.py=utf-8
+encoding//campos_event/models/camposjob.py=utf-8
+encoding//campos_event/models/event.py=utf-8
+encoding//campos_event/models/scout_org.py=utf-8
+encoding//campos_lost_and_found/models/property.py=utf-8
+encoding//campos_setup/__init__.py=utf-8
+encoding//campos_setup/__openerp__.py=utf-8
+encoding//campos_sponsor/model_sponsor.py=utf-8

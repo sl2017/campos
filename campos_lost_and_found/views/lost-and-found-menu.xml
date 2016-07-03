@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<!-- Top -->
+		
+        <menuitem name="Lost And Found"
+            id="menu_lost_and_found"
+            groups="base.group_user"
+            sequence="100"/>
+            
+            
+        <!-- Administration -->
+        
+		<menuitem name="Administration"
+			id="menu_lost_administration"
+			parent="menu_lost_and_found"
+			sequence="10" />
+			
+		<menuitem name="Lost Properties"
+			id="menu_lost_properties"
+			parent="menu_lost_administration"
+			action="action_lost_properties"
+			sequence="10" />
+			
+		<menuitem name="Lost Reports"
+			id="menu_lost_reports"
+			parent="menu_lost_administration"
+			action="action_lost_reports"
+			sequence="20" />
+			
+			
+		<!-- Setup -->
+		
+		<menuitem name="Setup"
+			id="menu_lost_setup"
+			parent="menu_lost_and_found"
+			sequence="10" />
+			
+		<menuitem name="Item Categories"
+			id="menu_lost_categories"
+			parent="menu_lost_setup"
+			action="action_lost_categories"
+			sequence="10" />
+			
+		<menuitem name="Item Types"
+			id="menu_lost_items"
+			parent="menu_lost_setup"
+			action="action_lost_items"
+			sequence="20" />
+            
+            
+	</data>
+</openerp>

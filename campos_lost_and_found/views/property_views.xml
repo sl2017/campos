@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	
+		<record id="view_tree_lost_properties" model="ir.ui.view">
+			<field name="name">Lost Properties Tree</field>
+			<field name="model">lost.property</field>
+			<field name="arch" type="xml">
+				<tree default_order='item_id, features'>
+					<field name="id" readonly="1"/>
+					<field name="item_id"/>
+					<field name="features"/>
+					<field name="registered_date"/>
+					<field name="handed_over_date"/>
+				</tree>
+			</field>
+		</record>
+	
+		<record id="view_form_lost_properties" model="ir.ui.view">
+			<field name="name">Lost Properties Form</field>
+			<field name="model">lost.property</field>
+			<field name="arch" type="xml">
+				<form string="Lost Property">
+					<sheet>
+						<group>
+							<field name="id" readonly="1"/>
+							<field name="item_id"/>
+							<field name="features"/>
+							<field name="registered_date"/>
+							<field name="handed_over_date"/>
+							<field name="comments"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	
+		<act_window id="action_lost_properties" 
+			name="Lost Properties" 
+			res_model="lost.property"
+			view_mode="tree,form" />
+		
+	</data>
+</openerp>
