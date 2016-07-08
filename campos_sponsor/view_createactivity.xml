@@ -8,67 +8,74 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                    <!--State fields-->
+                    	<button name="btn_activity_confirm" type="object" string="Bekræft aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_waiting')]}" class="oe_highlight" />
+						<button name="btn_activity_process" type="object" string="Behandles" attrs="{'invisible':['|',('activity_state','!=','state_application')]}" class="oe_highlight" />
+						<button name="btn_activity_approve" type="object" string="Godkend aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_processing')]}" class="oe_highlight" />
+						<button name="btn_activity_reject" type="object" string="Afvis aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_processing')]}" class="oe_highlight" />
+						<button name="btn_activity_lock" type="object" string="Lås aktivitet" attrs="{'invisible':['|',('activity_state','==','state_locked')]}" class="oe_highlight" />
+						<button name="btn_activity_open" type="object" string="Genopret ansøgning" attrs="{'invisible':['|',('activity_state','=','state_application')]}" class="oe_highlight" />
+						
+                    
+                    
+                    	<!--State fields-->
                         <field name="activity_state" widget="statusbar" statusbar_visible="state_application,state_processing,state_approved"/>
                     </header>
                     <sheet>
-                        <h1 style="margin-bottom: 20px;">Activity</h1>
-                        <h3>Activity name</h3>
-                        <h2 style="margin-bottom: 10px;"><field name="activity_name" attrs="{'required':True}"/></h2>                        
-                        <div>
-                        	<h4>Name of group/organisation</h4>
+                        <!--Activity information -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Aktivitets beskrivelse</h1>
+                        <group>
+                        	<field name="activity_name" attrs="{'required':True}"/>
                         	<field name="activity_groupname" attrs="{'required':True}"/>
-						</div>
+							<field name="activity_description" attrs="{'required':True}"/>
+							<field name="activity_participant_usage" attrs="{'required':True}"/>
+							<field name="activity_participant_knowledge" attrs="{'required':True}"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!--Contact information-->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Kontaktoplysninger</h1>
+						<group>
+							<field name="activity_contact1_name" attrs="{'required':True}"/>
+							<field name="activity_type" attrs="{'required':True}" widget="radio"/>
+							<field name="activity_contact1_road" attrs="{'required':True}"/>
+							<field name="activity_contact1_zip" attrs="{'required':True}"/>
+							<field name="activity_contact1_city" attrs="{'required':True}"/>
+							<field name="activity_contact1_email" attrs="{'required':True}"/>
+							<field name="activity_contact1_tlf" attrs="{'required':True}"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!-- Målgruppe -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Hvem henvender aktiviteten sig til?</h1>
+                        <group>
+							<field name="activity_age_from" attrs="{'required':True}"/>
+							<field name="activity_age_to" attrs="{'required':True}"/>
+							<field name="activity_expected_participants" attrs="{'required':True}" widget="radio"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!-- Economy -->
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Økonomi</h1>
+                        <group>
+							<field name="activity_expense_total" attrs="{'required':False}"/>
+						</group>
 						
+						
+						<!--Notes-->
+						<h1 style="margin-top: 50px; margin-bottom: 20px;">Noter til aktivitet</h1>
+						<field name="activity_note"/>
                         
-                        <!-- CONTACT INFORMATION -->
-                        <group>
-                        	<group>
-                        		<h3>Contact person 1</h3><br/>
-                        		<field name="activity_contact1_name" attrs="{'required':True}"/>
-                        		<field name="activity_contact1_road" attrs="{'required':True}"/>
-                        		<field name="activity_contact1_city" attrs="{'required':True}"/>
-                        		<field name="activity_contact1_zip" attrs="{'required':True}"/>
-                        		<field name="activity_contact1_email" attrs="{'required':True}"/>
-                        		<field name="activity_contact1_tlf" attrs="{'required':True}"/>
-                        	</group>
-                        	<group>
-                        		<h3>Contact person 2</h3><br/>
-                        		<field name="activity_contact2_name" attrs="{'required':True}"/>
-                        		<field name="activity_contact2_road" attrs="{'required':True}"/>
-                        		<field name="activity_contact2_city" attrs="{'required':True}"/>
-                        		<field name="activity_contact2_zip" attrs="{'required':True}"/>
-                        		<field name="activity_contact2_email" attrs="{'required':True}"/>
-                        		<field name="activity_contact2_tlf" attrs="{'required':True}"/>
-                        	</group>
-                        </group>
                         
-                        <hr/>
-                        <!-- OPENING HOURS -->
-                        <h2>Activity open hours</h2><br/>
-                        <group>
-                        	<field name="activity_open_sunday" attrs="{'required':False}"/>
-                        	<field name="activity_open_monday" attrs="{'required':False}"/>
-                        	<field name="activity_open_tuesday" attrs="{'required':False}"/>
-                        	<field name="activity_open_wednesday" attrs="{'required':False}"/>
-                        	<field name="activity_open_thursday" attrs="{'required':False}"/>
-                        	<field name="activity_open_friday" attrs="{'required':False}"/>
-                        </group>
                         
-                        <hr/>
-                        <!-- ACTIVITY INFORMATION -->
-                        <h2>Activity information</h2><br/>
-                        <group>
-                        	<group>
-                        		<field name="activity_age" attrs="{'required':True}"/>
-                        		<field name="activity_capacity_day" attrs="{'required':True}"/>
-                        		<field name="activity_filled" attrs="{'required':True}"/>
-                        	</group>
-                        	<group>
-                        		<field name="activity_expense_total" attrs="{'required':True}"/>
-                        		<field name="activity_expense_scout" attrs="{'required':True}"/>
-                        	</group>
-                        </group>
                         
                     </sheet>
                     <div class="oe_chatter">
@@ -86,16 +93,7 @@
 			<field name="arch" type="xml">
 				<tree>
 					<field name="activity_name"/>
-					<field name="activity_open_sunday"/>
-					<field name="activity_open_monday"/>
-					<field name="activity_open_tuesday"/>
-					<field name="activity_open_wednesday"/>
-					<field name="activity_open_thursday"/>
-					<field name="activity_open_friday"/>
-					<field name="activity_age"/>
-					<field name="activity_capacity_day"/>
-					<field name="activity_expense_total"/>
-					<field name="activity_state"/>
+					<field name="activity_groupname"/>
 				</tree>
 			</field>
 		</record>
