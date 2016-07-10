@@ -36,6 +36,10 @@
 			<field name="category_id" ref="module_campos_category" />
 			<field name="users" eval="[(4, ref('base.user_root'))]" />
 		</record>
+		<record id="group_campos_office" model="res.groups">
+			<field name="name">Office</field>
+			<field name="category_id" ref="module_campos_category" />
+		</record>
 		<record id="group_campos_admin" model="res.groups">
 			<field name="name">Admin</field>
 			<field name="implied_ids" eval="[(4, ref('group_campos_user')),(4, ref('group_campos_activity')),(4, ref('group_campos_committee')),(4, ref('group_campos_manager'))]" />

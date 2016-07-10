@@ -234,7 +234,7 @@
 								 	<field name="sharepoint_mail"/>
 								 	<field name="sharepoint_mailaddress"/>
 								 	<field name="sharepoint_clienttype"/>
-								 	<field name="sharepoint_mail_created"/>
+								 	<field name="sharepoint_mail_created" groups="campos_event.group_campos_office"/>
 								 	<field name="private_mailaddress"/>
 								 </group>
 								 </page>
@@ -250,7 +250,7 @@
 									<field name="reject_ids">
 									<tree create="false" colspan="4">
 									<field name="create_date"/>
-									<field name="create_uid"/>
+									<field name="create_uid" groups="campos_event.group_campos_office"/>
 								 	<field name="committee_id"/>
 								 	<field name="reason"/>
 									</tree>								  
