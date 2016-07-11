@@ -13,13 +13,24 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
+
+		<record id="view_graph_stat_gender_age" model="ir.ui.view">
+			<field name="name">stat_gender_age</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+				<graph type="pivot">
+					<field name="age" type="col"/>
+					<field name="reg_organization_id" />
+				</graph>
+			</field>
+		</record>
 		
 		<record id="action_event_participants_tree2" model="ir.actions.act_window">
 			<field name="name">Participants</field>
 			
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form,geoengine</field>
+			<field name="view_mode">tree,form,geoengine,graph</field>
 		</record>
 		
 		<!-- Registration inherited form -->
