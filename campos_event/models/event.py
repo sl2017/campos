@@ -26,6 +26,8 @@
 ##############################################################################
 
 import random
+from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from urlparse import urljoin
 import werkzeug
 
@@ -318,7 +320,7 @@ class EventParticipant(geo_model.GeoModel):
     staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
-        'Scout Organization', related='registration_id.organization_id')
+        'Scout Organization', related='registration_id.organization_id', store=True)
     scout_color = fields.Char('Scout Org Color', related='registration_id.organization_id.color')
 
     # Scout Leader Fiedls
@@ -329,6 +331,8 @@ class EventParticipant(geo_model.GeoModel):
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
     birthdate = fields.Date('Date of birth')
+    age = fields.Integer('Age', compute='_compute_age', store=True)
+    context_age = fields.Integer('Age', compute='_compute_context_age')
 
     # Jobber fields
     committee_id = fields.Many2one('campos.committee',
@@ -414,6 +418,19 @@ class EventParticipant(geo_model.GeoModel):
         self.reg_confirm_url = urljoin(base_url, 'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         self.zexpense_confirm_url = urljoin(base_url, 'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         self.sharepoint_confirm_url = urljoin(base_url, 'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+
+
+    @api.multi
+    @api.depends('birthdate')
+    def _compute_age(self):
+        for part in self:
+            part.age = relativedelta(date.today(), fields.Date.from_string(part.birthdate)).years if part.birthdate else False
+
+    @api.multi
+    @api.depends('birthdate')
+    def _compute_context_age(self):
+        for part in self:
+            part.context_age = part.age_on_date(self.env.context.get('context_age_date')) if part.birthdate else False
 
     @api.model
     def create(self, vals):
