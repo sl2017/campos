@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+	<openerp>
+		<data>
+    <!-- Action to open Event Preregistration -->
+		<act_window id="action_event_preregistration"
+		name="Event Preregistration"
+		res_model="event.registration"
+		view_mode="form" />
+    <!-- Menu item to open Event Preregistration -->
+		<menuitem id="menu_event_preregistration"
+		name="Event Preregistration"
+		parent="mail.mail_feeds"
+		sequence="30"
+		action="action_event_preregistration" />
+  </data>
+</openerp>
