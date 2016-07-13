@@ -24,3 +24,5 @@ class TodoTask(models.Model):
         done_recs = self.search([('is_done', '=', True)])
         done_recs.write({'active': False})
         return True
+    
+    
