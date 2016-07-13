@@ -1,16 +1,81 @@
 <?xml version="1.0"?>
 	<openerp>
 		<data>
+		<record id="view_form_preregistration" model="ir.ui.view">
+			<field name="name">Preregistration Form</field>
+			<field name="model">event.registration</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<form>
+						<header>
+						</header>
+					<sheet>
+					<!-- Content goes here: -->
+						<group name="group_top">
+<!--							<field name="name"/>-->
+							<field name="group_name"/>
+							<field name="group_association"/>
+							<field name="group_world_association"/>
+							<field name="group_entrypoint"/>
+							<field name="contact_name"/>
+							<field name="contact_email"/>
+							<field name="contact_phone"/>
+							<field name="contact_address"/>
+							<field name="contact_address2"/>
+							<field name="contact_zip_town"/>
+							<field name="group_municipality"/>
+							<field name="group_country"/>
+							<field name="treasurer_name"/>
+							<field name="treasurer_email"/>
+							<field name="treasurer_phone"/>
+							<field name="group_address"/>
+							<field name="group_address2"/>
+							<field name="group_zip_town"/>
+							<field name="association_groupid"/>
+<!--							<field name="participant_ids"/>-->
+                    <field colspan="7" name="participant_ids" widget="one2many_list">
+                        <tree string="Participants" editable="bottom">
+                            <field name="participant_age_group_id"/>
+                            <field name="participant_total"/>
+                            <field name="participant_from_date"/>
+                            <field name="participant_to_date"/>
+                            <field name="participant_transport_to_camp_total"/>
+                            <field name="participant_transport_from_camp_total"/>
+                            <field name="participant_transport_note" class="oe_read_only"/>
+                        </tree>
+                    </field>
+							<field name="pionering_poles_3m_total"/>
+							<field name="pionering_poles_6m_total"/>
+							<field name="pionering_poles_9m_total"/>
+							<field name="handicap"/>
+							<field name="handicap_description"/>
+							<field name="handicap_needs"/>
+							<field name="friendship_group"/>
+							<field name="friendship_group_name"/>
+							<field name="friendship_group_info"/>
+							<field name="group_camp_agreements"/>
+							<field name="internal_information"/>
+						</group>
+					</sheet>
+				</form> 
+			</field>
+		</record>
     <!-- Action to open Event Preregistration -->
 		<act_window id="action_event_preregistration"
 		name="Event Preregistration"
 		res_model="event.registration"
 		view_mode="form" />
     <!-- Menu item to open Event Preregistration -->
-		<menuitem id="menu_event_preregistration"
-		name="Event Preregistration"
-		parent="mail.mail_feeds"
-		sequence="30"
+		<menuitem id="event_preregistration_portal_menu"
+		name="Group Preregistration"
+		sequence="100"
 		action="action_event_preregistration" />
+		<!--		parent="portal.portal_menu"-->
+
+	<!--
+		<menuitem action="action_event_preregistration" id="event_preregistration_tree_menu"
+		name="Group Preregistration" sequence="60" parent="menu_campos"
+		groups="campos_event.group_campos_staff" />
+		-->
   </data>
 </openerp>

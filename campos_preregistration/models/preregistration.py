@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 
-# Mangler:
-# tjek typer
-# tjek tekster¨
-# værdilister
-# rettigheder
-# deltagere
-
-
-
 from openerp import models, fields, api
 from openerp.fields import One2many
+from openerp.osv.fields import reference
 class Preregistration(models.Model):
     '''
     Pre-registration for a scout group to an event
     '''
     _inherit = 'event.registration'
     group_name = fields.Char('Group Name', required=True)
-    group_association = fields.Many2one('campos.scout.org','Scout Organization') #fields.Char('Local association that group belongs to', required=True)
-    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True) # included in campos.scout.org ?
+    group_association = fields.Many2one('campos.scout.org','Scout Organization', required=True)
+#    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True)
+    group_world_association = fields.Char(reference='campos.scout.org.worldorg', 'World Organisation')
     group_entrypoint = fields.Char('Point of entry into Denmark', required=True)
     contact_name = fields.Char('Contact person', required=True)
     contact_email = fields.Char('Contact person email address', required=True)
@@ -47,20 +40,7 @@ class Preregistration(models.Model):
     friendship_group_info = fields.Text('Friendship group other info')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information')
-    
-    
-    
-#
-#    active = fields.Boolean('Active?', default=True)
-#    @api.one
-#    def do_toggle_done(self):
-#        self.is_done = not self.is_done
-#        return True
-#    @api.multi
-#    def do_clear_done(self):
-#        done_recs = self.search([('is_done', '=', True)])
-#        done_recs.write({'active': False})
-#        return True 
+
 
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
@@ -73,8 +53,8 @@ class PreregistrationParticipants(models.Model):
     registration_id = fields.Many2one('event.registration', 'Registration')
     participant_age_group_id = fields.Many2one('event.registration.agegroup','Age Group')
     participant_total  = fields.Integer('Number of participants', required=True)
-    participant_from_date = fields.Integer('Date of arrival', required=True)
-    participant_to_date = fields.Integer('Date of departure', required=True)
+    participant_from_date = fields.Date('Date of arrival', required=True)
+    participant_to_date = fields.Date('Date of departure', required=True)
     participant_transport_to_camp_total  = fields.Integer('Number of transport to camp', required=True)
     participant_transport_from_camp_total  = fields.Integer('Number of transport from camp', required=True)
     participant_transport_note = fields.Char(compute = '_calculate_note')
