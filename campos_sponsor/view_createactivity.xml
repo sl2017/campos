@@ -94,6 +94,11 @@
 				<tree>
 					<field name="activity_name"/>
 					<field name="activity_groupname"/>
+					<field name="activity_type"/>
+					<field name="activity_age_from"/>
+					<field name="activity_age_to"/>
+					<field name="activity_expected_participants"/>
+					<field name="activity_state"/>
 				</tree>
 			</field>
 		</record>
