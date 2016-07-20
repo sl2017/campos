@@ -130,8 +130,8 @@
 							<field name="parent_id" />
 							<field name="committee_type_id"/>
 							<field name="child_ids" />
-							<field name="sequence" />
-							<field name="account"/>
+							<field name="sequence" groups="campos_event.group_campos_office"/>
+							<field name="account" groups="campos_event.group_campos_office"/>
 							<field name="par_contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
 										options='{"always_reload": True, "highlight_first_line": True}' domain="[('state', '=', 'approved')]"/>
 						</group>
