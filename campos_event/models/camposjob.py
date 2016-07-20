@@ -94,6 +94,7 @@ class CamposJob(models.Model):
     issue_qty = fields.Integer("Questions", compute='_compute_issue')
     openjob = fields.Boolean('Open', compute='_compute_applicants')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
+    publish_international = fields.Boolean('Publish International')
     
     @api.one
     @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')

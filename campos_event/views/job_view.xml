@@ -144,6 +144,7 @@
 								<field name="date_public"/>
 								<field name="date_closing"/>
 								<field name="openjob"/>
+								<field name="publish_international"/>
 							</group>
 							<group colspan="2">
 								<field name="min_qty_jobbere" />
