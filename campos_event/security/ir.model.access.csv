@@ -26,3 +26,5 @@ access_campos_scout_org_admin,access_campos_scout_org_admin,campos_event.model_c
 access_campos_committee_admin,campos_committee_admin,campos_event.model_campos_committee,campos_event.group_campos_admin,1,1,1,1
 access_campos_committee_job_title,access_campos_committee_job_title,model_campos_committee_job_title,,1,1,1,0
 access_campos_camp_area,access_campos_camp_area,model_campos_camp_area,,1,1,1,0
+access_campos_job_when,access_campos_job_when,model_campos_job_when,,1,0,0,0
+access_campos_job_when_admin,access_campos_job_when_admin,model_campos_job_when,group_campos_admin,1,1,1,1

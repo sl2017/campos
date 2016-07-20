@@ -182,7 +182,7 @@ class CampOsEvent(http.Controller):
             jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|',('committee_id', '=', comm.id),('committee_id', 'child_of', comm.id)])
             list_title = _("Jobs for: ") + comm.name
         elif search:
-            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|','|',('name', 'ilike', search),('teaser', 'ilike', search),('desc', 'ilike', search)])
+            jobs = request.env['campos.job'].search([('active','=', True),('openjob', '=', True), '|','|','|','|',('name', 'ilike', search),('teaser', 'ilike', search),('desc', 'ilike', search),('committee_id.display_name', 'ilike', search), ('tag_ids.name', 'ilike', search)])
             list_title = _("Search Result")
         
         else:
