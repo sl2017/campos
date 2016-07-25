@@ -13,13 +13,24 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
+
+		<record id="view_graph_stat_gender_age" model="ir.ui.view">
+			<field name="name">stat_gender_age</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+				<graph type="pivot">
+					<field name="age" type="col"/>
+					<field name="reg_organization_id" />
+				</graph>
+			</field>
+		</record>
 		
 		<record id="action_event_participants_tree2" model="ir.actions.act_window">
 			<field name="name">Participants</field>
 			
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form,geoengine</field>
+			<field name="view_mode">tree,form,geoengine,graph</field>
 		</record>
 		
 		<!-- Registration inherited form -->
@@ -234,7 +245,7 @@
 								 	<field name="sharepoint_mail"/>
 								 	<field name="sharepoint_mailaddress"/>
 								 	<field name="sharepoint_clienttype"/>
-								 	<field name="sharepoint_mail_created"/>
+								 	<field name="sharepoint_mail_created" groups="campos_event.group_campos_office"/>
 								 	<field name="private_mailaddress"/>
 								 </group>
 								 </page>
@@ -250,7 +261,7 @@
 									<field name="reject_ids">
 									<tree create="false" colspan="4">
 									<field name="create_date"/>
-									<field name="create_uid"/>
+									<field name="create_uid" groups="campos_event.group_campos_office"/>
 								 	<field name="committee_id"/>
 								 	<field name="reason"/>
 									</tree>								  

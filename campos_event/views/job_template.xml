@@ -32,6 +32,7 @@
 											</span>
 
 										</div>
+										<!-- 
 										<div class="text-muted fa fa-tags">
 											<t t-foreach="job.tag_ids" t-as="tag">
 												<a t-att-href="'/campos/jobber/joblist/' + slug(tag)"
@@ -39,20 +40,23 @@
 											</t>
 										</div>
 										<br />
+										 -->
 										<span>
 											Udvalg:
 											<a t-att-href="'/campos/jobber/jobcom/' + slug(job.committee_id)"
-												t-field="job.committee_id" />
+												t-field="job.committee_id.root_name" />
 										</span>
 										<br />
 
 										<span t-field="job.teaser" />
 										<br />
+										<!-- 
 										<b>Hvor:</b>
 										<span t-field="job.job_where" />
 										<br />
+										 -->
 										<b>Hvornår:</b>
-										<span t-field="job.job_when" />
+										<span t-field="job.job_when_id.name" />
 										<br />
 										<a class="btn btn-success " t-att-href="'/campos/jobber/view/' + slug(job)">
 											<i class="fa fa-arrow-right">&amp;nbsp;</i>
@@ -114,7 +118,7 @@
 								<span t-field="job.job_where" />
 								<br />
 								<b>Hvornår: </b>
-								<span t-field="job.job_when" />
+								<span t-field="job.job_when_id.name" />
 								<br />
 								<a class="btn btn-success " t-att-href="'/campos/jobber/signup/' + slug(job)">
 									<i class="fa fa-arrow-right">&amp;nbsp;</i>

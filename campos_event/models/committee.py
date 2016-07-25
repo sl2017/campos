@@ -76,6 +76,9 @@ class CampCommittee(models.Model):
     short_name = fields.Char(
         string="Short Name",
         compute='_compute_short_name')
+    root_name = fields.Char(
+        string="Root Name",
+        compute='_compute_root_name')
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     applicants_count = fields.Integer(string='# Applicants', compute='_compute_member_no')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
@@ -109,6 +112,14 @@ class CampCommittee(models.Model):
             self.short_name = self.name[3:]
         else:
             self.short_name = False
+
+    @api.one
+    @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
+    def _compute_root_name(self):
+        if self.parent_id:
+            self.root_name = self.parent_id.root_name
+        else:
+            self.root_name = self.short_name
 
     @api.multi
     @api.depends('name', 'code')

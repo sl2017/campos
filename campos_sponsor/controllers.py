@@ -116,12 +116,10 @@ class activitycontroller(http.Controller):
         }
         
 
-        for f in ['activity_name', 'activity_groupname', 
-                  'activity_contact1_name', 'activity_contact1_road', 'activity_contact1_city', 'activity_contact1_zip', 'activity_contact1_email', 'activity_contact1_tlf',
-                  'activity_contact2_name', 'activity_contact2_road', 'activity_contact2_city', 'activity_contact2_zip', 'activity_contact2_email', 'activity_contact2_tlf',
-                  'activity_open_sunday', 'activity_open_monday', 'activity_open_tuesday', 'activity_open_wednesday', 'activity_open_thursday', 'activity_open_friday',
-                  'activity_age', 'activity_capacity_day', 'activity_expense_total', 'activity_expense_scout',
-                  'activity_filled',
+        for f in ['activity_name', 'activity_groupname', 'activity_description', 'activity_participant_usage', 'activity_participant_knowledge',
+                  'activity_contact1_name', 'activity_type', 'activity_contact1_road', 'activity_contact1_zip', 'activity_contact1_city', 'activity_contact1_email', 'activity_contact1_tlf',
+                  'activity_age_from', 'activity_age_to', 'activity_expected_participants',
+                  'activity_expense_total',
                   
                   ]:
             value[f] = post.get(f)

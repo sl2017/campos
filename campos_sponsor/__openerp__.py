@@ -12,7 +12,6 @@
         'security/campos_sponsor_security.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
-        'controllers.py',
         'view_createsponsor.xml',
         'partner_template.xml',
         'mail_templates.xml',

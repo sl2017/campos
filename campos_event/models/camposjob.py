@@ -47,7 +47,18 @@ class CamposJobTag(models.Model):
     
     _parent_store = True
     _parent_order = 'name'
-    
+
+
+class CamposJobWhen(models.Model):
+
+    """ Job When """
+    _description = 'Job when'
+    _name = 'campos.job.when'
+    _order = 'sequence'
+
+    name = fields.Char('Name', size=64)
+    sequence = fields.Integer('Sequence')
+    active = fields.Boolean('Active', help="The active field allows you to hide the category without removing it.", default=True)
     
     
 class CamposJob(models.Model):
@@ -70,6 +81,7 @@ class CamposJob(models.Model):
     
     job_where = fields.Char('Where')
     job_when = fields.Char('When')
+    job_when_id = fields.Many2one('campos.job.when', 'When')
     min_qty_jobbere = fields.Integer('Minimum numbers of staff')
     wanted_qty_jobbere = fields.Integer('Wanted numbers of staff')
     max_qty_jobbere = fields.Integer('Maximun numbers of staff')
@@ -82,6 +94,7 @@ class CamposJob(models.Model):
     issue_qty = fields.Integer("Questions", compute='_compute_issue')
     openjob = fields.Boolean('Open', compute='_compute_applicants')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
+    publish_international = fields.Boolean('Publish International')
     
     @api.one
     @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')
