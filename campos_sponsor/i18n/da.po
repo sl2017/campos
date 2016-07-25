@@ -107,7 +107,7 @@ msgstr "Status på aktivitet"
 #. module: campos_sponsor
 #: field:model.activity,activity_type:0
 msgid "Activity type"
-msgstr "Aktivitets type"
+msgstr "Organisations forhold"
 
 #. module: campos_sponsor
 #: field:model.sponsor,type:0
@@ -127,7 +127,7 @@ msgstr "Adresse"
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Adresse*"
-msgstr ""
+msgstr "Adresse*"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_state:0
