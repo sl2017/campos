@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-11 17:40+0000\n"
-"PO-Revision-Date: 2016-07-25 17:51+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2016-07-25 18:21+0000\n"
+"PO-Revision-Date: 2016-07-25 18:21+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,7 +236,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee.function,active:0
 #: field:campos.event.participant,active:0 field:campos.job,active:0
-#: field:campos.job.tag,active:0
+#: field:campos.job.tag,active:0 field:campos.job.when,active:0
 msgid "Active"
 msgstr "Aktive"
 
@@ -708,8 +708,8 @@ msgstr "Opret bruger"
 #: field:campos.committee.type,create_uid:0
 #: field:campos.event.par.reject,create_uid:0
 #: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
-#: field:campos.job.tag,create_uid:0 field:campos.municipality,create_uid:0
-#: field:campos.scout.org,create_uid:0
+#: field:campos.job.tag,create_uid:0 field:campos.job.when,create_uid:0
+#: field:campos.municipality,create_uid:0 field:campos.scout.org,create_uid:0
 msgid "Created by"
 msgstr "Oprettet af"
 
@@ -721,7 +721,8 @@ msgstr "Oprettet af"
 #: field:campos.committee.type,create_date:0
 #: field:campos.event.par.reject,create_date:0
 #: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
-#: field:campos.job.tag,create_date:0 field:campos.municipality,create_date:0
+#: field:campos.job.tag,create_date:0 field:campos.job.when,create_date:0
+#: field:campos.municipality,create_date:0
 #: field:campos.scout.org,create_date:0
 msgid "Created on"
 msgstr ""
@@ -814,6 +815,7 @@ msgstr "Din adgang til zExpense"
 #: field:campos.event.par.reject,display_name:0
 #: field:campos.event.participant,display_name:0
 #: field:campos.job,display_name:0 field:campos.job.tag,display_name:0
+#: field:campos.job.when,display_name:0
 #: field:campos.municipality,display_name:0
 #: field:campos.scout.org,display_name:0
 msgid "Display Name"
@@ -1027,7 +1029,6 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_view
-#: view:website:campos_event.jobber_latest_jobs
 msgid "Hvor:"
 msgstr "Hvor:"
 
@@ -1048,7 +1049,7 @@ msgstr "Jeg ønsker mere information"
 #: field:campos.committee.function.type,id:0
 #: field:campos.committee.job.title,id:0 field:campos.committee.type,id:0
 #: field:campos.event.par.reject,id:0 field:campos.event.participant,id:0
-#: field:campos.job,id:0 field:campos.job.tag,id:0
+#: field:campos.job,id:0 field:campos.job.tag,id:0 field:campos.job.when,id:0
 #: field:campos.municipality,id:0 field:campos.scout.org,id:0
 msgid "ID"
 msgstr ""
@@ -1167,6 +1168,13 @@ msgid "Job Title"
 msgstr "Job titel"
 
 #. module: campos_event
+#: view:campos.job.when:campos_event.job_when_tree
+#: model:ir.actions.act_window,name:campos_event.action_job_when_tree
+#: model:ir.ui.menu,name:campos_event.event_job_when_menu
+msgid "Job When"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee.function,job_id:0
 msgid "Job annonce"
 msgstr "Job annonce"
@@ -1180,6 +1188,11 @@ msgstr "Navn på job"
 #: view:campos.job.tag:campos_event.job_tag_tree
 msgid "Job tags"
 msgstr "Job kategorier"
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_job_when
+msgid "Job when"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -1255,6 +1268,7 @@ msgstr "Dato for sidste meddelelse"
 #: field:campos.event.par.reject,__last_update:0
 #: field:campos.event.participant,__last_update:0
 #: field:campos.job,__last_update:0 field:campos.job.tag,__last_update:0
+#: field:campos.job.when,__last_update:0
 #: field:campos.municipality,__last_update:0
 #: field:campos.scout.org,__last_update:0
 msgid "Last Modified on"
@@ -1268,8 +1282,8 @@ msgstr "Sidst ændret d."
 #: field:campos.committee.type,write_uid:0
 #: field:campos.event.par.reject,write_uid:0
 #: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
-#: field:campos.job.tag,write_uid:0 field:campos.municipality,write_uid:0
-#: field:campos.scout.org,write_uid:0
+#: field:campos.job.tag,write_uid:0 field:campos.job.when,write_uid:0
+#: field:campos.municipality,write_uid:0 field:campos.scout.org,write_uid:0
 msgid "Last Updated by"
 msgstr "Sidst opdateret af"
 
@@ -1281,8 +1295,8 @@ msgstr "Sidst opdateret af"
 #: field:campos.committee.type,write_date:0
 #: field:campos.event.par.reject,write_date:0
 #: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
-#: field:campos.job.tag,write_date:0 field:campos.municipality,write_date:0
-#: field:campos.scout.org,write_date:0
+#: field:campos.job.tag,write_date:0 field:campos.job.when,write_date:0
+#: field:campos.municipality,write_date:0 field:campos.scout.org,write_date:0
 msgid "Last Updated on"
 msgstr "Sidst opdateret af"
 
@@ -1437,8 +1451,8 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,name:0
 #: view:campos.job:campos_event.campos_job_form field:campos.job,name:0
-#: field:campos.job.tag,name:0 field:campos.municipality,name:0
-#: field:campos.scout.org,name:0
+#: field:campos.job.tag,name:0 field:campos.job.when,name:0
+#: field:campos.municipality,name:0 field:campos.scout.org,name:0
 msgid "Name"
 msgstr "Navn"
 
@@ -1680,6 +1694,11 @@ msgid "Publish"
 msgstr "Publiceret"
 
 #. module: campos_event
+#: field:campos.job,publish_international:0
+msgid "Publish International"
+msgstr ""
+
+#. module: campos_event
 #: help:campos.event.participant,website_published:0
 #: help:res.users,website_published:0
 msgid "Publish on the website"
@@ -1696,7 +1715,7 @@ msgid "Questions"
 msgstr "Spørgsmål"
 
 #. module: campos_event
-#: code:addons/campos_event/models/camposjob.py:109
+#: code:addons/campos_event/models/camposjob.py:122
 #, python-format
 msgid "Questions re %s"
 msgstr ""
@@ -1825,6 +1844,11 @@ msgid "Rooms/Camp Areas"
 msgstr "Rum/ lejrområde"
 
 #. module: campos_event
+#: field:campos.committee,root_name:0
+msgid "Root Name"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,property_product_pricelist:0
 msgid "Sale Pricelist"
 msgstr "Salgs prisliste"
@@ -1940,7 +1964,7 @@ msgid "Sent to committee"
 msgstr "Sendt til udvalg"
 
 #. module: campos_event
-#: field:campos.committee,sequence:0
+#: field:campos.committee,sequence:0 field:campos.job.when,sequence:0
 msgid "Sequence"
 msgstr "Sekvens"
 
@@ -2215,6 +2239,7 @@ msgstr "Tak"
 
 #. module: campos_event
 #: help:campos.job,active:0 help:campos.job.tag,active:0
+#: help:campos.job.when,active:0
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
@@ -2432,7 +2457,7 @@ msgid "What do you do for living"
 msgstr "Hvad er din beskæftigelse"
 
 #. module: campos_event
-#: field:campos.job,job_when:0
+#: field:campos.job,job_when:0 field:campos.job,job_when_id:0
 msgid "When"
 msgstr "Hvornår"
 
