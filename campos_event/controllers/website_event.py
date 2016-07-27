@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import openerp
 from openerp import http
 from openerp.addons.website_event_register_free.controllers.website_event import WebsiteEvent
 
@@ -188,3 +189,44 @@ class WebsiteEventEx(WebsiteEvent):
         return http.request.render(
             'campos_event.intl_groups_register_form', values)
 
+
+    @http.route(['''/event/<model("event.event"):event>/meeting_proposal'''], type='http', auth="user", website=True)
+    def event_meeting_proposal(self, event, **post):
+        all_comms = http.request.env['campos.committee'].search(['|', ('parent_id', '=', False),('parent_id.parent_id', '=', False),('website_published', '=', True)])
+        comm_ids = [jf.committee_id.id for jf in http.request.env.user.participant_id.jobfunc_ids]
+        _logger.info("My comms: %s", comm_ids)
+        my_comms = http.request.env['campos.committee'].search([('id', 'in', comm_ids),('website_published', '=', True)])
+        values = { 'event': event,
+                   'all_comms': all_comms,
+                   'my_comms': my_comms}
+        return http.request.website.render("campos_event.event_meeting_proposal", values)
+
+    @http.route(['/event/<model("event.event"):event>/meeting_proposal/post'], type='http', auth="user", methods=['POST'], website=True)
+    def event_meeting_proposal_post(self, event, **post):
+        cr, uid, context = http.request.cr, http.request.uid, http.request.context
+
+        tobj = http.request.registry['event.track']
+
+        tags = []
+        for tag in event.allowed_track_tag_ids:
+            if post.get('tag_'+str(tag.id)):
+                tags.append(tag.id)
+
+        e = openerp.tools.escape
+        track_description = post['description']
+
+        track_id = tobj.create(cr, openerp.SUPERUSER_ID, {
+            'name': post['track_name'],
+            'event_id': event.id,
+            'tag_ids': [(6, 0, tags)],
+            'user_id': uid,
+            'description': track_description,
+            'req_comm_id': post['req_comm_id'],
+            'wanted_comm_id': post['wanted_comm_id'],
+            'wanted_people': post['wanted_people'],
+            'duration' : float(post['duration']) / 60.0,
+        }, context=context)
+
+        track = tobj.browse(cr, uid, track_id, context=context)
+        values = {'track': track, 'event':event}
+        return http.request.website.render("campos_event.event_meeting_proposal_success", values)
