@@ -420,6 +420,15 @@ class EventParticipant(geo_model.GeoModel):
         self.sharepoint_confirm_url = urljoin(base_url, 'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
 
 
+    def age_on_date(self, age_date=date.today()):
+        '''
+        Calculate the members age on a given date
+        :param age_date: date object or string in Odoo date format (YYYY-MM-DD)
+        '''
+        if isinstance(age_date, basestring): 
+            age_date = fields.Date.from_string(age_date)
+        return relativedelta(age_date, fields.Date.from_string(self.birthdate)).years
+
     @api.multi
     @api.depends('birthdate')
     def _compute_age(self):

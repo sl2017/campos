@@ -57,6 +57,7 @@
         'web_widget_color',
         'project_issue',
         'project_model_to_issue',
+        'website_event_track',
         
     ],
 
@@ -85,6 +86,7 @@
         "views/res_users_view.xml",
         'views/campos_menu.xml',
         'views/event_partner_reg_template.xml',
+        'views/meeting_proposal_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
