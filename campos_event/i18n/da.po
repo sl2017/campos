@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-28 14:09+0000\n"
-"PO-Revision-Date: 2016-07-28 14:09+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"PO-Revision-Date: 2016-07-28 17:18+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -411,7 +411,7 @@ msgstr "Fødselsdag"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Call for Proposals"
-msgstr ""
+msgstr "Ønsker om møde på tværs"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -789,7 +789,7 @@ msgstr "Dato for sidst afsendte meddelelse"
 #. module: campos_event
 #: view:event.track:campos_event.view_event_track_search
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
@@ -1403,17 +1403,17 @@ msgstr ""
 #. module: campos_event
 #: field:event.track,wanted_comm_id:0
 msgid "Meeting Wanted With Committee"
-msgstr ""
+msgstr "Ønsker møde med følgende udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Meeting agenda"
-msgstr ""
+msgstr "Møde agenda"
 
 #. module: campos_event
 #: selection:event.event,regform:0
 msgid "Meeting register (with survey)"
-msgstr ""
+msgstr "Møde registrering"
 
 #. module: campos_event
 #: field:campos.event.participant,meeting_registration_ids:0
@@ -1423,7 +1423,7 @@ msgstr "Møderegistreringsnummer"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Meeting subject"
-msgstr ""
+msgstr "Overskrift for mødet"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -1488,7 +1488,7 @@ msgstr "Kommune"
 #. module: campos_event
 #: field:event.track,req_comm_id:0
 msgid "My Committee"
-msgstr ""
+msgstr "Mit udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -2131,7 +2131,7 @@ msgstr "Tilmeldings knap"
 #. module: campos_event
 #: field:event.event,survey_id:0
 msgid "Signup survey"
-msgstr ""
+msgstr "Tilmeld"
 
 #. module: campos_event
 #: field:campos.event.participant,skype:0 field:res.partner,skype:0
@@ -2243,7 +2243,7 @@ msgstr "SEND"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Submit Meeting Proposal"
-msgstr ""
+msgstr "Indsend møde ønsker"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal_success
@@ -2300,7 +2300,7 @@ msgstr "Appetitvækker"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal_success
 msgid "Thank you for your meeting proposal."
-msgstr ""
+msgstr "Tak for dit mødeforslag"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
@@ -2450,7 +2450,7 @@ msgstr "WOSM"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Want to meet with"
-msgstr ""
+msgstr "Ønsker at møde med Navn(e) eller funktion"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -2574,12 +2574,12 @@ msgstr "Adresse"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Your Committee"
-msgstr ""
+msgstr "Dit udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Contact Details"
-msgstr ""
+msgstr "Dine kontaktoplysninger"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask
