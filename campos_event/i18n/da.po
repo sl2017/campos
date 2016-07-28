@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-25 18:21+0000\n"
-"PO-Revision-Date: 2016-07-25 18:21+0000\n"
+"POT-Creation-Date: 2016-07-28 14:09+0000\n"
+"PO-Revision-Date: 2016-07-28 14:09+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -229,6 +229,21 @@ msgid "(edit company address)"
 msgstr "(Redigér firma adresse)"
 
 #. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "1 hour"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "30 minutes"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "45 minutes"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,account:0
 msgid "Account"
 msgstr ""
@@ -328,6 +343,7 @@ msgstr "Ansøgere"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: view:website:campos_event.event_meeting_proposal
 msgid "Application"
 msgstr "Ansøgning"
 
@@ -337,7 +353,7 @@ msgid "Approval Procedure"
 msgstr "Godkendelses procedure"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:565
+#: code:addons/campos_event/models/event.py:574
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -391,6 +407,11 @@ msgstr ""
 #: view:website:campos_event.partner_register_form
 msgid "Birthdate"
 msgstr "Fødselsdag"
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Call for Proposals"
+msgstr ""
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -604,7 +625,7 @@ msgid "Complete Address"
 msgstr "Fuld adresse"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:539
+#: code:addons/campos_event/models/event.py:548
 #, python-format
 msgid "Compose Email"
 msgstr "Lav Email"
@@ -766,6 +787,11 @@ msgid "Date of the last message posted on the record."
 msgstr "Dato for sidst afsendte meddelelse"
 
 #. module: campos_event
+#: view:event.track:campos_event.view_event_track_search
+msgid "Day"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.partner_register_form
 msgid "Deltager"
 msgstr "Deltager"
@@ -857,6 +883,11 @@ msgid "Employee"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Estimated duration"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
 msgid "Estimated number of leaders/scoutsmasters"
 msgstr "Forventede antal af ledere/"
@@ -889,6 +920,11 @@ msgid "Event Registration"
 msgstr "Arrangement tilmelding"
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_event_track
+msgid "Event Tracks"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,event_registration_ids:0
 #: field:res.partner,event_registration_ids:0
 #: field:res.users,event_registration_ids:0
@@ -911,6 +947,11 @@ msgstr "eksport"
 #: field:campos.event.participant,fax:0
 msgid "Fax"
 msgstr "Fax"
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Fill this form to propose your meeting."
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
@@ -1172,7 +1213,7 @@ msgstr "Job titel"
 #: model:ir.actions.act_window,name:campos_event.action_job_when_tree
 #: model:ir.ui.menu,name:campos_event.event_job_when_menu
 msgid "Job When"
-msgstr ""
+msgstr "Hvornår"
 
 #. module: campos_event
 #: field:campos.committee.function,job_id:0
@@ -1192,7 +1233,7 @@ msgstr "Job kategorier"
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_job_when
 msgid "Job when"
-msgstr ""
+msgstr "Hvornår"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -1360,6 +1401,16 @@ msgid ""
 msgstr ""
 
 #. module: campos_event
+#: field:event.track,wanted_comm_id:0
+msgid "Meeting Wanted With Committee"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Meeting agenda"
+msgstr ""
+
+#. module: campos_event
 #: selection:event.event,regform:0
 msgid "Meeting register (with survey)"
 msgstr ""
@@ -1368,6 +1419,11 @@ msgstr ""
 #: field:campos.event.participant,meeting_registration_ids:0
 msgid "Meeting registration ids"
 msgstr "Møderegistreringsnummer"
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Meeting subject"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -1428,6 +1484,11 @@ msgstr "Mobil telefon"
 #: model:ir.ui.menu,name:campos_event.event_municipality_menu
 msgid "Municipality"
 msgstr "Kommune"
+
+#. module: campos_event
+#: field:event.track,req_comm_id:0
+msgid "My Committee"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -1596,7 +1657,7 @@ msgid "Paricipant"
 msgstr "Deltager"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:694
+#: code:addons/campos_event/models/event.py:703
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1796,7 +1857,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:582
+#: code:addons/campos_event/models/event.py:591
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -1934,6 +1995,7 @@ msgid ""
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
 #: view:website:campos_event.intl_groups_register_form
 msgid "Select..."
 msgstr ""
@@ -1974,7 +2036,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:511
+#: code:addons/campos_event/models/event.py:520
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2179,6 +2241,16 @@ msgid "Submit"
 msgstr "SEND"
 
 #. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Submit Meeting Proposal"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal_success
+msgid "Submit another request"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,message_summary:0
 #: field:campos.committee.function,message_summary:0
 #: field:campos.event.participant,message_summary:0
@@ -2224,6 +2296,11 @@ msgstr ""
 #: field:campos.job,teaser:0
 msgid "Teaser"
 msgstr "Appetitvækker"
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal_success
+msgid "Thank you for your meeting proposal."
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
@@ -2371,6 +2448,11 @@ msgid "WOSM"
 msgstr "WOSM"
 
 #. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Want to meet with"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Want to work as both."
 msgstr "Ønsker at være med i planlægning og jobber på lejren"
@@ -2394,6 +2476,12 @@ msgstr "Ønsker at arbejde med planlægningen af lejren"
 #: field:campos.job,wanted_qty_jobbere:0
 msgid "Wanted numbers of staff"
 msgstr "Ønskede antal i udvalg"
+
+#. module: campos_event
+#: field:event.track,wanted_people:0
+#: view:website:campos_event.event_meeting_proposal
+msgid "Wanted people"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,website:0
@@ -2482,6 +2570,11 @@ msgstr "Ja"
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
 msgstr "Adresse"
+
+#. module: campos_event
+#: view:website:campos_event.event_meeting_proposal
+msgid "Your Committee"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
