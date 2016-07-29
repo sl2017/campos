@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-28 14:09+0000\n"
-"PO-Revision-Date: 2016-07-28 17:18+0000\n"
+"POT-Creation-Date: 2016-07-29 10:36+0000\n"
+"PO-Revision-Date: 2016-07-28 20:30+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -231,17 +231,17 @@ msgstr "(Redigér firma adresse)"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "1 hour"
-msgstr ""
+msgstr "1 time"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutter"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "45 minutes"
-msgstr ""
+msgstr "45 minutter"
 
 #. module: campos_event
 #: field:campos.committee,account:0
@@ -885,7 +885,7 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Estimated duration"
-msgstr ""
+msgstr "Forventet mødetid"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
@@ -951,7 +951,7 @@ msgstr "Fax"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Fill this form to propose your meeting."
-msgstr ""
+msgstr "Udfyld denne formular for at bestille et møde"
 
 #. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
@@ -2248,7 +2248,7 @@ msgstr "Indsend møde ønsker"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal_success
 msgid "Submit another request"
-msgstr ""
+msgstr "Flere møder"
 
 #. module: campos_event
 #: field:campos.committee,message_summary:0
@@ -2450,7 +2450,7 @@ msgstr "WOSM"
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
 msgid "Want to meet with"
-msgstr "Ønsker at møde med Navn(e) eller funktion"
+msgstr "Ønsker at møde udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -2481,7 +2481,7 @@ msgstr "Ønskede antal i udvalg"
 #: field:event.track,wanted_people:0
 #: view:website:campos_event.event_meeting_proposal
 msgid "Wanted people"
-msgstr ""
+msgstr "Ønsker at mødes med navn(e), funktion, udvalg (hvis mere end et)"
 
 #. module: campos_event
 #: field:campos.event.participant,website:0
