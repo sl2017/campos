@@ -24,7 +24,10 @@
     'depends': ['campos_event'],
 
     # always loaded
-    'data': ['views/preregistration.xml'],
+    'data': ['views/preregistration.xml',
+             'security/campos_preregistration_security.xml',
+             'security/ir.model.access.csv',
+             ],
     # only loaded in demonstration mode
     'demo': [ ],
 }

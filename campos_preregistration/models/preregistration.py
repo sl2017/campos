@@ -10,8 +10,8 @@ class Preregistration(models.Model):
     _inherit = 'event.registration'
     group_name = fields.Char('Group Name', required=True)
     group_association = fields.Many2one('campos.scout.org','Scout Organization', required=True)
-#    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True)
-    group_world_association = fields.Char(reference='campos.scout.org.worldorg', 'World Organisation')
+    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True)
+#    group_world_association = fields.Char(reference='campos.scout.org.worldorg', 'World Organisation')
     group_entrypoint = fields.Char('Point of entry into Denmark', required=True)
     contact_name = fields.Char('Contact person', required=True)
     contact_email = fields.Char('Contact person email address', required=True)
@@ -44,7 +44,7 @@ class Preregistration(models.Model):
 
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
-    age_group_name = fields.Char('Age Group name', required=True)
+    name = fields.Char('Age Group name', required=True)
     age_from = fields.Integer('From age', required=True)
     age_to = fields.Integer('To age', required=True)
     

@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 	<openerp>
 		<data>
+			<record id="view_tree_event_registration_agegroup" model="ir.ui.view">
+				<field name="name">Age group Tree</field>
+				<field name="model">event.registration.agegroup</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+						<field name="age_from"/>
+						<field name="age_to"/>
+					</tree>
+				</field>
+			</record> 		
 		<record id="view_form_preregistration" model="ir.ui.view">
 			<field name="name">Preregistration Form</field>
 			<field name="model">event.registration</field>
@@ -33,17 +44,17 @@
 							<field name="group_zip_town"/>
 							<field name="association_groupid"/>
 <!--							<field name="participant_ids"/>-->
-                    <field colspan="7" name="participant_ids" widget="one2many_list">
-                        <tree string="Participants" editable="bottom">
-                            <field name="participant_age_group_id"/>
-                            <field name="participant_total"/>
-                            <field name="participant_from_date"/>
-                            <field name="participant_to_date"/>
-                            <field name="participant_transport_to_camp_total"/>
-                            <field name="participant_transport_from_camp_total"/>
-                            <field name="participant_transport_note" class="oe_read_only"/>
-                        </tree>
-                    </field>
+              <field colspan="7" name="participant_ids" widget="one2many_list">
+								<tree string="Participants" editable="bottom">
+									<field name="participant_age_group_id"/>
+                  <field name="participant_total"/>
+                  <field name="participant_from_date"/>
+                  <field name="participant_to_date"/>
+                  <field name="participant_transport_to_camp_total"/>
+                  <field name="participant_transport_from_camp_total"/>
+                  <field name="participant_transport_note" class="oe_read_only"/>
+                </tree>
+              </field>
 							<field name="pionering_poles_3m_total"/>
 							<field name="pionering_poles_6m_total"/>
 							<field name="pionering_poles_9m_total"/>
@@ -54,28 +65,32 @@
 							<field name="friendship_group_name"/>
 							<field name="friendship_group_info"/>
 							<field name="group_camp_agreements"/>
-							<field name="internal_information"/>
+							<field name="internal_information" groups="campos_event.group_campos_staff"/>
 						</group>
 					</sheet>
 				</form> 
 			</field>
 		</record>
-    <!-- Action to open Event Preregistration -->
+		
+    <!-- Menu Actions -->
 		<act_window id="action_event_preregistration"
 		name="Event Preregistration"
 		res_model="event.registration"
 		view_mode="form" />
-    <!-- Menu item to open Event Preregistration -->
-		<menuitem id="event_preregistration_portal_menu"
-		name="Group Preregistration"
-		sequence="100"
-		action="action_event_preregistration" />
-		<!--		parent="portal.portal_menu"-->
+		<act_window id="action_event_registration_agegroup"
+		name="Event Registration Agegroup"
+		res_model="event.registration.agegroup"
+		view_mode="tree,form" />
+		
+		<!-- sub menu -->
+		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration"/>
 
-	<!--
-		<menuitem action="action_event_preregistration" id="event_preregistration_tree_menu"
-		name="Group Preregistration" sequence="60" parent="menu_campos"
-		groups="campos_event.group_campos_staff" />
-		-->
+		<!-- Menu Items -->
+		<menuitem id="event_preregistration_portal_menu" name="Group Preregistration" sequence="100" action="action_event_preregistration" />
+		<menuitem id="menu_action_event_preregistration" parent="menu_event_preregistration" name="Group Preregistration" action="action_event_preregistration" groups="campos_event.group_campos_staff" sequence="20"/>
+	
+		<!--menuitem id="menu_action_portal_menu_agegroup" name="Age Groups" action="action_event_registration_agegroup" /-->
+		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" />
+	
   </data>
 </openerp>
