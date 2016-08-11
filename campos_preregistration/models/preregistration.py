@@ -10,8 +10,8 @@ class Preregistration(models.Model):
     _inherit = 'event.registration'
     group_name = fields.Char('Group Name', required=True)
     group_association = fields.Many2one('campos.scout.org','Scout Organization', required=True)
-    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True)
-#    group_world_association = fields.Char(reference='campos.scout.org.worldorg', 'World Organisation')
+    group_world_association = fields.Selection(related='group_association.worldorg', string='World Organisation', readonly=True)
+#    group_world_association = fields.Char('WOSM/WAGGGS Membership', required=True)
     group_entrypoint = fields.Char('Point of entry into Denmark', required=True)
     contact_name = fields.Char('Contact person', required=True)
     contact_email = fields.Char('Contact person email address', required=True)
@@ -57,7 +57,7 @@ class PreregistrationParticipants(models.Model):
     participant_to_date = fields.Date('Date of departure', required=True)
     participant_transport_to_camp_total  = fields.Integer('Number of transport to camp', required=True)
     participant_transport_from_camp_total  = fields.Integer('Number of transport from camp', required=True)
-    participant_transport_note = fields.Char(compute = '_calculate_note')
+    participant_transport_note = fields.Char(compute = '_calculate_note', string='Not all participants with transport')
     
     @api.depends ('participant_total','participant_transport_to_camp_total','participant_transport_from_camp_total')
     @api.multi

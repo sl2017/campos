@@ -43,7 +43,6 @@
 							<field name="group_address2"/>
 							<field name="group_zip_town"/>
 							<field name="association_groupid"/>
-<!--							<field name="participant_ids"/>-->
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
 									<field name="participant_age_group_id"/>
