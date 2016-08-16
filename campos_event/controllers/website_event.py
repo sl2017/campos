@@ -192,10 +192,10 @@ class WebsiteEventEx(WebsiteEvent):
 
     @http.route(['''/event/<model("event.event"):event>/meeting_proposal'''], type='http', auth="user", website=True)
     def event_meeting_proposal(self, event, **post):
-        all_comms = http.request.env['campos.committee'].search(['|', ('parent_id', '=', False),('parent_id.parent_id', '=', False),('website_published', '=', True)])
+        all_comms = http.request.env['campos.committee'].search(['|', ('parent_id', '=', False),('parent_id.parent_id', '=', False)])
         comm_ids = [jf.committee_id.id for jf in http.request.env.user.participant_id.jobfunc_ids]
         _logger.info("My comms: %s", comm_ids)
-        my_comms = http.request.env['campos.committee'].search([('id', 'in', comm_ids),('website_published', '=', True)])
+        my_comms = http.request.env['campos.committee'].search([('id', 'in', comm_ids)])
         values = { 'event': event,
                    'all_comms': all_comms,
                    'my_comms': my_comms}
