@@ -16,7 +16,7 @@ class CamposWelcomeProfile(models.TransientModel):
 
     _name= 'campos.welcome.profile'
     
-    user_id = fields.Many2one('res.user', 'Welcome Wizard')
+    user_id = fields.Many2one('res.users', 'Welcome Wizard')
     name = fields.Char()
     org_int_id = fields.Integer('Remote Res ID')
     org_ext_id = fields.Char('Remote Ext ID')
