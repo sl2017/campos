@@ -1,0 +1,3 @@
+"id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
+"campos_preregistration.gl_access_prereg","CampOS Group Leader Own","campos_preregistration.model_event_registration","[('create_uid', '=', user.id)]","campos_preregistration.group_campos_groupleader","True","True","True","False"
+"campos_preregistration.gl_access_partic","CampOS Group Leader Own Participants","campos_preregistration.model_event_registration_participants","[('create_uid', '=', user.id)]","campos_preregistration.group_campos_groupleader","True","True","True","True"
