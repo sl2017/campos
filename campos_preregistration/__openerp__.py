@@ -27,6 +27,7 @@
     'data': ['views/preregistration.xml',
              'security/campos_preregistration_security.xml',
              'security/ir.model.access.csv',
+             'security/ir.rule.csv',
              ],
     # only loaded in demonstration mode
     'demo': [ ],

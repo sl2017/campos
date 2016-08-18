@@ -21,36 +21,41 @@
 						<header>
 						</header>
 					<sheet>
-					<!-- Content goes here: -->
 						<group name="group_top">
 <!--							<field name="name"/>-->
-							<field name="group_name"/>
+							<field name="event_id"/>
+							<field name="state"/>
+							<field name="partner_id" string="Scout group"/>
+<!--							<field name="group_name"/>-->
 							<field name="group_association"/>
 							<field name="group_world_association"/>
+							<field name="association_groupid"/>
 							<field name="group_entrypoint"/>
-							<field name="contact_name"/>
+<!--							<field name="contact_name"/>
 							<field name="contact_email"/>
 							<field name="contact_phone"/>
 							<field name="contact_address"/>
 							<field name="contact_address2"/>
-							<field name="contact_zip_town"/>
+							<field name="contact_zip_town"/>-->
+							
+							<field name="contact_partner_id" string="Contact Person"/>
 							<field name="group_municipality"/>
 							<field name="group_country"/>
-							<field name="treasurer_name"/>
+<!--							<field name="treasurer_name"/>
 							<field name="treasurer_email"/>
-							<field name="treasurer_phone"/>
-							<field name="group_address"/>
+							<field name="treasurer_phone"/>-->
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
+<!--							<field name="group_address"/>
 							<field name="group_address2"/>
-							<field name="group_zip_town"/>
-							<field name="association_groupid"/>
+							<field name="group_zip_town"/>-->
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
 									<field name="participant_age_group_id"/>
-                  <field name="participant_total"/>
+                  <field name="participant_total" sum="Total"/>
                   <field name="participant_from_date"/>
                   <field name="participant_to_date"/>
-                  <field name="participant_transport_to_camp_total"/>
-                  <field name="participant_transport_from_camp_total"/>
+                  <field name="participant_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_transport_from_camp_total" sum="Total"/>
                   <field name="participant_transport_note" class="oe_read_only"/>
                 </tree>
               </field>
@@ -63,15 +68,28 @@
 							<field name="friendship_group"/>
 							<field name="friendship_group_name"/>
 							<field name="friendship_group_info"/>
-							<field name="group_camp_agreements"/>
-							<field name="internal_information" groups="campos_event.group_campos_staff"/>
+							<field name="group_camp_agreements" class="oe_read_only:is_done==True"/>
+							<field name="internal_information"/>
 						</group>
 					</sheet>
 				</form> 
 			</field>
 		</record>
 		
-    <!-- Menu Actions -->
+			<record id="view_tree_event_registration" model="ir.ui.view">
+				<field name="name">Event Preregistration Tree</field>
+				<field name="model">event.registration</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="partner_id" string="Scout group"/>
+						<field name="event_id"/>
+						<field name="state"/>
+						<field name="contact_partner_id" string="Contact Person"/>
+					</tree>
+				</field>
+			</record> 		
+
+			<!-- Menu Actions -->
 		<act_window id="action_event_preregistration"
 		name="Event Preregistration"
 		res_model="event.registration"
@@ -80,6 +98,10 @@
 		name="Event Registration Agegroup"
 		res_model="event.registration.agegroup"
 		view_mode="tree,form" />
+		<act_window id="action_event_preregistration_tree"
+		name="Event Preregistration Tree"
+		res_model="event.registration"
+		view_mode="tree" />
 		
 		<!-- sub menu -->
 		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration"/>
@@ -87,9 +109,10 @@
 		<!-- Menu Items -->
 		<menuitem id="event_preregistration_portal_menu" name="Group Preregistration" sequence="100" action="action_event_preregistration" />
 		<menuitem id="menu_action_event_preregistration" parent="menu_event_preregistration" name="Group Preregistration" action="action_event_preregistration" groups="campos_event.group_campos_staff" sequence="20"/>
+		<menuitem id="menu_action_event_preregistration_tree" parent="menu_event_preregistration" name="Group Prereg.List" action="action_event_preregistration_tree" groups="campos_event.group_campos_staff" sequence="30"/>
+		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" sequence="40" />
 	
-		<!--menuitem id="menu_action_portal_menu_agegroup" name="Age Groups" action="action_event_registration_agegroup" /-->
-		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" />
-	
+		<!-- temporary -->
+		<menuitem id="event_preregistration_tree_portal_menu" name="Group Prereg. List" sequence="110" action="action_event_preregistration_tree" />
   </data>
 </openerp>
