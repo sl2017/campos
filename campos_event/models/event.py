@@ -79,6 +79,7 @@ class EventEvent(models.Model):
         fields = [{'id': "s1", 'fieldname': 'Navn'},
                   {'id': 's1s', 'fieldname': 'Status'},
                   {'id': "s2", 'fieldname': 'Udvalg'},
+                  {'id': "s2x", 'fieldname': 'Udvalg Kort'},
                   {'id': "s3", 'fieldname': 'Funktion'},
                   {'id': "s3r", 'fieldname': 'Rum'},
                   {'id': "s4", 'fieldname': 'adresse'},
@@ -131,6 +132,8 @@ class EventEvent(models.Model):
                     func_list = '|'.join(filter(None, [func_list, j.function_type_id.name]))
                 row['s2'] = comm_list
                 row['s3'] = func_list
+                if participant[0].jobfunc_ids[0]:
+                    row['s2x'] = participant[0].jobfunc_ids[0].committee_id.root_name
             if reg.reg_survey_input_id:
                 row['s10'] = reg.reg_survey_input_id.write_date
                 for ans in reg.reg_user_input_line_ids:
