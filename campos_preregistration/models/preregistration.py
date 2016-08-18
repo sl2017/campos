@@ -8,13 +8,13 @@ class Preregistration(models.Model):
     Pre-registration for a scout group to an event
     '''
     _inherit = 'event.registration'
-    group_name = fields.Char('Group Name', required=True)
-    group_association = fields.Many2one('campos.scout.org','Scout Organization', required=True)
+    group_name = fields.Char('Group Name')
+    group_association = fields.Many2one('campos.scout.org','Scout Organization')
     group_world_association = fields.Selection(related='group_association.worldorg', string='World Organisation', readonly=True)
     group_entrypoint = fields.Char('Point of entry into Denmark', required=True)
-    group_municipality = fields.Many2one('campos.municipality','Municipallity for DK groups / Place of arrival for non DK groups', required=True)
+    group_municipality = fields.Many2one('campos.municipality','Municipallity for DK groups / Place of arrival for non DK groups')
     group_country = fields.Many2one('res.country', 'Country')
-    association_groupid = fields.Char('Groups id (number) at local association', required=True)
+    association_groupid = fields.Char('Groups id (number) at local association')
     participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
     pionering_poles_3m_total = fields.Integer('Number of pionering poles - 3 meters')
     pionering_poles_6m_total = fields.Integer('Number of pionering poles - 6 meters')
@@ -22,7 +22,7 @@ class Preregistration(models.Model):
     handicap = fields.Boolean('Participant(s) with handicap or other special considerations?')
     handicap_description = fields.Text('Description of handicap / special considerations')
     handicap_needs = fields.Text('Special needs due to handicap / special considerations')
-    friendship_group = fields.Boolean('Request placement with friendship group?', required=True)
+    friendship_group = fields.Boolean('Request placement with friendship group?')
     friendship_group_name = fields.Char('Friendship group name, association, country')
     friendship_group_info = fields.Text('Friendship group other info')
     group_camp_agreements = fields.Text('Official agreements')
