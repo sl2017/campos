@@ -11,7 +11,7 @@ class Preregistration(models.Model):
     group_name = fields.Char('Group Name')
     group_association = fields.Many2one('campos.scout.org','Scout Organization')
     group_world_association = fields.Selection(related='group_association.worldorg', string='World Organisation', readonly=True)
-    group_entrypoint = fields.Char('Point of entry into Denmark', required=True)
+    group_entrypoint = fields.Char('Point of entry into Denmark')
     group_municipality = fields.Many2one('campos.municipality','Municipallity for DK groups / Place of arrival for non DK groups')
     group_country = fields.Many2one('res.country', 'Country')
     association_groupid = fields.Char('Groups id (number) at local association')
