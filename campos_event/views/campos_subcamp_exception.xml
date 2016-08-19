@@ -60,9 +60,9 @@
 
     <record model="ir.ui.menu" id="campos_subcamp_exception_menu">
         <field name="name">Sub Camp exception</field>
-        <field name="parent_id" ref="campos_event.menu_campos_config_event"/>
+        <field name="parent_id" ref="menu_campos_config_event"/>
         <field name="action" ref="campos_subcamp_exception_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="110"/> <!-- TODO -->
     </record>
 
 </data>
