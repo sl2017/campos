@@ -21,6 +21,7 @@
         'views/campos_remote_system.xml',
         'views/res_partner.xml',
         'wizards/campos_welcome.xml',
+        'views/mail_templates.xml',
     ],
     'demo': [
         'demo/campos_remote_system.xml',

@@ -52,6 +52,18 @@ class CamposWelcome(models.TransientModel):
 #         result['profile_id'] = pro_id.id
         result['remote_system_id'] = remote_system_id.id
         result['name'] = self.env.user.name 
+        if self.env.user.partner_id.remote_system_id:
+            #Already imported - Go to "Done"
+            result['state'] = 'done'
+            event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
+            _logger.info('EVent: %s', event_id)
+            if event_id:
+                event_id = int(event_id)
+                reg = self.env['event.registration'].search([('partner_id', '=', self.env.user.partner_id.id), ('event_id', '=', event_id)])
+                if reg:
+                    result['reg_id'] = reg.id
+                    result['message'] = _('Your group has already been signed up')
+                    self.env.user.action_id = False
         return result
 
 
@@ -111,7 +123,15 @@ class CamposWelcome(models.TransientModel):
                             'contact_partner_id': self.env.user.partner_id.id,
                             'scoutgroup': True,
                             'staff': False,
+                            'organization_id': wizard.remote_system_id.scoutorg_id
                             }
+                    
+                    cse = self.env['campos.subcamp.exception'].search('name', 'ilike', group.name)
+                    if cse:
+                        vals['subcamp_id'] = cse.subcamp_id.id
+                    elif group.municipality_id.subcamp_id:
+                        vals['subcamp_id'] = group.municipality_id.subcamp_id.id
+                        
                 treasurer_id = wizard.remote_system_id.getTreasurer(group.remote_link_id)
                 if treasurer_id:
                     treasurer = wizard.remote_system_id.syncPartner(remote_int_id=treasurer_id)
@@ -120,6 +140,12 @@ class CamposWelcome(models.TransientModel):
                 
                 if event_id:
                     wizard.reg_id = self.env['event.registration'].sudo().create(vals)
+                    template = self.env.ref('campos_welcome.treasurer_mail')
+                    assert template._name == 'email.template'
+                    try:
+                        template.send_mail(wizard.reg_id.id)
+                    except:
+                        pass
                     _logger.info('REG Created')
             wizard.state = 'done'
             self.env.user.action_id = False
