@@ -65,9 +65,9 @@
     'data': [
         'security/campos_event_security.xml',
         'security/campos_subcamp_exception.xml',
-        'views/campos_subcamp_exception.xml',
+        
         'security/campos_subcamp.xml',
-        'views/campos_subcamp.xml',
+        
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
         
@@ -89,6 +89,8 @@
         #"views/portal_menu.xml",
         "views/res_users_view.xml",
         'views/campos_menu.xml',
+        'views/campos_subcamp_exception.xml',
+        'views/campos_subcamp.xml',
         'views/event_partner_reg_template.xml',
         'views/meeting_proposal_template.xml',
         'views/event_track_view.xml',
