@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_subcamp_form_view">
+        <field name="name">campos.subcamp.form (in campos_event)</field>
+        <field name="model">campos.subcamp</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                         <notebook colspan="4">
+                      <page string="Geometry">
+                        <field name="the_geom" colspan="4" widget="geo_edit_map"/>
+                      </page>
+                    </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_subcamp_search_view">
+        <field name="name">campos.subcamp.search (in campos_event)</field>
+        <field name="model">campos.subcamp</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_subcamp_tree_view">
+        <field name="name">campos.subcamp.tree (in campos_event)</field>
+        <field name="model">campos.subcamp</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_subcamp_act_window">
+        <field name="name">Sub Camps</field> <!-- TODO -->
+        <field name="res_model">campos.subcamp</field>
+        <field name="view_mode">tree,form,geoengine</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_subcamp_menu">
+        <field name="name">Sub camps</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config_event"/>
+        <field name="action" ref="campos_subcamp_act_window"/>
+        <field name="sequence" eval="100"/> <!-- TODO -->
+    </record>
+
+	<!-- GeoEngine views -->
+        <record id="ir_ui_view_subcampgeoview0" model="ir.ui.view">
+            <field name="name">subcamp.geo_view</field>
+            <field eval="16" name="priority"/>
+            <field name="model">campos.subcamp</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name"/>
+                </geoengine>
+            </field>
+        </record>
+
+        <record id="geoengine_vector_layer_subcamp0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="campos_event.field_campos_subcamp_the_geom"/>
+            <field name="name">Basic Subcamp</field>
+            <field name="view_id" ref="ir_ui_view_subcampgeoview0"/>
+            <field name="geo_repr">basic</field>
+            <field name="attribute_field_id" ref="field_campos_subcamp_name"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        
+        <record id="geoengine_raster_layer_subcamp0" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Municipality OSM</field>
+            <field name="view_id" ref="ir_ui_view_subcampgeoview0"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        <record id="geoengine_raster_layer_subcampmapbox0" model="geoengine.raster.layer">
+            <field name="raster_type">mapbox</field>
+            <field name="mapbox_id">camptocamp.map-qrf4x</field>
+            <field name="name">ZIP Mapbox Light</field>
+            <field name="view_id" ref="ir_ui_view_subcampgeoview0"/>
+            <field eval="1" name="overlay"/>
+        </record>
+</data>
+</openerp>

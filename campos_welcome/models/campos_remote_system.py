@@ -30,6 +30,7 @@ class CamposRemoteSystem(models.Model):
     systype = fields.Selection([('ms', 'Medlemsservice'),
                                 ('bm', u'Blåt Medlem')], 'System type', default='ms')
     treasurer_function = fields.Char()
+    scoutorg_id = fields.Many2one('campos.scout.org', 'Scout organization')
 
     @api.model
     def getRemoteSystem(self):
@@ -112,6 +113,7 @@ class CamposRemoteSystem(models.Model):
             remote_int_id = partner.remote_int_id
         if not remote_int_id:
             return
+        muni_no = False
         if self.systype == 'ms':
             msodoo = odoorpc.ODOO(self.host, protocol=self.protocol, port=self.port)
             msodoo.login(self.db_name, self.db_user, self.db_pwd)
@@ -136,7 +138,7 @@ class CamposRemoteSystem(models.Model):
                 vals['remote_link_id'] = remote_partner.organization_id.id
             else:
                 vals['remote_ext_id'] = remote_partner.member_number
-
+            muni_no = remote.partner.municipality_id.number
         else:
             # bm import
             if is_company:  # Group import
@@ -159,7 +161,7 @@ class CamposRemoteSystem(models.Model):
                             'remote_system_id': self.id,
                             'last_import': fields.Datetime.now(),
                             }
-
+                    muni_no = rd['organizationKommune']
             else:
                 rows = ET.parse(urlopen(self.getBMurl('members', memberNumber=remote_int_id)))
                 for row in rows.getroot():
@@ -179,7 +181,11 @@ class CamposRemoteSystem(models.Model):
                             'remote_system_id': self.id,
                             'last_import': fields.Datetime.now(),
                             }
-
+                    muni_no = rd['userKommune']
+        if muni_no:
+            muni = self.env['campos.municipality'].search([('number', '=', int(muni_no))])
+            if muni:
+                vals['municipality_id'] = muni.id
         if not partner:
             partner = self.env['res.partner'].suspend_security().create(vals)
         else:

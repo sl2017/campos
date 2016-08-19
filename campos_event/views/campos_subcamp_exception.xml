@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_subcamp_exception_form_view">
+        <field name="name">campos.subcamp_exception.form (in campos_event)</field>
+        <field name="model">campos.subcamp.exception</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="subcamp_id" />
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_subcamp_exception_search_view">
+        <field name="name">campos.subcamp_exception.search (in campos_event)</field>
+        <field name="model">campos.subcamp.exception</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="subcamp_id"/>
+                <group expand="0" string="Group By...">
+                 	<filter name="fSubcamp" string="Subcamp" icon="terp-personal" domain="[]" context="{'group_by':'subcamp_id'}"/>
+                 </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_subcamp_exception_tree_view">
+        <field name="name">campos.subcamp_exception.tree (in campos_event)</field>
+        <field name="model">campos.subcamp.exception</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="subcamp_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_subcamp_exception_act_window">
+        <field name="name">Sub camp exception</field> <!-- TODO -->
+        <field name="res_model">campos.subcamp.exception</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_subcamp_exception_menu">
+        <field name="name">Sub Camp exception</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config_event"/>
+        <field name="action" ref="campos_subcamp_exception_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

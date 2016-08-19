@@ -40,3 +40,4 @@ class CamposMunicipality(geo_model.GeoModel):
     name = fields.Char('Name', size=64)
     number = fields.Integer('Number')
     the_geom = geo_fields.GeoMultiPolygon('NPA Shape')
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
