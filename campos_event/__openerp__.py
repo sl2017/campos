@@ -63,11 +63,11 @@
 
     # always loaded
     'data': [
+        'security/campos_event_security.xml',
         'security/campos_subcamp_exception.xml',
         'views/campos_subcamp_exception.xml',
         'security/campos_subcamp.xml',
         'views/campos_subcamp.xml',
-        'security/campos_event_security.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
         

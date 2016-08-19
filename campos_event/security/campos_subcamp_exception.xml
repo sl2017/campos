@@ -18,7 +18,7 @@
 	<record model="ir.model.access" id="campos_subcamp_exception_access_mgr">
         <field name="name">campos.subcamp_exception access mgr</field>
         <field name="model_id" ref="model_campos_subcamp_exception"/>
-        <field name="group_id" ref="campos_event.group_campos_admin"/>
+        <field name="group_id" ref="group_campos_admin"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>
