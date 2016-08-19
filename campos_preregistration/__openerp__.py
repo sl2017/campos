@@ -10,7 +10,7 @@
 
     'summary': """Scout Camp Preregistration Module""",
 
-    # 'description': put the module description in README.rst
+    'description': """Scout Camp Preregistration Module""",
 
     'author': "Jeppe Axelsen, Ernst Madsen",
 
