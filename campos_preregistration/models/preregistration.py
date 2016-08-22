@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields, api
-from openerp.fields import One2many
-from openerp.osv.fields import reference
+from openerp import models, fields, api, exceptions
 class Preregistration(models.Model):
     '''
     Pre-registration for a scout group to an event
@@ -28,7 +26,6 @@ class Preregistration(models.Model):
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
 
-
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
     name = fields.Char('Age Group name', required=True)
@@ -38,7 +35,7 @@ class PreregistrationAgegroup(models.Model):
 class PreregistrationParticipants(models.Model):
     _name = 'event.registration.participants'
     registration_id = fields.Many2one('event.registration', 'Registration')
-    participant_age_group_id = fields.Many2one('event.registration.agegroup','Age Group')
+    participant_age_group_id = fields.Many2one('event.registration.agegroup','Age Group', required=True)
     participant_total  = fields.Integer('Number of participants', required=True)
     participant_from_date = fields.Date('Date of arrival', required=True)
     participant_to_date = fields.Date('Date of departure', required=True)
@@ -52,4 +49,28 @@ class PreregistrationParticipants(models.Model):
         for record in self:
             if record.participant_transport_to_camp_total!=record.participant_total or record.participant_transport_from_camp_total!=record.participant_total:
                 record.participant_transport_note = 'NB!'
+                
+                
+    def _check_from_before_end(self):
+        if self.participant_from_date < self.participant_to_date:
+            return True
+        return False
     
+    @api.one
+    @api.constrains('participant_from_date', 'participant_to_date')
+    def validation_from_to_dates(self):
+        validation_result = self._check_from_before_end()
+        if validation_result != True:
+            raise exceptions.ValidationError('Date of arrival must be before date of departure')
+
+    def _check_transport_in_camp_period(self):
+        if self.registration_id.event_begin_date <= self.participant_from_date and self.registration_id.event_end_date >= self.participant_to_date:
+            return True
+        return False
+    
+    @api.one
+    @api.constrains('participant_from_date', 'participant_to_date')
+    def validation_transport_in_camp_period(self):
+        validation_result = self._check_transport_in_camp_period()
+        if validation_result != True:
+            raise exceptions.ValidationError('Date of arrival and departure must be within camp period')
