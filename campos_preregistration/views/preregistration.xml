@@ -13,25 +13,39 @@
 				</field>
 			</record> 		
 			
-		<record id="view_form_preregistration" model="ir.ui.view">
-			<field name="name">Preregistration Form</field>
+			<record id="view_tree_event_registration_pioneeringpole" model="ir.ui.view">
+				<field name="name">Pioneering Poles Tree</field>
+				<field name="model">event.registration.pioneeringpole</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+						<field name="length"/>
+					</tree>
+				</field>
+			</record> 
+
+			<!-- Preregistration for group leaders-->
+			<record id="view_form_preregistration_gl" model="ir.ui.view">
+			<field name="name">Preregistration Form Group Leader</field>
 			<field name="model">event.registration</field>
 			<field name="priority" eval="15"/>
+<!--			<field name="groups_id" eval="[(4, ref('group_campos_groupleader'))]"/>-->
 			<field name="arch" type="xml">
 				<form>
 						<header>
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id"/>
-							<field name="partner_id" string="Scout group"/>
-							<field name="group_association" required="True"/>
+							<field name="event_id" string="Event (GL)" readonly="1"/>
+							<field name="partner_id" string="Scout group" readonly="1"/>
+							<field name="group_association" required="True" readonly="1"/>
 							<field name="group_world_association"/>
 							<field name="association_groupid" required="True"/>
-							<field name="group_entrypoint" required="True"/>							
-							<field name="contact_partner_id" string="Contact Person"/>
+							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>							
+							<field name="contact_partner_id" string="Contact Person" readonly="1"/>
 							<field name="group_municipality" required="True"/>
 							<field name="group_country"/>
+							<field name="group_country_name"  invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
@@ -41,15 +55,21 @@
                   <field name="participant_to_date"/>
                   <field name="participant_transport_to_camp_total" sum="Total"/>
                   <field name="participant_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_transport_note" class="oe_read_only"/>
+                  <field name="participant_transport_note"/>
                 </tree>
               </field>
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
-										<field name="pionering_poles_3m_total"/>
+<!--										<field name="pionering_poles_3m_total"/>
 										<field name="pionering_poles_6m_total"/>
-										<field name="pionering_poles_9m_total"/>
+										<field name="pionering_poles_9m_total"/>-->
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
+											<tree editable="bottom">
+												<field name="pioneeringpole_id"/>
+												<field name="polecount" sum="Total"/>
+											</tree>
+										</field>				
 									</group>
 								</page>
 								<page string="Handicaped participants">
@@ -67,13 +87,85 @@
 									</group>
 								</page>
 								<page string="Agreements" position="after">
-										<field name="group_camp_agreements" class="oe_read_only:is_done==True"/>
+										<field name="group_camp_agreements" readonly="1"/>
+								</page>
+							</notebook>
+							<field name="state" invisible="1"/>
+							</group>
+					</sheet>
+				</form> 
+			</field>
+		</record>
+
+		<!-- Preregistration for admin-->
+		<record id="view_form_preregistration_admin" model="ir.ui.view">
+			<field name="name">Preregistration Form Admin</field>
+			<field name="model">event.registration</field>
+			<field name="priority" eval="14"/>
+<!--			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_admin'))]"/>-->
+			<field name="arch" type="xml">
+				<form>
+						<header>
+						</header>
+					<sheet>
+						<group name="sheet">
+							<field name="event_id" string="Event (admin)"/>
+							<field name="partner_id" string="Scout group"/>
+							<field name="group_association" required="True"/>
+							<field name="group_world_association"/>
+							<field name="association_groupid" required="True"/>
+							<field name="group_entrypoint" required="True"/>							
+							<field name="contact_partner_id" string="Contact Person"/>
+							<field name="group_municipality" required="True"/>
+							<field name="group_country"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
+              <field colspan="7" name="participant_ids" widget="one2many_list">
+								<tree string="Participants" editable="bottom">
+									<field name="participant_age_group_id"/>
+                  <field name="participant_total" sum="Total"/>
+                  <field name="participant_from_date"/>
+                  <field name="participant_to_date"/>
+                  <field name="participant_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_transport_note"/>
+                </tree>
+              </field>
+							<notebook colspan="2">
+								<page string="Pionering poles">
+									<group>
+<!--										<field name="pionering_poles_3m_total"/>
+										<field name="pionering_poles_6m_total"/>
+										<field name="pionering_poles_9m_total"/>-->
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
+											<tree editable="bottom">
+												<field name="pioneeringpole_id"/>
+												<field name="polecount" sum="Total"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap"/>
+										<field name="handicap_description"/>
+										<field name="handicap_needs"/>
+									</group>
+								</page>
+								<page string="Friendship group">
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name"/>
+										<field name="friendship_group_info"/>
+									</group>
+								</page>
+								<page string="Agreements" position="after">
+										<field name="group_camp_agreements"/>
 								</page>
 								<page string="Internal Information">
 										<field name="internal_information"/>
 								</page>
 							</notebook>
-							<field name="state"/>
+							<field name="state" invisible="1"/>
 							</group>
 					</sheet>
 				</form> 
@@ -105,7 +197,11 @@
 		<act_window id="action_event_preregistration_tree"
 		name="Event Preregistration Tree"
 		res_model="event.registration"
-		view_mode="tree" />
+		view_mode="tree,form" />
+		<act_window id="action_event_registration_pioneeringpole"
+		name="Event Registration Pioneering Poles"
+		res_model="event.registration.pioneeringpole"
+		view_mode="tree,form" />		
 		
 		<!-- sub menu -->
 		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration"/>
@@ -116,6 +212,7 @@
 		<menuitem id="menu_action_event_preregistration" parent="menu_event_preregistration" name="Group Preregistration" action="action_event_preregistration" groups="campos_event.group_campos_admin" sequence="20"/>
 		<menuitem id="menu_action_event_preregistration_tree" parent="menu_event_preregistration" name="Group Prereg.List" action="action_event_preregistration_tree" groups="campos_event.group_campos_admin" sequence="30"/>
 		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" groups="campos_event.group_campos_admin" sequence="40" />
+		<menuitem id="menu_action_preregistration_menu_pioneeringpole" parent="menu_event_preregistration" name="Pioneering Poles" action="action_event_registration_pioneeringpole" groups="campos_event.group_campos_admin" sequence="50" />
 	
 		<!-- temporary -->
 <!--		<menuitem id="event_preregistration_tree_portal_menu" name="Group Prereg. List" sequence="110" action="action_event_preregistration_tree" />-->

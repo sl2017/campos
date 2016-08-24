@@ -12,11 +12,10 @@ class Preregistration(models.Model):
     group_entrypoint = fields.Char('Point of entry into Denmark')
     group_municipality = fields.Many2one('campos.municipality','Municipallity for DK groups / Place of arrival for non DK groups')
     group_country = fields.Many2one('res.country', 'Country')
+    group_country_name = fields.Char(related='group_country.name', string='Country Name', readonly=True)
     association_groupid = fields.Char('Groups id (number) at local association')
     participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
-    pionering_poles_3m_total = fields.Integer('Number of pionering poles - 3 meters')
-    pionering_poles_6m_total = fields.Integer('Number of pionering poles - 6 meters')
-    pionering_poles_9m_total = fields.Integer('Number of pionering poles - 9 meters')
+    pioneeringpole_ids = fields.One2many('event.registration.polelist','registration_id','Pioneering Poles')
     handicap = fields.Boolean('Participant(s) with handicap or other special considerations?')
     handicap_description = fields.Text('Description of handicap / special considerations')
     handicap_needs = fields.Text('Special needs due to handicap / special considerations')
@@ -32,6 +31,11 @@ class PreregistrationAgegroup(models.Model):
     age_from = fields.Integer('From age', required=True)
     age_to = fields.Integer('To age', required=True)
     
+class PreregistrationPioneeringPole(models.Model):
+    _name = 'event.registration.pioneeringpole'
+    name = fields.Char('Pioneering Pole Name', required=True)
+    length = fields.Integer('Length', required=True)
+
 class PreregistrationParticipants(models.Model):
     _name = 'event.registration.participants'
     registration_id = fields.Many2one('event.registration', 'Registration')
@@ -74,3 +78,9 @@ class PreregistrationParticipants(models.Model):
         validation_result = self._check_transport_in_camp_period()
         if validation_result != True:
             raise exceptions.ValidationError('Date of arrival and departure must be within camp period')
+
+class PreregistrationPolelist(models.Model):
+    _name = 'event.registration.polelist'
+    registration_id = fields.Many2one('event.registration', 'Registration')
+    pioneeringpole_id = fields.Many2one('event.registration.pioneeringpole','Pole type', required=True)
+    polecount  = fields.Integer('Number of pioneering poles', required=True)
