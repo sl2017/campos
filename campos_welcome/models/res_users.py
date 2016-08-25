@@ -28,11 +28,11 @@ class ResUsers(models.Model):
         new_email = values.get('email')
         partner_id = False
         if new_email:
-            partner_ids = self.pool['res.partner'].search(cr, uid, ['email', '=', new_email])
+            partner_ids = self.pool['res.partner'].search(cr, uid, [('email', '=', new_email)])
             if partner_ids:
                 partner_id = partner_ids[0]
             else:
-                part_ids = self.pool['event.participant'].search('private_mailaddress', '=', new_email)
+                part_ids = self.pool['event.participant'].search([('private_mailaddress', '=', new_email)])
                 if part_ids:
                     partner_id = self.pool('event.participant').browse(cr, uid, part_ids[0]).partner_id.id
             if partner_id:
