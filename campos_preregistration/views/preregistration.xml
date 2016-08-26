@@ -36,7 +36,7 @@
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id" string="Event (GL)" readonly="1"/>
+							<field name="event_id" string="Event" readonly="1"/>
 							<field name="partner_id" string="Scout group" readonly="1"/>
 							<field name="group_association" required="True" readonly="1"/>
 							<field name="group_world_association"/>
@@ -61,9 +61,6 @@
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
-<!--										<field name="pionering_poles_3m_total"/>
-										<field name="pionering_poles_6m_total"/>
-										<field name="pionering_poles_9m_total"/>-->
 										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
 											<tree editable="bottom">
 												<field name="pioneeringpole_id"/>
@@ -101,7 +98,7 @@
 		<record id="view_form_preregistration_admin" model="ir.ui.view">
 			<field name="name">Preregistration Form Admin</field>
 			<field name="model">event.registration</field>
-			<field name="priority" eval="14"/>
+			<field name="priority" eval="16"/>
 <!--			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_admin'))]"/>-->
 			<field name="arch" type="xml">
 				<form>
@@ -109,7 +106,7 @@
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id" string="Event (admin)"/>
+							<field name="event_id" string="Event"/>
 							<field name="partner_id" string="Scout group"/>
 							<field name="group_association" required="True"/>
 							<field name="group_world_association"/>
@@ -133,9 +130,6 @@
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
-<!--										<field name="pionering_poles_3m_total"/>
-										<field name="pionering_poles_6m_total"/>
-										<field name="pionering_poles_9m_total"/>-->
 										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
 											<tree editable="bottom">
 												<field name="pioneeringpole_id"/>
