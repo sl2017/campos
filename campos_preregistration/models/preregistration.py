@@ -41,24 +41,27 @@ class PreregistrationParticipants(models.Model):
     registration_id = fields.Many2one('event.registration', 'Registration')
     participant_age_group_id = fields.Many2one('event.registration.agegroup','Age Group', required=True)
     participant_total  = fields.Integer('Number of participants', required=True)
-    participant_from_date = fields.Date('Date of arrival', required=True)
-    participant_to_date = fields.Date('Date of departure', required=True)
+    participant_from_date = fields.Date('Date of arrival', required=True, default='2017-07-22')
+    participant_to_date = fields.Date('Date of departure', required=True, default='2017-07-30')
     participant_transport_to_camp_total  = fields.Integer('Number of transport to camp', required=True)
     participant_transport_from_camp_total  = fields.Integer('Number of transport from camp', required=True)
-    participant_transport_note = fields.Char(compute = '_calculate_note', string='Not all participants with transport')
+    participant_transport_note = fields.Char(compute = '_calculate_note', string='Note')
     
     @api.depends ('participant_total','participant_transport_to_camp_total','participant_transport_from_camp_total')
     @api.multi
     def _calculate_note (self):
         for record in self:
-            if record.participant_transport_to_camp_total!=record.participant_total or record.participant_transport_from_camp_total!=record.participant_total:
-                record.participant_transport_note = 'NB!'
+            if record.participant_transport_to_camp_total<record.participant_total or record.participant_transport_from_camp_total<record.participant_total:
+                record.participant_transport_note = 'Not all participants with transport.'
+            if record.participant_transport_to_camp_total>record.participant_total or record.participant_transport_from_camp_total>record.participant_total:
+                record.participant_transport_note = 'More than all participants with transport.'
                 
                 
     def _check_from_before_end(self):
         if self.participant_from_date < self.participant_to_date:
             return True
         return False
+    
     
     @api.one
     @api.constrains('participant_from_date', 'participant_to_date')

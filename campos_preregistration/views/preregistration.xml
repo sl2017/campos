@@ -43,7 +43,8 @@
 							<field name="association_groupid" required="True"/>
 							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>							
 							<field name="contact_partner_id" string="Contact Person" readonly="1"/>
-							<field name="group_municipality" required="True"/>
+							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_name', '!=', 'Danmark')]}"/>
+							<field name="group_municipality" string="Place of arrival" required="True" attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
 							<field name="group_country"/>
 							<field name="group_country_name"  invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
