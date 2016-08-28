@@ -20,6 +20,8 @@ class EventTrack(models.Model):
     user_status = fields.Selection([('not_reg', 'Not registrered'),
                                     ('reg', 'Registeret'),
                                     ('cancel', 'Canceled')], 'Resp. Status', compute='_compute_user_status')
+    kanban_state = fields.Selection([('normal', 'In Progress'),('blocked', 'Blocked'),('done', 'Ready for next stage')], 'Kanban State',
+                                         compute='_compute_user_status')
     
     @api.multi
     def _compute_user_status(self):
@@ -28,7 +30,10 @@ class EventTrack(models.Model):
             if reg:
                 if reg.state == 'cancel':
                     track.user_status = 'cancel'
+                    track.kanban_state = 'blocked'
                 else:
                     track.user_status = 'reg'
+                    track.kanban_state = 'done'
             else:
                 track.user_status = 'not_reg'
+                track.kanban_state = 'blocked'

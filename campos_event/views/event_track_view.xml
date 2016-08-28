@@ -23,6 +23,23 @@
 			</field>
 		</record>
 		
+		<record id="view_event_track_kanban" model="ir.ui.view">
+			<field name="name">view_event_track_form</field>
+			<field name="model">event.track</field>
+			<field name="inherit_id" ref="website_event_track.view_event_track_kanban" />
+			<field name="arch" type="xml">
+				<data>
+					<field name="priority" position="after">
+						<field name="kanban_state" />
+					</field>	
+					
+					<xpath expr="//t[@t-set='priority']" position="before">
+						<field name="kanban_state" widget="kanban_state_selection"/>
+					</xpath>						
+				</data>
+			</field>
+		</record>
+		
 		
 		<record id="view_event_track_search" model="ir.ui.view">
 			<field name="name">view_event_track_search</field>
