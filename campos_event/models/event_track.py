@@ -16,3 +16,19 @@ class EventTrack(models.Model):
                                      ondelete='set null')
     
     wanted_people = fields.Text('Wanted people')
+    
+    user_status = fields.Selection([('not_reg', 'Not registrered'),
+                                    ('reg', 'Registeret'),
+                                    ('cancel', 'Canceled')], 'Resp. Status', compute='_compute_user_status')
+    
+    @api.multi
+    def _compute_user_status(self):
+        for track in self:
+            reg = self.env['event.registration'].search([('event_id', '=', track.event_id.id),('partner_id', '=', track.user_id.partner_id.id)])
+            if reg:
+                if reg.state == 'cancel':
+                    track.user_status = 'cancel'
+                else:
+                    track.user_status = 'reg'
+            else:
+                track.user_status = 'not_reg'
