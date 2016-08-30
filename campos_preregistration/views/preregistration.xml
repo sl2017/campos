@@ -37,6 +37,7 @@
 					<sheet>
 						<group name="sheet">
 							<field name="event_id" string="Event" readonly="1"/>
+							<field name="subcamp_id"  readonly="1"/>
 							<field name="partner_id" string="Scout group" readonly="1"/>
 							<field name="group_association" required="True" readonly="1"/>
 							<field name="group_world_association"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
@@ -110,6 +111,7 @@
 					<sheet>
 						<group name="sheet">
 							<field name="event_id" string="Event"/>
+							<field name="subcamp_id" />
 							<field name="partner_id" string="Scout group"/>
 							<field name="group_association" required="True"/>
 							<field name="group_world_association"/>
