@@ -28,7 +28,7 @@
 			<record id="view_form_preregistration_gl" model="ir.ui.view">
 			<field name="name">Preregistration Form Group Leader</field>
 			<field name="model">event.registration</field>
-			<field name="priority" eval="15"/>
+<!--			<field name="priority" eval="15"/>-->
 <!--			<field name="groups_id" eval="[(4, ref('group_campos_groupleader'))]"/>-->
 			<field name="arch" type="xml">
 				<form>
@@ -39,12 +39,11 @@
 							<field name="event_id" string="Event" readonly="1"/>
 							<field name="partner_id" string="Scout group" readonly="1"/>
 							<field name="group_association" required="True" readonly="1"/>
-							<field name="group_world_association"/>
+							<field name="group_world_association"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
 							<field name="association_groupid" required="True"/>
 							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>							
 							<field name="contact_partner_id" string="Contact Person" readonly="1"/>
 							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_name', '!=', 'Danmark')]}"/>
-							<field name="group_municipality" string="Place of arrival" required="True" attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
 							<field name="group_country"/>
 							<field name="group_country_name"  invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
@@ -54,9 +53,12 @@
                   <field name="participant_total" sum="Total"/>
                   <field name="participant_from_date"/>
                   <field name="participant_to_date"/>
-                  <field name="participant_transport_to_camp_total" sum="Total"/>
-                  <field name="participant_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_transport_note"/>
+                  <field name="participant_own_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_type"/>
+ <!--                 <field name="participant_transport_note"/>-->
                 </tree>
               </field>
 							<notebook colspan="2">
@@ -99,7 +101,7 @@
 		<record id="view_form_preregistration_admin" model="ir.ui.view">
 			<field name="name">Preregistration Form Admin</field>
 			<field name="model">event.registration</field>
-			<field name="priority" eval="16"/>
+<!--			<field name="priority" eval="15"/>-->
 <!--			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_admin'))]"/>-->
 			<field name="arch" type="xml">
 				<form>
@@ -123,9 +125,12 @@
                   <field name="participant_total" sum="Total"/>
                   <field name="participant_from_date"/>
                   <field name="participant_to_date"/>
-                  <field name="participant_transport_to_camp_total" sum="Total"/>
-                  <field name="participant_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_transport_note"/>
+                  <field name="participant_own_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_type"/>
+ <!--                 <field name="participant_transport_note"/>-->
                 </tree>
               </field>
 							<notebook colspan="2">
@@ -184,22 +189,28 @@
 		<act_window id="action_event_preregistration"
 		name="Event Preregistration"
 		res_model="event.registration"
-		view_mode="form" />
+		view_mode="form" 
+		view_id="view_form_preregistration_gl"/>
 		<act_window id="action_event_registration_agegroup"
 		name="Event Registration Agegroup"
 		res_model="event.registration.agegroup"
 		view_mode="tree,form" />
+		<act_window id="action_event_registration_transporttype"
+		name="Event Registration Transporttype"
+		res_model="event.registration.transporttype"
+		view_mode="tree,form" />
 		<act_window id="action_event_preregistration_tree"
 		name="Event Preregistration Tree"
 		res_model="event.registration"
-		view_mode="tree,form" />
+		view_mode="tree,form"  
+		view_id="view_form_preregistration_admin"/>
 		<act_window id="action_event_registration_pioneeringpole"
 		name="Event Registration Pioneering Poles"
 		res_model="event.registration.pioneeringpole"
 		view_mode="tree,form" />		
 		
 		<!-- sub menu -->
-		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration"/>
+		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration" groups="campos_event.group_campos_admin"/>
 
 		<!-- Menu Items -->
 		<menuitem id="event_preregistration_portal_menu" name="Group Preregistration" sequence="100" action="action_event_preregistration" />
@@ -208,6 +219,7 @@
 		<menuitem id="menu_action_event_preregistration_tree" parent="menu_event_preregistration" name="Group Prereg.List" action="action_event_preregistration_tree" groups="campos_event.group_campos_admin" sequence="30"/>
 		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" groups="campos_event.group_campos_admin" sequence="40" />
 		<menuitem id="menu_action_preregistration_menu_pioneeringpole" parent="menu_event_preregistration" name="Pioneering Poles" action="action_event_registration_pioneeringpole" groups="campos_event.group_campos_admin" sequence="50" />
+		<menuitem id="menu_action_preregistration_menu_transporttype" parent="menu_event_preregistration" name="Transport Types" action="action_event_registration_transporttype" groups="campos_event.group_campos_admin" sequence="60" />
 	
 		<!-- temporary -->
 <!--		<menuitem id="event_preregistration_tree_portal_menu" name="Group Prereg. List" sequence="110" action="action_event_preregistration_tree" />-->
