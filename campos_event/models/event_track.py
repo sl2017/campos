@@ -22,6 +22,7 @@ class EventTrack(models.Model):
                                     ('cancel', 'Canceled')], 'Resp. Status', compute='_compute_user_status')
     kanban_state = fields.Selection([('normal', 'In Progress'),('blocked', 'Blocked'),('done', 'Ready for next stage')], 'Kanban State',
                                          compute='_compute_user_status')
+    taglist = fields.Char('Taglist', compute='_compute_taglist')
     
     @api.multi
     def _compute_user_status(self):
@@ -37,3 +38,12 @@ class EventTrack(models.Model):
             else:
                 track.user_status = 'not_reg'
                 track.kanban_state = 'blocked'
+
+    @api.multi
+    def _compute_taglist(self):
+        for track in self:
+            if track.tag_ids:
+                track.taglist = ' '.join([t.name for t in track.tag_ids])
+            else:
+                track.taglist = False
+    
