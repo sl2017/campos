@@ -15,6 +15,7 @@ class CamposCampArea(models.Model):
     reg_ids = fields.One2many('event.registration', 'camp_area_id', 'Troops')
     addreg_id = fields.Many2one('event.registration', 'Add Registration', ondelete='set null', domain=[('state','!=', 'cancel')])
     allocated = fields.Integer('Allocated', compute="_compute_allocated")
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
     
     @api.one
     @api.depends('reg_ids')

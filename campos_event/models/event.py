@@ -26,6 +26,8 @@
 ##############################################################################
 
 import random
+from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from urlparse import urljoin
 import werkzeug
 
@@ -77,6 +79,7 @@ class EventEvent(models.Model):
         fields = [{'id': "s1", 'fieldname': 'Navn'},
                   {'id': 's1s', 'fieldname': 'Status'},
                   {'id': "s2", 'fieldname': 'Udvalg'},
+                  {'id': "s2x", 'fieldname': 'Udvalg Kort'},
                   {'id': "s3", 'fieldname': 'Funktion'},
                   {'id': "s3r", 'fieldname': 'Rum'},
                   {'id': "s4", 'fieldname': 'adresse'},
@@ -129,6 +132,8 @@ class EventEvent(models.Model):
                     func_list = '|'.join(filter(None, [func_list, j.function_type_id.name]))
                 row['s2'] = comm_list
                 row['s3'] = func_list
+                if participant[0].jobfunc_ids[0]:
+                    row['s2x'] = participant[0].jobfunc_ids[0].committee_id.root_name
             if reg.reg_survey_input_id:
                 row['s10'] = reg.reg_survey_input_id.write_date
                 for ans in reg.reg_user_input_line_ids:
@@ -231,12 +236,12 @@ class EventRegistration(models.Model):
     friendship = fields.Char('Friendship group', size=64)
     municipality_id = fields.Many2one(
         'campos.municipality',
-        'Municipality',
-        select=True,
-        ondelete='set null')
+        'Municipality', related="partner_id.municipality_id")
+        
     ddsgroup = fields.Integer('DDS Gruppenr')
     region = fields.Char('Region', size=64)
-
+    
+    
     # Contact
     contact_partner_id = fields.Many2one(
         'res.partner', 'Contact', states={
@@ -261,7 +266,8 @@ class EventRegistration(models.Model):
         'Room/Camp Area',
         select=True,
         ondelete='set null')
-
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
+    
     @api.multi
     def action_edit_survey_response(self):
         fields = []
@@ -318,7 +324,7 @@ class EventParticipant(geo_model.GeoModel):
     staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
-        'Scout Organization', related='registration_id.organization_id')
+        'Scout Organization', related='registration_id.organization_id', store=True)
     scout_color = fields.Char('Scout Org Color', related='registration_id.organization_id.color')
 
     # Scout Leader Fiedls
@@ -329,6 +335,8 @@ class EventParticipant(geo_model.GeoModel):
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
     birthdate = fields.Date('Date of birth')
+    age = fields.Integer('Age', compute='_compute_age', store=True)
+    context_age = fields.Integer('Age', compute='_compute_context_age')
 
     # Jobber fields
     committee_id = fields.Many2one('campos.committee',
@@ -414,6 +422,28 @@ class EventParticipant(geo_model.GeoModel):
         self.reg_confirm_url = urljoin(base_url, 'campos/confirm/reg/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         self.zexpense_confirm_url = urljoin(base_url, 'campos/confirm/zx/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
         self.sharepoint_confirm_url = urljoin(base_url, 'campos/confirm/sp/%s?%s' % (self.confirm_token, werkzeug.url_encode(query)))
+
+
+    def age_on_date(self, age_date=date.today()):
+        '''
+        Calculate the members age on a given date
+        :param age_date: date object or string in Odoo date format (YYYY-MM-DD)
+        '''
+        if isinstance(age_date, basestring): 
+            age_date = fields.Date.from_string(age_date)
+        return relativedelta(age_date, fields.Date.from_string(self.birthdate)).years
+
+    @api.multi
+    @api.depends('birthdate')
+    def _compute_age(self):
+        for part in self:
+            part.age = relativedelta(date.today(), fields.Date.from_string(part.birthdate)).years if part.birthdate else False
+
+    @api.multi
+    @api.depends('birthdate')
+    def _compute_context_age(self):
+        for part in self:
+            part.context_age = part.age_on_date(self.env.context.get('context_age_date')) if part.birthdate else False
 
     @api.model
     def create(self, vals):

@@ -1,6 +1,29 @@
 <?xml version="1.0"?>
 <openerp>
 	<data>
+	
+	<!-- Job when -->
+		<record model="ir.ui.view" id="job_when_tree">
+			<field name="name">job_when.tree</field>
+			<field name="model">campos.job.when</field>
+			<field name="arch" type="xml">
+				<tree string="Job When">
+					<field name="sequence" widget="handle"/>
+					<field name="name" />
+					<field name="active" />
+
+				</tree>
+			</field>
+		</record>
+
+        <record id="action_job_when_tree" model="ir.actions.act_window">
+			<field name="name">Job When</field>
+
+			<field name="res_model">campos.job.when</field>
+			<field name="view_type">form</field>
+
+		</record>
+
 
 		<!-- Job tag -->
 		<record model="ir.ui.view" id="job_tag_tree">
@@ -109,7 +132,8 @@
 								<field name="job_where" />
 							</group>
 							<group colspan="2">
-								<field name="job_when" />
+								<field name="job_when" readonly="1"/>
+								<field name="job_when_id" />
 							</group>
 							<field name="signup_button"/>
 							<newline/>
@@ -120,6 +144,7 @@
 								<field name="date_public"/>
 								<field name="date_closing"/>
 								<field name="openjob"/>
+								<field name="publish_international"/>
 							</group>
 							<group colspan="2">
 								<field name="min_qty_jobbere" />

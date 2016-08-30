@@ -1,0 +1,112 @@
+<openerp>
+    <data>
+    
+    
+    
+<template id="event_meeting_proposal">
+    <t t-call="website_event.layout">
+        <div class="oe_structure"/>
+        <div class="container">
+            <section data-snippet-id="title">
+                <h1 class="text-center mb0">Call for Proposals</h1>
+                <h2 class="text-center text-muted mb32" t-esc="event.name"></h2>
+            </section>
+            
+            <section class="row">
+                <div class="col-md-8">
+                    <div class="oe_structure">
+                        
+                        <section data-snippet-id="text">
+                            <h3 class="page-header">Application</h3>
+                            <p>
+                                Fill this form to propose your meeting.
+
+                            </p>
+                        </section>
+                    </div>
+                    <section id="forms">
+                        <form class="form-horizontal mt32" t-attf-action="/event/#{event.id}/meeting_proposal/post" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="req_comm_id">Your Committee<span class="text-danger">*</span></label>
+                                <div class="col-md-7 col-sm-8">
+                                    <select class="form-control" name="req_comm_id" required="True">
+												<t t-foreach="my_comms or []" t-as="committee">
+													<option t-att-value="committee.id" t-att-selected="committee.id == comm_id">
+														<t t-esc="committee.display_name" />
+													</option>
+												</t>
+											</select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="wanted_comm_id">Want to meet with<span class="text-danger">*</span></label>
+                                <div class="col-md-7 col-sm-8">
+                                    <select class="form-control" name="wanted_comm_id" required="True">
+                                    			<option value="">Select...</option>
+												<t t-foreach="all_comms or []" t-as="committee">
+													<option t-att-value="committee.id" t-att-selected="committee.id == comm_id">
+														<t t-esc="committee.display_name" />
+													</option>
+												</t>
+											</select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="track_name">Meeting subject<span class="text-danger">*</span></label>
+                                <div class="col-md-7 col-sm-8">
+                                    <input type="text" class="form-control" name="track_name" required="True"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="description">Meeting agenda<span class="text-danger">*</span></label>
+                                <div class="col-md-7 col-sm-8">
+                                    <textarea  class="form-control" name="description" style="min-height: 120px" required="True"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="wanted_people">Wanted people</label>
+                                <div class="col-md-7 col-sm-8">
+                                    <textarea  class="form-control" name="wanted_people" style="min-height: 120px"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-4 control-label" for="duration">Estimated duration</label>
+                                <div class="col-md-7 col-sm-8">
+                            	<input type="radio" name="duration" value="30" checked="1"/> 30 minutes<br/>
+  								<input type="radio" name="duration" value="45"/> 45 minutes<br/>
+  								<input type="radio" name="duration" value="60"/> 1 hour<br/>
+  							</div>
+  							</div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+                                    <button type="submit" class="btn btn-primary">Submit Meeting Proposal</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <div class="oe_structure"/>
+                </div>
+
+			</section>
+			
+                   
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+
+<template id="event_meeting_proposal_success">
+    <t t-call="website_event.event_details">
+        <p>
+            Thank you for your meeting proposal.
+        </p><p>
+            <a class="btn btn-primary" t-att-href="'/event/' + slug(event) + '/meeting_proposal'">Submit another request</a>
+        </p>
+    </t>
+</template>
+
+</data>
+</openerp>
