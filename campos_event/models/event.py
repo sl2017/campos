@@ -403,6 +403,7 @@ class EventParticipant(geo_model.GeoModel):
     # participant_url = fields.Char('Participant URL', compute='_compute_confirm_urls')
 
     meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
+    staff_del_prod_ids = fields.One2many('campos.staff.del.prod', 'participant_id')
 
     @api.one
     def _compute_meeting_registration(self):
