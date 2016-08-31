@@ -63,6 +63,9 @@
 
     # always loaded
     'data': [
+        'views/product_template.xml',
+        
+        #'views/campos_staff_del_prod.xml',
         'security/campos_event_security.xml',
         'security/campos_subcamp_exception.xml',
         
@@ -70,7 +73,7 @@
         
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
-        
+        'security/campos_staff_del_prod.xml',
         'data/campos.municipality.csv',
         'data/campos.scout.org.csv',
         'data/job_ask_project.xml',
