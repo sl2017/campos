@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.model.access" id="campos_staff_del_prod_access_read"> <!-- TODO acl id -->
+        <field name="name">campos.staff.del.prod access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_staff_del_prod"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+    
+    <record model="ir.model.access" id="campos_staff_del_prod_access_edit"> <!-- TODO acl id -->
+        <field name="name">campos.staff.del.prod access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_staff_del_prod"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="group_campos_manager"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+</data>
+</openerp>

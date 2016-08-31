@@ -13,3 +13,5 @@ from . import camposjob
 from . import res_users
 from . import camp_area
 from . import event_track
+from . import campos_staff_del_prod
+from . import product_template
