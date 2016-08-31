@@ -1,23 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* campos_welcome
-#
+# * campos_welcome
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-31 22:24+0000\n"
 "PO-Revision-Date: 2016-08-31 22:24+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_welcome
 #: model:email.template,body_html:campos_welcome.new_staff_member
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Kære ${econ_partner_id.name},\n"
@@ -70,15 +71,13 @@ msgid "Completed"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,create_uid:0
-#: field:campos.welcome,create_uid:0
+#: field:campos.remote.system,create_uid:0 field:campos.welcome,create_uid:0
 #: field:campos.welcome.profile,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,create_date:0
-#: field:campos.welcome,create_date:0
+#: field:campos.remote.system,create_date:0 field:campos.welcome,create_date:0
 #: field:campos.welcome.profile,create_date:0
 msgid "Created on"
 msgstr ""
@@ -106,8 +105,7 @@ msgid "Host"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,id:0
-#: field:campos.welcome,id:0
+#: field:campos.remote.system,id:0 field:campos.welcome,id:0
 #: field:campos.welcome.profile,id:0
 msgid "ID"
 msgstr ""
@@ -125,22 +123,19 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,write_uid:0
-#: field:campos.welcome,write_uid:0
+#: field:campos.remote.system,write_uid:0 field:campos.welcome,write_uid:0
 #: field:campos.welcome.profile,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,write_date:0
-#: field:campos.welcome,write_date:0
+#: field:campos.remote.system,write_date:0 field:campos.welcome,write_date:0
 #: field:campos.welcome.profile,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_welcome
-#: field:res.partner,last_import:0
-#: field:res.users,last_import:0
+#: field:res.partner,last_import:0 field:res.users,last_import:0
 msgid "Last import"
 msgstr ""
 
@@ -160,8 +155,7 @@ msgid "Message"
 msgstr ""
 
 #. module: campos_welcome
-#: field:campos.remote.system,name:0
-#: field:campos.welcome.profile,name:0
+#: field:campos.remote.system,name:0 field:campos.welcome.profile,name:0
 msgid "Name"
 msgstr ""
 
@@ -192,7 +186,9 @@ msgstr ""
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
-msgid "Please select your Scout group. We will import the group (name and address), your contact details, and the contact details on the groups treasurer."
+msgid ""
+"Please select your Scout group. We will import the group (name and address),"
+" your contact details, and the contact details on the groups treasurer."
 msgstr ""
 
 #. module: campos_welcome
@@ -231,26 +227,22 @@ msgid "Remote Sync"
 msgstr ""
 
 #. module: campos_welcome
-#: field:res.partner,remote_link_id:0
-#: field:res.users,remote_link_id:0
+#: field:res.partner,remote_link_id:0 field:res.users,remote_link_id:0
 msgid "Remote System link ID"
 msgstr ""
 
 #. module: campos_welcome
-#: field:res.partner,remote_ext_id:0
-#: field:res.users,remote_ext_id:0
+#: field:res.partner,remote_ext_id:0 field:res.users,remote_ext_id:0
 msgid "Remote system external ID"
 msgstr ""
 
 #. module: campos_welcome
-#: field:res.partner,remote_system_id:0
-#: field:res.users,remote_system_id:0
+#: field:res.partner,remote_system_id:0 field:res.users,remote_system_id:0
 msgid "Remote system id"
 msgstr ""
 
 #. module: campos_welcome
-#: field:res.partner,remote_int_id:0
-#: field:res.users,remote_int_id:0
+#: field:res.partner,remote_int_id:0 field:res.users,remote_int_id:0
 msgid "Remote system internal ID"
 msgstr ""
 
@@ -276,7 +268,9 @@ msgstr ""
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
-msgid "To pre-register your group, you need to be a leader or boardmember in your group. Click Next to select scout Group to import"
+msgid ""
+"To pre-register your group, you need to be a leader or boardmember in your "
+"group. Click Next to select scout Group to import"
 msgstr ""
 
 #. module: campos_welcome
@@ -322,4 +316,3 @@ msgstr ""
 #, python-format
 msgid "Your group has already been signed up"
 msgstr ""
-

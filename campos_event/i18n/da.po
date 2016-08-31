@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-19 14:05+0000\n"
-"PO-Revision-Date: 2016-08-19 14:05+0000\n"
+"POT-Creation-Date: 2016-08-31 22:24+0000\n"
+"PO-Revision-Date: 2016-08-31 22:24+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -198,7 +198,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,issue_count:0 field:res.users,issue_count:0
 msgid "# Issues"
-msgstr ""
+msgstr "#issues"
 
 #. module: campos_event
 #: field:campos.committee,member_no:0
@@ -280,7 +280,7 @@ msgstr "Adresse type"
 #: field:campos.committee.function,geo_point:0
 #: field:campos.event.participant,geo_point:0
 msgid "Addresses coordinate"
-msgstr "Kooridinater på adresse"
+msgstr "Koordinater på adresse"
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_admin
@@ -353,7 +353,7 @@ msgid "Approval Procedure"
 msgstr "Godkendelses procedure"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:578
+#: code:addons/campos_event/models/event.py:579
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -441,6 +441,11 @@ msgid "CampOS"
 msgstr "CampOS"
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_staff_del_prod
+msgid "Campos Staff Del Prod"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_subcamp
 msgid "Campos Subcamp"
 msgstr ""
@@ -454,6 +459,11 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Cancel Registration"
 msgstr "Afmeld tilmelding"
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Cancelled"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.committee.function.type,chairman:0
@@ -532,6 +542,7 @@ msgid "Color Index"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.staff.del.prod,comment:0
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Comment"
 msgstr "Kommentar"
@@ -645,7 +656,7 @@ msgid "Complete Address"
 msgstr "Fuld adresse"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:552
+#: code:addons/campos_event/models/event.py:553
 #, python-format
 msgid "Compose Email"
 msgstr "Lav Email"
@@ -751,7 +762,7 @@ msgstr "Opret bruger"
 #: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
 #: field:campos.job.tag,create_uid:0 field:campos.job.when,create_uid:0
 #: field:campos.municipality,create_uid:0 field:campos.scout.org,create_uid:0
-#: field:campos.subcamp,create_uid:0
+#: field:campos.staff.del.prod,create_uid:0 field:campos.subcamp,create_uid:0
 #: field:campos.subcamp.exception,create_uid:0
 msgid "Created by"
 msgstr "Oprettet af"
@@ -766,7 +777,9 @@ msgstr "Oprettet af"
 #: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
 #: field:campos.job.tag,create_date:0 field:campos.job.when,create_date:0
 #: field:campos.municipality,create_date:0
-#: field:campos.scout.org,create_date:0 field:campos.subcamp,create_date:0
+#: field:campos.scout.org,create_date:0
+#: field:campos.staff.del.prod,create_date:0
+#: field:campos.subcamp,create_date:0
 #: field:campos.subcamp.exception,create_date:0
 msgid "Created on"
 msgstr ""
@@ -813,6 +826,21 @@ msgstr "Dato for sidst afsendte meddelelse"
 #: view:event.track:campos_event.view_event_track_search
 msgid "Day"
 msgstr "Dag"
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Delivered"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.staff.del.prod,del_by_partner_id:0
+msgid "Delivery by"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.staff.del.prod,delivery_date:0
+msgid "Delivery date"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
@@ -866,7 +894,9 @@ msgstr "Din adgang til zExpense"
 #: field:campos.job,display_name:0 field:campos.job.tag,display_name:0
 #: field:campos.job.when,display_name:0
 #: field:campos.municipality,display_name:0
-#: field:campos.scout.org,display_name:0 field:campos.subcamp,display_name:0
+#: field:campos.scout.org,display_name:0
+#: field:campos.staff.del.prod,display_name:0
+#: field:campos.subcamp,display_name:0
 #: field:campos.subcamp.exception,display_name:0
 msgid "Display Name"
 msgstr "Navn"
@@ -875,6 +905,11 @@ msgstr "Navn"
 #: field:event.registration,scout_division:0
 msgid "Division/District"
 msgstr "Division/distrikt"
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Draft"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,ean13:0
@@ -1091,6 +1126,11 @@ msgid "HR/Manager"
 msgstr "HR/Manager"
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Handed out items"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,committee_id:0
 msgid "Have agreement with committee"
 msgstr "Ønsker aftale med med udvalg"
@@ -1129,7 +1169,8 @@ msgstr "Jeg ønsker mere information"
 #: field:campos.event.par.reject,id:0 field:campos.event.participant,id:0
 #: field:campos.job,id:0 field:campos.job.tag,id:0 field:campos.job.when,id:0
 #: field:campos.municipality,id:0 field:campos.scout.org,id:0
-#: field:campos.subcamp,id:0 field:campos.subcamp.exception,id:0
+#: field:campos.staff.del.prod,id:0 field:campos.subcamp,id:0
+#: field:campos.subcamp.exception,id:0
 msgid "ID"
 msgstr ""
 
@@ -1349,7 +1390,9 @@ msgstr "Dato for sidste meddelelse"
 #: field:campos.job,__last_update:0 field:campos.job.tag,__last_update:0
 #: field:campos.job.when,__last_update:0
 #: field:campos.municipality,__last_update:0
-#: field:campos.scout.org,__last_update:0 field:campos.subcamp,__last_update:0
+#: field:campos.scout.org,__last_update:0
+#: field:campos.staff.del.prod,__last_update:0
+#: field:campos.subcamp,__last_update:0
 #: field:campos.subcamp.exception,__last_update:0
 msgid "Last Modified on"
 msgstr "Sidst ændret d."
@@ -1364,7 +1407,8 @@ msgstr "Sidst ændret d."
 #: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
 #: field:campos.job.tag,write_uid:0 field:campos.job.when,write_uid:0
 #: field:campos.municipality,write_uid:0 field:campos.scout.org,write_uid:0
-#: field:campos.subcamp,write_uid:0 field:campos.subcamp.exception,write_uid:0
+#: field:campos.staff.del.prod,write_uid:0 field:campos.subcamp,write_uid:0
+#: field:campos.subcamp.exception,write_uid:0
 msgid "Last Updated by"
 msgstr "Sidst opdateret af"
 
@@ -1378,7 +1422,7 @@ msgstr "Sidst opdateret af"
 #: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
 #: field:campos.job.tag,write_date:0 field:campos.job.when,write_date:0
 #: field:campos.municipality,write_date:0 field:campos.scout.org,write_date:0
-#: field:campos.subcamp,write_date:0
+#: field:campos.staff.del.prod,write_date:0 field:campos.subcamp,write_date:0
 #: field:campos.subcamp.exception,write_date:0
 msgid "Last Updated on"
 msgstr "Sidst opdateret af"
@@ -1427,7 +1471,7 @@ msgstr "Maksimum"
 #. module: campos_event
 #: field:campos.job,max_qty_jobbere:0
 msgid "Maximun numbers of staff"
-msgstr "Maksimum antal i udvalget"
+msgstr "Maksimum antal til jobbet"
 
 #. module: campos_event
 #: field:campos.event.participant,image_medium:0
@@ -1504,7 +1548,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,min_qty_jobbere:0
 msgid "Minimum numbers of staff"
-msgstr "Minimum af jobbere i udvalget"
+msgstr "Minimum antal til jobbet"
 
 #. module: campos_event
 #: field:campos.committee.function,mobile:0
@@ -1710,7 +1754,7 @@ msgid "Paricipant"
 msgstr "Deltager"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:707
+#: code:addons/campos_event/models/event.py:708
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1732,6 +1776,7 @@ msgid "Participant background"
 msgstr "Deltagers baggrund"
 
 #. module: campos_event
+#: field:campos.staff.del.prod,participant_id:0
 #: field:res.users,participant_id:0
 msgid "Participant id"
 msgstr ""
@@ -1790,6 +1835,16 @@ msgstr "Foretrukket sprog"
 #: field:campos.event.participant,private_mailaddress:0
 msgid "Private mail address"
 msgstr "Private mail adresse"
+
+#. module: campos_event
+#: field:campos.staff.del.prod,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_product_template
+msgid "Product Template"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,profession:0
@@ -1910,7 +1965,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:595
+#: code:addons/campos_event/models/event.py:596
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2089,7 +2144,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:524
+#: code:addons/campos_event/models/event.py:525
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2236,6 +2291,16 @@ msgid "Staff approval"
 msgstr "Udvalgs godkendelse"
 
 #. module: campos_event
+#: field:campos.event.participant,staff_del_prod_ids:0
+msgid "Staff del prod ids"
+msgstr ""
+
+#. module: campos_event
+#: field:product.template,staff_del_ok:0
+msgid "Staff delivery"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Staff rejection"
@@ -2254,6 +2319,7 @@ msgstr "Standby indtil"
 
 #. module: campos_event
 #: field:campos.event.participant,state_id:0
+#: field:campos.staff.del.prod,state:0
 msgid "State"
 msgstr ""
 
@@ -2561,7 +2627,7 @@ msgstr "Ønsker at arbejde med planlægningen af lejren"
 #. module: campos_event
 #: field:campos.job,wanted_qty_jobbere:0
 msgid "Wanted numbers of staff"
-msgstr "Ønskede antal i udvalg"
+msgstr "Ønskede antal til jobbet"
 
 #. module: campos_event
 #: field:event.track,wanted_people:0

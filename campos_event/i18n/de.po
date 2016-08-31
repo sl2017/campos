@@ -3,12 +3,13 @@
 # * campos_event
 # 
 # Translators:
+# Lykke Merete Højsting <lho@sl2017.dk>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-19 14:05+0000\n"
-"PO-Revision-Date: 2016-08-19 14:05+0000\n"
+"POT-Creation-Date: 2016-08-31 22:24+0000\n"
+"PO-Revision-Date: 2016-08-31 22:24+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -265,7 +266,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #. module: campos_event
 #: field:campos.event.participant,type:0
@@ -349,7 +350,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:578
+#: code:addons/campos_event/models/event.py:579
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -437,6 +438,11 @@ msgid "CampOS"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_staff_del_prod
+msgid "Campos Staff Del Prod"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_subcamp
 msgid "Campos Subcamp"
 msgstr ""
@@ -449,6 +455,11 @@ msgstr ""
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Cancel Registration"
+msgstr ""
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Cancelled"
 msgstr ""
 
 #. module: campos_event
@@ -528,6 +539,7 @@ msgid "Color Index"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.staff.del.prod,comment:0
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Comment"
 msgstr ""
@@ -641,7 +653,7 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:552
+#: code:addons/campos_event/models/event.py:553
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -747,7 +759,7 @@ msgstr ""
 #: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
 #: field:campos.job.tag,create_uid:0 field:campos.job.when,create_uid:0
 #: field:campos.municipality,create_uid:0 field:campos.scout.org,create_uid:0
-#: field:campos.subcamp,create_uid:0
+#: field:campos.staff.del.prod,create_uid:0 field:campos.subcamp,create_uid:0
 #: field:campos.subcamp.exception,create_uid:0
 msgid "Created by"
 msgstr ""
@@ -762,7 +774,9 @@ msgstr ""
 #: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
 #: field:campos.job.tag,create_date:0 field:campos.job.when,create_date:0
 #: field:campos.municipality,create_date:0
-#: field:campos.scout.org,create_date:0 field:campos.subcamp,create_date:0
+#: field:campos.scout.org,create_date:0
+#: field:campos.staff.del.prod,create_date:0
+#: field:campos.subcamp,create_date:0
 #: field:campos.subcamp.exception,create_date:0
 msgid "Created on"
 msgstr ""
@@ -808,6 +822,21 @@ msgstr ""
 #. module: campos_event
 #: view:event.track:campos_event.view_event_track_search
 msgid "Day"
+msgstr ""
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Delivered"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.staff.del.prod,del_by_partner_id:0
+msgid "Delivery by"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.staff.del.prod,delivery_date:0
+msgid "Delivery date"
 msgstr ""
 
 #. module: campos_event
@@ -862,7 +891,9 @@ msgstr ""
 #: field:campos.job,display_name:0 field:campos.job.tag,display_name:0
 #: field:campos.job.when,display_name:0
 #: field:campos.municipality,display_name:0
-#: field:campos.scout.org,display_name:0 field:campos.subcamp,display_name:0
+#: field:campos.scout.org,display_name:0
+#: field:campos.staff.del.prod,display_name:0
+#: field:campos.subcamp,display_name:0
 #: field:campos.subcamp.exception,display_name:0
 msgid "Display Name"
 msgstr ""
@@ -870,6 +901,11 @@ msgstr ""
 #. module: campos_event
 #: field:event.registration,scout_division:0
 msgid "Division/District"
+msgstr ""
+
+#. module: campos_event
+#: selection:campos.staff.del.prod,state:0
+msgid "Draft"
 msgstr ""
 
 #. module: campos_event
@@ -1087,6 +1123,11 @@ msgid "HR/Manager"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Handed out items"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,committee_id:0
 msgid "Have agreement with committee"
 msgstr ""
@@ -1125,7 +1166,8 @@ msgstr ""
 #: field:campos.event.par.reject,id:0 field:campos.event.participant,id:0
 #: field:campos.job,id:0 field:campos.job.tag,id:0 field:campos.job.when,id:0
 #: field:campos.municipality,id:0 field:campos.scout.org,id:0
-#: field:campos.subcamp,id:0 field:campos.subcamp.exception,id:0
+#: field:campos.staff.del.prod,id:0 field:campos.subcamp,id:0
+#: field:campos.subcamp.exception,id:0
 msgid "ID"
 msgstr ""
 
@@ -1345,7 +1387,9 @@ msgstr ""
 #: field:campos.job,__last_update:0 field:campos.job.tag,__last_update:0
 #: field:campos.job.when,__last_update:0
 #: field:campos.municipality,__last_update:0
-#: field:campos.scout.org,__last_update:0 field:campos.subcamp,__last_update:0
+#: field:campos.scout.org,__last_update:0
+#: field:campos.staff.del.prod,__last_update:0
+#: field:campos.subcamp,__last_update:0
 #: field:campos.subcamp.exception,__last_update:0
 msgid "Last Modified on"
 msgstr ""
@@ -1360,7 +1404,8 @@ msgstr ""
 #: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
 #: field:campos.job.tag,write_uid:0 field:campos.job.when,write_uid:0
 #: field:campos.municipality,write_uid:0 field:campos.scout.org,write_uid:0
-#: field:campos.subcamp,write_uid:0 field:campos.subcamp.exception,write_uid:0
+#: field:campos.staff.del.prod,write_uid:0 field:campos.subcamp,write_uid:0
+#: field:campos.subcamp.exception,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
@@ -1374,7 +1419,7 @@ msgstr ""
 #: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
 #: field:campos.job.tag,write_date:0 field:campos.job.when,write_date:0
 #: field:campos.municipality,write_date:0 field:campos.scout.org,write_date:0
-#: field:campos.subcamp,write_date:0
+#: field:campos.staff.del.prod,write_date:0 field:campos.subcamp,write_date:0
 #: field:campos.subcamp.exception,write_date:0
 msgid "Last Updated on"
 msgstr ""
@@ -1706,7 +1751,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:707
+#: code:addons/campos_event/models/event.py:708
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1728,6 +1773,7 @@ msgid "Participant background"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.staff.del.prod,participant_id:0
 #: field:res.users,participant_id:0
 msgid "Participant id"
 msgstr ""
@@ -1785,6 +1831,16 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,private_mailaddress:0
 msgid "Private mail address"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.staff.del.prod,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_product_template
+msgid "Product Template"
 msgstr ""
 
 #. module: campos_event
@@ -1906,7 +1962,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:595
+#: code:addons/campos_event/models/event.py:596
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2085,7 +2141,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:524
+#: code:addons/campos_event/models/event.py:525
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2232,6 +2288,16 @@ msgid "Staff approval"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,staff_del_prod_ids:0
+msgid "Staff del prod ids"
+msgstr ""
+
+#. module: campos_event
+#: field:product.template,staff_del_ok:0
+msgid "Staff delivery"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Staff rejection"
@@ -2250,6 +2316,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,state_id:0
+#: field:campos.staff.del.prod,state:0
 msgid "State"
 msgstr ""
 
