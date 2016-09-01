@@ -138,7 +138,7 @@ class CamposRemoteSystem(models.Model):
                 vals['remote_link_id'] = remote_partner.organization_id.id
             else:
                 vals['remote_ext_id'] = remote_partner.member_number
-            muni_no = remote.partner.municipality_id.number
+            muni_no = remote_partner.municipality_id.number
         else:
             # bm import
             if is_company:  # Group import
