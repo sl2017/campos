@@ -125,19 +125,19 @@ class CamposWelcome(models.TransientModel):
                             'staff': False,
                             'organization_id': wizard.remote_system_id.scoutorg_id
                             }
-                    
-                    cse = self.env['campos.subcamp.exception'].search('name', 'ilike', group.name)
+
+                    cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name)])
                     if cse:
                         vals['subcamp_id'] = cse.subcamp_id.id
                     elif group.municipality_id.subcamp_id:
                         vals['subcamp_id'] = group.municipality_id.subcamp_id.id
-                        
+
                 treasurer_id = wizard.remote_system_id.getTreasurer(group.remote_link_id)
                 if treasurer_id:
                     treasurer = wizard.remote_system_id.syncPartner(remote_int_id=treasurer_id)
                     treasurer.parent_id = group
                     vals['econ_partner_id'] = treasurer.id
-                
+
                 if event_id:
                     wizard.reg_id = self.env['event.registration'].sudo().create(vals)
                     template = self.env.ref('campos_welcome.treasurer_mail')
