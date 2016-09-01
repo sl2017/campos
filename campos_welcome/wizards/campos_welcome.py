@@ -155,10 +155,12 @@ class CamposWelcome(models.TransientModel):
     @api.multi
     def doit_done(self):
         for wizard in self:
+            view = self.env.ref('campos_preregistration.view_form_preregistration_gl')
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'event.registration',
                 'res_id': wizard.reg_id.id,  # the current wizard record
                 'view_type': 'form',
                 'view_mode': 'form',
+                'view_id': view.id
                 }
