@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-01 02:00+0000\n"
-"PO-Revision-Date: 2016-09-01 02:00+0000\n"
+"POT-Creation-Date: 2016-09-02 02:00+0000\n"
+"PO-Revision-Date: 2016-09-02 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,9 +21,22 @@ msgid "Age Groups"
 msgstr ""
 
 #. module: campos_preregistration
-#: view:event.registration:campos_preregistration.view_form_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Agreements"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
 #: view:event.registration:campos_preregistration.view_tree_event_registration
 msgid "Contact Person"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Event"
 msgstr ""
 
 #. module: campos_preregistration
@@ -47,13 +60,24 @@ msgid "Event Registration Agegroup"
 msgstr ""
 
 #. module: campos_preregistration
-#: model:res.groups,name:campos_preregistration.group_campos_groupleader
-msgid "Group Leader"
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_pioneeringpole
+msgid "Event Registration Pioneering Poles"
 msgstr ""
 
 #. module: campos_preregistration
-#: model:ir.ui.menu,name:campos_preregistration.event_preregistration_tree_portal_menu
-msgid "Group Prereg. List"
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_transporttype
+msgid "Event Registration Transporttype"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Friendship group"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:res.groups,name:campos_preregistration.group_campos_groupleader
+msgid "Group Leader"
 msgstr ""
 
 #. module: campos_preregistration
@@ -68,8 +92,36 @@ msgid "Group Preregistration"
 msgstr ""
 
 #. module: campos_preregistration
-#: view:event.registration:campos_preregistration.view_form_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Handicaped participants"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+msgid "Internal Information"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Municipallity"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Participants"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_pioneeringpole
+msgid "Pioneering Poles"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Pionering poles"
 msgstr ""
 
 #. module: campos_preregistration
@@ -78,18 +130,26 @@ msgid "Preregistration"
 msgstr ""
 
 #. module: campos_preregistration
-#: view:event.registration:campos_preregistration.view_form_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
 #: view:event.registration:campos_preregistration.view_tree_event_registration
 msgid "Scout group"
 msgstr ""
 
 #. module: campos_preregistration
-#: view:event.registration:campos_preregistration.view_form_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Total"
 msgstr ""
 
 #. module: campos_preregistration
-#: view:event.registration:campos_preregistration.view_form_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_transporttype
+msgid "Transport Types"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Treasurer (invoice receiver)"
 msgstr ""
 
