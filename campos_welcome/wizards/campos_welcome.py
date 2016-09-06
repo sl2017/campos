@@ -85,16 +85,17 @@ class CamposWelcome(models.TransientModel):
         for wizard in self:
             member_number, profiles = wizard.remote_system_id.getProfiles(wizard.remote_system_id.getRemoteUID())
             cwpro = self.env['campos.welcome.profile']
+            pro_id = False
             for pro in profiles:
                 _logger.info("Profile: %s", pro)
                 pro['wiz_id'] = wizard.id
-                pro_id = cwpro.create(pro)
+                pro_id = cwpro.create(pro).id
             self.env.user.partner_id.write({'remote_ext_id': member_number,
                                             'remote_int_id': self.env.user.oauth_uid,
                                             'remote_system_id': wizard.remote_system_id.id,
                                             'remote_link_id': wizard.profile_id.profile_id,
                                             })
-            wizard.profile_id = pro_id.id
+            wizard.profile_id = pro_id
             wizard.state = 'select'
 
         return self.do_reopen_form()

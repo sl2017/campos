@@ -72,7 +72,7 @@ class CamposRemoteSystem(models.Model):
             rows = ET.parse(urlopen(self.getBMurl('memberships', memberNumber=remote_int_id, orgTypes='gruppe')))
             for row in rows.getroot():
                 rd = dict((e.tag, e.text) for e in row)
-                if rd['trustLeaderType'] or rd['trustBoardGroup'] and '-' not in rd['orgCode']:
+                if (rd['trustLeaderType'] or rd['trustBoardGroup']) and '-' not in rd['orgCode']:
                     org = rd['orgCode']
                     if '-' in org:
                         org = org.split('-')[0]
