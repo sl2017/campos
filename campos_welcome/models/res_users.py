@@ -36,6 +36,10 @@ class ResUsers(models.Model):
                 if part_ids:
                     partner_id = self.pool('campos.event.participant').browse(cr, uid, part_ids[0]).partner_id.id
             if partner_id:
-                values['partner_id'] = partner_id
+                partner = self.pool['res.partner'].browse(cr, uid, partner_id)
+                if partner.user_ids:
+                    return (cr.dbname, partner.user_ids[0].login, values.get('password'))
+                else:
+                    values['partner_id'] = partner_id
         return super(ResUsers, self).signup(cr, uid, values, token=token, context=context) 
         
