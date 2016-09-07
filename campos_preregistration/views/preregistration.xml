@@ -36,21 +36,21 @@
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id" string="Event" readonly="1"/>
-							<field name="subcamp_id"  readonly="1"/>
-							<field name="partner_id" string="Scout group" readonly="1"/>
-							<field name="group_association" required="True" readonly="1"/>
+							<field name="event_id" string="Event" readonly="1" options="{'no_create': True}"/>
+							<field name="partner_id" string="Scout group" readonly="1"  options="{'no_create': True}"/>
+							<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+							<field name="group_association" required="True" readonly="1"  options="{'no_create': True}"/>
 							<field name="group_world_association"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
 							<field name="association_groupid" required="True"/>
 							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>							
-							<field name="contact_partner_id" string="Contact Person" readonly="1"/>
-							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_name', '!=', 'Danmark')]}"/>
-							<field name="group_country"/>
+							<field name="contact_partner_id" string="Contact Person" readonly="1"  options="{'no_create': True}"/>
+							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_name', '!=', 'Danmark')]}"  options="{'no_create': True}"/>
+							<field name="group_country"  options="{'no_create': True}"/>
 							<field name="group_country_name"  invisible="1"/>
-							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
-									<field name="participant_age_group_id"/>
+									<field name="participant_age_group_id"  options="{'no_create': True}"/>
                   <field name="participant_total" sum="Total"/>
                   <field name="participant_from_date"/>
                   <field name="participant_to_date"/>
@@ -58,7 +58,7 @@
                   <field name="participant_own_transport_from_camp_total" sum="Total"/>
                   <field name="participant_common_transport_to_camp_total" sum="Total"/>
                   <field name="participant_common_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_own_transport_type"/>
+                  <field name="participant_own_transport_type"  options="{'no_create': True}"/>
  <!--                 <field name="participant_transport_note"/>-->
                 </tree>
               </field>
@@ -67,7 +67,7 @@
 									<group>
 										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
 											<tree editable="bottom">
-												<field name="pioneeringpole_id"/>
+												<field name="pioneeringpole_id"  options="{'no_create': True}"/>
 												<field name="polecount" sum="Total"/>
 											</tree>
 										</field>				
@@ -110,20 +110,20 @@
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id" string="Event"/>
-							<field name="subcamp_id" />
-							<field name="partner_id" string="Scout group"/>
-							<field name="group_association" required="True"/>
+							<field name="event_id" string="Event"  options="{'no_create': True}"/>
+							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
+							<field name="subcamp_id"  options="{'no_create': True}"/>
+							<field name="group_association" required="True"  options="{'no_create': True}"/>
 							<field name="group_world_association"/>
 							<field name="association_groupid" required="True"/>
 							<field name="group_entrypoint" required="True"/>							
-							<field name="contact_partner_id" string="Contact Person"/>
-							<field name="group_municipality" required="True"/>
-							<field name="group_country"/>
-							<field name="econ_partner_id" string="Treasurer (invoice receiver)"/>
+							<field name="contact_partner_id" string="Contact Person"  options="{'no_create': True}"/>
+							<field name="group_municipality" required="True"  options="{'no_create': True}"/>
+							<field name="group_country"  options="{'no_create': True}"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
-									<field name="participant_age_group_id"/>
+									<field name="participant_age_group_id"  options="{'no_create': True}"/>
                   <field name="participant_total" sum="Total"/>
                   <field name="participant_from_date"/>
                   <field name="participant_to_date"/>
@@ -131,7 +131,7 @@
                   <field name="participant_own_transport_from_camp_total" sum="Total"/>
                   <field name="participant_common_transport_to_camp_total" sum="Total"/>
                   <field name="participant_common_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_own_transport_type"/>
+                  <field name="participant_own_transport_type"  options="{'no_create': True}"/>
  <!--                 <field name="participant_transport_note"/>-->
                 </tree>
               </field>
@@ -140,7 +140,7 @@
 									<group>
 										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
 											<tree editable="bottom">
-												<field name="pioneeringpole_id"/>
+												<field name="pioneeringpole_id" options="{'no_create': True}"/>
 												<field name="polecount" sum="Total"/>
 											</tree>
 										</field>
