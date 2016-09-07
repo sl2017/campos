@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-02 02:00+0000\n"
-"PO-Revision-Date: 2016-09-02 02:00+0000\n"
+"POT-Creation-Date: 2016-09-07 16:55+0000\n"
+"PO-Revision-Date: 2016-09-07 16:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,6 +43,11 @@ msgid "Accept"
 msgstr ""
 
 #. module: campos_welcome
+#: selection:campos.remote.system,systype:0
+msgid "Blåt Medlem"
+msgstr ""
+
+#. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_remote_system_act_window
 #: model:ir.model,name:campos_welcome.model_campos_remote_system
 #: model:ir.ui.menu,name:campos_welcome.campos_remote_system_menu
@@ -60,13 +65,114 @@ msgid "Cancel"
 msgstr ""
 
 #. module: campos_welcome
+#: selection:campos.welcome,state:0
+msgid "Completed"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,create_uid:0
+#: field:campos.welcome,create_uid:0
+#: field:campos.welcome.profile,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,create_date:0
+#: field:campos.welcome,create_date:0
+#: field:campos.welcome.profile,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,db_name:0
+msgid "Database"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,display_name:0
+#: field:campos.welcome,display_name:0
+#: field:campos.welcome.profile,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_welcome
+#: selection:campos.welcome,state:0
+msgid "Group Selection"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,host:0
+msgid "Host"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,id:0
+#: field:campos.welcome,id:0
+#: field:campos.welcome.profile,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
 msgid "Import is now completed and the next step is the pre-registration"
 msgstr ""
 
 #. module: campos_welcome
+#: field:campos.remote.system,__last_update:0
+#: field:campos.welcome,__last_update:0
+#: field:campos.welcome.profile,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,write_uid:0
+#: field:campos.welcome,write_uid:0
+#: field:campos.welcome.profile,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,write_date:0
+#: field:campos.welcome,write_date:0
+#: field:campos.welcome.profile,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_welcome
+#: field:res.partner,last_import:0
+#: field:res.users,last_import:0
+msgid "Last import"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,remote_system_id:0
+msgid "Logged in by"
+msgstr ""
+
+#. module: campos_welcome
+#: selection:campos.remote.system,systype:0
+msgid "Medlemsservice"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,message:0
+msgid "Message"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,name:0
+#: field:campos.welcome.profile,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
 msgid "Next"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,oauth_provider_id:0
+msgid "Oauth provider id"
 msgstr ""
 
 #. module: campos_welcome
@@ -80,8 +186,43 @@ msgid "Partner"
 msgstr ""
 
 #. module: campos_welcome
+#: field:campos.remote.system,db_pwd:0
+msgid "Password"
+msgstr ""
+
+#. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
 msgid "Please select your Scout group. We will import the group (name and address), your contact details, and the contact details on the groups treasurer."
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,port:0
+msgid "Port"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,protocol:0
+msgid "Protocol"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,reg_id:0
+msgid "Reg id"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome.profile,org_ext_id:0
+msgid "Remote Ext ID"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome.profile,profile_id:0
+msgid "Remote Profile ID"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome.profile,org_int_id:0
+msgid "Remote Res ID"
 msgstr ""
 
 #. module: campos_welcome
@@ -90,8 +231,62 @@ msgid "Remote Sync"
 msgstr ""
 
 #. module: campos_welcome
+#: field:res.partner,remote_link_id:0
+#: field:res.users,remote_link_id:0
+msgid "Remote System link ID"
+msgstr ""
+
+#. module: campos_welcome
+#: field:res.partner,remote_ext_id:0
+#: field:res.users,remote_ext_id:0
+msgid "Remote system external ID"
+msgstr ""
+
+#. module: campos_welcome
+#: field:res.partner,remote_system_id:0
+#: field:res.users,remote_system_id:0
+msgid "Remote system id"
+msgstr ""
+
+#. module: campos_welcome
+#: field:res.partner,remote_int_id:0
+#: field:res.users,remote_int_id:0
+msgid "Remote system internal ID"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,profile_id:0
+msgid "Scout group"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,scoutorg_id:0
+msgid "Scout organization"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,state:0
+msgid "State"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,systype:0
+msgid "System type"
+msgstr ""
+
+#. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
 msgid "To pre-register your group, you need to be a leader or boardmember in your group. Click Next to select scout Group to import"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,treasurer_function:0
+msgid "Treasurer function"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.remote.system,db_user:0
+msgid "User"
 msgstr ""
 
 #. module: campos_welcome
@@ -100,7 +295,31 @@ msgid "Users"
 msgstr ""
 
 #. module: campos_welcome
+#: selection:campos.welcome,state:0
+msgid "Welcome"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome.profile,user_id:0
+#: field:campos.welcome.profile,wiz_id:0
+msgid "Welcome Wizard"
+msgstr ""
+
+#. module: campos_welcome
+#: code:addons/campos_welcome/wizards/campos_welcome.py:75
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
+#, python-format
 msgid "Welcome to SL2017 Group Pre-registration"
+msgstr ""
+
+#. module: campos_welcome
+#: field:campos.welcome,name:0
+msgid "Your Name"
+msgstr ""
+
+#. module: campos_welcome
+#: code:addons/campos_welcome/wizards/campos_welcome.py:65
+#, python-format
+msgid "Your group has already been signed up"
 msgstr ""
 
