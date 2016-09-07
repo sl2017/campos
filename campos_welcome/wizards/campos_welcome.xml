@@ -64,6 +64,8 @@
         <field name="target">new</field>
         <field name="context">{}</field>
     </record>
+    
+    <menuitem id="campos_welcome_menu" name="Group Import" parent="campos_event.menu_campos_groups" action="campos_welcome_act_window" sequence="30"/>
 
 
 </data>

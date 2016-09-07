@@ -14,12 +14,22 @@
         <menuitem name="Events" id="menu_campos_event" parent="menu_campos" sequence="10"/>
         	
         	<menuitem name="Events" id="menu_campos_event_event" action="event.action_event_view" parent="menu_campos_event" sequence="10" groups="campos_event.group_campos_admin"/>
+
+		<!-- Events Groups items -->
+        <menuitem name="Groups" id="menu_campos_groups" parent="menu_campos" sequence="20"/>
+		
+		
+		
+
+		<!-- Events jobber items -->
+        <menuitem name="Jobber" id="menu_campos_jobber" parent="menu_campos" sequence="30"/>
+		
 	        <menuitem name="Registrations"
-	            id="menu_action_registration" parent="menu_campos_event" sequence="20"
+	            id="menu_action_registration" parent="menu_campos_jobber" sequence="20"
 	            action="event.action_registration"  groups="campos_event.group_campos_admin"/>
 	    
 		    <menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
-				name="Participants" sequence="50" parent="menu_campos_event"
+				name="Participants" sequence="50" parent="menu_campos_jobber"
 				groups="campos_event.group_campos_manager,campos_event.group_campos_committee" />
 	    
 	    	<menuitem action="action_event_participants_staff_tree" id="event_participants_staff_tree_menu"
@@ -27,7 +37,7 @@
 				groups="campos_event.group_campos_staff" />
 	    
 	    <!-- Committee menu items -->
-        <menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="10" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
+        <menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="40" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			
 			<menuitem action="action_committee_tree" id="event_committee_menu"
 				name="Committees" sequence="60" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
