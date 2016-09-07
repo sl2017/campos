@@ -17,7 +17,9 @@
 
 		<!-- Events Groups items -->
         <menuitem name="Groups" id="menu_campos_groups" parent="menu_campos" sequence="20"/>
-		
+			<menuitem name="Registrations"
+	            id="menu_action_group_registration" parent="menu_campos_groups" sequence="20"
+	            action="action_group_registration"  groups="campos_event.group_campos_admin"/>
 		
 		
 
@@ -26,7 +28,7 @@
 		
 	        <menuitem name="Registrations"
 	            id="menu_action_registration" parent="menu_campos_jobber" sequence="20"
-	            action="event.action_registration"  groups="campos_event.group_campos_admin"/>
+	            action="action_jobber_registration"  groups="campos_event.group_campos_admin"/>
 	    
 		    <menuitem action="action_event_participants_tree2" id="event_participants_tree_menu"
 				name="Participants" sequence="50" parent="menu_campos_jobber"

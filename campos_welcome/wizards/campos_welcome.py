@@ -34,7 +34,8 @@ class CamposWelcome(models.TransientModel):
     remote_system_id = fields.Many2one('campos.remote.system', 'Logged in by')
     state = fields.Selection([('welcome', 'Welcome'),
                               ('select', 'Group Selection'),
-                              ('done', 'Completed')], 'State', default='welcome')
+                              ('done', 'Completed'),
+                              ('cancel', 'Cancel')], 'State', default='welcome')
     message = fields.Char()
     reg_id = fields.Many2one('event.registration')
 
@@ -52,7 +53,10 @@ class CamposWelcome(models.TransientModel):
 #         result['profile_id'] = pro_id.id
         result['remote_system_id'] = remote_system_id.id
         result['name'] = self.env.user.name 
-        if self.env.user.partner_id.remote_system_id:
+        if not remote_system_id:
+            result['state'] = 'cancel'
+            result['message'] = _("You must be logged in via your organization's member system")
+        elif self.env.user.partner_id.remote_system_id:
             #Already imported - Go to "Done"
             result['state'] = 'done'
             event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
