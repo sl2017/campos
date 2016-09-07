@@ -79,8 +79,8 @@
         'data/job_ask_project.xml',
         
         'views/templates.xml',
-        'views/event_registration_view.xml',
         'views/participant_view.xml',
+        'views/event_registration_view.xml',
         'views/committee_view.xml',
         'views/municipality_view.xml',
         "views/scout_org_view.xml",
