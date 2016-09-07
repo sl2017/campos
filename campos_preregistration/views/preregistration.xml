@@ -38,7 +38,6 @@
 						<group name="sheet">
 							<field name="event_id" string="Event" readonly="1" options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group" readonly="1"  options="{'no_create': True}"/>
-							<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
 							<field name="group_association" required="True" readonly="1"  options="{'no_create': True}"/>
 							<field name="group_world_association"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
 							<field name="association_groupid" required="True"/>
@@ -90,6 +89,9 @@
 								<page string="Agreements" position="after">
 										<field name="group_camp_agreements" readonly="1"/>
 								</page>
+								<page string="Sub Camp">
+									<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+								</page>
 							</notebook>
 							<field name="state" invisible="1"/>
 							</group>
@@ -112,7 +114,6 @@
 						<group name="sheet">
 							<field name="event_id" string="Event"  options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
-							<field name="subcamp_id"  options="{'no_create': True}"/>
 							<field name="group_association" required="True"  options="{'no_create': True}"/>
 							<field name="group_world_association"/>
 							<field name="association_groupid" required="True"/>
@@ -162,6 +163,9 @@
 								</page>
 								<page string="Agreements" position="after">
 										<field name="group_camp_agreements"/>
+								</page>
+								<page string="Sub Camp">
+									<field name="subcamp_id"  options="{'no_create': True}"/>
 								</page>
 								<page string="Internal Information">
 										<field name="internal_information"/>
