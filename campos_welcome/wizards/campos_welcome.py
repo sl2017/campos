@@ -58,16 +58,17 @@ class CamposWelcome(models.TransientModel):
             result['message'] = _("You must be logged in via your organization's member system")
         elif self.env.user.partner_id.remote_system_id:
             #Already imported - Go to "Done"
-            result['state'] = 'done'
+            #result['state'] = 'done'
             event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
             _logger.info('EVent: %s', event_id)
             if event_id:
                 event_id = int(event_id)
-                reg = self.env['event.registration'].search([('partner_id', '=', self.env.user.partner_id.id), ('event_id', '=', event_id)])
-                if reg:
-                    result['reg_id'] = reg.id
-                    result['message'] = _('Your group has already been signed up')
-                    self.env.user.action_id = False
+                if self.env.user.partner_id.parent_id and self.env.user.partner_id.parent_id.scoutgroup:
+                    reg = self.env['event.registration'].search([('partner_id', '=', self.env.user.partner_id.parent_id.id), ('event_id', '=', event_id)])
+                    if reg:
+                        result['reg_id'] = reg.id
+                        result['message'] = _('Your group has already been signed up.')
+                        self.env.user.action_id = False
         return result
 
 
