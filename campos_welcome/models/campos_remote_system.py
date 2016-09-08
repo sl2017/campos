@@ -47,7 +47,9 @@ class CamposRemoteSystem(models.Model):
             return self.env.user.oauth_uid
 
     def getBMurl(self, service, **param):
-        return "%s/%s?system=%s&password=%s&%s" % (self.host, service, self.db_user, self.db_pwd, werkzeug.url_encode(param))
+        bmurl =  "%s/%s?system=%s&password=%s&%s" % (self.host, service, self.db_user, self.db_pwd, werkzeug.url_encode(param))
+        _logger.info('BM URL: %s', bmurl)
+        return bmurl  
 
     def getProfiles(self, remote_int_id):
         profiles = []
@@ -72,6 +74,7 @@ class CamposRemoteSystem(models.Model):
             rows = ET.parse(urlopen(self.getBMurl('memberships', memberNumber=remote_int_id, orgTypes='gruppe')))
             for row in rows.getroot():
                 rd = dict((e.tag, e.text) for e in row)
+                _logger.info("BM row: %s", rd)
                 if (rd['trustLeaderType'] or rd['trustBoardGroup']) and '-' not in rd['orgCode']:
                     org = rd['orgCode']
                     if '-' in org:
