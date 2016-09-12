@@ -23,6 +23,9 @@ class Preregistration(models.Model):
     friendship_group = fields.Boolean('Request placement with friendship group?')
     friendship_group_name = fields.Char('Friendship group name, association, country')
     friendship_group_info = fields.Text('Friendship group other info')
+    friendship_group_desire = fields.Boolean('Would like a friendship group?')
+    friendship_group_desire_country = fields.Many2one('res.country', 'Country of friendship group (optional)')
+    friendship_group_home_hospitality = fields.Boolean('Would like to offer home hospitality?')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
 
