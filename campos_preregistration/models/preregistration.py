@@ -13,6 +13,7 @@ class Preregistration(models.Model):
     group_municipality = fields.Many2one('campos.municipality','Municipallity')
     group_country = fields.Many2one('res.country', 'Country')
     group_country_name = fields.Char(related='group_country.name', string='Country Name', readonly=True)
+    group_country_code = fields.Char(related='group_country.code', string='Country Code', readonly=True)
     association_groupid = fields.Char('Groups id (number) at local association')
     participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
     pioneeringpole_ids = fields.One2many('event.registration.polelist','registration_id','Pioneering Poles')
@@ -63,7 +64,11 @@ class PreregistrationParticipants(models.Model):
 #                record.participant_transport_note = 'Not all participants with transport.'
 #            if record.participant_transport_to_camp_total>record.participant_total or record.participant_transport_from_camp_total>record.participant_total:
 #                record.participant_transport_note = 'More than all participants with transport.'
-                
+    @api.one
+    def _default_start_date (self):   
+        # 21-30 
+        return '2017-07-07'         
+    
     @api.depends ('participant_total','participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
     @api.one
     def _calculate_common_transport (self):
@@ -92,7 +97,8 @@ class PreregistrationParticipants(models.Model):
             raise exceptions.ValidationError('Date of arrival must be before date of departure')
 
     def _check_transport_in_camp_period(self):
-        if self.registration_id.event_begin_date <= self.participant_from_date and self.registration_id.event_end_date >= self.participant_to_date:
+        if (fields.Datetime.from_string(self.registration_id.event_begin_date).date() <= fields.Datetime.from_string(self.participant_from_date).date() and 
+        fields.Datetime.from_string(self.registration_id.event_end_date).date() >= fields.Datetime.from_string(self.participant_to_date).date()):
             return True
         return False
     
@@ -101,7 +107,7 @@ class PreregistrationParticipants(models.Model):
     def validation_transport_in_camp_period(self):
         validation_result = self._check_transport_in_camp_period()
         if validation_result != True:
-            raise exceptions.ValidationError('Date of arrival and departure must be within camp period')
+            raise exceptions.ValidationError('Date of arrival and departure must be within camp period ('+self.registration_id.event_begin_date+' - '+ self.registration_id.event_end_date + ')')
 
 class PreregistrationPolelist(models.Model):
     _name = 'event.registration.polelist'

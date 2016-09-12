@@ -36,16 +36,16 @@
 						</header>
 					<sheet>
 						<group name="sheet">
-							<field name="event_id" string="Event" readonly="1" options="{'no_create': True}"/>
+							<field name="event_id" string="Event" readonly="1" options="{'no_create': True}" invisible="1"/>
 							<field name="partner_id" string="Scout group" readonly="1"  options="{'no_create': True}"/>
 							<field name="group_association" required="True" readonly="1"  options="{'no_create': True}"/>
-							<field name="group_world_association"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>
+							<field name="group_world_association"  attrs="{'invisible': [('group_country_code', '=', 'DK')]}"/>
 							<field name="association_groupid" required="True"/>
-							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_name', '=', 'Danmark')]}"/>							
+							<field name="group_entrypoint" required="True"  attrs="{'invisible': [('group_country_code', '=', 'DK')]}"/>							
 							<field name="contact_partner_id" string="Contact Person" readonly="1"  options="{'no_create': True}"/>
-							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_name', '!=', 'Danmark')]}"  options="{'no_create': True}"/>
+							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_code', '!=', 'DK')]}"  options="{'no_create': True}"/>
 							<field name="group_country"  options="{'no_create': True}"/>
-							<field name="group_country_name"  invisible="1"/>
+							<field name="group_country_code" invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
               <field colspan="7" name="participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
