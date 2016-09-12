@@ -336,7 +336,7 @@ msgstr "Registrering"
 #. module: campos_preregistration
 #: field:event.registration,friendship_group:0
 msgid "Request placement with friendship group?"
-msgstr "Ønskede placering af venskabsgruppe"
+msgstr "Har en udenlandsk venskabsgruppe som forventes at deltage på  lejren"
 
 #. module: campos_preregistration
 #: field:event.registration,group_association:0
@@ -348,7 +348,7 @@ msgstr "Korps"
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 #: view:event.registration:campos_preregistration.view_tree_event_registration
 msgid "Scout group"
-msgstr "Spejdergruppe"
+msgstr "Gruppenavn"
 
 #. module: campos_preregistration
 #: field:event.registration,handicap_needs:0
