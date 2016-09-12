@@ -117,4 +117,4 @@ class PreregistrationPolelist(models.Model):
     registration_id = fields.Many2one('event.registration', 'Registration')
     pioneeringpole_id = fields.Many2one('event.registration.pioneeringpole','Pole type', required=True)
     polecount  = fields.Integer('Number of pioneering poles', required=True)
-
+    _sql_constraints = [('pole_id_unique_on_registration', 'unique(registration_id,pioneeringpole_id)', ' Please only make one line with each type of pole')]
