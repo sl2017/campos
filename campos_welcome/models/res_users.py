@@ -47,9 +47,13 @@ class ResUsers(models.Model):
                     _logger.info('LOGIN: %s %s', partner.user_ids[0].login, values)
                     if not partner.last_import:
                          template_user = self.pool.get('ir.model.data').get_object(cr, 1, 'auth_signup', 'default_template_user')
+<<<<<<< HEAD
                          self.pool('res.users').write(cr, 1, [ partner.user_ids[0].id], {'action_id': template_user.action_id.id,
                                                                                          'member_number': values['member_number'],
                                                                                          'blaatlogin_ticket': values['blaatlogin_ticket']})
+=======
+                         self.pool('res.users').write(cr, 1, [ partner.user_ids[0].id], {'action_id': template_user.action_id.id, 'member_number': values['member_number']})
+>>>>>>> branch '8.0' of https://github.com/sl2017/campos.git
                     return (cr.dbname, partner.user_ids[0].login, values.get('password'))
                 else:
                     values['partner_id'] = partner_id
