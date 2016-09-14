@@ -22,7 +22,7 @@ class ResUsers(models.Model):
             values = crs.getBMuserData(member_number)
             values['member_number'] = member_number
             values['blaatlogin_ticket'] = ticket
-            db, login, _ = self.signup(cr, uid, values)
+            db, login, _ = self.signup(cr, uid, values, token=ticket)
             return {'db': db, 'login': login}
             #user_ids = self.search(cr, uid, [("login", "=", login)])
         assert len(user_ids) == 1
