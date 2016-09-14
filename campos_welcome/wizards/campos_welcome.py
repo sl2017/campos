@@ -129,7 +129,7 @@ class CamposWelcome(models.TransientModel):
                             'contact_partner_id': self.env.user.partner_id.id,
                             'scoutgroup': True,
                             'staff': False,
-                            'organization_id': wizard.remote_system_id.scoutorg_id
+                            'organization_id': wizard.remote_system_id.scoutorg_id.id
                             }
 
                     cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name)])
