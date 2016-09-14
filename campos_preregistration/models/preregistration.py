@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, exceptions, _
 class Preregistration(models.Model):
     '''
     Pre-registration for a scout group to an event
@@ -79,6 +79,12 @@ class PreregistrationParticipants(models.Model):
             record.participant_common_transport_to_camp_total = record.participant_total - record.participant_own_transport_to_camp_total
             record.participant_common_transport_from_camp_total = record.participant_total - record.participant_own_transport_from_camp_total
                 
+    @api.depends ('participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
+    @api.one
+    def _clear_participant_own_transport_type(self):
+        if self.participant_own_transport_to_camp_total==0 and self.participant_own_transport_from_camp_total==0:
+            self.participant_own_transport_type = ''
+
     def _check_from_before_end(self):
         if self.participant_from_date < self.participant_to_date:
             return True
@@ -88,16 +94,16 @@ class PreregistrationParticipants(models.Model):
     @api.constrains('participant_total','participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
     def validation_own_transport_numbers(self):
         if self.participant_own_transport_to_camp_total>self.participant_total:
-            raise exceptions.ValidationError('Own transport to camp more than total participants')
+            raise exceptions.ValidationError(_('Own transport to camp more than total participants'))
         if self.participant_own_transport_from_camp_total>self.participant_total:
-            raise exceptions.ValidationError('Own transport from camp more than total participants')
+            raise exceptions.ValidationError(_('Own transport from camp more than total participants'))
 
     @api.one
     @api.constrains('participant_from_date', 'participant_to_date')
     def validation_from_to_dates(self):
         validation_result = self._check_from_before_end()
         if validation_result != True:
-            raise exceptions.ValidationError('Date of arrival must be before date of departure')
+            raise exceptions.ValidationError(_('Date of arrival must be before date of departure'))
 
     def _check_transport_in_camp_period(self):
         if (fields.Datetime.from_string(self.registration_id.event_begin_date).date() <= fields.Datetime.from_string(self.participant_from_date).date() and 
@@ -110,7 +116,7 @@ class PreregistrationParticipants(models.Model):
     def validation_transport_in_camp_period(self):
         validation_result = self._check_transport_in_camp_period()
         if validation_result != True:
-            raise exceptions.ValidationError('Date of arrival and departure must be within camp period ('+self.registration_id.event_begin_date+' - '+ self.registration_id.event_end_date + ')')
+            raise exceptions.ValidationError(_('Date of arrival and departure must be within camp period')+' ('+self.registration_id.event_begin_date+' - '+ self.registration_id.event_end_date + ')')
 
 class PreregistrationPolelist(models.Model):
     _name = 'event.registration.polelist'
