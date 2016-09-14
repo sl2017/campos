@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 16:55+0000\n"
-"PO-Revision-Date: 2016-09-07 16:02+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2016-09-14 19:03+0000\n"
+"PO-Revision-Date: 2016-09-14 19:03+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1121,6 +1121,11 @@ msgid "Group Name"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_groups
+msgid "Groups"
+msgstr ""
+
+#. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_manager
 msgid "HR/Manager"
 msgstr "HR/Manager"
@@ -1319,6 +1324,11 @@ msgstr "Hvornår"
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Job/Committee"
 msgstr "Job/udvalg"
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_jobber
+msgid "Jobber"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -1955,9 +1965,16 @@ msgid "Registration survay"
 msgstr "registrering"
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_action_group_registration
 #: model:ir.ui.menu,name:campos_event.menu_action_registration
 msgid "Registrations"
 msgstr "Registreringer"
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_group_registration
+#: model:ir.actions.act_window,name:campos_event.action_jobber_registration
+msgid "Registtrations"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -2361,7 +2378,7 @@ msgstr ""
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.campos_subcamp_act_window
 msgid "Sub Camps"
-msgstr ""
+msgstr "Underlejre"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.campos_subcamp_exception_act_window
@@ -2371,13 +2388,13 @@ msgstr ""
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.campos_subcamp_menu
 msgid "Sub camps"
-msgstr ""
+msgstr "Underlejr"
 
 #. module: campos_event
 #: view:campos.municipality:campos_event.municipality_search
 #: view:campos.subcamp.exception:campos_event.campos_subcamp_exception_search_view
 msgid "Subcamp"
-msgstr ""
+msgstr "Underlejr"
 
 #. module: campos_event
 #: field:campos.committee,child_ids:0
