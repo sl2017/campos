@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="partner_signup" name="Partner signup">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Partner Signup</t>
+				<div id="wrap" style="margin-bottom:100px;">
+					<div class="oe_structure" />
+					<div class="container">
+					
+						<h1 class="text-center">
+							Partner Signup Form
+						</h1>
+						
+						
+						<div class="row">
+							<section id="forms">
+								<form class="form-horizontal mt32" action="/page/campos-partner-thankyou"
+									method="post" enctype="multipart/form-data">
+														
+														
+																		
+									
+									<!--Virksomhedsnavn-->
+									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="name">Navn på firma/organisation</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="name" required="True" />
+										</div>
+									</div>									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="sponsor_cvr">Evt. CVR</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="sponsor_cvr" required="False" />
+										</div>
+									</div>
+									
+									
+									
+									
+									<!--Virksomhedsoplysninger-->
+									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="street">Adresse</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="street" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="zip">Postnummer</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="zip" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="city">Bynavn</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="city" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="sponsor_url">Evt. hjemmeside</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="sponsor_url" required="False" />
+										</div>
+									</div>
+									
+									
+									
+									
+									
+									<h3 class="text-center" style="margin-top:50px;">
+										Kontaktperson
+									</h3>
+									<!--Virksomhed kontaktperson-->
+									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_name">Kontaktperson navn</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="sponsor_kontaktperson_name" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_mail">Kontaktperson email</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="email" class="form-control" name="sponsor_kontaktperson_mail" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_tlf">Kontaktperson telefonnummer</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="sponsor_kontaktperson_tlf" required="True" />
+										</div>
+									</div>
+									
+									
+									
+									
+									
+									<h3 class="text-center" style="margin-top:50px;">
+										Vi kan levere
+									</h3>
+									<!--Checkboxes-->
+									
+									<div t-attf-class="form-group">
+										<div style="width: 18%; float:left; margin-left:10%;">
+											<input type="checkbox" name="partner_bidrag_1" style="float:left; -ms-transform: scale(1.5); -moz-transform: scale(1.5); -webkit-transform: scale(1.5); -o-transform: scale(1.5); padding: 10px; margin-top:13px; margin-right: 10px;"/>
+											<h4 style="float:left;">Idé</h4>
+										</div>
+										<div style="width: 18%; float:left;">
+											<input type="checkbox" name="partner_bidrag_2" style="float:left; -ms-transform: scale(1.5); -moz-transform: scale(1.5); -webkit-transform: scale(1.5); -o-transform: scale(1.5); padding: 10px; margin-top:13px; margin-right: 10px;"/>
+											<h4 style="float:left;">Bemanding på lejr</h4>
+										</div>
+										<div style="width: 18%; float:left;">
+											<input type="checkbox" name="partner_bidrag_3" style="float:left; -ms-transform: scale(1.5); -moz-transform: scale(1.5); -webkit-transform: scale(1.5); -o-transform: scale(1.5); padding: 10px; margin-top:13px; margin-right: 10px;"/>
+											<h4 style="float:left;">Materialer</h4>
+										</div>
+										<div style="width: 18%; float:left;">
+											<input type="checkbox" name="partner_bidrag_4" style="float:left; -ms-transform: scale(1.5); -moz-transform: scale(1.5); -webkit-transform: scale(1.5); -o-transform: scale(1.5); padding: 10px; margin-top:13px; margin-right: 10px;"/>
+											<h4 style="float:left;">Viden/sparring</h4>
+										</div>
+										<div style="width: 18%; float:left;">
+											<input type="checkbox" name="partner_bidrag_5" style="float:left; -ms-transform: scale(1.5); -moz-transform: scale(1.5); -webkit-transform: scale(1.5); -o-transform: scale(1.5); padding: 10px; margin-top:13px; margin-right: 10px;"/>
+											<h4 style="float:left;">Diverse</h4>
+										</div>
+										
+										
+									</div>
+									
+									
+									
+									
+									
+									<h3 class="text-center" style="margin-top:50px;">Detaljer</h3>
+									<h5 class="text-center"><em>Korte og præcise beskrivelser</em></h5>
+									<!--Aktivitetsindhold-->
+									
+									<div class="form-group"> 
+										<div class="col-md-3 col-sm-4 control-label" for="partner_aktivitet">
+											<label>Idé til aktivitet</label> 
+											<p>Hvilke idéer har i til en aktivitet?</p>
+										</div>
+										<div class="col-md-7 col-sm-8"> 
+											<textarea class="form-control" name="partner_aktivitet" style="min-height: 120px" required="True"/> 
+										</div> 
+									</div>
+									<div class="form-group"> 
+										<div class="col-md-3 col-sm-4 control-label" for="partner_onsker">
+											<label>Ønsker fra partnerskabet</label> 
+											<p>Hvad ønsker i ud af partnerskabet?</p>
+										</div>
+										<div class="col-md-7 col-sm-8"> 
+											<textarea class="form-control" name="partner_onsker" style="min-height: 120px" required="True"/> 
+										</div> 
+									</div>
+									<div class="form-group"> 
+										<div class="col-md-3 col-sm-4 control-label" for="partner_nextsteps">
+											<label>Næste skridt</label> 
+											<p>Hvad er næste skridt efter ansøgningen?</p>
+										</div>
+										<div class="col-md-7 col-sm-8"> 
+											<textarea class="form-control" name="partner_nextsteps" style="min-height: 120px" required="True"/> 
+										</div> 
+									</div>
+									<div class="form-group"> 
+										<div class="col-md-3 col-sm-4 control-label" for="partner_bemarkninger">
+											<label>Bemærkninger</label> 
+											<p>Eventuelle bemærkninger.</p>
+										</div>
+										<div class="col-md-7 col-sm-8"> 
+											<textarea class="form-control" name="partner_bemarkninger" style="min-height: 120px"/> 
+										</div> 
+									</div>
+								
+								
+								
+									<div class="col-md-12 text-center mt16 mb16">
+										<button type="submit" class="btn btn-primary btn-lg">Indsend ansøgning</button>
+									</div>
+								
+								</form>
+							</section>
+							
+								
+							
+							
+						</div>
+							
+					</div>
+					<div class="oe_structure" />
+				</div>
+						
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="partners_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1 class="text-center">Tak!</h1>
+							<h4 class="text-center">Din ansøgning om partnerskab er registreret! Vi vender tilbage til dig hurtigst muligt.</h4>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Fortsæt til vores hjemmeside</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
+		</template>
+	</data>
+</openerp>

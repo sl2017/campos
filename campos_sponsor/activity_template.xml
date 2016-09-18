@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="activity_signup" name="Activity signup">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Activity Signup</t>
+				<div id="wrap" style="margin-bottom:100px;">
+					<div class="oe_structure" />
+					<div class="container">
+					
+						<h1 class="text-center">
+							Aktivitets tilmelding
+						</h1>
+						
+						
+						<div class="row">
+							<section id="forms">
+								<form class="form-horizontal mt32" action="/page/campos-activity-thankyou"
+									method="post" enctype="multipart/form-data">
+															
+																		
+									
+									<!--Activity information-->
+									<h2>Aktivitetsbeskrivelse</h2>
+									<hr/>
+									<h4 style="margin-top: 20px;">Navn på aktivitet*</h4>
+									<input type="text" class="form-control" name="activity_name" required="True" />
+									
+									<h4 style="margin-top: 20px;">Navn på Spejdergruppe/Organisation/Firma/Andet*</h4>
+									<input type="text" class="form-control" name="activity_groupname" required="True" />
+									
+									<h4 style="margin-top: 20px;">Beskrivelse af aktiviteten*</h4>
+									<textarea type="text" class="form-control" name="activity_description" required="True" />
+									
+									<h4 style="margin-top: 20px;">Hvad får deltagerne ud af aktiviteten?*</h4>
+									<input type="text" class="form-control" name="activity_participant_usage" required="True" />
+									
+									<h4 style="margin-top: 20px;">Hvad lærer deltagerne af aktiviteten?*</h4>
+									<input type="text" class="form-control" name="activity_participant_knowledge" required="True" />
+									
+									
+									
+									
+									<!--Contact information-->
+									<h2 style="margin-top: 50px;">Kontaktoplysninger</h2>
+									<hr/>
+									<h4 style="margin-top: 20px;">Navn*</h4>
+									<input type="text" class="form-control" name="activity_contact1_name" required="True" />
+									
+									<h4 style="margin-top: 20px;">Tilhørsforhold*</h4>
+									<input type="radio" name="activity_type" value="type_scout_group"> Spejdergruppe</input><br/>
+									<input type="radio" name="activity_type" value="type_organisation"> Anden frivillig organisation</input><br/>
+									<input type="radio" name="activity_type" value="type_company"> Firma</input><br/>
+									<input type="radio" name="activity_type" value="type_private_person"> Privat person</input><br/>
+									<input type="radio" name="activity_type" value="type_other"> Andet</input>
+									
+									<h4 style="margin-top: 20px;">Adresse*</h4>
+									<input type="text" class="form-control" name="activity_contact1_road" required="True" />
+									
+									<h4 style="margin-top: 20px;">Postnr*</h4>
+									<input type="text" class="form-control" name="activity_contact1_city" required="True" />
+									
+									<h4 style="margin-top: 20px;">By*</h4>
+									<input type="text" class="form-control" name="activity_contact1_zip" required="True" />
+									
+									<h4 style="margin-top: 20px;">Email*</h4>
+									<input type="text" class="form-control" name="activity_contact1_email" required="True" />
+									
+									<h4 style="margin-top: 20px;">Telefon*</h4>
+									<input type="text" class="form-control" name="activity_contact1_tlf" required="True" />
+									
+									
+									
+									<!--Målgruppe-->
+									<h2 style="margin-top: 50px;">Hvem henvender aktiviteten sig til?</h2>
+									<hr/>
+									<h4 style="margin-top: 20px;">Målgruppe fra alder*</h4>
+									<input type="text" class="form-control" name="activity_age_from" required="True" />
+									
+									<h4 style="margin-top: 20px;">Målgruppe til alder*</h4>
+									<input type="text" class="form-control" name="activity_age_to" required="True" />
+									
+									<h4 style="margin-top: 20px;">Forventede antal deltagere pr. aktivitets periode*</h4>
+									<input type="radio" name="activity_expected_participants" value="expected_50"> Under 50</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_50_100"> 50 - 100</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_101_200"> 101 - 200</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_201_350"> 201 - 350</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_351_500"> 351 - 500</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_501_750"> 501 - 750</input><br/>
+									<input type="radio" name="activity_expected_participants" value="expected_751"> Mere end 750</input>
+									
+									
+									
+									<!--Economy-->
+									<h2 style="margin-top: 50px;">Økonomi</h2>
+									<hr/>
+									<h4 style="margin-top: 20px;">Hvad forventer du aktiviteten koster?</h4>
+									<input type="text" class="form-control" name="activity_expense_total" />
+									
+									
+									
+									
+									<!--Submit button-->
+									<div class="col-md-12 text-center mt16 mb16" style="margin-top: 50px;">
+										<button type="submit" class="btn btn-primary btn-lg">Indsend ansøgning</button>
+									</div>
+									
+									
+									
+								</form>
+							</section>
+							
+								
+							
+							
+						</div>
+							
+					</div>
+					<div class="oe_structure" />
+				</div>
+						
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="activity_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1 class="text-center">Tak for din ansøgning!</h1>
+							<h4 class="text-center">Din ansøgning om aktivitet er blevet registreret. Vi vender tilbage til dig hurtigst muligt!</h4>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Tilbage til forside</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
+		</template>
+	</data>
+</openerp>

@@ -34,7 +34,8 @@ class CamposWelcome(models.TransientModel):
     remote_system_id = fields.Many2one('campos.remote.system', 'Logged in by')
     state = fields.Selection([('welcome', 'Welcome'),
                               ('select', 'Group Selection'),
-                              ('done', 'Completed')], 'State', default='welcome')
+                              ('done', 'Completed'),
+                              ('cancel', 'Cancel')], 'State', default='welcome')
     message = fields.Char()
     reg_id = fields.Many2one('event.registration')
 
@@ -52,18 +53,22 @@ class CamposWelcome(models.TransientModel):
 #         result['profile_id'] = pro_id.id
         result['remote_system_id'] = remote_system_id.id
         result['name'] = self.env.user.name 
-        if self.env.user.partner_id.remote_system_id:
+        if not remote_system_id:
+            result['state'] = 'cancel'
+            result['message'] = _("You must be logged in via your organization's member system")
+        elif self.env.user.partner_id.remote_system_id:
             #Already imported - Go to "Done"
-            result['state'] = 'done'
+            #result['state'] = 'done'
             event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
             _logger.info('EVent: %s', event_id)
             if event_id:
                 event_id = int(event_id)
-                reg = self.env['event.registration'].search([('partner_id', '=', self.env.user.partner_id.id), ('event_id', '=', event_id)])
-                if reg:
-                    result['reg_id'] = reg.id
-                    result['message'] = _('Your group has already been signed up')
-                    self.env.user.action_id = False
+                if self.env.user.partner_id.parent_id and self.env.user.partner_id.parent_id.scoutgroup:
+                    reg = self.env['event.registration'].search([('partner_id', '=', self.env.user.partner_id.parent_id.id), ('event_id', '=', event_id)])
+                    if reg:
+                        result['reg_id'] = reg.id
+                        result['message'] = _('Your group has already been signed up.')
+                        self.env.user.action_id = False
         return result
 
 
@@ -85,16 +90,17 @@ class CamposWelcome(models.TransientModel):
         for wizard in self:
             member_number, profiles = wizard.remote_system_id.getProfiles(wizard.remote_system_id.getRemoteUID())
             cwpro = self.env['campos.welcome.profile']
+            pro_id = False
             for pro in profiles:
                 _logger.info("Profile: %s", pro)
                 pro['wiz_id'] = wizard.id
-                pro_id = cwpro.create(pro)
+                pro_id = cwpro.create(pro).id
             self.env.user.partner_id.write({'remote_ext_id': member_number,
                                             'remote_int_id': self.env.user.oauth_uid,
                                             'remote_system_id': wizard.remote_system_id.id,
                                             'remote_link_id': wizard.profile_id.profile_id,
                                             })
-            wizard.profile_id = pro_id.id
+            wizard.profile_id = pro_id
             wizard.state = 'select'
 
         return self.do_reopen_form()
@@ -108,7 +114,7 @@ class CamposWelcome(models.TransientModel):
                 event_id = int(event_id)
             group = self.env['res.partner'].search([('remote_int_id', '=', wizard.profile_id.org_int_id),('remote_system_id', '=', wizard.remote_system_id.id)])
             if group:
-                wizard.message = "%s has already been signed up - Skipping Group import"
+                wizard.message = "%s has already been signed up"
                 wizard.reg_id = self.env['event.registration'].search([('partner_id', '=', group.id), ('event_id', '=', event_id)])
                 self.env.user.partner_id.parent_id = group
                 wizard.remote_system_id.syncPartner(partner=self.env.user.partner_id)
@@ -123,21 +129,23 @@ class CamposWelcome(models.TransientModel):
                             'contact_partner_id': self.env.user.partner_id.id,
                             'scoutgroup': True,
                             'staff': False,
-                            'organization_id': wizard.remote_system_id.scoutorg_id
+                            'organization_id': wizard.remote_system_id.scoutorg_id.id
                             }
-                    
-                    cse = self.env['campos.subcamp.exception'].search('name', 'ilike', group.name)
+
+                    cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name)])
                     if cse:
                         vals['subcamp_id'] = cse.subcamp_id.id
+                        vals['camp_area_id'] = cse.camp_area_id.id
                     elif group.municipality_id.subcamp_id:
                         vals['subcamp_id'] = group.municipality_id.subcamp_id.id
-                        
+                        vals['camp_area_id'] = group.municipality_id.camp_area_id.id
+
                 treasurer_id = wizard.remote_system_id.getTreasurer(group.remote_link_id)
                 if treasurer_id:
                     treasurer = wizard.remote_system_id.syncPartner(remote_int_id=treasurer_id)
                     treasurer.parent_id = group
                     vals['econ_partner_id'] = treasurer.id
-                
+
                 if event_id:
                     wizard.reg_id = self.env['event.registration'].sudo().create(vals)
                     template = self.env.ref('campos_welcome.treasurer_mail')
@@ -155,10 +163,12 @@ class CamposWelcome(models.TransientModel):
     @api.multi
     def doit_done(self):
         for wizard in self:
+            view = self.env.ref('campos_preregistration.view_form_preregistration_gl')
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'event.registration',
                 'res_id': wizard.reg_id.id,  # the current wizard record
                 'view_type': 'form',
                 'view_mode': 'form',
+                'view_id': view.id
                 }

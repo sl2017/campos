@@ -1,28 +1,32 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* campos_sponsor
-#
+# * campos_sponsor
+# 
+# Translators:
+# christian Eggert Jørgensen <christian@eggert.dk>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 19:03+0000\n"
 "PO-Revision-Date: 2016-09-14 19:03+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
+"Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_sponsor
 #: model:email.template,body_html:campos_sponsor.request_partnerconfirm
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.sponsor_kontaktperson_name},\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        Bekræft venligst din anmodning om et partnerskab ved at klikke på dette link: ${object.reg_confirm_url}\n"
 "                    </p>\n"
 "                    \n"
@@ -44,72 +48,71 @@ msgstr ""
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "101 - 200"
-msgstr ""
+msgstr "101 -200"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "201 - 350"
-msgstr ""
+msgstr "201 - 350"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "351 - 500"
-msgstr ""
+msgstr "351 - 500"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 msgid "50 - 100"
-msgstr ""
+msgstr "50 -100"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "501 - 750"
-msgstr ""
+msgstr "501 - 750"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 msgid ">750"
-msgstr ""
+msgstr "> 750"
 
 #. module: campos_sponsor
-#: field:model.sponsor,active:0
-#: field:sponsor.modydelser,active:0
+#: field:model.sponsor,active:0 field:sponsor.modydelser,active:0
 #: field:sponsor.temaer,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktive"
 
 #. module: campos_sponsor
 #: model:ir.ui.menu,name:campos_sponsor.menu_activity_create
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteter"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Activity Signup"
-msgstr ""
+msgstr "Aktivitets signup"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_expected_participants:0
 msgid "Activity expected participants"
-msgstr ""
+msgstr "antal forventede deltagere"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_state:0
 msgid "Activity state"
-msgstr ""
+msgstr "Status på aktivitet"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_type:0
 msgid "Activity type"
-msgstr ""
+msgstr "Organisations forhold"
 
 #. module: campos_sponsor
 #: field:model.sponsor,type:0
 msgid "Address Type"
-msgstr ""
+msgstr "Adresse type"
 
 #. module: campos_sponsor
 #: field:model.sponsor,geo_point:0
@@ -119,12 +122,12 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Adresse"
-msgstr ""
+msgstr "Adresse"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Adresse*"
-msgstr ""
+msgstr "Adresse*"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_state:0
@@ -135,7 +138,7 @@ msgstr ""
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
 msgid "Afvis aktivitet"
-msgstr ""
+msgstr "Afvis aktivitet"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -147,7 +150,7 @@ msgstr ""
 #: selection:model.sponsor,partner_state:0
 #: selection:model.sponsor,sponsor_state:0
 msgid "Afvist"
-msgstr ""
+msgstr "Afvist"
 
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
@@ -167,7 +170,7 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Anden frivillig organisation"
-msgstr ""
+msgstr "Anden frivillig organisation"
 
 #. module: campos_sponsor
 #: selection:model.activity,activity_type:0
@@ -229,7 +232,7 @@ msgstr ""
 #: field:model.sponsor,partner_bidrag_2:0
 #: view:website:campos_sponsor.partner_signup
 msgid "Bemanding på lejr"
-msgstr ""
+msgstr "Bemanding på lejren"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -271,7 +274,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,birthdate:0
 msgid "Birthdate"
-msgstr ""
+msgstr "Fødselsdag"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_contact1_city:0
@@ -315,7 +318,9 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,supplier:0
-msgid "Check this box if this contact is a supplier. If it's not checked, purchase people will not see it when encoding a purchase order."
+msgid ""
+"Check this box if this contact is a supplier. If it's not checked, purchase "
+"people will not see it when encoding a purchase order."
 msgstr ""
 
 #. module: campos_sponsor
@@ -324,15 +329,14 @@ msgid "Check this box if this contact is an Employee."
 msgstr ""
 
 #. module: campos_sponsor
-#: field:sponsor.modydelser,child_ids:0
-#: field:sponsor.temaer,child_ids:0
+#: field:sponsor.modydelser,child_ids:0 field:sponsor.temaer,child_ids:0
 msgid "Child Categories"
 msgstr ""
 
 #. module: campos_sponsor
 #: field:model.sponsor,city:0
 msgid "City"
-msgstr ""
+msgstr "By"
 
 #. module: campos_sponsor
 #: field:model.sponsor,color:0
@@ -352,7 +356,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,contact_address:0
 msgid "Complete Address"
-msgstr ""
+msgstr "Fuldstændig adresse"
 
 #. module: campos_sponsor
 #: field:model.sponsor,ref:0
@@ -362,28 +366,24 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,child_ids:0
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakter"
 
 #. module: campos_sponsor
 #: field:model.sponsor,country_id:0
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: campos_sponsor
-#: field:model.activity,create_uid:0
-#: field:model.sponsor,create_uid:0
-#: field:sponsor.modydelser,create_uid:0
-#: field:sponsor.temaer,create_uid:0
+#: field:model.activity,create_uid:0 field:model.sponsor,create_uid:0
+#: field:sponsor.modydelser,create_uid:0 field:sponsor.temaer,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Oprettet af"
 
 #. module: campos_sponsor
-#: field:model.activity,create_date:0
-#: field:model.sponsor,create_date:0
-#: field:sponsor.modydelser,create_date:0
-#: field:sponsor.temaer,create_date:0
+#: field:model.activity,create_date:0 field:model.sponsor,create_date:0
+#: field:sponsor.modydelser,create_date:0 field:sponsor.temaer,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Opretttelse dato"
 
 #. module: campos_sponsor
 #: field:model.sponsor,credit_limit:0
@@ -398,13 +398,13 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,date:0
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 #. module: campos_sponsor
 #: help:model.activity,message_last_post:0
 #: help:model.sponsor,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr ""
+msgstr "Dato for sidste besked sendt på denne person"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
@@ -413,26 +413,30 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,sponsor_issponsor:0
-msgid "Dette felt bestemmer om element er sponsor. Hvis det ikke er markeret, er dette element et partnerskab."
+msgid ""
+"Dette felt bestemmer om element er sponsor. Hvis det ikke er markeret, er "
+"dette element et partnerskab."
 msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_thankyou
-msgid "Din ansøgning om aktivitet er blevet registreret. Vi vender tilbage til dig hurtigst muligt!"
+msgid ""
+"Din ansøgning om aktivitet er blevet registreret. Vi vender tilbage til dig "
+"hurtigst muligt!"
 msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partners_thankyou
-msgid "Din ansøgning om partnerskab er registreret! Vi vender tilbage til dig hurtigst muligt."
+msgid ""
+"Din ansøgning om partnerskab er registreret! Vi vender tilbage til dig "
+"hurtigst muligt."
 msgstr ""
 
 #. module: campos_sponsor
-#: field:model.activity,display_name:0
-#: field:model.sponsor,display_name:0
-#: field:sponsor.modydelser,display_name:0
-#: field:sponsor.temaer,display_name:0
+#: field:model.activity,display_name:0 field:model.sponsor,display_name:0
+#: field:sponsor.modydelser,display_name:0 field:sponsor.temaer,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Fuldt navn"
 
 #. module: campos_sponsor
 #: field:model.sponsor,partner_bidrag_5:0
@@ -446,10 +450,9 @@ msgid "EAN13"
 msgstr ""
 
 #. module: campos_sponsor
-#: field:model.activity,activity_contact1_email:0
-#: field:model.sponsor,email:0
+#: field:model.activity,activity_contact1_email:0 field:model.sponsor,email:0
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #. module: campos_sponsor
 #: model:ir.model,name:campos_sponsor.model_model_activity
@@ -485,7 +488,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,event_registration_ids:0
 msgid "Event registrations"
-msgstr ""
+msgstr "Registrering af event"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
@@ -586,9 +589,10 @@ msgid "Gruppenavn"
 msgstr ""
 
 #. module: campos_sponsor
-#: help:model.activity,message_summary:0
-#: help:model.sponsor,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+#: help:model.activity,message_summary:0 help:model.sponsor,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: campos_sponsor
@@ -604,49 +608,47 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvad forventer du aktiviteten koster?"
-msgstr ""
+msgstr "Hvad forventer du aktiviteten koster?"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvad får deltagerne ud af aktiviteten?*"
-msgstr ""
+msgstr "Hvad får deltagerne ud af aktiviteten?*"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_participant_usage:0
 msgid "Hvad får spejderne ud af aktiviteten?"
-msgstr ""
+msgstr "Hvad får spejderne ud af aktiviteten?"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvad lærer deltagerne af aktiviteten?*"
-msgstr ""
+msgstr "Hvad lærer deltagerne af aktiviteten?*"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_participant_knowledge:0
 msgid "Hvad lærer spejderne af aktiviteten?"
-msgstr ""
+msgstr "Hvad lærer spejderne af aktiviteten?"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Hvad ønsker i ud af partnerskabet?"
-msgstr ""
+msgstr "Hvad ønsker i ud af partnerskabet?"
 
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvem henvender aktiviteten sig til?"
-msgstr ""
+msgstr "Hvem henvender aktiviteten sig til?"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Hvilke idéer har i til en aktivitet?"
-msgstr ""
+msgstr "Hvilke idéer har i til en aktivitet?"
 
 #. module: campos_sponsor
-#: field:model.activity,id:0
-#: field:model.sponsor,id:0
-#: field:sponsor.modydelser,id:0
-#: field:sponsor.temaer,id:0
+#: field:model.activity,id:0 field:model.sponsor,id:0
+#: field:sponsor.modydelser,id:0 field:sponsor.temaer,id:0
 msgid "ID"
 msgstr ""
 
@@ -654,7 +656,7 @@ msgstr ""
 #: field:model.sponsor,partner_bidrag_1:0
 #: view:website:campos_sponsor.partner_signup
 msgid "Idé"
-msgstr ""
+msgstr "Idé"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -664,19 +666,23 @@ msgid "Idé til aktivitet"
 msgstr ""
 
 #. module: campos_sponsor
-#: help:model.activity,message_unread:0
-#: help:model.sponsor,message_unread:0
+#: help:model.activity,message_unread:0 help:model.sponsor,message_unread:0
 msgid "If checked new messages require your attention."
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,opt_out:0
-msgid "If opt-out is checked, this contact has refused to receive emails for mass mailing and marketing campaign. Filter 'Available for Mass Mailing' allows users to filter the partners when performing mass mailing."
+msgid ""
+"If opt-out is checked, this contact has refused to receive emails for mass "
+"mailing and marketing campaign. Filter 'Available for Mass Mailing' allows "
+"users to filter the partners when performing mass mailing."
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,lang:0
-msgid "If the selected language is loaded in the system, all documents related to this contact will be printed in this language. If not, it will be English."
+msgid ""
+"If the selected language is loaded in the system, all documents related to "
+"this contact will be printed in this language. If not, it will be English."
 msgstr ""
 
 #. module: campos_sponsor
@@ -688,7 +694,7 @@ msgstr ""
 #: view:website:campos_sponsor.activity_signup
 #: view:website:campos_sponsor.partner_signup
 msgid "Indsend ansøgning"
-msgstr ""
+msgstr "Indsend ansøgning"
 
 #. module: campos_sponsor
 #: field:model.sponsor,is_company:0
@@ -709,7 +715,7 @@ msgstr ""
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Kan bidrage med (gerne flere krydser"
-msgstr ""
+msgstr "Kan bidrage med (gerne flere krydser"
 
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
@@ -752,35 +758,30 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,lang:0
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 #. module: campos_sponsor
 #: field:model.activity,message_last_post:0
 #: field:model.sponsor,message_last_post:0
 msgid "Last Message Date"
-msgstr ""
+msgstr "Dato for sidste meddelelse"
 
 #. module: campos_sponsor
-#: field:model.activity,__last_update:0
-#: field:model.sponsor,__last_update:0
+#: field:model.activity,__last_update:0 field:model.sponsor,__last_update:0
 #: field:sponsor.modydelser,__last_update:0
 #: field:sponsor.temaer,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Sidste ændringsdato"
 
 #. module: campos_sponsor
-#: field:model.activity,write_uid:0
-#: field:model.sponsor,write_uid:0
-#: field:sponsor.modydelser,write_uid:0
-#: field:sponsor.temaer,write_uid:0
+#: field:model.activity,write_uid:0 field:model.sponsor,write_uid:0
+#: field:sponsor.modydelser,write_uid:0 field:sponsor.temaer,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Sidst opdateret af"
 
 #. module: campos_sponsor
-#: field:model.activity,write_date:0
-#: field:model.sponsor,write_date:0
-#: field:sponsor.modydelser,write_date:0
-#: field:sponsor.temaer,write_date:0
+#: field:model.activity,write_date:0 field:model.sponsor,write_date:0
+#: field:sponsor.modydelser,write_date:0 field:sponsor.temaer,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
@@ -795,8 +796,7 @@ msgid "Lav til sponsor"
 msgstr ""
 
 #. module: campos_sponsor
-#: field:sponsor.modydelser,parent_left:0
-#: field:sponsor.temaer,parent_left:0
+#: field:sponsor.modydelser,parent_left:0 field:sponsor.temaer,parent_left:0
 msgid "Left parent"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.activity,activity_age_to:0
 msgid "Maximumsalder for aktivitet"
-msgstr ""
+msgstr "Maximumsalder for aktivitet"
 
 #. module: campos_sponsor
 #: field:model.sponsor,image_medium:0
@@ -835,35 +835,36 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,image_medium:0
-msgid "Medium-sized image of this contact. It is automatically resized as a 128x128px image, with aspect ratio preserved. Use this field in form views or some kanban views."
+msgid ""
+"Medium-sized image of this contact. It is automatically resized as a "
+"128x128px image, with aspect ratio preserved. Use this field in form views "
+"or some kanban views."
 msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Mere end 750"
-msgstr ""
+msgstr "Mere end 750 "
 
 #. module: campos_sponsor
-#: field:model.activity,message_ids:0
-#: field:model.sponsor,message_ids:0
+#: field:model.activity,message_ids:0 field:model.sponsor,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Besked"
 
 #. module: campos_sponsor
-#: help:model.activity,message_ids:0
-#: help:model.sponsor,message_ids:0
+#: help:model.activity,message_ids:0 help:model.sponsor,message_ids:0
 msgid "Messages and communication history"
 msgstr ""
 
 #. module: campos_sponsor
 #: field:model.activity,activity_age_from:0
 msgid "Minimumsalder for aktivitet"
-msgstr ""
+msgstr "Minimumsalder for aktivitet"
 
 #. module: campos_sponsor
 #: field:model.sponsor,mobile:0
 msgid "Mobile"
-msgstr ""
+msgstr "Mobil telefon"
 
 #. module: campos_sponsor
 #: model:ir.model,name:campos_sponsor.model_sponsor_modydelser
@@ -878,19 +879,18 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Målgruppe fra alder*"
-msgstr ""
+msgstr "Målgruppe fra alder*"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Målgruppe til alder*"
-msgstr ""
+msgstr "Målgruppe til alder*"
 
 #. module: campos_sponsor
-#: field:model.sponsor,name:0
-#: field:sponsor.modydelser,name:0
+#: field:model.sponsor,name:0 field:sponsor.modydelser,name:0
 #: field:sponsor.temaer,name:0
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_contact1_name:0
@@ -900,22 +900,22 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Navn på Spejdergruppe/Organisation/Firma/Andet*"
-msgstr ""
+msgstr "Navn på Spejdergruppe/Organisation/Firma/Andet*"
 
 #. module: campos_sponsor
 #: field:model.activity,activity_name:0
 msgid "Navn på aktivitet"
-msgstr ""
+msgstr "Navn på aktivitet"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Navn på aktivitet*"
-msgstr ""
+msgstr "Navn på aktivitet* "
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Navn på firma/organisation"
-msgstr ""
+msgstr "Navn på firma/organisation"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
@@ -936,7 +936,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,comment:0
 msgid "Notes"
-msgstr ""
+msgstr "Noter"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -956,8 +956,7 @@ msgid "Organisation"
 msgstr ""
 
 #. module: campos_sponsor
-#: field:sponsor.modydelser,parent_id:0
-#: field:sponsor.temaer,parent_id:0
+#: field:sponsor.modydelser,parent_id:0 field:sponsor.temaer,parent_id:0
 msgid "Parent Category"
 msgstr ""
 
@@ -969,7 +968,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,participant:0
 msgid "Participant"
-msgstr ""
+msgstr "Deltager"
 
 #. module: campos_sponsor
 #: selection:model.sponsor,sponsor_kategori:0
@@ -1019,11 +1018,12 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,phone:0
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: campos_sponsor
 #: help:model.sponsor,notify_email:0
-msgid "Policy to receive emails for new messages pushed to your personal Inbox:\n"
+msgid ""
+"Policy to receive emails for new messages pushed to your personal Inbox:\n"
 "- Never: no emails are sent\n"
 "- All Messages: for every notification you receive in your Inbox"
 msgstr ""
@@ -1031,17 +1031,17 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.activity,activity_contact1_zip:0
 msgid "Postnr"
-msgstr ""
+msgstr "Postnr"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Postnr*"
-msgstr ""
+msgstr "Postnr*"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Postnummer"
-msgstr ""
+msgstr "Postnummer"
 
 #. module: campos_sponsor
 #: selection:model.sponsor,sponsor_state:0
@@ -1061,12 +1061,12 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,website_published:0
 msgid "Publish"
-msgstr ""
+msgstr "Udgiv"
 
 #. module: campos_sponsor
 #: help:model.sponsor,website_published:0
 msgid "Publish on the website"
-msgstr ""
+msgstr "Udgiv på hjemmeside"
 
 #. module: campos_sponsor
 #: selection:model.sponsor,sponsor_kategori:0
@@ -1089,15 +1089,14 @@ msgid "Reserveret Fond"
 msgstr ""
 
 #. module: campos_sponsor
-#: field:sponsor.modydelser,parent_right:0
-#: field:sponsor.temaer,parent_right:0
+#: field:sponsor.modydelser,parent_right:0 field:sponsor.temaer,parent_right:0
 msgid "Right parent"
 msgstr ""
 
 #. module: campos_sponsor
 #: model:ir.actions.act_window,name:campos_sponsor.action_activity_create
 msgid "SL2017 Activity overview"
-msgstr ""
+msgstr "SL2017 aktivitets overblik"
 
 #. module: campos_sponsor
 #: model:ir.ui.menu,name:campos_sponsor.menu_partner_create
@@ -1142,22 +1141,24 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.activity,activity_expense_total:0
 msgid "Samlet udgift for aktivitet"
-msgstr ""
+msgstr "Samlet udgift for aktivitet"
 
 #. module: campos_sponsor
 #: field:model.sponsor,scoutgroup:0
 msgid "Scoutgroup"
-msgstr ""
+msgstr "Spejdergruppe"
 
 #. module: campos_sponsor
 #: help:model.sponsor,use_parent_address:0
-msgid "Select this if you want to set company's address information  for this contact"
+msgid ""
+"Select this if you want to set company's address information  for this "
+"contact"
 msgstr ""
 
 #. module: campos_sponsor
 #: field:model.sponsor,signup_expiration:0
 msgid "Signup Expiration"
-msgstr ""
+msgstr "Login er udløbet"
 
 #. module: campos_sponsor
 #: field:model.sponsor,signup_token:0
@@ -1182,7 +1183,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,skype:0
 msgid "Skype"
-msgstr ""
+msgstr "Skype"
 
 #. module: campos_sponsor
 #: field:model.sponsor,image_small:0
@@ -1191,7 +1192,10 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,image_small:0
-msgid "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required."
+msgid ""
+"Small-sized image of this contact. It is automatically resized as a 64x64px "
+"image, with aspect ratio preserved. Use this field anywhere a small image is"
+" required."
 msgstr ""
 
 #. module: campos_sponsor
@@ -1202,12 +1206,12 @@ msgstr ""
 #. module: campos_sponsor
 #: selection:model.activity,activity_type:0
 msgid "Spedjergruppe"
-msgstr ""
+msgstr "Spejdergruppe"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Spejdergruppe"
-msgstr ""
+msgstr "Spejdergruppe"
 
 #. module: campos_sponsor
 #: field:model.sponsor,sponsor:0
@@ -1227,7 +1231,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,sponsor_state:0
 msgid "Sponsor state"
-msgstr ""
+msgstr "Sponsor status"
 
 #. module: campos_sponsor
 #: field:model.sponsor,sponsor_temaer:0
@@ -1267,22 +1271,22 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,staff:0
 msgid "Staff"
-msgstr ""
+msgstr "Stab"
 
 #. module: campos_sponsor
 #: field:model.sponsor,state_id:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: campos_sponsor
 #: field:model.sponsor,street:0
 msgid "Street"
-msgstr ""
+msgstr "Gade"
 
 #. module: campos_sponsor
 #: field:model.sponsor,street2:0
 msgid "Street2"
-msgstr ""
+msgstr "Gade"
 
 #. module: campos_sponsor
 #: field:model.activity,message_summary:0
@@ -1308,7 +1312,7 @@ msgstr ""
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_thankyou
 msgid "Tak for din ansøgning!"
-msgstr ""
+msgstr "Tak for din ansøgning!"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partners_thankyou
@@ -1322,18 +1326,20 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,vat:0
-msgid "Tax Identification Number. Check the box if this contact is subjected to taxes. Used by the some of the legal statements."
+msgid ""
+"Tax Identification Number. Check the box if this contact is subjected to "
+"taxes. Used by the some of the legal statements."
 msgstr ""
 
 #. module: campos_sponsor
 #: field:model.activity,activity_contact1_tlf:0
 msgid "Telefon"
-msgstr ""
+msgstr "Telefon"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Telefon*"
-msgstr ""
+msgstr "Telefon*"
 
 #. module: campos_sponsor
 #: model:ir.model,name:campos_sponsor.model_sponsor_temaer
@@ -1341,29 +1347,38 @@ msgid "Temaer"
 msgstr ""
 
 #. module: campos_sponsor
-#: help:sponsor.modydelser,active:0
-#: help:sponsor.temaer,active:0
+#: help:sponsor.modydelser,active:0 help:sponsor.temaer,active:0
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,user_id:0
-msgid "The internal user that is in charge of communicating with this contact if any."
+msgid ""
+"The internal user that is in charge of communicating with this contact if "
+"any."
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,tz:0
-msgid "The partner's timezone, used to output proper date and time values inside printed reports. It is important to set a value for this field. You should use the same timezone that is otherwise used to pick and render date and time values: your computer's timezone."
+msgid ""
+"The partner's timezone, used to output proper date and time values inside "
+"printed reports. It is important to set a value for this field. You should "
+"use the same timezone that is otherwise used to pick and render date and "
+"time values: your computer's timezone."
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,image:0
-msgid "This field holds the image used as avatar for this contact, limited to 1024x1024px"
+msgid ""
+"This field holds the image used as avatar for this contact, limited to "
+"1024x1024px"
 msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,property_product_pricelist:0
-msgid "This pricelist will be used, instead of the default one, for sales to the current partner"
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
 msgstr ""
 
 #. module: campos_sponsor
@@ -1399,7 +1414,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,title:0
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -1415,13 +1430,12 @@ msgstr ""
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "Under 50"
-msgstr ""
+msgstr "Under 50"
 
 #. module: campos_sponsor
-#: field:model.activity,message_unread:0
-#: field:model.sponsor,message_unread:0
+#: field:model.activity,message_unread:0 field:model.sponsor,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ulæste beskeder"
 
 #. module: campos_sponsor
 #: field:model.sponsor,use_parent_address:0
@@ -1430,7 +1444,9 @@ msgstr ""
 
 #. module: campos_sponsor
 #: help:model.sponsor,type:0
-msgid "Used to select automatically the right address according to the context in sales and purchases documents."
+msgid ""
+"Used to select automatically the right address according to the context in "
+"sales and purchases documents."
 msgstr ""
 
 #. module: campos_sponsor
@@ -1441,7 +1457,7 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.activity,activity_contact1_road:0
 msgid "Vej"
-msgstr ""
+msgstr "Vej"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
@@ -1462,13 +1478,13 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,website:0
 msgid "Website"
-msgstr ""
+msgstr "Webside"
 
 #. module: campos_sponsor
 #: field:model.activity,website_message_ids:0
 #: field:model.sponsor,website_message_ids:0
 msgid "Website Messages"
-msgstr ""
+msgstr "Webside besked"
 
 #. module: campos_sponsor
 #: field:model.sponsor,website_description:0
@@ -1509,24 +1525,23 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,zip:0
 msgid "Zip"
-msgstr ""
+msgstr "Postnummer"
 
 #. module: campos_sponsor
 #: field:model.sponsor,complete_contact:0
 msgid "contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: campos_sponsor
-#: field:model.sponsor,has_image:0
-#: field:model.sponsor,self:0
+#: field:model.sponsor,has_image:0 field:model.sponsor,self:0
 msgid "unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
 #: view:website:campos_sponsor.activity_signup
 msgid "Økonomi"
-msgstr ""
+msgstr "Økonomi"
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
@@ -1543,4 +1558,3 @@ msgstr ""
 #: selection:model.sponsor,sponsor_kategori:0
 msgid "Øvrige Sponsorer"
 msgstr ""
-

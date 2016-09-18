@@ -17,6 +17,7 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="scoutorg_id"/>
                         <field name="host"/>
     					<field name="port"/>
     					<field name="protocol"/>

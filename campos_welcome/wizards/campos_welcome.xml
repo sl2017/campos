@@ -19,7 +19,7 @@
                         <div colspan="2" states="welcome">
                         <p>To pre-register your group, you need to be a leader or boardmember in your group. Click Next to select scout Group to import</p>
                         </div>
-                        <field name="message" readonly="1" nolabel="1"/>
+                        <field name="message" readonly="1" nolabel="1" colspan="2"/>
                         <div colspan="2" states="select">
                         <p>Please select your Scout group. We will import the group (name and address), your contact details, and the contact details on the groups treasurer.</p>
                         </div>
@@ -64,6 +64,8 @@
         <field name="target">new</field>
         <field name="context">{}</field>
     </record>
+    
+    <menuitem id="campos_welcome_menu" name="Group Import" parent="campos_event.menu_campos_groups" action="campos_welcome_act_window" sequence="30"/>
 
 
 </data>

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_form_activity_create" model="ir.ui.view">
+            <field name="name">Create new activity</field>
+            <field name="model">model.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    	<button name="btn_activity_confirm" type="object" string="Bekræft aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_waiting')]}" class="oe_highlight" />
+						<button name="btn_activity_process" type="object" string="Behandles" attrs="{'invisible':['|',('activity_state','!=','state_application')]}" class="oe_highlight" />
+						<button name="btn_activity_approve" type="object" string="Godkend aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_processing')]}" class="oe_highlight" />
+						<button name="btn_activity_reject" type="object" string="Afvis aktivitet" attrs="{'invisible':['|',('activity_state','!=','state_processing')]}" class="oe_highlight" />
+						<button name="btn_activity_lock" type="object" string="Lås aktivitet" attrs="{'invisible':['|',('activity_state','==','state_locked')]}" class="oe_highlight" />
+						<button name="btn_activity_open" type="object" string="Genopret ansøgning" attrs="{'invisible':['|',('activity_state','=','state_application')]}" class="oe_highlight" />
+						
+                    
+                    
+                    	<!--State fields-->
+                        <field name="activity_state" widget="statusbar" statusbar_visible="state_application,state_processing,state_approved"/>
+                    </header>
+                    <sheet>
+                        <!--Activity information -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Aktivitets beskrivelse</h1>
+                        <group>
+                        	<field name="activity_name" attrs="{'required':True}"/>
+                        	<field name="activity_groupname" attrs="{'required':True}"/>
+							<field name="activity_description" attrs="{'required':True}"/>
+							<field name="activity_participant_usage" attrs="{'required':True}"/>
+							<field name="activity_participant_knowledge" attrs="{'required':True}"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!--Contact information-->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Kontaktoplysninger</h1>
+						<group>
+							<field name="activity_contact1_name" attrs="{'required':True}"/>
+							<field name="activity_type" attrs="{'required':True}" widget="radio"/>
+							<field name="activity_contact1_road" attrs="{'required':True}"/>
+							<field name="activity_contact1_zip" attrs="{'required':True}"/>
+							<field name="activity_contact1_city" attrs="{'required':True}"/>
+							<field name="activity_contact1_email" attrs="{'required':True}"/>
+							<field name="activity_contact1_tlf" attrs="{'required':True}"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!-- Målgruppe -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Hvem henvender aktiviteten sig til?</h1>
+                        <group>
+							<field name="activity_age_from" attrs="{'required':True}"/>
+							<field name="activity_age_to" attrs="{'required':True}"/>
+							<field name="activity_expected_participants" attrs="{'required':True}" widget="radio"/>
+						</group>
+                        
+                        
+                        
+                        
+                        <!-- Economy -->
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Økonomi</h1>
+                        <group>
+							<field name="activity_expense_total" attrs="{'required':False}"/>
+						</group>
+						
+						
+						<!--Notes-->
+						<h1 style="margin-top: 50px; margin-bottom: 20px;">Noter til aktivitet</h1>
+						<field name="activity_note"/>
+                        
+                        
+                        
+                        
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_activity_overview" model="ir.ui.view">
+			<field name="name">Activity Tree view</field>
+			<field name="model">model.activity</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="activity_name"/>
+					<field name="activity_groupname"/>
+					<field name="activity_type"/>
+					<field name="activity_age_from"/>
+					<field name="activity_age_to"/>
+					<field name="activity_expected_participants"/>
+					<field name="activity_state"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<!-- Action to open Activity list -->
+		<act_window id="action_activity_create"
+			name="SL2017 Activity overview"
+			res_model="model.activity"
+			view_mode="tree,form"
+			view_id="view_activity_overview" />
+			
+			
+		<!-- Menu item to open Activity list -->
+		<menuitem id="menu_activity_create"
+			name="Activities"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_activity_create" />
+			
+			
+			
+        
+    </data>
+</openerp>
