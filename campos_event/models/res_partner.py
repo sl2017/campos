@@ -47,6 +47,7 @@ class ResPartner(models.Model):
         'Municipality',
         select=True,
         ondelete='set null')
+    scoutorg_id = fields.Many2one('campos.scout.org', 'Scout organization')
     
     def name_get(self, cr, uid, ids, context=None):
         if context is None:

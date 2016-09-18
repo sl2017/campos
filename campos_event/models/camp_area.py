@@ -9,6 +9,7 @@ class CamposCampArea(models.Model):
     _name = 'campos.camp.area'
 
     name = fields.Char('Name', size=64)
+    code = fields.Char('Code', size=16)
     desc = fields.Text('Description')
     max_cap = fields.Integer('Max')
     event_id = fields.Many2one('event.event', 'Event')

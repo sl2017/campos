@@ -11,4 +11,6 @@ class CamposSubcamp_exception(models.Model):
     _description = 'Campos Subcamp_exceptions'  # TODO
 
     name = fields.Char('Group Name')
-    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
+    scoutorg_id = fields.Many2one('campos.scout.org', 'Scout organization')
+    camp_area_id = fields.Many2one('campos.camp.area', 'Camp Area')
+    subcamp_id = fields.Many2one('campos.subcamp', reslated='camp_area_id.subcamp_id', string='Sub Camp')

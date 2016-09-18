@@ -135,8 +135,10 @@ class CamposWelcome(models.TransientModel):
                     cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name)])
                     if cse:
                         vals['subcamp_id'] = cse.subcamp_id.id
+                        vals['camp_area_id'] = cse.camp_area_id.id
                     elif group.municipality_id.subcamp_id:
                         vals['subcamp_id'] = group.municipality_id.subcamp_id.id
+                        vals['camp_area_id'] = group.municipality_id.camp_area_id.id
 
                 treasurer_id = wizard.remote_system_id.getTreasurer(group.remote_link_id)
                 if treasurer_id:
