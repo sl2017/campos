@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-31 22:24+0000\n"
-"PO-Revision-Date: 2016-08-31 22:24+0000\n"
+"POT-Creation-Date: 2016-09-14 19:03+0000\n"
+"PO-Revision-Date: 2016-09-14 19:03+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1118,6 +1118,11 @@ msgid "Group Name"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_groups
+msgid "Groups"
+msgstr ""
+
+#. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_manager
 msgid "HR/Manager"
 msgstr ""
@@ -1315,6 +1320,11 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Job/Committee"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_jobber
+msgid "Jobber"
 msgstr ""
 
 #. module: campos_event
@@ -1952,8 +1962,15 @@ msgid "Registration survay"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_action_group_registration
 #: model:ir.ui.menu,name:campos_event.menu_action_registration
 msgid "Registrations"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_group_registration
+#: model:ir.actions.act_window,name:campos_event.action_jobber_registration
+msgid "Registtrations"
 msgstr ""
 
 #. module: campos_event

@@ -57,8 +57,7 @@
                   <field name="participant_own_transport_from_camp_total" sum="Total"/>
                   <field name="participant_common_transport_to_camp_total" sum="Total"/>
                   <field name="participant_common_transport_from_camp_total" sum="Total"/>
-                  <field name="participant_own_transport_type"  options="{'no_create': True}"/>
- <!--                 <field name="participant_transport_note"/>-->
+                  <field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
                 </tree>
               </field>
 							<notebook colspan="2">
@@ -136,7 +135,6 @@
                   <field name="participant_common_transport_to_camp_total" sum="Total"/>
                   <field name="participant_common_transport_from_camp_total" sum="Total"/>
                   <field name="participant_own_transport_type"  options="{'no_create': True}"/>
- <!--                 <field name="participant_transport_note"/>-->
                 </tree>
               </field>
 							<notebook colspan="2">
@@ -180,6 +178,10 @@
 							<field name="state" invisible="1"/>
 							</group>
 					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
 				</form> 
 			</field>
 		</record>
@@ -235,5 +237,23 @@
 	
 		<!-- temporary -->
 <!--		<menuitem id="event_preregistration_tree_portal_menu" name="Group Prereg. List" sequence="110" action="action_event_preregistration_tree" />-->
-  </data>
+
+<!--			<record id="view_tree_pioneering_pole_list" model="ir.ui.view">
+				<field name="name">Pioneering Poles on Registration</field>
+				<field name="model">event.registration.polelist</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="registration_id"/>
+						<field name="pioneeringpole_id"/>
+						<field name="polecount"/>
+					</tree>
+				</field>
+			</record> 
+		<act_window id="action_event_registration_pioneeringpoles_on_registrations"
+		name="Pioneering Poles on Registration"
+		res_model="event.registration.polelist"
+		view_mode="tree,form" />		
+		<menuitem id="menu_action_preregistration_menu_pioneeringpolelist" parent="menu_event_preregistration" name="Pioneering Poles List" action="action_event_registration_pioneeringpoles_on_registrations" groups="campos_event.group_campos_admin" sequence="99" />-->
+
+		</data>
 </openerp>

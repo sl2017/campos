@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 16:55+0000\n"
-"PO-Revision-Date: 2016-09-07 16:55+0000\n"
+"POT-Creation-Date: 2016-09-14 19:03+0000\n"
+"PO-Revision-Date: 2016-09-14 19:03+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -65,6 +65,7 @@ msgstr "Velkommen til CampOS"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
+#: selection:campos.welcome,state:0
 msgid "Cancel"
 msgstr "Afbryd"
 
@@ -96,6 +97,11 @@ msgstr ""
 #: field:campos.welcome.profile,display_name:0
 msgid "Display Name"
 msgstr "Navn"
+
+#. module: campos_welcome
+#: model:ir.ui.menu,name:campos_welcome.campos_welcome_menu
+msgid "Group Import"
+msgstr ""
 
 #. module: campos_welcome
 #: selection:campos.welcome,state:0
@@ -310,11 +316,17 @@ msgid "Welcome Wizard"
 msgstr ""
 
 #. module: campos_welcome
-#: code:addons/campos_welcome/wizards/campos_welcome.py:75
+#: code:addons/campos_welcome/wizards/campos_welcome.py:80
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
 #, python-format
 msgid "Welcome to SL2017 Group Pre-registration"
 msgstr "Velkommen til SL2017 forhåndstilmelding for grupper"
+
+#. module: campos_welcome
+#: code:addons/campos_welcome/wizards/campos_welcome.py:58
+#, python-format
+msgid "You must be logged in via your organization's member system"
+msgstr ""
 
 #. module: campos_welcome
 #: field:campos.welcome,name:0
@@ -322,7 +334,7 @@ msgid "Your Name"
 msgstr "Dit navn"
 
 #. module: campos_welcome
-#: code:addons/campos_welcome/wizards/campos_welcome.py:65
+#: code:addons/campos_welcome/wizards/campos_welcome.py:70
 #, python-format
-msgid "Your group has already been signed up"
-msgstr "Din gruppe er allerede blevet tilmeldt"
+msgid "Your group has already been signed up."
+msgstr ""
