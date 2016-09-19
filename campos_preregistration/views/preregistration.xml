@@ -85,7 +85,7 @@
 										<field name="friendship_group_name" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
 										<field name="friendship_group_info" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
 										<field name="friendship_group_desire"/>
-										<field name="friendship_group_desire_country" attrs="{'invisible': [('friendship_group_desire', '=', False)]}"/>
+										<field name="friendship_group_desire_country" attrs="{'invisible': [('friendship_group_desire', '=', False)]}" options="{'no_create': True, 'no_open': True}"/>
 										<field name="friendship_group_home_hospitality" attrs="{'invisible': [('friendship_group_desire', '=', False)]}"/>
 									</group>
 								</page>
@@ -167,7 +167,7 @@
 										<field name="friendship_group_name"/>
 										<field name="friendship_group_info"/>
 										<field name="friendship_group_desire"/>
-										<field name="friendship_group_desire_country"/>
+										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}"/>
 										<field name="friendship_group_home_hospitality"/>
 									</group>
 								</page>
