@@ -75,8 +75,8 @@
 								<page string="Handicaped participants">
 									<group>
 										<field name="handicap"/>
-										<field name="handicap_description"/>
-										<field name="handicap_needs"/>
+										<field name="handicap_description" attrs="{'invisible': [('handicap', '=', False)]}"/>
+										<field name="handicap_needs" attrs="{'invisible': [('handicap', '=', False)]}"/>
 									</group>
 								</page>
 								<page string="Friendship group">
@@ -90,10 +90,14 @@
 									</group>
 								</page>
 								<page string="Agreements" position="after">
+									<group>
 										<field name="group_camp_agreements" readonly="1"/>
+									</group>
 								</page>
 								<page string="Sub Camp">
-									<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+									<group>
+										<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+									</group>
 								</page>
 							</notebook>
 							<field name="state" invisible="1"/>
@@ -168,13 +172,19 @@
 									</group>
 								</page>
 								<page string="Agreements" position="after">
+									<group>
 										<field name="group_camp_agreements"/>
+									</group>
 								</page>
 								<page string="Sub Camp">
-									<field name="subcamp_id"  options="{'no_create': True}"/>
+									<group>
+										<field name="subcamp_id"  options="{'no_create': True}"/>
+									</group>
 								</page>
 								<page string="Internal Information">
+									<group>
 										<field name="internal_information"/>
+									</group>
 								</page>
 							</notebook>
 							<field name="state" invisible="1"/>
