@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_camp_area_form_view">
+        <field name="name">campos.camp.area.form (in campos_event)</field>
+        <field name="model">campos.camp.area</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="subcamp_id"/>
+                        <field name="event_id"/>
+                         <notebook colspan="4">
+                      <page string="Geometry">
+                        <field name="the_geom" colspan="4" widget="geo_edit_map"/>
+                      </page>
+                    </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_camp_area_search_view">
+        <field name="name">campos.camp.area.search (in campos_event)</field>
+        <field name="model">campos.camp.area</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+                <field name="name"/>
+                <field name="code"/>
+                <field name="subcamp_id"/>
+                <field name="event_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_camp_area_tree_view">
+        <field name="name">campos.camp.area.tree (in campos_event)</field>
+        <field name="model">campos.camp.area</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="code"/>
+                <field name="name"/>
+                <field name="subcamp_id"/>
+                <field name="event_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_camp_area_act_window">
+        <field name="name">Camp Areas</field> <!-- TODO -->
+        <field name="res_model">campos.camp.area</field>
+        <field name="view_mode">tree,form,geoengine</field>
+        <field name="domain">[('event_id', '=', 1)]</field>
+        <field name="context">{'default_event_id': 1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_camp_area_menu">
+        <field name="name">Camp Areas</field>
+        <field name="parent_id" ref="menu_campos_config_event"/>
+        <field name="action" ref="campos_camp_area_act_window"/>
+        <field name="sequence" eval="110"/> <!-- TODO -->
+    </record>
+
+	<!-- GeoEngine views -->
+        <record id="ir_ui_view_camp_areageoview0" model="ir.ui.view">
+            <field name="name">camp_area.geo_view</field>
+            <field eval="16" name="priority"/>
+            <field name="model">campos.camp.area</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name"/>
+                </geoengine>
+            </field>
+        </record>
+
+        <record id="geoengine_vector_layer_camp_area0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="campos_event.field_campos_camp_area_the_geom"/>
+            <field name="name">Basic Camp Area</field>
+            <field name="view_id" ref="ir_ui_view_camp_areageoview0"/>
+            <field name="geo_repr">basic</field>
+            <field name="attribute_field_id" ref="field_campos_camp_area_name"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        
+        <record id="geoengine_raster_layer_camp_area0" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Municipality OSM</field>
+            <field name="view_id" ref="ir_ui_view_camp_areageoview0"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        <record id="geoengine_raster_layer_camp_areamapbox0" model="geoengine.raster.layer">
+            <field name="raster_type">mapbox</field>
+            <field name="mapbox_id">camptocamp.map-qrf4x</field>
+            <field name="name">ZIP Mapbox Light</field>
+            <field name="view_id" ref="ir_ui_view_camp_areageoview0"/>
+            <field eval="1" name="overlay"/>
+        </record>
+</data>
+</openerp>
