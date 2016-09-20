@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import openerp
-from openerp import http
+from openerp import http, _
 from openerp.addons.website_event_register_free.controllers.website_event import WebsiteEvent
 
 import datetime
@@ -264,13 +264,19 @@ class WebsiteEventEx(WebsiteEvent):
         languages = http.request.env['res.lang'].search([])
         groups = False
         if scout_org_id:
-            groups = http.request.env['res.partner'].search([('scoutorg_id', '=', scout_org_id),('scoutgroup', '=', True)])
+            groups = http.request.env['res.partner'].sudo().search([('scoutorg_id', '=', int(scout_org_id)),('scoutgroup', '=', True)])
         if not post.get('group_country_id', False):
             post['group_country_id'] = http.request.env.ref('base.dk').id
         if not post.get('contact_lang', False):
             post['contact_lang'] = 'da_DK'
         _logger.info('POST: %s', post)
-        _logger.info('ORGS: %s', scoutorgs)
+        _logger.info('GROUPS: %s', groups)
+
+        pagetitle = _('Preregistration for Danish Groups')        
+        if scout_org_id:
+            scoutorg = http.request.env['campos.scout.org'].sudo().browse(int(scout_org_id))
+            pagetitle = _('Preregistration for %s') % scoutorg.name
+            
         values = {
             'event': event,
             'range': range,
@@ -283,6 +289,7 @@ class WebsiteEventEx(WebsiteEvent):
             'error': error,
             'groups': groups,
             'scout_org_id': scout_org_id,
+            'pagetitle': pagetitle,
         }
         return http.request.render(
             'campos_event.dk_groups_register_form', values)

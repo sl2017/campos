@@ -215,7 +215,7 @@
             <t t-call="website.layout">
                 <div id="wrap">
                 <form t-attf-action="/event/#{event.id}/register/dk_groups/#{scout_org_id}" method="post" class="container">
-                	<h1><span t-esc="event.name"/></h1>
+                	<h1><span t-esc="pagetitle"/></h1>
                     <h2>Your Scout Group</h2>
                     <t t-if="not scout_org_id">
                     <div class="row">
@@ -266,10 +266,10 @@
 							<select name="group_partner_id" class="form-control" required="required">
 								<option value="">Select Group...</option>
 								<t t-foreach="groups or []" t-as="group">
-									<option t-if="str(group.id) == post.get('group_partner_id')" selected="selected" t-att-value="group.id">
+									<option t-if="group.id == post.get('group_partner_id')" selected="selected" t-att-value="group.id">
 										<t t-esc="group.name" />
 									</option>
-									<option t-if="str(group.id) != post.get('group_partner_id')" t-att-value="group.id">
+									<option t-if="group.id != post.get('group_partner_id')" t-att-value="group.id">
 										<t t-esc="group.name" />
 									</option>
 								</t>
