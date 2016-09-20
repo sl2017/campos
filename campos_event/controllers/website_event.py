@@ -189,18 +189,27 @@ class WebsiteEventEx(WebsiteEvent):
         return http.request.render(
             'campos_event.intl_groups_register_form', values)
 
-@http.route(['/event/<model("event.event"):event>/register/dk_groups'],
+    @http.route(['/event/<model("event.event"):event>/register/dk_groups/<scout_org_id>',
+                 '/event/<model("event.event"):event>/register/dk_groups'],
                 type='http', auth="public", website=True)
-    def event_register_dk_groups(self, event, **post):
+    def event_register_dk_groups(self, event, scout_org_id=None, **post):
         def validate(name, force_check=False):
             return self._validate(name, post, force_check=force_check)
 
         error = {}
         reg_obj = http.request.env['event.registration']
+        partner_obj = http.request.env['res.partner']
+        group = False
         registration_vals = {}
         _logger.info("Post? %s", http.request.httprequest.method)
         if post.get('group_name', False):
             post['name'] = post.get('group_name', '')
+            post['email'] = post.get('contact_email', '')
+            post['phone'] = post.get('contact_mobile', '')
+            post['tickets'] = '1'
+        elif post.get('group_partner_id', False):
+            group = partner_obj.sudo().browse(int(post.get('group_partner_id', False)))
+            post['name'] = group.name
             post['email'] = post.get('contact_email', '')
             post['phone'] = post.get('contact_mobile', '')
             post['tickets'] = '1'
@@ -220,18 +229,18 @@ class WebsiteEventEx(WebsiteEvent):
         _logger.info("Reg: %s - post: %s", registration_vals, post)
 
         if http.request.httprequest.method == 'POST' and registration_vals:
-            partner_obj = http.request.env['res.partner']
-            group = partner_obj.sudo().create({'name': post.get('name'),
-                                               'scoutgroup': True,
-                                               'country_id': post.get('group_country_id', False),
-                                               })
+            if not group:
+                group = partner_obj.sudo().create({'name': post.get('name'),
+                                                   'scoutgroup': True,
+                                                   'country_id': post.get('group_country_id', False),
+                                                   'scoutorg_id': post.get('scoutorg_id', False)
+                                                   })
             registration_vals['partner_id'] = group.id
-            for f in ['intl_org', 'natorg', 'friendship']:
+            registration_vals['organization_id'] = group.scoutorg_id.id
+            for f in ['intl_org', 'natorg']:
                 registration_vals[f] = post.get('group_%s' % (f), False)
-            for f in ['scout_qty_pre_reg', 'leader_qty_pre_reg']:
-                registration_vals[f] = int(post.get('group_%s' % (f), '0'))
             cvals = {}
-            post['contact_country_id'] = post.get('group_country_id', False)
+            post['contact_country_id'] = group.country_id.id
             for f in ['name', 'email', 'mobile', 'street', 'zip', 'city', 'country_id', 'lang']:
                 cvals[f] = post.get('contact_%s' % (f), False)
             contact = partner_obj.sudo().create(cvals)
@@ -241,23 +250,39 @@ class WebsiteEventEx(WebsiteEvent):
             if registration.partner_id:
                 registration._onchange_partner()
             registration.registration_open()
+            new_user = reg_obj.env['res.users'].sudo().create({'login':contact.email,
+                                                            'partner_id': contact.id,
+                                                            'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id)],
+                                                            'action_id': int(http.request.env['ir.config_parameter'].get_param('campos_event.group_login_home_action'))
+                                                         })
             return http.request.render(
                 'website_event_register_free.partner_register_confirm',
                 {'registration': registration})
 
         countries = http.request.env['res.country'].search([])
-        intl_orgs = http.request.env['campos.scout.org'].search([('country_id', '=', False)])
+        scoutorgs = http.request.env['campos.scout.org'].sudo().search([('country_id.code', '=', 'DK')])
         languages = http.request.env['res.lang'].search([])
+        groups = False
+        if scout_org_id:
+            groups = http.request.env['res.partner'].search([('scoutorg_id', '=', scout_org_id),('scoutgroup', '=', True)])
+        if not post.get('group_country_id', False):
+            post['group_country_id'] = http.request.env.ref('base.dk').id
+        if not post.get('contact_lang', False):
+            post['contact_lang'] = 'da_DK'
+        _logger.info('POST: %s', post)
+        _logger.info('ORGS: %s', scoutorgs)
         values = {
             'event': event,
             'range': range,
             'countries': countries,
-            'intl_orgs': intl_orgs,
+            'scoutorgs': scoutorgs,
             'tickets': post.get('tickets', 1),
             'validate': validate,
             'post': post,
             'languages': languages,
             'error': error,
+            'groups': groups,
+            'scout_org_id': scout_org_id,
         }
         return http.request.render(
             'campos_event.dk_groups_register_form', values)

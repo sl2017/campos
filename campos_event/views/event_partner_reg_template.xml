@@ -211,6 +211,135 @@
             </t>
         </template>
         
+        <template id="dk_groups_register_form" name="Danish Groups Event Pre-registration">
+            <t t-call="website.layout">
+                <div id="wrap">
+                <form t-attf-action="/event/#{event.id}/register/dk_groups/#{scout_org_id}" method="post" class="container">
+                	<h1><span t-esc="event.name"/></h1>
+                    <h2>Your Scout Group</h2>
+                    <t t-if="not scout_org_id">
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('group_name') and 'has-error' or ''}">
+                            <label class="control-label" for="group_name">Your Scout Groups name</label>
+                            <input type="text" name="group_name" class="form-control" t-att-value="post.get('group_name')" required="required"/>
+                        </div>
+                     <div class="clearfix" />
+                     </div>
+                    <div class="row">
+                        
+                        <div class="form-group col-lg-6 #{not validate('scoutorg_id') and 'has-error' or ''}">
+							<label class="control-label" for="group_intl_org">Member of</label>
+							
+								<select class="form-control" name="scoutorg_id" required="required">
+									<option value="">Select...</option>
+									<t t-foreach="scoutorgs or []" t-as="org">
+										<option t-att-value="org.id" t-att-selected="org.id == post.get('scoutorg_id')">
+											<t t-esc="org.name" />
+										</option>
+									</t>
+								</select>
+							
+						</div>
+					</div>
+					<div class="row">
+						<div t-attf-class="form-group #{error.get('group_country_id') and 'has-error' or ''} col-lg-6">
+							<label class="control-label" for="group_country_id">Country</label>
+							<select name="group_country_id" class="form-control" required="required">
+								<option value="">Country...</option>
+								<t t-foreach="countries or []" t-as="country">
+									<option t-if="country.id == post.get('group_country_id')" selected="selected" t-att-value="country.id">
+										<t t-esc="country.name" />
+									</option>
+									<option t-if="country.id != post.get('group_country_id')" t-att-value="country.id">
+										<t t-esc="country.name" />
+									</option>
+								</t>
+							</select>
+						</div>
+						<div class="clearfix" />
+					</div>
+					</t>
+					<t t-if="scout_org_id">	
+					<div class="row">
+                        <div t-attf-class="form-group #{error.get('group_partner_id_id') and 'has-error' or ''} col-lg-6">
+							<label class="control-label" for="group_partner_id">Groupname</label>
+							<select name="group_partner_id" class="form-control" required="required">
+								<option value="">Select Group...</option>
+								<t t-foreach="groups or []" t-as="group">
+									<option t-if="str(group.id) == post.get('group_partner_id')" selected="selected" t-att-value="group.id">
+										<t t-esc="group.name" />
+									</option>
+									<option t-if="str(group.id) != post.get('group_partner_id')" t-att-value="group.id">
+										<t t-esc="group.name" />
+									</option>
+								</t>
+							</select>
+						</div>
+						<div class="clearfix" />
+					</div>
+					</t>
+					
+					
+                    <h2>Your Contact Details</h2>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('contact_name') and 'has-error' or ''}">
+                            <label class="control-label" for="name">Your Name</label>
+                            <input type="text" name="contact_name" class="form-control" t-att-value="post.get('contact_name')" required="required" />
+                        </div>
+                        <div class="clearfix" />
+                    </div>
+                    <div class="row">
+                        <div t-attf-class="form-group col-lg-6 #{not validate('contact_email') and 'has-error' or ''}">
+                            <label class="control-label" for="contact_email">Email</label>
+                            <input type="email" name="contact_email" class="form-control" t-att-value="post.get('contact_email')" required="required" />
+                        </div>
+                        <div t-attf-class="form-group col-lg-6 #{not validate('contact_mobile') and 'has-error' or ''}">
+                            <label class="control-label" for="contact_mobile">Mobile phone</label>
+                            <input type="text" name="contact_mobile" class="form-control" t-att-value="post.get('contact_mobile')" required="required"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div t-attf-class="form-group col-lg-6 #{error.get('contact_street') and 'has-error' or ''}">
+										<label class="control-label" for="contact_street">Your Address</label>
+											<input type="text" t-att-value="post.get('contact_street')"
+												class="form-control" name="contact_street" required="True" />
+									</div>
+					    <div class="clearfix" />
+                    </div>
+                    <div class="row">
+									<div t-attf-class="form-group col-lg-6#{error.get('contact_zip') and 'has-error' or ''}">
+										<label class="control-label" for="zip">Zipcode</label>
+											<input type="text" t-att-value="post.get('contact_zip')"
+												class="form-control" name="contact_zip" required="True" />
+									</div>
+									<div t-attf-class="form-group col-lg-6 #{error.get('contact_city') and 'has-error' or ''}">
+										<label class="control-label" for="contact_city">City</label>
+											<input type="text" t-att-value="post.get('contact_city')"
+												class="form-control" name="contact_city" required="True" />
+									</div>
+                    </div>
+                    <div class="row">			
+						<div t-attf-class="form-group col-lg-6 #{error.get('contact_lang') and 'has-error' or ''}">
+							<label class="control-label" for="contact_lang">Preferred language</label>
+							<select name="contact_lang" class="form-control">
+								<option value="">Language...</option>
+								<t t-foreach="languages or []" t-as="language">
+									<option t-if="language.code == post.get('contact_lang')" selected="selected" t-att-value="language.code">
+										<t t-esc="language.name" />
+									</option>
+									<option t-if="language.code != post.get('contact_lang')" t-att-value="language.code">
+										<t t-esc="language.name" />
+									</option>
+								</t>
+							</select>
+						</div>
+					</div>
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">Register <span class="fa fa-long-arrow-right"/></button>
+                </form>
+                </div>
+            </t>
+        </template>
+        
         
      </data>
 </openerp>

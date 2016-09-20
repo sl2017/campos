@@ -98,6 +98,7 @@
         'views/event_partner_reg_template.xml',
         'views/meeting_proposal_template.xml',
         'views/event_track_view.xml',
+        'views/campos_camp_area.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
