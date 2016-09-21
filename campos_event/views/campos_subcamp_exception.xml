@@ -17,6 +17,7 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="camp_area_id"/>
                         <field name="subcamp_id" />
                     </group>
                 </sheet>
@@ -31,6 +32,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
+                <field name="camp_area_id"/>
                 <field name="subcamp_id"/>
                 <group expand="0" string="Group By...">
                  	<filter name="fSubcamp" string="Subcamp" icon="terp-personal" domain="[]" context="{'group_by':'subcamp_id'}"/>
@@ -45,6 +47,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="scoutorg_id"/>
+                <field name="camp_area_id"/>
                 <field name="subcamp_id"/>
             </tree>
         </field>
