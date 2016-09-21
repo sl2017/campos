@@ -12,6 +12,7 @@
 					<group>
 					<field name="number" />
 					<field name="name" />
+					<field name="camp_area_id"/>
 					<field name="subcamp_id"/>
 					</group>
 					 <notebook colspan="4">
@@ -33,6 +34,7 @@
 					<field name="number" />
 					<field name="name" />
 					<field name="subcamp_id"/>
+					<field name="camp_area_id"/>
 				</tree>
 			</field>
 		</record>
