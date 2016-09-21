@@ -16,6 +16,7 @@
                 'auth_signup',
     ],
     'data': [
+        'wizards/campos_group_signup.xml',
         'views/res_partner.xml',
         'security/campos_remote_system.xml',
         'views/campos_remote_system.xml',

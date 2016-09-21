@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_group_signup_form_view">
+        <field name="name">campos.group.signup.form (in campos_welcome)</field>
+        <field name="model">campos.group.signup</field>
+        <field name="arch" type="xml">
+        	<form string="Campos Group Signup">
+                <sheet>
+                    <field name="state" readonly="1"/>
+                    
+                    <group states="welcome,edit_group,edit_econ">
+                    <field name="reg_id" readonly="1"/>
+                    	<field name="edit_partner_id" invisible="1" />
+                        <field name="partner_name"/>
+                        <field name="partner_street"/>
+                        <field name="partner_street2"/>
+                        <field name="partner_zip"/>
+                        <field name="partner_city"/>
+                        <field name="partner_country_id"/>
+                        <field name="partner_email"/>
+                    </group>
+                </sheet>
+            
+	    <footer>
+			<button name='doit_welcome'
+					string='Save'
+					class='btn-primary'
+					type='object' states="welcome"/>
+					
+			<button name='doit_edit_group'
+					string='Save'
+					class='btn-primary'
+					type='object' states="edit_group"/>
+			<button name='doit_edit_econ'
+					string='Save'
+					class='btn-primary'
+					type='object' states="edit_econ"/>
+										
+			<button name='doit_done'
+						string='Open Pre-reg'
+						class='oe_highlight'
+						type='object'
+						states="done"/>
+		
+			<button string='Cancel'
+					special='cancel'/>
+	    </footer>
+	    </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_group_signup_act_window">
+        <field name="name">Group Signup</field>
+        <field name="res_model">campos.group.signup</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_group_signup_menu">
+        <field name="name">Group Signup</field>
+        <field name="parent_id" ref="campos_event.menu_campos_groups"/> 
+        <field name="action" ref="campos_group_signup_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>
