@@ -21,7 +21,7 @@ msgstr ""
 #. module: campos_preregistration
 #: sql_constraint:event.registration.polelist:0
 msgid " Please only make one line with each type of pole"
-msgstr ""
+msgstr "Bitte machen Sie nur eine Reihe mit jeder Art Stangenholz"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_age_group_id:0
@@ -59,7 +59,7 @@ msgstr "Land"
 #. module: campos_preregistration
 #: field:event.registration,group_country_code:0
 msgid "Country Code"
-msgstr ""
+msgstr "Länderkode"
 
 #. module: campos_preregistration
 #: field:event.registration,group_country_name:0
@@ -69,7 +69,7 @@ msgstr "Name des Landes"
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire_country:0
 msgid "Country of friendship group (optional)"
-msgstr ""
+msgstr "Heimat der Freundschaftgruppe (optional)"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_uid:0
@@ -99,12 +99,15 @@ msgstr "Ankunftstag"
 #, python-format
 msgid "Date of arrival and departure must be within camp period"
 msgstr ""
+"Die Daten der Ankunft und der Abreise müssen innerhalb der Lagerperiode "
+"liegen"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:106
 #, python-format
 msgid "Date of arrival must be before date of departure"
 msgstr ""
+"Das Datum des Ankunftstages muss vor das Datum des Abfahrtstages liegen"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_to_date:0
@@ -114,7 +117,7 @@ msgstr "Abfahrtstag"
 #. module: campos_preregistration
 #: field:event.registration,handicap_description:0
 msgid "Description of handicap / special considerations"
-msgstr ""
+msgstr "Beschreibung der Behinderungsart / besondere Rücksichtsnahmen"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,display_name:0
@@ -123,18 +126,18 @@ msgstr ""
 #: field:event.registration.polelist,display_name:0
 #: field:event.registration.transporttype,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Name"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Event"
-msgstr ""
+msgstr "Event"
 
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_preregistration
 msgid "Event Preregistration"
-msgstr ""
+msgstr "Vorausanmeldung zum Event"
 
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_preregistration_tree
@@ -144,12 +147,12 @@ msgstr ""
 #. module: campos_preregistration
 #: model:ir.model,name:campos_preregistration.model_event_registration
 msgid "Event Registration"
-msgstr ""
+msgstr "Anmeldung zum Event "
 
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_agegroup
 msgid "Event Registration Agegroup"
-msgstr ""
+msgstr "Altersgruppe der Eventanmeldung"
 
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_pioneeringpole
@@ -201,7 +204,7 @@ msgstr ""
 #: model:ir.ui.menu,name:campos_preregistration.event_preregistration_portal_menu
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_event_preregistration
 msgid "Group Preregistration"
-msgstr ""
+msgstr "Vorausanmeldung der Gruppe"
 
 #. module: campos_preregistration
 #: field:event.registration,association_groupid:0
@@ -359,7 +362,7 @@ msgstr ""
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_event_preregistration
 msgid "Preregistration"
-msgstr ""
+msgstr "Vorausanmeldung"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_type:0
