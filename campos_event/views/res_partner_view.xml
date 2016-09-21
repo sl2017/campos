@@ -10,10 +10,18 @@
 				 <page name="sales_purchases" position="after">
 				 <page string="Camp Info">
 				 <group>
+				 <group>
 				 	<field name="scoutgroup"/>
 				 	<field name="participant"/>
 				 	<field name="staff"/>
+				 	<field name="sponsor"/>
 				 	</group>
+				 	<group>
+				 	<field name="scoutorg_id"/>
+				 	<field name="municipality_id"/>
+				 	
+				 	</group>
+				 </group>
 				 </page>
 				 </page>
 				 </field>

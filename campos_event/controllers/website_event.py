@@ -233,7 +233,8 @@ class WebsiteEventEx(WebsiteEvent):
                 group = partner_obj.sudo().create({'name': post.get('name'),
                                                    'scoutgroup': True,
                                                    'country_id': post.get('group_country_id', False),
-                                                   'scoutorg_id': post.get('scoutorg_id', False)
+                                                   'scoutorg_id': post.get('scoutorg_id', False),
+                                                   'is_company': True,
                                                    })
             registration_vals['partner_id'] = group.id
             registration_vals['organization_id'] = group.scoutorg_id.id
@@ -243,6 +244,7 @@ class WebsiteEventEx(WebsiteEvent):
             post['contact_country_id'] = group.country_id.id
             for f in ['name', 'email', 'mobile', 'street', 'zip', 'city', 'country_id', 'lang']:
                 cvals[f] = post.get('contact_%s' % (f), False)
+            cvals['parent_id'] = group.id
             contact = partner_obj.sudo().create(cvals)
             registration_vals['contact_partner_id'] = contact.id
             registration = reg_obj.sudo().create(registration_vals)
