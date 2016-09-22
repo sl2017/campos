@@ -57,34 +57,15 @@ class PreregistrationParticipants(models.Model):
     participant_common_transport_to_camp_total  = fields.Integer(compute = '_calculate_common_transport', string='No. of common transport to camp')
     participant_common_transport_from_camp_total  = fields.Integer(compute = '_calculate_common_transport', string='No. of common transport from camp')
     participant_own_transport_type = fields.Many2one('event.registration.transporttype','Primary own transport')
-    
-#    participant_transport_note = fields.Char(compute = '_calculate_note', string='Note')
-    
-#    @api.depends ('participant_total','participant_transport_to_camp_total','participant_transport_from_camp_total')
-#    @api.multi
-#    def _calculate_note (self):
-#        for record in self:
-#            if record.participant_transport_to_camp_total<record.participant_total or record.participant_transport_from_camp_total<record.participant_total:
-#                record.participant_transport_note = 'Not all participants with transport.'
-#            if record.participant_transport_to_camp_total>record.participant_total or record.participant_transport_from_camp_total>record.participant_total:
-#                record.participant_transport_note = 'More than all participants with transport.'
-    @api.one
-    def _default_start_date (self):   
-        # 21-30 
-        return '2017-07-07'         
-    
+
     @api.depends ('participant_total','participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
     @api.one
     def _calculate_common_transport (self):
         for record in self:
             record.participant_common_transport_to_camp_total = record.participant_total - record.participant_own_transport_to_camp_total
             record.participant_common_transport_from_camp_total = record.participant_total - record.participant_own_transport_from_camp_total
-                
-    @api.depends ('participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
-    @api.one
-    def _clear_participant_own_transport_type(self):
-        if self.participant_own_transport_to_camp_total==0 and self.participant_own_transport_from_camp_total==0:
-            self.participant_own_transport_type = ''
+            if (record.participant_own_transport_to_camp_total==0 and record.participant_own_transport_from_camp_total==0):
+                record.participant_own_transport_type=None
 
     def _check_from_before_end(self):
         if self.participant_from_date < self.participant_to_date:
@@ -98,6 +79,13 @@ class PreregistrationParticipants(models.Model):
             raise exceptions.ValidationError(_('Own transport to camp more than total participants'))
         if self.participant_own_transport_from_camp_total>self.participant_total:
             raise exceptions.ValidationError(_('Own transport from camp more than total participants'))
+    
+    @api.multi
+    @api.constrains('participant_own_transport_to_camp_total','participant_own_transport_from_camp_total','participant_own_transport_type')
+    def validation_own_transport_type(self):
+        for record in self:
+            if (record.participant_own_transport_to_camp_total>0 or record.participant_own_transport_from_camp_total>0) and record.participant_own_transport_type.name==False:
+                raise exceptions.ValidationError(_('Primary own transport must be chosen when number of own transport to or from camp is greater than 0'))
 
     @api.one
     @api.constrains('participant_from_date', 'participant_to_date')
