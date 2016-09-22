@@ -10,7 +10,7 @@
                     <input type="hidden" t-att-value="tickets" name="tickets" />
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('name') and 'has-error' or ''}">
-                            <label class="control-label" for="name">Your Name</label>
+                            <label class="control-label" for="name">Your Name<span class="text-danger">*</span></label>
                             <input type="text" name="name" class="form-control" t-att-value="post.get('name')" required="required" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('reg_organization_id') and 'has-error' or ''}" >
@@ -30,13 +30,13 @@
                             <input type="text" name="phone" class="form-control" t-att-value="post.get('phone')" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('mobile') and 'has-error' or ''}">
-                            <label class="control-label" for="mobile">Mobile</label>
+                            <label class="control-label" for="mobile">Mobile<span class="text-danger">*</span></label>
                             <input type="mobile" name="mobile" class="form-control" t-att-value="post.get('mobile')" required="required" />
                         </div>
                     </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('email') and 'has-error' or ''}">
-                            <label class="control-label" for="email">Email</label>
+                            <label class="control-label" for="email">Email<span class="text-danger">*</span></label>
                             <input type="text" name="email" class="form-control" t-att-value="post.get('email')" required="required" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('skype') and 'has-error' or ''}">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('street') and 'has-error' or ''}">
-                            <label class="control-label" for="street">Street</label>
+                            <label class="control-label" for="street">Street<span class="text-danger">*</span></label>
                             <input type="text" name="street" class="form-control" t-att-value="post.get('street')" required="required" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('street2') and 'has-error' or ''}">
@@ -56,17 +56,17 @@
                     </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('zip') and 'has-error' or ''}">
-                            <label class="control-label" for="zip">Zip</label>
+                            <label class="control-label" for="zip">Zip<span class="text-danger">*</span></label>
                             <input type="text" name="zip" class="form-control" t-att-value="post.get('zip')" required="required" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('city') and 'has-error' or ''}">
-                            <label class="control-label" for="city">city</label>
+                            <label class="control-label" for="city">city<span class="text-danger">*</span></label>
                             <input type="text" name="city" class="form-control" t-att-value="post.get('city')" />
                         </div>
                     </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('birthdate') and 'has-error' or ''}">
-                            <label class="control-label" for="birthdate">Birthdate</label>
+                            <label class="control-label" for="birthdate">Birthdate<span class="text-danger">*</span></label>
                             <input type="date" id="birthdate" name="birthdate" placeholder="åååå-mm-dd" class="form-control" t-att-value="post.get('birthdate')" required="required" />
                         </div>
                     </div>
@@ -89,18 +89,18 @@
                     <h2>Your Scout Group</h2>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('group_name') and 'has-error' or ''}">
-                            <label class="control-label" for="group_name">Your Scout Groups name</label>
+                            <label class="control-label" for="group_name">Your Scout Groups name<span class="text-danger">*</span></label>
                             <input type="text" name="group_name" class="form-control" t-att-value="post.get('group_name')" required="required"/>
                         </div>
                      <div class="clearfix" />
                      </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('group_natorg') and 'has-error' or ''}">
-                            <label class="control-label" for="group_natorg">National Scout Organization</label>
+                            <label class="control-label" for="group_natorg">National Scout Organization<span class="text-danger">*</span></label>
                             <input type="text" name="group_natorg" class="form-control" t-att-value="post.get('group_natorg')" required="required"/>
                         </div>
                         <div class="form-group col-lg-6 #{not validate('group_intl_org') and 'has-error' or ''}">
-							<label class="control-label" for="group_intl_org">Member of</label>
+							<label class="control-label" for="group_intl_org">Member of<span class="text-danger">*</span></label>
 							
 								<select class="form-control" name="group_intl_org" required="required">
 									<option value="">Select...</option>
@@ -115,7 +115,7 @@
 					</div>
 					<div class="row">
 						<div t-attf-class="form-group #{error.get('group_country_id') and 'has-error' or ''} col-lg-6">
-							<label class="control-label" for="group_country_id">Country</label>
+							<label class="control-label" for="group_country_id">Country<span class="text-danger">*</span></label>
 							<select name="group_country_id" class="form-control" required="required">
 								<option value="">Country...</option>
 								<t t-foreach="countries or []" t-as="country">
@@ -132,12 +132,12 @@
 					</div>	
 					<div class="row">
                         <div t-attf-class="form-group col-lg-6 #{error.get('group_scout_qty_pre_reg') and 'has-error' or ''}">
-										<label class="control-label" for="group_scout_qty_pre_reg">Estimated number of scouts/girlguides</label>
+										<label class="control-label" for="group_scout_qty_pre_reg">Estimated number of scouts/girlguides<span class="text-danger">*</span></label>
 											<input type="text" t-att-value="post.get('group_scout_qty_pre_reg')"
 												class="form-control" name="group_scout_qty_pre_reg" required="required"/>
 									</div>
 						<div t-attf-class="form-group col-lg-6 #{error.get('group_leader_qty_pre_reg') and 'has-error' or ''}">
-										<label class="control-label" for="group_leader_qty_pre_reg">Estimated number of leaders/scoutsmasters</label>
+										<label class="control-label" for="group_leader_qty_pre_reg">Estimated number of leaders/scoutsmasters<span class="text-danger">*</span></label>
 										
 											<input type="text" t-att-value="post.get('group_leader_qty_pre_reg')"
 												class="form-control" name="group_leader_qty_pre_reg" required="required"/>
@@ -220,7 +220,7 @@
                     <t t-if="not scout_org_id">
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('group_name') and 'has-error' or ''}">
-                            <label class="control-label" for="group_name">Your Scout Groups name</label>
+                            <label class="control-label" for="group_name">Your Scout Groups name<span class="text-danger">*</span></label>
                             <input type="text" name="group_name" class="form-control" t-att-value="post.get('group_name')" required="required"/>
                         </div>
                      <div class="clearfix" />
@@ -228,7 +228,7 @@
                     <div class="row">
                         
                         <div class="form-group col-lg-6 #{not validate('scoutorg_id') and 'has-error' or ''}">
-							<label class="control-label" for="group_intl_org">Member of</label>
+							<label class="control-label" for="group_intl_org">Member of<span class="text-danger">*</span></label>
 							
 								<select class="form-control" name="scoutorg_id" required="required">
 									<option value="">Select...</option>
@@ -243,7 +243,7 @@
 					</div>
 					<div class="row">
 						<div t-attf-class="form-group #{error.get('group_country_id') and 'has-error' or ''} col-lg-6">
-							<label class="control-label" for="group_country_id">Country</label>
+							<label class="control-label" for="group_country_id">Country<span class="text-danger">*</span></label>
 							<select name="group_country_id" class="form-control" required="required">
 								<option value="">Country...</option>
 								<t t-foreach="countries or []" t-as="country">
@@ -262,7 +262,7 @@
 					<t t-if="scout_org_id">	
 					<div class="row">
                         <div t-attf-class="form-group #{error.get('group_partner_id_id') and 'has-error' or ''} col-lg-6">
-							<label class="control-label" for="group_partner_id">Groupname</label>
+							<label class="control-label" for="group_partner_id">Groupname<span class="text-danger">*</span></label>
 							<select name="group_partner_id" class="form-control" required="required">
 								<option value="">Select Group...</option>
 								<t t-foreach="groups or []" t-as="group">
@@ -283,24 +283,24 @@
                     <h2>Your Contact Details</h2>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('contact_name') and 'has-error' or ''}">
-                            <label class="control-label" for="name">Your Name</label>
+                            <label class="control-label" for="name">Your Name<span class="text-danger">*</span></label>
                             <input type="text" name="contact_name" class="form-control" t-att-value="post.get('contact_name')" required="required" />
                         </div>
                         <div class="clearfix" />
                     </div>
                     <div class="row">
                         <div t-attf-class="form-group col-lg-6 #{not validate('contact_email') and 'has-error' or ''}">
-                            <label class="control-label" for="contact_email">Email</label>
+                            <label class="control-label" for="contact_email">Email<span class="text-danger">*</span></label>
                             <input type="email" name="contact_email" class="form-control" t-att-value="post.get('contact_email')" required="required" />
                         </div>
                         <div t-attf-class="form-group col-lg-6 #{not validate('contact_mobile') and 'has-error' or ''}">
-                            <label class="control-label" for="contact_mobile">Mobile phone</label>
+                            <label class="control-label" for="contact_mobile">Mobile phone<span class="text-danger">*</span></label>
                             <input type="text" name="contact_mobile" class="form-control" t-att-value="post.get('contact_mobile')" required="required"/>
                         </div>
                     </div>
                     <div class="row">
                     <div t-attf-class="form-group col-lg-6 #{error.get('contact_street') and 'has-error' or ''}">
-										<label class="control-label" for="contact_street">Your Address</label>
+										<label class="control-label" for="contact_street">Your Address<span class="text-danger">*</span></label>
 											<input type="text" t-att-value="post.get('contact_street')"
 												class="form-control" name="contact_street" required="True" />
 									</div>
@@ -308,12 +308,12 @@
                     </div>
                     <div class="row">
 									<div t-attf-class="form-group col-lg-6#{error.get('contact_zip') and 'has-error' or ''}">
-										<label class="control-label" for="zip">Zipcode</label>
+										<label class="control-label" for="zip">Postcode<span class="text-danger">*</span></label>
 											<input type="text" t-att-value="post.get('contact_zip')"
 												class="form-control" name="contact_zip" required="True" />
 									</div>
 									<div t-attf-class="form-group col-lg-6 #{error.get('contact_city') and 'has-error' or ''}">
-										<label class="control-label" for="contact_city">City</label>
+										<label class="control-label" for="contact_city">City<span class="text-danger">*</span></label>
 											<input type="text" t-att-value="post.get('contact_city')"
 												class="form-control" name="contact_city" required="True" />
 									</div>

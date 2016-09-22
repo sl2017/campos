@@ -32,6 +32,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
+                <field name="scoutorg_id"/>
                 <field name="camp_area_id"/>
                 <field name="subcamp_id"/>
                 <group expand="0" string="Group By...">

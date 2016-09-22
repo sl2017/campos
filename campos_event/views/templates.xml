@@ -28,14 +28,14 @@
 									</t>
 
 									<div t-attf-class="form-group #{error.get('name') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="name">Your Name</label>
+										<label class="col-md-3 col-sm-4 control-label" for="name">Your Name<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('name')"
 												class="form-control" name="name" required="True" />
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('email') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="email">Your Email</label>
+										<label class="col-md-3 col-sm-4 control-label" for="email">Your Email<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="email" t-att-value="default.get('email')"
 												class="form-control" name="email" required="True" />
@@ -56,21 +56,21 @@
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('street') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="street">Your Address</label>
+										<label class="col-md-3 col-sm-4 control-label" for="street">Your Address<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('street')"
 												class="form-control" name="street" required="True" />
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('zip') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="zip">Zipcode</label>
+										<label class="col-md-3 col-sm-4 control-label" for="zip">Zipcode<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('zip')"
 												class="form-control" name="zip" required="True" />
 										</div>
 									</div>
 									<div t-attf-class="form-group #{error.get('city') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="city">City</label>
+										<label class="col-md-3 col-sm-4 control-label" for="city">City<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('city')"
 												class="form-control" name="city" required="True" />
