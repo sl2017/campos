@@ -93,6 +93,12 @@ class CamposGroupSignup(models.TransientModel):
                 vals['camp_area_id'] = wizard.reg_id.partner_id.municipality_id.camp_area_id.id
             if vals:
                 wizard.reg_id.write(vals)
+            template = self.env.ref('campos_welcome.treasurer_mail')
+            assert template._name == 'email.template'
+            try:
+                template.send_mail(wizard.reg_id.id)
+            except:
+                pass
             wizard.state = 'done'
  
         return self.do_reopen_form()
