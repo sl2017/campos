@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-21 19:46+0000\n"
-"PO-Revision-Date: 2016-09-21 19:46+0000\n"
+"POT-Creation-Date: 2016-09-23 12:27+0000\n"
+"PO-Revision-Date: 2016-09-23 12:27+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -332,7 +332,7 @@ msgstr ""
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_subcamp
 msgid "Campos Subcamp"
-msgstr ""
+msgstr "Underlejr"
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_subcamp_exception
@@ -652,7 +652,7 @@ msgstr "Grupper efter"
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
 msgid "Groupname"
-msgstr ""
+msgstr "Gruppe/Kreds navn"
 
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_groups
@@ -759,7 +759,7 @@ msgstr "Job/udvalg"
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_jobber
 msgid "Jobber"
-msgstr ""
+msgstr "Jobber"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -837,13 +837,13 @@ msgstr "Medlem"
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Mobile"
-msgstr "Mobil telefon"
+msgstr "Mobiltelefon"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Mobile phone"
-msgstr "Mobil telefon"
+msgstr "Mobiltelefon"
 
 #. module: campos_event
 #: view:campos.municipality:campos_event.municipality_form
@@ -955,6 +955,11 @@ msgstr "Telefon"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+msgid "Postcode"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Preferred language"
 msgstr "Foretrukket sprog"
@@ -993,7 +998,7 @@ msgstr "Rediger svar"
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Register"
-msgstr ""
+msgstr "Registrer"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -1087,7 +1092,7 @@ msgstr "Søg"
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
 msgid "Select Group..."
-msgstr ""
+msgstr "Vælg gruppe/kreds"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -1424,7 +1429,6 @@ msgid "Zip"
 msgstr "Postnr"
 
 #. module: campos_event
-#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"

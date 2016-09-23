@@ -49,7 +49,7 @@ msgstr "Godkendelse"
 #. module: campos_welcome
 #: view:campos.group.signup:campos_welcome.campos_group_signup_form_view
 msgid "Campos Group Signup"
-msgstr ""
+msgstr "gruppe/kreds forhåndstilmelding"
 
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_remote_system_act_window
@@ -78,7 +78,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:campos_welcome.campos_group_signup_act_window
 #: model:ir.ui.menu,name:campos_welcome.campos_group_signup_menu
 msgid "Group Signup"
-msgstr ""
+msgstr "Forhåndstilmelding grupper/kredse"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
@@ -120,7 +120,7 @@ msgstr ""
 #. module: campos_welcome
 #: view:campos.group.signup:campos_welcome.campos_group_signup_form_view
 msgid "Save"
-msgstr ""
+msgstr "Gem"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
@@ -128,7 +128,7 @@ msgid ""
 "To pre-register your group, you need to be a leader or boardmember in your "
 "group. Click Next to select scout Group to import"
 msgstr ""
-"For at kunne forhåndstilmelde eller ændre i tilmeldingen, slla du være leder"
+"For at kunne forhåndstilmelde eller ændre i tilmeldingen, skal du være leder"
 " i gruppen, eller bestyrelsesmedlem. Klik videre for at hente data om din "
 "gruppe"
 
@@ -140,4 +140,4 @@ msgstr ""
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
 msgid "Welcome to SL2017 Group Pre-registration"
-msgstr "Velkommen til SL2017 forhåndstilmelding for grupper"
+msgstr "Velkommen til SL2017 forhåndstilmelding for grupper/kredse"

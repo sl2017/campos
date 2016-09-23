@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-21 19:46+0000\n"
-"PO-Revision-Date: 2016-09-21 19:46+0000\n"
+"POT-Creation-Date: 2016-09-23 12:27+0000\n"
+"PO-Revision-Date: 2016-09-23 12:27+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -952,6 +952,11 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+msgid "Postcode"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Preferred language"
 msgstr ""
@@ -1421,7 +1426,6 @@ msgid "Zip"
 msgstr ""
 
 #. module: campos_event
-#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"
