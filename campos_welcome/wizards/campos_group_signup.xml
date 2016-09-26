@@ -67,6 +67,7 @@
         <field name="parent_id" ref="campos_event.menu_campos_groups"/> 
         <field name="action" ref="campos_group_signup_act_window"/>
         <field name="sequence" eval="16"/> <!-- TODO -->
+        <fiedl name="groups" ref="campos_welcome.group_campos_manuel_group"/>
     </record>
 
 </data>
