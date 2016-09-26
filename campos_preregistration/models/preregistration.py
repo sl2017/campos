@@ -32,18 +32,18 @@ class Preregistration(models.Model):
 
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
-    name = fields.Char('Age Group name', required=True)
+    name = fields.Char('Age Group name', required=True, translate=True)
     age_from = fields.Integer('From age', required=True)
     age_to = fields.Integer('To age', required=True)
     
 class PreregistrationPioneeringPole(models.Model):
     _name = 'event.registration.pioneeringpole'
-    name = fields.Char('Pioneering Pole Name', required=True)
+    name = fields.Char('Pioneering Pole Name', required=True, translate=True)
     length = fields.Integer('Length', required=True)
 
 class PreregistrationTransportType(models.Model):
     _name = 'event.registration.transporttype'
-    name = fields.Char('Transport Type Name', required=True)
+    name = fields.Char('Transport Type Name', required=True, translate=True)
 
 class PreregistrationParticipants(models.Model):
     _name = 'event.registration.participants'
@@ -57,6 +57,9 @@ class PreregistrationParticipants(models.Model):
     participant_common_transport_to_camp_total  = fields.Integer(compute = '_calculate_common_transport', string='No. of common transport to camp')
     participant_common_transport_from_camp_total  = fields.Integer(compute = '_calculate_common_transport', string='No. of common transport from camp')
     participant_own_transport_type = fields.Many2one('event.registration.transporttype','Primary own transport')
+
+    def _calculate_default_start_date (self):
+        return fields.Date.from_string(self.registration_id.event_begin_date)
 
     @api.depends ('participant_total','participant_own_transport_to_camp_total','participant_own_transport_from_camp_total')
     @api.one
