@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_remote_system_form_view">
+        <field name="name">campos.remote.system.form (in campos_welcome)</field>
+        <field name="model">campos.remote.system</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="scoutorg_id"/>
+                        <field name="host"/>
+    					<field name="port"/>
+    					<field name="protocol"/>
+    					<field name="db_name"/>
+    					<field name="db_user"/>
+    					<field name="db_pwd" password="1"/>
+    					<field name="oauth_provider_id"/>
+    					<field name="systype"/>
+    					<field name="treasurer_function"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_remote_system_search_view">
+        <field name="name">campos.remote.system.search (in campos_welcome)</field>
+        <field name="model">campos.remote.system</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="host"/>
+                <field name="db_name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_remote_system_tree_view">
+        <field name="name">campos.remote.system.tree (in campos_welcome)</field>
+        <field name="model">campos.remote.system</field>
+        <field name="arch" type="xml">
+            <tree>
+               
+                <field name="name"/>
+                <field name="oauth_provider_id"/>
+    			<field name="systype"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_remote_system_act_window">
+        <field name="name">Campos Remote System</field>
+        <field name="res_model">campos.remote.system</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_remote_system_menu">
+        <field name="name">Campos Remote System</field>
+        <field name="parent_id" ref="base.menu_users"/>
+        <field name="action" ref="campos_remote_system_act_window"/>
+        <field name="sequence" eval="50"/>
+    </record>
+
+</data>
+</openerp>

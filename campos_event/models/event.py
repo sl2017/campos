@@ -236,12 +236,12 @@ class EventRegistration(models.Model):
     friendship = fields.Char('Friendship group', size=64)
     municipality_id = fields.Many2one(
         'campos.municipality',
-        'Municipality',
-        select=True,
-        ondelete='set null')
+        'Municipality', related="partner_id.municipality_id")
+        
     ddsgroup = fields.Integer('DDS Gruppenr')
     region = fields.Char('Region', size=64)
-
+    
+    
     # Contact
     contact_partner_id = fields.Many2one(
         'res.partner', 'Contact', states={
@@ -266,7 +266,8 @@ class EventRegistration(models.Model):
         'Room/Camp Area',
         select=True,
         ondelete='set null')
-
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
+    
     @api.multi
     def action_edit_survey_response(self):
         fields = []

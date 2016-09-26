@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-30 02:00+0000\n"
-"PO-Revision-Date: 2016-07-30 02:00+0000\n"
+"POT-Creation-Date: 2016-09-23 12:27+0000\n"
+"PO-Revision-Date: 2016-09-23 12:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -179,11 +179,6 @@ msgid "# Issues"
 msgstr ""
 
 #. module: campos_event
-#: field:res.users,task_count:0
-msgid "# Tasks"
-msgstr ""
-
-#. module: campos_event
 #: view:website:campos_event.jobber_job_view
 #: view:website:campos_event.jobber_latest_jobs
 msgid "&nbsp;"
@@ -295,6 +290,12 @@ msgid "Call for Proposals"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.campos_camp_area_act_window
+#: model:ir.ui.menu,name:campos_event.campos_camp_area_menu
+msgid "Camp Areas"
+msgstr ""
+
+#. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 #: view:res.partner:campos_event.view_campos_res_partner_form1
 msgid "Camp Info"
@@ -307,18 +308,29 @@ msgid "CampOS"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_staff_del_prod
+msgid "Campos Staff Del Prod"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_subcamp
+msgid "Campos Subcamp"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_subcamp_exception
+msgid "Campos Subcamp_exceptions"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Cancel Registration"
 msgstr ""
 
 #. module: campos_event
-#: help:res.users,speaker:0
-msgid "Check this box if this contact is a speaker."
-msgstr ""
-
-#. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "City"
@@ -439,11 +451,13 @@ msgstr ""
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country..."
 msgstr ""
@@ -494,6 +508,7 @@ msgid "Din adgang til zExpense"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.partner_register_form
 msgid "Email"
@@ -598,6 +613,13 @@ msgid "GeoCoord"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.camp.area:campos_event.campos_camp_area_form_view
+#: view:campos.municipality:campos_event.municipality_form
+#: view:campos.subcamp:campos_event.campos_subcamp_form_view
+msgid "Geometry"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.campos_event_participant_search
 msgid "Group"
 msgstr ""
@@ -605,12 +627,29 @@ msgstr ""
 #. module: campos_event
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: view:campos.event.participant:campos_event.campos_event_participant_search
+#: view:campos.municipality:campos_event.municipality_search
+#: view:campos.subcamp.exception:campos_event.campos_subcamp_exception_search_view
 msgid "Group By..."
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
+msgid "Groupname"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_groups
+msgid "Groups"
 msgstr ""
 
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_manager
 msgid "HR/Manager"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Handed out items"
 msgstr ""
 
 #. module: campos_event
@@ -701,6 +740,11 @@ msgid "Job/Committee"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_jobber
+msgid "Jobber"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_signup
 msgid "Jobber Signup"
 msgstr ""
@@ -723,6 +767,7 @@ msgid "Korps"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Language..."
 msgstr ""
@@ -758,6 +803,7 @@ msgid "Meetings"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Member of"
 msgstr ""
@@ -777,11 +823,14 @@ msgid "Mobile"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Mobile phone"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.municipality:campos_event.municipality_form
+#: view:campos.municipality:campos_event.municipality_search
 #: view:campos.municipality:campos_event.municipality_tree
 #: model:ir.actions.act_window,name:campos_event.action_municipality_tree
 #: model:ir.ui.menu,name:campos_event.event_municipality_menu
@@ -888,8 +937,19 @@ msgid "Phone"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
+msgid "Postcode"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Preferred language"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_product_template
+msgid "Product Template"
 msgstr ""
 
 #. module: campos_event
@@ -918,6 +978,7 @@ msgid "Rediger svar"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Register"
 msgstr ""
@@ -933,8 +994,15 @@ msgid "Registration Survey"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.menu_action_group_registration
 #: model:ir.ui.menu,name:campos_event.menu_action_registration
 msgid "Registrations"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_group_registration
+#: model:ir.actions.act_window,name:campos_event.action_jobber_registration
+msgid "Registtrations"
 msgstr ""
 
 #. module: campos_event
@@ -1005,6 +1073,12 @@ msgid "Search"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
+msgid "Select Group..."
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.event_meeting_proposal
 #: view:website:campos_event.intl_groups_register_form
 msgid "Select..."
@@ -1057,11 +1131,6 @@ msgid "Skype"
 msgstr ""
 
 #. module: campos_event
-#: field:res.users,speaker:0
-msgid "Speaker"
-msgstr ""
-
-#. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_staff
 msgid "Staff"
 msgstr ""
@@ -1105,6 +1174,32 @@ msgid "Street2"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.ui.menu,name:campos_event.campos_subcamp_exception_menu
+msgid "Sub Camp exception"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.campos_subcamp_act_window
+msgid "Sub Camps"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.campos_subcamp_exception_act_window
+msgid "Sub camp exception"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.campos_subcamp_menu
+msgid "Sub camps"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.municipality:campos_event.municipality_search
+#: view:campos.subcamp.exception:campos_event.campos_subcamp_exception_search_view
+msgid "Subcamp"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.sp_confirm_prompt
@@ -1131,11 +1226,6 @@ msgstr ""
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
 msgid "Tags..."
-msgstr ""
-
-#. module: campos_event
-#: field:res.users,task_ids:0
-msgid "Tasks"
 msgstr ""
 
 #. module: campos_event
@@ -1237,6 +1327,7 @@ msgid "Website meta title"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
@@ -1248,6 +1339,7 @@ msgid "Your Committee"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Contact Details"
 msgstr ""
@@ -1259,6 +1351,7 @@ msgid "Your Email"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
@@ -1272,11 +1365,13 @@ msgid "Your Phone"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Group"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Groups name"
 msgstr ""

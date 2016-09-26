@@ -1,0 +1,159 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_preregistration
+# 
+# Translators:
+# Lykke Merete Højsting <lho@sl2017.dk>, 2016
+# christian Eggert Jørgensen <christian@eggert.dk>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-21 19:46+0000\n"
+"PO-Revision-Date: 2016-09-21 19:46+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
+"Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_agegroup
+msgid "Age Groups"
+msgstr "Aldersgrupper"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Agreements"
+msgstr "Aftale med"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+#: view:event.registration:campos_preregistration.view_tree_event_registration
+msgid "Contact Person"
+msgstr "Gruppens/kredsens kontaktperson"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Event"
+msgstr "Event"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_preregistration
+msgid "Event Preregistration"
+msgstr "Forhåndstilmelding Spejdernes Lejr 2017"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_preregistration_tree
+msgid "Event Preregistration Tree"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:ir.model,name:campos_preregistration.model_event_registration
+msgid "Event Registration"
+msgstr "Registrering til event"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_agegroup
+msgid "Event Registration Agegroup"
+msgstr "Event registrering aldersgrupper"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_pioneeringpole
+msgid "Event Registration Pioneering Poles"
+msgstr "Event registrering rafter"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_transporttype
+msgid "Event Registration Transporttype"
+msgstr "Event registrering transporttype"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Friendship group"
+msgstr "Venskabsgruppe"
+
+#. module: campos_preregistration
+#: model:res.groups,name:campos_preregistration.group_campos_groupleader
+msgid "Group Leader"
+msgstr "Gruppeleder"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_event_preregistration_tree
+msgid "Group Prereg.List"
+msgstr "Forhåndstilmelding"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.event_preregistration_portal_menu
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_event_preregistration
+msgid "Group Preregistration"
+msgstr "Forhåndstilmelding for grupper/kredse"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Handicaped participants"
+msgstr "Handicappede deltagere"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+msgid "Internal Information"
+msgstr "Interne informationer"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Participants"
+msgstr "Deltagere"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_pioneeringpole
+msgid "Pioneering Poles"
+msgstr "Rafter"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Pionering poles"
+msgstr "Rafter"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_event_preregistration
+msgid "Preregistration"
+msgstr "Forhåndstilmelding"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+#: view:event.registration:campos_preregistration.view_tree_event_registration
+msgid "Scout group"
+msgstr "Gruppenavn"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Sub Camp"
+msgstr "Underlejr"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Total"
+msgstr "Total"
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_transporttype
+msgid "Transport Types"
+msgstr "Transporttype"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Treasurer (invoice receiver)"
+msgstr "Kasserer (den der skal modtage fakturaer)"

@@ -31,67 +31,9 @@
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form,geoengine,graph</field>
+			<field name="domain">[('staff','=',True)]</field>
 		</record>
 		
-		<!-- Registration inherited form -->
-
-		<record id="view_dds_camp_reg_info_form1" model="ir.ui.view">
-			<field name="name">event.event.campos.reg.inherit1</field>
-			<field name="model">event.registration</field>
-			<field name="type">form</field>
-			<field name="inherit_id" ref="event.view_event_registration_form" />
-			<field name="arch" type="xml">
-				<xpath expr="/form/sheet/h1" position="after">
-					<div class="oe_right oe_button_box">
-						<button name="%(campos_event.action_event_participants_tree)d"
-							type="action" string="Participants"
-							help="Register Participant Details for this Group" />
-
-
-					</div>
-				</xpath>
-				<xpath expr="/form/sheet/group" position="after">
-				<notebook>
-				<page string="Camp Info">
-				 <group>
-				 	<field name="organization_id"/>
-				 	<field name="scoutgroup"/>
-				 	<field name="staff"/>
-				 	<field name="staff_qty_pre_reg" />
-				 	<field name="camp_area_id" domain="[('event_id','=', event_id)]" context="{'default_event_id': event_id}"/>
-				 	</group>
-				 </page>
-				 <page string="Registration Survey">
-				 	<group>
-				 		<field name="reg_user_input_line_ids" nolabel="1">
-				 			<tree>
-				 				<field name="question_id"/>
-				 				<field name="value_suggested" string="Reply"/>
-				 				<field name="value_text" string="Comment" />
-				 			</tree>
-				 		</field>
-				 		<newline/>
-				 		<button name="action_edit_survey_response" type="object" string="Rediger svar" />
-				 	
-				 	</group>
-				 
-				 </page>
-				 <page string="Intl. Pre-registration">
-				 <group>
-				 	<field name="contact_partner_id" context="{'show_email': True, 'show_address': True}"/>
-				 	<newline/>
-				 	<field name="scout_qty_pre_reg"/>
-				 	<field name="leader_qty_pre_reg"/>
-				 	<field name="natorg"/>
-				 	<field name="intl_org"/>
-				 	<field name="friendship"/>
-				 </group>
-				 </page>
-				 
-				 </notebook>
-				 </xpath>
-			</field>
-		</record>
 		
 		<record model="ir.ui.view" id="view_event_participant_reject_form">
 			<field name="name">registration.participant.reject.form</field>

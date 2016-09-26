@@ -1,0 +1,571 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_sponsor
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-21 19:46+0000\n"
+"PO-Revision-Date: 2016-09-21 19:46+0000\n"
+"Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_sponsor
+#: model:email.template,body_html:campos_sponsor.request_partnerconfirm
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.sponsor_kontaktperson_name},\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        Bekræft venligst din anmodning om et partnerskab ved at klikke på dette link: ${object.reg_confirm_url}\n"
+"                    </p>\n"
+"                    \n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "101 - 200"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "201 - 350"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "351 - 500"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "501 - 750"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.ui.menu,name:campos_sponsor.menu_activity_create
+msgid "Activities"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Activity Signup"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Adresse"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Adresse*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Afvis aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Afvis ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Aktivitets beskrivelse"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Aktivitets tilmelding"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Aktivitetsbeskrivelse"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Anden frivillig organisation"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Andet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Behandles"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Bekræft aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Bekræft partnerskab"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Bemanding på lejr"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+#: view:website:campos_sponsor.partner_signup
+msgid "Bemærkninger"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Bemærkninger til sponsorat"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Beskrivelse af aktiviteten*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "By*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Bynavn"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Detaljer"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_thankyou
+msgid ""
+"Din ansøgning om aktivitet er blevet registreret. Vi vender tilbage til dig "
+"hurtigst muligt!"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partners_thankyou
+msgid ""
+"Din ansøgning om partnerskab er registreret! Vi vender tilbage til dig "
+"hurtigst muligt."
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Diverse"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.model,name:campos_sponsor.model_model_activity
+#: model:ir.model,name:campos_sponsor.model_model_sponsor
+msgid "Email Thread"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Email*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Er et sponsorat:"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Eventuelle bemærkninger."
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Evt. CVR"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Evt. hjemmeside"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Firma"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partners_thankyou
+msgid "Fortsæt til vores hjemmeside"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Forventede antal deltagere pr. aktivitets periode*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Genopret ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Godkend aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Godkend partnerskab"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Hvad er næste skridt efter ansøgningen?"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Hvad forventer du aktiviteten koster?"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Hvad får deltagerne ud af aktiviteten?*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Hvad lærer deltagerne af aktiviteten?*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Hvad ønsker i ud af partnerskabet?"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+#: view:website:campos_sponsor.activity_signup
+msgid "Hvem henvender aktiviteten sig til?"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Hvilke idéer har i til en aktivitet?"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Idé"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+#: view:website:campos_sponsor.partner_signup
+msgid "Idé til aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+#: view:website:campos_sponsor.partner_signup
+msgid "Indsend ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Kan bidrage med (gerne flere krydser"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+#: view:website:campos_sponsor.activity_signup
+msgid "Kontaktoplysninger"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Kontaktperson"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Kontaktperson email"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Kontaktperson navn"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Kontaktperson telefonnummer"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Korte og præcise beskrivelser"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Lav til partnerskab"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Lav til sponsor"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Lås aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Lås ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Materialer"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Mere end 750"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.model,name:campos_sponsor.model_sponsor_modydelser
+msgid "Modydelser"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Målgruppe fra alder*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Målgruppe til alder*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Navn på Spejdergruppe/Organisation/Firma/Andet*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Navn på aktivitet*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Navn på firma/organisation"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Navn*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+msgid "Noter til aktivitet"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+#: view:website:campos_sponsor.partner_signup
+msgid "Næste skridt"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Partner Signup"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Partner Signup Form"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Partnerskab"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:email.template,subject:campos_sponsor.request_partnerconfirm
+msgid "Partnerskab med SL2017"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Partnerskabsnavn"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Postnr*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Postnummer"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Privat person"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.actions.act_window,name:campos_sponsor.action_activity_create
+msgid "SL2017 Activity overview"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.ui.menu,name:campos_sponsor.menu_partner_create
+msgid "SL2017 Partner"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.actions.act_window,name:campos_sponsor.action_partner_create
+msgid "SL2017 Partner oversigt"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.ui.menu,name:campos_sponsor.menu_sponsor_create
+msgid "SL2017 Sponsor"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.actions.act_window,name:campos_sponsor.action_sponsor_create
+msgid "SL2017 Sponsor oversigt"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Spejdergruppe"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.ui.menu,name:campos_sponsor.menu_sponsorpartner_create
+msgid "Sponsor og Partner"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Sponsorat bevilliget"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Sponsorat/fond"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Sponsornavn"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:res.groups,name:campos_sponsor.group_campos_sponsorudvalg
+msgid "Sponsorudvalg"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_thankyou
+msgid "Tak for din ansøgning!"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partners_thankyou
+msgid "Tak!"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Telefon*"
+msgstr ""
+
+#. module: campos_sponsor
+#: model:ir.model,name:campos_sponsor.model_sponsor_temaer
+msgid "Temaer"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Til ansøgning"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Til potentiel"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_thankyou
+msgid "Tilbage til forside"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Tilhørsforhold*"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+msgid "Udvalgsfelter"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.activity_signup
+msgid "Under 50"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Vi kan levere"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Viden/sparring"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.activity:campos_sponsor.view_form_activity_create
+#: view:website:campos_sponsor.activity_signup
+msgid "Økonomi"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:model.sponsor:campos_sponsor.view_form_sponsor_create
+#: view:website:campos_sponsor.partner_signup
+msgid "Ønsker fra partnerskabet"
+msgstr ""
