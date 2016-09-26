@@ -113,5 +113,6 @@ class CamposGroupSignup(models.TransientModel):
                 'res_id': wizard.reg_id.id,  # the current wizard record
                 'view_type': 'form',
                 'view_mode': 'form',
-                'view_id': view.id
+                'view_id': view.id,
+                'target': 'inline',
                 }
