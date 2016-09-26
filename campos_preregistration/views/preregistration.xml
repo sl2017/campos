@@ -63,7 +63,8 @@
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
-										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1">
+											<p><b>This is not a binding order for pioneering poles</b></p>
 											<tree editable="bottom">
 												<field name="pioneeringpole_id"  options="{'no_create': True}"/>
 												<field name="polecount" sum="Total"/>
@@ -96,6 +97,7 @@
 								<page string="Sub Camp">
 									<group>
 										<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+										<field name="camp_area_id"  readonly="1"  options="{'no_create': True}"/>
 									</group>
 								</page>
 							</notebook>
@@ -145,7 +147,8 @@
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
-										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list">
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1">
+											<p><b>This is not a binding order for pioneering poles</b></p>
 											<tree editable="bottom">
 												<field name="pioneeringpole_id" options="{'no_create': True}"/>
 												<field name="polecount" sum="Total"/>
@@ -178,6 +181,7 @@
 								<page string="Sub Camp">
 									<group>
 										<field name="subcamp_id"  options="{'no_create': True}"/>
+										<field name="camp_area_id" options="{'no_create': True}"/>
 									</group>
 								</page>
 								<page string="Internal Information">
