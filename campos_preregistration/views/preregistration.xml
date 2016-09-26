@@ -96,6 +96,7 @@
 								<page string="Sub Camp">
 									<group>
 										<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+										<field name="camp_area_id"  readonly="1"  options="{'no_create': True}"/>
 									</group>
 								</page>
 							</notebook>
@@ -178,6 +179,7 @@
 								<page string="Sub Camp">
 									<group>
 										<field name="subcamp_id"  options="{'no_create': True}"/>
+										<field name="camp_area_id" options="{'no_create': True}"/>
 									</group>
 								</page>
 								<page string="Internal Information">
