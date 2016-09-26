@@ -114,5 +114,5 @@ class CamposGroupSignup(models.TransientModel):
                 'view_type': 'form',
                 'view_mode': 'form',
                 'view_id': view.id,
-                'target': 'inline',
+                #'target': 'inline',
                 }
