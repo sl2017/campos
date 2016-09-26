@@ -22,17 +22,17 @@ msgstr ""
 #. module: campos_preregistration
 #: sql_constraint:event.registration.polelist:0
 msgid " Please only make one line with each type of pole"
-msgstr ""
+msgstr "Der må kun indberettes samme længde af rafter en gang"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_age_group_id:0
 msgid "Age Group"
-msgstr ""
+msgstr "Aldersgruppe"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,name:0
 msgid "Age Group name"
-msgstr ""
+msgstr "Navn på aldersgruppe"
 
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_agegroup
@@ -60,7 +60,7 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire_country:0
 msgid "Country of friendship group (optional)"
-msgstr ""
+msgstr "Venskabsgruppes land"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_uid:0
@@ -83,29 +83,29 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_from_date:0
 msgid "Date of arrival"
-msgstr ""
+msgstr "ankomst dag"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:108
 #, python-format
 msgid "Date of arrival and departure must be within camp period"
-msgstr ""
+msgstr "Dato for ankomst og afrejse skal ligge indenfor lejrperioden "
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:95
 #, python-format
 msgid "Date of arrival must be before date of departure"
-msgstr ""
+msgstr "Ankomst dag skal ligge før afrejsedag"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_to_date:0
 msgid "Date of departure"
-msgstr ""
+msgstr "Afrejsedag"
 
 #. module: campos_preregistration
 #: field:event.registration,handicap_description:0
 msgid "Description of handicap / special considerations"
-msgstr ""
+msgstr "Deltagere med særlige behov"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,display_name:0
@@ -161,17 +161,17 @@ msgstr "Venskabsgruppe"
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_name:0
 msgid "Friendship group name, association, country"
-msgstr ""
+msgstr "Venskabsgruppes navn, korps"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_info:0
 msgid "Friendship group other info"
-msgstr ""
+msgstr "Andre informationer om venskabsgruppen"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,age_from:0
 msgid "From age"
-msgstr ""
+msgstr "Fra alder"
 
 #. module: campos_preregistration
 #: model:res.groups,name:campos_preregistration.group_campos_groupleader
@@ -212,7 +212,7 @@ msgstr "Interne informationer"
 #. module: campos_preregistration
 #: field:event.registration,internal_information:0
 msgid "Internal information"
-msgstr ""
+msgstr "Intern information"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,__last_update:0
@@ -249,54 +249,58 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_from_camp_total:0
 msgid "No. of common transport from camp"
-msgstr ""
+msgstr "Antal der deltager i fælles transporten FRA lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_to_camp_total:0
 msgid "No. of common transport to camp"
-msgstr ""
+msgstr "Antal der deltager i fællestransprten TIL lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_from_camp_total:0
 msgid "No. of own transport from camp"
-msgstr ""
+msgstr "Antal der deltager i egen transport FRA lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_to_camp_total:0
 msgid "No. of own transport to camp"
-msgstr ""
+msgstr "Antal af deltager der deltager i egen transport TIL lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_total:0
 msgid "Number of participants"
-msgstr ""
+msgstr "Antal af deltagere"
 
 #. module: campos_preregistration
 #: field:event.registration.polelist,polecount:0
 msgid "Number of pioneering poles"
-msgstr ""
+msgstr "Antal rafter"
 
 #. module: campos_preregistration
 #: field:event.registration,group_camp_agreements:0
 msgid "Official agreements"
-msgstr ""
+msgstr "Aftaler, der er indgået med lejren"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:81
 #, python-format
 msgid "Own transport from camp more than total participants"
 msgstr ""
+"Antal indberettet med egen transport FRA lejren overstiger antallet af "
+"tilmeldte"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:79
 #, python-format
 msgid "Own transport to camp more than total participants"
 msgstr ""
+"Antal indberttee  med egen traport TIL lejren overstiger antallet  af "
+"tilmeldte"
 
 #. module: campos_preregistration
 #: field:event.registration,handicap:0
 msgid "Participant(s) with handicap or other special considerations?"
-msgstr ""
+msgstr "deltager med handicap eller andre specielle ønsker"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -307,7 +311,7 @@ msgstr "Deltagere"
 #. module: campos_preregistration
 #: field:event.registration.pioneeringpole,name:0
 msgid "Pioneering Pole Name"
-msgstr ""
+msgstr "Navn på rafte"
 
 #. module: campos_preregistration
 #: field:event.registration,pioneeringpole_ids:0
@@ -324,12 +328,12 @@ msgstr "Rafter"
 #. module: campos_preregistration
 #: field:event.registration,group_entrypoint:0
 msgid "Point of entry into Denmark"
-msgstr ""
+msgstr "Ankomssted i Danmark (kun udlændinge)"
 
 #. module: campos_preregistration
 #: field:event.registration.polelist,pioneeringpole_id:0
 msgid "Pole type"
-msgstr ""
+msgstr "Rafte type"
 
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_event_preregistration
@@ -339,7 +343,7 @@ msgstr "Forhåndstilmelding"
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_type:0
 msgid "Primary own transport"
-msgstr ""
+msgstr "Primære type af egen transport"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:88
@@ -348,17 +352,19 @@ msgid ""
 "Primary own transport must be chosen when number of own transport to or from"
 " camp is greater than 0"
 msgstr ""
+"Primær type af egen transport, skal vælges,når der er oprette et antal i "
+"egen transport tll eller fra lejren."
 
 #. module: campos_preregistration
 #: field:event.registration.participants,registration_id:0
 #: field:event.registration.polelist,registration_id:0
 msgid "Registration"
-msgstr ""
+msgstr "Registration"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group:0
 msgid "Request placement with friendship group?"
-msgstr ""
+msgstr "Ønsker aftale med venskabsgruppe"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -370,7 +376,7 @@ msgstr "Gruppe/Kredsnavn"
 #. module: campos_preregistration
 #: field:event.registration,handicap_needs:0
 msgid "Special needs due to handicap / special considerations"
-msgstr ""
+msgstr "Speielle ønsker på grund af handicap, eller andet fx allergier"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -388,7 +394,7 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration.agegroup,age_to:0
 msgid "To age"
-msgstr ""
+msgstr "Til alder"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -399,7 +405,7 @@ msgstr "Total"
 #. module: campos_preregistration
 #: field:event.registration.transporttype,name:0
 msgid "Transport Type Name"
-msgstr ""
+msgstr "Type af transport"
 
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_transporttype
@@ -415,9 +421,9 @@ msgstr "Kasserer (den der skal modtage fakturaer)"
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire:0
 msgid "Would like a friendship group?"
-msgstr ""
+msgstr "Ønsker en venskabsgruppe"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_home_hospitality:0
 msgid "Would like to offer home hospitality?"
-msgstr ""
+msgstr " Tilbyder home hospitality"
