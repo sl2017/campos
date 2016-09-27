@@ -29,10 +29,11 @@
             <page name="internal_notes" position="attributes">
            		<attribute name="groups" ref="campos_event.group_campos_admin"/>
            	</page>
+           	<!-- 
            	<page name="geo_localization" position="attributes">
            		<attribute name="groups" ref="campos_event.group_campos_admin"/>
            	</page>
-            
+			 -->            
         </field>
     </record>
 
