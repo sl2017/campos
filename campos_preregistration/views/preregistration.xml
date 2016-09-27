@@ -242,7 +242,6 @@
 		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration" groups="campos_event.group_campos_admin"/>
 
 		<!-- Menu Items -->
-		<menuitem id="event_preregistration_portal_menu" name="Group Preregistration" sequence="100" action="action_event_preregistration" />
 		
 		<menuitem id="menu_action_event_preregistration" parent="menu_event_preregistration" name="Group Preregistration" action="action_event_preregistration" groups="campos_event.group_campos_admin" sequence="20"/>
 		<menuitem id="menu_action_event_preregistration_tree" parent="menu_event_preregistration" name="Group Prereg.List" action="action_event_preregistration_tree" groups="campos_event.group_campos_admin" sequence="30"/>
