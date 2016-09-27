@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-26 17:14+0000\n"
-"PO-Revision-Date: 2016-09-26 17:14+0000\n"
+"POT-Creation-Date: 2016-09-27 12:56+0000\n"
+"PO-Revision-Date: 2016-09-27 12:56+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Gruppens/kredsens kontaktperson"
 #. module: campos_preregistration
 #: field:event.registration,group_country_code2:0
 msgid "Country Code2"
-msgstr ""
+msgstr "Lnadekode2"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire_country:0
@@ -69,7 +69,7 @@ msgstr "Venskabsgruppes land"
 #: field:event.registration.polelist,create_uid:0
 #: field:event.registration.transporttype,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Fremstillet af"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_date:0
@@ -78,21 +78,21 @@ msgstr ""
 #: field:event.registration.polelist,create_date:0
 #: field:event.registration.transporttype,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Oprettet"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_from_date:0
 msgid "Date of arrival"
-msgstr "ankomst dag"
+msgstr "Ankomst dag"
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:108
+#: code:addons/campos_preregistration/models/preregistration.py:111
 #, python-format
 msgid "Date of arrival and departure must be within camp period"
 msgstr "Dato for ankomst og afrejse skal ligge indenfor lejrperioden "
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:95
+#: code:addons/campos_preregistration/models/preregistration.py:98
 #, python-format
 msgid "Date of arrival must be before date of departure"
 msgstr "Ankomst dag skal ligge før afrejsedag"
@@ -105,7 +105,7 @@ msgstr "Afrejsedag"
 #. module: campos_preregistration
 #: field:event.registration,handicap_description:0
 msgid "Description of handicap / special considerations"
-msgstr "Deltagere med særlige behov"
+msgstr "Beskrivelse af handicap/ særlige behov. (ikke på deltagernavn)"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,display_name:0
@@ -114,7 +114,7 @@ msgstr "Deltagere med særlige behov"
 #: field:event.registration.polelist,display_name:0
 #: field:event.registration.transporttype,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -130,7 +130,7 @@ msgstr "Forhåndstilmelding Spejdernes Lejr 2017"
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_preregistration_tree
 msgid "Event Preregistration Tree"
-msgstr ""
+msgstr "Arrangement forhåndstilmelding træ"
 
 #. module: campos_preregistration
 #: model:ir.model,name:campos_preregistration.model_event_registration
@@ -184,7 +184,6 @@ msgid "Group Prereg.List"
 msgstr "Forhåndstilmelding"
 
 #. module: campos_preregistration
-#: model:ir.ui.menu,name:campos_preregistration.event_preregistration_portal_menu
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_event_preregistration
 msgid "Group Preregistration"
 msgstr "Forhåndstilmelding for grupper/kredse"
@@ -202,7 +201,7 @@ msgstr "Deltagere med særlige behov"
 #: field:event.registration.polelist,id:0
 #: field:event.registration.transporttype,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -221,7 +220,7 @@ msgstr "Intern information"
 #: field:event.registration.polelist,__last_update:0
 #: field:event.registration.transporttype,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Sidst ændret"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,write_uid:0
@@ -230,7 +229,7 @@ msgstr ""
 #: field:event.registration.polelist,write_uid:0
 #: field:event.registration.transporttype,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "sidst opdateret af"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,write_date:0
@@ -239,12 +238,12 @@ msgstr ""
 #: field:event.registration.polelist,write_date:0
 #: field:event.registration.transporttype,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "sidst opdateret"
 
 #. module: campos_preregistration
 #: field:event.registration.pioneeringpole,length:0
 msgid "Length"
-msgstr ""
+msgstr "Længde"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_from_camp_total:0
@@ -254,7 +253,7 @@ msgstr "Antal der deltager i fælles transporten FRA lejren"
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_to_camp_total:0
 msgid "No. of common transport to camp"
-msgstr "Antal der deltager i fællestransprten TIL lejren"
+msgstr "Antal der deltager i fællestransporten TIL lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_from_camp_total:0
@@ -264,7 +263,7 @@ msgstr "Antal der deltager i egen transport FRA lejren"
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_to_camp_total:0
 msgid "No. of own transport to camp"
-msgstr "Antal af deltager der deltager i egen transport TIL lejren"
+msgstr "Antal der deltager i egen transport TIL lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_total:0
@@ -282,7 +281,7 @@ msgid "Official agreements"
 msgstr "Aftaler, der er indgået med lejren"
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:81
+#: code:addons/campos_preregistration/models/preregistration.py:84
 #, python-format
 msgid "Own transport from camp more than total participants"
 msgstr ""
@@ -290,7 +289,7 @@ msgstr ""
 "tilmeldte"
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:79
+#: code:addons/campos_preregistration/models/preregistration.py:82
 #, python-format
 msgid "Own transport to camp more than total participants"
 msgstr ""
@@ -300,7 +299,7 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,handicap:0
 msgid "Participant(s) with handicap or other special considerations?"
-msgstr "deltager med handicap eller andre specielle ønsker"
+msgstr "Deltagere med handicap eller andre specielle ønsker"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -346,7 +345,7 @@ msgid "Primary own transport"
 msgstr "Primære type af egen transport"
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:88
+#: code:addons/campos_preregistration/models/preregistration.py:91
 #, python-format
 msgid ""
 "Primary own transport must be chosen when number of own transport to or from"
@@ -376,7 +375,7 @@ msgstr "Gruppe/Kredsnavn"
 #. module: campos_preregistration
 #: field:event.registration,handicap_needs:0
 msgid "Special needs due to handicap / special considerations"
-msgstr "Speielle ønsker på grund af handicap, eller andet fx allergier"
+msgstr "Specielle ønsker på grund af handicap, eller andet fx allergier"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -389,6 +388,12 @@ msgstr "Underlejr"
 msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "This is not a binding order for pioneering poles"
 msgstr ""
 
 #. module: campos_preregistration
