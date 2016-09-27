@@ -14,15 +14,25 @@
             	<page string="Remote Sync">
 					<group>
 						<field name="remote_system_id"/>
-						<field name="remote_int_id"/>
-						<field name="remote_ext_id"/>
-						<field name="remote_link_id"/>
+						<field name="remote_int_id" groups="campos_event.group_campos_admin" />
+						<field name="remote_ext_id" readonly="1"/>
+						<field name="remote_link_id" groups="campos_event.group_campos_admin"/>
 						<field name="last_import"/>
 					
 					</group>            	
             	
             	</page>
             </page>
+           	<page name="sales_purchases" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+            <page name="internal_notes" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+           	<page name="geo_localization" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+            
         </field>
     </record>
 
