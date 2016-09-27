@@ -254,7 +254,8 @@ class WebsiteEventEx(WebsiteEvent):
             registration.registration_open()
             new_user = reg_obj.env['res.users'].sudo().create({'login':contact.email,
                                                             'partner_id': contact.id,
-                                                            'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id)],
+                                                            'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id),
+                                                                          (4, partner_obj.env.ref('campos_welcome.group_campos_manuel_group').id)],
                                                             'action_id': int(http.request.env['ir.config_parameter'].get_param('campos_event.group_login_home_action'))
                                                          })
             return http.request.render(

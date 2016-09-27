@@ -74,13 +74,6 @@
 			<field name="domain">[('staff','=',True)]</field>
 		</record>
 		
-		<record id="action_group_registration" model="ir.actions.act_window">
-			<field name="name">Registtrations</field>
-			
-			<field name="res_model">event.registration</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form,geoengine,graph</field>
-			<field name="domain">[('scoutgroup','=',True)]</field>
-		</record>
+		
 	</data>
 </openerp>

@@ -84,7 +84,7 @@ class CamposGroupSignup(models.TransientModel):
             if not wizard.reg_id.partner_id.municipality_id:
                 wizard.reg_id.partner_id.geo_localize()
             cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', wizard.reg_id.partner_id.name)])
-            vals = []
+            vals = {}
             if cse:
                 vals['subcamp_id'] = cse.subcamp_id.id
                 vals['camp_area_id'] = cse.camp_area_id.id
@@ -113,5 +113,6 @@ class CamposGroupSignup(models.TransientModel):
                 'res_id': wizard.reg_id.id,  # the current wizard record
                 'view_type': 'form',
                 'view_mode': 'form',
-                'view_id': view.id
+                'view_id': view.id,
+                #'target': 'inline',
                 }

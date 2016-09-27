@@ -5,7 +5,7 @@
         <!-- Top menu item -->
         <menuitem name="CampOS"
             id="menu_campos"
-            groups="base.group_user"
+            groups="campos_event.group_campos_staff"
             sequence="45"/>
             
             
@@ -15,11 +15,6 @@
         	
         	<menuitem name="Events" id="menu_campos_event_event" action="event.action_event_view" parent="menu_campos_event" sequence="10" groups="campos_event.group_campos_admin"/>
 
-		<!-- Events Groups items -->
-        <menuitem name="Groups" id="menu_campos_groups" parent="menu_campos" sequence="20"/>
-			<menuitem name="Registrations"
-	            id="menu_action_group_registration" parent="menu_campos_groups" sequence="20"
-	            action="action_group_registration"  groups="campos_event.group_campos_admin"/>
 		
 		
 

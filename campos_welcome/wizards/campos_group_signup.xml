@@ -5,6 +5,37 @@
 <openerp>
 <data>
 
+	<record id="action_group_registration" model="ir.actions.act_window">
+			<field name="name">My Group</field>
+			
+			<field name="res_model">event.registration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('scoutgroup','=',True)]</field>
+		</record>
+		
+	<record id="action_tagwaarden_tree" model="ir.actions.act_window.view">
+    	<field name="view_mode">tree</field>
+    	<field name="view_id" ref="campos_preregistration.view_tree_event_registration" />
+    	<field name="act_window_id" ref="action_group_registration" />
+	</record>
+
+	<record id="action_tagwaarden_form" model="ir.actions.act_window.view">
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="campos_preregistration.view_form_preregistration_gl" />
+	    <field name="act_window_id" ref="action_group_registration" />
+	</record>
+
+	<menuitem name="Group Signup" id="menu_campos_groups_top" sequence="1"/>
+		
+	<!-- Events Groups items: Moved to Own top level Menu-->
+       <menuitem name="Pre-registration" id="menu_campos_groups" sequence="1" parent="menu_campos_groups_top"/>
+		<menuitem name="My Group"
+            id="menu_action_group_registration" parent="menu_campos_groups" sequence="10"
+            action="action_group_registration"/>
+		
+	
+	
     <record model="ir.ui.view" id="campos_group_signup_form_view">
         <field name="name">campos.group.signup.form (in campos_welcome)</field>
         <field name="model">campos.group.signup</field>
@@ -62,12 +93,6 @@
         <field name="context">{}</field>
     </record>
 
-    <record model="ir.ui.menu" id="campos_group_signup_menu">
-        <field name="name">Group Signup</field>
-        <field name="parent_id" ref="campos_event.menu_campos_groups"/> 
-        <field name="action" ref="campos_group_signup_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
-    </record>
-
+    <menuitem id="campos_group_signup_menu" name="Group Signup" parent="menu_campos_groups" action="campos_group_signup_act_window" sequence="30" groups="campos_welcome.group_campos_manuel_group"/>
 </data>
 </openerp>

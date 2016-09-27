@@ -112,6 +112,12 @@ class CamposRemoteSystem(models.Model):
                 return int(rd['memberNumber'])
 
     def syncPartner(self, remote_int_id=False, partner=False, is_company = False):
+        
+        def country_lookup(country):
+            if country:
+                return self.env['res.country'].search([('name', 'ilike', country)]).id
+            return False
+        
         if not remote_int_id and partner:
             remote_int_id = partner.remote_int_id
         if not remote_int_id:
@@ -126,7 +132,7 @@ class CamposRemoteSystem(models.Model):
                     'street': remote_partner.street,
                     'zip': remote_partner.zip,
                     'city': remote_partner.city,
-                    'country': remote_partner.country,
+                    'country_id': country_lookup(remote_partner.country_id.name),
                     'phone': remote_partner.phone,
                     'mobile': remote_partner.mobile,
                     'email': remote_partner.email,
@@ -152,7 +158,7 @@ class CamposRemoteSystem(models.Model):
                             'street': rd['addressFull'],
                             'zip': rd['organizationPostalCode'],
                             'city': rd['City'],
-                            'country': rd['Country'],
+                            'country_id': country_lookup(rd['Country']),
                             'phone': rd['organizationPhone'],
                             'mobile': rd['organizationMobilePhone'],
                             'email': rd['organizationEMail'],
@@ -173,7 +179,7 @@ class CamposRemoteSystem(models.Model):
                             'street': rd['addressFull'],
                             'zip': rd['userPostalCode'],
                             'city': rd['City'],
-                            'country': rd['Country'],
+                            'country_id': country_lookup(rd['Country']),
                             'phone': rd['userPrivatePhone'],
                             'mobile': rd['userMobilePhone'],
                             'email': rd['userEMail'],

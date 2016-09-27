@@ -50,7 +50,10 @@ class ResUsers(models.Model):
                          template_user = self.pool.get('ir.model.data').get_object(cr, 1, 'auth_signup', 'default_template_user')
                          self.pool('res.users').write(cr, 1, [ partner.user_ids[0].id], {'action_id': template_user.action_id.id,
                                                                                          'member_number': values['member_number'],
-                                                                                         'blaatlogin_ticket': values['blaatlogin_ticket']})
+                                                                                         'blaatlogin_ticket': values['blaatlogin_ticket'],
+                                                                                         'groups_id': [(4, self.env.ref('campos_preregistration.group_campos_groupleader').id),
+                                                                                                       (4, self.env.ref('campos_welcome.group_campos_imported_group').id)],
+                                                                                         'action_id': int(self.env['ir.config_parameter'].get_param('campos_event.import_login_home_action'))})
                     return (cr.dbname, partner.user_ids[0].login, values.get('password'))
                 else:
                     values['partner_id'] = partner_id
