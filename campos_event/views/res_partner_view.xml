@@ -54,7 +54,7 @@ for obj in self.browse(cr, uid, ids, context):
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-        	<field name="name">
+        	<field name="name" position="after">
         	<field name="scoutorg_id"/>
         	<filter string="Scoutgroup" name="fscoutgroup" domain="[('scoutgroup','=',1)]" />
         	<filter string="Staff" name="fstaff" domain="[('staff','=',1)]" />
