@@ -35,7 +35,7 @@
             action="action_group_registration"/>
             
        <menuitem name="Scout Groups"
-            id="menu_action_group_registration" parent="campos_preregistration.menu_action_event_preregistration" sequence="10"
+            id="menu_action_group_registration" parent="campos_preregistration.menu_event_preregistration" sequence="10"
             action="action_group_registration" groups="campos_event.group_campos_admin"/>     
             
             

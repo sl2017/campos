@@ -259,7 +259,7 @@ class WebsiteEventEx(WebsiteEvent):
                                                             'action_id': int(http.request.env['ir.config_parameter'].get_param('campos_event.group_login_home_action'))
                                                          })
             return http.request.render(
-                'website_event_register_free.partner_register_confirm',
+                'campos_event.dkgroup_register_confirm',
                 {'registration': registration})
 
         countries = http.request.env['res.country'].search([])

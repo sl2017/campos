@@ -340,6 +340,14 @@
             </t>
         </template>
         
+        <template id="dkgroup_register_confirm" name="Confirmation">
+            <t t-call="website.layout">
+                <div id="wrap" class="container">
+                    <h1>Thank you <span t-esc="registration.name" />!</h1>
+                    Your registration for <span t-esc="registration.event_id.name" /> succeeded!
+                </div>
+            </t>
+        </template>
         
      </data>
 </openerp>

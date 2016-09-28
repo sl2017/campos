@@ -14,6 +14,7 @@
                 'campos_event',
                 'auth_blaatlogin',
                 'auth_signup',
+                'base_geolocalize',
     ],
     'data': [
         "security/campos_welcome_security.xml",
