@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 12:56+0000\n"
-"PO-Revision-Date: 2016-09-27 12:56+0000\n"
+"POT-Creation-Date: 2016-09-28 18:57+0000\n"
+"PO-Revision-Date: 2016-09-28 18:57+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1817,6 +1817,7 @@ msgstr ""
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
+#: view:res.partner:campos_event.view_res_partner_filter
 #: field:res.partner,participant:0 field:res.users,participant:0
 #, python-format
 msgid "Participant"
@@ -2183,8 +2184,9 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,scoutgroup:0
-#: field:event.registration,scoutgroup:0 field:res.partner,scoutgroup:0
-#: field:res.users,scoutgroup:0
+#: field:event.registration,scoutgroup:0
+#: view:res.partner:campos_event.view_res_partner_filter
+#: field:res.partner,scoutgroup:0 field:res.users,scoutgroup:0
 msgid "Scoutgroup"
 msgstr ""
 
@@ -2386,6 +2388,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,staff:0 field:event.registration,staff:0
 #: model:res.groups,name:campos_event.group_campos_staff
+#: view:res.partner:campos_event.view_res_partner_filter
 #: field:res.partner,staff:0 field:res.users,staff:0
 msgid "Staff"
 msgstr ""
@@ -2558,6 +2561,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,teaser:0
 msgid "Teaser"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "Thank you"
 msgstr ""
 
 #. module: campos_event
@@ -2898,6 +2906,11 @@ msgid "Your question"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "Your registration for"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
 msgid "Your request has been submitted, we will get back to you soon."
 msgstr ""
@@ -2957,6 +2970,11 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.participant updated
 msgid "has been successfully updated."
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "succeeded!"
 msgstr ""
 
 #. module: campos_event

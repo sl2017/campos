@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 12:56+0000\n"
-"PO-Revision-Date: 2016-09-27 12:56+0000\n"
+"POT-Creation-Date: 2016-09-28 18:57+0000\n"
+"PO-Revision-Date: 2016-09-28 18:57+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -296,7 +296,7 @@ msgstr "Aftale med/kontaktperson"
 #: field:campos.event.participant,age:0
 #: field:campos.event.participant,context_age:0
 msgid "Age"
-msgstr ""
+msgstr "Alder"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -350,7 +350,7 @@ msgstr "Ansøgning"
 #. module: campos_event
 #: field:campos.event.participant,state:0
 msgid "Approval Procedure"
-msgstr ""
+msgstr "Godkendelses procedure"
 
 #. module: campos_event
 #: code:addons/campos_event/models/event.py:579
@@ -386,7 +386,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.event,attachment_id:0
 msgid "Attachments"
-msgstr ""
+msgstr "Vedhæftet"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -396,7 +396,7 @@ msgstr "Deltager i arragementet"
 #. module: campos_event
 #: field:campos.event.participant,att_received:0
 msgid "Attest modtaget"
-msgstr ""
+msgstr "Attest modtaget"
 
 #. module: campos_event
 #: field:campos.event.participant,bank_ids:0
@@ -416,7 +416,7 @@ msgstr ""
 #. module: campos_event
 #: model:geoengine.vector.layer,name:campos_event.geoengine_vector_layer_basictest0
 msgid "Basic ZIP"
-msgstr ""
+msgstr "Postnummer"
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
@@ -437,13 +437,13 @@ msgstr "Ønsker om møde på tværs"
 #: field:campos.municipality,camp_area_id:0
 #: field:campos.subcamp.exception,camp_area_id:0
 msgid "Camp Area"
-msgstr ""
+msgstr "Kvarter"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.campos_camp_area_act_window
 #: model:ir.ui.menu,name:campos_event.campos_camp_area_menu
 msgid "Camp Areas"
-msgstr ""
+msgstr "Kvarterer"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -454,7 +454,7 @@ msgstr "Lejr info"
 #. module: campos_event
 #: field:campos.event.participant,workas_planner:0
 msgid "Camp Planner"
-msgstr ""
+msgstr "Lejr planlægger"
 
 #. module: campos_event
 #: model:ir.module.category,name:campos_event.module_campos_category
@@ -485,17 +485,17 @@ msgstr "Afmeld tilmelding"
 #. module: campos_event
 #: selection:event.track,user_status:0
 msgid "Canceled"
-msgstr ""
+msgstr "Afvist"
 
 #. module: campos_event
 #: selection:campos.staff.del.prod,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Afvist"
 
 #. module: campos_event
 #: field:campos.committee.function.type,chairman:0
 msgid "Chairman"
-msgstr ""
+msgstr "Formand"
 
 #. module: campos_event
 #: help:campos.event.participant,is_company:0
@@ -681,7 +681,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,contact_address:0
 msgid "Complete Address"
-msgstr ""
+msgstr "Fuldstændig adresse"
 
 #. module: campos_event
 #: code:addons/campos_event/models/event.py:553
@@ -740,7 +740,7 @@ msgstr "Godkendt job"
 #: field:campos.job,par_contact_id:0
 #: field:event.registration,contact_partner_id:0
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: campos_event
 #: field:campos.event.participant,ref:0
@@ -750,7 +750,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,child_ids:0
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
@@ -795,7 +795,7 @@ msgstr "Opret bruger"
 #: field:campos.staff.del.prod,create_uid:0 field:campos.subcamp,create_uid:0
 #: field:campos.subcamp.exception,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Oprettet af"
 
 #. module: campos_event
 #: field:campos.camp.area,create_date:0 field:campos.committee,create_date:0
@@ -827,7 +827,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.registration,ddsgroup:0
 msgid "DDS Gruppenr"
-msgstr ""
+msgstr "DDS gruppenr"
 
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_municipality
@@ -837,12 +837,12 @@ msgstr "Kommunekode"
 #. module: campos_event
 #: field:campos.event.participant,date:0
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 #. module: campos_event
 #: field:campos.event.participant,birthdate:0
 msgid "Date of birth"
-msgstr ""
+msgstr "Fødselsdato"
 
 #. module: campos_event
 #: help:campos.committee,message_last_post:0
@@ -865,12 +865,12 @@ msgstr ""
 #. module: campos_event
 #: field:campos.staff.del.prod,del_by_partner_id:0
 msgid "Delivery by"
-msgstr ""
+msgstr "Afleveret af"
 
 #. module: campos_event
 #: field:campos.staff.del.prod,delivery_date:0
 msgid "Delivery date"
-msgstr ""
+msgstr "Afleveringsdato"
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
@@ -900,13 +900,13 @@ msgstr "Afmeld deltager og fjern adgang til systemet"
 #. module: campos_event
 #: selection:campos.event.participant,state:0
 msgid "Deregistered"
-msgstr ""
+msgstr "Afmeldt"
 
 #. module: campos_event
 #: field:campos.camp.area,desc:0 field:campos.committee,desc:0
 #: field:campos.job,desc:0
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.info_zexpense
@@ -934,12 +934,12 @@ msgstr ""
 #. module: campos_event
 #: field:event.registration,scout_division:0
 msgid "Division/District"
-msgstr ""
+msgstr "Division/distrikt/region"
 
 #. module: campos_event
 #: selection:campos.staff.del.prod,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Kladde"
 
 #. module: campos_event
 #: field:campos.event.participant,ean13:0
@@ -1019,7 +1019,7 @@ msgstr ""
 #: field:res.partner,event_registration_ids:0
 #: field:res.users,event_registration_ids:0
 msgid "Event registrations"
-msgstr ""
+msgstr "Forhåndstilmelding"
 
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_config_event
@@ -1036,7 +1036,7 @@ msgstr "eksport"
 #. module: campos_event
 #: field:campos.event.participant,fax:0
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
@@ -1059,7 +1059,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.registration,friendship:0
 msgid "Friendship group"
-msgstr ""
+msgstr "Venskabsgruppe"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
@@ -1150,7 +1150,7 @@ msgstr "Grupper efter"
 #. module: campos_event
 #: field:campos.subcamp.exception,name:0
 msgid "Group Name"
-msgstr ""
+msgstr "Gruppe/kreds navn"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -1165,12 +1165,12 @@ msgstr "HR/Manager"
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Handed out items"
-msgstr ""
+msgstr "Udleverede genstande"
 
 #. module: campos_event
 #: field:campos.event.participant,committee_id:0
 msgid "Have agreement with committee"
-msgstr ""
+msgstr "Har aftale med følgende udvalg"
 
 #. module: campos_event
 #: help:campos.committee,message_summary:0
@@ -1268,12 +1268,12 @@ msgstr "Interne noter"
 #. module: campos_event
 #: field:campos.event.participant,par_internal_note:0
 msgid "Internal note"
-msgstr ""
+msgstr "Interne noter"
 
 #. module: campos_event
 #: selection:event.event,regform:0
 msgid "International Groups"
-msgstr ""
+msgstr "International gruppe"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -1327,7 +1327,7 @@ msgstr "Job kategorier"
 #: field:campos.committee.function,job_title_id:0
 #: field:campos.committee.job.title,name:0
 msgid "Job Title"
-msgstr ""
+msgstr "Job titel"
 
 #. module: campos_event
 #: view:campos.job.when:campos_event.job_when_tree
@@ -1339,7 +1339,7 @@ msgstr "Hvornår"
 #. module: campos_event
 #: field:campos.committee.function,job_id:0
 msgid "Job annonce"
-msgstr ""
+msgstr "Job annonce"
 
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form
@@ -1380,7 +1380,7 @@ msgstr "Tilmeldings formular for Jobbere"
 #. module: campos_event
 #: field:campos.event.participant,workas_jobber:0
 msgid "Jobber on Camp"
-msgstr ""
+msgstr "Jobber på lejren"
 
 #. module: campos_event
 #: field:campos.committee,job_ids:0 view:campos.job:campos_event.job_tree
@@ -1415,7 +1415,7 @@ msgstr "Korps/organisation"
 #. module: campos_event
 #: field:campos.event.participant,lang:0
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -1429,7 +1429,7 @@ msgstr "Sprog..."
 #: field:campos.event.participant,message_last_post:0
 #: field:campos.job,message_last_post:0
 msgid "Last Message Date"
-msgstr ""
+msgstr "Dato for sidste meddelelse"
 
 #. module: campos_event
 #: field:campos.camp.area,__last_update:0
@@ -1448,7 +1448,7 @@ msgstr ""
 #: field:campos.subcamp,__last_update:0
 #: field:campos.subcamp.exception,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dato for idste ændring"
 
 #. module: campos_event
 #: field:campos.camp.area,write_uid:0 field:campos.committee,write_uid:0
@@ -1463,7 +1463,7 @@ msgstr ""
 #: field:campos.staff.del.prod,write_uid:0 field:campos.subcamp,write_uid:0
 #: field:campos.subcamp.exception,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Sidst opdateret af"
 
 #. module: campos_event
 #: field:campos.camp.area,write_date:0 field:campos.committee,write_date:0
@@ -1478,18 +1478,18 @@ msgstr ""
 #: field:campos.staff.del.prod,write_date:0 field:campos.subcamp,write_date:0
 #: field:campos.subcamp.exception,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Sidst opdateret d."
 
 #. module: campos_event
 #: field:campos.event.participant,appr_leader:0
 msgid "Leder godkendt"
-msgstr ""
+msgstr "Leder godkendt"
 
 #. module: campos_event
 #: code:addons/campos_event/controllers/main.py:190
 #, python-format
 msgid "Ledige job"
-msgstr ""
+msgstr "Ledige job"
 
 #. module: campos_event
 #: field:campos.job.tag,parent_left:0
@@ -1504,7 +1504,7 @@ msgstr "Login mail"
 #. module: campos_event
 #: field:campos.committee,parent_id:0
 msgid "Main Committee"
-msgstr ""
+msgstr "Hoved udvalg"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -1519,12 +1519,12 @@ msgstr "Masseudsendelse"
 #. module: campos_event
 #: field:campos.camp.area,max_cap:0
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 #. module: campos_event
 #: field:campos.job,max_qty_jobbere:0
 msgid "Maximun numbers of staff"
-msgstr ""
+msgstr "Maksimum antal i stab"
 
 #. module: campos_event
 #: field:campos.event.participant,image_medium:0
@@ -1542,7 +1542,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.track,wanted_comm_id:0
 msgid "Meeting Wanted With Committee"
-msgstr ""
+msgstr "Møde ønskes med udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
@@ -1590,7 +1590,7 @@ msgstr "Medlem"
 #: field:campos.committee.function,message_ids:0
 #: field:campos.event.participant,message_ids:0 field:campos.job,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Besked"
 
 #. module: campos_event
 #: help:campos.committee,message_ids:0
@@ -1602,7 +1602,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,min_qty_jobbere:0
 msgid "Minimum numbers of staff"
-msgstr ""
+msgstr "Minimum antal i udvalg"
 
 #. module: campos_event
 #: field:campos.committee.function,mobile:0
@@ -1640,7 +1640,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.track,req_comm_id:0
 msgid "My Committee"
-msgstr ""
+msgstr "Mit udvalg"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -1674,7 +1674,7 @@ msgstr "Navn"
 #. module: campos_event
 #: field:event.registration,natorg:0
 msgid "National Organization"
-msgstr ""
+msgstr "Korps/organisation"
 
 #. module: campos_event
 #: view:website:campos_event.intl_groups_register_form
@@ -1694,7 +1694,7 @@ msgstr "Nedlæggelse af Zexpense adgang"
 #. module: campos_event
 #: field:campos.event.participant,newsletter:0
 msgid "Newsletter"
-msgstr ""
+msgstr "Nyhedsbrev"
 
 #. module: campos_event
 #: selection:campos.committee.function,sharepoint_mail:0
@@ -1705,12 +1705,12 @@ msgstr ""
 #. module: campos_event
 #: selection:event.track,user_status:0
 msgid "Not registrered"
-msgstr ""
+msgstr "Ikke registrereet"
 
 #. module: campos_event
 #: field:campos.event.participant,comment:0
 msgid "Notes"
-msgstr ""
+msgstr "Noter"
 
 #. module: campos_event
 #: field:campos.municipality,number:0
@@ -1720,18 +1720,18 @@ msgstr "Nummer"
 #. module: campos_event
 #: field:event.registration,leader_qty_pre_reg:0
 msgid "Number of Leaders - Pre-registration"
-msgstr ""
+msgstr "Antal leder forhåndstilmelding"
 
 #. module: campos_event
 #: field:event.registration,scout_qty_pre_reg:0
 msgid "Number of Scouts - Pre-registration"
-msgstr ""
+msgstr "Antal af Spejdere forhåndregistreret"
 
 #. module: campos_event
 #: field:campos.event.participant,staff_qty_pre_reg:0
 #: field:event.registration,staff_qty_pre_reg:0
 msgid "Number of Staff - Pre-registration"
-msgstr ""
+msgstr "Antal af jobbere forhåndstilmelding"
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.new_staff_member
@@ -1813,13 +1813,14 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.par.reject,participant_id:0
 msgid "Paricipant"
-msgstr ""
+msgstr "Deltager"
 
 #. module: campos_event
 #: code:addons/campos_event/models/event.py:708
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
+#: view:res.partner:campos_event.view_res_partner_filter
 #: field:res.partner,participant:0 field:res.users,participant:0
 #, python-format
 msgid "Participant"
@@ -1909,12 +1910,12 @@ msgstr ""
 #: code:addons/campos_event/controllers/website_event.py:278
 #, python-format
 msgid "Preregistration for Danish Groups"
-msgstr ""
+msgstr "Forhåndstilmelding for danske grupper/foreninger"
 
 #. module: campos_event
 #: field:campos.event.participant,private_mailaddress:0
 msgid "Private mail address"
-msgstr ""
+msgstr "Private mailadresse"
 
 #. module: campos_event
 #: field:campos.staff.del.prod,product_id:0
@@ -1956,7 +1957,7 @@ msgstr "Publiceres på hjemmeside"
 #. module: campos_event
 #: field:campos.event.participant,qualifications:0
 msgid "Qualifications"
-msgstr ""
+msgstr "Kvalifikationer"
 
 #. module: campos_event
 #: view:campos.job:campos_event.campos_job_form field:campos.job,issue_qty:0
@@ -1992,7 +1993,7 @@ msgstr ""
 #. module: campos_event
 #: selection:campos.event.participant,state:0
 msgid "Received"
-msgstr ""
+msgstr "Modtaget"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -2002,7 +2003,7 @@ msgstr "Rediger svar"
 #. module: campos_event
 #: field:event.registration,region:0
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -2033,7 +2034,7 @@ msgstr ""
 #. module: campos_event
 #: field:event.event,regform:0
 msgid "Registration Form"
-msgstr ""
+msgstr "Registrerings blanket"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -2069,7 +2070,7 @@ msgstr ""
 #. module: campos_event
 #: selection:campos.event.participant,state:0
 msgid "Rejected"
-msgstr ""
+msgstr "Afslået"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -2182,14 +2183,15 @@ msgstr "Korps"
 #: field:campos.subcamp.exception,scoutorg_id:0
 #: field:res.partner,scoutorg_id:0 field:res.users,scoutorg_id:0
 msgid "Scout organization"
-msgstr ""
+msgstr "Korps/Organisation"
 
 #. module: campos_event
 #: field:campos.event.participant,scoutgroup:0
-#: field:event.registration,scoutgroup:0 field:res.partner,scoutgroup:0
-#: field:res.users,scoutgroup:0
+#: field:event.registration,scoutgroup:0
+#: view:res.partner:campos_event.view_res_partner_filter
+#: field:res.partner,scoutgroup:0 field:res.users,scoutgroup:0
 msgid "Scoutgroup"
-msgstr ""
+msgstr "Spedjergruppe/kreds"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.campos_event_participant_search
@@ -2240,12 +2242,12 @@ msgstr "Send til udvalg"
 #. module: campos_event
 #: field:campos.event.participant,sent_to_comm_date:0
 msgid "Sent to Committee"
-msgstr ""
+msgstr "Sendt til udvalg"
 
 #. module: campos_event
 #: selection:campos.event.participant,state:0
 msgid "Sent to committee"
-msgstr ""
+msgstr "Send til udvalg"
 
 #. module: campos_event
 #: field:campos.committee,sequence:0 field:campos.job.when,sequence:0
@@ -2266,7 +2268,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.scout.org,sex:0
 msgid "Sex"
-msgstr ""
+msgstr "Køn"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -2276,7 +2278,7 @@ msgstr "Skal på sharepoint"
 #. module: campos_event
 #: field:campos.event.participant,sharepoint_clienttype:0
 msgid "Sharepoint Client"
-msgstr ""
+msgstr "Sharepoint klient"
 
 #. module: campos_event
 #: view:website:campos_event.sp_confirm_prompt
@@ -2297,28 +2299,28 @@ msgstr "Sharepoint bekræftelse"
 #: field:campos.committee.function,sharepoint_mailaddress:0
 #: field:campos.event.participant,sharepoint_mailaddress:0
 msgid "Sharepoint mail address"
-msgstr ""
+msgstr "Sharepoint mailadresse"
 
 #. module: campos_event
 #: field:campos.event.participant,sharepoint_mail_created:0
 msgid "Sharepoint mail created"
-msgstr ""
+msgstr "Sharepoint mail er oprettet"
 
 #. module: campos_event
 #: field:campos.event.participant,sharepoint_mail_requested:0
 msgid "Sharepoint mail requested"
-msgstr ""
+msgstr "Ønsker sharepoint mail"
 
 #. module: campos_event
 #: field:campos.committee.function,sharepoint_mail:0
 #: field:campos.event.participant,sharepoint_mail:0
 msgid "Sharepoint mail wanted"
-msgstr ""
+msgstr "Ønsker Shartepoint mail"
 
 #. module: campos_event
 #: field:campos.committee,short_name:0
 msgid "Short Name"
-msgstr ""
+msgstr "Kort navn"
 
 #. module: campos_event
 #: field:campos.event.participant,signup_expiration:0
@@ -2348,7 +2350,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,signup_button:0
 msgid "Signup button"
-msgstr ""
+msgstr "Tilmeld knap"
 
 #. module: campos_event
 #: field:event.event,survey_id:0
@@ -2384,11 +2386,12 @@ msgstr ""
 #: field:campos.event.participant,sponsor:0 field:res.partner,sponsor:0
 #: field:res.users,sponsor:0
 msgid "Sponsor"
-msgstr ""
+msgstr "Sponsor"
 
 #. module: campos_event
 #: field:campos.event.participant,staff:0 field:event.registration,staff:0
 #: model:res.groups,name:campos_event.group_campos_staff
+#: view:res.partner:campos_event.view_res_partner_filter
 #: field:res.partner,staff:0 field:res.users,staff:0
 msgid "Staff"
 msgstr "Stab"
@@ -2429,7 +2432,7 @@ msgstr "Standby"
 #. module: campos_event
 #: field:campos.event.participant,standby_until:0
 msgid "Standby until"
-msgstr ""
+msgstr "Standby indtil"
 
 #. module: campos_event
 #: field:campos.event.participant,state_id:0
@@ -2465,12 +2468,12 @@ msgstr "Gade fortsat"
 #: field:campos.subcamp.exception,subcamp_id:0
 #: field:event.registration,subcamp_id:0
 msgid "Sub Camp"
-msgstr ""
+msgstr "Ubderlejr"
 
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.campos_subcamp_exception_menu
 msgid "Sub Camp exception"
-msgstr ""
+msgstr "Underlejr afvigelser"
 
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.campos_subcamp_act_window
@@ -2480,7 +2483,7 @@ msgstr "Underlejre"
 #. module: campos_event
 #: model:ir.actions.act_window,name:campos_event.campos_subcamp_exception_act_window
 msgid "Sub camp exception"
-msgstr ""
+msgstr "Underlejr afvigelser"
 
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.campos_subcamp_menu
@@ -2561,6 +2564,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,teaser:0
 msgid "Teaser"
+msgstr "Appetikvækker"
+
+#. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "Thank you"
 msgstr ""
 
 #. module: campos_event
@@ -2634,12 +2642,12 @@ msgstr ""
 #. module: campos_event
 #: field:campos.camp.area,reg_ids:0
 msgid "Troops"
-msgstr ""
+msgstr "Grupper"
 
 #. module: campos_event
 #: field:campos.committee,committee_type_id:0
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: campos_event
 #: view:campos.committee:campos_event.campos_committee_form
@@ -2663,7 +2671,7 @@ msgstr "Ukendt token"
 #: field:campos.event.participant,message_unread:0
 #: field:campos.job,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ulæste beskeder"
 
 #. module: campos_event
 #: field:campos.event.participant,use_parent_address:0
@@ -2696,17 +2704,17 @@ msgstr "Velkommen til SL2017"
 #. module: campos_event
 #: field:campos.committee,website_published:0
 msgid "Visible in Website"
-msgstr ""
+msgstr "Synlige på web"
 
 #. module: campos_event
 #: selection:campos.scout.org,worldorg:0
 msgid "WAGGGS"
-msgstr ""
+msgstr "WAGGGS"
 
 #. module: campos_event
 #: selection:campos.scout.org,worldorg:0
 msgid "WAGGGS/WOSM"
-msgstr ""
+msgstr "WAGGGS/WOSM"
 
 #. module: campos_event
 #: selection:campos.scout.org,worldorg:0
@@ -2731,7 +2739,7 @@ msgstr "Ønsker at være jobber på lejren"
 #. module: campos_event
 #: field:campos.event.participant,workwish:0
 msgid "Want to work with"
-msgstr ""
+msgstr "Ønsker at arbejde med"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
@@ -2741,7 +2749,7 @@ msgstr "Ønsker at arbejde med planlægningen af lejren"
 #. module: campos_event
 #: field:campos.job,wanted_qty_jobbere:0
 msgid "Wanted numbers of staff"
-msgstr ""
+msgstr "Ønsked antal i udvalg"
 
 #. module: campos_event
 #: field:event.track,wanted_people:0
@@ -2813,23 +2821,23 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,job_when:0 field:campos.job,job_when_id:0
 msgid "When"
-msgstr ""
+msgstr "Hvornår"
 
 #. module: campos_event
 #: field:campos.job,job_where:0
 msgid "Where"
-msgstr ""
+msgstr "Hvor"
 
 #. module: campos_event
 #: field:campos.scout.org,worldorg:0
 msgid "World Organization"
-msgstr ""
+msgstr "Verdensorganisation"
 
 #. module: campos_event
 #: selection:campos.committee.function,sharepoint_mail:0
 #: selection:campos.committee.function,zexpense_access_wanted:0
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -2901,6 +2909,11 @@ msgid "Your question"
 msgstr "Dit spørgsmål"
 
 #. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "Your registration for"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
 msgid "Your request has been submitted, we will get back to you soon."
 msgstr "Dit spørgsmål er blevet sendt. vi vil besvare den hurtigst muligt"
@@ -2945,7 +2958,7 @@ msgstr "col-sm-8"
 #: field:campos.event.participant,complete_contact:0
 #: field:res.partner,complete_contact:0 field:res.users,complete_contact:0
 msgid "contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -2963,6 +2976,11 @@ msgid "has been successfully updated."
 msgstr "Er blevet opdateret uden problemer"
 
 #. module: campos_event
+#: view:website:campos_event.dkgroup_register_confirm
+msgid "succeeded!"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,has_image:0
 #: field:campos.event.participant,self:0 field:res.users,self:0
 msgid "unknown"
@@ -2976,23 +2994,23 @@ msgstr "zExpense"
 #. module: campos_event
 #: field:campos.event.participant,zexpense_firsttime_pwd:0
 msgid "zExpense First time password"
-msgstr ""
+msgstr "zExpense førstegangskodeord"
 
 #. module: campos_event
 #: field:campos.event.participant,zexpense_access_created:0
 msgid "zExpense access created"
-msgstr ""
+msgstr "Adgang til Zexpende er gennemført"
 
 #. module: campos_event
 #: field:campos.event.participant,zexpense_access_requested:0
 msgid "zExpense access requested"
-msgstr ""
+msgstr "Anmodning om  adgang til  zExpense"
 
 #. module: campos_event
 #: field:campos.committee.function,zexpense_access_wanted:0
 #: field:campos.event.participant,zexpense_access_wanted:0
 msgid "zExpense access wanted"
-msgstr ""
+msgstr "Ønsker adgang til Zexpense"
 
 #. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
