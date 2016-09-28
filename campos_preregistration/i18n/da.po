@@ -55,7 +55,7 @@ msgstr "Gruppens/kredsens kontaktperson"
 #. module: campos_preregistration
 #: field:event.registration,group_country_code2:0
 msgid "Country Code2"
-msgstr "Lnadekode2"
+msgstr "Landekode2"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire_country:0
@@ -394,7 +394,7 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "This is not a binding order for pioneering poles"
-msgstr ""
+msgstr "Det er kun en hensigsterklæring og ikke en bestilling af rafter"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,age_to:0
