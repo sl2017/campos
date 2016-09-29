@@ -17,6 +17,7 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="scoutorg_id"/>
                         <field name="camp_area_id"/>
                         <field name="subcamp_id" />
                     </group>

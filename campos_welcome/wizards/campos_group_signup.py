@@ -105,6 +105,7 @@ class CamposGroupSignup(models.TransientModel):
  
     @api.multi
     def doit_done(self):
+        self.env.user.action_id = False
         for wizard in self:
             view = self.env.ref('campos_preregistration.view_form_preregistration_gl')
             return {
