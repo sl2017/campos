@@ -46,4 +46,3 @@ class EventTrack(models.Model):
                 track.taglist = ' '.join([t.name for t in track.tag_ids])
             else:
                 track.taglist = False
-    
