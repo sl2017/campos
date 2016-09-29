@@ -10,33 +10,31 @@ _logger = logging.getLogger(__name__)
 
 class ResUsers(models.Model):
     _inherit = 'res.users'
-    
+
     participant_id = fields.Many2one('campos.event.participant', ondelete='set null')
     committee_ids = fields.Many2many('campos.committee', compute='_compute_committeeaccess')
     participant_ids = fields.Many2many('campos.event.participant', compute='_compute_committeeaccess')
-    
+
     @api.one
     def _compute_committeeaccess(self):
-        top = self.env['campos.committee'].search(['|',('approvers_ids', 'in', self.participant_id.id),('par_contact_id.id','=',self.participant_id.id)])
-        for f in self.participant_id.jobfunc_ids:
-            if f.function_type_id.chairman:
-                top += f.committee_id
-        coms = top
-        for c in top:
-            childs = self.env['campos.committee'].search([('id', 'child_of', c.id)])
-            coms |= childs
-        members = set()
-        self.committee_ids = coms
-        for c in coms:
-            for a in c.sudo().member_ids:
-                members.add(a.sudo().id)
-            for f in c.sudo().part_function_ids:
-                members.add(f.sudo().participant_id.id)
-        _logger.info("Part list for %s (%d): %s", self.name, len(members), list(members))
-        self.participant_ids = self.env['campos.event.participant'].sudo().browse(list(members))
-        _logger.info("Part list for %s : %s", self.name, self.participant_ids.ids)
-        return list(members)
-            
-        
-    
-    
+        if self.participant_id:
+            top = self.env['campos.committee'].search(['|',('approvers_ids', 'in', self.participant_id.id),('par_contact_id.id','=',self.participant_id.id)])
+            for f in self.participant_id.jobfunc_ids:
+                if f.function_type_id.chairman:
+                    top += f.committee_id
+            coms = top
+            for c in top:
+                childs = self.env['campos.committee'].search([('id', 'child_of', c.id)])
+                coms |= childs
+            members = set()
+            self.committee_ids = coms
+            for c in coms:
+                for a in c.sudo().member_ids:
+                    members.add(a.sudo().id)
+                for f in c.sudo().part_function_ids:
+                    members.add(f.sudo().participant_id.id)
+            _logger.info("Part list for %s (%d): %s", self.name, len(members), list(members))
+            self.participant_ids = self.env['campos.event.participant'].sudo().browse(list(members))
+            _logger.info("Part list for %s : %s", self.name, self.participant_ids.ids)
+        else:
+            self.committee_ids = False

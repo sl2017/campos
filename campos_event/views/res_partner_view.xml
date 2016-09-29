@@ -10,10 +10,18 @@
 				 <page name="sales_purchases" position="after">
 				 <page string="Camp Info">
 				 <group>
+				 <group>
 				 	<field name="scoutgroup"/>
 				 	<field name="participant"/>
 				 	<field name="staff"/>
+				 	<field name="sponsor"/>
 				 	</group>
+				 	<group>
+				 	<field name="scoutorg_id"/>
+				 	<field name="municipality_id"/>
+				 	
+				 	</group>
+				 </group>
 				 </page>
 				 </page>
 				 </field>
@@ -41,5 +49,18 @@ for obj in self.browse(cr, uid, ids, context):
             <field name="key2">client_action_multi</field>
         </record>
         
+        <record model="ir.ui.view" id="view_res_partner_filter">
+        <field name="name">res.partner search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+        	<field name="name" position="after">
+        		<field name="scoutorg_id"/>
+        		<filter string="Scoutgroup" name="fscoutgroup" domain="[('scoutgroup','=',1)]" />
+        		<filter string="Staff" name="fstaff" domain="[('staff','=',1)]" />
+        		<filter string="Participant" name="fparticipant" domain="[('participant','=',1)]" />
+  			</field>
+  		</field>  
+        </record>
 	</data>
 </openerp>

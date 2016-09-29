@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+	<openerp>
+		<data>
+			<record id="view_tree_event_registration_agegroup" model="ir.ui.view">
+				<field name="name">Age group Tree</field>
+				<field name="model">event.registration.agegroup</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+						<field name="age_from"/>
+						<field name="age_to"/>
+					</tree>
+				</field>
+			</record> 		
+			
+			<record id="view_tree_event_registration_pioneeringpole" model="ir.ui.view">
+				<field name="name">Pioneering Poles Tree</field>
+				<field name="model">event.registration.pioneeringpole</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+						<field name="length"/>
+					</tree>
+				</field>
+			</record> 
+
+			<!-- Preregistration for group leaders-->
+			<record id="view_form_preregistration_gl" model="ir.ui.view">
+			<field name="name">Preregistration Form Group Leader</field>
+			<field name="model">event.registration</field>
+<!--			<field name="priority" eval="15"/>-->
+<!--			<field name="groups_id" eval="[(4, ref('group_campos_groupleader'))]"/>-->
+			<field name="arch" type="xml">
+				<form>
+						<header>
+						</header>
+					<sheet>
+						<group name="sheet">
+							<field name="event_id" string="Event" readonly="1" options="{'no_create': True}" invisible="1"/>
+							<field name="partner_id" string="Scout group" readonly="1"  options="{'no_create': True}"/>
+							<field name="organization_id" readonly="1"  options="{'no_create': True}"/>
+<!--							<field name="group_world_association"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>-->
+<!--							<field name="association_groupid" required="True"/>-->
+							<field name="group_entrypoint" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>							
+							<field name="contact_partner_id" string="Contact Person" readonly="1"  options="{'no_create': True}"/>
+<!--							<field name="group_municipality" string="Municipallity" required="True" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"  options="{'no_create': True}"/>-->
+<!--							<field name="group_country"  options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>-->
+							<field name="group_country_code2" invisible="1"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}" readonly="1"/>
+              <field colspan="7" name="participant_ids" widget="one2many_list">
+								<tree string="Participants" editable="bottom">
+									<field name="participant_age_group_id"  options="{'no_create': True, 'no_open': True}"/>
+                  <field name="participant_total" sum="Total"/>
+                  <field name="participant_from_date"/>
+                  <field name="participant_to_date"/>
+                  <field name="participant_own_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
+                </tree>
+              </field>
+							<notebook colspan="2">
+								<page string="Pionering poles">
+									<group>
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1">
+											<p><b>This is not a binding order for pioneering poles</b></p>
+											<tree editable="bottom">
+												<field name="pioneeringpole_id"  options="{'no_create': True}"/>
+												<field name="polecount" sum="Total"/>
+											</tree>
+										</field>				
+									</group>
+								</page>
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap"/>
+										<field name="handicap_description" attrs="{'invisible': [('handicap', '=', False)]}"/>
+										<field name="handicap_needs" attrs="{'invisible': [('handicap', '=', False)]}"/>
+									</group>
+								</page>
+								<page string="Friendship group">
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
+										<field name="friendship_group_info" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
+										<field name="friendship_group_desire"/>
+										<field name="friendship_group_desire_country" attrs="{'invisible': [('friendship_group_desire', '=', False)]}" options="{'no_create': True, 'no_open': True}"/>
+										<field name="friendship_group_home_hospitality" attrs="{'invisible': [('friendship_group_desire', '=', False)]}"/>
+									</group>
+								</page>
+								<page string="Agreements" position="after">
+									<group>
+										<field name="group_camp_agreements" readonly="1"/>
+									</group>
+								</page>
+								<page string="Sub Camp">
+									<group>
+										<field name="subcamp_id"  readonly="1"  options="{'no_create': True}"/>
+										<field name="camp_area_id"  readonly="1"  options="{'no_create': True}"/>
+									</group>
+								</page>
+							</notebook>
+							<field name="state" invisible="1"/>
+							</group>
+					</sheet>
+				</form> 
+			</field>
+		</record>
+
+		<!-- Preregistration for admin-->
+		<record id="view_form_preregistration_admin" model="ir.ui.view">
+			<field name="name">Preregistration Form Admin</field>
+			<field name="model">event.registration</field>
+<!--			<field name="priority" eval="15"/>-->
+<!--			<field name="groups_id" eval="[(4, ref('campos_event.group_campos_admin'))]"/>-->
+			<field name="arch" type="xml">
+				<form>
+						<header>
+						</header>
+					<sheet>
+						<group name="sheet">
+							<field name="event_id" string="Event"  options="{'no_create': True}"/>
+							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
+							<field name="organization_id" options="{'no_create': True}"/>
+<!--							<field name="group_world_association"/>-->
+<!--							<field name="association_groupid" required="True"/>-->
+							<field name="group_entrypoint"/>							
+							<field name="contact_partner_id" string="Contact Person"  options="{'no_create': True}"/>
+<!--							<field name="group_municipality" required="True"  options="{'no_create': True}"/>-->
+<!--							<field name="group_country"  options="{'no_create': True}"/>-->
+							<field name="group_country_code2" invisible="1"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
+              <field colspan="7" name="participant_ids" widget="one2many_list">
+								<tree string="Participants" editable="bottom">
+									<field name="participant_age_group_id"  options="{'no_create': True}"/>
+                  <field name="participant_total" sum="Total"/>
+                  <field name="participant_from_date"/>
+                  <field name="participant_to_date"/>
+                  <field name="participant_own_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_to_camp_total" sum="Total"/>
+                  <field name="participant_common_transport_from_camp_total" sum="Total"/>
+                  <field name="participant_own_transport_type"  options="{'no_create': True}"/>
+                </tree>
+              </field>
+							<notebook colspan="2">
+								<page string="Pionering poles">
+									<group>
+										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1">
+											<p><b>This is not a binding order for pioneering poles</b></p>
+											<tree editable="bottom">
+												<field name="pioneeringpole_id" options="{'no_create': True}"/>
+												<field name="polecount" sum="Total"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap"/>
+										<field name="handicap_description"/>
+										<field name="handicap_needs"/>
+									</group>
+								</page>
+								<page string="Friendship group">
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name"/>
+										<field name="friendship_group_info"/>
+										<field name="friendship_group_desire"/>
+										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}"/>
+										<field name="friendship_group_home_hospitality"/>
+									</group>
+								</page>
+								<page string="Agreements" position="after">
+									<group>
+										<field name="group_camp_agreements"/>
+									</group>
+								</page>
+								<page string="Sub Camp">
+									<group>
+										<field name="subcamp_id"  options="{'no_create': True}"/>
+										<field name="camp_area_id" options="{'no_create': True}"/>
+									</group>
+								</page>
+								<page string="Internal Information">
+									<group>
+										<field name="internal_information"/>
+									</group>
+								</page>
+							</notebook>
+							<field name="state" invisible="1"/>
+							</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form> 
+			</field>
+		</record>
+		
+			<record id="view_tree_event_registration" model="ir.ui.view">
+				<field name="name">Event Preregistration Tree</field>
+				<field name="model">event.registration</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="partner_id" string="Scout group"/>
+						<field name="event_id"/>
+						<field name="state"/>
+						<field name="contact_partner_id" string="Contact Person"/>
+					</tree>
+				</field>
+			</record> 		
+
+			<!-- Menu Actions -->
+		<act_window id="action_event_preregistration"
+		name="Event Preregistration"
+		res_model="event.registration"
+		view_mode="form" 
+		view_id="view_form_preregistration_gl"/>
+		<act_window id="action_event_registration_agegroup"
+		name="Event Registration Agegroup"
+		res_model="event.registration.agegroup"
+		view_mode="tree,form" />
+		<act_window id="action_event_registration_transporttype"
+		name="Event Registration Transporttype"
+		res_model="event.registration.transporttype"
+		view_mode="tree,form" />
+		<act_window id="action_event_preregistration_tree"
+		name="Event Preregistration Tree"
+		res_model="event.registration"
+		view_mode="tree,form"  
+		view_id="view_form_preregistration_admin"/>
+		<act_window id="action_event_registration_pioneeringpole"
+		name="Event Registration Pioneering Poles"
+		res_model="event.registration.pioneeringpole"
+		view_mode="tree,form" />		
+		
+		<!-- sub menu -->
+		<menuitem id="menu_event_preregistration" parent="campos_event.menu_campos" name="Preregistration" groups="campos_event.group_campos_admin"/>
+
+		<!-- Menu Items -->
+		
+		<menuitem id="menu_action_event_preregistration" parent="menu_event_preregistration" name="Group Preregistration" action="action_event_preregistration" groups="campos_event.group_campos_admin" sequence="20"/>
+		<menuitem id="menu_action_event_preregistration_tree" parent="menu_event_preregistration" name="Group Prereg.List" action="action_event_preregistration_tree" groups="campos_event.group_campos_admin" sequence="30"/>
+		<menuitem id="menu_action_preregistration_menu_agegroup" parent="menu_event_preregistration" name="Age Groups" action="action_event_registration_agegroup" groups="campos_event.group_campos_admin" sequence="40" />
+		<menuitem id="menu_action_preregistration_menu_pioneeringpole" parent="menu_event_preregistration" name="Pioneering Poles" action="action_event_registration_pioneeringpole" groups="campos_event.group_campos_admin" sequence="50" />
+		<menuitem id="menu_action_preregistration_menu_transporttype" parent="menu_event_preregistration" name="Transport Types" action="action_event_registration_transporttype" groups="campos_event.group_campos_admin" sequence="60" />
+	
+		<!-- temporary -->
+<!--		<menuitem id="event_preregistration_tree_portal_menu" name="Group Prereg. List" sequence="110" action="action_event_preregistration_tree" />-->
+
+<!--			<record id="view_tree_pioneering_pole_list" model="ir.ui.view">
+				<field name="name">Pioneering Poles on Registration</field>
+				<field name="model">event.registration.polelist</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="registration_id"/>
+						<field name="pioneeringpole_id"/>
+						<field name="polecount"/>
+					</tree>
+				</field>
+			</record> 
+		<act_window id="action_event_registration_pioneeringpoles_on_registrations"
+		name="Pioneering Poles on Registration"
+		res_model="event.registration.polelist"
+		view_mode="tree,form" />		
+		<menuitem id="menu_action_preregistration_menu_pioneeringpolelist" parent="menu_event_preregistration" name="Pioneering Poles List" action="action_event_registration_pioneeringpoles_on_registrations" groups="campos_event.group_campos_admin" sequence="99" />-->
+
+		</data>
+</openerp>

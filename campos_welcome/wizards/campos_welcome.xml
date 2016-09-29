@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+	
+    <record model="ir.ui.view" id="campos_welcome_form_view">
+        <field name="name">campos.welcome.form (in campos_welcome)</field>
+        <field name="model">campos.welcome</field>
+        <field name="arch" type="xml">
+            <form string="Campos Welcome">
+                <sheet>
+                    <group>
+                    <field name="state" invisible="1"/>
+                    <field name="id" invisible="1"/>
+                        <field name="name" readonly="1"/>
+                        <field name="remote_system_id" readonly="1"/>
+                        <div colspan="2" states="welcome">
+                        <p>To pre-register your group, you need to be a leader or boardmember in your group. Click Next to select scout Group to import</p>
+                        </div>
+                        <field name="message" readonly="1" nolabel="1" colspan="2"/>
+                        <div colspan="2" states="select">
+                        <p>Please select your Scout group. We will import the group (name and address), your contact details, and the contact details on the groups treasurer.</p>
+                        </div>
+                        <field name="profile_id" states="select" domain="[('wiz_id', '=', id)]" options="{'no_create': True, 'no_open':True}"/>
+                        <div colspan="2" states="done">
+                        <p>Import is now completed and the next step is the pre-registration</p>
+                        </div>
+                    </group>
+                    <p></p>
+                
+            
+	    			<footer>
+					<button name='doit_welcome'
+						string='Next'
+						class='oe_highlight' 
+						type='object'
+						states="welcome"/>
+					<button name='doit_select'
+						string='Accept'
+						class='oe_highlight'
+						type='object'
+						states="select"/>
+		
+					<button name='doit_done'
+						string='Open Pre-reg'
+						class='oe_highlight'
+						type='object'
+						states="done"/>
+		
+					<button string='Cancel'
+						special='cancel'/>
+	    			</footer>
+	    	</sheet>
+	    </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_welcome_act_window">
+        <field name="name">Welcome to SL2017 Group Pre-registration/Import</field>
+        <field name="res_model">campos.welcome</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+    
+    <menuitem id="campos_welcome_menu" name="Group Import" parent="menu_campos_groups" action="campos_welcome_act_window" sequence="30" groups="campos_welcome.group_campos_imported_group"/>
+
+	
+</data>
+</openerp>

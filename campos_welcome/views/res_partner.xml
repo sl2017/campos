@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="res_partner_form_view">
+        <field name="name">res.partner.form (in campos_welcome)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <page name="sales_purchases" position="after">
+            	<page string="Remote Sync">
+					<group>
+						<field name="remote_system_id"/>
+						<field name="remote_int_id" groups="campos_event.group_campos_admin" />
+						<field name="remote_ext_id" readonly="1"/>
+						<field name="remote_link_id" groups="campos_event.group_campos_admin"/>
+						<field name="last_import"/>
+					
+					</group>            	
+            	
+            	</page>
+            </page>
+           	<page name="sales_purchases" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+            <page name="internal_notes" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+           	<!-- 
+           	<page name="geo_localization" position="attributes">
+           		<attribute name="groups" ref="campos_event.group_campos_admin"/>
+           	</page>
+			 -->            
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>
