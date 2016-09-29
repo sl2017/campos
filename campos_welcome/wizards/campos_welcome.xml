@@ -59,7 +59,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="campos_welcome_act_window">
-        <field name="name">Welcome to SL2017 Group Pre-registration</field>
+        <field name="name">Welcome to SL2017 Group Pre-registration/Import</field>
         <field name="res_model">campos.welcome</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
