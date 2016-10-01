@@ -42,6 +42,9 @@ class ResUsers(models.Model):
                 part_ids = self.pool['campos.event.participant'].search(cr, uid, [('private_mailaddress', '=', new_email)])
                 if part_ids:
                     partner_id = self.pool('campos.event.participant').browse(cr, uid, part_ids[0]).partner_id.id
+            user_ids = self.pool['res.users'].search(cr, uid, [('login', '=', new_email)])
+            if user_ids:
+                partner_id = self.pool('res.users').browse(cr, uid, user_ids[0]).partner_id.id
             if partner_id:
                 partner = self.pool['res.partner'].browse(cr, uid, partner_id)
                 if partner.user_ids:
