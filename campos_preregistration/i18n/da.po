@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 12:56+0000\n"
-"PO-Revision-Date: 2016-09-27 12:56+0000\n"
+"POT-Creation-Date: 2016-10-02 14:37+0000\n"
+"PO-Revision-Date: 2016-10-02 14:37+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -248,22 +248,22 @@ msgstr "Længde"
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_from_camp_total:0
 msgid "No. of common transport from camp"
-msgstr "Antal der deltager i fælles transporten FRA lejren"
+msgstr "Antal der deltager i fælles, transporten FRA lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_to_camp_total:0
 msgid "No. of common transport to camp"
-msgstr "Antal der deltager i fællestransporten TIL lejren"
+msgstr "Antal der deltager i fælles- transporten TIL lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_from_camp_total:0
 msgid "No. of own transport from camp"
-msgstr "Antal der deltager i egen transport FRA lejren"
+msgstr "Deltager IKKE i fælles- transporten FRA lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_to_camp_total:0
 msgid "No. of own transport to camp"
-msgstr "Antal der deltager i egen transport TIL lejren"
+msgstr "Deltager IKKE i fælles- transporten TIL Lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_total:0

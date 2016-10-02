@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-28 18:57+0000\n"
-"PO-Revision-Date: 2016-09-28 18:57+0000\n"
+"POT-Creation-Date: 2016-10-02 14:37+0000\n"
+"PO-Revision-Date: 2016-10-02 14:37+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 #: code:addons/campos_welcome/wizards/campos_welcome.py:117
 #, python-format
 msgid "%s has already been signed up"
-msgstr ""
+msgstr "%s er allerede blevet tilmeldt"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
@@ -427,10 +427,14 @@ msgstr ""
 #: code:addons/campos_welcome/wizards/campos_group_signup.py:54
 #: code:addons/campos_welcome/wizards/campos_welcome.py:80
 #: model:ir.actions.act_window,name:campos_welcome.campos_group_signup_act_window
-#: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
 #, python-format
 msgid "Welcome to SL2017 Group Pre-registration"
 msgstr "Velkommen til SL2017 forhåndstilmelding for grupper/kredse"
+
+#. module: campos_welcome
+#: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
+msgid "Welcome to SL2017 Group Pre-registration/Import"
+msgstr ""
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
