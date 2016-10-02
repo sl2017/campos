@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-28 18:57+0000\n"
-"PO-Revision-Date: 2016-09-28 18:57+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2016-10-02 14:37+0000\n"
+"PO-Revision-Date: 2016-09-30 13:20+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -366,7 +366,7 @@ msgstr "Godkend"
 #. module: campos_event
 #: selection:campos.event.participant,state:0
 msgid "Approved by the committee"
-msgstr ""
+msgstr "Godkendt af udvalget"
 
 #. module: campos_event
 #: field:campos.event.participant,comm_approver_ids:0
@@ -475,7 +475,7 @@ msgstr "Underlejr"
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_subcamp_exception
 msgid "Campos Subcamp_exceptions"
-msgstr ""
+msgstr "CampOS kommune afvigelser"
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
@@ -860,7 +860,7 @@ msgstr "Dag"
 #. module: campos_event
 #: selection:campos.staff.del.prod,state:0
 msgid "Delivered"
-msgstr ""
+msgstr "Afleveret"
 
 #. module: campos_event
 #: field:campos.staff.del.prod,del_by_partner_id:0
@@ -965,7 +965,7 @@ msgstr "Email"
 #. module: campos_event
 #: field:campos.committee,template_id:0
 msgid "Email Template"
-msgstr ""
+msgstr "Email skabeloner"
 
 #. module: campos_event
 #: field:campos.event.participant,employee:0
@@ -2468,7 +2468,7 @@ msgstr "Gade fortsat"
 #: field:campos.subcamp.exception,subcamp_id:0
 #: field:event.registration,subcamp_id:0
 msgid "Sub Camp"
-msgstr "Ubderlejr"
+msgstr "Underlejr"
 
 #. module: campos_event
 #: model:ir.ui.menu,name:campos_event.campos_subcamp_exception_menu
@@ -2569,7 +2569,7 @@ msgstr "Appetikvækker"
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
 msgid "Thank you"
-msgstr ""
+msgstr "Tak"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal_success
@@ -2911,7 +2911,7 @@ msgstr "Dit spørgsmål"
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
 msgid "Your registration for"
-msgstr ""
+msgstr "Din registrering til"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou
@@ -2978,7 +2978,7 @@ msgstr "Er blevet opdateret uden problemer"
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
 msgid "succeeded!"
-msgstr ""
+msgstr "er vellykket. Du vil meget hurtigt modtage en mail, som du skal bruge for at lave dit kodeord til CampOS som er vores tilmeldingssystem. I mailen er der er link, der ikke er aktivt mere end 24 timer.\nHvis linket ikke virker, eller der er gået mere end 24 timer så bruge reset passord knappen på denne adresse camp.sl2017.dk"
 
 #. module: campos_event
 #: field:campos.event.participant,has_image:0
