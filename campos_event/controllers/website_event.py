@@ -252,7 +252,7 @@ class WebsiteEventEx(WebsiteEvent):
             if registration.partner_id:
                 registration._onchange_partner()
             registration.registration_open()
-            new_user = reg_obj.env['res.users'].sudo().create({'login':contact.email,
+            new_user = reg_obj.env['res.users'].sudo().with_context(template_ref='campos_event.group_signup_email').create({'login':contact.email,
                                                             'partner_id': contact.id,
                                                             'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id),
                                                                           (4, partner_obj.env.ref('campos_welcome.group_campos_manuel_group').id)],
