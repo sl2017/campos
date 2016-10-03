@@ -147,8 +147,8 @@
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
+										<p><b>This is not a binding order for pioneering poles</b></p>
 										<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1">
-											<p><b>This is not a binding order for pioneering poles</b></p>
 											<tree editable="bottom">
 												<field name="pioneeringpole_id" options="{'no_create': True}"/>
 												<field name="polecount" sum="Total"/>
