@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-02 14:37+0000\n"
-"PO-Revision-Date: 2016-10-02 14:37+0000\n"
+"POT-Creation-Date: 2016-10-03 18:06+0000\n"
+"PO-Revision-Date: 2016-10-03 18:06+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgstr "Længde"
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_from_camp_total:0
 msgid "No. of common transport from camp"
-msgstr "Antal der deltager i fælles, transporten FRA lejren"
+msgstr "Antal der deltager i fælles- transporten FRA lejren"
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_common_transport_to_camp_total:0
@@ -293,7 +293,7 @@ msgstr ""
 #, python-format
 msgid "Own transport to camp more than total participants"
 msgstr ""
-"Antal indberttee  med egen traport TIL lejren overstiger antallet  af "
+"Antal indberettet  med egen transport TIL lejren overstiger antallet  af "
 "tilmeldte"
 
 #. module: campos_preregistration
@@ -363,7 +363,7 @@ msgstr "Registration"
 #. module: campos_preregistration
 #: field:event.registration,friendship_group:0
 msgid "Request placement with friendship group?"
-msgstr "Ønsker aftale med venskabsgruppe"
+msgstr "Har en udenlandsk venskabsgruppe, der deltager på lejren."
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -394,7 +394,7 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "This is not a binding order for pioneering poles"
-msgstr "Det er kun en hensigsterklæring og ikke en bestilling af rafter"
+msgstr "Dette er kun en hensigtserklæring og ikke en bestilling af rafter"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,age_to:0

@@ -11,15 +11,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-02 14:37+0000\n"
-"PO-Revision-Date: 2016-09-30 13:20+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2016-10-03 18:06+0000\n"
+"PO-Revision-Date: 2016-10-03 18:06+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.group_signup_email
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        ${object.name},\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        You have been invited to connect to \"${object.company_id.name}\" in order to get access to your documents in Odoo.\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        To accept the invitation, click on the following link:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li><a href=\"${object.signup_url}\">Accept invitation to \"${object.company_id.name}\"</a></li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                        Thanks,\n"
+"                    </p>\n"
+"                    <pre>\n"
+"--\n"
+"${object.company_id.name or ''}\n"
+"${object.company_id.email or ''}\n"
+"${object.company_id.phone or ''}\n"
+"                    </pre>\n"
+"                \n"
+"            "
+msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.deregister_zexpense
@@ -208,6 +238,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,task_count:0
 msgid "# Tasks"
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,subject:campos_event.group_signup_email
+msgid "${object.company_id.name} invitation to connect on Odoo"
 msgstr ""
 
 #. module: campos_event
@@ -491,6 +526,12 @@ msgstr "Afvist"
 #: selection:campos.staff.del.prod,state:0
 msgid "Cancelled"
 msgstr "Afvist"
+
+#. module: campos_event
+#: code:addons/campos_event/models/res_users.py:82
+#, python-format
+msgid "Cannot send email: user has no email address."
+msgstr ""
 
 #. module: campos_event
 #: field:campos.committee.function.type,chairman:0
@@ -1901,13 +1942,13 @@ msgid "Preferred language"
 msgstr "Foretrukket sprog"
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/website_event.py:281
+#: code:addons/campos_event/controllers/website_event.py:283
 #, python-format
 msgid "Preregistration for %s"
-msgstr ""
+msgstr "Forhåndstilmelding for %s"
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/website_event.py:278
+#: code:addons/campos_event/controllers/website_event.py:280
 #, python-format
 msgid "Preregistration for Danish Groups"
 msgstr "Forhåndstilmelding for danske grupper/foreninger"
@@ -2538,6 +2579,11 @@ msgid "TIN"
 msgstr ""
 
 #. module: campos_event
+#: field:event.track,taglist:0
+msgid "Taglist"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,category_id:0 field:campos.job,tag_ids:0
 #: view:website:campos_event.jobber_job_view
 #: view:website:campos_event.jobber_latest_jobs
@@ -2978,7 +3024,7 @@ msgstr "Er blevet opdateret uden problemer"
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
 msgid "succeeded!"
-msgstr "er vellykket. Du vil meget hurtigt modtage en mail, som du skal bruge for at lave dit kodeord til CampOS som er vores tilmeldingssystem. I mailen er der er link, der ikke er aktivt mere end 24 timer.\nHvis linket ikke virker, eller der er gået mere end 24 timer så bruge reset passord knappen på denne adresse camp.sl2017.dk"
+msgstr "er vellykket. Du vil meget hurtigt modtage en mail, som du skal bruge for at lave dit kodeord til CampOS som er vores tilmeldingssystem. I mailen er der er link, der ikke er aktivt mere end 24 timer.\nHvis linket ikke virker, eller der er gået mere end 24 timer så bruge reset password knappen på denne adresse camp.sl2017.dk"
 
 #. module: campos_event
 #: field:campos.event.participant,has_image:0

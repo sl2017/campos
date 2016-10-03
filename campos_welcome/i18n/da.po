@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-02 14:37+0000\n"
-"PO-Revision-Date: 2016-10-02 14:37+0000\n"
+"POT-Creation-Date: 2016-10-03 18:06+0000\n"
+"PO-Revision-Date: 2016-10-03 18:06+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -231,6 +231,7 @@ msgstr "Besked"
 
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.action_group_registration
+#: model:ir.ui.menu,name:campos_welcome.menu_action_group_registration
 msgid "My Group"
 msgstr "Min gruppe/kreds"
 
@@ -284,8 +285,8 @@ msgid ""
 "Please select your Scout group. We will import the group (name and address),"
 " your contact details, and the contact details on the groups treasurer."
 msgstr ""
-"Vælg din gruppe. Vi vil importere data på gruppen (navn og adresse), dine kontakt detaljer. og information om gruppens økonomiansvarlige\n"
-"Data hentes enten fra medlemsservice, eller Blåt medlem."
+"Vælg din gruppe. Vi vil importere data på gruppen (navn og adresse), dine kontaktoplysninger og information om gruppens økonomiansvarlige.\n"
+"Data hentes enten fra medlemsservice eller Blåt medlem."
 
 #. module: campos_welcome
 #: field:campos.remote.system,port:0
@@ -353,7 +354,8 @@ msgid "Save"
 msgstr "Gem"
 
 #. module: campos_welcome
-#: model:ir.ui.menu,name:campos_welcome.menu_action_group_registration
+#: model:ir.actions.act_window,name:campos_welcome.action_group_registration_mgr
+#: model:ir.ui.menu,name:campos_welcome.menu_action_group_registration_mgr
 msgid "Scout Groups"
 msgstr "Spejdergrupper"
 
@@ -434,7 +436,7 @@ msgstr "Velkommen til SL2017 forhåndstilmelding for grupper/kredse"
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
 msgid "Welcome to SL2017 Group Pre-registration/Import"
-msgstr ""
+msgstr "Velkommen til Spejdernes lejr gruppe forhåndstilmelding/import"
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
