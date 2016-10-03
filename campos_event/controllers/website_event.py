@@ -247,12 +247,14 @@ class WebsiteEventEx(WebsiteEvent):
             cvals['parent_id'] = group.id
             contact = partner_obj.sudo().create(cvals)
             registration_vals['contact_partner_id'] = contact.id
-            registration = reg_obj.sudo().create(registration_vals)
+            registration = reg_obj.sudo().search([('partner_id', '=', registration_vals['partner_id']), ('event_id', '=', registration_vals['event_id'])])
+            if not registration:
+                registration = reg_obj.sudo().create(registration_vals)
 
             if registration.partner_id:
                 registration._onchange_partner()
             registration.registration_open()
-            new_user = reg_obj.env['res.users'].sudo().create({'login':contact.email,
+            new_user = reg_obj.env['res.users'].sudo().with_context(template_ref='campos_event.group_signup_email').create({'login':contact.email,
                                                             'partner_id': contact.id,
                                                             'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id),
                                                                           (4, partner_obj.env.ref('campos_welcome.group_campos_manuel_group').id)],

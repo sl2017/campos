@@ -132,9 +132,9 @@ class EventEvent(models.Model):
                     func_list = '|'.join(filter(None, [func_list, j.function_type_id.name]))
                 row['s2'] = comm_list
                 row['s3'] = func_list
-                if participant[0].jobfunc_ids[0]:
+                if participant[0].jobfunc_ids:
                     row['s2x'] = participant[0].jobfunc_ids[0].committee_id.root_name
-            if reg.reg_survey_input_id:
+            if reg.reg_survey_input_id and reg.state != 'cancel':
                 row['s10'] = reg.reg_survey_input_id.write_date
                 for ans in reg.reg_user_input_line_ids:
                     if ans.question_id.comments_allowed and ans.answer_type == 'text':

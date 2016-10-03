@@ -96,7 +96,7 @@ class CamposWelcome(models.TransientModel):
                 pro['wiz_id'] = wizard.id
                 pro_id = cwpro.create(pro).id
             self.env.user.partner_id.write({'remote_ext_id': member_number,
-                                            'remote_int_id': self.env.user.oauth_uid,
+                                            'remote_int_id': self.env.user.oauth_uid if wizard.remote_system_id.systype == 'ms' else int(member_number),
                                             'remote_system_id': wizard.remote_system_id.id,
                                             'remote_link_id': wizard.profile_id.profile_id,
                                             })

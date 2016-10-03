@@ -33,6 +33,7 @@ class ResUsers(models.Model):
 
     def signup(self, cr, uid, values, token=None, context=None):
         new_email = values.get('email')
+        
         partner_id = False
         if new_email:
             partner_ids = self.pool['res.partner'].search(cr, uid, [('email', '=', new_email)])
@@ -42,6 +43,9 @@ class ResUsers(models.Model):
                 part_ids = self.pool['campos.event.participant'].search(cr, uid, [('private_mailaddress', '=', new_email)])
                 if part_ids:
                     partner_id = self.pool('campos.event.participant').browse(cr, uid, part_ids[0]).partner_id.id
+            user_ids = self.pool['res.users'].search(cr, uid, [('login', '=', new_email)])
+            if user_ids:
+                partner_id = self.pool('res.users').browse(cr, uid, user_ids[0]).partner_id.id
             if partner_id:
                 partner = self.pool['res.partner'].browse(cr, uid, partner_id)
                 if partner.user_ids:
@@ -51,9 +55,9 @@ class ResUsers(models.Model):
                          self.pool('res.users').write(cr, 1, [ partner.user_ids[0].id], {'action_id': template_user.action_id.id,
                                                                                          'member_number': values['member_number'],
                                                                                          'blaatlogin_ticket': values['blaatlogin_ticket'],
-                                                                                         'groups_id': [(4, self.env.ref('campos_preregistration.group_campos_groupleader').id),
-                                                                                                       (4, self.env.ref('campos_welcome.group_campos_imported_group').id)],
-                                                                                         'action_id': int(self.env['ir.config_parameter'].get_param('campos_event.import_login_home_action'))})
+                                                                                         'groups_id': [(4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_preregistration','group_campos_groupleader').id),
+                                                                                                       (4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_welcome','group_campos_imported_group').id)],
+                                                                                         })
                     return (cr.dbname, partner.user_ids[0].login, values.get('password'))
                 else:
                     values['partner_id'] = partner_id
