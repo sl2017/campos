@@ -277,7 +277,7 @@ class WebsiteEventEx(WebsiteEvent):
         _logger.info('POST: %s', post)
         _logger.info('GROUPS: %s', groups)
 
-        pagetitle = _('Preregistration for Danish Groups')        
+        pagetitle = _('Preregistration for Danish Groups')
         if scout_org_id:
             scoutorg = http.request.env['campos.scout.org'].sudo().browse(int(scout_org_id))
             pagetitle = _('Preregistration for %s') % scoutorg.name
