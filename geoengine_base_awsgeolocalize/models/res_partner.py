@@ -62,10 +62,16 @@ class ResPartner(geo_model.GeoModel):
                 aws = aws_json
                 _logger.info("AWS Geo: %s", aws)
         
-            self.write({
+                muni_id = False
+                muni_code = aws['properties'].get(u'kommunekode')
+                if muni_code:
+                    muni_id = self.env['campos.municipality'].search([('number', '=', int(muni_code))]).id 
+
+                self.write({
                         'partner_latitude': aws['properties'].get(u'wgs84koordinat_bredde'),
                         'partner_longitude': aws['properties'].get(u'wgs84koordinat_længde'),
-                        'date_localization': fields.Date.today()
+                        'date_localization': fields.Date.today(),
+                        'municipality_id': muni_id,
                         })
         except:
             _logger.info(traceback.format_exc())
