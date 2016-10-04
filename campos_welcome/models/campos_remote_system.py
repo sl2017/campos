@@ -122,6 +122,8 @@ class CamposRemoteSystem(models.Model):
             remote_int_id = partner.remote_int_id
         if not remote_int_id:
             return
+        if not partner:
+            partner = self.env['res.partner'].suspend_security().search([('remote_system_id', '=', self.id),('remote_int_id', '=', remote_int_id)])
         muni_no = False
         if self.systype == 'ms':
             msodoo = odoorpc.ODOO(self.host, protocol=self.protocol, port=self.port)
