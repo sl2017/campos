@@ -8,8 +8,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class CamposCampArea(geo_model.GeoModel):
+    _description = 'Camp Area'
     _name = 'campos.camp.area'
-
+    
     name = fields.Char('Name', size=64)
     code = fields.Char('Code', size=16)
     desc = fields.Text('Description')

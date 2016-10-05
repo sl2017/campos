@@ -31,22 +31,30 @@ class Preregistration(models.Model):
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
 
 class PreregistrationAgegroup(models.Model):
+    _description = 'Age Group'
     _name = 'event.registration.agegroup'
+    
     name = fields.Char('Age Group name', required=True, translate=True)
     age_from = fields.Integer('From age', required=True)
     age_to = fields.Integer('To age', required=True)
     
 class PreregistrationPioneeringPole(models.Model):
+    _description = 'Pioneering Pole'
     _name = 'event.registration.pioneeringpole'
+    
     name = fields.Char('Pioneering Pole Name', required=True, translate=True)
     length = fields.Integer('Length', required=True)
 
 class PreregistrationTransportType(models.Model):
+    _description = 'Transport Type'
     _name = 'event.registration.transporttype'
+    
     name = fields.Char('Transport Type Name', required=True, translate=True)
 
 class PreregistrationParticipants(models.Model):
+    _description = 'Preregistration Participants'
     _name = 'event.registration.participants'
+    
     registration_id = fields.Many2one('event.registration', 'Registration')
     participant_age_group_id = fields.Many2one('event.registration.agegroup','Age Group', required=True)
     participant_total  = fields.Integer('Number of participants', required=True)
@@ -111,7 +119,9 @@ class PreregistrationParticipants(models.Model):
             raise exceptions.ValidationError(_('Date of arrival and departure must be within camp period')+' ('+self.registration_id.event_begin_date+' - '+ self.registration_id.event_end_date + ')')
 
 class PreregistrationPolelist(models.Model):
+    _description = 'Polelist'
     _name = 'event.registration.polelist'
+    
     registration_id = fields.Many2one('event.registration', 'Registration')
     pioneeringpole_id = fields.Many2one('event.registration.pioneeringpole','Pole type', required=True)
     polecount  = fields.Integer('Number of pioneering poles', required=True)
