@@ -117,9 +117,13 @@
 			<field name="arch" type="xml">
 				<form>
 						<header>
-						</header>
+							<button name="cancel_registration" 
+											type="object"    
+											string="Cancel Registration"/> 
+							</header>
 					<sheet>
 						<group name="sheet">
+							<field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
 							<field name="event_id" string="Event"  options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
 							<field name="organization_id" options="{'no_create': True}"/>
@@ -190,7 +194,6 @@
 									</group>
 								</page>
 							</notebook>
-							<field name="state" invisible="1"/>
 							</group>
 					</sheet>
 					<div class="oe_chatter">

@@ -29,6 +29,10 @@ class Preregistration(models.Model):
     friendship_group_home_hospitality = fields.Boolean('Would like to offer home hospitality?')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
+    
+    @api.one
+    def cancel_registration (self):
+        self.state = 'cancel'
 
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
