@@ -78,7 +78,7 @@ class CampCommittee(models.Model):
         compute='_compute_short_name')
     root_name = fields.Char(
         string="Root Name",
-        compute='_compute_root_name')
+        compute='_compute_root_name', store=True)
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     applicants_count = fields.Integer(string='# Applicants', compute='_compute_member_no')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner

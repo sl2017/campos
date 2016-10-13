@@ -47,6 +47,12 @@ class CamposJobTag(models.Model):
     
     _parent_store = True
     _parent_order = 'name'
+    
+    _sql_constraints = [
+        ('name_unique',
+         'unique(name)',
+         'The tag name has to be unique!')
+    ]
 
 
 class CamposJobWhen(models.Model):

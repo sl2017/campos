@@ -133,6 +133,7 @@
 											</label>
 										</div>
 									</div>
+									<!-- 
 									<div t-attf-class="form-group #{error.get('workas_both') and 'has-error' or ''}">
 										<label class="col-md-3 col-sm-4 control-label" for="workas_both" />
 										<div class="checkbox col-md-7 col-sm-8">
@@ -142,7 +143,7 @@
 											</label>
 										</div>
 									</div>
-									
+									 -->
 									<div t-attf-class="form-group #{error.get('my_comm_contact') and 'has-error' or ''}">
 										<label class="col-md-3 col-sm-4 control-label" for="my_comm_contact">Agreement with/My contact in the Committee</label>
 										<div class="col-md-7 col-sm-8">
