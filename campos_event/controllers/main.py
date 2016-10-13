@@ -153,7 +153,7 @@ class CampOsEvent(http.Controller):
         for f in ['committee_id', 'job_id', 'my_comm_contact', 'qualifications', 'workas_planner', 'workas_jobber']:
             value[f] = post.get(f)
         if post.get('job_id'):
-            job = env['campos.job'].browse(post.get('job_id'))
+            job = env['campos.job'].suspend_security().browse(int(post.get('job_id')))
             if job:
                 value['committee_id'] = job.committee_id.id
         if post.get('workas_both'):
