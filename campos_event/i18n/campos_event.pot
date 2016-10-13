@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-03 18:06+0000\n"
-"PO-Revision-Date: 2016-10-03 18:06+0000\n"
+"POT-Creation-Date: 2016-10-13 10:18+0000\n"
+"PO-Revision-Date: 2016-10-13 10:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -373,7 +373,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:579
+#: code:addons/campos_event/models/participant.py:336
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -710,7 +710,7 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:553
+#: code:addons/campos_event/models/participant.py:310
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1429,13 +1429,13 @@ msgid "Jobs"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:183
+#: code:addons/campos_event/controllers/main.py:187
 #, python-format
 msgid "Jobs for: "
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:180
+#: code:addons/campos_event/controllers/main.py:184
 #, python-format
 msgid "Jobs tagged: "
 msgstr ""
@@ -1535,7 +1535,7 @@ msgid "Leder godkendt"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:190
+#: code:addons/campos_event/controllers/main.py:194
 #, python-format
 msgid "Ledige job"
 msgstr ""
@@ -1870,7 +1870,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:708
+#: code:addons/campos_event/models/participant.py:470
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2020,7 +2020,7 @@ msgid "Questions"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/camposjob.py:122
+#: code:addons/campos_event/models/camposjob.py:128
 #, python-format
 msgid "Questions re %s"
 msgstr ""
@@ -2117,7 +2117,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:596
+#: code:addons/campos_event/models/participant.py:358
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2257,7 +2257,7 @@ msgid "Search"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:186
+#: code:addons/campos_event/controllers/main.py:190
 #, python-format
 msgid "Search Result"
 msgstr ""
@@ -2316,7 +2316,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/event.py:525
+#: code:addons/campos_event/models/participant.py:282
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2669,6 +2669,11 @@ msgid "The partner's timezone, used to output proper date and time values inside
 msgstr ""
 
 #. module: campos_event
+#: sql_constraint:campos.job.tag:0
+msgid "The tag name has to be unique!"
+msgstr ""
+
+#. module: campos_event
 #: help:campos.event.participant,image:0
 msgid "This field holds the image used as avatar for this contact, limited to 1024x1024px"
 msgstr ""
@@ -2780,11 +2785,6 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_signup
-msgid "Want to work as both."
-msgstr ""
-
-#. module: campos_event
-#: view:website:campos_event.jobber_signup
 msgid "Want to work at the Camp."
 msgstr ""
 
@@ -2879,6 +2879,12 @@ msgstr ""
 #. module: campos_event
 #: field:campos.job,job_where:0
 msgid "Where"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: selection:campos.event.participant,state:0
+msgid "Work in Progress"
 msgstr ""
 
 #. module: campos_event

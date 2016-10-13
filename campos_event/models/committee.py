@@ -78,7 +78,7 @@ class CampCommittee(models.Model):
         compute='_compute_short_name')
     root_name = fields.Char(
         string="Root Name",
-        compute='_compute_root_name')
+        compute='_compute_root_name', store=True)
     member_no = fields.Integer(string='# Member', compute='_compute_member_no')
     applicants_count = fields.Integer(string='# Applicants', compute='_compute_member_no')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
@@ -157,7 +157,7 @@ class CampCommittee(models.Model):
         Count members in the Committee
         '''
         self.member_no = len(self.sudo().part_function_ids)
-        self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', 'child_of', self.id),('state', 'in', ['sent'])])
+        self.applicants_count = self.env['campos.event.participant'].sudo().search_count([('committee_id', 'child_of', self.id),('state', 'in', ['sent', 'inprogress'])])
 
     @api.one
     @api.depends('approvers_ids')
