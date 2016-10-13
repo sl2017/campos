@@ -247,7 +247,9 @@ class WebsiteEventEx(WebsiteEvent):
             cvals['parent_id'] = group.id
             contact = partner_obj.sudo().create(cvals)
             registration_vals['contact_partner_id'] = contact.id
-            registration = reg_obj.sudo().create(registration_vals)
+            registration = reg_obj.sudo().search([('partner_id', '=', registration_vals['partner_id']), ('event_id', '=', registration_vals['event_id'])])
+            if not registration:
+                registration = reg_obj.sudo().create(registration_vals)
 
             if registration.partner_id:
                 registration._onchange_partner()
