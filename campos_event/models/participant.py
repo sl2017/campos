@@ -25,6 +25,7 @@
 #
 ##############################################################################
 
+import random
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from urlparse import urljoin
@@ -36,6 +37,13 @@ from openerp.tools.translate import _
 
 import logging
 _logger = logging.getLogger(__name__)
+
+
+def random_token():
+    # the token has an entropy of about 120 bits (6 bits/char * 20 chars)
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    return ''.join(random.SystemRandom().choice(chars) for i in xrange(20))
+
 
 class EventParticipantReject(models.Model):
 
