@@ -479,7 +479,7 @@
     		<field name="view_id" ref="campos_event_participant_form2"/>
     		<field name="search_view_id" ref="campos_event_participant_search"/>
             <field name="context">{}</field>
-            <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id),('state','in',['sent'])]</field>
+            <field name="domain">['|',('committee_id','=',active_id),('committee_id','child_of',active_id),('state','in',['sent', 'inprogress'])]</field>
         
 		</record>
 		
