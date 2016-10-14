@@ -129,16 +129,16 @@
 							<field name="teaser" colspan="4" required="1"/>
 							<field name="desc" colspan="4" required="1"/>
 							<group colspan="2">
-								<field name="job_where" />
+								<field name="job_where" invisible="1"/>
 							</group>
 							<group colspan="2">
-								<field name="job_when" readonly="1"/>
+								<field name="job_when" invisible="1"/>
 								<field name="job_when_id" />
 							</group>
 							<field name="signup_button"/>
 							<newline/>
 							<field name="tag_ids" widget="many2many_tags" placeholder="Tags..." colspan="4"/>
-							<field name="par_contact_id" required="1" domain="[('state', '=', 'approved')]"/>
+							<field name="par_contact_id" required="1" domain="[('state', '=', 'approved')]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
 							<newline/>
 							<group colspan="2">
 								<field name="date_public"/>
