@@ -133,7 +133,7 @@
 							</group>
 							<group colspan="2">
 								<field name="job_when" invisible="1"/>
-								<field name="job_when_id" />
+								<field name="job_when_id" required="1"  />
 							</group>
 							<field name="signup_button"/>
 							<newline/>
