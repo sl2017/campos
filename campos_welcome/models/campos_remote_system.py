@@ -61,7 +61,7 @@ class CamposRemoteSystem(models.Model):
             partner = Partner.browse(int(remote_int_id))
             member_number = partner.member_number
             for profile in partner.member_id.profile_ids:
-                if any([func.function_type_id.leader_function or func.function_type_id.board_function for func in profile.active_functions_in_current_organization]):
+                if any([func.function_type_id.leader_function or func.function_type_id.board_function for func in profile.active_functions_in_profile]):
                     profiles.append({'name': profile.organization_id.name,
                                      'org_int_id': profile.organization_id.partner_id.id,
                                      'org_ext_id': profile.organization_id.organization_code,

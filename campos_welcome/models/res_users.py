@@ -53,8 +53,8 @@ class ResUsers(models.Model):
                     if not partner.last_import:
                          template_user = self.pool.get('ir.model.data').get_object(cr, 1, 'auth_signup', 'default_template_user')
                          self.pool('res.users').write(cr, 1, [ partner.user_ids[0].id], {'action_id': template_user.action_id.id,
-                                                                                         'member_number': values['member_number'],
-                                                                                         'blaatlogin_ticket': values['blaatlogin_ticket'],
+                                                                                         'member_number': values.get('member_number'),
+                                                                                         'blaatlogin_ticket': values.get('blaatlogin_ticket'),
                                                                                          'groups_id': [(4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_preregistration','group_campos_groupleader').id),
                                                                                                        (4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_welcome','group_campos_imported_group').id)],
                                                                                          })
