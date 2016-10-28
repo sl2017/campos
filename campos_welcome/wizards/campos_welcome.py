@@ -132,7 +132,9 @@ class CamposWelcome(models.TransientModel):
                             'organization_id': wizard.remote_system_id.scoutorg_id.id
                             }
 
-                    cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name)])
+                    cse = self.env['campos.subcamp.exception'].search([('name', 'ilike', group.name),
+                                                                       ('scoutorg_id', '=', wizard.remote_system_id.scoutorg_id.id)],
+                                                                      limit=1)
                     if cse:
                         vals['subcamp_id'] = cse.subcamp_id.id
                         vals['camp_area_id'] = cse.camp_area_id.id
