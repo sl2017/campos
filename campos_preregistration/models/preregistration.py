@@ -34,6 +34,10 @@ class Preregistration(models.Model):
     def cancel_registration (self):
         self.state = 'cancel'
 
+    @api.one
+    def reopen_registration (self):
+        self.state = 'draft'
+
 class PreregistrationAgegroup(models.Model):
     _name = 'event.registration.agegroup'
     name = fields.Char('Age Group name', required=True, translate=True)
@@ -100,19 +104,15 @@ class PreregistrationParticipants(models.Model):
         validation_result = self._check_from_before_end()
         if validation_result != True:
             raise exceptions.ValidationError(_('Date of arrival must be before date of departure'))
-
-    def _check_transport_in_camp_period(self):
-        if (fields.Datetime.from_string(self.registration_id.event_begin_date).date() <= fields.Datetime.from_string(self.participant_from_date).date() and 
-        fields.Datetime.from_string(self.registration_id.event_end_date).date() >= fields.Datetime.from_string(self.participant_to_date).date()):
-            return True
-        return False
     
     @api.one
     @api.constrains('participant_from_date', 'participant_to_date')
     def validation_transport_in_camp_period(self):
-        validation_result = self._check_transport_in_camp_period()
-        if validation_result != True:
-            raise exceptions.ValidationError(_('Date of arrival and departure must be within camp period')+' ('+self.registration_id.event_begin_date+' - '+ self.registration_id.event_end_date + ')')
+        event_begin_date_located = self.registration_id.event_id.date_begin_located
+        event_end_date_located = self.registration_id.event_id.date_end_located
+        if (fields.Datetime.from_string(event_begin_date_located).date() > fields.Datetime.from_string(self.participant_from_date).date() or 
+        fields.Datetime.from_string(event_end_date_located).date() < fields.Datetime.from_string(self.participant_to_date).date()):
+            raise exceptions.ValidationError(_('Date of arrival and departure must be within camp period')+' ('+event_begin_date_located+' - '+ event_end_date_located + ')')
 
 class PreregistrationPolelist(models.Model):
     _name = 'event.registration.polelist'
