@@ -115,7 +115,7 @@ class CamposRemoteSystem(models.Model):
         
         def country_lookup(country):
             if country:
-                return self.env['res.country'].search([('name', 'ilike', country)]).id
+                return self.env['res.country'].search([('name', 'ilike', country)], limit=1, order='id').id
             return False
         
         if not remote_int_id and partner:
