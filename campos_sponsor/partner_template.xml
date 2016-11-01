@@ -3,20 +3,19 @@
 	<data>
 		<template id="partner_signup" name="Partner signup">
 			<t t-call="website.layout">
-				<t t-set="additional_title">Partner Signup</t>
+				<t t-set="additional_title">Sæt spor som partner på Spejdernes Lejr</t>
 				<div id="wrap" style="margin-bottom:100px;">
-					<div class="oe_structure" />
+					<div class="oe_structure"/>
 					<div class="container">
 					
 						<h1 class="text-center">
-							Partner Signup Form
+							Sæt spor som partner på Spejdernes Lejr
 						</h1>
 						
 						
 						<div class="row">
 							<section id="forms">
-								<form class="form-horizontal mt32" action="/page/campos-partner-thankyou"
-									method="post" enctype="multipart/form-data">
+								<form class="form-horizontal mt32" action="/page/campos-partner-thankyou" method="post" enctype="multipart/form-data">
 														
 														
 																		
@@ -26,13 +25,13 @@
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="name">Navn på firma/organisation</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="name" required="True" />
+											<input type="text" class="form-control" name="name" required="True"/>
 										</div>
 									</div>									
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="sponsor_cvr">Evt. CVR</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="sponsor_cvr" required="False" />
+											<input type="text" class="form-control" name="sponsor_cvr" required="False"/>
 										</div>
 									</div>
 									
@@ -44,25 +43,25 @@
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="street">Adresse</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="street" required="True" />
+											<input type="text" class="form-control" name="street" required="True"/>
 										</div>
 									</div>
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="zip">Postnummer</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="zip" required="True" />
+											<input type="text" class="form-control" name="zip" required="True"/>
 										</div>
 									</div>
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="city">Bynavn</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="city" required="True" />
+											<input type="text" class="form-control" name="city" required="True"/>
 										</div>
 									</div>
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="sponsor_url">Evt. hjemmeside</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="sponsor_url" required="False" />
+											<input type="text" class="form-control" name="sponsor_url" required="False"/>
 										</div>
 									</div>
 									
@@ -78,19 +77,19 @@
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_name">Kontaktperson navn</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="sponsor_kontaktperson_name" required="True" />
+											<input type="text" class="form-control" name="sponsor_kontaktperson_name" required="True"/>
 										</div>
 									</div>
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_mail">Kontaktperson email</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="email" class="form-control" name="sponsor_kontaktperson_mail" required="True" />
+											<input type="email" class="form-control" name="sponsor_kontaktperson_mail" required="True"/>
 										</div>
 									</div>
 									<div t-attf-class="form-group">
 										<label class="col-md-3 col-sm-4 control-label" for="sponsor_kontaktperson_tlf">Kontaktperson telefonnummer</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control" name="sponsor_kontaktperson_tlf" required="True" />
+											<input type="text" class="form-control" name="sponsor_kontaktperson_tlf" required="True"/>
 										</div>
 									</div>
 									
@@ -139,7 +138,7 @@
 									<div class="form-group"> 
 										<div class="col-md-3 col-sm-4 control-label" for="partner_aktivitet">
 											<label>Idé til aktivitet</label> 
-											<p>Hvilke idéer har i til en aktivitet?</p>
+											<p>Hvilke idéer har I til en aktivitet?</p>
 										</div>
 										<div class="col-md-7 col-sm-8"> 
 											<textarea class="form-control" name="partner_aktivitet" style="min-height: 120px" required="True"/> 
@@ -148,12 +147,13 @@
 									<div class="form-group"> 
 										<div class="col-md-3 col-sm-4 control-label" for="partner_onsker">
 											<label>Ønsker fra partnerskabet</label> 
-											<p>Hvad ønsker i ud af partnerskabet?</p>
+											<p>Hvad ønsker I ud af partnerskabet?</p>
 										</div>
 										<div class="col-md-7 col-sm-8"> 
 											<textarea class="form-control" name="partner_onsker" style="min-height: 120px" required="True"/> 
 										</div> 
 									</div>
+<!--
 									<div class="form-group"> 
 										<div class="col-md-3 col-sm-4 control-label" for="partner_nextsteps">
 											<label>Næste skridt</label> 
@@ -163,6 +163,7 @@
 											<textarea class="form-control" name="partner_nextsteps" style="min-height: 120px" required="True"/> 
 										</div> 
 									</div>
+-->
 									<div class="form-group"> 
 										<div class="col-md-3 col-sm-4 control-label" for="partner_bemarkninger">
 											<label>Bemærkninger</label> 
@@ -188,10 +189,11 @@
 						</div>
 							
 					</div>
-					<div class="oe_structure" />
+					<div class="oe_structure"/>
 				</div>
 						
 			</t>
+		
 		</template>
 		
 		
