@@ -56,7 +56,7 @@ class ResUsers(models.Model):
                                                                                          'member_number': values.get('member_number'),
                                                                                          'blaatlogin_ticket': values.get('blaatlogin_ticket'),
                                                                                          'oauth_access_token': token,
-                                                                                         'oauth_uid': values.get('oauth_uid),
+                                                                                         'oauth_uid': values.get('oauth_uid'),
                                                                                          'oauth_provider_id': values.get('oauth_provider_id'),
                                                                                          'groups_id': [(4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_preregistration','group_campos_groupleader').id),
                                                                                                        (4, self.pool.get('ir.model.data').get_object(cr, uid,'campos_welcome','group_campos_imported_group').id)],
