@@ -33,7 +33,13 @@ class Preregistration(models.Model):
     @api.one
     def cancel_registration (self):
         self.state = 'cancel'
-
+        template = self.env.ref('campos_preregistration.preregistration_cancel_mail')
+        assert template._name == 'email.template'
+        try:
+            template.send_mail(self.id)
+        except:
+            pass
+        
     @api.one
     def reopen_registration (self):
         self.state = 'draft'
