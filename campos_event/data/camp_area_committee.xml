@@ -1,0 +1,8 @@
+<<openerp>
+    <data>
+    	 
+    	<record id="camp_area_committee" model="campos.committee">
+    	<field name="name">Kvarterskoordinatorer</field>
+    
+    </data>
+</openerp>
