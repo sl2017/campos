@@ -32,6 +32,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form,geoengine,graph</field>
 			<field name="domain">[('staff','=',True)]</field>
+			<field name="context">{'default_staff': True}</field>
 		</record>
 		
 		
