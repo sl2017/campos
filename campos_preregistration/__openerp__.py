@@ -25,6 +25,7 @@
 
     # always loaded
     'data': ['views/preregistration.xml',
+             'views/mail_templates.xml',
              'security/campos_preregistration_security.xml',
              'security/ir.model.access.csv',
              'security/ir.rule.csv',
