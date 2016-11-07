@@ -99,6 +99,7 @@ class EventParticipant(geo_model.GeoModel):
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
     birthdate = fields.Date('Date of birth')
+    birthdate_short = fields.Char(compute='_compute_birthdate_short')
     age = fields.Integer('Age', compute='_compute_age', store=True)
     context_age = fields.Integer('Age', compute='_compute_context_age')
 
@@ -210,6 +211,12 @@ class EventParticipant(geo_model.GeoModel):
     def _compute_context_age(self):
         for part in self:
             part.context_age = part.age_on_date(self.env.context.get('context_age_date')) if part.birthdate else False
+
+    @api.one
+    @api.depends('birthdate')
+    def _compute_birthdate_short(self):
+        if self.birthdate:
+            self.birthdate_short = '%s%s%s' % (self.birthdate[8:10], self.birthdate[5:7], self.birthdate[2:4])
 
     @api.model
     def create(self, vals):

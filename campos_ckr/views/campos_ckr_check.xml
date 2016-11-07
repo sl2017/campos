@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_ckr_check_form_view">
+        <field name="name">campos.ckr.check.form (in campos_ckr)</field>
+        <field name="model">campos.ckr.check</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+						<button string="Send to CO" name="action_confirm"
+							type="object" class="oe_highlight"
+							attrs="{'invisible': ['|', ('birthdate_short', '=', False), '|', ('cpr', '=', False), ('state', '!=', 'draft')]}" />
+						<button string="Requested from CKR" name="action_req_ckr" states="sentin,cancel,timeout"
+							type="object" class="oe_highlight" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+						<button string="Approved" name="action_approve" states="ckr_req"
+							type="object" class="oe_highlight" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+						<button string="Rejected" name="action_reject" states="ckr_req,approved,cancel"
+							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+						<button string="Cancel" name="action_cancel" states="draft,sentin,ckr_req,approved,timeout,rejected"
+							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+						<button string="Req. Expired" name="action_timeout" states="ckr_req"
+							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,sentin,ckr_req,approved"
+							statusbar_colors='{"rejected":"red","approved":"blue"}' />
+					</header>
+					<sheet>
+						<group name="ckr_check_fields">
+							<group name="ckr_check_base">
+								<field name="participant_id" options="{'no_create': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+								<label for="cpr" />
+									<div>
+										<field name="birthdate_short" readonly="1" nolabel="1" style="width: auto;" />-
+										<field name="cpr" nolabel="1" style="width: 10%%" attrs="{'readonly': [('state', 'not in', ('draft', 'sentin'))]}" />
+									</div>
+							</group>
+							<group name="ckr_check_dates">
+								<field name="create_date" readonly="1"/>
+								<field name="edit_appr_date" invisible="1"/>
+								<field name="appr_date" attrs="{'readonly': [('edit_appr_date', '=', False)], 'invisible': [('appr_date', '=', False), ('edit_appr_date', '=', False)]}" />/>
+							</group>
+						</group>
+						<div attrs="{'invisible': ['|', ('birthdate_short', '!=', False), ('state', '!=', 'draft')]}">
+							You must set the birthdate on the participant to complete the CKR request.
+						</div>
+						<div attrs="{'invisible': ['|', ('cpr', '!=', False), ('state', '!=', 'draft')]}">
+							You must enter the CPR number (the last four digits) to complete the CKR request.
+						</div>
+						<div attrs="{'invisible': ['|', ('birthdate_short', '=', False), '|', ('cpr', '=', False), ('state', '!=', 'draft')]}">
+							<strong><i>Use the "Send to CO" button to submit the CKR check request.</i></strong>
+						</div>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_ckr_check_search_view">
+        <field name="name">campos.ckr.check.search (in campos_ckr)</field>
+        <field name="model">campos.ckr.check</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="participant_id" />
+				<field name="state" />
+				<filter name="to_request" string="To Request at Central office"
+					domain="[('state', '=', 'sentin')]" />
+				<filter name="waiting" string="In Process" domain="[('state', '=', 'ckr_req')]" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_ckr_check_tree_view">
+        <field name="name">campos.ckr.check.tree (in campos_ckr)</field>
+        <field name="model">campos.ckr.check</field>
+        <field name="arch" type="xml">
+            <tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
+				<button name="action_open_participant" string="" type="object" icon="terp-personal" />
+				<field name="participant_id" />
+				<field name="create_date" />
+				<field name="appr_date" />
+				<field name="state" />
+			</tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_ckr_check_act_window">
+        <field name="name">Ckr Check</field> <!-- TODO -->
+        <field name="res_model">campos.ckr.check</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_ckr_check_menu">
+        <field name="name">Ckr Check</field>
+        <field name="parent_id" ref="campos_event.menu_campos_jobber"/>
+        <field name="action" ref="campos_ckr_check_act_window"/>
+        <field name="sequence" eval="60"/>
+    </record>
+    
+    <!-- Server action and binding to present cpr list -->
+		<record id="action_participant_cpr_list" model="ir.actions.server">
+			<field name="name">Show CPR List</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="model_campos_ckr_check" />
+			<field name="state">code</field>
+			<field name="code">
+				action = self.get_ckrdata_action(cr, uid, context.get('active_ids'))
+			</field>
+		</record>
+		
+		<record id="ir_participant_cpr_list" model="ir.values">
+			<field name="model">campos.ckr.check</field>
+			<field name="name">Show CPR/Name list</field>
+			<field name="key2">client_action_multi</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_participant_cpr_list" />
+		</record>
+
+</data>
+</openerp>
