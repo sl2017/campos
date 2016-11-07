@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+	<record id="group_campos_ckr_admin" model="res.groups">
+			<field name="name">CKR Admin</field>
+			<field name="implied_ids" eval="[(4, ref('campos_event.group_campos_user'))]"/>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+
+    <record model="ir.model.access" id="campos_ckr_check_access">
+        <field name="name">campos.ckr.check access</field>
+        <field name="model_id" ref="model_campos_ckr_check"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="campos_ckr.group_campos_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+    
+     <record id="campos_rule_ckr_check_participant" model="ir.rule">
+            <field name="name">Participant CKR</field>
+            <field name="model_id" ref="model_campos_ckr_check"/>
+            <field name="domain_force">[('participant_id','=', user.participant_id.id)]</field>
+            <field name="groups" eval="[(4,ref('campos_event.group_campos_user'))]"/>
+        </record>
+
+	<record id="campos_rule_ckr_check_admin" model="ir.rule">
+            <field name="name">Admin CKR</field>
+            <field name="model_id" ref="model_campos_ckr_check"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('campos_ckr.group_campos_ckr_admin'))]"/>
+        </record>
+	
+</data>
+</openerp>
