@@ -237,11 +237,11 @@ class EventRegistration(models.Model):
     municipality_id = fields.Many2one(
         'campos.municipality',
         'Municipality', related="partner_id.municipality_id")
-        
+
     ddsgroup = fields.Integer('DDS Gruppenr')
     region = fields.Char('Region', size=64)
-    
-    
+
+
     # Contact
     contact_partner_id = fields.Many2one(
         'res.partner', 'Contact', states={
@@ -267,7 +267,10 @@ class EventRegistration(models.Model):
         select=True,
         ondelete='set null')
     subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
-    
+
+    part_function_view_ids = fields.One2many(related='camp_area_id.committee_id.part_function_view_ids', string='Coordinators')
+    reg_view_ids = fields.One2many(related='camp_area_id.reg_view_ids', string='Troops')
+
     @api.multi
     def action_edit_survey_response(self):
         fields = []

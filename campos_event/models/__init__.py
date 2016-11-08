@@ -18,3 +18,5 @@ from . import campos_subcamp
 from . import campos_subcamp_exception
 from . import campos_staff_del_prod
 from . import product_template
+from . import campos_registration_view
+from . import campos_function_view

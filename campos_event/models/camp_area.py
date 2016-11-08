@@ -17,6 +17,7 @@ class CamposCampArea(geo_model.GeoModel):
     max_cap = fields.Integer('Max')
     event_id = fields.Many2one('event.event', 'Event')
     reg_ids = fields.One2many('event.registration', 'camp_area_id', 'Troops')
+    reg_view_ids = fields.One2many('campos.registration.view', 'camp_area_id', 'Troops')
     addreg_id = fields.Many2one('event.registration', 'Add Registration', ondelete='set null', domain=[('state','!=', 'cancel')])
     allocated = fields.Integer('Allocated', compute="_compute_allocated")
     subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
@@ -24,8 +25,10 @@ class CamposCampArea(geo_model.GeoModel):
     committee_id = fields.Many2one('campos.committee',
                                    'Committee',
                                    ondelete='cascade')
+    part_function_ids = fields.One2many(related='committee_id.part_function_ids', string='Coordinators')
+    
     mailgroup_id = fields.Many2one('mail.group',
-                                   'Committee',
+                                   'Mail list',
                                    ondelete='cascade')
 
     
@@ -37,7 +40,7 @@ class CamposCampArea(geo_model.GeoModel):
     @api.one
     def _create_committee(self):
         if not self.committee_id:
-            parent = self.env['campos.committee'].search(['name', '=', self.subcamp_id.name])
+            parent = self.env['campos.committee'].search([('name', '=', self.subcamp_id.name), ('parent_id', '=', self.env.ref('campos_event.camp_area_committee').id)])
             if not parent:
                 parent = self.env['campos.committee'].create({'name': self.subcamp_id.name,
                                                               'parent_id' : self.env.ref('campos_event.camp_area_committee').id
