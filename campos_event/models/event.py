@@ -268,6 +268,7 @@ class EventRegistration(models.Model):
         ondelete='set null')
     subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
 
+    subcamp_function_view_ids = fields.One2many(related='subcamp_id.committee_id.part_function_view_ids', string='Coordinators')
     part_function_view_ids = fields.One2many(related='camp_area_id.committee_id.part_function_view_ids', string='Coordinators')
     reg_view_ids = fields.One2many(related='camp_area_id.reg_view_ids', string='Troops')
 

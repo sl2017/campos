@@ -15,3 +15,8 @@ class CamposSubcamp(geo_model.GeoModel):
     name = fields.Char()
     color = fields.Char('Color')
     the_geom = geo_fields.GeoMultiPolygon('NPA Shape')
+    committee_id = fields.Many2one('campos.committee',
+                                   'Committee',
+                                   ondelete='cascade')
+    part_function_ids = fields.One2many(related='committee_id.part_function_ids', string='Coordinators')
+    
