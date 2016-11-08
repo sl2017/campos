@@ -124,6 +124,47 @@
 			<field name="value"
 				eval="'ir.actions.server,%d'%action_participant_cpr_list" />
 		</record>
+		
+		<!--  Participant -->
+		
+		<record model="ir.ui.view" id="view_event_registration_participant_form">
+			<field name="name">registration.participant.form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="inherit_id" ref="campos_event.view_event_registration_participant_form" />
+			<field name="arch" type="xml">
+				<page name="agreements" position="after">
+					<page name="ckr" string="CKR Request" groups="campos_ckr.group_campos_ckr_admin">
+						<field name="ckr_ids">
+							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
+								<field name="create_date" />
+								<field name="state" />
+								<field name="appr_date" />
+							</tree>
+						</field>
+					</page>
+				</page>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="staff_event_registration_participant_form">
+			<field name="name">registration.participant.form Staff</field>
+			<field name="model">campos.event.participant</field>
+			<field name="inherit_id" ref="campos_event.staff_event_registration_participant_form" />
+			<field name="arch" type="xml">
+						<page name="agreements" position="after">
+					<page name="ckr" string="CKR Request">
+						<field name="ckr_ids">
+							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
+								<field name="create_date" />
+								<field name="state" />
+								<field name="appr_date" />
+							</tree>
+						</field>
+					</page>
+				</page>
+			</field>
+		</record>
+				
 
 </data>
 </openerp>
