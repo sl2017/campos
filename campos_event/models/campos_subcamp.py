@@ -18,5 +18,5 @@ class CamposSubcamp(geo_model.GeoModel):
     committee_id = fields.Many2one('campos.committee',
                                    'Committee',
                                    ondelete='cascade')
-    part_function_ids = fields.One2many(related='committee_id.part_function_ids', string='Coordinators')
+    subcamp_function_ids = fields.One2many(related='committee_id.part_function_ids', string='Coordinators')
     
