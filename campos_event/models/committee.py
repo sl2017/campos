@@ -84,6 +84,7 @@ class CampCommittee(models.Model):
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     job_ids = fields.One2many('campos.job', 'committee_id', string='Jobs')
     part_function_ids = fields.One2many('campos.committee.function', 'committee_id', string='Members')
+    part_function_view_ids = fields.One2many('campos.function.view', 'committee_id', string='Members')
     website_published = fields.Boolean('Visible in Website')
     partner_list = fields.Char(
         string="Approver list",

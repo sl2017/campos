@@ -20,7 +20,31 @@
                         <field name="code"/>
                         <field name="subcamp_id"/>
                         <field name="event_id"/>
+                        <field name="committee_id"/>
+                        <field name="mailgroup_id"/>
                          <notebook colspan="4">
+                         <page string="Contacts">
+                         	<field name="part_function_ids">
+                         		<tree>
+                         			<field name="function_type_id" />
+									<field name="participant_id" string="Name"/>
+									<field name="email" />
+									<field name="mobile" />
+                         		</tree>
+                         	</field>
+                         	<field name="reg_ids">
+                         		<tree>
+                         			<field name="name" string="Group"/>
+                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
+                         			<field name="contact_email"/>
+                         			<field name="state"/>
+                         		
+                         		</tree>
+                         	
+                         	</field>
+                         	
+                         	</field>
+                         </page>
                       <page string="Geometry">
                         <field name="the_geom" colspan="4" widget="geo_edit_map"/>
                       </page>

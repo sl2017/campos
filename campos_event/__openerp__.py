@@ -63,6 +63,8 @@
 
     # always loaded
     'data': [
+        'security/campos_registration_view.xml',
+        'security/campos_function_view.xml',
         'views/product_template.xml',
         
         #'views/campos_staff_del_prod.xml',
@@ -99,6 +101,7 @@
         'views/meeting_proposal_template.xml',
         'views/event_track_view.xml',
         'views/campos_camp_area.xml',
+        'data/camp_area_committee.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
