@@ -43,7 +43,6 @@
                          	
                          	</field>
                          	
-                         	</field>
                          </page>
                       <page string="Geometry">
                         <field name="the_geom" colspan="4" widget="geo_edit_map"/>
