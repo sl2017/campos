@@ -26,6 +26,7 @@ class CamposCampArea(geo_model.GeoModel):
                                    'Committee',
                                    ondelete='cascade')
     part_function_ids = fields.One2many(related='committee_id.part_function_ids', string='Coordinators')
+    subcamp_function_ids = fields.One2many(related='subcamp_id.committee_id.part_function_ids', string='Camp Area Resp.')
     
     mailgroup_id = fields.Many2one('mail.group',
                                    'Mail list',

@@ -20,7 +20,7 @@
 						<field name="committee_id" />
 						<notebook colspan="4">
 							<page string="Contacts">
-								<field name="part_function_ids">
+								<field name="subcamp_function_ids">
 									<tree>
 										<field name="function_type_id" />
 										<field name="participant_id" string="Name" />
