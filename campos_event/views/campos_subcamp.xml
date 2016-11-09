@@ -5,29 +5,40 @@
 <openerp>
 <data>
 
-    <record model="ir.ui.view" id="campos_subcamp_form_view">
-        <field name="name">campos.subcamp.form (in campos_event)</field>
-        <field name="model">campos.subcamp</field>
-        <field name="arch" type="xml">
-            <form>
-                <header>
-                    <!-- TODO -->
-                </header>
-                <sheet>
-                    <!-- TODO -->
-                    <group>
-                        <field name="name"/>
-                         <notebook colspan="4">
-                      <page string="Geometry">
-                        <field name="the_geom" colspan="4" widget="geo_edit_map"/>
-                      </page>
-                    </notebook>
-                    </group>
-                </sheet>
-                <div class="oe_chatter"></div>
-            </form>
-        </field>
-    </record>
+	<record model="ir.ui.view" id="campos_subcamp_form_view">
+		<field name="name">campos.subcamp.form (in campos_event)</field>
+		<field name="model">campos.subcamp</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<!-- TODO -->
+				</header>
+				<sheet>
+					<!-- TODO -->
+					<group>
+						<field name="name" />
+						<field name="committee_id" />
+						<notebook colspan="4">
+							<page string="Contacts">
+								<field name="subcamp_function_ids">
+									<tree>
+										<field name="function_type_id" />
+										<field name="participant_id" string="Name" />
+										<field name="email" />
+										<field name="mobile" />
+									</tree>
+								</field>
+							</page>
+							<page string="Geometry">
+								<field name="the_geom" colspan="4" widget="geo_edit_map" />
+							</page>
+						</notebook>
+					</group>
+				</sheet>
+				<div class="oe_chatter"></div>
+			</form>
+		</field>
+	</record>
 
     <record model="ir.ui.view" id="campos_subcamp_search_view">
         <field name="name">campos.subcamp.search (in campos_event)</field>
