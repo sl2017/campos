@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-31 02:00+0000\n"
-"PO-Revision-Date: 2016-10-31 02:00+0000\n"
+"POT-Creation-Date: 2016-11-10 02:00+0000\n"
+"PO-Revision-Date: 2016-11-10 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -234,11 +234,6 @@ msgid "Godkend partnerskab"
 msgstr ""
 
 #. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Hvad er næste skridt efter ansøgningen?"
-msgstr ""
-
-#. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvad forventer du aktiviteten koster?"
 msgstr ""
@@ -255,7 +250,7 @@ msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
-msgid "Hvad ønsker i ud af partnerskabet?"
+msgid "Hvad ønsker I ud af partnerskabet?"
 msgstr ""
 
 #. module: campos_sponsor
@@ -266,7 +261,7 @@ msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
-msgid "Hvilke idéer har i til en aktivitet?"
+msgid "Hvilke idéer har I til en aktivitet?"
 msgstr ""
 
 #. module: campos_sponsor
@@ -394,18 +389,7 @@ msgstr ""
 
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
-#: view:website:campos_sponsor.partner_signup
 msgid "Næste skridt"
-msgstr ""
-
-#. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Partner Signup"
-msgstr ""
-
-#. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Partner Signup Form"
 msgstr ""
 
 #. module: campos_sponsor
@@ -491,6 +475,11 @@ msgstr ""
 #. module: campos_sponsor
 #: model:res.groups,name:campos_sponsor.group_campos_sponsorudvalg
 msgid "Sponsorudvalg"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Sæt spor som partner på Spejdernes Lejr"
 msgstr ""
 
 #. module: campos_sponsor
