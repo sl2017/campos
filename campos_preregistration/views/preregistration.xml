@@ -99,32 +99,57 @@
 										<field name="subcamp_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
 										<field name="camp_area_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
 									</group>
+									<separator string="Sub Camp Responsible"/>
 									<field name="subcamp_function_view_ids" options="{'no_open': True}">
-                         		<tree editable="bottom" delete="false">
-                         			<field name="function_type_id" />
-									<field name="participant_id" string="Name"/>
-									<field name="email" />
-									<field name="mobile" />
-                         		</tree>
-                         	</field>
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+                         			<separator string="Camp Area Coordinators"/>
 									<field name="part_function_view_ids" readonly="1" options="{'no_open': True, 'reload_on_button': True}">
-                         		<tree editable="bottom" delete="false">
-                         			<field name="function_type_id" />
-									<field name="participant_id" string="Name"/>
-									<field name="email" />
-									<field name="mobile" />
-                         		</tree>
-                         	</field>
-                         	<field name="reg_view_ids">
-                         		<tree editable="bottom" delete="false">
-                         			<field name="name" string="Group" options="{'no_open': True}"/>
-                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
-                         			<field name="contact_email"/>
-                         			<field name="state"/>
-                         		
-                         		</tree>
-                         	
-                         	</field>
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+		                         	<separator string="Scout Groups Contacts"/>
+		                         	<field name="reg_view_ids">
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}" options="{'no_open': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         			</group>
+		                         		</form>
+		                         	</field>
 								</page>
 							</notebook>
 							<field name="state" invisible="1"/>
