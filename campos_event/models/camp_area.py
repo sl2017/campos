@@ -51,7 +51,7 @@ class CamposCampArea(geo_model.GeoModel):
                                                                      'code': self.code,
                                                                      'parent_id': parent.id,
                                                                      })
-        if not self.mailgroup_id:
-            self.mailgroup_id = self.env['mail.group'].with_context(mail_create_nosubscribe=True).create({'name': "Kvarter %s / %s" % (self.name, self.subcamp_id.name),
-                                                                'alias_name': "kvarter-%s" % (self.code),
-                                                                })
+#         if not self.mailgroup_id:
+#             self.mailgroup_id = self.env['mail.group'].with_context(mail_create_nosubscribe=True).create({'name': "Kvarter %s / %s" % (self.name, self.subcamp_id.name),
+#                                                                 'alias_name': "kvarter-%s" % (self.code),
+#                                                                 })
