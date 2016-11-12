@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 02:00+0000\n"
-"PO-Revision-Date: 2016-11-10 02:00+0000\n"
+"POT-Creation-Date: 2016-11-12 02:00+0000\n"
+"PO-Revision-Date: 2016-11-12 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,11 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Agreements"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Camp Area Coordinators"
 msgstr ""
 
 #. module: campos_preregistration
@@ -183,6 +188,11 @@ msgid "Reopen Registration"
 msgstr ""
 
 #. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Scout Groups Contacts"
+msgstr ""
+
+#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 #: view:event.registration:campos_preregistration.view_tree_event_registration
@@ -193,6 +203,11 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Sub Camp"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Sub Camp Responsible"
 msgstr ""
 
 #. module: campos_preregistration
