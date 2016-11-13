@@ -9,7 +9,8 @@ class Preregistration(models.Model):
 #    group_name = fields.Char('Group Name')
 #    group_association = fields.Many2one('campos.scout.org','Scout Organization')
 #    group_world_association = fields.Selection(related='group_association.worldorg', string='World Organisation', readonly=True)
-    group_entrypoint = fields.Char('Point of entry into Denmark')
+    group_entrypoint = fields.Many2one('event.registration.entryexitpoint','Point of entry into Denmark')
+    group_exitpoint = fields.Many2one('event.registration.entryexitpoint','Point of exit from Denmark')
 #    group_municipality = fields.Many2one('campos.municipality','Municipallity')
 #    group_country = fields.Many2one('res.country', 'Country')
 #    group_country_name = fields.Char(related='group_country.name', string='Country Name', readonly=True)
@@ -64,6 +65,10 @@ class PreregistrationTransportType(models.Model):
     _name = 'event.registration.transporttype'
     
     name = fields.Char('Transport Type Name', required=True, translate=True)
+
+class PreregistrationEntryExitPoint(models.Model):
+    _name = 'event.registration.entryexitpoint'
+    name = fields.Char('Entry/exit Point Name', required=True, translate=True)
 
 class PreregistrationParticipants(models.Model):
     _description = 'Preregistration Participants'
