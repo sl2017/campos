@@ -70,6 +70,8 @@
         'security/campos_subcamp_exception.xml',
         
         'security/campos_subcamp.xml',
+        'security/campos_registration_view.xml',
+        'security/campos_function_view.xml',
         
         'security/ir.model.access.csv',
         'security/ir.rule.csv',
@@ -99,6 +101,7 @@
         'views/meeting_proposal_template.xml',
         'views/event_track_view.xml',
         'views/campos_camp_area.xml',
+        'data/camp_area_committee.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
