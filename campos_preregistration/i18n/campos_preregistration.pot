@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 02:00+0000\n"
-"PO-Revision-Date: 2016-11-12 02:00+0000\n"
+"POT-Creation-Date: 2016-11-15 02:00+0000\n"
+"PO-Revision-Date: 2016-11-15 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -68,6 +68,11 @@ msgid "Contact Person"
 msgstr ""
 
 #. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_entryexitpoint
+msgid "Entry/exit Points"
+msgstr ""
+
+#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Event"
@@ -91,6 +96,11 @@ msgstr ""
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_agegroup
 msgid "Event Registration Agegroup"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_entryexitpoint
+msgid "Event Registration Entry/exit Points"
 msgstr ""
 
 #. module: campos_preregistration
