@@ -2,7 +2,7 @@
 # Copyright 2016 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, SUPERUSER_ID, _
+from openerp import api, fields, models, exceptions, SUPERUSER_ID, _
 
 
 class CamposCkrCheck(models.Model):
@@ -40,6 +40,11 @@ class CamposCkrCheck(models.Model):
     # Computed fields for access control
     edit_appr_date = fields.Boolean(compute='_edit_appr_date', default=False)
 
+    @api.constrains('cpr')
+    def _check_description(self):
+        if not (len(self.cpr) == 4 and self.cpr.isdigit()):
+            raise exceptions.ValidationError("CPR number must be 4 digits")
+        
     @api.one
     def _edit_appr_date(self, operation=None):
         self.edit_appr_date = self.user_has_groups('campos_ckr.group_campos_ckr_admin') or self.env.uid == SUPERUSER_ID
