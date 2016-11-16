@@ -31,7 +31,7 @@
 			<field name="name">campos.committee.member</field>
 			<field name="model">campos.committee.function</field>
 			<field name="arch" type="xml">
-				<tree string="Members">
+				<tree string="Members"  create="0">
 					<field name="committee_id" operator="child_of"/>
 					<field name="function_type_id" />
 					<field name="participant_id" />

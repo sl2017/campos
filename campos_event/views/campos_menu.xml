@@ -29,6 +29,11 @@
 				name="Participants" sequence="50" parent="menu_campos_jobber"
 				groups="campos_event.group_campos_manager,campos_event.group_campos_committee" />
 	    
+	    	<menuitem action="action_graph_staff_del_prod" id="menu_graph_staff_del_prod"
+				name="Staff products" sequence="70" parent="menu_campos_jobber"
+				groups="campos_event.group_campos_manager,campos_event.group_campos_manager" />
+	    
+	    
 	    	<menuitem action="action_event_participants_staff_tree" id="event_participants_staff_tree_menu"
 				name="My signup" sequence="50" parent="menu_campos_event"
 				groups="campos_event.group_campos_staff" />

@@ -99,6 +99,7 @@ class EventParticipant(geo_model.GeoModel):
         track_visibility='onchange')
     leader = fields.Boolean('Is Leader')
     birthdate = fields.Date('Date of birth')
+    birthdate_short = fields.Char(compute='_compute_birthdate_short')
     age = fields.Integer('Age', compute='_compute_age', store=True)
     context_age = fields.Integer('Age', compute='_compute_context_age')
 
@@ -211,6 +212,12 @@ class EventParticipant(geo_model.GeoModel):
         for part in self:
             part.context_age = part.age_on_date(self.env.context.get('context_age_date')) if part.birthdate else False
 
+    @api.one
+    @api.depends('birthdate')
+    def _compute_birthdate_short(self):
+        if self.birthdate:
+            self.birthdate_short = '%s%s%s' % (self.birthdate[8:10], self.birthdate[5:7], self.birthdate[2:4])
+
     @api.model
     def create(self, vals):
         par = super(EventParticipant, self).create(vals)
@@ -305,6 +312,33 @@ class EventParticipant(geo_model.GeoModel):
         """
         assert len(self) == 1, 'This option should only be used for a single id at a time.'
         template = self.env.ref('campos_event.staff_on_standby', False)
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ctx = dict(
+            default_model='campos.event.participant',
+            default_res_id=self.id,
+            default_use_template=bool(template),
+            default_template_id=template.id,
+            default_composition_mode='comment',
+
+        )
+        return {
+            'name': _('Compose Email'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }
+        
+    @api.multi
+    def action_send_mail(self, template):
+        """ Open a window to compose an email, with the template
+            message loaded by default
+        """
+        assert len(self) == 1, 'This option should only be used for a single id at a time.'
         compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
         ctx = dict(
             default_model='campos.event.participant',

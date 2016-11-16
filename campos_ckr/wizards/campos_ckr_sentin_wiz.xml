@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_ckr_sentin_wiz_form_view">
+        <field name="name">campos.ckr.sentin.wiz.form (in campos_ckr)</field>
+        <field name="model">campos.ckr.sentin.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Campos Ckr Sentin Wiz">
+                    <field name="message" no-label="1"/>
+                <footer>
+                    <button name='action_mark_req'
+                        string='Mark as Requested'
+                        class='btn-primary oe_highlight'
+                        type='object'/>
+                    or
+                    <button string='Close'
+                        class='btn-default oe_link'
+                        special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    
+
+
+</data>
+</openerp>
