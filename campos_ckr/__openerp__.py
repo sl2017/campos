@@ -15,7 +15,7 @@
                 'warning_box'
     ],
     'data': [
-        #S'wizards/campos_ckr_fetch_wiz.xml',
+        'wizards/campos_ckr_fetch_wiz.xml',
         'wizards/campos_ckr_sentin_wiz.xml',
         'security/campos_ckr_check.xml',
         'views/campos_ckr_check.xml',
