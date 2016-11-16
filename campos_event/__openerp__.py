@@ -65,7 +65,7 @@
     'data': [
         'views/product_template.xml',
         
-        #'views/campos_staff_del_prod.xml',
+        'views/campos_staff_del_prod.xml',
         'security/campos_event_security.xml',
         'security/campos_subcamp_exception.xml',
         

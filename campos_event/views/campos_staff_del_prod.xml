@@ -4,17 +4,15 @@
 
 <openerp>
 <data>
-
+<!-- 
     <record model="ir.ui.view" id="campos_staff_del_prod_form_view">
         <field name="name">campos.staff.del.prod.form (in campos_event)</field>
         <field name="model">campos.staff.del.prod</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
                 </header>
                 <sheet>
-                    <!-- TODO -->
                     <group>
                         <field name="name"/>
                     </group>
@@ -23,9 +21,44 @@
             </form>
         </field>
     </record>
+ -->
+    <record model="ir.ui.view" id="campos_staff_del_prod_tree_view">
+        <field name="name">campos.staff.del.prod.form (in campos_event)</field>
+        <field name="model">campos.staff.del.prod</field>
+        <field name="arch" type="xml">
+            <tree>
+				<field name="participant_id"/>
+				<field name="product_id"/>
+				<field name="del_by_partner_id"/>
+				<field name="delivery_date"/>
+				<field name="comment"/>
+				<field name="state"/>
+			</tree>
+		</field>
+		</record>
+		
+	<record model="ir.ui.view" id="campos_staff_del_prod_tree_view">
+        <field name="name">campos.staff.del.prod.form (in campos_event)</field>
+        <field name="model">campos.staff.del.prod</field>
+        <field name="arch" type="xml">
+            <graph type="pivot">
+				<field name="participant_id"/>
+				<field name="product_id" type="col"/>
+				<field name="del_by_partner_id" type="col"/>
+				<field name="delivery_date"/>
+				<field name="state"/>
+			</graph>
+		</field>
+		</record>		
+			
+	<record id="action_graph_staff_del_prod" model="ir.actions.act_window">
+			<field name="name">Staff products</field>
 
-
-
-
-</data>
+			<field name="res_model">campos.staff.del.prod</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,graph</field>
+		</record>
+		
+		
+	</data>
 </openerp>
