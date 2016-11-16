@@ -8,21 +8,7 @@
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
 # Kristian Michael <kmi@sl2017.dk>, 2015
 # Lars Wive Marcussen <larswm@larswm.dk>, 2015
-# #-#-#-#-#  da_DK_live.po (Odoo Server 8.0)  #-#-#-#-#
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# 	* campos_event
-#
-# #-#-#-#-#  for_translation_campos_campos_event_da.po (CampOS)  #-#-#-#-#
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * campos_event
-#
-# Translators:
-# christian Eggert Jørgensen <christian@eggert.dk>, 2015-2016
-# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
-# Kristian Michael <kmi@sl2017.dk>, 2015
-# Lars Wive Marcussen <larswm@larswm.dk>, 2015
+
 msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
@@ -35,28 +21,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
-"Project-Id-Version: Odoo Server 8.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 13:41+0000\n"
-"PO-Revision-Date: 2016-11-16 13:41+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
-"Project-Id-Version: CampOS\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-13 10:18+0000\n"
-"PO-Revision-Date: 2016-11-15 19:09+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
-"Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_event
@@ -348,7 +312,7 @@ msgstr ""
 "\n"
 "\n"
 "<p class=\"MsoNormal\"></p>\n"
-
+"            "
 #. module: campos_event
 #: model:email.template,body_html:campos_event.info_zexpense
 msgid ""
@@ -448,6 +412,7 @@ msgstr ""
 "\n"
 "<p style=\"color: rgb(76, 76, 76); font-family: &quot;Lucida Grande&quot;, "
 "Helvetica, Verdana, Arial, sans-serif; font-size: 13px;\"></p>\n"
+"            "
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.email_template_participant
@@ -532,6 +497,7 @@ msgstr ""
 "\n"
 "<p><img src=\"http://test.sl17dev.steingabelgaard.dk/website/image/ir."
 "attachment/225_9487439/datas\"></p>\n"
+"            "
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.deregister_sharepoint
@@ -3614,6 +3580,7 @@ msgid ""
 "                \n"
 "            "
 msgstr ""
+"\n"
 "Kære ${object.name},&nbsp;\n"
 "<div>Du modtager denne mail fordi du nu registreret i CampOS, som er "
 "Spejdernes Lejrs system til administration af alle tilmeldinger.&nbsp;\n"

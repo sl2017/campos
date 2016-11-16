@@ -101,7 +101,7 @@
 										<field name="camp_area_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
 									</group>
 									<separator string="Sub Camp Responsible"/>
-									<field name="subcamp_function_view_ids" options="{'no_open': True}">
+									<field name="subcamp_function_view_ids" options="{'no_open': True}" readonly="1" >
 		                         		<tree editable="bottom" delete="false">
 		                         			<field name="function_type_id" />
 											<field name="participant_id" string="Name"/>
@@ -135,7 +135,7 @@
 		                         		</form>
 		                         	</field>
 		                         	<separator string="Scout Groups Contacts"/>
-		                         	<field name="reg_view_ids">
+		                         	<field name="reg_view_ids" readonly="1" >
 		                         		<tree editable="bottom" delete="false">
 		                         			<field name="name" string="Group" options="{'no_open': True}"/>
 		                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
