@@ -37,7 +37,7 @@
 		</field>
 		</record>
 		
-	<record model="ir.ui.view" id="campos_staff_del_prod_tree_view">
+	<record model="ir.ui.view" id="campos_staff_del_prod_graph_view">
         <field name="name">campos.staff.del.prod.form (in campos_event)</field>
         <field name="model">campos.staff.del.prod</field>
         <field name="arch" type="xml">
