@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-13 10:18+0000\n"
-"PO-Revision-Date: 2016-10-13 10:18+0000\n"
+"POT-Creation-Date: 2016-11-16 14:40+0000\n"
+"PO-Revision-Date: 2016-11-16 14:40+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -20,12 +20,33 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_preregistration
+#: model:email.template,body_html:campos_preregistration.preregistration_cancel_mail
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Dear ${object.contact_partner_id.name} and ${object.econ_partner_id.display_name}\n"
+"                    </p>\n"
+"                    <p> \n"
+"                        ${object.partner_id.name} has today been canceled from participating in Spejdernes Lejr 2017.\n"
+"                    </p>\n"
+"                                    \n"
+"            "
+msgstr ""
+
+#. module: campos_preregistration
 #: sql_constraint:event.registration.polelist:0
 msgid " Please only make one line with each type of pole"
 msgstr ""
 
 #. module: campos_preregistration
+#: model:email.template,subject:campos_preregistration.preregistration_cancel_mail
+msgid "${object.partner_id.name} canceled from SL2017"
+msgstr ""
+
+#. module: campos_preregistration
 #: field:event.registration.participants,participant_age_group_id:0
+#: model:ir.model,name:campos_preregistration.model_event_registration_agegroup
 msgid "Age Group"
 msgstr ""
 
@@ -46,6 +67,16 @@ msgid "Agreements"
 msgstr "Aftaler der er indgået med lejren"
 
 #. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Camp Area Coordinators"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+msgid "Cancel Registration"
+msgstr ""
+
+#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 #: view:event.registration:campos_preregistration.view_tree_event_registration
@@ -64,6 +95,7 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_uid:0
+#: field:event.registration.entryexitpoint,create_uid:0
 #: field:event.registration.participants,create_uid:0
 #: field:event.registration.pioneeringpole,create_uid:0
 #: field:event.registration.polelist,create_uid:0
@@ -73,6 +105,7 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_date:0
+#: field:event.registration.entryexitpoint,create_date:0
 #: field:event.registration.participants,create_date:0
 #: field:event.registration.pioneeringpole,create_date:0
 #: field:event.registration.polelist,create_date:0
@@ -86,13 +119,13 @@ msgid "Date of arrival"
 msgstr ""
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:111
+#: code:addons/campos_preregistration/models/preregistration.py:134
 #, python-format
 msgid "Date of arrival and departure must be within camp period"
 msgstr ""
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:98
+#: code:addons/campos_preregistration/models/preregistration.py:125
 #, python-format
 msgid "Date of arrival must be before date of departure"
 msgstr ""
@@ -109,11 +142,22 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,display_name:0
+#: field:event.registration.entryexitpoint,display_name:0
 #: field:event.registration.participants,display_name:0
 #: field:event.registration.pioneeringpole,display_name:0
 #: field:event.registration.polelist,display_name:0
 #: field:event.registration.transporttype,display_name:0
 msgid "Display Name"
+msgstr ""
+
+#. module: campos_preregistration
+#: field:event.registration.entryexitpoint,name:0
+msgid "Entry/exit Point Name"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_entryexitpoint
+msgid "Entry/exit Points"
 msgstr ""
 
 #. module: campos_preregistration
@@ -141,6 +185,11 @@ msgstr "Registrering til event"
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_agegroup
 msgid "Event Registration Agegroup"
 msgstr "Event registrering aldersgrupper"
+
+#. module: campos_preregistration
+#: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_entryexitpoint
+msgid "Event Registration Entry/exit Points"
+msgstr ""
 
 #. module: campos_preregistration
 #: model:ir.actions.act_window,name:campos_preregistration.action_event_registration_pioneeringpole
@@ -174,6 +223,11 @@ msgid "From age"
 msgstr ""
 
 #. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Group"
+msgstr ""
+
+#. module: campos_preregistration
 #: model:res.groups,name:campos_preregistration.group_campos_groupleader
 msgid "Group Leader"
 msgstr "Gruppe/Kredsleder"
@@ -196,6 +250,7 @@ msgstr "Deltagere med særlige behov"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,id:0
+#: field:event.registration.entryexitpoint,id:0
 #: field:event.registration.participants,id:0
 #: field:event.registration.pioneeringpole,id:0
 #: field:event.registration.polelist,id:0
@@ -215,6 +270,7 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,__last_update:0
+#: field:event.registration.entryexitpoint,__last_update:0
 #: field:event.registration.participants,__last_update:0
 #: field:event.registration.pioneeringpole,__last_update:0
 #: field:event.registration.polelist,__last_update:0
@@ -224,6 +280,7 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,write_uid:0
+#: field:event.registration.entryexitpoint,write_uid:0
 #: field:event.registration.participants,write_uid:0
 #: field:event.registration.pioneeringpole,write_uid:0
 #: field:event.registration.polelist,write_uid:0
@@ -233,6 +290,7 @@ msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,write_date:0
+#: field:event.registration.entryexitpoint,write_date:0
 #: field:event.registration.participants,write_date:0
 #: field:event.registration.pioneeringpole,write_date:0
 #: field:event.registration.polelist,write_date:0
@@ -243,6 +301,11 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration.pioneeringpole,length:0
 msgid "Length"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Name"
 msgstr ""
 
 #. module: campos_preregistration
@@ -281,13 +344,13 @@ msgid "Official agreements"
 msgstr ""
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:84
+#: code:addons/campos_preregistration/models/preregistration.py:111
 #, python-format
 msgid "Own transport from camp more than total participants"
 msgstr ""
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:82
+#: code:addons/campos_preregistration/models/preregistration.py:109
 #, python-format
 msgid "Own transport to camp more than total participants"
 msgstr ""
@@ -302,6 +365,11 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Participants"
 msgstr "Deltagere"
+
+#. module: campos_preregistration
+#: model:ir.model,name:campos_preregistration.model_event_registration_pioneeringpole
+msgid "Pioneering Pole"
+msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.pioneeringpole,name:0
@@ -326,8 +394,18 @@ msgid "Point of entry into Denmark"
 msgstr ""
 
 #. module: campos_preregistration
+#: field:event.registration,group_exitpoint:0
+msgid "Point of exit from Denmark"
+msgstr ""
+
+#. module: campos_preregistration
 #: field:event.registration.polelist,pioneeringpole_id:0
 msgid "Pole type"
+msgstr ""
+
+#. module: campos_preregistration
+#: model:ir.model,name:campos_preregistration.model_event_registration_polelist
+msgid "Polelist"
 msgstr ""
 
 #. module: campos_preregistration
@@ -336,12 +414,17 @@ msgid "Preregistration"
 msgstr "Forhåndstilmelding"
 
 #. module: campos_preregistration
+#: model:ir.model,name:campos_preregistration.model_event_registration_participants
+msgid "Preregistration Participants"
+msgstr ""
+
+#. module: campos_preregistration
 #: field:event.registration.participants,participant_own_transport_type:0
 msgid "Primary own transport"
 msgstr ""
 
 #. module: campos_preregistration
-#: code:addons/campos_preregistration/models/preregistration.py:91
+#: code:addons/campos_preregistration/models/preregistration.py:118
 #, python-format
 msgid ""
 "Primary own transport must be chosen when number of own transport to or from"
@@ -355,8 +438,18 @@ msgid "Registration"
 msgstr ""
 
 #. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_admin
+msgid "Reopen Registration"
+msgstr ""
+
+#. module: campos_preregistration
 #: field:event.registration,friendship_group:0
 msgid "Request placement with friendship group?"
+msgstr ""
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Scout Groups Contacts"
 msgstr ""
 
 #. module: campos_preregistration
@@ -376,6 +469,11 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Sub Camp"
 msgstr "Underlejr"
+
+#. module: campos_preregistration
+#: view:event.registration:campos_preregistration.view_form_preregistration_gl
+msgid "Sub Camp Responsible"
+msgstr ""
 
 #. module: campos_preregistration
 #: help:event.registration,group_country_code2:0
@@ -400,6 +498,11 @@ msgstr ""
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Total"
 msgstr "Total"
+
+#. module: campos_preregistration
+#: model:ir.model,name:campos_preregistration.model_event_registration_transporttype
+msgid "Transport Type"
+msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.transporttype,name:0

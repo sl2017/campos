@@ -1,23 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* campos_event
-#
+# * campos_event
+# 
+# Translators:
+# Lykke Merete Højsting <lho@sl2017.dk>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-16 14:40+0000\n"
 "PO-Revision-Date: 2016-11-16 14:40+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.group_signup_email
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        ${object.name},\n"
@@ -46,12 +50,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.deregister_zexpense
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
@@ -60,12 +65,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.request_zexpense_change
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal opdateres - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    <p>Udvalg:</p>\n"
@@ -78,12 +84,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.request_zexpense
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
@@ -92,7 +99,8 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.new_staff_member
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.committee_id.name},\n"
@@ -109,12 +117,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.info_sharepoint
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.name}\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                         ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
@@ -123,7 +132,8 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.info_zexpense
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.name}\n"
@@ -134,7 +144,8 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.email_template_participant
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.name},\n"
@@ -146,7 +157,8 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.staff_on_standby
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.name},\n"
@@ -161,12 +173,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.request_signupconfirm
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej ${object.name},\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        Bekræft venligst din tilmelding som jobber ved at klikke på dette link: ${object.reg_confirm_url}\n"
 "                    </p>\n"
 "                    \n"
@@ -176,12 +189,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.deregister_sharepoint
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej Kristian\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal nedlægges - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
@@ -190,12 +204,13 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.request_sharepoint
-msgid "\n"
+msgid ""
+"\n"
 "                \n"
 "                    <p>\n"
 "                        Hej Kristian\n"
 "                    </p>    \n"
-"					<p>	                        \n"
+"\t\t\t\t\t<p>\t                        \n"
 "                        ${object.name} skal oprettes - ${object.sharepoint_mailaddress}\n"
 "                    </p>\n"
 "                    \n"
@@ -208,8 +223,7 @@ msgid "# Applicants"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,issue_count:0
-#: field:res.users,issue_count:0
+#: field:campos.event.participant,issue_count:0 field:res.users,issue_count:0
 msgid "# Issues"
 msgstr ""
 
@@ -268,10 +282,8 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.committee.function,active:0
-#: field:campos.event.participant,active:0
-#: field:campos.job,active:0
-#: field:campos.job.tag,active:0
-#: field:campos.job.when,active:0
+#: field:campos.event.participant,active:0 field:campos.job,active:0
+#: field:campos.job.tag,active:0 field:campos.job.when,active:0
 msgid "Active"
 msgstr ""
 
@@ -289,7 +301,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #. module: campos_event
 #: field:campos.event.participant,type:0
@@ -562,7 +574,9 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,supplier:0
-msgid "Check this box if this contact is a supplier. If it's not checked, purchase people will not see it when encoding a purchase order."
+msgid ""
+"Check this box if this contact is a supplier. If it's not checked, purchase "
+"people will not see it when encoding a purchase order."
 msgstr ""
 
 #. module: campos_event
@@ -601,14 +615,12 @@ msgid "Closed Jobs"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,code:0
-#: field:campos.committee,code:0
+#: field:campos.camp.area,code:0 field:campos.committee,code:0
 msgid "Code"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.scout.org,color:0
-#: field:campos.subcamp,color:0
+#: field:campos.scout.org,color:0 field:campos.subcamp,color:0
 msgid "Color"
 msgstr ""
 
@@ -635,8 +647,7 @@ msgstr ""
 #: field:campos.committee.function,committee_id:0
 #: field:campos.event.par.reject,committee_id:0
 #: view:campos.event.participant:campos_event.campos_event_participant_form2
-#: field:campos.function.view,committee_id:0
-#: field:campos.job,committee_id:0
+#: field:campos.function.view,committee_id:0 field:campos.job,committee_id:0
 #: field:campos.subcamp,committee_id:0
 #: model:ir.model,name:campos_event.model_campos_committee
 #: view:website:campos_event.jobber_signup
@@ -831,8 +842,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,country_id:0
-#: field:campos.scout.org,country_id:0
-#: field:event.registration,country_id:0
+#: field:campos.scout.org,country_id:0 field:event.registration,country_id:0
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country"
@@ -850,37 +860,29 @@ msgid "Create User"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,create_uid:0
-#: field:campos.committee,create_uid:0
+#: field:campos.camp.area,create_uid:0 field:campos.committee,create_uid:0
 #: field:campos.committee.function,create_uid:0
 #: field:campos.committee.function.type,create_uid:0
 #: field:campos.committee.job.title,create_uid:0
 #: field:campos.committee.type,create_uid:0
 #: field:campos.event.par.reject,create_uid:0
-#: field:campos.event.participant,create_uid:0
-#: field:campos.job,create_uid:0
-#: field:campos.job.tag,create_uid:0
-#: field:campos.job.when,create_uid:0
-#: field:campos.municipality,create_uid:0
-#: field:campos.scout.org,create_uid:0
-#: field:campos.staff.del.prod,create_uid:0
-#: field:campos.subcamp,create_uid:0
+#: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
+#: field:campos.job.tag,create_uid:0 field:campos.job.when,create_uid:0
+#: field:campos.municipality,create_uid:0 field:campos.scout.org,create_uid:0
+#: field:campos.staff.del.prod,create_uid:0 field:campos.subcamp,create_uid:0
 #: field:campos.subcamp.exception,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,create_date:0
-#: field:campos.committee,create_date:0
+#: field:campos.camp.area,create_date:0 field:campos.committee,create_date:0
 #: field:campos.committee.function,create_date:0
 #: field:campos.committee.function.type,create_date:0
 #: field:campos.committee.job.title,create_date:0
 #: field:campos.committee.type,create_date:0
 #: field:campos.event.par.reject,create_date:0
-#: field:campos.event.participant,create_date:0
-#: field:campos.job,create_date:0
-#: field:campos.job.tag,create_date:0
-#: field:campos.job.when,create_date:0
+#: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
+#: field:campos.job.tag,create_date:0 field:campos.job.when,create_date:0
 #: field:campos.municipality,create_date:0
 #: field:campos.scout.org,create_date:0
 #: field:campos.staff.del.prod,create_date:0
@@ -978,8 +980,7 @@ msgid "Deregistered"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,desc:0
-#: field:campos.committee,desc:0
+#: field:campos.camp.area,desc:0 field:campos.committee,desc:0
 #: field:campos.job,desc:0
 msgid "Description"
 msgstr ""
@@ -997,10 +998,8 @@ msgstr ""
 #: field:campos.committee.type,display_name:0
 #: field:campos.event.par.reject,display_name:0
 #: field:campos.event.participant,display_name:0
-#: field:campos.function.view,display_name:0
-#: field:campos.job,display_name:0
-#: field:campos.job.tag,display_name:0
-#: field:campos.job.when,display_name:0
+#: field:campos.function.view,display_name:0 field:campos.job,display_name:0
+#: field:campos.job.tag,display_name:0 field:campos.job.when,display_name:0
 #: field:campos.municipality,display_name:0
 #: field:campos.registration.view,display_name:0
 #: field:campos.scout.org,display_name:0
@@ -1032,8 +1031,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.committee.function,email:0
-#: field:campos.event.participant,email:0
-#: field:campos.function.view,email:0
+#: field:campos.event.participant,email:0 field:campos.function.view,email:0
 #: field:campos.registration.view,contact_email:0
 #: field:event.registration,contact_email:0
 #: field:event.registration,econ_email:0
@@ -1260,7 +1258,9 @@ msgstr ""
 #: help:campos.committee.function,message_summary:0
 #: help:campos.event.participant,message_summary:0
 #: help:campos.job,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: campos_event
@@ -1280,24 +1280,16 @@ msgid "I need more info"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,id:0
-#: field:campos.committee,id:0
+#: field:campos.camp.area,id:0 field:campos.committee,id:0
 #: field:campos.committee.function,id:0
 #: field:campos.committee.function.type,id:0
-#: field:campos.committee.job.title,id:0
-#: field:campos.committee.type,id:0
-#: field:campos.event.par.reject,id:0
-#: field:campos.event.participant,id:0
-#: field:campos.function.view,id:0
-#: field:campos.job,id:0
-#: field:campos.job.tag,id:0
-#: field:campos.job.when,id:0
-#: field:campos.municipality,id:0
-#: field:campos.registration.view,id:0
-#: field:campos.scout.org,id:0
-#: field:campos.staff.del.prod,id:0
-#: field:campos.subcamp,id:0
-#: field:campos.subcamp.exception,id:0
+#: field:campos.committee.job.title,id:0 field:campos.committee.type,id:0
+#: field:campos.event.par.reject,id:0 field:campos.event.participant,id:0
+#: field:campos.function.view,id:0 field:campos.job,id:0
+#: field:campos.job.tag,id:0 field:campos.job.when,id:0
+#: field:campos.municipality,id:0 field:campos.registration.view,id:0
+#: field:campos.scout.org,id:0 field:campos.staff.del.prod,id:0
+#: field:campos.subcamp,id:0 field:campos.subcamp.exception,id:0
 msgid "ID"
 msgstr ""
 
@@ -1311,12 +1303,17 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,opt_out:0
-msgid "If opt-out is checked, this contact has refused to receive emails for mass mailing and marketing campaign. Filter 'Available for Mass Mailing' allows users to filter the partners when performing mass mailing."
+msgid ""
+"If opt-out is checked, this contact has refused to receive emails for mass "
+"mailing and marketing campaign. Filter 'Available for Mass Mailing' allows "
+"users to filter the partners when performing mass mailing."
 msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,lang:0
-msgid "If the selected language is loaded in the system, all documents related to this contact will be printed in this language. If not, it will be English."
+msgid ""
+"If the selected language is loaded in the system, all documents related to "
+"this contact will be printed in this language. If not, it will be English."
 msgstr ""
 
 #. module: campos_event
@@ -1473,8 +1470,7 @@ msgid "Jobber on Camp"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.committee,job_ids:0
-#: view:campos.job:campos_event.job_tree
+#: field:campos.committee,job_ids:0 view:campos.job:campos_event.job_tree
 #: field:campos.job.tag,job_ids:0
 #: model:ir.actions.act_window,name:campos_event.action_job_tree
 #: model:ir.ui.menu,name:campos_event.event_job_menu
@@ -1536,10 +1532,8 @@ msgstr ""
 #: field:campos.committee.type,__last_update:0
 #: field:campos.event.par.reject,__last_update:0
 #: field:campos.event.participant,__last_update:0
-#: field:campos.function.view,__last_update:0
-#: field:campos.job,__last_update:0
-#: field:campos.job.tag,__last_update:0
-#: field:campos.job.when,__last_update:0
+#: field:campos.function.view,__last_update:0 field:campos.job,__last_update:0
+#: field:campos.job.tag,__last_update:0 field:campos.job.when,__last_update:0
 #: field:campos.municipality,__last_update:0
 #: field:campos.registration.view,__last_update:0
 #: field:campos.scout.org,__last_update:0
@@ -1550,41 +1544,31 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,write_uid:0
-#: field:campos.committee,write_uid:0
+#: field:campos.camp.area,write_uid:0 field:campos.committee,write_uid:0
 #: field:campos.committee.function,write_uid:0
 #: field:campos.committee.function.type,write_uid:0
 #: field:campos.committee.job.title,write_uid:0
 #: field:campos.committee.type,write_uid:0
 #: field:campos.event.par.reject,write_uid:0
-#: field:campos.event.participant,write_uid:0
-#: field:campos.job,write_uid:0
-#: field:campos.job.tag,write_uid:0
-#: field:campos.job.when,write_uid:0
-#: field:campos.municipality,write_uid:0
-#: field:campos.scout.org,write_uid:0
-#: field:campos.staff.del.prod,write_uid:0
-#: field:campos.subcamp,write_uid:0
+#: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
+#: field:campos.job.tag,write_uid:0 field:campos.job.when,write_uid:0
+#: field:campos.municipality,write_uid:0 field:campos.scout.org,write_uid:0
+#: field:campos.staff.del.prod,write_uid:0 field:campos.subcamp,write_uid:0
 #: field:campos.subcamp.exception,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,write_date:0
-#: field:campos.committee,write_date:0
+#: field:campos.camp.area,write_date:0 field:campos.committee,write_date:0
 #: field:campos.committee.function,write_date:0
 #: field:campos.committee.function.type,write_date:0
 #: field:campos.committee.job.title,write_date:0
 #: field:campos.committee.type,write_date:0
 #: field:campos.event.par.reject,write_date:0
-#: field:campos.event.participant,write_date:0
-#: field:campos.job,write_date:0
-#: field:campos.job.tag,write_date:0
-#: field:campos.job.when,write_date:0
-#: field:campos.municipality,write_date:0
-#: field:campos.scout.org,write_date:0
-#: field:campos.staff.del.prod,write_date:0
-#: field:campos.subcamp,write_date:0
+#: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
+#: field:campos.job.tag,write_date:0 field:campos.job.when,write_date:0
+#: field:campos.municipality,write_date:0 field:campos.scout.org,write_date:0
+#: field:campos.staff.del.prod,write_date:0 field:campos.subcamp,write_date:0
 #: field:campos.subcamp.exception,write_date:0
 msgid "Last Updated on"
 msgstr ""
@@ -1647,7 +1631,10 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,image_medium:0
-msgid "Medium-sized image of this contact. It is automatically resized as a 128x128px image, with aspect ratio preserved. Use this field in form views or some kanban views."
+msgid ""
+"Medium-sized image of this contact. It is automatically resized as a "
+"128x128px image, with aspect ratio preserved. Use this field in form views "
+"or some kanban views."
 msgstr ""
 
 #. module: campos_event
@@ -1700,16 +1687,14 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,message_ids:0
 #: field:campos.committee.function,message_ids:0
-#: field:campos.event.participant,message_ids:0
-#: field:campos.job,message_ids:0
+#: field:campos.event.participant,message_ids:0 field:campos.job,message_ids:0
 msgid "Messages"
 msgstr ""
 
 #. module: campos_event
 #: help:campos.committee,message_ids:0
 #: help:campos.committee.function,message_ids:0
-#: help:campos.event.participant,message_ids:0
-#: help:campos.job,message_ids:0
+#: help:campos.event.participant,message_ids:0 help:campos.job,message_ids:0
 msgid "Messages and communication history"
 msgstr ""
 
@@ -1720,8 +1705,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.committee.function,mobile:0
-#: field:campos.event.participant,mobile:0
-#: field:campos.function.view,mobile:0
+#: field:campos.event.participant,mobile:0 field:campos.function.view,mobile:0
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Mobile"
@@ -1741,8 +1725,7 @@ msgstr ""
 #: field:event.registration,municipality_id:0
 #: model:ir.actions.act_window,name:campos_event.action_municipality_tree
 #: model:ir.ui.menu,name:campos_event.event_municipality_menu
-#: field:res.partner,municipality_id:0
-#: field:res.users,municipality_id:0
+#: field:res.partner,municipality_id:0 field:res.users,municipality_id:0
 msgid "Municipality"
 msgstr ""
 
@@ -1769,27 +1752,21 @@ msgid "My signup"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,the_geom:0
-#: field:campos.municipality,the_geom:0
+#: field:campos.camp.area,the_geom:0 field:campos.municipality,the_geom:0
 #: field:campos.subcamp,the_geom:0
 msgid "NPA Shape"
 msgstr ""
 
 #. module: campos_event
 #: view:campos.camp.area:campos_event.campos_camp_area_form_view
-#: field:campos.camp.area,name:0
-#: field:campos.committee,name:0
+#: field:campos.camp.area,name:0 field:campos.committee,name:0
 #: field:campos.committee.function,name:0
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
-#: field:campos.event.participant,name:0
-#: field:campos.function.view,name:0
-#: view:campos.job:campos_event.campos_job_form
-#: field:campos.job,name:0
-#: field:campos.job.tag,name:0
-#: field:campos.job.when,name:0
-#: field:campos.municipality,name:0
-#: field:campos.registration.view,name:0
+#: field:campos.event.participant,name:0 field:campos.function.view,name:0
+#: view:campos.job:campos_event.campos_job_form field:campos.job,name:0
+#: field:campos.job.tag,name:0 field:campos.job.when,name:0
+#: field:campos.municipality,name:0 field:campos.registration.view,name:0
 #: field:campos.scout.org,name:0
 #: view:campos.subcamp:campos_event.campos_subcamp_form_view
 #: field:campos.subcamp,name:0
@@ -1947,8 +1924,7 @@ msgstr ""
 #: field:campos.event.participant,participant:0
 #: field:campos.function.view,participant_id:0
 #: view:res.partner:campos_event.view_res_partner_filter
-#: field:res.partner,participant:0
-#: field:res.users,participant:0
+#: field:res.partner,participant:0 field:res.users,participant:0
 #, python-format
 msgid "Participant"
 msgstr ""
@@ -2010,7 +1986,8 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,notify_email:0
-msgid "Policy to receive emails for new messages pushed to your personal Inbox:\n"
+msgid ""
+"Policy to receive emails for new messages pushed to your personal Inbox:\n"
 "- Never: no emails are sent\n"
 "- All Messages: for every notification you receive in your Inbox"
 msgstr ""
@@ -2086,8 +2063,7 @@ msgid "Qualifications"
 msgstr ""
 
 #. module: campos_event
-#: view:campos.job:campos_event.campos_job_form
-#: field:campos.job,issue_qty:0
+#: view:campos.job:campos_event.campos_job_form field:campos.job,issue_qty:0
 msgid "Questions"
 msgstr ""
 
@@ -2309,8 +2285,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,scoutorg_id:0
 #: field:campos.subcamp.exception,scoutorg_id:0
-#: field:res.partner,scoutorg_id:0
-#: field:res.users,scoutorg_id:0
+#: field:res.partner,scoutorg_id:0 field:res.users,scoutorg_id:0
 msgid "Scout organization"
 msgstr ""
 
@@ -2318,8 +2293,7 @@ msgstr ""
 #: field:campos.event.participant,scoutgroup:0
 #: field:event.registration,scoutgroup:0
 #: view:res.partner:campos_event.view_res_partner_filter
-#: field:res.partner,scoutgroup:0
-#: field:res.users,scoutgroup:0
+#: field:res.partner,scoutgroup:0 field:res.users,scoutgroup:0
 msgid "Scoutgroup"
 msgstr ""
 
@@ -2342,7 +2316,9 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,use_parent_address:0
-msgid "Select this if you want to set company's address information  for this contact"
+msgid ""
+"Select this if you want to set company's address information  for this "
+"contact"
 msgstr ""
 
 #. module: campos_event
@@ -2378,8 +2354,7 @@ msgid "Sent to committee"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.committee,sequence:0
-#: field:campos.job.when,sequence:0
+#: field:campos.committee,sequence:0 field:campos.job.when,sequence:0
 msgid "Sequence"
 msgstr ""
 
@@ -2487,10 +2462,8 @@ msgid "Signup survey"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,skype:0
-#: field:res.partner,skype:0
-#: field:res.users,skype:0
-#: view:website:campos_event.jobber_signup
+#: field:campos.event.participant,skype:0 field:res.partner,skype:0
+#: field:res.users,skype:0 view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Skype"
 msgstr ""
@@ -2502,7 +2475,10 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,image_small:0
-msgid "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required."
+msgid ""
+"Small-sized image of this contact. It is automatically resized as a 64x64px "
+"image, with aspect ratio preserved. Use this field anywhere a small image is"
+" required."
 msgstr ""
 
 #. module: campos_event
@@ -2511,19 +2487,16 @@ msgid "Speaker"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,sponsor:0
-#: field:res.partner,sponsor:0
+#: field:campos.event.participant,sponsor:0 field:res.partner,sponsor:0
 #: field:res.users,sponsor:0
 msgid "Sponsor"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,staff:0
-#: field:event.registration,staff:0
+#: field:campos.event.participant,staff:0 field:event.registration,staff:0
 #: model:res.groups,name:campos_event.group_campos_staff
 #: view:res.partner:campos_event.view_res_partner_filter
-#: field:res.partner,staff:0
-#: field:res.users,staff:0
+#: field:res.partner,staff:0 field:res.users,staff:0
 msgid "Staff"
 msgstr ""
 
@@ -2600,8 +2573,7 @@ msgid "Street2"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,subcamp_id:0
-#: field:campos.municipality,subcamp_id:0
+#: field:campos.camp.area,subcamp_id:0 field:campos.municipality,subcamp_id:0
 #: field:campos.subcamp.exception,subcamp_id:0
 #: field:event.registration,subcamp_id:0
 msgid "Sub Camp"
@@ -2685,8 +2657,7 @@ msgid "Taglist"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,category_id:0
-#: field:campos.job,tag_ids:0
+#: field:campos.event.participant,category_id:0 field:campos.job,tag_ids:0
 #: view:website:campos_event.jobber_job_view
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Tags"
@@ -2704,7 +2675,9 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,vat:0
-msgid "Tax Identification Number. Check the box if this contact is subjected to taxes. Used by the some of the legal statements."
+msgid ""
+"Tax Identification Number. Check the box if this contact is subjected to "
+"taxes. Used by the some of the legal statements."
 msgstr ""
 
 #. module: campos_event
@@ -2735,20 +2708,25 @@ msgid "Thank you,"
 msgstr ""
 
 #. module: campos_event
-#: help:campos.job,active:0
-#: help:campos.job.tag,active:0
+#: help:campos.job,active:0 help:campos.job.tag,active:0
 #: help:campos.job.when,active:0
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,user_id:0
-msgid "The internal user that is in charge of communicating with this contact if any."
+msgid ""
+"The internal user that is in charge of communicating with this contact if "
+"any."
 msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,tz:0
-msgid "The partner's timezone, used to output proper date and time values inside printed reports. It is important to set a value for this field. You should use the same timezone that is otherwise used to pick and render date and time values: your computer's timezone."
+msgid ""
+"The partner's timezone, used to output proper date and time values inside "
+"printed reports. It is important to set a value for this field. You should "
+"use the same timezone that is otherwise used to pick and render date and "
+"time values: your computer's timezone."
 msgstr ""
 
 #. module: campos_event
@@ -2758,12 +2736,16 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,image:0
-msgid "This field holds the image used as avatar for this contact, limited to 1024x1024px"
+msgid ""
+"This field holds the image used as avatar for this contact, limited to "
+"1024x1024px"
 msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,property_product_pricelist:0
-msgid "This pricelist will be used, instead of the default one, for sales to the current partner"
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
 msgstr ""
 
 #. module: campos_event
@@ -2782,8 +2764,7 @@ msgid "Title"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.camp.area,reg_ids:0
-#: field:campos.camp.area,reg_view_ids:0
+#: field:campos.camp.area,reg_ids:0 field:campos.camp.area,reg_view_ids:0
 #: field:event.registration,reg_view_ids:0
 msgid "Troops"
 msgstr ""
@@ -2829,7 +2810,9 @@ msgstr ""
 
 #. module: campos_event
 #: help:campos.event.participant,type:0
-msgid "Used to select automatically the right address according to the context in sales and purchases documents."
+msgid ""
+"Used to select automatically the right address according to the context in "
+"sales and purchases documents."
 msgstr ""
 
 #. module: campos_event
@@ -2961,8 +2944,7 @@ msgid "What do you do for living"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.job,job_when:0
-#: field:campos.job,job_when_id:0
+#: field:campos.job,job_when:0 field:campos.job,job_when_id:0
 msgid "When"
 msgstr ""
 
@@ -3040,12 +3022,16 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.reg_confirmed
-msgid "Your job application has been successfully confirmed, we will get back to you soon."
+msgid ""
+"Your job application has been successfully confirmed, we will get back to "
+"you soon."
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.jobber_thankyou
-msgid "Your job application has been successfully registered, we will get back to you soon."
+msgid ""
+"Your job application has been successfully registered, we will get back to "
+"you soon."
 msgstr ""
 
 #. module: campos_event
@@ -3101,8 +3087,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,complete_contact:0
-#: field:res.partner,complete_contact:0
-#: field:res.users,complete_contact:0
+#: field:res.partner,complete_contact:0 field:res.users,complete_contact:0
 msgid "contact"
 msgstr ""
 
@@ -3128,8 +3113,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,has_image:0
-#: field:campos.event.participant,self:0
-#: field:res.users,self:0
+#: field:campos.event.participant,self:0 field:res.users,self:0
 msgid "unknown"
 msgstr ""
 
@@ -3183,4 +3167,3 @@ msgstr ""
 #: view:website:campos_event.partner_register_form
 msgid "åååå-mm-dd"
 msgstr ""
-
