@@ -12,7 +12,8 @@
     'website': 'www.steingabelgaard.dk',
     'depends': ['campos_event', 
                 'model_field_access', 
-                'warning_box'
+                'warning_box',
+                'mail_notification_email_template',
     ],
     'data': [
         'wizards/campos_ckr_fetch_wiz.xml',
