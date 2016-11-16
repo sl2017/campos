@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-13 10:18+0000\n"
-"PO-Revision-Date: 2016-10-13 10:18+0000\n"
+"POT-Creation-Date: 2016-11-16 14:40+0000\n"
+"PO-Revision-Date: 2016-11-16 14:40+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -601,11 +601,6 @@ msgid "Hoved Sponsor"
 msgstr ""
 
 #. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Hvad er næste skridt efter ansøgningen?"
-msgstr ""
-
-#. module: campos_sponsor
 #: view:website:campos_sponsor.activity_signup
 msgid "Hvad forventer du aktiviteten koster?"
 msgstr "Hvad forventer du aktiviteten koster?"
@@ -632,8 +627,8 @@ msgstr ""
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
-msgid "Hvad ønsker i ud af partnerskabet?"
-msgstr "Hvad ønsker i ud af partnerskabet?"
+msgid "Hvad ønsker I ud af partnerskabet?"
+msgstr ""
 
 #. module: campos_sponsor
 #: view:model.activity:campos_sponsor.view_form_activity_create
@@ -643,8 +638,8 @@ msgstr "Hvem henvender aktiviteten sig til?"
 
 #. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
-msgid "Hvilke idéer har i til en aktivitet?"
-msgstr "Hvilke idéer har i til en aktivitet?"
+msgid "Hvilke idéer har I til en aktivitet?"
+msgstr ""
 
 #. module: campos_sponsor
 #: field:model.activity,id:0 field:model.sponsor,id:0
@@ -941,7 +936,6 @@ msgstr ""
 #. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 #: field:model.sponsor,partner_nextsteps:0
-#: view:website:campos_sponsor.partner_signup
 msgid "Næste skridt"
 msgstr ""
 
@@ -973,16 +967,6 @@ msgstr ""
 #. module: campos_sponsor
 #: selection:model.sponsor,sponsor_kategori:0
 msgid "Partner"
-msgstr ""
-
-#. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Partner Signup"
-msgstr ""
-
-#. module: campos_sponsor
-#: view:website:campos_sponsor.partner_signup
-msgid "Partner Signup Form"
 msgstr ""
 
 #. module: campos_sponsor
@@ -1302,6 +1286,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,supplier:0
 msgid "Supplier"
+msgstr ""
+
+#. module: campos_sponsor
+#: view:website:campos_sponsor.partner_signup
+msgid "Sæt spor som partner på Spejdernes Lejr"
 msgstr ""
 
 #. module: campos_sponsor
