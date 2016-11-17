@@ -5,7 +5,6 @@ class WebtourUsGroup(models.Model):
     _name = 'campos.webtourusgroup'
     troop_id = fields.Char('troop ID', required=True)
     groupidno = fields.Char('US Group ID', required=False)
-    troop_id = fields.Char('troop ID', required=True)
 
     @api.one
     def get_create_groupidno(self):

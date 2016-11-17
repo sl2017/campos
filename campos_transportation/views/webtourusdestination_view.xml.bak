@@ -18,7 +18,7 @@
 <field name="arch" type="xml">
 <form>
 <header>
-<button name="get_destinations" type="object" string="Get Webtour" class="oe_highlight" />
+<button name="get_destinations_online" type="object" string="Get Webtour" class="oe_highlight" />
 </header>
 <sheet>
 <group name="destination_top">

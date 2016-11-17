@@ -42,7 +42,7 @@ def usgroup_getbyname(groupname):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -69,7 +69,7 @@ def usgroup_create(groupname):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -96,7 +96,7 @@ def ususer_getbyexternalid(externalid):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -123,7 +123,7 @@ def ususer_create(externalid, groupname):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -150,7 +150,7 @@ def usneed_create(request):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -174,7 +174,7 @@ def usneed_getbyidno(request):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -198,7 +198,7 @@ def usdestinations_getall():
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
