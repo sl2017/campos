@@ -12,7 +12,10 @@ class WebtourUsDestination(models.Model):
     longitude = fields.Char('Longitude', required=False)
     note = fields.Char('Note', required=False)
 
-    def get_destinations(self, cr, uid, ids, context=None):
+    def get_destinations_online(self, cr, uid, ids, context=None):
+        get_destinations(self, cr, uid, context)
+
+    def get_destinations(self, cr, uid, context=None):
 
         def get_tag_data(nodetag):
             try:
