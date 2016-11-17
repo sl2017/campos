@@ -1,0 +1,27 @@
+print "Start."
+
+import datetime
+import webtourinterface
+
+current_time = datetime.datetime.now().time()
+print current_time.isoformat()
+
+tours = webtourinterface.gettours()
+
+current_time = datetime.datetime.now().time()
+print current_time.isoformat()
+
+tours.sort()
+
+print tours
+
+current_time = datetime.datetime.now().time()
+print current_time.isoformat()
+
+for tourid in tours:
+    print webtourinterface.gettour(tourid)
+
+current_time = datetime.datetime.now().time()
+print current_time.isoformat()
+
+print "Done"

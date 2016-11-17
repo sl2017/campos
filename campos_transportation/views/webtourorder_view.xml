@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourorder" model="ir.ui.view">
+<field name="name">Webtour Order Tree</field>
+<field name="model">campos.webtourorder</field>
+<field name="arch" type="xml">
+<tree>
+<field name="order_id"/>
+<field name="webtour_id"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourorder" model="ir.ui.view">
+<field name="name">Webtour Order Form</field>
+<field name="model">campos.webtourorder</field>
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="do_update_webtour" type="object" string="Update Webtour" class="oe_highlight" />
+</header>
+<sheet>
+<group name="group_top">
+<field name="id" readonly="1"/>
+<field name="order_id" readonly="0"/>
+<field name="webtour_id" readonly="1"/>
+<field name="troop_id"/>
+<field name="travel_date"/>
+<field name="departure_location"/>
+<field name="arrival_location"/>
+<field name="pax_requested_adults"/>
+<field name="pax_requested_non_adults"/>
+<field name="pax_confirmed_adults" readonly="1"/>
+<field name="pax_confirmed_non_adults" readonly="1"/>
+<field name="pax_at_deadline_adults" readonly="1"/>
+<field name="pax_at_deadline_non_adults" readonly="1"/>
+<field name="status"/>
+<field name="alternative_proposal"/>
+<field name="route"/>
+<field name="adult_PAX_price"/>
+<field name="special_request"/>
+<field name="special_agreement"/>
+<field name="remark_to_operator"/>
+<field name="remark_from_operator" readonly="1"/>
+<field name="active"/>
+<field name="changed_date" readonly="1"/>
+<field name="bus_reference" readonly="1"/>
+<field name="contact_name"/>
+<field name="contact_phone"/>
+<field name="etd" readonly="1"/>
+<field name="eta" readonly="1"/>
+<field name="pax_in_bus" readonly="1"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Order list -->
+<act_window id="action_webtourorder"
+name="Camp OS Webtour Order"
+res_model="campos.webtourorder"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourorder"
+name="Campos transportation"
+parent="mail.mail_feeds"
+sequence="20"
+action="action_webtourorder" />
+</data>
+</openerp>

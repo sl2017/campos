@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourususer" model="ir.ui.view">
+<field name="name">Webtour Us User</field>
+<field name="model">campos.webtourususer</field>
+<field name="arch" type="xml">
+<tree>
+<field name="participant_id"/>
+<field name="useridno"/>
+<field name="troop_id"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourususer" model="ir.ui.view">
+<field name="name">Webtour Us User</field>
+<field name="model">campos.webtourususer</field>
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="get_create_useridno" type="object" string="Update Webtour" class="oe_highlight" />
+</header>
+<sheet>
+<group name="user_top">
+<field name="participant_id" readonly="0"/>
+<field name="useridno" readonly="0"/>
+<field name="troop_id" readonly="0"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Us Group list -->
+<act_window id="action_webtourususer"
+name="Camp OS Webtour Us User"
+res_model="campos.webtourususer"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourususer"
+name="Campos transportation Us User"
+parent="mail.mail_feeds"
+sequence="24"
+action="action_webtourususer" />
+</data>
+</openerp>
