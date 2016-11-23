@@ -1,7 +1,7 @@
-campos_event
-============
+campos_welcome
+==============
 
 .. toctree::
    :maxdepth: 4
 
-   campos_event
+   campos_welcome
