@@ -48,7 +48,7 @@
 <!--							<field name="group_country"  options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>-->
 							<field name="group_country_code2" invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}" readonly="1"/>
-              <field colspan="7" name="participant_ids" widget="one2many_list">
+              <field colspan="7" name="prereg_participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
 									<field name="participant_age_group_id"  options="{'no_create': True, 'no_open': True}"/>
                   <field name="participant_total" sum="Total"/>
@@ -194,7 +194,7 @@
 <!--							<field name="group_country"  options="{'no_create': True}"/>-->
 							<field name="group_country_code2" invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
-              <field colspan="7" name="participant_ids" widget="one2many_list">
+              <field colspan="7" name="prereg_participant_ids" widget="one2many_list">
 								<tree string="Participants" editable="bottom">
 									<field name="participant_age_group_id"  options="{'no_create': True}"/>
                   <field name="participant_total" sum="Total"/>

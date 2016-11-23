@@ -17,7 +17,7 @@ class Preregistration(models.Model):
 #    group_country_code = fields.Char(related='group_country.code', string='Country Code', readonly=True)
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
 #    association_groupid = fields.Char('Groups id (number) at local association')
-    participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
+    prereg_participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
     pioneeringpole_ids = fields.One2many('event.registration.polelist','registration_id','Pioneering Poles')
     handicap = fields.Boolean('Participant(s) with handicap or other special considerations?')
     handicap_description = fields.Text('Description of handicap / special considerations')
