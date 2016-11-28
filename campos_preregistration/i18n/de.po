@@ -47,12 +47,12 @@ msgstr ""
 #: field:event.registration.participants,participant_age_group_id:0
 #: model:ir.model,name:campos_preregistration.model_event_registration_agegroup
 msgid "Age Group"
-msgstr ""
+msgstr "Altersstufe"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,name:0
 msgid "Age Group name"
-msgstr ""
+msgstr "Name der Altersstufe"
 
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_agegroup
@@ -68,12 +68,12 @@ msgstr "Verabredungen"
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Camp Area Coordinators"
-msgstr ""
+msgstr "Koordinatoren des Lagergebietes"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 msgid "Cancel Registration"
-msgstr ""
+msgstr "Streichung der Anmeldung"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
@@ -85,12 +85,12 @@ msgstr "Kontaktperson"
 #. module: campos_preregistration
 #: field:event.registration,group_country_code2:0
 msgid "Country Code2"
-msgstr ""
+msgstr "Landeskode 2"
 
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_desire_country:0
 msgid "Country of friendship group (optional)"
-msgstr ""
+msgstr "Land der Freundschaftsgruppe (optional)"
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,create_uid:0
@@ -115,29 +115,30 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_from_date:0
 msgid "Date of arrival"
-msgstr ""
+msgstr "Ankunftstag"
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:134
 #, python-format
 msgid "Date of arrival and departure must be within camp period"
 msgstr ""
+"Der Ankunfts- und Abfahrtstag sollen innerhalb der Lagersperiode liegen."
 
 #. module: campos_preregistration
 #: code:addons/campos_preregistration/models/preregistration.py:125
 #, python-format
 msgid "Date of arrival must be before date of departure"
-msgstr ""
+msgstr "Der Ankunftstag muss bevor der Abfahrtstag liegen."
 
 #. module: campos_preregistration
 #: field:event.registration.participants,participant_to_date:0
 msgid "Date of departure"
-msgstr ""
+msgstr "Abfahrtstag"
 
 #. module: campos_preregistration
 #: field:event.registration,handicap_description:0
 msgid "Description of handicap / special considerations"
-msgstr ""
+msgstr "Beschreibung von sonder "
 
 #. module: campos_preregistration
 #: field:event.registration.agegroup,display_name:0

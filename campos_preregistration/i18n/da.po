@@ -396,7 +396,7 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,group_exitpoint:0
 msgid "Point of exit from Denmark"
-msgstr ""
+msgstr "Udrejse sted i Danmark (kun udlændinge)"
 
 #. module: campos_preregistration
 #: field:event.registration.polelist,pioneeringpole_id:0
