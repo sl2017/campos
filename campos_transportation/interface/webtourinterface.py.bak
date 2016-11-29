@@ -42,7 +42,7 @@ def usgroup_getbyname(groupname):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -69,7 +69,7 @@ def usgroup_create(groupname):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -96,7 +96,7 @@ def ususer_getbyexternalid(externalid):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -114,22 +114,22 @@ def ususer_getbyexternalid(externalid):
 
         return idno.firstChild.data
 
-def ususer_create(externalid, groupname):
+def ususer_create(externalid, groupidno, lastname):
     global cookie
 
-    def do_usgroup_create():
-        do_url = _url + "usUser/Create/WithGroupName/?FirstName=" + externalid + "&LastName=" + groupname + "&ExternalID=" + externalid + "&GroupName=" + groupname
+    def do_ususer_create():
+        do_url = _url + "usUser/Create/WithGroupIDno/?FirstName=" + externalid + "&LastName=" + lastname + "&ExternalID=" + externalid + "&GroupIDno=" + groupidno
 
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
 
     while repeat_read:
-        doc = do_usgroup_create()
+        doc = do_ususer_create()
 
         if is_authenticated(doc):
             repeat_read = False
@@ -150,7 +150,7 @@ def usneed_create(request):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -174,7 +174,7 @@ def usneed_getbyidno(request):
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True
@@ -198,7 +198,7 @@ def usdestinations_getall():
         response = requests.get(do_url,data=None,cookies=cookie)
 
         doc = minidom.parseString(response.content)
-        
+
         return doc
 
     repeat_read = True

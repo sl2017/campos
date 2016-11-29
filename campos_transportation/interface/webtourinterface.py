@@ -114,11 +114,11 @@ def ususer_getbyexternalid(externalid):
 
         return idno.firstChild.data
 
-def ususer_create(externalid, groupname):
+def ususer_create(externalid, groupidno, firstname, lastname):
     global cookie
 
-    def do_usgroup_create():
-        do_url = _url + "usUser/Create/WithGroupName/?FirstName=" + externalid + "&LastName=" + groupname + "&ExternalID=" + externalid + "&GroupName=" + groupname
+    def do_ususer_create():
+        do_url = _url + "usUser/Create/WithGroupIDno/?FirstName=" + firstname + "&LastName=" + lastname + "&ExternalID=" + externalid + "&GroupIDno=" + groupidno
 
         response = requests.get(do_url,data=None,cookies=cookie)
 
@@ -129,7 +129,7 @@ def ususer_create(externalid, groupname):
     repeat_read = True
 
     while repeat_read:
-        doc = do_usgroup_create()
+        doc = do_ususer_create()
 
         if is_authenticated(doc):
             repeat_read = False

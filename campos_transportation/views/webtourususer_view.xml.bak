@@ -7,8 +7,9 @@
 <field name="arch" type="xml">
 <tree>
 <field name="participant_id"/>
-<field name="useridno"/>
 <field name="troop_id"/>
+<field name="ususeridno"/>
+<field name="usgroupidno"/>
 </tree>
 </field>
 </record>
@@ -23,14 +24,15 @@
 <sheet>
 <group name="user_top">
 <field name="participant_id" readonly="0"/>
-<field name="useridno" readonly="0"/>
 <field name="troop_id" readonly="0"/>
+<field name="ususeridno" readonly="0"/>
+<field name="usgroupidno" readonly="0"/>
 </group>
 </sheet>
 </form>
 </field>
 </record>
-<!-- Action to open Webtour Us Group list -->
+<!-- Action to open Webtour Us User list -->
 <act_window id="action_webtourususer"
 name="Camp OS Webtour Us User"
 res_model="campos.webtourususer"

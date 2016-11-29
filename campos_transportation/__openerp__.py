@@ -8,5 +8,6 @@
          'views/webtourususer_view.xml',
          'views/webtourusneed_view.xml',
          'views/webtourusdestination_view.xml',
+         'views/webtourparticipant_view.xml',
          'data/webtourusdestination_scheduler.xml'],
 }
