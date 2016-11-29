@@ -12,10 +12,14 @@ class WebtourUsDestination(models.Model):
     longitude = fields.Char('Longitude', required=False)
     note = fields.Char('Note', required=False)
 
-    def get_destinations_online(self, cr, uid, ids, context=None):
-        get_destinations(self, cr, uid, context)
+    @api.model
+    def get_destinations_cron(self):
+        self.get_destinations()
+         
+    #def get_destinations_online(self, cr, uid, ids, context=None):
+    #    get_destinations(self, cr, uid, context)
 
-    def get_destinations(self, cr, uid, context=None):
+    def get_destinations(self):
 
         def get_tag_data(nodetag):
             try:
@@ -25,7 +29,7 @@ class WebtourUsDestination(models.Model):
 
             return tag_data
 
-        webtourusdestination_obj = self.pool.get('campos.webtourusdestination')
+        webtourusdestination_obj = self.env['campos.webtourusdestination']
 
         response_doc=webtourinterface.usdestinations_getall()
 
@@ -42,11 +46,11 @@ class WebtourUsDestination(models.Model):
             webtour_dict["longitude"] = get_tag_data("a:Longitude")
             webtour_dict["note"] = get_tag_data("a:Note")
 
-            rs_webtourdestination = self.pool.get('campos.webtourusdestination').search(cr, uid, [('destinationidno','=',destinationidno)])
+            rs_webtourdestination = self.env['campos.webtourusdestination'].search([('destinationidno','=',destinationidno)])
             rs_webtourdestination_count = len(rs_webtourdestination)
             if rs_webtourdestination_count == 0:
-                webtourusdestination_obj.create(cr, uid, webtour_dict)
+                webtourusdestination_obj.create(webtour_dict)
             else:
-                webtourusdestination_obj.write(cr, uid, rs_webtourdestination, webtour_dict)
+                rs_webtourdestination.write(webtour_dict)
 
         return True
