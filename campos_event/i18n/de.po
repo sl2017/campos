@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 14:40+0000\n"
-"PO-Revision-Date: 2016-11-16 14:40+0000\n"
+"POT-Creation-Date: 2016-11-29 21:39+0000\n"
+"PO-Revision-Date: 2016-11-29 21:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -385,7 +385,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:344
+#: code:addons/campos_event/models/participant.py:378
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -458,6 +458,11 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
 msgid "Birthdate"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,birthdate_short:0
+msgid "Birthdate short"
 msgstr ""
 
 #. module: campos_event
@@ -746,7 +751,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:318
+#: code:addons/campos_event/models/participant.py:325
+#: code:addons/campos_event/models/participant.py:352
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1244,6 +1250,7 @@ msgid "HR/Manager"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Handed out items"
 msgstr ""
@@ -1918,7 +1925,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:478
+#: code:addons/campos_event/models/participant.py:512
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2165,7 +2172,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:366
+#: code:addons/campos_event/models/participant.py:400
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2364,7 +2371,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:290
+#: code:addons/campos_event/models/participant.py:297
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2519,6 +2526,12 @@ msgstr ""
 #. module: campos_event
 #: field:product.template,staff_del_ok:0
 msgid "Staff delivery"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_graph_staff_del_prod
+#: model:ir.ui.menu,name:campos_event.menu_graph_staff_del_prod
+msgid "Staff products"
 msgstr ""
 
 #. module: campos_event
