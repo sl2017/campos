@@ -100,4 +100,25 @@ class WebtourParticipant(models.Model):
                 webtourusdestination_obj.write(cr, uid, rs_webtourdestination, webtour_dict)
 
         return True
-	
+
+    @api.onchange('troop_id') #This method will be called when the field troop_id changes.
+    def on_change_troop(self):
+    #Try to get Webtour usGroupIDno
+        if self.troop_id <> None:
+        # get or create usgroup from webtour matching troop_id
+            newidno=webtourinterface.usgroup_getbyname(self.troop_id)
+            if newidno == "0":
+                newidno=webtourinterface.usgroup_create(self.troop_id)
+
+                if newidno <> "0":
+                    self.groupidno = newidno
+
+    @api.onchange('participant_id','groupidno') #This method will be called when either the field participant_id or the field groupidno changes.
+    def on_change_participant(self):                
+        #Try to get Webtour usUserIDno
+        if self.usgroupidno <> None and self.usgroupidno <> "0" and self.participant_id <> None:
+            newidno=webtourinterface.ususer_getbyexternalid(self.participant_id)
+            if newidno == "0":
+                newidno=webtourinterface.ususer_create(self.participant_id, self.usgroupidno, self.participant_id, self.troop_id)
+                if newidno <> "0":
+                    self.usgroupidno = newidno 

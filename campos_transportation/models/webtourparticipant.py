@@ -122,3 +122,4 @@ class WebtourParticipant(models.Model):
                 newidno=webtourinterface.ususer_create(self.participant_id, self.usgroupidno, self.participant_id, self.troop_id)
                 if newidno <> "0":
                     self.usgroupidno = newidno 
+
