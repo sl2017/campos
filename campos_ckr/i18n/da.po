@@ -242,7 +242,7 @@ msgstr ""
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
 msgid "In Process"
-msgstr ""
+msgstr "Under behandling hos politiet"
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_is_follower:0
@@ -351,12 +351,12 @@ msgstr "Anmodning om børneattest"
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Send to CO"
-msgstr "Send til HU formænd"
+msgstr "Send til SL2017 sekretariat"
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Sent to CO"
-msgstr "Sendt til HU formænd"
+msgstr "Sendt til SL2017 sekretariatet"
 
 #. module: campos_ckr
 #: model:ir.actions.server,name:campos_ckr.action_participant_cpr_list
@@ -387,7 +387,7 @@ msgstr "Tid udløbet"
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
 msgid "To Request at Central office"
-msgstr ""
+msgstr "Ikke fremsendte børneattester"
 
 #. module: campos_ckr
 #: code:addons/campos_ckr/models/campos_ckr_check.py:176
@@ -404,7 +404,8 @@ msgstr "Ulæste beskeder"
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Use the \"Send to CO\" button to submit the CKR check request."
 msgstr ""
-"Anvend send til HU-formænd knappen for at sende en børneattest anmodning"
+"Anvend send til \"send til sl2017 sekretariatet\"  knappen for at sende en "
+"børneattest anmodning"
 
 #. module: campos_ckr
 #: field:campos.ckr.check,website_message_ids:0
