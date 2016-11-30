@@ -24,7 +24,7 @@
     'depends': ['campos_preregistration'],
 
     # always loaded
-    'data': [],
+    'data': ['views/finalregistration.xml'],
     # only loaded in demonstration mode
     'demo': [ ],
 }

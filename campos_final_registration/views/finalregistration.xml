@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+	<openerp>
+		<data>
+		
+		<!-- Preregistration for admin-->
+		<record id="view_form_finalregistration_admin" model="ir.ui.view">
+			<field name="name">Final Registration Form Admin</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_preregistration.view_form_preregistration_admin" />
+			<field name="arch" type="xml">
+				<field name="econ_partner_id" position="after">
+					<field name="total_price" readonly="1"/>
+					<field name="child_certificates_accept"/>
+					<field name="child_certificates_date"/>
+					<field name="child_certificates_user"/>
+					<field name="pioneering_pole_depot"/>
+										<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups">
+											<tree editable="bottom">
+												<field name="friendship_group_id"  options="{'no_create': True}"/>
+											</tree>
+										</field>
+
+					</field>
+			</field>	
+		</record>
+		
+		<!-- Menu Actions -->
+		<act_window id="action_event_finalregistration_tree"
+		name="Event Final Registration Tree"
+		res_model="event.registration"
+		view_mode="tree,form"  
+		view_id="view_form_finalregistration_admin"/>
+		
+		<!-- sub menu -->
+		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
+
+		<!-- Menu Items -->
+		
+		<menuitem id="menu_action_event_finalregistration_tree" parent="menu_event_finalregistration" name="Final Registration" action="action_event_finalregistration_tree" groups="campos_event.group_campos_admin" sequence="20"/>
+
+		</data>
+</openerp>

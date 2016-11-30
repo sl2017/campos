@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields
+from openerp import models, fields, api
 class FinalRegistration(models.Model):
     '''
     Final registration for a scout group to an event
     '''
     _inherit = 'event.registration'
     total_price = fields.Float('Total Price')
-    child_certificates_accept = fields.Boolean('We declare to not bring any leaders not having a child certificate')
+    child_certificates_accept = fields.Boolean('Check declaration of child certificates')
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
     friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','registration_id','Friendship Groups')
     pioneering_pole_depot = fields.Char('Pioneering Pole Depot (ref. to depot?)')
     
-    
+    #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
+    @api.depends ('subcamp_id','camp_area_id')
+    @api.one
+    def _update_friendship_group_supcamp_area (self):
+        if (self.group_country_code2 == 'DK'):
+            for record in self.friendhip_group_ids:
+                record.friendship_group_id.subcamp_id=self.subcamp_id
+                record.friendship_group_id.camp_area_id=self.camp_area_id
+
 class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
     registration_id = fields.Many2one('event.registration', 'Registration', required=True)
