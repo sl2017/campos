@@ -42,8 +42,9 @@ class CamposCkrCheck(models.Model):
 
     @api.constrains('cpr')
     def _check_description(self):
-        if not (len(self.cpr) == 4 and self.cpr.isdigit()):
-            raise exceptions.ValidationError("CPR number must be 4 digits")
+        if self.state in ['sentin', 'ckr_req']:
+            if not (len(self.cpr) == 4 and self.cpr.isdigit()):
+                raise exceptions.ValidationError("CPR number must be 4 digits")
         
     @api.one
     def _edit_appr_date(self, operation=None):
