@@ -3,30 +3,27 @@
 <data>
 <record id="view_tree_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
-<field name="model">webtour.campos.event.participant</field>
+<field name="model">campos.event.participant</field>
 <field name="arch" type="xml">
 <tree>
-<field name="participant_id"/>
-<field name="troop_id"/>
+<field name="partner_id"/>
+<field name="registration_id"/>
 <field name="ususeridno"/>
-<field name="usgroupidno"/>
+<field name="scoutgroup"/>
 </tree>
 </field>
 </record>
 <record id="view_form_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
-<field name="model">webtour.campos.event.participant</field>
+<field name="model">campos.event.participant</field>
 <field name="arch" type="xml">
 <form>
-<header>
-<button name="create_update_needs_online" type="object" string="Update Webtour" class="oe_highlight" />
-</header>
 <sheet>
 <group name="user_top">
-<field name="participant_id" readonly="0"/>
-<field name="troop_id" readonly="0"/>
-<field name="usgroupidno" on_change="on_change_troop(troop_id)"/>
-<field name="ususeridno" on_change="on_change_participant(participant_id,usgroupidno)"/>
+<field name="partner_id"/>
+<field name="registration_id"/>
+<field name="ususeridno"/>
+<field name="scoutgroup"/>
 <field name="tocampfromdestination" readonly="0"/>
 <field name="fromcamptodestination" readonly="0"/>
 <field name="tocampdate" readonly="0"/>
@@ -43,7 +40,7 @@
 <!-- Action to open Webtour Participant list -->
 <act_window id="action_webtourparticipant"
 name="Camp OS Webtour Participant"
-res_model="webtour.campos.event.participant"
+res_model="campos.event.participant"
 view_mode="tree,form" />
 <!-- Menu item to open Webtour Order list -->
 <menuitem id="menu _webtourparticipant"
