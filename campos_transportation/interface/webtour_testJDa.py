@@ -1,13 +1,13 @@
 print "Start."
 
 import datetime
-from ..interface import webtourinterface
+import webtourinterface
 
 current_time = datetime.datetime.now().time()
 print current_time.isoformat()
 
-response_doc=webtourinterface.usgroup_getall()
-usgroups = response_doc.getElementsByTagName("a:IDno")
+k=webtourinterface.ususer_getbygroupidnoList('333')
+
 
 current_time = datetime.datetime.now().time()
 print current_time.isoformat()

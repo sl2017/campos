@@ -24,35 +24,52 @@ class WebtourParticipant(models.Model):
     usecamptransportfromcamp = fields.Boolean('Use Camp Transport from Camp', required=False, default=True)
     tocampneedidno = fields.Char('To Camp Need ID', required=False)
     fromcampneedidno = fields.Char('From Camp Need ID', required=False)
-
-    @api.model
-    def get_create_usIDno_tron(self):
-        rs_missingusgroupidno= self.env['campos.event.participant'].search([('webtourusidno','=',None),('active', '=', True),('scoutgroup', '=', True)])
-        for rec in rs_missingusgroupidno:
-                    # get or create usgroup from webtour matching troop_id
-            newidno=webtourinterface.usgroup_getbyname(rec.registration_id)
-            if newidno == "0":
-                newidno=webtourinterface.usgroup_create(rec.registration_id)
-
-                if newidno <> "0":
-                    dicto = {}
-                    dicto["webtourusidno"] = newidno
-                    rec.dicto(dict) 
-
-        return True
-    
+   
     @api.model
     def get_create_usgroupidno_tron(self):
-        rs_missingusgroupidno= self.env['event.registration'].search([('event_id', '=', 1),('state', '=', 'open'),('scoutgroup', '=', True)])
+        
+        _logger.info("get_create_usgroupidno_tron: Here we go...")
+        
+        #Get all usGroupIDno's from webtour and conver to a simple list
+        response_doc=webtourinterface.usgroup_getall()
+        usgroups = response_doc.getElementsByTagName("a:IDno")
+        usgrouplist=[]
+
+        for g in usgroups:
+            usgrouplist.append(str(g.firstChild.data))
+        
+        _logger.info("get_create_usgroupidno_tron: Got %d usGroupIDno's from Webtour", len(usgrouplist))           
+
+        # find all registrations missing usgroupidno
+        rs_missingusgroupidno= self.env['event.registration'].search([('event_id', '=', 1),('state', '=', 'open'),('scoutgroup', '=', True),('webtourusgroupidno','not in',usgrouplist)])
+        
+        # for each registation check usgroupidno name and create if missing
         for rec in rs_missingusgroupidno:
-            _logger.info("get_create_usgroupidno_tron %s %s %s %s",str(rec.state), str(rec.id), rec.name,rec.webtourusgroupidno)                    # get or create usgroup from webtour matching troop_id
             newidno=webtourinterface.usgroup_getbyname(str(rec.id))
             if newidno == "0":
                 newidno=webtourinterface.usgroup_create(str(rec.id))
-
-            if newidno <> "0":
+                if newidno != "0": #remember also this usgroupidno
+                    usgrouplist.append
+                
+            _logger.info("get_create_usgroupidno_tron Group: %s %s %s %s",str(rec.id), rec.name, rec.webtourusgroupidno, newidno)
+            
+            if newidno <> "0": #Update registration
                 dicto = {}
                 dicto["webtourusgroupidno"] = newidno
                 rec.write(dicto) 
+
+        # find participants missing usUserIDno, from Registration having a usGroupIDno
+        rs_missingususeridno= self.env['campos.event.participant'].search([('participant', '=', True),('webtourususeridno', '=', False),('webtourusgroupidno', 'in', usgrouplist)])
+        for rec in rs_missingususeridno:
+            newidno=webtourinterface.ususer_getbyexternalid(str(rec.id))
+            if newidno == "0":
+                newidno=webtourinterface.ususer_create(str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
+            
+            _logger.info("get_create_usgroupidno_tron User: %s %s %s %s %s",str(rec.id), rec.name, rec.webtourusgroupidno, rec.webtourususeridno,newidno)
+            
+            if newidno <> "0": #Update participant
+                dicto = {}
+                dicto["webtourususeridno"] = newidno
+                rec.write(dicto)            
 
         return True

@@ -33,6 +33,30 @@ def login():
     if authenticated.firstChild.data == "true":
         cookie = response.cookies
 
+def usgroup_getall():
+    global cookie
+
+    def do_usgroup_getall():
+        do_url = _url + "usgroup/GetAll/"
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_usgroup_getall()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login()
+
+    return doc
+
 def usgroup_getbyname(groupname):
     global cookie
 
@@ -86,6 +110,43 @@ def usgroup_create(groupname):
         idno = doc.getElementsByTagName("a:IDno")[0]
 
         return idno.firstChild.data
+
+def ususer_getbygroupidno(groupidno):
+    global cookie
+
+    def do_ususer__getbygroupidno():
+        do_url = _url + "usUser/GetAll/GroupIDno/?GroupIDno=" + groupidno
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_ususer__getbygroupidno()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login()
+
+    if cookie is not None:
+            return doc
+
+def ususer_getbygroupidnoList(groupidno):
+    response_doc=ususer_getbygroupidno(groupidno)
+    qty = response_doc.getElementsByTagName("Total")[0].firstChild.data
+    ususerlist=[]
+    if qty <> '0':
+        idno = response_doc.getElementsByTagName("a:IDno")
+
+        for u in idno:
+            ususerlist.append(str(u.firstChild.data))
+    
+    return ususerlist
 
 def ususer_getbyexternalid(externalid):
     global cookie
