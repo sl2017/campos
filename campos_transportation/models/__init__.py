@@ -8,3 +8,4 @@ from . import webtourususer
 from . import webtourusneed
 from . import webtourusdestination
 from . import webtourparticipant
+from . import webtourregistration

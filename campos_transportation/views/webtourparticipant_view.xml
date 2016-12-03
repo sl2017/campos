@@ -4,11 +4,12 @@
 <record id="view_tree_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
 <field name="model">campos.event.participant</field>
+<field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
 <field name="arch" type="xml">
 <tree>
-<field name="partner_id"/>
 <field name="registration_id"/>
-<field name="ususeridno"/>
+<field name="webtourusgroupidno"/>
+<field name="webtourususeridno"/>
 <field name="scoutgroup"/>
 </tree>
 </field>
@@ -16,13 +17,15 @@
 <record id="view_form_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
 <field name="model">campos.event.participant</field>
+<field name="inherit_id" ref="campos_event.view_event_registration_participant_form"/>
 <field name="arch" type="xml">
 <form>
 <sheet>
 <group name="user_top">
 <field name="partner_id"/>
 <field name="registration_id"/>
-<field name="ususeridno"/>
+<field name="webtourusgroupidno"/>
+<field name="webtourususeridno"/>
 <field name="scoutgroup"/>
 <field name="tocampfromdestination" readonly="0"/>
 <field name="fromcamptodestination" readonly="0"/>
