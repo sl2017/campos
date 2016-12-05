@@ -12,6 +12,13 @@ class FinalRegistration(models.Model):
     child_certificates_user = fields.Char('User signing declaration')
     friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','registration_id','Friendship Groups')
     pioneering_pole_depot = fields.Char('Pioneering Pole Depot (ref. to depot?)')
+    @api.depends ('child_certificates_accept')
+    @api.one
+    def _child_certificates_accept_checked (self):
+        for record in self:
+            record.child_certificates_date = fields.Date.to_string(fields.Date.today())
+            record.child_certificates_user = 'test'
+#            if (self.child_certificates_accept == 'True'):
     
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
     @api.depends ('subcamp_id','camp_area_id')
@@ -51,5 +58,10 @@ class ParticipantCampDay(models.Model):
     participation_date = fields.Char('Date')
     will_participate = fields.Boolean('Does Participate')
     
+class RegistrationCampDay(models.Model):
+    '''
+    A camp day
+    '''
+    _name='event.registration.day'
     
     
