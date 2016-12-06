@@ -27,14 +27,14 @@
 <field name="webtourusgroupidno"/>
 <field name="webtourususeridno"/>
 <field name="scoutgroup"/>
-<field name="tocampfromdestination" readonly="0"/>
-<field name="fromcamptodestination" readonly="0"/>
+<field name="tocampfromdestination_id" readonly="0"/>
+<field name="fromcamptodestination_id" readonly="0"/>
 <field name="tocampdate" readonly="0"/>
 <field name="fromcampdate" readonly="0"/>
 <field name="usecamptransporttocamp" readonly="0"/>
 <field name="usecamptransportfromcamp" readonly="0"/>
-<field name="tocampneedidno" readonly="0"/>
-<field name="fromcampneedidno" readonly="0"/>
+<field name="tocampusneed_id" readonly="0"/>
+<field name="fromcampusneed_id" readonly="0"/>
 </group>
 </sheet>
 </form>

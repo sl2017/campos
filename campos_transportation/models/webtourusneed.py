@@ -3,8 +3,7 @@ from openerp import models, fields, api
 from xml.dom import minidom
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
-    id = fields.Char('SL ID', required=True)
-    participant_id = fields.Integer('Participant ID', required=True)
+    participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
     campos_startdatetime = fields.Char('CampOs StartDateTime', required=False)
     campos_startdestinationidno = fields.Char('CampOs StartDestinationIdNo', required=False)

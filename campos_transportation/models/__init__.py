@@ -3,8 +3,6 @@
 ..  automodule:: package
 
 """
-from . import webtourusgroup
-from . import webtourususer
 from . import webtourusneed
 from . import webtourusdestination
 from . import webtourparticipant

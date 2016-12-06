@@ -12,18 +12,18 @@ class WebtourParticipant(models.Model):
     webtourususeridno = fields.Char('webtour us User ID no', required=False)
     webtourusgroupidno = fields.Char(string='webtour us Group ID no', related='registration_id.webtourusgroupidno')                                 
     
-    tocampfromdestination = fields.Many2one('campos.webtourusdestination',
+    tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'destinationidno',
                                             ondelete='set null')
-    fromcamptodestination = fields.Many2one('campos.webtourusdestination',
+    fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
                                             'destinationidno',
                                             ondelete='set null')
     tocampdate = fields.Date('To Camp Date', required=False)
     fromcampdate = fields.Date('From Camp Date', required=False)
     usecamptransporttocamp = fields.Boolean('Use Camp Transport to Camp', required=False, default=True)
     usecamptransportfromcamp = fields.Boolean('Use Camp Transport from Camp', required=False, default=True)
-    tocampneedidno = fields.Char('To Camp Need ID', required=False)
-    fromcampneedidno = fields.Char('From Camp Need ID', required=False)
+    tocampusneed_id = fields.Char('To Camp Need ID', required=False)
+    fromcampusneed_id = fields.Char('From Camp Need ID', required=False)
    
     @api.model
     def get_create_usgroupidno_tron(self):
