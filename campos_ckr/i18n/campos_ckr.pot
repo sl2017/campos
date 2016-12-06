@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 02:00+0000\n"
-"PO-Revision-Date: 2016-12-03 02:00+0000\n"
+"POT-Creation-Date: 2016-12-06 02:00+0000\n"
+"PO-Revision-Date: 2016-12-06 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -137,6 +137,11 @@ msgstr ""
 #. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
 msgid "Mark as Requested"
+msgstr ""
+
+#. module: campos_ckr
+#: model:ir.model,name:campos_ckr.model_mail_notification
+msgid "Notifications"
 msgstr ""
 
 #. module: campos_ckr
