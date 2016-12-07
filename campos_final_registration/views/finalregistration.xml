@@ -2,6 +2,17 @@
 	<openerp>
 		<data>
 		
+			<record id="view_tree_event_registration_pioneeringpoledepot" model="ir.ui.view">
+				<field name="name">Pioneering Pole Depot Tree</field>
+				<field name="model">event.registration.pioneeringpoledepot</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+					</tree>
+				</field>
+			</record> 		
+
+
 		<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
 			<field name="name">Final Registration Form Admin</field>
@@ -33,7 +44,7 @@
 							<field name="child_certificates_accept"/>
 							<field name="child_certificates_date"/>
 							<field name="child_certificates_user"/>
-							<field name="pioneering_pole_depot"/>
+							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
 							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups">
 								<tree editable="bottom">
 									<field name="friendship_group_id"  options="{'no_create': True}"/>
@@ -126,12 +137,18 @@
 		view_mode="tree,form"  
 		view_id="view_form_finalregistration_admin"/>
 		
+		<act_window id="action_event_registration_pioneeringpoledepot"
+		name="Event Registration Pioneering Pole Depots"
+		res_model="event.registration.pioneeringpoledepot"
+		view_mode="tree,form" />
+		
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
 		<!-- Menu Items -->
 		
 		<menuitem id="menu_action_event_finalregistration_tree" parent="menu_event_finalregistration" name="Final Registration" action="action_event_finalregistration_tree" groups="campos_event.group_campos_admin" sequence="20"/>
-
+		
+		<menuitem id="menu_action_finalregistration_menu_pioneeringpoledepot" parent="menu_event_finalregistration" name="Pioneering Pole Depots" action="action_event_registration_pioneeringpoledepot" groups="campos_event.group_campos_admin" sequence="30" />
 		</data>
 </openerp>

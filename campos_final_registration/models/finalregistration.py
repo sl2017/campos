@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
+from email import _name
 class FinalRegistration(models.Model):
     '''
     Final registration for a scout group to an event
@@ -11,7 +12,7 @@ class FinalRegistration(models.Model):
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
     friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','registration_id','Friendship Groups')
-    pioneering_pole_depot = fields.Char('Pioneering Pole Depot (ref. to depot?)')
+    pioneering_pole_depot_id = fields.Many2one('event.registration.pioneeringpoledepot','Pioneering Pole Depot')
     @api.depends ('child_certificates_accept')
     @api.one
     def _child_certificates_accept_checked (self):
@@ -63,5 +64,15 @@ class RegistrationCampDay(models.Model):
     A camp day
     '''
     _name='event.registration.day'
+    
+class PioneeringPoleDepot(models.Model):
+    '''
+    List of pioneering pole depots
+    '''
+    _description = 'Pioneering Pole Depot'
+    _name='event.registration.pioneeringpoledepot'
+    name = fields.Char('Depot Name', required=True, translate=True)
+
+    
     
     
