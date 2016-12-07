@@ -45,7 +45,9 @@
 							<field name="child_certificates_date"/>
 							<field name="child_certificates_user"/>
 							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
-							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups">
+							<field name="group_country_code2" string="*midlertidig landekode*"/>
+							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
+										 attrs="{'readonly': [('group_country_code2', '!=', 'DK')]}">
 								<tree editable="bottom">
 									<field name="friendship_group_id"  options="{'no_create': True}"/>
 								</tree>
