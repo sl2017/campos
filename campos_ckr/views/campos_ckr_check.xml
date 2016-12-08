@@ -15,15 +15,15 @@
 							type="object" class="oe_highlight"
 							attrs="{'invisible': ['|', ('birthdate_short', '=', False), '|', ('cpr', '=', False), ('state', '!=', 'draft')]}" />
 						<button string="Requested from CKR" name="action_req_ckr" states="sentin,cancel,timeout"
-							type="object" class="oe_highlight" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Approved" name="action_approve" states="ckr_req"
-							type="object" class="oe_highlight" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Rejected" name="action_reject" states="ckr_req,approved,cancel"
-							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Cancel" name="action_cancel" states="draft,sentin,ckr_req,approved,timeout,rejected"
-							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Req. Expired" name="action_timeout" states="ckr_req"
-							type="object" groups="campos_ckr.group_ckr_admin,base.group_no_one" />
+							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<field name="state" widget="statusbar" statusbar_visible="draft,sentin,ckr_req,approved"
 							statusbar_colors='{"rejected":"red","approved":"blue"}' />
 					</header>
@@ -72,6 +72,7 @@
 				<filter name="to_request" string="To Request at Central office"
 					domain="[('state', '=', 'sentin')]" />
 				<filter name="waiting" string="In Process" domain="[('state', '=', 'ckr_req')]" />
+				<filter name="expired" string="Expired" domain="[('state', '=', 'timeout')]" />
             </search>
         </field>
     </record>
