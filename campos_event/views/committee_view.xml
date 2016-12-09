@@ -280,6 +280,24 @@
 			<field name="view_type">form</field>
 		</record>
 		
+		<!--  Job Title -->
+		
+		<record model="ir.ui.view" id="campos_committee_job_title_tree">
+			<field name="name">campos.committee.job.title.tree</field>
+			<field name="model">campos.committee.job.title</field>
+			<field name="arch" type="xml">
+				<tree string="Job type">
+
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_committee_job_title_tree" model="ir.actions.act_window">
+			<field name="name">Job title</field>
+			<field name="res_model">campos.committee.job.title</field>
+			<field name="view_type">form</field>
+		</record>
 		
 
 		<!-- Email template for new IST assigned to Committe -->
