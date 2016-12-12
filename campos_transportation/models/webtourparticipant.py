@@ -73,3 +73,23 @@ class WebtourParticipant(models.Model):
                 rec.write(dicto)            
 
         return True
+    
+    @api.one
+    def write(self, vals):
+        _logger.info("Transportation Participant Write Entered %s", vals.keys())
+        for par in self:
+            _logger.info("Transportation Participant Write Kilroy WAS HERRE")       
+            if 'tocampfromdestination_id' in vals:
+                _logger.info("Transportation Participant Write found new dest %s", par.tocampfromdestination_id)
+        ret = super(WebtourParticipant, self).write(vals)    
+        return ret
+    
+    @api.multi
+    def write(self, vals):
+        _logger.info("Transportation Participant Write Entered %s", vals.keys())
+        for par in self:
+            _logger.info("Transportation Participant Write Kilroy WAS HERRE")       
+            if 'tocampfromdestination_id' in vals:
+                _logger.info("Transportation Participant Write found new dest %s", par.tocampfromdestination_id)
+        ret = super(WebtourParticipant, self).write(vals)    
+        return ret

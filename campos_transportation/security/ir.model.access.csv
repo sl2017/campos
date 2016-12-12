@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_campos_webtourusneed,access_campos_webtourusneed,model_campos_webtourusneed,campos_preregistration.group_campos_groupleader,1,1,1,0
+access_campos_webtourusneed,access_campos_webtourusneed,model_campos_webtourusneed,,1,1,1,0
 access_campos_webtourusdestination,access_campos_webtourusdestination,model_campos_webtourusdestination,,1,0,0,0
