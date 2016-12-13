@@ -33,8 +33,7 @@
 
 		<act_window id="action_member_organization_tree_sms" name="Organizations"
 			res_model="campos.committee" view_mode="tree,form"
-			view_id="view_member_organization_sms_tree"
-			domain="[('organization_type_id.legal_entity', '=', True)]" />
+			view_id="view_member_organization_sms_tree" />
 
         <menuitem id="menu_sms_organization_list" parent="campos_sms.menu_sms"
             sequence="50" action="action_member_organization_tree_sms" />
