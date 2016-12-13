@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="smsclient.action_partner_sms_send" model="ir.actions.act_window">
+			<field name="groups_id">base.group_no_one</field>
+		</record>
+
+	</data>
+</openerp>
