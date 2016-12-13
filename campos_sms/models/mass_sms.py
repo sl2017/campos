@@ -18,7 +18,6 @@ class part_sms(models.TransientModel):
     organization_id = fields.Many2one('campos.committee', string='Paying Committee', required=True,
                                       domain="[('sms_max_monthly_cost', '>', 0),('user_sms_ids', 'in', uid)]",
                                       context={'name_with_sms_budget': True})
-    committee_ids = fields.Many2many('campos.committee', compute='_compute_committeeaccess')
 
     # The sender of the SMS (can be text or a confirmed number)
     # If a number is selected, it will also be copied to sender_text 
