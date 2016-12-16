@@ -114,11 +114,15 @@ class CampCommitteeFunction(geo_model.GeoModel):
                     old_user =  self.env['res.users'].sudo().search([('participant_id', '=', app.participant_id.id)])
                     if len(old_user) == 0:
                         app.participant_id.action_create_user()
-                app.participant_id.write({'committee_id': False,
-                                          'job_id': False,
-                                          'my_comm_contact': False,
-                                          'state': 'approved'
-                                          })
+                parvals = {'committee_id': False,
+                           'job_id': False,
+                           'my_comm_contact': False,
+                           'state': 'approved'
+                           }
+                if not app.participant_id.primary_committee_id:
+                    parvals['primary_committee_id'] = app.committee_id.id
+                app.participant_id.write(parvals)
+
         return ret
     
     @api.multi

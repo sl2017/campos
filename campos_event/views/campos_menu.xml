@@ -59,7 +59,7 @@
 	        <menuitem action="action_committee_functions_type_tree" id="event_committee_function_type_menu"
 				name="Function types" sequence="100" parent="menu_campos_comittee"  groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			<menuitem action="action_committee_job_title_tree" id="event_committee_job_title_menu"
-				name="Function types" sequence="105" parent="menu_campos_comittee"  groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
+				name="Job titles" sequence="105" parent="menu_campos_comittee"  groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 	        
 	        <menuitem action="action_committee_type_tree" id="event_committee_type_menu"
 			name="Committee types" sequence="110" parent="menu_campos_comittee" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>

@@ -108,7 +108,7 @@ class part_sms(models.TransientModel):
     @api.one
     @api.depends('sender_text')
     def _compute_sender_is_number(self):
-        self.sender_is_number = self.sender_text and any(char.isdigit() for char in self.sender_text)
+        self.sender_is_number = self.sender_text and any(char.isdigit() for char in self.sender_text) and not any(char.isalpha() for char in self.sender_text)
 
     @api.one
     def _compute_sms_allowed(self):

@@ -171,6 +171,11 @@ class EventParticipant(geo_model.GeoModel):
 
     meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
     staff_del_prod_ids = fields.One2many('campos.staff.del.prod', 'participant_id')
+    
+    primary_committee_id = fields.Many2one('campos.committee',
+                                           'Have agreement with committee',
+                                           track_visibility='onchange',
+                                           ondelete='set null')
 
     @api.one
     def _compute_meeting_registration(self):
@@ -511,3 +516,5 @@ class EventParticipant(geo_model.GeoModel):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
+    
+    

@@ -181,6 +181,7 @@
 							</tree>
 							</field>
 							<field name="standby_until" states="standby"/>
+							<field name="primary_committee_id" groups="campos_event.group_campos_manager"/>
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
