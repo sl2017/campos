@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//campos_ckr/models/campos_event_participant.py=utf-8
+encoding//campos_event/__init__.py=utf-8
 encoding//campos_event/__openerp__.py=utf-8
 encoding//campos_event/models/__init__.py=utf-8
 encoding//campos_event/models/camp_area.py=utf-8

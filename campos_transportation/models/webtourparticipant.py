@@ -20,8 +20,8 @@ class WebtourParticipant(models.Model):
                                             ondelete='set null')
     tocampdate = fields.Date('To Camp Date', required=False)
     fromcampdate = fields.Date('From Camp Date', required=False)
-    usecamptransporttocamp = fields.Boolean('Use Camp Transport to Camp', required=False, default=True)
-    usecamptransportfromcamp = fields.Boolean('Use Camp Transport from Camp', required=False, default=True)
+    usecamptransporttocamp = fields.Boolean('Use Camp Transport to Camp', required=False)
+    usecamptransportfromcamp = fields.Boolean('Use Camp Transport from Camp', required=False)
     tocampusneed_id = fields.Char('To Camp Need ID', required=False)
     fromcampusneed_id = fields.Char('From Camp Need ID', required=False)
    
@@ -29,7 +29,20 @@ class WebtourParticipant(models.Model):
     def get_create_usgroupidno_tron(self):
         
         _logger.info("get_create_usgroupidno_tron: Here we go...")
-        
+
+        # find participants having transort need but missing usGroupIDno
+        rs_missingusGroupIDno= self.env['campos.event.participant'].search([('registration_id.event_id', '=', 1),('webtourusgroupidno', '=', False)
+                                                                            ,'|',('usecamptransporttocamp', '=', True),('usecamptransportfromcamp', '=', True)])
+        # make at list of distinct Registrationid missing
+        missingRegistrationidlist=[]
+        for r in rs_missingusGroupIDno:
+            if r.registration_id.id in missingRegistrationidlist: 
+                continue 
+            else:
+                missingRegistrationidlist.append(r.registration_id.id)                                                                       
+
+        #_logger.info("get_create_usgroupidno_tron: %s usGroupIDno's missing ",missingRegistrationidlist)
+             
         #Get all usGroupIDno's from webtour and conver to a simple list
         response_doc=webtourinterface.usgroup_getall()
         usgroups = response_doc.getElementsByTagName("a:IDno")
@@ -37,11 +50,12 @@ class WebtourParticipant(models.Model):
 
         for g in usgroups:
             usgrouplist.append(str(g.firstChild.data))
-        
-        _logger.info("get_create_usgroupidno_tron: Got %d usGroupIDno's from Webtour", len(usgrouplist))           
 
-        # find all registrations missing usgroupidno
-        rs_missingusgroupidno= self.env['event.registration'].search([('event_id', '=', 1),('state', '=', 'open'),('scoutgroup', '=', True),('webtourusgroupidno','not in',usgrouplist)])
+        # find all registrations missing usgroupidno or is missing in webtour
+        rs_missingusgroupidno= self.env['event.registration'].search(['|',('id','in',missingRegistrationidlist)
+                                                                      ,'&',('webtourusgroupidno', '!=', False),('webtourusgroupidno','not in',usgrouplist)])
+        
+        _logger.info("get_create_usgroupidno_tron: %d (%d) usGroupIDno's missing. Got %d usGroupIDno's from Webtour",len(missingRegistrationidlist),len(rs_missingusgroupidno),len(usgrouplist))    
         
         # for each registation check usgroupidno name and create if missing
         for rec in rs_missingusgroupidno:
@@ -59,7 +73,8 @@ class WebtourParticipant(models.Model):
                 rec.write(dicto) 
 
         # find participants missing usUserIDno, from Registration having a usGroupIDno
-        rs_missingususeridno= self.env['campos.event.participant'].search([('participant', '=', True),('webtourususeridno', '=', False),('webtourusgroupidno', 'in', usgrouplist)])
+        rs_missingususeridno= self.env['campos.event.participant'].search([('webtourususeridno', '=', False),('webtourusgroupidno', 'in', usgrouplist)
+                                                                           ,'|',('usecamptransporttocamp', '=', True),('usecamptransportfromcamp', '=', True)])
         for rec in rs_missingususeridno:
             newidno=webtourinterface.ususer_getbyexternalid(str(rec.id))
             if newidno == "0":
@@ -74,22 +89,22 @@ class WebtourParticipant(models.Model):
 
         return True
     
-    @api.one
-    def write(self, vals):
+    @api.multi
+    def write2(self, vals):
         _logger.info("Transportation Participant Write Entered %s", vals.keys())
+        ret = super(WebtourParticipant, self).write(vals)            
         for par in self:
             _logger.info("Transportation Participant Write Kilroy WAS HERRE")       
             if 'tocampfromdestination_id' in vals:
                 _logger.info("Transportation Participant Write found new dest %s", par.tocampfromdestination_id)
-        ret = super(WebtourParticipant, self).write(vals)    
         return ret
     
     @api.multi
-    def write(self, vals):
-        _logger.info("Transportation Participant Write Entered %s", vals.keys())
-        for par in self:
-            _logger.info("Transportation Participant Write Kilroy WAS HERRE")       
-            if 'tocampfromdestination_id' in vals:
-                _logger.info("Transportation Participant Write found new dest %s", par.tocampfromdestination_id)
-        ret = super(WebtourParticipant, self).write(vals)    
-        return ret
+    def clearusecamptransport(self):
+        # find participants missing usUserIDno, from Registration having a usGroupIDno
+        rs = self.env['campos.event.participant'].search([('usecamptransportfromcamp', '=', True)])
+        for rec in rs:
+            rec.usecamptransportfromcamp = False   
+        
+        return True
+        

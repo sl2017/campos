@@ -7,9 +7,10 @@
 <field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
 <field name="arch" type="xml">
 <tree>
-<field name="registration_id"/>
 <field name="webtourusgroupidno"/>
 <field name="webtourususeridno"/>
+<field name="usecamptransporttocamp"/>
+<field name="usecamptransportfromcamp"/>
 <field name="scoutgroup"/>
 </tree>
 </field>
@@ -38,6 +39,9 @@
 </group>
 </sheet>
 </form>
+<header>
+<button name="clearusecamptransport" type="object" string="Clear Use Transport" class="oe_highlight" />
+</header>
 </field>
 </record>
 <!-- Action to open Webtour Participant list -->

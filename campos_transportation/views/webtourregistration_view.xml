@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourregistration" model="ir.ui.view">
+<field name="name">Webtour Registration</field>
+<field name="model">event.registration</field>
+<field name="inherit_id" ref="campos_preregistration.view_tree_event_registration"/>
+<field name="arch" type="xml">
+<tree>
+<field name="webtourusgroupidno"/>
+<field name="scoutgroup"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourregistration" model="ir.ui.view">
+<field name="name">Webtour Registration</field>
+<field name="model">event.registration</field>
+<field name="inherit_id" ref="event.view_event_registration_form"/>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="user_top">
+<field name="partner_id"/>
+<field name="name"/>
+<field name="event_id"/>
+<field name="webtourusgroupidno"/>
+<field name="scoutgroup"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Participant list -->
+<act_window id="action_webtourregistration"
+name="Camp OS Webtour Registration"
+res_model="event.registration"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourregistration"
+name="Campos transportation Registration"
+parent="mail.mail_feeds"
+sequence="32"
+action="action_webtourregistration" />
+</data>
+</openerp>
