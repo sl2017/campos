@@ -22,8 +22,9 @@ class WebtourParticipant(models.Model):
     fromcampdate = fields.Date('From Camp Date', required=False)
     usecamptransporttocamp = fields.Boolean('Use Camp Transport to Camp', required=False)
     usecamptransportfromcamp = fields.Boolean('Use Camp Transport from Camp', required=False)
-    tocampusneed_id = fields.Char('To Camp Need ID', required=False)
-    fromcampusneed_id = fields.Char('From Camp Need ID', required=False)
+    
+    tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
+    fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
    
     @api.model
     def get_create_usgroupidno_tron(self):
@@ -74,7 +75,9 @@ class WebtourParticipant(models.Model):
 
         # find participants missing usUserIDno, from Registration having a usGroupIDno
         rs_missingususeridno= self.env['campos.event.participant'].search([('webtourususeridno', '=', False),('webtourusgroupidno', 'in', usgrouplist)
-                                                                           ,'|',('usecamptransporttocamp', '=', True),('usecamptransportfromcamp', '=', True)])
+                                                                          ,'|',('usecamptransporttocamp', '=', True),('usecamptransportfromcamp', '=', True)])
+        
+        # for each participant check ususeridno name and create if missing
         for rec in rs_missingususeridno:
             newidno=webtourinterface.ususer_getbyexternalid(str(rec.id))
             if newidno == "0":
@@ -90,13 +93,60 @@ class WebtourParticipant(models.Model):
         return True
     
     @api.multi
-    def write2(self, vals):
+    def write(self, vals):
         _logger.info("Transportation Participant Write Entered %s", vals.keys())
         ret = super(WebtourParticipant, self).write(vals)            
         for par in self:
-            _logger.info("Transportation Participant Write Kilroy WAS HERRE")       
-            if 'tocampfromdestination_id' in vals:
-                _logger.info("Transportation Participant Write found new dest %s", par.tocampfromdestination_id)
+     
+            if  ('tocampfromdestination_id' in vals 
+                or 'tocampdate' in vals
+                or 'usecamptransporttocamp' in vals 
+                or 'webtourususeridno' in vals
+                ):
+                if par.tocampusneed_id.id == False:
+                    dicto1 = {}
+                    dicto1["participant_id"] = par.id
+                    dicto1["campos_startdatetime"] = par.tocampdate
+                    dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
+                    dicto1["campos_enddestinationidno"] = 4389
+                    dicto1["webtour_useridno"] = par.webtourususeridno
+                    dicto1["webtour_groupidno"] = par.webtourusgroupidno
+                    
+                    usneed_obj = self.env['campos.webtourusneed']                
+                    par.tocampusneed_id = usneed_obj.create(dicto1)
+                else:
+                    par.tocampusneed_id.campos_startdatetime = par.tocampdate
+                    par.tocampusneed_id.campos_startdestinationidno = par.tocampfromdestination_id.destinationidno
+                    par.tocampusneed_id.campos_enddestinationidno = 4389
+                    par.tocampusneed_id.webtour_useridno = par.webtourususeridno
+                    par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno     
+                                       
+                _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id
+                
+            if  ('fromcamptodestination_id' in vals 
+                or 'fromcampdate' in vals
+                or 'usecamptransportfromcamp' in vals 
+                or 'webtourususeridno' in vals
+                ):
+                if par.fromcampusneed_id.id == False:
+                    dicto1 = {}
+                    dicto1["participant_id"] = par.id
+                    dicto1["campos_startdatetime"] = par.fromcampdate
+                    dicto1["campos_startdestinationidno"] = 4389
+                    dicto1["campos_enddestinationidno"] = par.fromcamptodestination_id.destinationidno
+                    dicto1["webtour_useridno"] = par.webtourususeridno
+                    dicto1["webtour_groupidno"] = par.webtourusgroupidno
+                    
+                    usneed_obj = self.env['campos.webtourusneed']                
+                    par.fromcampusneed_id = usneed_obj.create(dicto1)
+                else:
+                    par.fromcampusneed_id.campos_startdatetime = par.fromcampdate
+                    par.fromcampusneed_id.campos_startdestinationidno = 4389
+                    par.fromcampusneed_id.campos_enddestinationidno = par.fromcamptodestination_id.destinationidno
+                    par.fromcampusneed_id.webtour_useridno = par.webtourususeridno
+                    par.fromcampusneed_id.webtour_groupidno = par.webtourusgroupidno     
+                                       
+                _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id                            
         return ret
     
     @api.multi

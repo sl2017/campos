@@ -34,8 +34,8 @@
 <field name="fromcampdate" readonly="0"/>
 <field name="usecamptransporttocamp" readonly="0"/>
 <field name="usecamptransportfromcamp" readonly="0"/>
-<field name="tocampusneed_id" readonly="0"/>
-<field name="fromcampusneed_id" readonly="0"/>
+<field name="tocampusneed_id" readonly="1"/>
+<field name="fromcampusneed_id" readonly="1"/>
 </group>
 </sheet>
 </form>
