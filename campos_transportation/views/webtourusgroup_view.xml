@@ -16,9 +16,6 @@
 <field name="model">campos.webtourusgroup</field>
 <field name="arch" type="xml">
 <form>
-<header>
-<button name="get_create_groupidno" type="object" string="Update Webtour" class="oe_highlight" />
-</header>
 <sheet>
 <group name="group_top">
 <field name="troop_id" readonly="0"/>
@@ -35,7 +32,7 @@ res_model="campos.webtourusgroup"
 view_mode="tree,form" />
 <!-- Menu item to open Webtour Order list -->
 <menuitem id="menu _webtourusgroup"
-name="Campos transportation Us Group"
+name="Campos trans. Us Group"
 parent="mail.mail_feeds"
 sequence="22"
 action="action_webtourusgroup" />

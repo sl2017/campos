@@ -230,7 +230,7 @@ def usneed_getbyidno(request):
     global cookie
 
     def do_usneed_getbyidno():
-        do_url = _url + "usNeed/GetByGroupIDno/?" + request
+        do_url = _url + "usNeed/GetByIDno/?IDno=" + request
 
         response = requests.get(do_url,data=None,cookies=cookie)
 
@@ -242,6 +242,30 @@ def usneed_getbyidno(request):
 
     while repeat_read:
         doc = do_usneed_getbyidno()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login()
+
+    return doc
+
+def usneed_update(request):
+    global cookie
+
+    def do_usneed_update():
+        do_url = _url + "usNeed/Update/?" + request
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_usneed_update()
 
         if is_authenticated(doc):
             repeat_read = False

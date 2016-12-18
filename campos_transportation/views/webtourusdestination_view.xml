@@ -17,9 +17,6 @@
 <field name="model">campos.webtourusdestination</field>
 <field name="arch" type="xml">
 <form>
-<header>
-<button name="get_destinations_online" type="object" string="Get Webtour" class="oe_highlight" />
-</header>
 <sheet>
 <group name="destination_top">
 <field name="destinationidno" readonly="0"/>
@@ -34,16 +31,15 @@
 </form>
 </field>
 </record>
+
 <!-- Action to open Webtour Us Destination list -->
 <act_window id="action_webtourusdestination"
 name="Camp OS Webtour Us Destination"
 res_model="campos.webtourusdestination"
 view_mode="tree,form" />
-<!-- Menu item to open Webtour Order list -->
-<menuitem id="menu _webtourusdestination"
-name="Campos transportation Us Destination"
-parent="mail.mail_feeds"
-sequence="28"
-action="action_webtourusdestination" />
+
+<!-- Menu item to open Campos Webtour Destination list  -->
+<menuitem id="menu_action_campos_transportation_destinations" parent="menu_campos_transportation" name="Webtour Destinations" action="action_webtourusdestination" groups="campos_event.group_campos_admin" sequence="40"/>
+
 </data>
 </openerp>

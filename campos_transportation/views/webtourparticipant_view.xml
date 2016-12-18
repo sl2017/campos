@@ -15,6 +15,21 @@
 </tree>
 </field>
 </record>
+
+<record id="seq_type_my_transaction" model="ir.sequence.type">
+<field name="name">webtour Sequence</field>
+<field name="code">webtour.transaction</field>
+</record>
+
+<record id="seq_my_transaction" model="ir.sequence">
+<field name="name">webtour Sequence</field>
+<field name="code">webtour.transaction</field>
+<field name="prefix"></field>
+<field name="padding">0</field>
+<field name="company_id" eval="False"/>
+<field name="implementation">no_gap</field>
+</record>
+
 <record id="view_form_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
 <field name="model">campos.event.participant</field>
@@ -39,21 +54,20 @@
 </group>
 </sheet>
 </form>
-<header>
-<button name="clearusecamptransport" type="object" string="Clear Use Transport" class="oe_highlight" />
-</header>
 </field>
 </record>
+
 <!-- Action to open Webtour Participant list -->
 <act_window id="action_webtourparticipant"
 name="Camp OS Webtour Participant"
 res_model="campos.event.participant"
 view_mode="tree,form" />
-<!-- Menu item to open Webtour Order list -->
-<menuitem id="menu _webtourparticipant"
-name="Campos transportation Participant"
-parent="mail.mail_feeds"
-sequence="32"
-action="action_webtourparticipant" />
+
+<!-- Transportation sub menu -->
+<menuitem id="menu_campos_transportation" parent="campos_event.menu_campos" name="Transportation" groups="campos_event.group_campos_admin" sequence="30"/>
+
+<!-- Menu item to open Campos Participant list with Webtour details -->
+<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant" groups="campos_event.group_campos_admin" sequence="20"/>
+
 </data>
 </openerp>

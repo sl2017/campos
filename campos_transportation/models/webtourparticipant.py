@@ -107,19 +107,23 @@ class WebtourParticipant(models.Model):
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
                     dicto1["campos_startdatetime"] = par.tocampdate
+                    dicto1["campos_enddatetime"] = par.tocampdate
                     dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
                     dicto1["campos_enddestinationidno"] = 4389
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
+                    dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
                     
                     usneed_obj = self.env['campos.webtourusneed']                
                     par.tocampusneed_id = usneed_obj.create(dicto1)
                 else:
                     par.tocampusneed_id.campos_startdatetime = par.tocampdate
+                    par.tocampusneed_id.campos_enddatetime = par.tocampdate
                     par.tocampusneed_id.campos_startdestinationidno = par.tocampfromdestination_id.destinationidno
                     par.tocampusneed_id.campos_enddestinationidno = 4389
                     par.tocampusneed_id.webtour_useridno = par.webtourususeridno
-                    par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno     
+                    par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno
+                    par.tocampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
                                        
                 _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id
                 
@@ -132,29 +136,33 @@ class WebtourParticipant(models.Model):
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
                     dicto1["campos_startdatetime"] = par.fromcampdate
+                    dicto1["campos_enddatetime"] = par.fromcampdate                    
                     dicto1["campos_startdestinationidno"] = 4389
                     dicto1["campos_enddestinationidno"] = par.fromcamptodestination_id.destinationidno
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
-                    
+                    dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
+                                                            
                     usneed_obj = self.env['campos.webtourusneed']                
                     par.fromcampusneed_id = usneed_obj.create(dicto1)
                 else:
                     par.fromcampusneed_id.campos_startdatetime = par.fromcampdate
+                    par.fromcampusneed_id.campos_enddatetime = par.fromcampdate
                     par.fromcampusneed_id.campos_startdestinationidno = 4389
                     par.fromcampusneed_id.campos_enddestinationidno = par.fromcamptodestination_id.destinationidno
                     par.fromcampusneed_id.webtour_useridno = par.webtourususeridno
                     par.fromcampusneed_id.webtour_groupidno = par.webtourusgroupidno     
-                                       
+                    par.fromcampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')
+                                                           
                 _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id                            
         return ret
     
     @api.multi
     def clearusecamptransport(self):
         # find participants missing usUserIDno, from Registration having a usGroupIDno
-        rs = self.env['campos.event.participant'].search([('usecamptransportfromcamp', '=', True)])
-        for rec in rs:
-            rec.usecamptransportfromcamp = False   
+        #rs = self.env['campos.event.participant'].search([('usecamptransportfromcamp', '=', True)])
+        #for rec in rs:
+        #    rec.usecamptransportfromcamp = False   
         
         return True
         

@@ -10,10 +10,9 @@
 <field name="participant_id"/>
 <field name="campos_startdatetime"/>
 <field name="campos_startdestinationidno"/>
-<field name="campos_startnote"/>
-<field name="campos_enddatetime"/>
 <field name="campos_enddestinationidno"/>
-<field name="campos_endnote"/>
+<field name="campos_writeseq"/>
+<field name="campos_transferedseq"/>
 </tree>
 </field>
 </record>
@@ -35,6 +34,8 @@
 <field name="campos_enddatetime" readonly="0"/>
 <field name="campos_enddestinationidno" readonly="0"/>
 <field name="campos_endnote" readonly="0"/>
+<field name="campos_writeseq"/>
+<field name="campos_transferedseq"/>
 </group>
 <group name="group_right">
 <field name="webtour_startdatetime" readonly="1"/>
@@ -43,25 +44,26 @@
 <field name="webtour_enddatetime" readonly="1"/>
 <field name="webtour_enddestinationidno" readonly="1"/>
 <field name="webtour_endnote" readonly="1"/>
-<field name="webtour_needidno" readonly="1"/>
 <field name="webtour_useridno" readonly="1"/>
 <field name="webtour_groupidno" readonly="1"/>
+<field name="webtour_needidno" readonly="1"/>
+<field name="webtour_CurrentDateTime" readonly="1"/>
+
 </group>
 </group>
 </sheet>
 </form>
 </field>
 </record>
+
 <!-- Action to open Webtour Us Need list -->
 <act_window id="action_webtourusneed"
 name="Camp OS Webtour Us Need"
 res_model="campos.webtourusneed"
 view_mode="tree,form" />
-<!-- Menu item to open Webtour Order list -->
-<menuitem id="menu _webtourusneed"
-name="Campos transportation Us Need"
-parent="mail.mail_feeds"
-sequence="26"
-action="action_webtourusneed" />
+
+<!-- Menu item to open Campos Webtour usNeed list  -->
+<menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="30"/>
+
 </data>
 </openerp>

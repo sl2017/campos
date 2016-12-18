@@ -35,11 +35,9 @@
 name="Camp OS Webtour Registration"
 res_model="event.registration"
 view_mode="tree,form" />
-<!-- Menu item to open Webtour Order list -->
-<menuitem id="menu _webtourregistration"
-name="Campos transportation Registration"
-parent="mail.mail_feeds"
-sequence="32"
-action="action_webtourregistration" />
+
+<!-- Menu item to open Campos Registration list with Webtour details -->
+<menuitem id="menu_action_campos_transportation_registration" parent="menu_campos_transportation" name="Webtour Registrations" action="action_webtourregistration" groups="campos_event.group_campos_admin" sequence="10"/>
+
 </data>
 </openerp>
