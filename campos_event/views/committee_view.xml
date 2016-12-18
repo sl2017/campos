@@ -128,6 +128,7 @@
 							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" domain="[('state', '=', 'approved')]"/>
 							<field name="template_id" />
 							<field name="parent_id" />
+							<field name="main_comm_id" />
 							<field name="committee_type_id"/>
 							<field name="child_ids" />
 							<field name="sequence" groups="campos_event.group_campos_office"/>

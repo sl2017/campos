@@ -173,7 +173,7 @@ class EventParticipant(geo_model.GeoModel):
     staff_del_prod_ids = fields.One2many('campos.staff.del.prod', 'participant_id')
     
     primary_committee_id = fields.Many2one('campos.committee',
-                                           'Have agreement with committee',
+                                           'Primary committee',
                                            track_visibility='onchange',
                                            ondelete='set null')
 
@@ -517,4 +517,8 @@ class EventParticipant(geo_model.GeoModel):
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
     
-    
+    @api.model
+    def init_primary_committee_id(self):
+        for par in self.search([('primary_committee_id', '=', False)]):
+            if par.jobfunc_ids:
+                par.primary_committee_id = par.jobfunc_ids[0].committee_id 
