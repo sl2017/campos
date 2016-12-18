@@ -13,16 +13,22 @@
                 <header>
 						<button string="Send to CO" name="action_confirm"
 							type="object" class="oe_highlight"
-							attrs="{'invisible': ['|', ('birthdate_short', '=', False), '|', ('cpr', '=', False), ('state', '!=', 'draft')]}" />
-						<button string="Requested from CKR" name="action_req_ckr" states="sentin,cancel,timeout"
+							attrs="{'invisible': ['|', ('birthdate_short', '=', False), '|', ('cpr', '=', False), ('state', 'not in', ['draft','needinfo','sent_com'])]}" />
+						<button string="Requested from CKR" name="action_req_ckr" states="sentin,cancel,needinfo"
+							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
+						<button string="Re-Requested from CKR" name="action_re_req_ckr" states="timeout,sent_com"
 							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Approved" name="action_approve" states="ckr_req"
 							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
-						<button string="Rejected" name="action_reject" states="ckr_req,approved,cancel"
+						<button string="Need info" name="action_needinfo" states="ckr_req,re_ckr_req"
 							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
-						<button string="Cancel" name="action_cancel" states="draft,sentin,ckr_req,approved,timeout,rejected"
+						<button string="Rejected" name="action_reject" states="ckr_req,approved,cancel,re_ckr_req"
+							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
+						<button string="Cancel" name="action_cancel" states="draft,sentin,ckr_req,approved,timeout,rejected,re_ckr_req,needinfo"
 							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Req. Expired" name="action_timeout" states="ckr_req"
+							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
+						<button string="Expired/Send to Main Committee" name="action_sent_com" states="re_ckr_req"
 							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<field name="state" widget="statusbar" statusbar_visible="draft,sentin,ckr_req,approved"
 							statusbar_colors='{"rejected":"red","approved":"blue"}' />
@@ -31,6 +37,7 @@
 						<group name="ckr_check_fields">
 							<group name="ckr_check_base">
 								<field name="participant_id" options="{'no_create': True}" attrs="{'readonly': [('state', 'not in', ('draft'))]}" />
+								<field name="main_comm_id" readonly="1"/>
 								<label for="cpr" />
 									<div>
 										<field name="birthdate_short" readonly="1" nolabel="1" style="width: auto;" />-
@@ -84,6 +91,7 @@
             <tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
 				<button name="action_open_participant" string="" type="object" icon="terp-personal" />
 				<field name="participant_id" />
+				<field name="main_comm_id" />
 				<field name="create_date" />
 				<field name="appr_date" />
 				<field name="state" />
@@ -137,7 +145,7 @@
 				<page name="agreements" position="after">
 					<page name="ckr" string="CKR Request" groups="campos_ckr.group_campos_ckr_admin">
 						<field name="ckr_ids" options="{'reload_on_button': true}">
-							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
+							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'" create="0">
 								<field name="create_date" />
 								<field name="state" />
 								<field name="appr_date" />
