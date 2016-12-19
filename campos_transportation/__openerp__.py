@@ -1,7 +1,7 @@
 {
 'name': 'CampOS Transportation Application',
 'description': 'Manage your bus rides.',
-'author': 'Doobi',
+'author': 'Doobi & Darum',
 'depends': ['mail','campos_event'],
 'application': True,
 'data': ['views/webtourparticipant_view.xml',
