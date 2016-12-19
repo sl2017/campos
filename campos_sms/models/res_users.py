@@ -6,6 +6,8 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
     sms_last_sender = fields.Many2one('sms.confirmed_number', string='Last SMS sender number')
+    
+    comm_sms_ids = fields.Many2many('campos.committee', relation='user_org_sms', column1='user_id', column2='organization_id', string='Allowed to send SMS for')
 
     def can_sms_organization(self, organization):
         '''

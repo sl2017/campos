@@ -11,7 +11,7 @@
 				<field name="par_contact_id" position="after">
 					<field name="edit_sms_max_monthly_cost" invisible="1" />
 					<field name="sms_max_monthly_cost" attrs="{'readonly': [('edit_sms_max_monthly_cost', '=', False)]}" />
-					<field name="user_sms_ids" widget="many2many_tags"/>
+					<field name="user_sms_ids" widget="many2many_tags" attrs="{'readonly': [('edit_sms_max_monthly_cost', '=', False)]}"/>
 					<p>A limit of zero will disable SMS sending.</p>
 				</field>
 			</field>

@@ -50,7 +50,7 @@ class part_sms(models.TransientModel):
     @api.model
     def default_get(self, fields):
         result = super(part_sms, self).default_get(fields)
-        result['organization_id'] = False
+        result['organization_id'] = self.env.user.comm_sms_ids[0].id
 
         # Build receivers lists
         model = self.env.context.get('active_model', 'res.partner')
@@ -61,9 +61,7 @@ class part_sms(models.TransientModel):
             for r_id in record_ids:
                 _logger.info('Adding: %d', r_id.id)
                 receivers.add(eval(partner_field, {'object': r_id}).id)
-                # Set paying organization if not set and object has organization_id attribute
-                if not result['organization_id'] and hasattr(r_id, 'organization_id') and self.env.user.can_sms_organization(r_id.organization_id):
-                    result['organization_id'] = r_id.organization_id.id
+                
             result['receiver_ids'] = self.env['res.partner'].sudo().search([('id', 'in', list(receivers))], order='name').ids
         else:
             result['receiver_ids'] = self.env.context.get('active_ids', [])
