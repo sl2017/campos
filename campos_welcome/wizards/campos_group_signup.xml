@@ -40,7 +40,7 @@
 			
 			<field name="res_model">event.registration</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,geoengine</field>
 			<field name="domain">[('scoutgroup','=',True)]</field>
 		</record>
 		
