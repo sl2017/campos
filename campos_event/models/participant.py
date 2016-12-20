@@ -426,11 +426,19 @@ class EventParticipant(geo_model.GeoModel):
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress
-                new_user = self.env['res.users'].sudo().create({'login': par.email,
-                                                         'partner_id': par.partner_id.id,
-                                                         'participant_id' : par.id,
-                                                         # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
-                                                         })
+        
+                old_user = self.env['res.users'].sudo().search([('login', '=', par.email)])
+                if old_user:
+                    old_user.write({'participant_id': par.id,
+                                    'groups_id': [(4, self.env.ref('campos_event.group_campos_staff').id)]
+                                    })
+                    old_user.action_reset_password()
+                else:
+                    new_user = self.env['res.users'].sudo().create({'login': par.email,
+                                                             'partner_id': par.partner_id.id,
+                                                             'participant_id' : par.id,
+                                                             # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
+                                                             })
                 # new_user.with_context({'create_user': True}).action_reset_password()
 
             else:
