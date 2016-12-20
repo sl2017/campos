@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sg_member_sms
+#	* campos_sms
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-04 20:43+0000\n"
-"PO-Revision-Date: 2016-10-04 20:43+0000\n"
+"POT-Creation-Date: 2016-12-20 02:00+0000\n"
+"PO-Revision-Date: 2016-12-20 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,677 +15,259 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/organization.py:58
-#, python-format
-msgid "%s (Remaining SMS budget: %.2f)"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "A code has been sent to your mobile phone by SMS. Please enter the code from the SMS:"
 msgstr ""
 
-#. module: sg_member_sms
-#: sql_constraint:sms.confirmed_number:0
-msgid "A confirmation for this user/number has already been created"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:member.organization:sg_member_sms.view_member_organization_form
+#. module: campos_sms
+#: view:campos.committee:campos_sms.view_member_organization_form
 msgid "A limit of zero will disable SMS sending."
 msgstr ""
 
-#. module: sg_member_sms
-#: selection:sms.config.settings,international_price_adjust_method:0
-#: selection:sms.config.settings,national_price_adjust_method:0
-msgid "Amount surcharge"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "An SMS with a confirm code will be sent to your mobile phone."
 msgstr ""
 
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/smsclient.py:79
-#, python-format
-msgid "An error occured. No paying organization set when sending SMS."
-msgstr ""
-
-#. module: sg_member_sms
-#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+#. module: campos_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
 msgid "Apply"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Are you sure you want to send a confirm code?"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Are you sure you want to send this SMS?"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
-#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
 msgid "Cancel"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_campos_committee
+msgid "Committee"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Confirm"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,confirm_tries:0
-#: field:sms.confirmed_number,confirm_tries:0
-msgid "Confirm Tries left"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:part.sms,confirm_code:0
-#: field:sms.confirmed_number,confirm_code:0
-msgid "Confirm code"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:188
-#: code:addons/sg_member_sms/models/mass_sms.py:200
-#: code:addons/sg_member_sms/models/mass_sms.py:215
-#, python-format
-msgid "Confirm mobile number"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Confirm number"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,confirm_price:0
-msgid "Confirm price"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_sms_confirm_number
-#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_confirm_number
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Confirm sender"
 msgstr ""
 
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:32
-#: selection:sms.confirmed_number,state:0
-#, python-format
-msgid "Confirmed"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_sms_confirmed_numbers
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms_confirmed_numbers
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_confirmed_numbers
+#: model:ir.ui.menu,name:campos_sms.menu_sms_confirmed_numbers
 msgid "Confirmed numbers"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,sender_id:0
-msgid "Confirmed sender numbers"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.master,cost_price:0
-#: field:sms.smsclient.queue,cost_price:0
-msgid "Cost price"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,create_uid:0
-#: field:sms.confirmed_number,create_uid:0
-#: field:sms.master,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,create_date:0
-#: field:sms.confirmed_number,create_date:0
-#: field:sms.master,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Demo mode"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:sms.config.settings,display_name:0
-#: field:sms.confirmed_number,display_name:0
-#: field:sms.master,display_name:0
-msgid "Display Name"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Do you want to send a confirm SMS? (The organization will be charged for one SMS)"
 msgstr ""
 
-#. module: sg_member_sms
-#: selection:sms.confirmed_number,state:0
-msgid "Draft"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:member.organization,edit_sms_max_monthly_cost:0
-msgid "Edit sms max monthly cost"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:84
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:85
-#, python-format
-msgid "Enter this code to confirm your mobile number: %s"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/smsclient.py:131
-#: code:addons/sg_member_sms/models/smsclient.py:134
-#, python-format
-msgid "Error"
-msgstr ""
-
-#. module: sg_member_sms
-#: selection:sms.config.settings,international_price_adjust_method:0
-#: selection:sms.config.settings,national_price_adjust_method:0
-msgid "Fixed sell price"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Gateway"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+#. module: campos_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
 msgid "General Settings"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
 msgid "Group By"
 msgstr ""
 
-#. module: sg_member_sms
-#: help:sms.smsclient.queue,parts:0
-msgid "How many parts the SMS is split into"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,id:0
-#: field:sms.confirmed_number,id:0
-#: field:sms.master,id:0
-msgid "ID"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "If you need a new confirm code, you can request it by clicking this button:"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,include_relatives:0
-msgid "Include relatives"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.master,sms_queue_ids:0
-msgid "Individual messages"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,international_price_adjust:0
-msgid "International adjustment"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,international_cost_price:0
-msgid "International cost price"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,international_price_adjust_method:0
-msgid "International price adjust method"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,international_sell_price:0
-msgid "International sell price"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,__last_update:0
-#: field:sms.confirmed_number,__last_update:0
-#: field:sms.master,__last_update:0
-msgid "Last Modified on"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:res.users,sms_last_sender:0
-msgid "Last SMS sender number"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,write_uid:0
-#: field:sms.confirmed_number,write_uid:0
-#: field:sms.master,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,write_date:0
-#: field:sms.confirmed_number,write_date:0
-#: field:sms.master,write_date:0
-msgid "Last Updated on"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_sms_master
-#: field:sms.smsclient.queue,sms_master_id:0
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_master
 msgid "Master SMS"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:member.organization,sms_max_monthly_cost:0
-msgid "Max monthly SMS cost"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.master,msg:0
-msgid "Message"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:member.organization,mobile_clean:0
-#: field:res.partner,mobile_clean:0
-#: field:res.users,mobile_clean:0
-msgid "Mobile clean"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
 msgid "Month"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:member.organization:sg_member_sms.view_member_organization_sms_tree
+#. module: campos_sms
+#: view:campos.committee:campos_sms.view_member_organization_sms_tree
 msgid "Name"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:sms.config.settings,national_price_adjust:0
-msgid "National adjustment"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,national_cost_price:0
-msgid "National cost price"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,national_prefix:0
-msgid "National prefix"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,national_price_adjust_method:0
-msgid "National price adjust method"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.config.settings,national_sell_price:0
-msgid "National sell price"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:235
-#, python-format
-msgid "No Gateway Found"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:32
-#, python-format
-msgid "Not confirmed"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.confirmed_number,number:0
-msgid "Number"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:part.sms,sender_state:0
-msgid "Number state"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_config_settings.py:62
-#, python-format
-msgid "Only administrator may change these settings"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_member_organization
-#: field:sms.master,organization_id:0
-#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
-#: field:sms.smsclient.queue,organization_id:0
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
 msgid "Organization"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_member_organization_tree_sms
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms_organization_list
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_member_organization_tree_sms
+#: model:ir.ui.menu,name:campos_sms.menu_sms_organization_list
 msgid "Organizations"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_res_partner
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_res_partner
 msgid "Partner"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:sms.smsclient.queue,parts:0
-msgid "Parts"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:part.sms,organization_id:0
-msgid "Paying organization"
-msgstr ""
-
-#. module: sg_member_sms
-#: selection:sms.config.settings,international_price_adjust_method:0
-#: selection:sms.config.settings,national_price_adjust_method:0
-msgid "Percent surcharge"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:231
-#, python-format
-msgid "Please enter a text to send"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:92
-#, python-format
-msgid "Please enter the verification code that was send to your phone by SMS."
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.master,sell_price:0
-#: field:sms.smsclient.queue,sell_price:0
-msgid "Price"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
-#: field:part.sms,receiver_ids:0
-#: field:part.sms,receiver_with_relative_ids:0
-#: field:sms.master,receivers_count:0
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Receivers"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,receivers_foreign_count:0
-msgid "Receivers with a foreign mobile number"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms
+#. module: campos_sms
+#: model:ir.ui.menu,name:campos_sms.menu_sms
 msgid "SMS"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_sms_smsclient
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_smsclient
 msgid "SMS Client"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_smsclient_queue_tree
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms_smsclient_queue_tree
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_smsclient_queue_tree
+#: model:ir.ui.menu,name:campos_sms.menu_sms_smsclient_queue_tree
 msgid "SMS Details"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_sms_master_tree
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms_master_tree
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_master_tree
+#: model:ir.ui.menu,name:campos_sms.menu_sms_master_tree
 msgid "SMS Overview"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_sms_smsclient_queue
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_smsclient_queue
 msgid "SMS Queue"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_sms_settings
-#: model:ir.ui.menu,name:sg_member_sms.menu_sms_configuration
-#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_settings
+#: model:ir.ui.menu,name:campos_sms.menu_sms_configuration
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
 msgid "SMS Settings"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,sms_allowed:0
-msgid "SMS allowed"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:member.organization,sms_amount_current_month:0
-msgid "SMS amount current month"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:res.groups,name:sg_member_sms.group_sgsms_organization_admin
+#. module: campos_sms
+#: model:res.groups,name:campos_sms.group_sgsms_organization_admin
 msgid "SMS organization admin"
 msgstr ""
 
-#. module: sg_member_sms
-#: model:res.groups,name:sg_member_sms.group_sgsms_send
+#. module: campos_sms
+#: model:res.groups,name:campos_sms.group_sgsms_send
 msgid "SMS send"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "SMS text"
 msgstr ""
 
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:77
-#, python-format
-msgid "SMSservice"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:87
-#: code:addons/sg_member_sms/models/mass_sms.py:151
-#: code:addons/sg_member_sms/models/mass_sms.py:170
-#: model:ir.actions.act_window,name:sg_member_sms.action_function_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_member_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_membership_sms
-#: model:ir.actions.act_window,name:sg_member_sms.action_profile_sms
-#: view:part.sms:sg_member_sms.view_part_sms
-#, python-format
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_function_sms
+#: model:ir.actions.act_window,name:campos_sms.action_participant_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Send SMS"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Send a new confirm code"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Send code"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Send confirm code"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,sender_text:0
-#: field:sms.master,sender_text:0
-#: field:sms.smsclient.queue,sender_text:0
-msgid "Sender"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:part.sms,sender_is_number:0
-msgid "Sender is number"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
 msgid "Sent"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:sms.confirmed_number,state:0
-msgid "State"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/smsclient.py:99
-#, python-format
-msgid "The SMS could not be sent because it would exceed the SMS budget for %s."
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:105
-#, python-format
-msgid "The code was not entered correct. Please note that the code contains only letters (no digits)."
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:97
-#, python-format
-msgid "The confirmation code has expired, because you have tried more than %d times. You may request a new code and try again."
-msgstr ""
-
-#. module: sg_member_sms
-#: help:member.organization,sms_max_monthly_cost:0
-msgid "The maximum total amount that all users can spend sending SMS in this organization"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "The price for sending a confirm code by SMS is"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "The sender of the SMS can either be a short text (10 letters - no numbers) or your own mobile number."
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "This database does not allow SMS sending. All created messages will automatically be cancelled."
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,total_price:0
-msgid "Total price"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Total price:"
 msgstr ""
 
-#. module: sg_member_sms
-#: field:part.sms,receivers_count:0
-msgid "Total receivers with a valid mobile number"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_config_settings.py:30
-#, python-format
-msgid "Unknown price adjustment method: %s"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:sms.confirmed_number,user_id:0
-msgid "User"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:part.sms,user_has_confirmed_numbers:0
-msgid "User has confirmed numbers"
-msgstr ""
-
-#. module: sg_member_sms
-#: field:member.organization,user_sms_ids:0
-msgid "User sms ids"
-msgstr ""
-
-#. module: sg_member_sms
-#: model:ir.model,name:sg_member_sms.model_res_users
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_res_users
 msgid "Users"
 msgstr ""
 
-#. module: sg_member_sms
-#: selection:sms.confirmed_number,state:0
-msgid "Waiting"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:132
-#, python-format
-msgid "When sender is a text string, it cannot be more than %d chars."
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/mass_sms.py:138
-#, python-format
-msgid "You are not allowed to send SMSs charged to %s"
-msgstr ""
-
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/smsclient.py:81
-#, python-format
-msgid "You do not have access to send SMS for %s"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "You have"
 msgstr ""
 
-#. module: sg_member_sms
-#: code:addons/sg_member_sms/models/sms_confirmed_number.py:72
-#, python-format
-msgid "You have already confirmed the number %s"
-msgstr ""
-
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "You must confirm that you own the number before you can use it as sender."
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "Your confirm code has expired, because you have tried too many times."
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
-#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
 msgid "or"
 msgstr ""
 
-#. module: sg_member_sms
-#: view:part.sms:sg_member_sms.view_part_sms
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
 msgid "tries left."
 msgstr ""
 
