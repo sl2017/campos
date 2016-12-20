@@ -30,6 +30,13 @@ class Preregistration(models.Model):
     friendship_group_home_hospitality = fields.Boolean('Would like to offer home hospitality?')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
+    pre_reg_cnt = fields.Integer('Pre Reg #', _compute='_compute_pre_req_cnt')
+    
+    #@api.depends('participant_ids.participant_total')
+    @api.multi
+    def _compute_pre_req_cnt(self):
+        for record in self:
+            record.pre_reg_cnt = sum(line.participant_total for line in record.participant_ids)
     
     @api.one
     def cancel_registration (self):

@@ -207,6 +207,7 @@
                   <field name="participant_own_transport_type"  options="{'no_create': True}"/>
                 </tree>
               </field>
+              <field name="pre_reg_cnt"/>
 							<notebook colspan="2">
 								<page string="Pionering poles">
 									<group>
