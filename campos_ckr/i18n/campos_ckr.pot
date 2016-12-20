@@ -6,14 +6,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 02:00+0000\n"
-"PO-Revision-Date: 2016-12-06 02:00+0000\n"
+"POT-Creation-Date: 2016-12-20 02:00+0000\n"
+"PO-Revision-Date: 2016-12-20 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: campos_ckr
+#: model:email.template,body_html:campos_ckr.template_ckr_action_required_mail
+msgid "\n"
+"                <h2>Dear ${object.main_comm_id.name},</h2>\n"
+"                We have several times tried to get ${object.participant_id.name} to response to our CKR request.\n"
+"                Please take contact to your member and....\n"
+"                \n"
+"            "
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,body_html:campos_ckr.template_ckr_info_needed_mail
+msgid "\n"
+"                <h2>Dear ${object.participant_id.name},</h2>\n"
+"                The following info is missing/wrong in your request:<br/>\n"
+"                 * Name<br/>\n"
+"                 * CPR<br/>\n"
+"                Please log in to CampOS and update these\n"
+"                \n"
+"            "
+msgstr ""
 
 #. module: campos_ckr
 #: model:email.template,body_html:campos_ckr.template_ckr_approved
@@ -42,6 +64,16 @@ msgstr ""
 #: model:email.template,subject:campos_ckr.template_ckr_ckr_req
 #: model:email.template,subject:campos_ckr.template_ckr_draft
 msgid "${object.message_id.subject|safe}"
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,subject:campos_ckr.template_ckr_action_required_mail
+msgid "Action required!"
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,subject:campos_ckr.template_ckr_info_needed_mail
+msgid "Additional info neede for CKR Attest"
 msgstr ""
 
 #. module: campos_ckr
@@ -131,6 +163,16 @@ msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
+msgid "Expired"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Expired/Send to Main Committee"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
 msgid "In Process"
 msgstr ""
 
@@ -140,8 +182,18 @@ msgid "Mark as Requested"
 msgstr ""
 
 #. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Need info"
+msgstr ""
+
+#. module: campos_ckr
 #: model:ir.model,name:campos_ckr.model_mail_notification
 msgid "Notifications"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Re-Requested from CKR"
 msgstr ""
 
 #. module: campos_ckr
