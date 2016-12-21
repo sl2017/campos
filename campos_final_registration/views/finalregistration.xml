@@ -6,14 +6,64 @@
 				<field name="name">Pioneering Pole Depot Tree</field>
 				<field name="model">event.registration.pioneeringpoledepot</field>
 				<field name="arch" type="xml">
-					<tree>
+					<tree editable="bottom">
 						<field name="name"/>
 					</tree>
 				</field>
 			</record> 		
 
+			<record id="view_tree_event_registration_needs" model="ir.ui.view">
+				<field name="name">Special Needs</field>
+				<field name="model">event.registration.need</field>
+				<field name="arch" type="xml">
+					<tree editable="bottom">
+						<field name="name"/>
+					</tree>
+				</field>
+			</record> 		
 
-		<!-- Final Registration for admin-->
+			<record id="view_tree_event_days" model="ir.ui.view">
+				<field name="name">Event  Days</field>
+				<field name="model">event.day</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="event_id" string="Event"/>
+						<field name="event_date"/>
+<!--						<field name="create_date"/>-->
+					</tree>
+				</field>
+			</record> 	
+			
+			<record id="view_tree_event_participant_days" model="ir.ui.view">
+				<field name="name">Participant Camp Days</field>
+				<field name="model">campos.event.participant.day</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="participant_id"/>
+						<field name="registration_id_stored"/>
+						<field name="the_date"/>
+						<field name="will_participate"/>
+<!--						<field name="create_date"/>-->
+					</tree>
+				</field>
+			</record> 	
+
+			<!--
+			<record id="view_tree_event_participant" model="ir.ui.view">
+				<field name="name">Event Participant</field>
+				<field name="model">campos.event.participant</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="participant_id"/>
+						<field name="day_id"/>
+						<field name="will_participate"/>
+						<field name="create_date"/>
+					</tree>
+				</field>
+			</record> 	
+-->
+
+			<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
 			<field name="name">Final Registration Form Admin</field>
 			<field name="model">event.registration</field>
@@ -52,18 +102,28 @@
 									<field name="friendship_group_id"  options="{'no_create': True}"/>
 								</tree>
 							</field>
-							<field colspan="3" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants">
+
+							<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants">
 								<tree editable="bottom">
 									<field name="partner_id"  options="{'no_create': True}" string="Name"/>
-									<field name="has_allergy_gluten" string="Gluten Allergy"/>
-									<field name="has_allergy_milk" string="Milk Allergy"/>
 									<field name="own_transport_to_camp"/>
 									<field name="own_transport_from_camp"/>
 									<field name="reside_other_group_id"/>
 									<field name="reside_in_caravan" string="Caravan"/>
 									<field name="access_token_id" string="Access Token Id"/>
+									<button name="create_participant_days" type="object" string="Create Days" />
 								</tree>
 							</field>
+							
+							<field colspan="5" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
+								<tree editable="bottom">
+									<field name="need_id"  options="{'no_create': True}" string="Need"/>
+									<field name="need_count"  options="{'no_create': True}"/>
+								</tree>
+							</field>
+					
+						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1" />
+
 							<notebook colspan="2">
 								<page string="Handicaped participants">
 									<group>
@@ -132,6 +192,28 @@
 			</field>
 		</record>
 		
+		
+		<!-- Add to Event view -->
+		<record id="view_event_form" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit2</field>
+			<field name="model">event.event</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_event.view_event_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//notebook" position="inside">
+					<page string="Event Days">
+						<field name="event_day_ids" colspan="1" nolabel="1">
+							<tree>
+<!--                <field name="event_id"/>-->
+                <field name="event_date"/>
+           		</tree>
+           	</field>
+          </page>
+        </xpath>
+			</field>	
+		</record>
+		
+		
 		<!-- Menu Actions -->
 		<act_window id="action_event_finalregistration_tree"
 		name="Event Final Registration Tree"
@@ -144,6 +226,21 @@
 		res_model="event.registration.pioneeringpoledepot"
 		view_mode="tree,form" />
 		
+		<act_window id="action_event_registration_needs"
+		name="Special Needs"
+		res_model="event.registration.need"
+		view_mode="tree,form" />
+		
+		<act_window id="action_event_days"
+		name="Event Days"
+		res_model="event.day"
+		view_mode="tree,form" />
+
+		<act_window id="action_participant_days"
+		name="Participant Days"
+		res_model="campos.event.participant.day"
+		view_mode="tree,form" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
@@ -152,5 +249,13 @@
 		<menuitem id="menu_action_event_finalregistration_tree" parent="menu_event_finalregistration" name="Final Registration" action="action_event_finalregistration_tree" groups="campos_event.group_campos_admin" sequence="20"/>
 		
 		<menuitem id="menu_action_finalregistration_menu_pioneeringpoledepot" parent="menu_event_finalregistration" name="Pioneering Pole Depots" action="action_event_registration_pioneeringpoledepot" groups="campos_event.group_campos_admin" sequence="30" />
-		</data>
+
+		<menuitem id="menu_action_finalregistration_menu_event_days" parent="menu_event_finalregistration" name="Event Days" action="action_event_days" groups="campos_event.group_campos_admin" sequence="40" />
+
+		<menuitem id="menu_action_finalregistration_menu_participant_days" parent="menu_event_finalregistration" name="Participant Days" action="action_participant_days" groups="campos_event.group_campos_admin" sequence="50" />
+
+		<menuitem id="menu_action_finalregistration_menu_needs" parent="menu_event_finalregistration" name="Special Needs" action="action_event_registration_needs" groups="campos_event.group_campos_admin" sequence="60" />
+
+
+	</data>
 </openerp>
