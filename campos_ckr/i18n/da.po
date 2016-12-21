@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-01 14:55+0000\n"
-"PO-Revision-Date: 2016-12-01 14:55+0000\n"
+"POT-Creation-Date: 2016-12-21 17:08+0000\n"
+"PO-Revision-Date: 2016-12-21 17:08+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_ckr
+#: model:email.template,body_html:campos_ckr.template_ckr_action_required_mail
+msgid ""
+"\n"
+"                <h2>Dear ${object.main_comm_id.name},</h2>\n"
+"                We have several times tried to get ${object.participant_id.name} to response to our CKR request.\n"
+"                Please take contact to your member and....\n"
+"                \n"
+"            "
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,body_html:campos_ckr.template_ckr_info_needed_mail
+msgid ""
+"\n"
+"                <h2>Dear ${object.participant_id.name},</h2>\n"
+"                The following info is missing/wrong in your request:<br/>\n"
+"                 * Name<br/>\n"
+"                 * CPR<br/>\n"
+"                Please log in to CampOS and update these\n"
+"                \n"
+"            "
+msgstr ""
 
 #. module: campos_ckr
 #: model:email.template,body_html:campos_ckr.template_ckr_approved
@@ -47,6 +71,16 @@ msgstr ""
 #: model:email.template,subject:campos_ckr.template_ckr_ckr_req
 #: model:email.template,subject:campos_ckr.template_ckr_draft
 msgid "${object.message_id.subject|safe}"
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,subject:campos_ckr.template_ckr_action_required_mail
+msgid "Action required!"
+msgstr ""
+
+#. module: campos_ckr
+#: model:email.template,subject:campos_ckr.template_ckr_info_needed_mail
+msgid "Additional info neede for CKR Attest"
 msgstr ""
 
 #. module: campos_ckr
@@ -220,6 +254,16 @@ msgid "Event Participant"
 msgstr ""
 
 #. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
+msgid "Expired"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Expired/Send to Main Committee"
+msgstr ""
+
+#. module: campos_ckr
 #: field:campos.ckr.check,message_follower_ids:0
 msgid "Followers"
 msgstr ""
@@ -246,6 +290,11 @@ msgstr ""
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
 msgid "In Process"
 msgstr "Under behandling hos politiet"
+
+#. module: campos_ckr
+#: selection:campos.ckr.check,state:0
+msgid "Info Needed"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_is_follower:0
@@ -282,6 +331,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_ckr
+#: field:campos.ckr.check,main_comm_id:0
+msgid "Main Committee"
+msgstr ""
+
+#. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
 msgid "Mark as Requested"
 msgstr "Marker som afsendt til Politiet"
@@ -307,6 +361,16 @@ msgid "Name"
 msgstr "Navn"
 
 #. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Need info"
+msgstr ""
+
+#. module: campos_ckr
+#: model:ir.model,name:campos_ckr.model_mail_notification
+msgid "Notifications"
+msgstr ""
+
+#. module: campos_ckr
 #: field:campos.ckr.check,participant_id:0
 msgid "Participant"
 msgstr "Deltager"
@@ -314,6 +378,16 @@ msgstr "Deltager"
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,participant_id:0
 msgid "Participant id"
+msgstr ""
+
+#. module: campos_ckr
+#: selection:campos.ckr.check,state:0
+msgid "Re-Requested"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
+msgid "Re-Requested from CKR"
 msgstr ""
 
 #. module: campos_ckr
@@ -328,7 +402,7 @@ msgid "Req. Expired"
 msgstr "Anmodning om børneattest er udløbet"
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:136
+#: code:addons/campos_ckr/models/campos_ckr_check.py:156
 #, python-format
 msgid "Request"
 msgstr "Anmodning"
@@ -342,6 +416,12 @@ msgid "Request CKR"
 msgstr "Anmodning om børneattest"
 
 #. module: campos_ckr
+#: code:addons/campos_ckr/models/campos_ckr_check.py:106
+#, python-format
+msgid "Request action from Main Committee"
+msgstr ""
+
+#. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Requested"
 msgstr "Under behandling hos politiet"
@@ -352,6 +432,12 @@ msgid "Requested from CKR"
 msgstr "Anmodning om børneattest"
 
 #. module: campos_ckr
+#: code:addons/campos_ckr/models/campos_ckr_check.py:100
+#, python-format
+msgid "Send mail asking for additional info"
+msgstr ""
+
+#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Send to CO"
 msgstr "Send til SL2017 sekretariat"
@@ -360,6 +446,11 @@ msgstr "Send til SL2017 sekretariat"
 #: selection:campos.ckr.check,state:0
 msgid "Sent to CO"
 msgstr "Sendt til SL2017 sekretariatet"
+
+#. module: campos_ckr
+#: selection:campos.ckr.check,state:0
+msgid "Sent to Main Committee"
+msgstr ""
 
 #. module: campos_ckr
 #: model:ir.actions.server,name:campos_ckr.action_participant_cpr_list
@@ -393,7 +484,7 @@ msgid "To Request at Central office"
 msgstr "Ikke fremsendte børneattester"
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:177
+#: code:addons/campos_ckr/models/campos_ckr_check.py:197
 #, python-format
 msgid "Unknown"
 msgstr "ukendt"

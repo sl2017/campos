@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 21:39+0000\n"
-"PO-Revision-Date: 2016-11-29 21:39+0000\n"
+"POT-Creation-Date: 2016-12-21 17:08+0000\n"
+"PO-Revision-Date: 2016-12-21 17:08+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -385,7 +385,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:378
+#: code:addons/campos_event/models/participant.py:383
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -751,8 +751,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:325
-#: code:addons/campos_event/models/participant.py:352
+#: code:addons/campos_event/models/participant.py:330
+#: code:addons/campos_event/models/participant.py:357
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1441,6 +1441,21 @@ msgid "Job tags"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_job_title_tree
+msgid "Job title"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.event_committee_job_title_menu
+msgid "Job titles"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.committee.job.title:campos_event.campos_committee_job_title_tree
+msgid "Job type"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_job_when
 msgid "Job when"
 msgstr ""
@@ -1607,7 +1622,7 @@ msgid "Mail list"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.committee,parent_id:0
+#: field:campos.committee,main_comm_id:0
 msgid "Main Committee"
 msgstr ""
 
@@ -1905,6 +1920,11 @@ msgid "Parent Category"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee,parent_id:0
+msgid "Parent Committee"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,parent_left:0
 msgid "Parent Left"
 msgstr ""
@@ -1925,7 +1945,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:512
+#: code:addons/campos_event/models/participant.py:525
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2020,6 +2040,11 @@ msgstr ""
 #: code:addons/campos_event/controllers/website_event.py:280
 #, python-format
 msgid "Preregistration for Danish Groups"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,primary_committee_id:0
+msgid "Primary committee"
 msgstr ""
 
 #. module: campos_event
@@ -2172,7 +2197,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:400
+#: code:addons/campos_event/models/participant.py:405
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2371,7 +2396,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:297
+#: code:addons/campos_event/models/participant.py:302
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
