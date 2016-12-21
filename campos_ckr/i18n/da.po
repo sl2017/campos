@@ -185,7 +185,7 @@ msgstr "Oprettet af"
 #: field:campos.ckr.fetch.wiz,create_date:0
 #: field:campos.ckr.sentin.wiz,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Oprette den"
 
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,birthdate:0
@@ -267,7 +267,7 @@ msgstr "Sidst ændret d."
 #. module: campos_ckr
 #: field:campos.ckr.check,date_last_state_update:0
 msgid "Last State change"
-msgstr ""
+msgstr "Dato for sidste ændring i status"
 
 #. module: campos_ckr
 #: field:campos.ckr.check,write_uid:0 field:campos.ckr.fetch.wiz,write_uid:0
@@ -369,7 +369,7 @@ msgstr "Vis liste over CPR-numre"
 #. module: campos_ckr
 #: field:campos.ckr.check,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_summary:0
@@ -444,9 +444,8 @@ msgid ""
 "Your CKR request will be processed and you can expect a message in E-Boks "
 "soon."
 msgstr ""
-"Din børneattest-ansøgning er nu afsendt, og du kan forvente en mail i din "
-"E-boks fra rigspolitiet. Vær opmærksom på, at du har 14 dage til at svare på"
-" denne mail ellers bliver den ugyldig, og der skal ansøges igen. "
+"Din børneattest-ansøgning er nu afsendt, og du vil modtage en besked i  E-BOKS FRA RIGSPOLITIET. \n"
+"Du skal inden 14 dage godkende børneattest ansøgningen."
 
 #. module: campos_ckr
 #: view:campos.ckr.fetch.wiz:campos_ckr.campos_ckr_fetch_wiz_form_view

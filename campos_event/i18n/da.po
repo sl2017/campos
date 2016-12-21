@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-01 14:55+0000\n"
-"PO-Revision-Date: 2016-12-01 14:59+0000\n"
+"PO-Revision-Date: 2016-12-07 17:10+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -829,7 +829,7 @@ msgstr ""
 #: field:campos.event.participant,child_ids:0
 #: view:campos.subcamp:campos_event.campos_subcamp_form_view
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakter"
 
 #. module: campos_event
 #: view:website:campos_event.jobber_job_ask_thankyou

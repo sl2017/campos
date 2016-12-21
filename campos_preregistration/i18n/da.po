@@ -158,7 +158,7 @@ msgstr ""
 #. module: campos_preregistration
 #: model:ir.ui.menu,name:campos_preregistration.menu_action_preregistration_menu_entryexitpoint
 msgid "Entry/exit Points"
-msgstr ""
+msgstr "Ankomst/afrejse steder"
 
 #. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
