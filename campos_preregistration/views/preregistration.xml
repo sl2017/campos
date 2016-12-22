@@ -388,5 +388,14 @@
             <field name="attribute_field_id" ref="campos_preregistration.field_event_registration_pre_reg_cnt"/>
             <field name="begin_color">#4B69FD</field>
         </record>
+        
+        <record id="geoengine_vector_layer_basictest0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="campos_event.field_campos_municipality_the_geom"/>
+            <field name="name">Municipality</field>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field name="geo_repr">basic</field>
+            <field name="attribute_field_id" ref="campos_event.field_campos_municipality_name"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
         </data>
 </openerp>
