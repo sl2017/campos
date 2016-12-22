@@ -8,8 +8,12 @@
             groups="campos_event.group_campos_staff"
             sequence="45"/>
             
-            
-            
+	<!-- Signup -->
+        <menuitem name="Events" id="menu_campos_signup" parent="menu_campos" sequence="5"/>    
+        <menuitem action="action_event_participants_staff_tree" id="event_participants_staff_tree_menu"
+				name="My signup" sequence="50" parent="menu_campos_signup"
+				groups="campos_event.group_campos_staff,campos_event.group_campos_committee" />
+	        
         <!-- Events menu items -->
         <menuitem name="Events" id="menu_campos_event" parent="menu_campos" sequence="10"/>
         	
@@ -34,10 +38,7 @@
 				groups="campos_event.group_campos_manager,campos_event.group_campos_manager" />
 	    
 	    
-	    	<menuitem action="action_event_participants_staff_tree" id="event_participants_staff_tree_menu"
-				name="My signup" sequence="50" parent="menu_campos_event"
-				groups="campos_event.group_campos_staff" />
-	    
+	    	
 	    <!-- Committee menu items -->
         <menuitem name="Committees" id="menu_campos_comittee" parent="menu_campos" sequence="40" groups="campos_event.group_campos_manager,campos_event.group_campos_committee"/>
 			
