@@ -88,7 +88,7 @@
         <field name="name">campos.ckr.check.tree (in campos_ckr)</field>
         <field name="model">campos.ckr.check</field>
         <field name="arch" type="xml">
-            <tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'">
+            <tree colors="gray:state=='draft';blue:state=='sentin';green:state in ('ckr_req','ckr_re_req');red:state=='rejected'">
 				<button name="action_open_participant" string="" type="object" icon="terp-personal" />
 				<field name="participant_id" />
 				<field name="main_comm_id" />
@@ -145,7 +145,7 @@
 				<page name="agreements" position="after">
 					<page name="ckr" string="CKR Request" groups="campos_ckr.group_campos_ckr_admin">
 						<field name="ckr_ids" options="{'reload_on_button': true}">
-							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req';red:state=='rejected'" create="0">
+							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req,ckr_re_req';red:state=='rejected'" create="0">
 								<field name="create_date" />
 								<field name="state" />
 								<field name="appr_date" />

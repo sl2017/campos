@@ -61,7 +61,7 @@ class CamposCkrCheck(models.Model):
         Check if all parameters are set, and if so update state from draft to sentin
         '''
         for ckr in self:
-            if ckr.participant_id.birthdate and ckr.cpr and ckr.state in ['draft', 'needinfo']:
+            if ckr.participant_id.birthdate and ckr.cpr and ckr.state in ['draft', 'needinfo','sent_com']:
                 ckr.state = 'sentin'
 
     @api.multi

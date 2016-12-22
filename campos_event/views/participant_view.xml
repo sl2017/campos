@@ -138,7 +138,7 @@
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
-                            <field name="birthdate" string="Fødselsdato" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+                            <field name="birthdate" string="Fødselsdato" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
                             <field name="phone" placeholder="e.g. +45 12 34 56 78"/>
                             <field name="mobile"/>
                             <field name="skype"/>
