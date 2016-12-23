@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-21 17:08+0000\n"
-"PO-Revision-Date: 2016-12-21 17:08+0000\n"
+"POT-Creation-Date: 2016-12-22 20:08+0000\n"
+"PO-Revision-Date: 2016-12-22 20:08+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -461,7 +461,7 @@ msgstr "Postnummer"
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
 msgid "Birthdate"
-msgstr "Fødselsdag"
+msgstr "Fødselsdag dd/mm/åååå"
 
 #. module: campos_event
 #: field:campos.event.participant,birthdate_short:0
@@ -928,7 +928,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,birthdate:0
 msgid "Date of birth"
-msgstr "Fødselsdag"
+msgstr "Fødselsdag dd/mm/åååå"
 
 #. module: campos_event
 #: help:campos.committee,message_last_post:0
@@ -1113,6 +1113,7 @@ msgstr "Forhåndstilmelding"
 #: model:ir.ui.menu,name:campos_event.menu_campos_config_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_event_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_signup
 msgid "Events"
 msgstr "Arrangementer"
 
@@ -3130,6 +3131,11 @@ msgstr "col-sm-8"
 #: field:campos.event.participant,complete_contact:0
 #: field:res.partner,complete_contact:0 field:res.users,complete_contact:0
 msgid "contact"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "dd/mm/åååå"
 msgstr ""
 
 #. module: campos_event
