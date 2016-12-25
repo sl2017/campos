@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 #HIDEfrom email import _name
 #HIDEfrom campos_event.models import participant
 class FinalRegistration(models.Model):
@@ -21,13 +21,16 @@ class FinalRegistration(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Char('Need desription')
     other_need_update_date = fields.Date('Need updated') 
-    @api.depends ('child_certificates_accept')
-    @api.one
+    @api.onchange('child_certificates_accept')
     def _child_certificates_accept_checked (self):
-        for record in self:
-            record.child_certificates_date = fields.Date.to_string(fields.Date.today())
-            record.child_certificates_user = 'test'
-#            if (self.child_certificates_accept == 'True'):
+        if (self.child_certificates_accept == True):
+            self.child_certificates_user = self.env.user.name
+            self.child_certificates_date = fields.Date.today()
+        else:
+            self.child_certificates_user = ''
+            self.child_certificates_date = ''
+        
+#        self.child_certificates_date = fields.Date.to_string(fields.Date.today())
     
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
     @api.depends ('subcamp_id','camp_area_id')
@@ -121,6 +124,6 @@ class RegistrationNeeds(models.Model):
     registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
     need_id = fields.Many2one('event.registration.need','Need', required=True)
     need_count = fields.Integer('Count', required=True)
-    _sql_constraints = [('need_id_unique_on_registration', 'unique(registration_id,need_id)', 'Each need can only be added once')]
+    _sql_constraints = [('need_id_unique_on_registration', 'unique(registration_id,need_id)', _('Each need can only be added once'))]
     
     
