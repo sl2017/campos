@@ -18,6 +18,9 @@ class FinalRegistration(models.Model):
 #    participants_camp_day_ids = fields.One2many(related='participant_ids.camp_day_ids', string='Participant Camp Days')
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
     need_ids = fields.One2many('event.registration.needlist','registration_id','Special needs')
+    other_need = fields.Boolean('Other special need(s)')
+    other_need_description = fields.Char('Need desription')
+    other_need_update_date = fields.Date('Need updated') 
     @api.depends ('child_certificates_accept')
     @api.one
     def _child_certificates_accept_checked (self):

@@ -81,7 +81,7 @@
 						<field name="state" widget="statusbar" statusbar_visible="draft,open,done,cancel" statusbar_colors="{'cancel':'red'}"/>
 					</header>
 					<sheet>
-						<group name="sheet">
+						<group name="sheet" colspan="5">
 							<field name="event_id" string="Event"  options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
 							<field name="organization_id" options="{'no_create': True}"/>
@@ -115,14 +115,27 @@
 								</tree>
 							</field>
 							
-							<field colspan="5" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
+							<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
 								<tree editable="bottom">
 									<field name="need_id"  options="{'no_create': True}" string="Need"/>
 									<field name="need_count"  options="{'no_create': True}"/>
 								</tree>
 							</field>
 					
-						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1" />
+							<group name="otherneeds"  colspan="5" col="3">
+									<group>
+									<field name="other_need"/>
+									</group>
+									<group>
+									<field name="other_need_description"/>
+									</group>
+									<group>
+									<field name="other_need_update_date"/>
+									</group>
+							</group>
+
+					
+						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>
 
 							<notebook colspan="2">
 								<page string="Handicaped participants">
