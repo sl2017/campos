@@ -92,8 +92,8 @@
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}"/>
 							<field name="total_price" readonly="1"/>
 							<field name="child_certificates_accept"/>
-							<field name="child_certificates_date"/>
-							<field name="child_certificates_user"/>
+							<field name="child_certificates_date" readonly="1"/>
+							<field name="child_certificates_user" readonly="1"/>
 							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
 							<field name="group_country_code2" string="*midlertidig landekode*"/>
 							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
