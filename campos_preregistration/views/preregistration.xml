@@ -271,6 +271,7 @@
 						<field name="partner_id" string="Scout group"/>
 						<field name="event_id"/>
 						<field name="state"/>
+						<field name="pre_reg_cnt"/>
 						<field name="contact_partner_id" string="Contact Person"/>
 					</tree>
 				</field>

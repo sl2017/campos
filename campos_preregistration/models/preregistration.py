@@ -25,7 +25,7 @@ class Preregistration(geo_model.GeoModel):
 #    group_country_code = fields.Char(related='group_country.code', string='Country Code', readonly=True)
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
 #    association_groupid = fields.Char('Groups id (number) at local association')
-    prereg_participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
+    prereg_participant_ids = fields.One2many('event.registration.participants','registration_id','Participants', store=True)
     pioneeringpole_ids = fields.One2many('event.registration.polelist','registration_id','Pioneering Poles')
     handicap = fields.Boolean('Participant(s) with handicap or other special considerations?')
     handicap_description = fields.Text('Description of handicap / special considerations')
@@ -40,7 +40,8 @@ class Preregistration(geo_model.GeoModel):
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
     pre_reg_cnt = fields.Integer('Pre Reg #', compute='_compute_pre_req_cnt')
     geo_point = geo_fields.GeoPoint(related='partner_id.geo_point')
-    #@api.depends('participant_ids.participant_total')
+    
+    @api.depends('prereg_participant_ids.participant_total')
     @api.multi
     def _compute_pre_req_cnt(self):
         for record in self:
