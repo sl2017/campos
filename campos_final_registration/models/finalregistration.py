@@ -57,14 +57,34 @@ class FinalRegistrationParticipant(models.Model):
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with this group')
     reside_in_caravan =fields.Char('Resides in caravan?!?!')
     access_token_id = fields.Char('Id of Access Token')
-    @api.multi
-    def create_participant_days(self):
-        for day in self.registration_id.event_id.event_day_ids:
-            new = self.env['campos.event.participant.day'].create({'participant_id': self.id,
+#    @api.multi
+#    def create_participant_days(self):
+#        self.email='test2'
+#        for day in self.registration_id.event_id.event_day_ids:
+#            new = self.env['campos.event.participant.day'].create({'participant_id': self.id,
+#                                                         'day_id': day.id,
+#                                                         'will_participate' : False
+#                                                         })
+    @api.model
+    def create(self, vals):
+        par = super(FinalRegistrationParticipant, self).create(vals)
+#        self.create_participant_days(par)
+        for day in par.registration_id.event_id.event_day_ids:
+            new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
                                                          'day_id': day.id,
                                                          'will_participate' : False
                                                          })
-    
+        return par
+
+    @api.multi
+    def check_all_days(self):
+        for record in self.camp_day_ids:
+            record.will_participate = True
+            
+    @api.multi
+    def uncheck_all_days(self):
+        for record in self.camp_day_ids:
+            record.will_participate = False
 #    def _default_participant_days(self):
 #        days = self.registration_id.event_days
 #        return [(id,d.id,False) for d in days]
