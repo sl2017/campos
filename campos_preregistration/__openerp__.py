@@ -29,7 +29,6 @@
              'security/campos_preregistration_security.xml',
              'security/ir.model.access.csv',
              'security/ir.rule.csv',
-             'ir.model.access.csv',
              ],
     # only loaded in demonstration mode
     'demo': [ ],
