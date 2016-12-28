@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="event_registration_form_view">
+        <field name="name">event.registration.form (in campos_welcome)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_preregistration.view_form_preregistration_gl"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+            	<field name="id"/>
+            	<button string="Import Members" type="action" name="%(campos_import_member_wiz_act_window)d" context="{'default_registration_id': id}" />
+            
+            </field>
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>
