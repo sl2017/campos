@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from openerp.addons.base_geoengine import geo_model
+from openerp.addons.base_geoengine import fields as geo_fields
+
 from openerp import models, fields, api, exceptions, _
-class Preregistration(models.Model):
+import logging
+_logger = logging.getLogger(__name__)
+
+
+class Preregistration(geo_model.GeoModel):
+ 
     '''
     Pre-registration for a scout group to an event
     '''
@@ -30,6 +38,15 @@ class Preregistration(models.Model):
     friendship_group_home_hospitality = fields.Boolean('Would like to offer home hospitality?')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
+    pre_reg_cnt = fields.Integer('Pre Reg #', compute='_compute_pre_req_cnt')
+    geo_point = geo_fields.GeoPoint(related='partner_id.geo_point')
+    
+    @api.depends('prereg_participant_ids.participant_total')
+    @api.multi
+    def _compute_pre_req_cnt(self):
+        for record in self:
+            record.pre_reg_cnt = sum(line.participant_total for line in record.prereg_participant_ids)
+    
     
     @api.one
     def cancel_registration (self):

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+	<!-- Set group_ids on limited config parameters -->
+	<data noupdate="1">
+		<record model="ir.config_parameter" id="sms_national_cost_price">
+			<field name="key">sms_national_cost_price</field>
+			<field name="value">0.25</field>
+			<field name="group_ids" eval="[(4, ref('base.group_no_one'))]" />
+		</record>
+		<record model="ir.config_parameter" id="sms_international_cost_price">
+			<field name="key">sms_international_cost_price</field>
+			<field name="value">1.00</field>
+			<field name="group_ids" eval="[(4, ref('base.group_no_one'))]" />
+		</record>
+		<record model="ir.config_parameter" id="sms_national_prefix">
+			<field name="key">sms_national_prefix</field>
+			<field name="value">+45</field>
+		</record>
+	</data>
+
+	<data>
+		<record model="sms.smsclient" id="default_sms_client">
+			<field name="name">Default SMS gateway</field>
+			<field name="url">config</field>
+			<field name="char_limit" eval="False" />
+		</record>
+		<record model="sms.smsclient.parms" id="sender_parm">
+			<field name="gateway_id" ref="campos_sms.default_sms_client" />
+			<field name="type">sender</field>
+			<field name="name">id</field>
+		</record>
+		<record model="sms.smsclient.parms" id="to_parm">
+			<field name="gateway_id" ref="campos_sms.default_sms_client" />
+			<field name="type">to</field>
+			<field name="name">til</field>
+		</record>
+		<record model="sms.smsclient.parms" id="msg_parm">
+			<field name="gateway_id" ref="campos_sms.default_sms_client" />
+			<field name="type">sms</field>
+			<field name="name">msgtxt</field>
+		</record>
+	</data>
+
+</openerp>

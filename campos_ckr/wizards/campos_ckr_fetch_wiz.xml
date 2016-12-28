@@ -15,7 +15,7 @@
                 				<field name="participant_id" invisible="1"/>
                 				<field name="ckr_id" invisible="1"/>
 								<field name="name"/>
-								<field name="birthdate"/>
+								<field name="birthdate" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': '-100:+0'}}"/>
 								<label for="cpr" />
 									<div>
 										<field name="birthdate_short" readonly="1" nolabel="1" style="width: auto;" />-

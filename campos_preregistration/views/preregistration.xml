@@ -271,10 +271,25 @@
 						<field name="partner_id" string="Scout group"/>
 						<field name="event_id"/>
 						<field name="state"/>
+						<field name="pre_reg_cnt"/>
 						<field name="contact_partner_id" string="Contact Person"/>
 					</tree>
 				</field>
 			</record> 		
+			
+			
+			<record id="ir_ui_view_geo_pre_reg" model="ir.ui.view">
+            <field name="name">Pre reg view</field>
+            <field name="arch" type="xml">
+                <geoengine version="7.0">
+                    <field name="name" select="1"/>
+                    <field name="pre_reg_cnt"/>
+                </geoengine>
+            </field>
+            <field eval="16" name="priority"/>
+            <field name="model">event.registration</field>
+        </record>
+		
 
 			<!-- Menu Actions -->
 		<act_window id="action_event_preregistration"
@@ -298,7 +313,7 @@
 		<act_window id="action_event_registration_pioneeringpole"
 		name="Event Registration Pioneering Poles"
 		res_model="event.registration.pioneeringpole"
-		view_mode="tree,form" />		
+		view_mode="tree,form,geoengine" />		
 		<act_window id="action_event_registration_entryexitpoint"
 		name="Event Registration Entry/exit Points"
 		res_model="event.registration.entryexitpoint"
@@ -336,5 +351,52 @@
 		view_mode="tree,form" />		
 		<menuitem id="menu_action_preregistration_menu_pioneeringpolelist" parent="menu_event_preregistration" name="Pioneering Poles List" action="action_event_registration_pioneeringpoles_on_registrations" groups="campos_event.group_campos_admin" sequence="99" />-->
 
-		</data>
+		
+		
+		<record id="geoengine_vector_layer_prereg" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">pre_reg background</field>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
+        <record id="geoengine_vector_participant" model="geoengine.vector.layer">
+            <field name="geo_field_id"
+                ref="campos_preregistration.field_event_registration_geo_point"/>
+            <field name="name">Participant location</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        
+        <record id="geoengine_vector_layer_prereg_tree" model="geoengine.raster.layer">
+            <field name="raster_type">osm</field>
+            <field name="name">Participant background</field>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        
+        <record id="geoengine_vector_layer_pre_reg_colored_on_cnt" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="campos_preregistration.field_event_registration_geo_point"/>
+            <field name="name">Group colored on total pre reg</field>
+            <field name="classification">quantile</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field name="geo_repr">proportion</field>
+            <field eval="1" name="nb_class"/>
+            <field name="attribute_field_id" ref="campos_preregistration.field_event_registration_pre_reg_cnt"/>
+            <field name="begin_color">#4B69FD</field>
+        </record>
+        
+        <record id="geoengine_vector_layer_basictest0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="campos_event.field_campos_municipality_the_geom"/>
+            <field name="name">Municipality</field>
+            <field name="view_id" ref="ir_ui_view_geo_pre_reg"/>
+            <field name="geo_repr">basic</field>
+            <field name="attribute_field_id" ref="campos_event.field_campos_municipality_name"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        </data>
 </openerp>

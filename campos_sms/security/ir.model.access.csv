@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sms_confirmed_number,SMS Confirmed number,campos_sms.model_sms_confirmed_number,,1,1,1,1
+access_sms_master,SMS Master,campos_sms.model_sms_master,,1,0,0,0

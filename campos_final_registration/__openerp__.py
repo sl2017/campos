@@ -24,7 +24,8 @@
     'depends': ['campos_preregistration'],
 
     # always loaded
-    'data': ['views/finalregistration.xml'],
+    'data': ['views/finalregistration.xml',
+             'security/ir.model.access.csv'],
     # only loaded in demonstration mode
     'demo': [ ],
 }

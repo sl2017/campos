@@ -1,0 +1,714 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sg_member_sms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-04 20:43+0000\n"
+"PO-Revision-Date: 2016-05-20 02:00+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/organization.py:58
+#, python-format
+msgid "%s (Remaining SMS budget: %.2f)"
+msgstr "%s (Resterende SMS-budget: %.2f)"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid ""
+"A code has been sent to your mobile phone by SMS. Please enter the code from "
+"the SMS:"
+msgstr ""
+"Der er sendt en SMS med en kode til din mobil. Indtast koden fra SMS'en:"
+
+#. module: sg_member_sms
+#: sql_constraint:sms.confirmed_number:0
+msgid "A confirmation for this user/number has already been created"
+msgstr "Dette nummer er allerede bekræftet"
+
+#. module: sg_member_sms
+#: view:member.organization:sg_member_sms.view_member_organization_form
+msgid "A limit of zero will disable SMS sending."
+msgstr "En grænse på nul vil deaktivere SMS-udsendelsen."
+
+#. module: sg_member_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Amount surcharge"
+msgstr "Tillæg (beløb)"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "An SMS with a confirm code will be sent to your mobile phone."
+msgstr "Der bliver sendt en SMS med en bekræftelseskode til din mobil."
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/smsclient.py:79
+#, python-format
+msgid "An error occured. No paying organization set when sending SMS."
+msgstr "Der opstod en fejl. Der er ikke angivet en betaler til SMS'en."
+
+#. module: sg_member_sms
+#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+msgid "Apply"
+msgstr "Anvend"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Are you sure you want to send a confirm code?"
+msgstr "Er du sikker på, at du vil sende en bekræftelseskode?"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Are you sure you want to send this SMS?"
+msgstr "Er du sikker på, at du vil sende denne SMS?"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+msgid "Cancel"
+msgstr "Annuller"
+
+#. module: sg_member_sms
+#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+msgid "Confirm"
+msgstr "Bekræft"
+
+#. module: sg_member_sms
+#: field:part.sms,confirm_tries:0 field:sms.confirmed_number,confirm_tries:0
+msgid "Confirm Tries left"
+msgstr "Resterende forsøg"
+
+#. module: sg_member_sms
+#: field:part.sms,confirm_code:0 field:sms.confirmed_number,confirm_code:0
+msgid "Confirm code"
+msgstr "Bekræftelseskode"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:188
+#: code:addons/sg_member_sms/models/mass_sms.py:200
+#: code:addons/sg_member_sms/models/mass_sms.py:215
+#, python-format
+msgid "Confirm mobile number"
+msgstr "Bekræft mobilnummer"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Confirm number"
+msgstr "Bekræft nummer"
+
+#. module: sg_member_sms
+#: field:part.sms,confirm_price:0
+msgid "Confirm price"
+msgstr ""
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_sms_confirm_number
+#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+msgid "Confirm sender"
+msgstr "Bekræft afsender"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:32
+#: selection:sms.confirmed_number,state:0
+#, python-format
+msgid "Confirmed"
+msgstr "Bekræftet"
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_sms_confirmed_numbers
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms_confirmed_numbers
+msgid "Confirmed numbers"
+msgstr "Bekræftede numre"
+
+#. module: sg_member_sms
+#: field:part.sms,sender_id:0
+msgid "Confirmed sender numbers"
+msgstr "Bekræftede afsendernumre"
+
+#. module: sg_member_sms
+#: field:sms.master,cost_price:0 field:sms.smsclient.queue,cost_price:0
+msgid "Cost price"
+msgstr "Kostpris"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,create_uid:0
+#: field:sms.confirmed_number,create_uid:0 field:sms.master,create_uid:0
+msgid "Created by"
+msgstr "Oprettet af"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,create_date:0
+#: field:sms.confirmed_number,create_date:0 field:sms.master,create_date:0
+msgid "Created on"
+msgstr "Oprettet den"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Demo mode"
+msgstr "Demo-tilstand"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,display_name:0
+#: field:sms.confirmed_number,display_name:0 field:sms.master,display_name:0
+msgid "Display Name"
+msgstr "Navn"
+
+#. module: sg_member_sms
+#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+msgid ""
+"Do you want to send a confirm SMS? (The organization will be charged for one "
+"SMS)"
+msgstr ""
+"Vil du sende en bekræftelses-SMS? (Betaleren bliver opkrævet for én SMS)"
+
+#. module: sg_member_sms
+#: selection:sms.confirmed_number,state:0
+msgid "Draft"
+msgstr "Udkast"
+
+#. module: sg_member_sms
+#: field:member.organization,edit_sms_max_monthly_cost:0
+msgid "Edit sms max monthly cost"
+msgstr "Rediger månedligt SMS-loft"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:84
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:85
+#, python-format
+msgid "Enter this code to confirm your mobile number: %s"
+msgstr "Indtast denne kode for at bekræfte dit mobilnummer: %s"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/smsclient.py:131
+#: code:addons/sg_member_sms/models/smsclient.py:134
+#, python-format
+msgid "Error"
+msgstr "Fejl"
+
+#. module: sg_member_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Fixed sell price"
+msgstr "Fast salgspris"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Gateway"
+msgstr "Gateway"
+
+#. module: sg_member_sms
+#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+msgid "General Settings"
+msgstr "Generelle indstillinger"
+
+#. module: sg_member_sms
+#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+msgid "Group By"
+msgstr "Gruppér efter"
+
+#. module: sg_member_sms
+#: help:sms.smsclient.queue,parts:0
+msgid "How many parts the SMS is split into"
+msgstr "Hvor mange dele, SMS'en består af"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,id:0 field:sms.confirmed_number,id:0
+#: field:sms.master,id:0
+msgid "ID"
+msgstr "Id"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid ""
+"If you need a new confirm code, you can request it by clicking this button:"
+msgstr ""
+"Hvis du har brug for en bekræftelseskode, kan du få den ved at klikke på "
+"denne knap:"
+
+#. module: sg_member_sms
+#: field:part.sms,include_relatives:0
+msgid "Include relatives"
+msgstr "Medtag pårørende"
+
+#. module: sg_member_sms
+#: field:sms.master,sms_queue_ids:0
+msgid "Individual messages"
+msgstr "Individuelle beskeder"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,international_price_adjust:0
+msgid "International adjustment"
+msgstr "Udenlandsk tillæg"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,international_cost_price:0
+msgid "International cost price"
+msgstr "Udenlandsk kostpris"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,international_price_adjust_method:0
+msgid "International price adjust method"
+msgstr "Udenlandsk prisjusteringsmetode"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,international_sell_price:0
+msgid "International sell price"
+msgstr "Udenlandsk salgspris"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,__last_update:0
+#: field:sms.confirmed_number,__last_update:0 field:sms.master,__last_update:0
+msgid "Last Modified on"
+msgstr "Senest opdateret den"
+
+#. module: sg_member_sms
+#: field:res.users,sms_last_sender:0
+msgid "Last SMS sender number"
+msgstr "Seneste SMS afsendernummer"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,write_uid:0
+#: field:sms.confirmed_number,write_uid:0 field:sms.master,write_uid:0
+msgid "Last Updated by"
+msgstr "Sidst opdateret af"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,write_date:0
+#: field:sms.confirmed_number,write_date:0 field:sms.master,write_date:0
+msgid "Last Updated on"
+msgstr "Sidst opdateret den"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_sms_master
+#: field:sms.smsclient.queue,sms_master_id:0
+msgid "Master SMS"
+msgstr "Master SMS"
+
+#. module: sg_member_sms
+#: field:member.organization,sms_max_monthly_cost:0
+msgid "Max monthly SMS cost"
+msgstr "Maksimalt månedligt SMS-forbrug"
+
+#. module: sg_member_sms
+#: field:sms.master,msg:0
+msgid "Message"
+msgstr "Besked"
+
+#. module: sg_member_sms
+#: field:member.organization,mobile_clean:0 field:res.partner,mobile_clean:0
+#: field:res.users,mobile_clean:0
+msgid "Mobile clean"
+msgstr "Mobil (renset)"
+
+#. module: sg_member_sms
+#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+msgid "Month"
+msgstr "Måned"
+
+#. module: sg_member_sms
+#: view:member.organization:sg_member_sms.view_member_organization_sms_tree
+msgid "Name"
+msgstr "Navn"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,national_price_adjust:0
+msgid "National adjustment"
+msgstr "Indenlandsk tillæg"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,national_cost_price:0
+msgid "National cost price"
+msgstr "Idenlandsk kostpris"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,national_prefix:0
+msgid "National prefix"
+msgstr "Nationalt prefix"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,national_price_adjust_method:0
+msgid "National price adjust method"
+msgstr "Indenlandsk prisjusteringsmetode"
+
+#. module: sg_member_sms
+#: field:sms.config.settings,national_sell_price:0
+msgid "National sell price"
+msgstr "Indenlandsk salgspris"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:235
+#, python-format
+msgid "No Gateway Found"
+msgstr "Ingen gateway"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:32
+#, python-format
+msgid "Not confirmed"
+msgstr "Ikke bekræftet"
+
+#. module: sg_member_sms
+#: field:sms.confirmed_number,number:0
+msgid "Number"
+msgstr "Nummer"
+
+#. module: sg_member_sms
+#: field:part.sms,sender_state:0
+msgid "Number state"
+msgstr "Nummer-status"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_config_settings.py:62
+#, python-format
+msgid "Only administrator may change these settings"
+msgstr "Kun administrator kan ændre disse indstillinger"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_member_organization
+#: field:sms.master,organization_id:0
+#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+#: field:sms.smsclient.queue,organization_id:0
+msgid "Organization"
+msgstr "Enhed"
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_member_organization_tree_sms
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms_organization_list
+msgid "Organizations"
+msgstr "Enheder"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: sg_member_sms
+#: field:sms.smsclient.queue,parts:0
+msgid "Parts"
+msgstr "Dele"
+
+#. module: sg_member_sms
+#: field:part.sms,organization_id:0
+msgid "Paying organization"
+msgstr "Betaler"
+
+#. module: sg_member_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Percent surcharge"
+msgstr "Procenttillæg"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:231
+#, python-format
+msgid "Please enter a text to send"
+msgstr "Skriv venligst en tekst til SMS'en"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:92
+#, python-format
+msgid "Please enter the verification code that was send to your phone by SMS."
+msgstr ""
+"Indtast venligst bekræftelseskoden fra SMS'en, som blev sendt til din mobil."
+
+#. module: sg_member_sms
+#: field:sms.master,sell_price:0 field:sms.smsclient.queue,sell_price:0
+msgid "Price"
+msgstr "Pris"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms field:part.sms,receiver_ids:0
+#: field:part.sms,receiver_with_relative_ids:0
+#: field:sms.master,receivers_count:0
+msgid "Receivers"
+msgstr "Modtagere"
+
+#. module: sg_member_sms
+#: field:part.sms,receivers_foreign_count:0
+msgid "Receivers with a foreign mobile number"
+msgstr "Modtagere med udenlandsk mobilnummer"
+
+#. module: sg_member_sms
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms
+msgid "SMS"
+msgstr "SMS"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_sms_smsclient
+msgid "SMS Client"
+msgstr "SMS Klient"
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_smsclient_queue_tree
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms_smsclient_queue_tree
+msgid "SMS Details"
+msgstr "SMS Detaljer"
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_sms_master_tree
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms_master_tree
+msgid "SMS Overview"
+msgstr "SMS Overblik"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_sms_smsclient_queue
+msgid "SMS Queue"
+msgstr "SMS Kø"
+
+#. module: sg_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_sms_settings
+#: model:ir.ui.menu,name:sg_member_sms.menu_sms_configuration
+#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+msgid "SMS Settings"
+msgstr "SMS Indstillinger"
+
+#. module: sg_member_sms
+#: field:part.sms,sms_allowed:0
+msgid "SMS allowed"
+msgstr "SMS tilladt"
+
+#. module: sg_member_sms
+#: field:member.organization,sms_amount_current_month:0
+msgid "SMS amount current month"
+msgstr "SMS-udgifter denne måned"
+
+#. module: sg_member_sms
+#: model:res.groups,name:sg_member_sms.group_sgsms_organization_admin
+msgid "SMS organization admin"
+msgstr "SMS enhedsadministrator"
+
+#. module: sg_member_sms
+#: model:res.groups,name:sg_member_sms.group_sgsms_send
+msgid "SMS send"
+msgstr "SMS afsendelse"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "SMS text"
+msgstr "SMS tekst"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:77
+#, python-format
+msgid "SMSservice"
+msgstr "SMSservice"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:87
+#: code:addons/sg_member_sms/models/mass_sms.py:151
+#: code:addons/sg_member_sms/models/mass_sms.py:170
+#: model:ir.actions.act_window,name:sg_member_sms.action_function_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_member_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_membership_sms
+#: model:ir.actions.act_window,name:sg_member_sms.action_profile_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+#, python-format
+msgid "Send SMS"
+msgstr "Send SMS"
+
+#. module: sg_member_sms
+#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+msgid "Send a new confirm code"
+msgstr "Send ny bekræftelseskode"
+
+#. module: sg_member_sms
+#: view:sms.confirmed_number:sg_member_sms.view_sms_confirmed_number_form
+msgid "Send code"
+msgstr "Send kode"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Send confirm code"
+msgstr "Send bekræftelseskode"
+
+#. module: sg_member_sms
+#: field:part.sms,sender_text:0 field:sms.master,sender_text:0
+#: field:sms.smsclient.queue,sender_text:0
+msgid "Sender"
+msgstr "Afsender"
+
+#. module: sg_member_sms
+#: field:part.sms,sender_is_number:0
+msgid "Sender is number"
+msgstr "Afsender er et nummer"
+
+#. module: sg_member_sms
+#: view:sms.smsclient.queue:sg_member_sms.view_smsclient_queue_search
+msgid "Sent"
+msgstr "Sendt"
+
+#. module: sg_member_sms
+#: field:sms.confirmed_number,state:0
+msgid "State"
+msgstr "Status"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/smsclient.py:99
+#, python-format
+msgid ""
+"The SMS could not be sent because it would exceed the SMS budget for %s."
+msgstr ""
+"SMS'en kunne ikke sendes, fordi det ville overskride SMS-loftet for %s."
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:105
+#, python-format
+msgid ""
+"The code was not entered correct. Please note that the code contains only "
+"letters (no digits)."
+msgstr ""
+"Koden blev ikke tastet korrekt. Bemærk, at koden kun indeholder bogstaver "
+"(ingen cifre)."
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:97
+#, python-format
+msgid ""
+"The confirmation code has expired, because you have tried more than %d "
+"times. You may request a new code and try again."
+msgstr ""
+"Denne bekræftelseskode er udløbet, fordi du har forsøgt mere end %d gange. "
+"Du kan bestille en ny kode og prøve igen."
+
+#. module: sg_member_sms
+#: help:member.organization,sms_max_monthly_cost:0
+msgid ""
+"The maximum total amount that all users can spend sending SMS in this "
+"organization"
+msgstr ""
+"Det højeste samlede beløb, som brugerne i denne enhed kan bruge på SMS-"
+"udsendelser"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "The price for sending a confirm code by SMS is"
+msgstr "Prisen for at sende en bekræftelses-SMS er"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid ""
+"The sender of the SMS can either be a short text (10 letters - no numbers) "
+"or your own mobile number."
+msgstr ""
+"Afsender kan enten være en kort tekst (10 bogstaver - ingen cifre) eller dit "
+"eget mobilnummer."
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid ""
+"This database does not allow SMS sending. All created messages will "
+"automatically be cancelled."
+msgstr ""
+"Denne database tillader ikke SMS-afsendelse. Alle oprettede SMS'er vil "
+"automatisk blive annulleret."
+
+#. module: sg_member_sms
+#: field:part.sms,total_price:0
+msgid "Total price"
+msgstr "Samlet pris"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Total price:"
+msgstr "Samlet pris:"
+
+#. module: sg_member_sms
+#: field:part.sms,receivers_count:0
+msgid "Total receivers with a valid mobile number"
+msgstr "Samlet antal modagere med gyldigt mobilnummer"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_config_settings.py:30
+#, python-format
+msgid "Unknown price adjustment method: %s"
+msgstr "Ukendt prisjusteringsmetode: %s"
+
+#. module: sg_member_sms
+#: field:sms.confirmed_number,user_id:0
+msgid "User"
+msgstr "Bruger"
+
+#. module: sg_member_sms
+#: field:part.sms,user_has_confirmed_numbers:0
+msgid "User has confirmed numbers"
+msgstr ""
+
+#. module: sg_member_sms
+#: field:member.organization,user_sms_ids:0
+msgid "User sms ids"
+msgstr "Bruger SMS id'er"
+
+#. module: sg_member_sms
+#: model:ir.model,name:sg_member_sms.model_res_users
+msgid "Users"
+msgstr "Brugere"
+
+#. module: sg_member_sms
+#: selection:sms.confirmed_number,state:0
+msgid "Waiting"
+msgstr "Venter"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:132
+#, python-format
+msgid "When sender is a text string, it cannot be more than %d chars."
+msgstr "Når afsender er en tekst, kan den ikke indeholde mere end %d tegn."
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/mass_sms.py:138
+#, python-format
+msgid "You are not allowed to send SMSs charged to %s"
+msgstr "Du har ikke tilladelse til at sende SMS'er betalt af %s"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/smsclient.py:81
+#, python-format
+msgid "You do not have access to send SMS for %s"
+msgstr "Du har ikke adgang til at sende SMS'er for %s"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "You have"
+msgstr "Du har"
+
+#. module: sg_member_sms
+#: code:addons/sg_member_sms/models/sms_confirmed_number.py:72
+#, python-format
+msgid "You have already confirmed the number %s"
+msgstr "Du har allerede bekræftet nummeret %s"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid ""
+"You must confirm that you own the number before you can use it as sender."
+msgstr ""
+"Du skal bekræfte, at du ejer nummeret før du kan bruge det som afsender."
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "Your confirm code has expired, because you have tried too many times."
+msgstr "Din bekræftelseskode er udløbet, fordi du har forsøgt for mange gange."
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+#: view:sms.config.settings:sg_member_sms.view_sms_config_settings
+msgid "or"
+msgstr "eller"
+
+#. module: sg_member_sms
+#: view:part.sms:sg_member_sms.view_part_sms
+msgid "tries left."
+msgstr "forsøg tilbage."
+
+#~ msgid "Organization sms ids"
+#~ msgstr "Enhedens SMS id'er"

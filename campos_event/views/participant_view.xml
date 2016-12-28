@@ -138,7 +138,7 @@
                                 </div>
                                 <field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
                             </div>
-                            <field name="birthdate" string="Fødselsdato" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+                            <field name="birthdate" string="Fødselsdato" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
                             <field name="phone" placeholder="e.g. +45 12 34 56 78"/>
                             <field name="mobile"/>
                             <field name="skype"/>
@@ -181,6 +181,7 @@
 							</tree>
 							</field>
 							<field name="standby_until" states="standby"/>
+							<field name="primary_committee_id" groups="campos_event.group_campos_manager"/>
 							</group>
 							<notebook colspan="4" col="4">
 							<page string="Sharepoint">
@@ -409,6 +410,7 @@
 			<field name="res_model">campos.event.participant</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
+			<field name="domain">[('partner_id.user_ids', 'in', [uid])]</field>
 		</record>
 		
 	<record model="ir.actions.act_window.view"
@@ -445,6 +447,7 @@
 					<field name="state"/>
 					<field name="standby_until" attrs="{'invisible': [('state','!=','standby')]}"/>
 					<field name="committee_id" string="Committee"/>
+					<field name="primary_committee_id" />
 					<field name="message_last_post"/>
 	
 				</tree>

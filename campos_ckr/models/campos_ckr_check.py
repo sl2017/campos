@@ -24,10 +24,14 @@ class CamposCkrCheck(models.Model):
                               ('ckr_req', 'Requested'),  # Req. from CKR reg
                               ('approved', 'Approved'),
                               ('timeout', 'Timeout'),
+                              ('re_ckr_req', 'Re-Requested'),  # Req. from CKR reg
+                              ('needinfo', 'Info Needed'),
+                              ('sent_com', 'Sent to Main Committee'),
                               ('cancel', 'Cancelled'),
                               ('rejected', 'Rejected')],
                              track_visibility='onchange', default='draft', string='State', index=True)
     date_last_state_update = fields.Datetime('Last State change', index=True, default=fields.Datetime.now)
+    main_comm_id = fields.Many2one(related='participant_id.primary_committee_id.main_comm_id')
 
     _track = {
         'state': {
@@ -42,8 +46,9 @@ class CamposCkrCheck(models.Model):
 
     @api.constrains('cpr')
     def _check_description(self):
-        if not (len(self.cpr) == 4 and self.cpr.isdigit()):
-            raise exceptions.ValidationError("CPR number must be 4 digits")
+        if self.state in ['sentin', 'ckr_req']:
+            if not (len(self.cpr) == 4 and self.cpr.isdigit()):
+                raise exceptions.ValidationError("CPR number must be 4 digits")
         
     @api.one
     def _edit_appr_date(self, operation=None):
@@ -56,7 +61,7 @@ class CamposCkrCheck(models.Model):
         Check if all parameters are set, and if so update state from draft to sentin
         '''
         for ckr in self:
-            if ckr.participant_id.birthdate and ckr.cpr and ckr.state == 'draft':
+            if ckr.participant_id.birthdate and ckr.cpr and ckr.state in ['draft', 'needinfo','sent_com']:
                 ckr.state = 'sentin'
 
     @api.multi
@@ -66,6 +71,10 @@ class CamposCkrCheck(models.Model):
     @api.multi
     def action_req_ckr(self):
         self.state = 'ckr_req'
+        
+    @api.multi
+    def action_re_req_ckr(self):
+        self.state = 're_ckr_req'
 
     @api.multi
     def action_approve(self):
@@ -83,6 +92,18 @@ class CamposCkrCheck(models.Model):
     @api.multi
     def action_timeout(self):
         self.state = 'timeout'
+        
+    @api.multi
+    def action_needinfo(self):
+        self.state = 'needinfo'
+        template = self.env.ref('campos_ckr.template_ckr_info_needed_mail', False)
+        return self.action_send_mail(template, _('Send mail asking for additional info'))
+
+    @api.multi
+    def action_sent_com(self):
+        self.state = 'sent_com'
+        template = self.env.ref('campos_ckr.template_ckr_action_required_mail', False)
+        return self.action_send_mail(template, _('Request action from Main Committee'))
 
     @api.multi
     def write(self, vals):
@@ -176,3 +197,30 @@ class CamposCkrCheck(models.Model):
             result.append((ms.id, 'CKR for %s' % (ms.participant_id.name if ms.participant_id else _('Unknown'))))
         return result
 
+
+    @api.multi
+    def action_send_mail(self, template, title):
+        """ Open a window to compose an email, with the template
+            message loaded by default
+        """
+        assert len(self) == 1, 'This option should only be used for a single id at a time.'
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ctx = dict(
+            default_model='campos.ckr.check',
+            default_res_id=self.id,
+            default_use_template=bool(template),
+            default_template_id=template.id,
+            default_composition_mode='comment',
+
+        )
+        return {
+            'name': title,
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }

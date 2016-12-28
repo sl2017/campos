@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<record id="view_sms_master_form" model="ir.ui.view">
+			<field name="name">SMS Overview</field>
+			<field name="model">sms.master</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="organization_id" />
+							<field name="create_date" />
+							<field name="sender_text" />
+							<field name="msg" />
+							<field name="receivers_count" />
+							<field name="sell_price" />
+						</group>
+						<field name="sms_queue_ids" readonly="1">
+							<tree editable="bottom" delete="false" limit="false">
+								<field name="mobile" />
+								<field name="msg" />
+								<field name="state" />
+								<field name="error" />
+								<field name="sell_price" />
+							</tree>
+						</field>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_sms_master_tree" model="ir.ui.view">
+			<field name="name">SMS Overview</field>
+			<field name="model">sms.master</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="organization_id" />
+					<field name="create_date" />
+					<field name="sender_text" />
+					<field name="msg" />
+					<field name="receivers_count" />
+					<field name="sell_price" />
+				</tree>
+			</field>
+		</record>
+
+		<act_window id="action_sms_master_tree" name="SMS Overview"
+			res_model="sms.master" view_mode="tree,form" />
+
+        <menuitem id="menu_sms_master_tree" parent="campos_sms.menu_sms"
+            sequence="10" action="action_sms_master_tree" />
+
+		<record id="view_smsclient_queue_search" model="ir.ui.view">
+			<field name="name">SMS Details Search</field>
+			<field name="model">sms.smsclient.queue</field>
+			<field name="arch" type="xml">
+				<search create="false">
+					<field name="organization_id" />
+					<field name="date_create" />
+					<field name="sender_text" />
+					<field name="mobile" />
+					<field name="msg" />
+					<field name="state" />
+					<filter string="Sent" icon="terp-personal" name="fsent" domain="[('state', '=', 'send')]"/>
+					<group expand="0" string="Group By">
+						<filter string="Month" name="gmonth" icon="terp-personal" domain="[]" context="{'group_by' : 'date_create:month'}"/>
+						<filter string="Organization" name="gorg" icon="terp-personal" domain="[]" context="{'group_by' : 'organization_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="view_smsclient_queue_form" model="ir.ui.view">
+			<field name="name">SMS Details</field>
+			<field name="model">sms.smsclient.queue</field>
+			<field name="inherit_id" ref="smsclient.sms_smsclient_message_queue_form" />
+			<field name="arch" type="xml">
+				<field name="gateway_id" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+			</field>
+		</record>
+
+		<record id="view_smsclient_queue_tree" model="ir.ui.view">
+			<field name="name">SMS Details</field>
+			<field name="model">sms.smsclient.queue</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="organization_id" />
+					<field name="date_create" />
+					<field name="sender_text" />
+					<field name="mobile" />
+					<field name="msg" />
+					<field name="state" />
+					<field name="error" />
+					<field name="sell_price" />
+				</tree>
+			</field>
+		</record>
+
+	<record id="view_smsclient_queue_pivot" model="ir.ui.view">
+			<field name="name">SMS Details</field>
+			<field name="model">sms.smsclient.queue</field>
+			<field name="arch" type="xml">
+				<graph type="pivot">
+					<field name="sell_price" type="col" />
+					<field name="state" />
+					<field name="date_create" />
+					<field name="organization_id" />
+				</graph>
+			</field>
+		</record>
+		
+		
+		<act_window id="action_smsclient_queue_tree" name="SMS Details"
+			res_model="sms.smsclient.queue" view_mode="tree,form,graph" />
+
+        <menuitem id="menu_sms_smsclient_queue_tree" parent="campos_sms.menu_sms"
+            sequence="20" action="action_smsclient_queue_tree" />
+
+
+	</data>
+</openerp>

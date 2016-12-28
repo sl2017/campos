@@ -6,16 +6,25 @@ type = PO
 file_filter = campos_event/i18n/<lang>.po
 source_file = campos_event/i18n/campos_event.pot
 source_lang = en
+type = PO
 
 [campos.campos_sponsor]
 file_filter = campos_sponsor/i18n/<lang>.po
 source_file = campos_sponsor/i18n/campos_sponsor.pot
 source_lang = en
+type = PO
 
 [campos.campos_welcome]
 file_filter = campos_welcome/i18n/<lang>.po
 source_file = campos_welcome/i18n/campos_welcome.pot
 source_lang = en
+type = PO
+
+[campos.campos_ckr]
+file_filter = campos_ckr/i18n/<lang>.po
+source_file = campos_ckr/i18n/campos_ckr.pot
+source_lang = en
+type = PO
 
 [campos.campos_preregistration]
 file_filter = campos_preregistration/i18n/<lang>.po
@@ -27,4 +36,5 @@ type = PO
 file_filter = project_model_to_issue/i18n/<lang>.po
 source_file = project_model_to_issue/i18n/project_model_to_issue.pot
 source_lang = en
+type = PO
 

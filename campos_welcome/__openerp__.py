@@ -14,9 +14,13 @@
                 'campos_event',
                 'auth_blaatlogin',
                 'auth_signup',
+                'campos_final_registration',
                 #'base_geolocalize',
     ],
     'data': [
+        'wizards/campos_import_member_wiz.xml',
+        'views/campos_event_participant.xml',
+        'views/event_registration.xml',
         "security/campos_welcome_security.xml",
         'wizards/campos_group_signup.xml',
         'views/res_partner.xml',
@@ -25,6 +29,7 @@
         'views/res_partner.xml',
         'wizards/campos_welcome.xml',
         'views/mail_templates.xml',
+        'security/campos_import_member_profile.xml',
     ],
     'demo': [
         'demo/campos_remote_system.xml',

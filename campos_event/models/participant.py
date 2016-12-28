@@ -171,6 +171,11 @@ class EventParticipant(geo_model.GeoModel):
 
     meeting_registration_ids = fields.One2many('event.registration', compute='_compute_meeting_registration')
     staff_del_prod_ids = fields.One2many('campos.staff.del.prod', 'participant_id')
+    
+    primary_committee_id = fields.Many2one('campos.committee',
+                                           'Primary committee',
+                                           track_visibility='onchange',
+                                           ondelete='set null')
 
     @api.one
     def _compute_meeting_registration(self):
@@ -421,11 +426,19 @@ class EventParticipant(geo_model.GeoModel):
                     par.private_mailaddress = par.email
                     if par.sharepoint_mailaddress:
                         par.email = par.sharepoint_mailaddress
-                new_user = self.env['res.users'].sudo().create({'login': par.email,
-                                                         'partner_id': par.partner_id.id,
-                                                         'participant_id' : par.id,
-                                                         # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
-                                                         })
+        
+                old_user = self.env['res.users'].sudo().search([('login', '=', par.email)])
+                if old_user:
+                    old_user.write({'participant_id': par.id,
+                                    'groups_id': [(4, self.env.ref('campos_event.group_campos_staff').id)]
+                                    })
+                    old_user.action_reset_password()
+                else:
+                    new_user = self.env['res.users'].sudo().create({'login': par.email,
+                                                             'partner_id': par.partner_id.id,
+                                                             'participant_id' : par.id,
+                                                             # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
+                                                             })
                 # new_user.with_context({'create_user': True}).action_reset_password()
 
             else:
@@ -511,3 +524,9 @@ class EventParticipant(geo_model.GeoModel):
                 if lead.partner_id:
                     self._message_add_suggested_recipient(cr, uid, recipients, lead, partner=lead.partner_id, reason=_('Participant'))
         return recipients
+    
+    @api.model
+    def init_primary_committee_id(self):
+        for par in self.search([('primary_committee_id', '=', False)]):
+            if par.jobfunc_ids:
+                par.primary_committee_id = par.jobfunc_ids[0].committee_id 

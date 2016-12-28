@@ -29,7 +29,7 @@ sphinxodoo_addons_path = [
 #sg_path = os.environ['TRAVIS_BUILD_DIR']
 #addons = [x for x in os.listdir(sg_path)
 #          if not x.startswith('.') and os.path.isdir(os.path.join(sg_path, x))]
-sphinxodoo_addons = ['campos_setup','campos_event']
+sphinxodoo_addons = ['campos_setup','campos_event','campos_sponsor','campos_preregistration', 'campos_welcome', 'campos_ckr']
 sys.path.append(sphinxodoo_root_path)
 sys.path.append(os.path.join(sphinxodoo_root_path, 'openerp', 'addons'))
 
