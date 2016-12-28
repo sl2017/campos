@@ -29,7 +29,6 @@
 					<tree>
 						<field name="event_id" string="Event"/>
 						<field name="event_date"/>
-<!--						<field name="create_date"/>-->
 					</tree>
 				</field>
 			</record> 	
@@ -43,7 +42,6 @@
 						<field name="registration_id_stored"/>
 						<field name="the_date"/>
 						<field name="will_participate"/>
-<!--						<field name="create_date"/>-->
 					</tree>
 				</field>
 			</record> 	
@@ -103,22 +101,23 @@
 								</tree>
 							</field>
 
-							<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants">
-								<tree editable="bottom">
-									<field name="partner_id"  options="{'no_create': True}" string="Name"/>
+							<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id}">
+								<tree>
+									<field name="id" invisible="1"/>
+									<field name="name"/>
 									<field name="own_transport_to_camp"/>
 									<field name="own_transport_from_camp"/>
 									<field name="reside_other_group_id"/>
 									<field name="reside_in_caravan" string="Caravan"/>
 									<field name="access_token_id" string="Access Token Id"/>
-									<button name="create_participant_days" type="object" string="Create Days" />
+						<!--			<button name="create_participant_days" type="object" string="Create Days" />-->
 								</tree>
 							</field>
 							
 							<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
 								<tree editable="bottom">
-									<field name="need_id"  options="{'no_create': True}" string="Need"/>
-									<field name="need_count"  options="{'no_create': True}"/>
+									<field name="need_id"  options="{'no_create': True, 'no_open': True}" string="Need"/>
+									<field name="need_count"/>
 								</tree>
 							</field>
 					
@@ -217,7 +216,6 @@
 					<page string="Event Days">
 						<field name="event_day_ids" colspan="1" nolabel="1">
 							<tree>
-<!--                <field name="event_id"/>-->
                 <field name="event_date"/>
            		</tree>
            	</field>
@@ -226,12 +224,51 @@
 			</field>	
 		</record>
 		
+
+		
+		<record id="view_form_finalregistration_participant" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+					</header>
+					<sheet>
+						<group name="sheet2">
+							<field name="registration_id"  readonly="1" invisible="1"/>
+							<field name="name"/>
+							<field name="birthdate"/>
+							<field name="email"/>
+							<field name="mobile"/>
+							<field name="access_token_id"/>
+							<field name="reside_in_caravan"/>
+							<field name="own_transport_from_camp"/>
+							<field name="own_transport_to_camp"/>
+							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
+								<tree delete="false" create="false" editable="bottom">
+									<field name="the_date" readonly="1"/>
+									<field name="will_participate"/>
+								</tree>
+							</field>
+							<button name="check_all_days" 
+											type="object"    
+											string="Check all days"/> 
+							<button name="uncheck_all_days" 
+											type="object"    
+											string="Un-check all days"/> 
+
+						</group>
+					</sheet>
+				</form> 
+			</field>
+		</record>
+		
 		
 		<!-- Menu Actions -->
 		<act_window id="action_event_finalregistration_tree"
 		name="Event Final Registration Tree"
 		res_model="event.registration"
-		view_mode="tree,form"  
+		view_mode="tree,form"
 		view_id="view_form_finalregistration_admin"/>
 		
 		<act_window id="action_event_registration_pioneeringpoledepot"
