@@ -19,7 +19,7 @@ class FinalRegistration(models.Model):
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
     need_ids = fields.One2many('event.registration.needlist','registration_id','Special needs')
     other_need = fields.Boolean('Other special need(s)')
-    other_need_description = fields.Char('Need desription')
+    other_need_description = fields.Char('Other Need description')
     other_need_update_date = fields.Date('Need updated') 
     @api.onchange('child_certificates_accept')
     def _child_certificates_accept_checked (self):
@@ -55,7 +55,7 @@ class FinalRegistrationParticipant(models.Model):
     own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with this group')
-    reside_in_caravan =fields.Char('Resides in caravan?!?!')
+    reside_in_caravan =fields.Char('Caravan ?')
     access_token_id = fields.Char('Id of Access Token')
 #    @api.multi
 #    def create_participant_days(self):

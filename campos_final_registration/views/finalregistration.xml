@@ -134,8 +134,8 @@
 							</group>
 
 					
-						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>
-
+		<!--				<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>
+-->
 							<notebook colspan="2">
 								<page string="Handicaped participants">
 									<group>
@@ -242,8 +242,9 @@
 							<field name="mobile"/>
 							<field name="access_token_id"/>
 							<field name="reside_in_caravan"/>
-							<field name="own_transport_from_camp"/>
+							<field name="reside_other_group_id"/>							
 							<field name="own_transport_to_camp"/>
+							<field name="own_transport_from_camp"/>
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>

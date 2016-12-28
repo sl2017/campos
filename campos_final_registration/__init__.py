@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Models for Preregistration 
+""" Models for Final Registration 
 ..  automodule:: package
 """
 from . import models
