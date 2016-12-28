@@ -44,6 +44,7 @@ class CamposCkrFetchWiz(models.TransientModel):
                                                                                         'state': 'sentin',
                                                                                         'participant_id': wizard.participant_id.id,
                                                                                         })
+            wizard.ckr_id.message_subscribe_users()
         self.env.user.action_id = False
 
         return self.env['warning_box'].info(title=_('Thank you'), message=_('Your CKR request will be processed and you can expect a message in E-Boks soon.'))
