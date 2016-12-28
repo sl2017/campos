@@ -37,7 +37,11 @@ class CamposImportMemberWiz(models.TransientModel):
 
     @api.multi
     def doit(self):
+        cepd = self.env['campos.event.participant.day']
         for wizard in self:
+            ed_ids = self.env['event.day'].search([('event_date', '>=', wizard.participant_from_date),
+                                                   ('event_date', '<=', wizard.participant_to_date ),
+                                                   ('event_id', '=', wizard.registration_id.event_id.id)])
             # TODO
             for mbr in wizard.member_ids:
                 part = self.env['campos.event.participant'].search([('registration_id', '=', wizard.registration_id.id), ('remote_mpro_int_id', '=', mbr.remote_int_id)])
@@ -52,6 +56,11 @@ class CamposImportMemberWiz(models.TransientModel):
                                                                                                          'birthdate': mbr.birthdate,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
                                                                                                          })
+                    for day in ed_ids:
+                        cepd.create({'participaant_id': mbr.participant_id.id,
+                                     'day_id': day.id,
+                                     'will_participate': True,
+                                     })
             pass
 #         action = {
 #             'type': 'ir.action.act_window',
