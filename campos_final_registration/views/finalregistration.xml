@@ -93,7 +93,7 @@
 							<field name="child_certificates_date" readonly="1"/>
 							<field name="child_certificates_user" readonly="1"/>
 							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
-							<field name="group_country_code2" string="*midlertidig landekode*"/>
+<!--							<field name="group_country_code2" string="*midlertidig landekode*"/>-->
 							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
 										 attrs="{'readonly': [('group_country_code2', '!=', 'DK')]}">
 								<tree editable="bottom">
@@ -245,18 +245,18 @@
 							<field name="reside_other_group_id"/>							
 							<field name="own_transport_to_camp"/>
 							<field name="own_transport_from_camp"/>
+							<button name="check_all_days" 
+											type="object"    
+											string="Check all days" class = "oe_edit_only"/>
+							<button name="uncheck_all_days" 
+											type="object"    
+											string="Un-check all days" class = "oe_edit_only"/> 
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>
 									<field name="will_participate"/>
 								</tree>
 							</field>
-							<button name="check_all_days" 
-											type="object"    
-											string="Check all days"/> 
-							<button name="uncheck_all_days" 
-											type="object"    
-											string="Un-check all days"/> 
 
 						</group>
 					</sheet>
