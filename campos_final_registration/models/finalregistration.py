@@ -44,7 +44,7 @@ class FinalRegistration(models.Model):
 class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
     registration_id = fields.Many2one('event.registration', 'Registration', required=True)
-    friendship_group_id = fields.Many2one('res.partner','Friendship Group', required=True)
+    friendship_group_id = fields.Many2one('res.partner','Friendship Group', required=True,  domain="[('scoutgroup','=',True),('country_id.code','!=','DK')]")
 
 class FinalRegistrationParticipant(models.Model):
     '''
