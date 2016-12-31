@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-31 02:00+0000\n"
+"PO-Revision-Date: 2016-12-31 02:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_import
+#: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
+msgid "Active"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
+msgid "Campos Import Member Wiz"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.model,name:campos_import.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.model,name:campos_import.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: campos_import
+#: view:event.registration:campos_import.event_registration_form_view
+msgid "Import Members"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.actions.act_window,name:campos_import.campos_import_member_wiz_act_window
+msgid "Import Members from Medlemsservice"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
+#: view:campos.import.member.profile:campos_import.campos_import_member_profile_tree_view
+msgid "Members"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
+msgid "Relative"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
+msgid "or"
+msgstr ""
+
