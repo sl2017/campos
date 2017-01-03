@@ -20,6 +20,12 @@ source_file = campos_welcome/i18n/campos_welcome.pot
 source_lang = en
 type = PO
 
+[campos.campos_import]
+file_filter = campos_import/i18n/<lang>.po
+source_file = campos_importe/i18n/campos_welcome.pot
+source_lang = en
+type = PO
+
 [campos.campos_ckr]
 file_filter = campos_ckr/i18n/<lang>.po
 source_file = campos_ckr/i18n/campos_ckr.pot
@@ -31,6 +37,13 @@ file_filter = campos_preregistration/i18n/<lang>.po
 source_file = campos_preregistration/i18n/campos_preregistration.pot
 source_lang = en
 type = PO
+
+[campos.campos_final_registration]
+file_filter = campos_final_registration/i18n/<lang>.po
+source_file = campos_final_registration/i18n/campos_preregistration.pot
+source_lang = en
+type = PO
+
 
 [campos.project_model_to_issue]
 file_filter = project_model_to_issue/i18n/<lang>.po
