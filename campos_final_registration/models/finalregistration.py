@@ -16,16 +16,17 @@ class FinalRegistration(models.Model):
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
     need_ids = fields.One2many('event.registration.needlist','registration_id','Special needs')
     other_need = fields.Boolean('Other special need(s)')
-    other_need_description = fields.Char('Other Need description')
-    other_need_update_date = fields.Date('Need updated') 
+    other_need_description = fields.Text('Other Need description')
+    other_need_update_date = fields.Date('Need updated')
     @api.onchange('child_certificates_accept')
+    @api.one
     def _child_certificates_accept_checked (self):
         if (self.child_certificates_accept == True):
             self.child_certificates_user = self.env.user.name
             self.child_certificates_date = fields.Date.today()
         else:
-            self.child_certificates_user = ''
-            self.child_certificates_date = ''
+            self.child_certificates_user = False
+            self.child_certificates_date = False
     
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
     @api.depends ('subcamp_id','camp_area_id')
@@ -33,8 +34,11 @@ class FinalRegistration(models.Model):
     def _update_friendship_group_supcamp_area (self):
         if (self.group_country_code2 == 'DK'):
             for record in self.friendhip_group_ids:
-                record.friendship_group_id.subcamp_id=self.subcamp_id
-                record.friendship_group_id.camp_area_id=self.camp_area_id
+                record.friendship_group_registration_id.subcamp_id=self.subcamp_id
+                record.friendship_group_registration_id.camp_area_id=self.camp_area_id
+    @api.onchange('other_need_description')
+    def _other_need_description_changed(self):
+        self.other_need_update_date = fields.Date.today()
 
 class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
@@ -49,7 +53,7 @@ class FinalRegistrationParticipant(models.Model):
     own_transport_to_camp = fields.Boolean('No common transport TO camp')
     own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
-    reside_other_group_id = fields.Many2one('res.partner', 'Resides with this group')
+    reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
     reside_in_caravan =fields.Char('Caravan ?')
     access_token_id = fields.Char('Id of Access Token')
     @api.model
