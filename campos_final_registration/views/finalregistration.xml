@@ -93,11 +93,10 @@
 							<field name="child_certificates_date" readonly="1"/>
 							<field name="child_certificates_user" readonly="1"/>
 							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
-<!--							<field name="group_country_code2" string="*midlertidig landekode*"/>-->
 							<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
 										 attrs="{'readonly': [('group_country_code2', '!=', 'DK')]}">
 								<tree editable="bottom">
-									<field name="friendship_group_id"  options="{'no_create': True}"/>
+									<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
 								</tree>
 							</field>
 
@@ -110,7 +109,6 @@
 									<field name="reside_other_group_id"/>
 									<field name="reside_in_caravan" string="Caravan"/>
 									<field name="access_token_id" string="Access Token Id"/>
-						<!--			<button name="create_participant_days" type="object" string="Create Days" />-->
 								</tree>
 							</field>
 							

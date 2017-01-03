@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api, _
-#HIDEfrom email import _name
-#HIDEfrom campos_event.models import participant
 class FinalRegistration(models.Model):
     '''
     Final registration for a scout group to an event
@@ -12,10 +10,9 @@ class FinalRegistration(models.Model):
     child_certificates_accept = fields.Boolean('Check declaration of child certificates')
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
-    friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','registration_id','Friendship Groups')
+    friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','own_registration_id','Friendship Groups')
     pioneering_pole_depot_id = fields.Many2one('event.registration.pioneeringpoledepot','Pioneering Pole Depot')
     event_days = fields.One2many(related='event_id.event_day_ids', string='Event Days', readonly=True)
-#    participants_camp_day_ids = fields.One2many(related='participant_ids.camp_day_ids', string='Participant Camp Days')
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
     need_ids = fields.One2many('event.registration.needlist','registration_id','Special needs')
     other_need = fields.Boolean('Other special need(s)')
@@ -29,8 +26,6 @@ class FinalRegistration(models.Model):
         else:
             self.child_certificates_user = ''
             self.child_certificates_date = ''
-        
-#        self.child_certificates_date = fields.Date.to_string(fields.Date.today())
     
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
     @api.depends ('subcamp_id','camp_area_id')
@@ -43,8 +38,8 @@ class FinalRegistration(models.Model):
 
 class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
-    registration_id = fields.Many2one('event.registration', 'Registration', required=True)
-    friendship_group_id = fields.Many2one('res.partner','Friendship Group', required=True,  domain="[('scoutgroup','=',True),('country_id.code','!=','DK')]")
+    own_registration_id = fields.Many2one('event.registration', 'Registration', required=True,  domain="[('partner_id.country_id.code','=','DK')]")
+    friendship_group_registration_id = fields.Many2one('event.registration','Friendship Group', required=True,  domain="[('partner_id.scoutgroup','=',True),('partner_id.country_id.code','!=','DK')]")
 
 class FinalRegistrationParticipant(models.Model):
     '''
@@ -57,14 +52,6 @@ class FinalRegistrationParticipant(models.Model):
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with this group')
     reside_in_caravan =fields.Char('Caravan ?')
     access_token_id = fields.Char('Id of Access Token')
-#    @api.multi
-#    def create_participant_days(self):
-#        self.email='test2'
-#        for day in self.registration_id.event_id.event_day_ids:
-#            new = self.env['campos.event.participant.day'].create({'participant_id': self.id,
-#                                                         'day_id': day.id,
-#                                                         'will_participate' : False
-#                                                         })
     @api.model
     def create(self, vals):
         par = super(FinalRegistrationParticipant, self).create(vals)
@@ -85,11 +72,6 @@ class FinalRegistrationParticipant(models.Model):
     def uncheck_all_days(self):
         for record in self.camp_day_ids:
             record.will_participate = False
-#    def _default_participant_days(self):
-#        days = self.registration_id.event_days
-#        return [(id,d.id,False) for d in days]
-#    m2m_camp_day_ids = fields.Many2many(comodel_name='event.day',  relation='campos_event_participant_day', column1='participant_id',column2='day_id', default=_default_participant_days)
-    
     
 class ParticipantCampDay(models.Model):
     '''
