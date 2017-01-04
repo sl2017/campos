@@ -11,6 +11,7 @@ class FinalRegistration(models.Model):
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
     friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','own_registration_id','Friendship Groups')
+    reverse_friendship_group_ids = fields.One2many('event.registration.friendshipgrouplist','friendship_group_registration_id','Reverse Friendship Groups')
     pioneering_pole_depot_id = fields.Many2one('event.registration.pioneeringpoledepot','Pioneering Pole Depot')
     event_days = fields.One2many(related='event_id.event_day_ids', string='Event Days', readonly=True)
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
@@ -27,7 +28,18 @@ class FinalRegistration(models.Model):
         else:
             self.child_certificates_user = False
             self.child_certificates_date = False
-    
+    @api.multi
+    def write(self, vals):
+        if 'child_certificates_accept' in vals:
+            if vals['child_certificates_accept'] == True:
+                vals['child_certificates_user'] = self.env.user.name
+                vals['child_certificates_date'] = fields.Date.today()
+            else:
+                vals['child_certificates_user'] = False
+                vals['child_certificates_date'] = False              
+        return super(FinalRegistration, self).write(vals)
+                
+                
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
     @api.depends ('subcamp_id','camp_area_id')
     @api.one
