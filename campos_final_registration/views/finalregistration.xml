@@ -114,7 +114,7 @@
 								</page>
 								<page string="Friendship Groups">
 									<group>
-										<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
+										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
 													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}">
 											<tree editable="bottom">
 												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>

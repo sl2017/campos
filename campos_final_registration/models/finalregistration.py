@@ -10,7 +10,7 @@ class FinalRegistration(models.Model):
     child_certificates_accept = fields.Boolean('Check declaration of child certificates')
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
-    friendhip_group_ids = fields.One2many('event.registration.friendshipgrouplist','own_registration_id','Friendship Groups')
+    friendship_group_ids = fields.One2many('event.registration.friendshipgrouplist','own_registration_id','Friendship Groups')
     reverse_friendship_group_ids = fields.One2many('event.registration.friendshipgrouplist','friendship_group_registration_id','Reverse Friendship Groups')
     pioneering_pole_depot_id = fields.Many2one('event.registration.pioneeringpoledepot','Pioneering Pole Depot')
     event_days = fields.One2many(related='event_id.event_day_ids', string='Event Days', readonly=True)
@@ -28,7 +28,7 @@ class FinalRegistration(models.Model):
         else:
             self.child_certificates_user = False
             self.child_certificates_date = False
-    @api.multi
+    @api.one
     def write(self, vals):
         if 'child_certificates_accept' in vals:
             if vals['child_certificates_accept'] == True:
@@ -36,18 +36,30 @@ class FinalRegistration(models.Model):
                 vals['child_certificates_date'] = fields.Date.today()
             else:
                 vals['child_certificates_user'] = False
-                vals['child_certificates_date'] = False              
-        return super(FinalRegistration, self).write(vals)
-                
-                
+                vals['child_certificates_date'] = False
+        vals['child_certificates_user'] = 'test 8'
+        retval = super(FinalRegistration, self).write(vals)
+        if ('subcamp_id' in vals or 'camp_area_id' in vals) and self.group_country_code2 == 'DK':
+            friendship_group_list = self.friendship_group_ids
+            for friendship_group_reg in friendship_group_list:
+                vals2 = {}
+                if 'camp_area_id' in vals:
+                    vals2['camp_area_id'] = vals['camp_area_id']
+                if 'subcamp_id' in vals:
+                    vals2['subcamp_id'] = vals['subcamp_id']
+                reg_id = friendship_group_reg.friendship_group_registration_id
+                reg_id.write(vals2)
+        return retval
+
+
     #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
-    @api.depends ('subcamp_id','camp_area_id')
-    @api.one
-    def _update_friendship_group_supcamp_area (self):
-        if (self.group_country_code2 == 'DK'):
-            for record in self.friendhip_group_ids:
-                record.friendship_group_registration_id.subcamp_id=self.subcamp_id
-                record.friendship_group_registration_id.camp_area_id=self.camp_area_id
+#    @api.depends ('subcamp_id','camp_area_id')
+#    @api.one
+#    def _update_friendship_group_supcamp_area (self):
+#        if (self.group_country_code2 == 'DK'):
+#            for record in self.friendhip_group_ids:
+#                record.friendship_group_registration_id.subcamp_id=self.subcamp_id
+#                record.friendship_group_registration_id.camp_area_id=self.camp_area_id
     @api.onchange('other_need_description')
     def _other_need_description_changed(self):
         self.other_need_update_date = fields.Date.today()
