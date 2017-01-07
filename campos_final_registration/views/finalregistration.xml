@@ -114,12 +114,26 @@
 								</page>
 								<page string="Friendship Groups">
 									<group>
-										<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
-													attrs="{'readonly': [('group_country_code2', '!=', 'DK')]}">
+										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
+													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}">
 											<tree editable="bottom">
 												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
+										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
+													 readonly="1"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
+											<tree>
+												<field name="own_registration_id"/>
+											</tree>
+										</field>
+									</group>
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name"/>
+										<field name="friendship_group_info"/>
+										<field name="friendship_group_desire"/>
+										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}"/>
+										<field name="friendship_group_home_hospitality"/>
 									</group>
 								</page>
 								<page string="Special needs">
@@ -182,16 +196,6 @@
 										<field name="handicap" readonly="1"/>
 										<field name="handicap_description" readonly="1"/>
 										<field name="handicap_needs" readonly="1"/>
-									</group>
-								</page>
-								<page string="Friendship group">
-									<group>
-										<field name="friendship_group" readonly="1"/>
-										<field name="friendship_group_name" readonly="1"/>
-										<field name="friendship_group_info" readonly="1"/>
-										<field name="friendship_group_desire" readonly="1"/>
-										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}" readonly="1"/>
-										<field name="friendship_group_home_hospitality" readonly="1"/>
 									</group>
 								</page>
 							</notebook>
