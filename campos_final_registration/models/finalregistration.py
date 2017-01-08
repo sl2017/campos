@@ -37,7 +37,6 @@ class FinalRegistration(models.Model):
             else:
                 vals['child_certificates_user'] = False
                 vals['child_certificates_date'] = False
-        vals['child_certificates_user'] = 'test 8'
         retval = super(FinalRegistration, self).write(vals)
         if ('subcamp_id' in vals or 'camp_area_id' in vals) and self.group_country_code2 == 'DK':
             friendship_group_list = self.friendship_group_ids
@@ -68,6 +67,7 @@ class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
     own_registration_id = fields.Many2one('event.registration', 'Registration', required=True,  domain="[('partner_id.country_id.code','=','DK')]")
     friendship_group_registration_id = fields.Many2one('event.registration','Friendship Group', required=True,  domain="[('partner_id.scoutgroup','=',True),('partner_id.country_id.code','!=','DK')]")
+    _sql_constraints = [('unique_friendship_group_regid', 'unique(friendship_group_registration_id)', _('A group can only be added once as friendship group'))]
 
 class FinalRegistrationParticipant(models.Model):
     '''
