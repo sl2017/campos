@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 20:41+0000\n"
-"PO-Revision-Date: 2017-01-03 20:41+0000\n"
+"POT-Creation-Date: 2017-01-08 02:00+0000\n"
+"PO-Revision-Date: 2017-01-08 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,7 @@ msgstr ""
 
 #. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
-#: selection:campos.import.member.profile,state:0
 msgid "Active"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,age:0
-msgid "Age"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,birthdate:0
-msgid "Birthdate"
 msgstr ""
 
 #. module: campos_import
@@ -42,54 +31,6 @@ msgid "Cancel"
 msgstr ""
 
 #. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Cancelled"
-msgstr ""
-
-#. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Contact"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,create_uid:0
-#: field:campos.import.member.wiz,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,create_date:0
-#: field:campos.import.member.wiz,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.wiz,participant_from_date:0
-msgid "Date of arrival"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.wiz,participant_to_date:0
-msgid "Date of departure"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,department:0
-msgid "Department"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,display_name:0
-#: field:campos.import.member.wiz,display_name:0
-msgid "Display Name"
-msgstr ""
-
-#. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Draft"
-msgstr ""
-
-#. module: campos_import
 #: model:ir.model,name:campos_import.model_campos_event_participant
 msgid "Event Participant"
 msgstr ""
@@ -97,12 +38,6 @@ msgstr ""
 #. module: campos_import
 #: model:ir.model,name:campos_import.model_event_registration
 msgid "Event Registration"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,id:0
-#: field:campos.import.member.wiz,id:0
-msgid "ID"
 msgstr ""
 
 #. module: campos_import
@@ -116,88 +51,14 @@ msgid "Import Members from Medlemsservice"
 msgstr ""
 
 #. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Inactive"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,__last_update:0
-#: field:campos.import.member.wiz,__last_update:0
-msgid "Last Modified on"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,write_uid:0
-#: field:campos.import.member.wiz,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,write_date:0
-#: field:campos.import.member.wiz,write_date:0
-msgid "Last Updated on"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.wiz,member_ids:0
-msgid "Member ids"
-msgstr ""
-
-#. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_tree_view
 msgid "Members"
 msgstr ""
 
 #. module: campos_import
-#: field:campos.import.member.profile,name:0
-#: field:campos.import.member.wiz,name:0
-msgid "Name"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,participant_id:0
-msgid "Participant id"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.wiz,registration_id:0
-msgid "Registration"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,registration_id:0
-msgid "Registration id"
-msgstr ""
-
-#. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
 msgid "Relative"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,remote_int_id:0
-msgid "Remote ID"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.event.participant,remote_mpro_int_id:0
-msgid "Remote Profile ID"
-msgstr ""
-
-#. module: campos_import
-#: field:campos.import.member.profile,state:0
-msgid "State"
-msgstr ""
-
-#. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Waiting list"
-msgstr ""
-
-#. module: campos_import
-#: selection:campos.import.member.profile,state:0
-msgid "Web"
 msgstr ""
 
 #. module: campos_import
