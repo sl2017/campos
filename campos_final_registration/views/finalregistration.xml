@@ -61,6 +61,17 @@
 			</record> 	
 -->
 
+			<record id="view_tree_event_registration_friendshipgrouplist" model="ir.ui.view">
+				<field name="name">Friendship Group List</field>
+				<field name="model">event.registration.friendshipgrouplist</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="own_registration_id"/>
+						<field name="friendship_group_registration_id"/>
+					</tree>
+				</field>
+			</record> 	
+
 			<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
 			<field name="name">Final Registration Form Admin</field>
@@ -238,7 +249,7 @@
 							<field name="contact_partner_id" string="Contact Person"  options="{'no_create': True}" readonly="1"/>
 							<field name="group_country_code2" invisible="1"/>
 							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}" readonly="1"/>
-							<field name="total_price" readonly="1"/>
+							<field name="total_price" readonly="1" invisible="1"/>
 							<field name="child_certificates_accept"/>
 							<field name="child_certificates_date" readonly="1"/>
 							<field name="child_certificates_user" readonly="1"/>
@@ -483,6 +494,11 @@
 		res_model="campos.event.participant.day"
 		view_mode="tree,form" />
 
+		<act_window id="action_event_registration_friendshipgrouplist"
+		name="Friendship Group List"
+		res_model="event.registration.friendshipgrouplist"
+		view_mode="tree" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
@@ -498,6 +514,8 @@
 
 		<menuitem id="menu_action_finalregistration_menu_needs" parent="menu_event_finalregistration" name="Special Needs" action="action_event_registration_needs" groups="campos_event.group_campos_admin" sequence="60" />
 		
+		<menuitem id="menu_action_finalregistration_menu_friendshipgrouplist" parent="menu_event_finalregistration" name="Friendship Groups" action="action_event_registration_friendshipgrouplist" groups="campos_event.group_campos_admin" sequence="70" />
+
 		<!-- gl -->
 		<menuitem id="menu_action_event_finalregistration_tree_gl" parent="menu_event_finalregistration" name="Final Registration GL" action="action_event_finalregistration_tree_gl" groups="campos_preregistration.group_campos_groupleader" sequence="25"/>
 
