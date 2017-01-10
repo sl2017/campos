@@ -84,7 +84,6 @@ class FinalRegistrationParticipant(models.Model):
     own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
-    reside_in_caravan =fields.Char('Caravan ?')
     access_token_id = fields.Char('Id of Access Token')
     @api.model
     def create(self, vals):
