@@ -249,7 +249,7 @@
 							<notebook colspan="2">
 								<page string="Participants">
 									<group>
-										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id}">
+										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registraation.view_form_finalregistration_participant'}">
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
@@ -385,6 +385,7 @@
 		<record id="view_form_finalregistration_participant" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form</field>
 			<field name="model">campos.event.participant</field>
+			<fiedl name="priority">17</fiedl>
 			<field name="arch" type="xml">
 				<form>
 					<header>
