@@ -8,7 +8,7 @@
     <record model="ir.ui.view" id="event_registration_form_view">
         <field name="name">event.registration.form (in campos_welcome)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="campos_preregistration.view_form_preregistration_gl"/>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
             	<field name="id"/>
