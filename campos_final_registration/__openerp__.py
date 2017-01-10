@@ -21,7 +21,7 @@
     'license': 'AGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['campos_preregistration'],
+    'depends': ['campos_final_registration', 'campos_event'],
 
     # always loaded
     'data': ['views/finalregistration.xml',
