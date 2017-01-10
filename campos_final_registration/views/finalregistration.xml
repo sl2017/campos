@@ -385,7 +385,7 @@
 		<record id="view_form_finalregistration_participant" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form</field>
 			<field name="model">campos.event.participant</field>
-			<fiedl name="priority">17</fiedl>
+			<field name="priority">17</field>
 			<field name="arch" type="xml">
 				<form>
 					<header>
