@@ -50,15 +50,6 @@ class FinalRegistration(models.Model):
                 reg_id.write(vals2)
         return retval
 
-
-    #if subcamp_id or camp_area_id of DK changed then update to same on friendship groups
-#    @api.depends ('subcamp_id','camp_area_id')
-#    @api.one
-#    def _update_friendship_group_supcamp_area (self):
-#        if (self.group_country_code2 == 'DK'):
-#            for record in self.friendhip_group_ids:
-#                record.friendship_group_registration_id.subcamp_id=self.subcamp_id
-#                record.friendship_group_registration_id.camp_area_id=self.camp_area_id
     @api.onchange('other_need_description')
     def _other_need_description_changed(self):
         self.other_need_update_date = fields.Date.today()
@@ -68,6 +59,21 @@ class FriendshipGroupList(models.Model):
     own_registration_id = fields.Many2one('event.registration', 'Registration', required=True,  domain="[('partner_id.country_id.code','=','DK')]")
     friendship_group_registration_id = fields.Many2one('event.registration','Friendship Group', required=True,  domain="[('partner_id.scoutgroup','=',True),('partner_id.country_id.code','!=','DK')]")
     _sql_constraints = [('unique_friendship_group_regid', 'unique(friendship_group_registration_id)', _('A group can only be added once as friendship group'))]
+# When connecting friendship group to registration, then copy camp_area_id+subcamp_id to friendship groups registration
+    @api.model
+    def create(self, vals):
+        retval = super(FriendshipGroupList, self).create(vals)
+        own_registration_id = vals['own_registration_id']
+        own_registration = self.env['event.registration'].search([('id', '=', own_registration_id)])
+        camp_area_id = own_registration.camp_area_id.id
+        subcamp_id = own_registration.subcamp_id.id
+        vals2 = {}
+        vals2['camp_area_id'] = camp_area_id
+        vals2['subcamp_id'] = subcamp_id
+        friendship_group_registration_id = vals['friendship_group_registration_id']
+        friendship_group_registration = self.env['event.registration'].search([('id', '=', friendship_group_registration_id)])
+        friendship_group_registration.write(vals2)
+        return retval
 
 class FinalRegistrationParticipant(models.Model):
     '''
@@ -78,12 +84,10 @@ class FinalRegistrationParticipant(models.Model):
     own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
-    reside_in_caravan =fields.Char('Caravan ?')
     access_token_id = fields.Char('Id of Access Token')
     @api.model
     def create(self, vals):
         par = super(FinalRegistrationParticipant, self).create(vals)
-#        self.create_participant_days(par)
         for day in par.registration_id.event_id.event_day_ids:
             new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
                                                          'day_id': day.id,
