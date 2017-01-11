@@ -88,7 +88,7 @@ class FinalRegistrationParticipant(models.Model):
     @api.model
     def create(self, vals):
         par = super(FinalRegistrationParticipant, self).create(vals)
-        for day in par.registration_id.event_id.event_day_ids:
+        for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp'):
             new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
                                                          'day_id': day.id,
                                                          'will_participate' : False
@@ -125,6 +125,9 @@ class EventDay(models.Model):
     '''
     _name='event.day'
     event_date = fields.Date('Date', required=True)
+    event_period = fields.Selection([('precamp', 'Pre Camp'),
+                                     ('maincamp', 'Main Camp'),
+                                     ('postcamp', 'Post Camp')], default='maincamp', string='Period')
     event_id = fields.Many2one('event.event', 'Event day', required=True)
     
 class FinalRegistrationEvent(models.Model):
@@ -151,6 +154,8 @@ class RegistrationNeed(models.Model):
     _description = 'Group Need'
     _name='event.registration.need'
     name = fields.Char('Need Name', required=True, translate=True)
+    for_group = fields.Boolean('For Scout Groups')
+    for_staff = fields.Boolean('For Jobbers')
 
 class RegistrationNeeds(models.Model):
     '''

@@ -3,7 +3,7 @@
 # * campos_event
 # 
 # Translators:
-# christian Eggert Jørgensen <christian@eggert.dk>, 2015-2016
+# christian Eggert Jørgensen <christian@eggert.dk>, 2015-2017
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
 # Kristian Michael <kmi@sl2017.dk>, 2015
 # Lars Wive Marcussen <larswm@larswm.dk>, 2015
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-22 20:08+0000\n"
-"PO-Revision-Date: 2016-12-22 20:08+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2017-01-10 19:51+0000\n"
+"PO-Revision-Date: 2017-01-04 14:40+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2049,7 +2049,7 @@ msgstr "Forhåndstilmelding for danske grupper/foreninger"
 #. module: campos_event
 #: field:campos.event.participant,primary_committee_id:0
 msgid "Primary committee"
-msgstr ""
+msgstr "Dit primære hovedudvalg"
 
 #. module: campos_event
 #: field:campos.event.participant,private_mailaddress:0
