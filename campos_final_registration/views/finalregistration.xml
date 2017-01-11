@@ -417,12 +417,16 @@
 							<field name="reside_other_group_id"/>							
 							<field name="own_transport_to_camp"/>
 							<field name="own_transport_from_camp"/>
+							<field name="active"/>
 							<button name="check_all_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>
 							<button name="uncheck_all_days" 
 											type="object"    
 											string="Un-check all days" class = "oe_edit_only"/> 
+							<button name="inactivate_participant" 
+											type="object"    
+											string="Inactivate Participant" class = "oe_edit_only"/>
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>

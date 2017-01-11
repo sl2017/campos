@@ -104,6 +104,9 @@ class FinalRegistrationParticipant(models.Model):
     def uncheck_all_days(self):
         for record in self.camp_day_ids:
             record.will_participate = False
+    @api.one
+    def inactivate_participant(self):
+        self.active = False
     
 class ParticipantCampDay(models.Model):
     '''
