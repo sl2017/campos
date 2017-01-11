@@ -18,6 +18,7 @@
 						<field name="remote_ext_id" readonly="1"/>
 						<field name="remote_link_id" groups="campos_event.group_campos_admin"/>
 						<field name="last_import"/>
+						<button name="change_remote_group" string="Change Remote" type="object"/>
 					
 					</group>            	
             	
