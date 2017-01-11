@@ -13,10 +13,13 @@
     'depends': ['campos_welcome',
                 'campos_final_registration',
     ],
-    'data': ['wizards/campos_import_member_wiz.xml',
+    'data': [
+        'wizards/campos_import_participant_wiz.xml',
+        'wizards/campos_import_manager_wiz.xml','wizards/campos_import_member_wiz.xml',
              'views/campos_event_participant.xml',
              'views/event_registration.xml',
              'security/campos_import_member_profile.xml',
+             'security/ir.model.access.csv'
     ],
     'demo': [
     ],

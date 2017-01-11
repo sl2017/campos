@@ -18,6 +18,8 @@
 				<field name="arch" type="xml">
 					<tree editable="bottom">
 						<field name="name"/>
+						<field name="for_group"/>
+						<field name="for_staff"/>
 					</tree>
 				</field>
 			</record> 		
@@ -28,6 +30,7 @@
 				<field name="arch" type="xml">
 					<tree>
 						<field name="event_id" string="Event"/>
+						<field name="event_period"/>
 						<field name="event_date"/>
 					</tree>
 				</field>
@@ -99,7 +102,7 @@
 							<notebook colspan="2">
 								<page string="Participants">
 									<group>
-										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id}">
+										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'} ">
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
@@ -249,7 +252,7 @@
 							<notebook colspan="2">
 								<page string="Participants">
 									<group>
-										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id}">
+										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
@@ -290,7 +293,7 @@
 									<group>
 										<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
 											<tree editable="bottom">
-												<field name="need_id"  options="{'no_create': True, 'no_open': True}" string="Need"/>
+												<field name="need_id"  options="{'no_create': True, 'no_open': True}" string="Need" domain="[('for_group', '=', True)]"/>
 												<field name="need_count"/>
 											</tree>
 										</field>
@@ -385,6 +388,7 @@
 		<record id="view_form_finalregistration_participant" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form</field>
 			<field name="model">campos.event.participant</field>
+			<field name="priority">17</field>
 			<field name="arch" type="xml">
 				<form>
 					<header>
