@@ -1,19 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* campos_import
-#
+# * campos_import
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-11 20:44+0000\n"
 "PO-Revision-Date: 2017-01-11 20:44+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
@@ -146,10 +146,8 @@ msgid "Final registration"
 msgstr ""
 
 #. module: campos_import
-#: field:campos.import.event,id:0
-#: field:campos.import.manager.wiz,id:0
-#: field:campos.import.member.profile,id:0
-#: field:campos.import.member.wiz,id:0
+#: field:campos.import.event,id:0 field:campos.import.manager.wiz,id:0
+#: field:campos.import.member.profile,id:0 field:campos.import.member.wiz,id:0
 #: field:campos.import.participant.wiz,id:0
 msgid "ID"
 msgstr ""
@@ -230,8 +228,7 @@ msgid "My Group"
 msgstr ""
 
 #. module: campos_import
-#: field:campos.import.event,name:0
-#: field:campos.import.manager.wiz,name:0
+#: field:campos.import.event,name:0 field:campos.import.manager.wiz,name:0
 #: field:campos.import.member.profile,name:0
 #: field:campos.import.member.wiz,name:0
 #: field:campos.import.participant.wiz,name:0
@@ -308,4 +305,3 @@ msgstr ""
 #: view:campos.import.participant.wiz:campos_import.campos_import_participant_wiz_form_view
 msgid "or"
 msgstr ""
-

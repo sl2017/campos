@@ -22,7 +22,7 @@ type = PO
 
 [campos.campos_import]
 file_filter = campos_import/i18n/<lang>.po
-source_file = campos_importe/i18n/campos_import.pot
+source_file = campos_import/i18n/campos_import.pot
 source_lang = en
 type = PO
 
