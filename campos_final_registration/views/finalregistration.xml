@@ -393,6 +393,7 @@
 						<field name="event_day_ids" colspan="1" nolabel="1"  context="{'default_event_id': id}">
 							<tree editable="bottom">
                 <field name="event_date"/>
+                <field name="event_period"/>								
            		</tree>
            	</field>
           </page>
