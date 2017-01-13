@@ -47,6 +47,7 @@ class CamposEventParticipant(models.Model):
                 days_ids.append((0,0, {'participant_id': self.id,
                                        'day_id': day.id,
                                        'will_participate': True,
+                                       'the_date': day.event_date,
                                       }))
             self.camp_day_ids = days_ids
     

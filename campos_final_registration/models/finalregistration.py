@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api, _
+
+
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class FinalRegistration(models.Model):
     '''
     Final registration for a scout group to an event
@@ -84,15 +90,34 @@ class FinalRegistrationParticipant(models.Model):
     transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     access_token_id = fields.Char('Id of Access Token')
+    
     @api.model
-    def create(self, vals):
-        par = super(FinalRegistrationParticipant, self).create(vals)
-        for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp'):
-            new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
-                                                         'day_id': day.id,
-                                                         'will_participate' : False
-                                                         })
-        return par
+    def default_get(self, fields):
+        result = super(FinalRegistrationParticipant, self).default_get(fields)
+
+        if 'participant' in result and result['participant'] and 'registration_id' in result:
+            days_ids = []
+            registration = self.env['event.registration'].browse(result['registration_id'])
+            for day in self.env['event.day'].search([('event_period', '=', 'maincamp'),
+                                                     ('event_id', '=', registration.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate': True,
+                                       'the_date': day.event_date
+                                      }))
+            result['camp_day_ids'] = days_ids
+        _logger.info('GET: %s', result)
+        return result
+    
+#     @api.model
+#     def create(self, vals):
+#         par = super(FinalRegistrationParticipant, self).create(vals)
+#         for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp'):
+#             new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
+#                                                          'day_id': day.id,
+#                                                          'will_participate' : False
+#                                                          })
+#         return par
 
     @api.multi
     def check_all_days(self):
