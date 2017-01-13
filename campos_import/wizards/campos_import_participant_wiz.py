@@ -19,6 +19,8 @@ class CamposImportParticipantWiz(models.TransientModel):
     
     participant_from_date = fields.Date('Date of arrival', required=True, default='2017-07-22')
     participant_to_date = fields.Date('Date of departure', required=True, default='2017-07-30')
+    own_transport_to_camp = fields.Boolean('No common transport TO camp')
+    own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     
     @api.model
     def default_get(self, fields):
@@ -27,6 +29,8 @@ class CamposImportParticipantWiz(models.TransientModel):
         if 'remote_event_id' in result:
             remote_event = self.env['campos.import.event'].browse(result['remote_event_id'])
             self.env['campos.import.member.profile'].import_from_event(remote_event)
+            result['participant_from_date'] = remote_event.date_begin
+            result['participant_to_date'] = remote_event.date_end
         return result
  
 
@@ -34,8 +38,7 @@ class CamposImportParticipantWiz(models.TransientModel):
     def doit(self):
         cepd = self.env['campos.event.participant.day']
         for wizard in self:
-            ed_ids = self.env['event.day'].search([('event_date', '>=', wizard.participant_from_date),
-                                                   ('event_date', '<=', wizard.participant_to_date ),
+            ed_ids = self.env['event.day'].search([('event_period', '=', 'main'),
                                                    ('event_id', '=', wizard.registration_id.event_id.id)])
             # TODO
             for mbr in wizard.member_ids:
@@ -51,10 +54,12 @@ class CamposImportParticipantWiz(models.TransientModel):
                                                                                                          'name': mbr.name,
                                                                                                          'birthdate': mbr.birthdate,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
+                                                                                                         'own_transport_to_camp': wizard.own_transport_to_camp,
+                                                                                                         'own_transport_from_camp': wizard.own_transport_to_camp,
                                                                                                          })
                     for day in ed_ids:
                         cepd.create({'participant_id': mbr.participant_id.id,
                                      'day_id': day.id,
-                                     'will_participate': True,
+                                     'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
 

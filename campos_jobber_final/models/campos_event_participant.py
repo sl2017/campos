@@ -18,3 +18,17 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    payreq_state=fields.Selection([('draft', 'Draft'),
+                                   ('cancelled', 'Cancelled'),
+                                   ('approved', 'Approved'),
+                                   ('refused', 'Refused')], default='draft', string='Pay Req state')
+    payreq_approved_date = fields.Datetime('Pay Req Approved')
+    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By')
+    
+    @api.multi
+    def action_aprove_payreq(self):
+        self.write({'payreq_state': 'approved'})
+        
+    @api.multi
+    def action_refuse_payreq(self):
+        self.write({'payreq_state': 'refused'})

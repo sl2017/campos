@@ -44,7 +44,8 @@
             </tree>
         </field>
     </record>
-
+    
+   
     <record model="ir.actions.act_window" id="campos_jobber_accomodation_act_window">
         <field name="name">Campos Jobber Accomodation</field> <!-- TODO -->
         <field name="res_model">campos.jobber.accomodation</field>
