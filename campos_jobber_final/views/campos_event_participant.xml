@@ -31,7 +31,6 @@
 							</field>
             			</page>
             			<page string="Accomodation">
-							<field name="reside_other_group_id"/>
 							<field name="accomodation_ids">
 								<tree>
 									<field name="date_from"/>
