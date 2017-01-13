@@ -14,9 +14,11 @@ class CamposJobberAccomodation(models.Model):
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     date_from = fields.Date('From date')
     date_to = fields.Date('To date')
-    registration_id = fields.Many2one('event.registration', 'Participant')
+    registration_id = fields.Many2one('event.registration', 'Group')
     state = fields.Selection([('draft', 'Draft'),
-                              ('approved', 'Approved')], default='draft', string='State')
+                              ('cancelled', 'Cancelled'),
+                              ('approved', 'Approved'),
+                              ('refused', 'Refused')], default='draft', string='State')
     approved_date = fields.Datetime('Approved')
     approved_user_id = fields.Many2one('res.users', 'Approved By')
 
@@ -45,3 +47,11 @@ class CamposJobberAccomodation(models.Model):
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
         return super(CamposJobberAccomodation, self).write(vals)
+    
+    @api.multi
+    def action_aprove(self):
+        self.write({'state': 'approved'})
+        
+    @api.multi
+    def action_refuse(self):
+        self.write({'state': 'refused'})

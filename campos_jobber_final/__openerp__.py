@@ -12,6 +12,11 @@
     'website': 'www.steingabelgaard.dk',
     'depends': ['campos_final_registration'],
     'data': [
+        'security/campos_jobber_canteen.xml',
+        'views/campos_jobber_canteen.xml',
+        'security/campos_canteen.xml',
+        'views/campos_canteen.xml',
+        'views/event_registration.xml',
         'security/campos_jobber_accomodation.xml',
         #'views/campos_jobber_accomodation.xml',
         'views/campos_event_participant.xml',

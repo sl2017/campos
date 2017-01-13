@@ -11,10 +11,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
                 </header>
                 <sheet>
-                    <!-- TODO -->
                     <group>
                         <field name="name"/>
                         <field name="code"/>

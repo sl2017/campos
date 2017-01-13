@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="event_registration_form_view">
+        <field name="name">event.registration.form (in campos_jobber_final)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
+        <field name="arch" type="xml">
+            <page name="pre_reg" position="before">
+            	<page name="Associated jobbers">
+            		<field name="jobber_accomodation_ids" readonly="1">
+            			<tree>
+            				<field name="participant_id"/>
+            				<field name="date_from"/>
+            				<field name="date_to"/>
+            				<field name="state"/>
+            				<button name="action_approve" states="draft,refused" string="string" type="object" icon="STOCK_APPLY"/>
+            				<button name="action_refuse" states="draft,approved" string="string" type="object" icon="STOCK_CANCEL"/>
+            			
+            			
+            			</tree>
+            		</field>
+            		<field name="jobber_pay_for_ids" readonly="1">
+            			<tree>
+            				<field name="name"/>
+            				<field name="payreq_state"/>
+            				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
+            				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>
+            			
+            			
+            			</tree>
+            		</field>
+            	
+            	</page>
+            
+            </page>
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>

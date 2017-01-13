@@ -115,10 +115,9 @@
 										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'} ">
 											<tree>
 												<field name="id" invisible="1"/>
-												<field name="active" invisible="1"/>
 												<field name="name"/>
-												<field name="own_transport_to_camp"/>
-												<field name="own_transport_from_camp"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
 												<field name="state" readonly="1" string="Registration State"/>
 												<field name="access_token_id" string="Access Token Id" invisible="1"/>
 											</tree>
@@ -183,7 +182,7 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
-								<page string="Pre-registration">
+								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
 								<page string="Participants">
@@ -270,8 +269,8 @@
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
-												<field name="own_transport_to_camp"/>
-												<field name="own_transport_from_camp"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
 												<field name="state" readonly="1" string="Registration State"/>
 												<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
 											</tree>
@@ -336,7 +335,7 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
-								<page string="Pre-registration">
+								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
 								<page string="Participants">
@@ -426,8 +425,8 @@
 							<field name="email"/>
 							<field name="mobile"/>
 							<field name="access_token_id" invisible="1"/>
-							<field name="own_transport_to_camp"/>
-							<field name="own_transport_from_camp"/>
+							<field name="transport_to_camp"/>
+							<field name="transport_from_camp"/>
 							<field name="state" readonly="1" string="Registration State"/>
 							<button name="check_all_days" 
 											type="object"    

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_jobber_canteen_form_view">
+        <field name="name">campos.jobber.canteen.form (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.canteen</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    
+                </header>
+                <sheet>
+                    
+                    <group>
+                		<field name="participant_id"/>
+                		<field name="eat_at"/>
+                		<field name="date_from"/>
+                		<field name="date_to"/>
+                		<field name="canteen_id"/>
+                		<field name="registration_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_jobber_canteen_search_view">
+        <field name="name">campos.jobber.canteen.search (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.canteen</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="participant_id"/>
+                <field name="eat_at"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="canteen_id"/>
+                <field name="registration_id"/>
+                
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_jobber_canteen_tree_view">
+        <field name="name">campos.jobber.canteen.tree (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.canteen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="participant_id"/>
+                <field name="eat_at"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="canteen_id"/>
+                <field name="registration_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_jobber_canteen_act_window">
+        <field name="name">Campos Jobber Canteen</field>
+        <field name="res_model">campos.jobber.canteen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_jobber_canteen_menu">
+        <field name="name">Campos Jobber Canteen</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config"/>
+        <field name="action" ref="campos_jobber_canteen_act_window"/>
+        <field name="sequence" eval="50"/>
+    </record>
+
+</data>
+</openerp>

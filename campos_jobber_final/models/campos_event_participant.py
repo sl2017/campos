@@ -18,3 +18,40 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    payreq_state=fields.Selection([('draft', 'Draft'),
+                                   ('cancelled', 'Cancelled'),
+                                   ('approved', 'Approved'),
+                                   ('refused', 'Refused')], default='draft', string='Pay Req state')
+    payreq_approved_date = fields.Datetime('Pay Req Approved')
+    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By')
+    
+    @api.multi
+    def action_aprove_payreq(self):
+        self.write({'payreq_state': 'approved'})
+        
+    @api.multi
+    def action_refuse_payreq(self):
+        self.write({'payreq_state': 'refused'})
+        
+    @api.onchange('signup_state')
+    def onchange_signup_state(self):
+        if self.signup_state != 'draft':
+            self.transport_to_camp = False
+            self.transport_from_camp = False
+        if self.registration_id.partner_id.id == self.partner_id.id:
+            self.payreq_state = 'approved'
+        if not self.camp_day_ids:
+            days_ids = []
+            for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate': True,
+                                      }))
+            self.camp_day_ids = days_ids
+    
+    @api.onchange('registration_id')
+    def onchange_registration_id(self):
+        if self.registration_id.partner_id.id != self.partner_id.id:
+            self.payreq_state = 'draft'
+        else:
+            self.payreq_state = 'approved'

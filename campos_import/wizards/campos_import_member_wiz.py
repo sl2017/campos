@@ -23,6 +23,8 @@ class CamposImportMemberWiz(models.TransientModel):
                                    column2='wiz_id')
     participant_from_date = fields.Date('Date of arrival', required=True, default='2017-07-22')
     participant_to_date = fields.Date('Date of departure', required=True, default='2017-07-30')
+    transport_to_camp = fields.Boolean('Common transport to camp', default=True)
+    transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     
 
     @api.model
@@ -39,8 +41,7 @@ class CamposImportMemberWiz(models.TransientModel):
     def doit(self):
         cepd = self.env['campos.event.participant.day']
         for wizard in self:
-            ed_ids = self.env['event.day'].search([('event_date', '>=', wizard.participant_from_date),
-                                                   ('event_date', '<=', wizard.participant_to_date ),
+            ed_ids = self.env['event.day'].search([('event_period', '=', 'main'),
                                                    ('event_id', '=', wizard.registration_id.event_id.id)])
             # TODO
             for mbr in wizard.member_ids:
@@ -56,11 +57,13 @@ class CamposImportMemberWiz(models.TransientModel):
                                                                                                          'name': mbr.name,
                                                                                                          'birthdate': mbr.birthdate,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
+                                                                                                         'transport_to_camp': wizard.transport_to_camp,
+                                                                                                         'transport_from_camp': wizard.transport_from_camp,
                                                                                                          })
                     for day in ed_ids:
                         cepd.create({'participant_id': mbr.participant_id.id,
                                      'day_id': day.id,
-                                     'will_participate': True,
+                                     'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
             pass
 #         action = {

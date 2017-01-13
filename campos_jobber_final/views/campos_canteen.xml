@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_canteen_form_view">
+        <field name="name">campos.canteen.form (in campos_jobber_final)</field>
+        <field name="model">campos.canteen</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_search_view">
+        <field name="name">campos.canteen.search (in campos_jobber_final)</field>
+        <field name="model">campos.canteen</field>
+        <field name="arch" type="xml">
+            <search>
+            	<field name="name"/>
+                <field name="subcamp_id"/>
+                <field name="committee_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_tree_view">
+        <field name="name">campos.canteen.tree (in campos_jobber_final)</field>
+        <field name="model">campos.canteen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="subcamp_id"/>
+                <field name="committee_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_canteen_act_window">
+        <field name="name">Campos Canteen</field>
+        <field name="res_model">campos.canteen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_canteen_menu">
+        <field name="name">Campos Canteen</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config"/>
+        <field name="action" ref="campos_canteen_act_window"/>
+        <field name="sequence" eval="40"/>
+    </record>
+
+</data>
+</openerp>
