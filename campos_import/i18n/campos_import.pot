@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-11 20:44+0000\n"
-"PO-Revision-Date: 2017-01-11 20:44+0000\n"
+"POT-Creation-Date: 2017-01-13 22:56+0000\n"
+"PO-Revision-Date: 2017-01-13 22:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,18 @@ msgstr ""
 #. module: campos_import
 #: selection:campos.import.member.profile,state:0
 msgid "Cancelled"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.wiz,transport_from_camp:0
+#: field:campos.import.participant.wiz,transport_from_camp:0
+msgid "Common transport from camp"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.wiz,transport_to_camp:0
+#: field:campos.import.participant.wiz,transport_to_camp:0
+msgid "Common transport to camp"
 msgstr ""
 
 #. module: campos_import
@@ -290,6 +302,11 @@ msgstr ""
 #. module: campos_import
 #: field:campos.import.member.profile,state:0
 msgid "State"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
+msgid "These selection will apply to all members imported"
 msgstr ""
 
 #. module: campos_import
