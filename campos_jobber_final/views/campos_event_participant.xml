@@ -15,7 +15,7 @@
             		<group>
             			<field name="signup_state"/>
             		</group>
-            		<notebook>
+            		<notebook attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
             			<page string="Camp Days">
             				<button name="check_all_days" 
 											type="object"    

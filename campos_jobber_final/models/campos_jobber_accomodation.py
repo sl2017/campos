@@ -14,7 +14,7 @@ class CamposJobberAccomodation(models.Model):
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     date_from = fields.Date('From date')
     date_to = fields.Date('To date')
-    registration_id = fields.Many2one('event.registration', 'Participant')
+    registration_id = fields.Many2one('event.registration', 'Group')
     state = fields.Selection([('draft', 'Draft'),
                               ('cancelled', 'Cancelled'),
                               ('approved', 'Approved'),

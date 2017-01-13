@@ -32,3 +32,26 @@ class CamposEventParticipant(models.Model):
     @api.multi
     def action_refuse_payreq(self):
         self.write({'payreq_state': 'refused'})
+        
+    @api.onchange('signup_state')
+    def onchange_signup_state(self):
+        if self.signup_state != 'draft':
+            self.transport_to_camp = False
+            self.transport_from_camp = False
+        if self.registration_id.partner_id.id == self.partner_id.id:
+            self.payreq_state = 'approved'
+        if not self.camp_day_ids:
+            days_ids = []
+            for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate': True,
+                                      }))
+            self.camp_day_ids = days_ids
+    
+    @api.onchange('registration_id')
+    def onchange_registration_id(self):
+        if self.registration_id.partner_id.id != self.partner_id.id:
+            self.payreq_state = 'draft'
+        else:
+            self.payreq_state = 'approved'

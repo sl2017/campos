@@ -19,8 +19,8 @@ class CamposImportParticipantWiz(models.TransientModel):
     
     participant_from_date = fields.Date('Date of arrival', required=True, default='2017-07-22')
     participant_to_date = fields.Date('Date of departure', required=True, default='2017-07-30')
-    transport_to_camp = fields.Boolean('Common transport to camp')
-    transport_from_camp = fields.Boolean('Common transport from camp')
+    transport_to_camp = fields.Boolean('Common transport to camp', default=True)
+    transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     
     @api.model
     def default_get(self, fields):
