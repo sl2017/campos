@@ -24,4 +24,29 @@ class CamposJobberCanteen(models.Model):
                               ('refused', 'Refused')], default='draft', string='State')
     approved_date = fields.Datetime('Approved')
     approved_user_id = fields.Many2one('res.users', 'Approved By')
+    
+    
+    @api.model
+    @api.returns('self', lambda value:value.id)
+    def create(self, vals):
+        if 'state' in vals and vals['state'] == 'approved':
+            vals['approved_date'] = fields.Datetime.now()
+            vals['spproved_user_id'] = self.env.uid
+        return super(CamposJobberCanteen,self).create(vals)
+    
+    @api.multi
+    def write(self, vals):
+        if 'state' in vals and vals['state'] == 'approved':
+            vals['approved_date'] = fields.Datetime.now()
+            vals['spproved_user_id'] = self.env.uid
+        return super(CamposJobberCanteen, self).write(vals)
+    
+    @api.multi
+    def action_approve(self):
+        self.write({'state': 'approved'})
+        
+    @api.multi
+    def action_refuse(self):
+        self.write({'state': 'refused'})
+
 

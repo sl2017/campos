@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Campos Import',
+    'name': 'CampOS Import',
     'description': """
         Participant import helper module""",
     'version': '8.0.1.0.0',

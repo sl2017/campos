@@ -11,9 +11,10 @@ class CamposEventParticipant(models.Model):
 
     signup_state = fields.Selection([('draft', 'Not signed up'),
                                      ('oncamp', 'Camp Jobber'),
-                                     ('dayjobber', 'Day Jobber')], default='draft', string='Final registration')
+                                     ('dayjobber', 'Day Jobber')], default='draft', string='Final registration', track_visibility='onchange')
     accomodation_ids = fields.One2many('campos.jobber.accomodation', 'participant_id', 'Accomodation')
     # AS on registration
+    canteen_ids = fields.One2many('campos.jobber.canteen', 'participant_id', 'Catering')
     need_ids = fields.Many2many('event.registration.need', string='Special needs')
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
@@ -21,9 +22,9 @@ class CamposEventParticipant(models.Model):
     payreq_state=fields.Selection([('draft', 'Draft'),
                                    ('cancelled', 'Cancelled'),
                                    ('approved', 'Approved'),
-                                   ('refused', 'Refused')], default='draft', string='Pay Req state')
-    payreq_approved_date = fields.Datetime('Pay Req Approved')
-    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By')
+                                   ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
+    payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
+    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
     
     @api.multi
     def action_aprove_payreq(self):

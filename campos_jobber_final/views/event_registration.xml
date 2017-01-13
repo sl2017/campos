@@ -11,7 +11,8 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
-            	<page name="Associated jobbers">
+            	<page string="Associated jobbers">
+            		<label string="Jobber to accomodate"/>
             		<field name="jobber_accomodation_ids" readonly="1">
             			<tree>
             				<field name="participant_id"/>
@@ -24,10 +25,24 @@
             			
             			</tree>
             		</field>
+            		<label string="Jobber to pay for with the Group"/>
             		<field name="jobber_pay_for_ids" readonly="1">
             			<tree>
             				<field name="name"/>
-            				<field name="payreq_state"/>
+            				<field name="state"/>
+            				<button name="action_approve" states="draft,refused" string="string" type="object" icon="STOCK_APPLY"/>
+            				<button name="action_refuse" states="draft,approved" string="string" type="object" icon="STOCK_CANCEL"/>
+            			
+            			
+            			</tree>
+            		</field>
+            		<label string="Catering"/>
+            		<field name="jobber_catering_ids" readonly="1">
+            			<tree>
+            				<field name="participant_id"/>
+            				<field name="date_from"/>
+            				<field name="date_to"/>
+            				<field name="state"/>
             				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
             				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>
             			

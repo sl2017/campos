@@ -49,7 +49,7 @@ class CamposJobberAccomodation(models.Model):
         return super(CamposJobberAccomodation, self).write(vals)
     
     @api.multi
-    def action_aprove(self):
+    def action_approve(self):
         self.write({'state': 'approved'})
         
     @api.multi

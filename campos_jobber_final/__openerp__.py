@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Campos Jobber Final',
+    'name': 'CampOS Jobber Final',
     'description': """
         Final registration for jobbers""",
     'version': '8.0.1.0.0',
