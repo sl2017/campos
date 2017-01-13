@@ -196,11 +196,8 @@
 											<field name="participant_own_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-<<<<<<< HEAD
 											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
-=======
 											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
->>>>>>> branch '8.0' of https://github.com/sl2017/campos.git
 										</tree>
 									</field>
 								</page>
@@ -353,11 +350,8 @@
 											<field name="participant_own_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-<<<<<<< HEAD
+
 											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
-=======
-											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
->>>>>>> branch '8.0' of https://github.com/sl2017/campos.git
 										</tree>
 									</field>
 								</page>
