@@ -83,7 +83,7 @@ class FinalRegistrationParticipant(models.Model):
     own_transport_to_camp = fields.Boolean('No common transport TO camp')
     own_transport_from_camp = fields.Boolean('No common transport FROM camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
-    reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
+#    reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
     access_token_id = fields.Char('Id of Access Token')
     @api.model
     def create(self, vals):
@@ -106,7 +106,10 @@ class FinalRegistrationParticipant(models.Model):
             record.will_participate = False
     @api.one
     def inactivate_participant(self):
-        self.active = False
+        self.state = 'deregistered'
+    @api.one
+    def activate_participant(self):
+        self.state = 'draft'
     
 class ParticipantCampDay(models.Model):
     '''
