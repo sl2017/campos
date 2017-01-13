@@ -116,8 +116,8 @@
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
-												<field name="own_transport_to_camp"/>
-												<field name="own_transport_from_camp"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
 												<field name="reside_other_group_id"/>
 												<field name="access_token_id" string="Access Token Id" invisible="1"/>
 											</tree>
@@ -192,11 +192,11 @@
 											<field name="participant_total" sum="Total"/>
 											<field name="participant_from_date"/>
 											<field name="participant_to_date"/>
-											<field name="participant_own_transport_to_camp_total" sum="Total"/>
-											<field name="participant_own_transport_from_camp_total" sum="Total"/>
+											<field name="participant_transport_to_camp_total" sum="Total"/>
+											<field name="participant_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
+											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_transport_to_camp_total', '=', 0),('participant_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
 								</page>
@@ -269,8 +269,8 @@
 											<tree>
 												<field name="id" invisible="1"/>
 												<field name="name"/>
-												<field name="own_transport_to_camp"/>
-												<field name="own_transport_from_camp"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
 												<field name="reside_other_group_id"/>
 												<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
 											</tree>
@@ -345,11 +345,11 @@
 											<field name="participant_total" sum="Total"/>
 											<field name="participant_from_date"/>
 											<field name="participant_to_date"/>
-											<field name="participant_own_transport_to_camp_total" sum="Total"/>
-											<field name="participant_own_transport_from_camp_total" sum="Total"/>
+											<field name="participant_transport_to_camp_total" sum="Total"/>
+											<field name="participant_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
+											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_transport_to_camp_total', '=', 0),('participant_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
 								</page>
@@ -419,8 +419,8 @@
 							<field name="mobile"/>
 							<field name="access_token_id" invisible="1"/>
 							<field name="reside_other_group_id"/>							
-							<field name="own_transport_to_camp"/>
-							<field name="own_transport_from_camp"/>
+							<field name="transport_to_camp"/>
+							<field name="transport_from_camp"/>
 							<button name="check_all_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>

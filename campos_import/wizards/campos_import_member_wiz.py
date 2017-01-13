@@ -23,8 +23,8 @@ class CamposImportMemberWiz(models.TransientModel):
                                    column2='wiz_id')
     participant_from_date = fields.Date('Date of arrival', required=True, default='2017-07-22')
     participant_to_date = fields.Date('Date of departure', required=True, default='2017-07-30')
-    own_transport_to_camp = fields.Boolean('No common transport TO camp')
-    own_transport_from_camp = fields.Boolean('No common transport FROM camp')
+    transport_to_camp = fields.Boolean('Common transport to camp')
+    transport_from_camp = fields.Boolean('Common transport from camp')
     
 
     @api.model
@@ -57,8 +57,8 @@ class CamposImportMemberWiz(models.TransientModel):
                                                                                                          'name': mbr.name,
                                                                                                          'birthdate': mbr.birthdate,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
-                                                                                                         'own_transport_to_camp': wizard.own_transport_to_camp,
-                                                                                                         'own_transport_from_camp': wizard.own_transport_from_camp,
+                                                                                                         'transport_to_camp': wizard.transport_to_camp,
+                                                                                                         'transport_from_camp': wizard.transport_from_camp,
                                                                                                          })
                     for day in ed_ids:
                         cepd.create({'participant_id': mbr.participant_id.id,

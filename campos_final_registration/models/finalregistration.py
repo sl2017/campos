@@ -80,8 +80,8 @@ class FinalRegistrationParticipant(models.Model):
     Extending event participant for final registration
     '''
     _inherit = 'campos.event.participant'
-    own_transport_to_camp = fields.Boolean('No common transport TO camp')
-    own_transport_from_camp = fields.Boolean('No common transport FROM camp')
+    transport_to_camp = fields.Boolean('Common transport to camp')
+    transport_from_camp = fields.Boolean('Common transport from camp')
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
     access_token_id = fields.Char('Id of Access Token')

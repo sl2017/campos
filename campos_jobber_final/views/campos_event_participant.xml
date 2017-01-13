@@ -45,8 +45,8 @@
             			</page>
             			<page string="Transportation">
             				<group>
-            					<field name="own_transport_to_camp"/>
-            					<field name="own_transport_from_camp"/>
+            					<field name="transport_to_camp"/>
+            					<field name="transport_from_camp"/>
             				</group>
             			</page>
 						<page string="Special needs">
