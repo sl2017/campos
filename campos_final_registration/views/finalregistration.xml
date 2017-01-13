@@ -112,13 +112,13 @@
 						<notebook colspan="2">
 								<page string="Participants">
 									<group>
-										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'} ">
-											<tree>
+										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
+											<tree delete="0">
 												<field name="id" invisible="1"/>
 												<field name="name"/>
 												<field name="transport_to_camp"/>
 												<field name="transport_from_camp"/>
-												<field name="reside_other_group_id"/>
+												<field name="state" readonly="1" string="Registration State"/>
 												<field name="access_token_id" string="Access Token Id" invisible="1"/>
 											</tree>
 										</field>
@@ -266,12 +266,12 @@
 								<page string="Participants">
 									<group>
 										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
-											<tree>
+											<tree  delete="0">
 												<field name="id" invisible="1"/>
 												<field name="name"/>
 												<field name="transport_to_camp"/>
 												<field name="transport_from_camp"/>
-												<field name="reside_other_group_id"/>
+												<field name="state" readonly="1" string="Registration State"/>
 												<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
 											</tree>
 										</field>
@@ -349,7 +349,6 @@
 											<field name="participant_own_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-
 											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
@@ -394,6 +393,7 @@
 						<field name="event_day_ids" colspan="1" nolabel="1"  context="{'default_event_id': id}">
 							<tree editable="bottom">
                 <field name="event_date"/>
+                <field name="event_period"/>								
            		</tree>
            	</field>
           </page>
@@ -410,6 +410,12 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
+							<button name="inactivate_participant" 
+											type="object"    
+											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '=', 'deregistered')]}" />
+							<button name="activate_participant" 
+											type="object"    
+											string="Re-activate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '!=', 'deregistered')]}" />
 					</header>
 					<sheet>
 						<group name="sheet2">
@@ -419,9 +425,9 @@
 							<field name="email"/>
 							<field name="mobile"/>
 							<field name="access_token_id" invisible="1"/>
-							<field name="reside_other_group_id"/>							
 							<field name="transport_to_camp"/>
 							<field name="transport_from_camp"/>
+							<field name="state" readonly="1" string="Registration State"/>
 							<button name="check_all_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>

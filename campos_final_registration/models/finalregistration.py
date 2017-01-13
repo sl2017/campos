@@ -83,7 +83,6 @@ class FinalRegistrationParticipant(models.Model):
     transport_to_camp = fields.Boolean('Common transport to camp', default=True)
     transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
-    reside_other_group_id = fields.Many2one('res.partner', 'Resides with other group')
     access_token_id = fields.Char('Id of Access Token')
     @api.model
     def create(self, vals):
@@ -104,6 +103,12 @@ class FinalRegistrationParticipant(models.Model):
     def uncheck_all_days(self):
         for record in self.camp_day_ids:
             record.will_participate = False
+    @api.one
+    def inactivate_participant(self):
+        self.state = 'deregistered'
+    @api.one
+    def activate_participant(self):
+        self.state = 'draft'
     
 class ParticipantCampDay(models.Model):
     '''
