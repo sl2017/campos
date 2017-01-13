@@ -192,11 +192,11 @@
 											<field name="participant_total" sum="Total"/>
 											<field name="participant_from_date"/>
 											<field name="participant_to_date"/>
-											<field name="participant_transport_to_camp_total" sum="Total"/>
-											<field name="participant_transport_from_camp_total" sum="Total"/>
+											<field name="participant_own_transport_to_camp_total" sum="Total"/>
+											<field name="participant_own_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_transport_to_camp_total', '=', 0),('participant_transport_from_camp_total', '=', 0)]}"/>
+											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
 								</page>
@@ -345,11 +345,11 @@
 											<field name="participant_total" sum="Total"/>
 											<field name="participant_from_date"/>
 											<field name="participant_to_date"/>
-											<field name="participant_transport_to_camp_total" sum="Total"/>
-											<field name="participant_transport_from_camp_total" sum="Total"/>
+											<field name="participant_own_transport_to_camp_total" sum="Total"/>
+											<field name="participant_own_transport_from_camp_total" sum="Total"/>
 											<field name="participant_common_transport_to_camp_total" sum="Total"/>
 											<field name="participant_common_transport_from_camp_total" sum="Total"/>
-											<field name="participant_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_transport_to_camp_total', '=', 0),('participant_transport_from_camp_total', '=', 0)]}"/>
+											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
 								</page>
