@@ -3,6 +3,7 @@
 ..  automodule:: package
 
 """
+from . import webtourconfig
 from . import webtourusneed
 from . import webtourusdestination
 from . import webtourparticipant

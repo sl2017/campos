@@ -13,10 +13,10 @@ class WebtourParticipant(models.Model):
     webtourusgroupidno = fields.Char(string='webtour us Group ID no', related='registration_id.webtourusgroupidno')                                 
     
     tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
-                                            'destinationidno',
+                                            'id',
                                             ondelete='set null')
     fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
-                                            'destinationidno',
+                                            'id',
                                             ondelete='set null')
     tocampdate = fields.Date('To Camp Date', required=False)
     fromcampdate = fields.Date('From Camp Date', required=False)
@@ -95,7 +95,9 @@ class WebtourParticipant(models.Model):
     @api.multi
     def write(self, vals):
         _logger.info("Transportation Participant Write Entered %s", vals.keys())
-        ret = super(WebtourParticipant, self).write(vals)            
+        ret = super(WebtourParticipant, self).write(vals)    
+        campdesination= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)]).campdestinationid.destinationidno
+               
         for par in self:
      
             if  ('tocampfromdestination_id' in vals 
@@ -109,7 +111,7 @@ class WebtourParticipant(models.Model):
                     dicto1["campos_startdatetime"] = par.tocampdate
                     dicto1["campos_enddatetime"] = par.tocampdate
                     dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
-                    dicto1["campos_enddestinationidno"] = 4389
+                    dicto1["campos_enddestinationidno"] = campdesination
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
                     dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
@@ -120,7 +122,7 @@ class WebtourParticipant(models.Model):
                     par.tocampusneed_id.campos_startdatetime = par.tocampdate
                     par.tocampusneed_id.campos_enddatetime = par.tocampdate
                     par.tocampusneed_id.campos_startdestinationidno = par.tocampfromdestination_id.destinationidno
-                    par.tocampusneed_id.campos_enddestinationidno = 4389
+                    par.tocampusneed_id.campos_enddestinationidno = campdesination
                     par.tocampusneed_id.webtour_useridno = par.webtourususeridno
                     par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno
                     par.tocampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
@@ -137,7 +139,7 @@ class WebtourParticipant(models.Model):
                     dicto1["participant_id"] = par.id
                     dicto1["campos_startdatetime"] = par.fromcampdate
                     dicto1["campos_enddatetime"] = par.fromcampdate                    
-                    dicto1["campos_startdestinationidno"] = 4389
+                    dicto1["campos_startdestinationidno"] = campdesination
                     dicto1["campos_enddestinationidno"] = par.fromcamptodestination_id.destinationidno
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
@@ -148,7 +150,7 @@ class WebtourParticipant(models.Model):
                 else:
                     par.fromcampusneed_id.campos_startdatetime = par.fromcampdate
                     par.fromcampusneed_id.campos_enddatetime = par.fromcampdate
-                    par.fromcampusneed_id.campos_startdestinationidno = 4389
+                    par.fromcampusneed_id.campos_startdestinationidno = campdesination
                     par.fromcampusneed_id.campos_enddestinationidno = par.fromcamptodestination_id.destinationidno
                     par.fromcampusneed_id.webtour_useridno = par.webtourususeridno
                     par.fromcampusneed_id.webtour_groupidno = par.webtourusgroupidno     

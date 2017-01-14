@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourconfig" model="ir.ui.view">
+<field name="name">Webtour Configuration</field>
+<field name="model">campos.webtourconfig</field>
+<field name="arch" type="xml">
+<tree>
+<field name="event_id"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourconfig" model="ir.ui.view">
+<field name="name">Webtour Configuration</field>
+<field name="model">campos.webtourconfig</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+
+
+<group string="Event">
+	<field name="event_id"/>
+</group>
+<group string="URL's">
+<field name="webtoururl"/>
+<field name="login_url_part"/>
+</group>
+<group string="Camp destination">
+	<field name="campdestinationid"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<!-- Action to open Webtour Config list -->
+<act_window id="action_webtourconfig"
+name="Camp OS Webtour Config"
+res_model="campos.webtourconfig"
+view_mode="tree,form" />
+
+
+<!-- Menu item to open Campos Webtour Destination list  -->
+<menuitem id="menu_action_campos_webtour_config" parent="menu_campos_transportation" name="Webtour Configuration" action="action_webtourconfig" groups="campos_event.group_campos_admin" sequence="50"/>
+
+</data>
+</openerp>
