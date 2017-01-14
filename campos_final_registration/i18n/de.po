@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-11 20:44+0000\n"
-"PO-Revision-Date: 2017-01-11 20:44+0000\n"
+"POT-Creation-Date: 2017-01-13 22:56+0000\n"
+"PO-Revision-Date: 2017-01-13 22:56+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:61
+#: code:addons/campos_final_registration/models/finalregistration.py:67
 #: sql_constraint:event.registration.friendshipgrouplist:0
 #, python-format
 msgid "A group can only be added once as friendship group"
@@ -59,6 +59,16 @@ msgstr ""
 #. module: campos_final_registration
 #: field:event.registration,child_certificates_accept:0
 msgid "Check declaration of child certificates"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_from_camp:0
+msgid "Common transport from camp"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_to_camp:0
+msgid "Common transport to camp"
 msgstr ""
 
 #. module: campos_final_registration
@@ -118,7 +128,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:166
+#: code:addons/campos_final_registration/models/finalregistration.py:196
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -234,6 +244,11 @@ msgid "Id of Access Token"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Inactivate Participant"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Internal Information"
@@ -298,16 +313,6 @@ msgstr ""
 #. module: campos_final_registration
 #: field:event.registration,other_need_update_date:0
 msgid "Need updated"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,own_transport_from_camp:0
-msgid "No common transport FROM camp"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,own_transport_to_camp:0
-msgid "No common transport TO camp"
 msgstr ""
 
 #. module: campos_final_registration
@@ -381,10 +386,22 @@ msgid "Pre-registration"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Re-activate Participant"
+msgstr ""
+
+#. module: campos_final_registration
 #: field:campos.event.participant.day,registration_id_stored:0
 #: field:event.registration.friendshipgrouplist,own_registration_id:0
 #: field:event.registration.needlist,registration_id:0
 msgid "Registration"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Registration State"
 msgstr ""
 
 #. module: campos_final_registration
@@ -411,11 +428,6 @@ msgstr ""
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Reopen Registration"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,reside_other_group_id:0
-msgid "Resides with other group"
 msgstr ""
 
 #. module: campos_final_registration

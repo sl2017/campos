@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-11 20:44+0000\n"
-"PO-Revision-Date: 2017-01-11 20:44+0000\n"
+"POT-Creation-Date: 2017-01-13 22:56+0000\n"
+"PO-Revision-Date: 2017-01-13 22:56+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:61
+#: code:addons/campos_final_registration/models/finalregistration.py:67
 #: sql_constraint:event.registration.friendshipgrouplist:0
 #, python-format
 msgid "A group can only be added once as friendship group"
-msgstr ""
+msgstr "Man kan kun tilknyttes en venskabsgruppe"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -63,7 +63,18 @@ msgstr "Marker alle dage"
 #: field:event.registration,child_certificates_accept:0
 msgid "Check declaration of child certificates"
 msgstr ""
-"Godkend at gruppen har indhentet børneattest for alle voksne deltagere"
+"Erklære at gruppen/kredsen har indhentet børneattest for alle voksne "
+"deltagere"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_from_camp:0
+msgid "Common transport from camp"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_to_camp:0
+msgid "Common transport to camp"
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -74,7 +85,7 @@ msgstr "Kontaktperson"
 #. module: campos_final_registration
 #: field:event.registration.needlist,need_count:0
 msgid "Count"
-msgstr ""
+msgstr "Antal"
 
 #. module: campos_final_registration
 #: field:campos.event.participant.day,create_uid:0
@@ -122,7 +133,7 @@ msgid "Display Name"
 msgstr "Navn"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:166
+#: code:addons/campos_final_registration/models/finalregistration.py:196
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -178,7 +189,7 @@ msgstr "Lejr dag"
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree
 #: model:ir.ui.menu,name:campos_final_registration.menu_event_finalregistration
 msgid "Final Registration"
-msgstr "Endelig tilmelding"
+msgstr "Endelig tilmelding admin"
 
 #. module: campos_final_registration
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree_gl
@@ -188,12 +199,12 @@ msgstr "Endelig tilmedling"
 #. module: campos_final_registration
 #: field:event.registration.need,for_staff:0
 msgid "For Jobbers"
-msgstr ""
+msgstr "For jobbere"
 
 #. module: campos_final_registration
 #: field:event.registration.need,for_group:0
 msgid "For Scout Groups"
-msgstr ""
+msgstr "For spejdergrupper og Kredse"
 
 #. module: campos_final_registration
 #: field:event.registration.friendshipgrouplist,friendship_group_registration_id:0
@@ -203,7 +214,7 @@ msgstr "Venskabsgruppe"
 #. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_friendshipgrouplist
 msgid "Friendship Group List"
-msgstr ""
+msgstr "Liste over venskabsgrupper"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -236,6 +247,11 @@ msgstr ""
 #: field:campos.event.participant,access_token_id:0
 msgid "Id of Access Token"
 msgstr "Chip nummer"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Inactivate Participant"
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -280,7 +296,7 @@ msgstr "Sidste import"
 #. module: campos_final_registration
 #: selection:event.day,event_period:0
 msgid "Main Camp"
-msgstr ""
+msgstr "Hovedlejr"
 
 #. module: campos_final_registration
 #: field:campos.event.participant,mobile_clean:0
@@ -303,16 +319,6 @@ msgstr "Behovs navn"
 #: field:event.registration,other_need_update_date:0
 msgid "Need updated"
 msgstr "Behov opdateret"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,own_transport_from_camp:0
-msgid "No common transport FROM camp"
-msgstr "Ingen fælles transport FRA lejren"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,own_transport_to_camp:0
-msgid "No common transport TO camp"
-msgstr "Ingen fælles transport TIL lejren"
 
 #. module: campos_final_registration
 #: field:event.registration,other_need_description:0
@@ -349,7 +355,7 @@ msgstr "Deltagere"
 #. module: campos_final_registration
 #: field:event.day,event_period:0
 msgid "Period"
-msgstr ""
+msgstr "Periode"
 
 #. module: campos_final_registration
 #: field:event.registration,pioneering_pole_depot_id:0
@@ -371,12 +377,12 @@ msgstr "Rafter"
 #. module: campos_final_registration
 #: selection:event.day,event_period:0
 msgid "Post Camp"
-msgstr ""
+msgstr "Efterlejr"
 
 #. module: campos_final_registration
 #: selection:event.day,event_period:0
 msgid "Pre Camp"
-msgstr ""
+msgstr "Forlejr"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -385,11 +391,23 @@ msgid "Pre-registration"
 msgstr "Forhånds tilmelding"
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Re-activate Participant"
+msgstr ""
+
+#. module: campos_final_registration
 #: field:campos.event.participant.day,registration_id_stored:0
 #: field:event.registration.friendshipgrouplist,own_registration_id:0
 #: field:event.registration.needlist,registration_id:0
 msgid "Registration"
 msgstr "Registrering"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Registration State"
+msgstr ""
 
 #. module: campos_final_registration
 #: field:campos.event.participant,remote_link_id:0
@@ -416,11 +434,6 @@ msgstr ""
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Reopen Registration"
 msgstr "Genåben tilmeldingen"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,reside_other_group_id:0
-msgid "Resides with other group"
-msgstr "Overnatning hos andre grupper"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -488,7 +501,7 @@ msgstr "Fjern markering fra alle dage"
 #. module: campos_final_registration
 #: field:event.registration,child_certificates_user:0
 msgid "User signing declaration"
-msgstr ""
+msgstr "Den der har indsendt erklæringen"
 
 #. module: campos_final_registration
 #: field:campos.event.participant.day,will_participate:0
