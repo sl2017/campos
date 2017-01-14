@@ -260,8 +260,8 @@
 							<field name="child_certificates_date" readonly="1" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"/>
 							<field name="child_certificates_user" readonly="1" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"/>
 					
-		<!--				<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>
--->
+					<!-- 	<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>  -->
+
 							<notebook colspan="2">
 								<page string="Participants">
 									<group>
@@ -314,11 +314,13 @@
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 								</page>
+								<!-- 
 								<page string="Pioneering Poles">
 									<group>
 										<field name="pioneering_pole_depot_id" options="{'no_create': True}" readonly="1"/>
 									</group>
 								</page>
+								 -->
 								<page string="Agreements" position="after">
 									<group>
 										<field name="group_camp_agreements" readonly="1"/>

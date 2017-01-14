@@ -1,0 +1,2 @@
+"id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
+"product_for_groups","CampOS Group Leader","product.model_product_template","[('group_del_ok', '=', True)]","campos_preregistration.group_campos_groupleader","True","Fale","False","False"

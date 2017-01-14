@@ -15,6 +15,11 @@
             	<button string="Import from Member Service" type="action" name="%(campos_import_manager_wiz_act_window)d" context="{'default_registration_id': id}" />
             
             </field>
+            <page name="pre_reg" position="before">
+            	<page string="Material Order">
+            		<button name="action_sale_order" string="Material orders" type="object"/>
+            	</page>
+            </page>
         </field>
     </record>
     
