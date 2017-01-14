@@ -28,7 +28,7 @@
                     </field>
                 </group>
                 <footer>
-                    <button name='doit'
+                    <button name='action_member_import'
                         string='OK'
                         class='btn-primary oe_highlight'
                         type='object'/>

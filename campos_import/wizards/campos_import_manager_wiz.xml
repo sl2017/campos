@@ -20,12 +20,8 @@
                         type='action'/>
                 </group>
                 <footer>
-                    <button name='doit'
-                        string='OK'
-                        class='btn-primary oe_highlight'
-                        type='object'/>
-                    or
-                    <button string='Cancel'
+                    
+                    <button string='Close'
                         class='btn-default oe_link'
                         special='cancel'/>
                 </footer>

@@ -427,16 +427,27 @@
 							<field name="birthdate" required="1"/>
 							<field name="email"/>
 							<field name="mobile"/>
+							<field name="street"/>
+							<field name="street2"/>
+							<field name="zip"/>
+							<field name="city"/>
+							<field name="country_id"/>
 							<field name="access_token_id" invisible="1"/>
 							<field name="transport_to_camp"/>
 							<field name="transport_from_camp"/>
 							<field name="state" readonly="1" string="Registration State"/>
-							<button name="check_all_days" 
+							<button name="check_all_maincamp_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>
 							<button name="uncheck_all_days" 
 											type="object"    
 											string="Un-check all days" class = "oe_edit_only"/> 
+							<button name="check_all_first_half_days" 
+											type="object"    
+											string="Saturday to Wednesday" class = "oe_edit_only"/>
+							<button name="check_all_second_half_days" 
+											type="object"    
+											string="Wednesday to Sunday" class = "oe_edit_only"/>
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>

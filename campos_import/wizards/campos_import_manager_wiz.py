@@ -28,20 +28,6 @@ class CamposImportManagerWiz(models.TransientModel):
             self.env['campos.import.event'].import_from_membersys(registration)
         return result
 
-    @api.multi
-    def doit(self):
-        for wizard in self:
-            # TODO
-            pass
-        action = {
-            'type': 'ir.action.act_window',
-            'name': 'Action Name',  # TODO
-            'res_model': 'result.model',  # TODO
-            'domain': [('id', '=', result_ids)],  # TODO
-            'view_mode': 'form,tree',
-        }
-        return action
-
 
 class CamposImportEvent(models.Model):
 

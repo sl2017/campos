@@ -38,8 +38,8 @@ class CamposImportMemberWiz(models.TransientModel):
         return result
 
     @api.multi
-    def doit(self):
-        _logger.info('DOIT!')
+    def action_member_import(self):
+        _logger.info('DOIT! action_member_import')
         cepd = self.env['campos.event.participant.day']
         for wizard in self:
             ed_ids = self.env['event.day'].search([('event_period', '=', 'main'),
