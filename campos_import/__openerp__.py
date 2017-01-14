@@ -12,6 +12,7 @@
     'website': 'www.steingabelgaard.dk',
     'depends': ['campos_welcome',
                 'campos_final_registration',
+                'sale_order',
     ],
     'data': [
         'security/sale_order.xml',
