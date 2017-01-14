@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+#import datetime
+#import datetime_formatter
 from openerp import models, fields, api, _
 class FinalRegistration(models.Model):
     '''
@@ -84,6 +86,12 @@ class FinalRegistrationParticipant(models.Model):
     transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     access_token_id = fields.Char('Id of Access Token')
+    street = fields.Char(related='partner_id.street')
+    street2 = fields.Char(related='partner_id.street2')
+    zip = fields.Char(related='partner_id.zip')
+    city = fields.Char(related='partner_id.city')
+    country_id = fields.Char(related='partner_id.country_id.name')
+        
     @api.model
     def create(self, vals):
         par = super(FinalRegistrationParticipant, self).create(vals)
@@ -98,6 +106,24 @@ class FinalRegistrationParticipant(models.Model):
     def check_all_days(self):
         for record in self.camp_day_ids:
             record.will_participate = True
+    @api.multi
+    def check_all_maincamp_days(self):
+        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp'):
+            record.will_participate = True
+    @api.multi
+    def check_all_first_half_days(self):
+        wednesday = fields.Datetime.from_string('2017-07-26').date()
+        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() <= wednesday):
+            record.will_participate = True
+        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() > wednesday):
+            record.will_participate = False
+    @api.multi
+    def check_all_second_half_days(self):
+        wednesday = fields.Datetime.from_string('2017-07-26').date()
+        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() >= wednesday):
+            record.will_participate = True
+        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() < wednesday):
+            record.will_participate = False
             
     @api.multi
     def uncheck_all_days(self):
@@ -119,7 +145,15 @@ class ParticipantCampDay(models.Model):
     registration_id_stored = fields.Many2one(related='participant_id.registration_id', string='Registration', store=True)
     day_id = fields.Many2one('event.day', 'Event day')
     the_date = fields.Date(related='day_id.event_date', String='Event date')
+#    weekday = fields.Char(compute='_compute_weekday')
     will_participate = fields.Boolean('Will participate this day?')
+#    @api.depends('the_date')
+#    @api.multi
+#    def _compute_weekday(self):
+#        for record in self:
+#            record.weekday = fields.Datetime.from_string(record.the_date)
+#             datetime.strftime(record.the_date, '%A')
+    
 
 class EventDay(models.Model):
     '''
