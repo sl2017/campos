@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 22:56+0000\n"
-"PO-Revision-Date: 2017-01-13 22:56+0000\n"
+"POT-Creation-Date: 2017-01-14 19:58+0000\n"
+"PO-Revision-Date: 2017-01-14 19:58+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -442,6 +442,11 @@ msgid "Reverse Friendship Groups"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Saturday to Wednesday"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Scout group"
@@ -496,6 +501,11 @@ msgstr ""
 #. module: campos_final_registration
 #: field:event.registration,child_certificates_user:0
 msgid "User signing declaration"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Wednesday to Sunday"
 msgstr ""
 
 #. module: campos_final_registration

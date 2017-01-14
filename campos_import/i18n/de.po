@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 22:56+0000\n"
-"PO-Revision-Date: 2017-01-13 22:56+0000\n"
+"POT-Creation-Date: 2017-01-14 19:58+0000\n"
+"PO-Revision-Date: 2017-01-14 19:58+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "(update)"
+msgstr ""
 
 #. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
@@ -49,7 +54,6 @@ msgid "Campos Import Participant Wiz"
 msgstr ""
 
 #. module: campos_import
-#: view:campos.import.manager.wiz:campos_import.campos_import_manager_wiz_form_view
 #: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
 #: view:campos.import.participant.wiz:campos_import.campos_import_participant_wiz_form_view
 msgid "Cancel"
@@ -58,6 +62,16 @@ msgstr ""
 #. module: campos_import
 #: selection:campos.import.member.profile,state:0
 msgid "Cancelled"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.profile,city:0
+msgid "City"
+msgstr ""
+
+#. module: campos_import
+#: view:campos.import.manager.wiz:campos_import.campos_import_manager_wiz_form_view
+msgid "Close"
 msgstr ""
 
 #. module: campos_import
@@ -80,6 +94,11 @@ msgstr ""
 #. module: campos_import
 #: selection:campos.import.member.profile,state:0
 msgid "Contact"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.profile,country:0
+msgid "Country"
 msgstr ""
 
 #. module: campos_import
@@ -132,6 +151,11 @@ msgid "Draft"
 msgstr ""
 
 #. module: campos_import
+#: field:campos.import.member.profile,email:0
+msgid "Email"
+msgstr ""
+
+#. module: campos_import
 #: field:campos.import.event,date_end:0
 msgid "End Date"
 msgstr ""
@@ -155,6 +179,16 @@ msgstr ""
 #. module: campos_import
 #: model:ir.ui.menu,name:campos_import.menu_campos_groups_final
 msgid "Final registration"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_tree_view
+msgid "Group"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.ui.menu,name:campos_import.sale_order_menu
+msgid "Group Sale Order"
 msgstr ""
 
 #. module: campos_import
@@ -195,6 +229,16 @@ msgid "Inactive"
 msgstr ""
 
 #. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Invoice"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.profile,is_leader:0
+msgid "Is leader"
+msgstr ""
+
+#. module: campos_import
 #: field:campos.import.event,__last_update:0
 #: field:campos.import.manager.wiz,__last_update:0
 #: field:campos.import.member.profile,__last_update:0
@@ -222,6 +266,28 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_import
+#: view:event.registration:campos_import.event_registration_form_view
+msgid "Material Order"
+msgstr ""
+
+#. module: campos_import
+#: code:addons/campos_import/models/event_registration.py:22
+#, python-format
+msgid "Material Order for %s"
+msgstr ""
+
+#. module: campos_import
+#: code:addons/campos_import/models/event_registration.py:36
+#, python-format
+msgid "Material Orders for %s"
+msgstr ""
+
+#. module: campos_import
+#: view:event.registration:campos_import.event_registration_form_view
+msgid "Material orders"
+msgstr ""
+
+#. module: campos_import
 #: field:campos.import.member.wiz,member_ids:0
 #: field:campos.import.participant.wiz,member_ids:0
 msgid "Member ids"
@@ -231,6 +297,11 @@ msgstr ""
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_tree_view
 msgid "Members"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.profile,mobile:0
+msgid "Mobile"
 msgstr ""
 
 #. module: campos_import
@@ -248,8 +319,29 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Order Lines"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Other Information"
+msgstr ""
+
+#. module: campos_import
 #: field:campos.import.member.profile,participant_id:0
 msgid "Participant id"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+#: view:sale.order:campos_import.group_sale_order_tree_view
+msgid "Quotation"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_tree_view
+msgid "Quotation Number"
 msgstr ""
 
 #. module: campos_import
@@ -292,6 +384,27 @@ msgid "Remote Profile ID"
 msgstr ""
 
 #. module: campos_import
+#: field:event.registration,remote_system_id:0
+msgid "Remote system id"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.actions.act_window,name:campos_import.group_sale_order_act_window
+msgid "Sale Order"
+msgstr ""
+
+#. module: campos_import
+#: model:ir.model,name:campos_import.model_sale_order
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Sales Order"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Sales Order Lines"
+msgstr ""
+
+#. module: campos_import
 #: field:campos.import.event,date_begin:0
 msgid "Start Date"
 msgstr ""
@@ -302,8 +415,28 @@ msgid "State"
 msgstr ""
 
 #. module: campos_import
-#: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
-msgid "These selection will apply to all members imported"
+#: field:campos.import.member.profile,street:0
+msgid "Street"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.import.member.profile,street2:0
+msgid "Street2"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "Terms and conditions..."
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_tree_view
+msgid "Total Tax Included"
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order:campos_import.group_sale_order_form_view
+msgid "UoS"
 msgstr ""
 
 #. module: campos_import
@@ -317,7 +450,11 @@ msgid "Web"
 msgstr ""
 
 #. module: campos_import
-#: view:campos.import.manager.wiz:campos_import.campos_import_manager_wiz_form_view
+#: field:campos.import.member.profile,zip:0
+msgid "Zip"
+msgstr ""
+
+#. module: campos_import
 #: view:campos.import.member.wiz:campos_import.campos_import_member_wiz_form_view
 #: view:campos.import.participant.wiz:campos_import.campos_import_participant_wiz_form_view
 msgid "or"

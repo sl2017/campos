@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 22:56+0000\n"
-"PO-Revision-Date: 2017-01-13 22:56+0000\n"
+"POT-Creation-Date: 2017-01-14 19:58+0000\n"
+"PO-Revision-Date: 2017-01-14 19:58+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -69,12 +69,12 @@ msgstr ""
 #. module: campos_final_registration
 #: field:campos.event.participant,transport_from_camp:0
 msgid "Common transport from camp"
-msgstr ""
+msgstr "Fællestransport FRA lejren"
 
 #. module: campos_final_registration
 #: field:campos.event.participant,transport_to_camp:0
 msgid "Common transport to camp"
-msgstr ""
+msgstr "Fællestransport TIL lejren"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -153,7 +153,7 @@ msgstr "Event"
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_days
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_event_days
 msgid "Event Days"
-msgstr "Lejr dage"
+msgstr "Lejrdage"
 
 #. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_finalregistration_tree
@@ -251,7 +251,7 @@ msgstr "Chip nummer"
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Inactivate Participant"
-msgstr ""
+msgstr "Afmeld deltager"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -388,12 +388,12 @@ msgstr "Forlejr"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Pre-registration"
-msgstr "Forhånds tilmelding"
+msgstr "Forhåndstilmelding"
 
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Re-activate Participant"
-msgstr ""
+msgstr "Fortryd framelding"
 
 #. module: campos_final_registration
 #: field:campos.event.participant.day,registration_id_stored:0
@@ -407,7 +407,7 @@ msgstr "Registrering"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Registration State"
-msgstr ""
+msgstr "Status"
 
 #. module: campos_final_registration
 #: field:campos.event.participant,remote_link_id:0
@@ -445,6 +445,11 @@ msgstr "Er venskabsgruppe med"
 #: field:event.registration,reverse_friendship_group_ids:0
 msgid "Reverse Friendship Groups"
 msgstr "Er venskabsgruppe med"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Saturday to Wednesday"
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -502,6 +507,11 @@ msgstr "Fjern markering fra alle dage"
 #: field:event.registration,child_certificates_user:0
 msgid "User signing declaration"
 msgstr "Den der har indsendt erklæringen"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Wednesday to Sunday"
+msgstr ""
 
 #. module: campos_final_registration
 #: field:campos.event.participant.day,will_participate:0
