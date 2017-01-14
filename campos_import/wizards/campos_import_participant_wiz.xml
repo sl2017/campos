@@ -16,6 +16,8 @@
                     <field name="remote_event_id" readonly="1" options="{'no_open': True}"/>
                     <field name="participant_from_date" />
                     <field name="participant_to_date" />
+                    <field name="transport_to_camp"/>
+            		<field name="transport_from_camp"/>
                     <newline/>
                     <field name="member_ids"  domain="[('remote_event_id', '=', remote_event_id)]">
                     	<tree>

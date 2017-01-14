@@ -43,9 +43,21 @@ class CamposImportParticipantWiz(models.TransientModel):
             # TODO
             for mbr in wizard.member_ids:
                 part = self.env['campos.event.participant'].search([('registration_id', '=', wizard.registration_id.id), ('remote_mpro_int_id', '=', mbr.remote_int_id)])
+                country_id = self.env['res.country'].search([('name', '=', mbr.country)])
                 if part:
                     part.write({'name': mbr.name,
-                                'birthdate': mbr.birthdate})
+                                'birthdate': mbr.birthdate,
+                                'street': mbr.street,
+                                'street2': mbr.street2,
+                                'zip': mbr.zip,
+                                'city': mbr.city,
+                                'country': country_id,
+                                'email': mbr.email if mbr.is_leader else False,
+                                'mobile': mbr.mobile if mbr.is_leader else False,
+                                'parent_id': wizard.registration_id.partner_id.id,
+                                'transport_to_camp': wizard.transport_to_camp,
+                                'transport_from_camp': wizard.transport_to_camp,
+                                })
                     mbr.participant_id = part
                 else:
                     mbr.participant_id = self.env['campos.event.participant'].suspend_security().create({'registration_id': wizard.registration_id.id,
@@ -53,6 +65,13 @@ class CamposImportParticipantWiz(models.TransientModel):
                                                                                                          'remote_int_id': mbr.remote_partner_int_id,
                                                                                                          'name': mbr.name,
                                                                                                          'birthdate': mbr.birthdate,
+                                                                                                         'street': mbr.street,
+                                                                                                         'street2': mbr.street2,
+                                                                                                         'zip': mbr.zip,
+                                                                                                         'city': mbr.city,
+                                                                                                         'country': country_id,
+                                                                                                         'email': mbr.email if mbr.is_leader else False,
+                                                                                                         'mobile': mbr.mobile if mbr.is_leader else False,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
                                                                                                          'transport_to_camp': wizard.transport_to_camp,
                                                                                                          'transport_from_camp': wizard.transport_to_camp,
@@ -62,4 +81,5 @@ class CamposImportParticipantWiz(models.TransientModel):
                                      'day_id': day.id,
                                      'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
+                
 

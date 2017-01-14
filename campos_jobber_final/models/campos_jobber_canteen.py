@@ -15,6 +15,7 @@ class CamposJobberCanteen(models.Model):
     date_from = fields.Date('From date')
     date_to = fields.Date('To date')
     eat_at = fields.Selection([('group', 'With Scoutgroup'),
+                               ('jobcamp', 'Own jobber camp'),
                                ('canteen', 'Canteen')], default='canteen', string='Eating')
     canteen_id = fields.Many2one('event.registration', 'Canteen')
     registration_id = fields.Many2one('event.registration', 'Group')

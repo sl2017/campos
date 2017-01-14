@@ -13,7 +13,7 @@
                 <!-- TODO -->
                 <group col="3">
                 	<field name="registration_id" string="Import from" readonly="1" options="{'no_open': True}"/>
-                	<button string="Import Members" type="action" name="%(campos_import_member_wiz_act_window)d" context="{'default_registration_id': id}" />
+                	<button string="Import Members" type="action" name="%(campos_import_member_wiz_act_window)d" context="{'default_registration_id': registration_id}" />
                     <field name="remote_event_id" options="{'no_open': True, 'no_create': True}"/>
                     <button name="%(campos_import_participant_wiz_act_window)d" context="{'default_registration_id': registration_id, 'default_remote_event_id': remote_event_id}" 
                         string='Import Participants'

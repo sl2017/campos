@@ -13,7 +13,6 @@
                 <!-- TODO -->
                 <group>
                     <field name="registration_id" readonly="1" options="{'no_open': True}"/>
-                    <p>These selection will apply to all members imported</p>
                     <field name="participant_from_date" />
                     <field name="participant_to_date" />
                     <field name="transport_to_camp"/>

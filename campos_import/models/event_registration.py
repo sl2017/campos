@@ -9,6 +9,8 @@ class EventRegistration(models.Model):
 
     _inherit = 'event.registration'
     
+    remote_system_id = fields.Many2one(related='partner_id.remote_system_id')
+    
     @api.multi
     def action_sale_order(self):
         self.ensure_one()

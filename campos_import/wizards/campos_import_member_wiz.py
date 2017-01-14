@@ -34,11 +34,12 @@ class CamposImportMemberWiz(models.TransientModel):
         if 'registration_id' in result:
             _logger.info('REG: %d', result['registration_id'])
             registration = self.env['event.registration'].browse(result['registration_id'])
-            self.env['campos.import.member.profile'].import_from_membersys(registration)
+            self.env['campos.import.member.profile'].suspend_security().import_from_membersys(registration)
         return result
 
     @api.multi
     def doit(self):
+        _logger.info('DOIT!')
         cepd = self.env['campos.event.participant.day']
         for wizard in self:
             ed_ids = self.env['event.day'].search([('event_period', '=', 'main'),
@@ -46,9 +47,20 @@ class CamposImportMemberWiz(models.TransientModel):
             # TODO
             for mbr in wizard.member_ids:
                 part = self.env['campos.event.participant'].search([('registration_id', '=', wizard.registration_id.id), ('remote_mpro_int_id', '=', mbr.remote_int_id)])
+                country_id = self.env['res.country'].search([('name', '=', mbr.country)])
                 if part:
                     part.write({'name': mbr.name,
-                                'birthdate': mbr.birthdate})
+                                'birthdate': mbr.birthdate,
+                                'street': mbr.street,
+                                'street2': mbr.street2,
+                                'zip': mbr.zip,
+                                'city': mbr.city,
+                                'country': country_id,
+                                'email': mbr.email if mbr.is_leader else False,
+                                'mobile': mbr.mobile if mbr.is_leader else False,
+                                'parent_id': wizard.registration_id.partner_id.id,
+                                'transport_to_camp': wizard.transport_to_camp,
+                                'transport_from_camp': wizard.transport_from_camp,})
                     mbr.participant_id = part
                 else:
                     mbr.participant_id = self.env['campos.event.participant'].suspend_security().create({'registration_id': wizard.registration_id.id,
@@ -56,6 +68,13 @@ class CamposImportMemberWiz(models.TransientModel):
                                                                                                          'remote_int_id': mbr.remote_partner_int_id,
                                                                                                          'name': mbr.name,
                                                                                                          'birthdate': mbr.birthdate,
+                                                                                                         'street': mbr.street,
+                                                                                                         'street2': mbr.street2,
+                                                                                                         'zip': mbr.zip,
+                                                                                                         'city': mbr.city,
+                                                                                                         'country': country_id,
+                                                                                                         'email': mbr.email if mbr.is_leader else False,
+                                                                                                         'mobile': mbr.mobile if mbr.is_leader else False,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
                                                                                                          'transport_to_camp': wizard.transport_to_camp,
                                                                                                          'transport_from_camp': wizard.transport_from_camp,
@@ -65,7 +84,8 @@ class CamposImportMemberWiz(models.TransientModel):
                                      'day_id': day.id,
                                      'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
-            pass
+                _logger.info('Saved %s', mbr.name)
+                
 #         action = {
 #             'type': 'ir.action.act_window',
 #             'name': 'Action Name',  # TODO
@@ -83,6 +103,14 @@ class CamposImportMemberProfile(models.Model):
     name = fields.Char()
     department = fields.Char()
     birthdate = fields.Date()
+    street = fields.Char()
+    street2 = fields.Char()
+    zip = fields.Char()
+    city = fields.Char()
+    country = fields.Char()
+    email = fields.Char()
+    mobile = fields.Char()
+    is_leader = fields.Boolean()
     remote_int_id = fields.Integer('Remote ID', index=True)
     remote_partner_int_id = fields.Integer('Remote Partner ID', index=True)
     age = fields.Integer('Age', compute='_compute_age', store=True)
@@ -116,25 +144,37 @@ class CamposImportMemberProfile(models.Model):
             Partner = msodoo.env['res.partner']
             partner = Partner.browse(registration.partner_id.remote_int_id)
             remote_profiles_ids = msodoo.env['member.profile'].search([('organization_id', '=', partner.organization_id.id), ('state', 'in', ['active', 'relative'])])
-            for rp in msodoo.execute('member.profile', 'read', remote_profiles_ids, ['id','firstname','lastname','birthdate','state', 'partner_id']):
-                cimp = self.search([('remote_partner_int_id', '=', rp['partner_id']),('registration_id', '=', registration.id)])
+            for rp in msodoo.execute('member.profile', 'read', remote_profiles_ids, ['id','firstname','lastname','birthdate','state', 'partner_id', 'street','street2','zip','city','country_id', 'is_active_leader']):
+                cimp = self.search([('remote_partner_int_id', '=', rp['partner_id'][0]),('registration_id', '=', registration.id)])
                 if cimp:
                     cimp.write({'name': ' '.join(filter(None, [rp['firstname'], rp['lastname']])),
                                 #'department': rp.active_functions_in_profile[0].organization_id.name if rp.active_functions_in_profile else '',
                                 'birthdate' : rp['birthdate'],
                                 'state': rp['state'],
                                 'remote_int_id': rp['id'],
-                                'remote_partner_int_id': rp['partner_id'],
+                                'remote_partner_int_id': rp['partner_id'][0],
                                 'registration_id': registration.id,
+                                'street': rp['street'],
+                                'street2': rp['street2'],
+                                'zip': rp['zip'],
+                                'city': rp['city'],
+                                'country': rp['country_id'][1],
+                                'is_leader': rp['is_active_leader']
                                 })
                 else:
                     self.create({'name': ' '.join(filter(None, [rp['firstname'], rp['lastname']])),
                                  #'department': rp.active_functions_in_profile[0].organization_id.name if rp.active_functions_in_profile else '',
                                  'birthdate' : rp['birthdate'],
                                  'remote_int_id': rp['id'],
-                                 'remote_partner_int_id': rp['partner_id'],
+                                 'remote_partner_int_id': rp['partner_id'][0],
                                  'state': rp['state'],
                                  'registration_id': registration.id,
+                                 'street': rp['street'],
+                                 'street2': rp['street2'],
+                                 'zip': rp['zip'],
+                                 'city': rp['city'],
+                                 'country': rp['country_id'][1],
+                                 'is_leader': rp['is_active_leader']
                                  #'wiz_id': wizard.id,
                                  })
                 _logger.info('Importing: %s %s', rp['firstname'], rp['lastname'])
@@ -164,6 +204,12 @@ class CamposImportMemberProfile(models.Model):
                                 'remote_int_id': rp['id'],
                                 'remote_partner_int_id': rp['partner_id'][0] if partner else False,
                                 'remote_event_id': remote_event.id,
+                                'street': partner.street,
+                                'street2': partner.street2,
+                                'zip': partner.zip,
+                                'city': partner.city,
+                                'country': partner.country_id.name,
+                                'is_leader': partner.member_id.is_active_leader,
                                 })
                 else:
                     self.create({'name': rp['name'],
@@ -174,6 +220,12 @@ class CamposImportMemberProfile(models.Model):
                                  'state': rp['state'],
                                  'remote_event_id': remote_event.id,
                                  #'wiz_id': wizard.id,
+                                 'street': partner.street,
+                                 'street2': partner.street2,
+                                 'zip': partner.zip,
+                                 'city': partner.city,
+                                 'country': partner.country_id.name,
+                                 'is_leader': partner.member_id.is_active_leader,
                                  })
                 _logger.info('Importing: %s', rp['name'])
 
