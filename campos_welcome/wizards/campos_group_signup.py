@@ -51,7 +51,7 @@ class CamposGroupSignup(models.TransientModel):
     def do_reopen_form(self):
         self.ensure_one()
         return {
-                'name': _('Welcome to SL2017 Group Pre-registration'),
+                'name': _('Welcome to SL2017 Group Registration'),
                 'type': 'ir.actions.act_window',
                 'res_model': self._name, # this model
                 'res_id': self.id, # the current wizard record
@@ -107,7 +107,7 @@ class CamposGroupSignup(models.TransientModel):
     def doit_done(self):
         self.env.user.action_id = False
         for wizard in self:
-            view = self.env.ref('campos_preregistration.view_form_preregistration_gl')
+            view = self.env.ref('campos_final_registration.view_form_finalregistration_gl')
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'event.registration',

@@ -17,7 +17,7 @@ class CamposJobberCanteen(models.Model):
     eat_at = fields.Selection([('group', 'With Scoutgroup'),
                                ('jobcamp', 'Own jobber camp'),
                                ('canteen', 'Canteen')], default='canteen', string='Eating')
-    canteen_id = fields.Many2one('event.registration', 'Canteen')
+    canteen_id = fields.Many2one('campos.canteen', 'Canteen')
     registration_id = fields.Many2one('event.registration', 'Group')
     state = fields.Selection([('draft', 'Draft'),
                               ('cancelled', 'Cancelled'),
