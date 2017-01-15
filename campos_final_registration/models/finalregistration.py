@@ -153,6 +153,7 @@ class ParticipantCampDay(models.Model):
     One persons participation to a camp in one day
     '''
     _name = 'campos.event.participant.day'
+    _order="day_id"
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     registration_id_stored = fields.Many2one(related='participant_id.registration_id', string='Registration', store=True)
     day_id = fields.Many2one('event.day', 'Event day')
@@ -164,6 +165,7 @@ class EventDay(models.Model):
     An Event day
     '''
     _name='event.day'
+    _order="event_date"
     event_date = fields.Date('Date', required=True)
     event_period = fields.Selection([('precamp', 'Pre Camp'),
                                      ('maincamp', 'Main Camp'),
