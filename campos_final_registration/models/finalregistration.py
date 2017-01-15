@@ -143,7 +143,7 @@ class ParticipantCampDay(models.Model):
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     registration_id_stored = fields.Many2one(related='participant_id.registration_id', string='Registration', store=True)
     day_id = fields.Many2one('event.day', 'Event day')
-    the_date = fields.Date(related='day_id.event_date', String='Event date')
+    the_date = fields.Date(related='day_id.event_date', String='Event date', readonly=True)
     will_participate = fields.Boolean('Will participate this day?')
 
 class EventDay(models.Model):
