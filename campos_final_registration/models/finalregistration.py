@@ -91,14 +91,27 @@ class FinalRegistrationParticipant(models.Model):
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     access_token_id = fields.Char('Id of Access Token')
     
+    
+    @api.onchange('name')
+    def onchange_name(self):
+        if not self.camp_day_ids:
+            days_ids = []
+            for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate': True if day.event_period == 'maincamp' else False,
+                                       'the_date': day.event_date,
+                                      }))
+            self.camp_day_ids = days_ids
     @api.model
     def create(self, vals):
         par = super(FinalRegistrationParticipant, self).create(vals)
-        for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp'):
-            new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
-                                                         'day_id': day.id,
-                                                         'will_participate' : False
-                                                         })
+        if not par.camp_day_ids:
+            for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp'):
+                new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
+                                                             'day_id': day.id,
+                                                             'will_participate' : False
+                                                             })
         return par
 
     @api.multi
