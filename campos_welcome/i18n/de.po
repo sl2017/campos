@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 19:58+0000\n"
-"PO-Revision-Date: 2017-01-14 19:58+0000\n"
+"POT-Creation-Date: 2017-01-15 11:15+0000\n"
+"PO-Revision-Date: 2017-01-15 11:15+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -417,23 +417,23 @@ msgid "Welcome Wizard"
 msgstr ""
 
 #. module: campos_welcome
-#: code:addons/campos_welcome/wizards/campos_group_signup.py:54
-#: code:addons/campos_welcome/wizards/campos_welcome.py:80
-#: model:ir.actions.act_window,name:campos_welcome.campos_group_signup_act_window
-#, python-format
-msgid "Welcome to SL2017 Group Pre-registration"
-msgstr ""
-
-#. module: campos_welcome
-#: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
-msgid "Welcome to SL2017 Group Pre-registration/Import"
-msgstr ""
-
-#. module: campos_welcome
 #: selection:campos.group.signup,state:0
 msgid ""
 "Welcome to SL2017 Group Preregistration. Please confirm your contact "
 "information"
+msgstr ""
+
+#. module: campos_welcome
+#: code:addons/campos_welcome/wizards/campos_group_signup.py:54
+#: code:addons/campos_welcome/wizards/campos_welcome.py:80
+#: model:ir.actions.act_window,name:campos_welcome.campos_group_signup_act_window
+#, python-format
+msgid "Welcome to SL2017 Group Registration"
+msgstr ""
+
+#. module: campos_welcome
+#: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
+msgid "Welcome to SL2017 Group Registration/Import"
 msgstr ""
 
 #. module: campos_welcome

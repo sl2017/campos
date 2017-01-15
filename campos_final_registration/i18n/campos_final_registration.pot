@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 19:58+0000\n"
-"PO-Revision-Date: 2017-01-14 19:58+0000\n"
+"POT-Creation-Date: 2017-01-15 11:15+0000\n"
+"PO-Revision-Date: 2017-01-15 11:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:196
+#: code:addons/campos_final_registration/models/finalregistration.py:209
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -290,11 +290,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,last_import:0
-msgid "Last import"
-msgstr ""
-
-#. module: campos_final_registration
 #: selection:event.day,event_period:0
 msgid "Main Camp"
 msgstr ""
@@ -408,26 +403,6 @@ msgstr ""
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Registration State"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_link_id:0
-msgid "Remote System link ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_ext_id:0
-msgid "Remote system external ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_system_id:0
-msgid "Remote system id"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_int_id:0
-msgid "Remote system internal ID"
 msgstr ""
 
 #. module: campos_final_registration
