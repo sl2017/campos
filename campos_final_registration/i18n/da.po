@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 19:58+0000\n"
-"PO-Revision-Date: 2017-01-14 19:58+0000\n"
+"POT-Creation-Date: 2017-01-15 11:15+0000\n"
+"PO-Revision-Date: 2017-01-15 11:15+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgid "Display Name"
 msgstr "Navn"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:196
+#: code:addons/campos_final_registration/models/finalregistration.py:209
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -183,7 +183,7 @@ msgstr "Raftedepot"
 #. module: campos_final_registration
 #: field:campos.event.participant.day,day_id:0 field:event.day,event_id:0
 msgid "Event day"
-msgstr "Lejr dag"
+msgstr "Lejrdag"
 
 #. module: campos_final_registration
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree
@@ -287,11 +287,6 @@ msgstr "Sidst opdateret af"
 #: field:event.registration.pioneeringpoledepot,write_date:0
 msgid "Last Updated on"
 msgstr "Sidst opdateret d."
-
-#. module: campos_final_registration
-#: field:campos.event.participant,last_import:0
-msgid "Last import"
-msgstr "Sidste import"
 
 #. module: campos_final_registration
 #: selection:event.day,event_period:0
@@ -410,26 +405,6 @@ msgid "Registration State"
 msgstr "Status"
 
 #. module: campos_final_registration
-#: field:campos.event.participant,remote_link_id:0
-msgid "Remote System link ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_ext_id:0
-msgid "Remote system external ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_system_id:0
-msgid "Remote system id"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_int_id:0
-msgid "Remote system internal ID"
-msgstr ""
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Reopen Registration"
@@ -449,7 +424,7 @@ msgstr "Er venskabsgruppe med"
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Saturday to Wednesday"
-msgstr ""
+msgstr "Lørdag til Onsdag"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -511,7 +486,7 @@ msgstr "Den der har indsendt erklæringen"
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Wednesday to Sunday"
-msgstr ""
+msgstr "Onsdag til Søndag"
 
 #. module: campos_final_registration
 #: field:campos.event.participant.day,will_participate:0

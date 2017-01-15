@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 19:58+0000\n"
-"PO-Revision-Date: 2017-01-14 19:58+0000\n"
+"POT-Creation-Date: 2017-01-15 11:15+0000\n"
+"PO-Revision-Date: 2017-01-15 11:15+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -266,6 +266,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_import
+#: field:campos.event.participant,last_import:0
+msgid "Last import"
+msgstr ""
+
+#. module: campos_import
 #: view:event.registration:campos_import.event_registration_form_view
 msgid "Material Order"
 msgstr ""
@@ -384,8 +389,24 @@ msgid "Remote Profile ID"
 msgstr ""
 
 #. module: campos_import
+#: field:campos.event.participant,remote_link_id:0
+msgid "Remote System link ID"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.event.participant,remote_ext_id:0
+msgid "Remote system external ID"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.event.participant,remote_system_id:0
 #: field:event.registration,remote_system_id:0
 msgid "Remote system id"
+msgstr ""
+
+#. module: campos_import
+#: field:campos.event.participant,remote_int_id:0
+msgid "Remote system internal ID"
 msgstr ""
 
 #. module: campos_import
