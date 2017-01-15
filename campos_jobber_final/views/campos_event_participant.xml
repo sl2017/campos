@@ -15,14 +15,28 @@
             		<group>
             			<field name="signup_state"/>
             		</group>
-            		<notebook attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
+            		<notebook attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
             			<page string="Camp Days">
-            				<button name="check_all_days" 
+            				<group col="4">
+            					<button name="check_all_maincamp_days" 
 											type="object"    
-											string="Check all days" class = "oe_edit_only"/>
-							<button name="uncheck_all_days" 
+											icon="fa-check-square-o"
+											string="Check all days" class = "oe_edit_only oe_inline oe_stat_button"/>
+							 
+							<button name="check_all_first_half_days" 
+											type="object"
+											icon="fa-check-square-o"    
+											string="Sat- to Wednesday" class = "oe_edit_only oe_inline oe_stat_button"/>
+							<button name="check_all_second_half_days" 
+											type="object"
+											icon="fa-check-square-o"    
+											string="Wed- to Sunday" class = "oe_edit_only oe_inline oe_stat_button"/>
+            				<button name="uncheck_all_days" 
 											type="object"    
-											string="Un-check all days" class = "oe_edit_only"/> 
+											icon="fa-square-o"
+											string="Un-check all days" class = "oe_edit_only oe_inline oe_stat_button"/>
+            				</group>
+            				 
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>
@@ -30,7 +44,7 @@
 								</tree>
 							</field>
             			</page>
-            			<page string="Accomodation">
+            			<page string="Accomodation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
 							<field name="accomodation_ids" context="{'default_participant_id': id}">
 								<tree editable="bottom">
 									<field name="date_from"/>
@@ -40,7 +54,7 @@
 								</tree>
 							</field>
 						</page>
-            			<page string="Catering">
+            			<page string="Catering" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
 							<field name="canteen_ids" context="{'default_participant_id': id}">
 								<tree editable="bottom">
 									<field name="date_from"/>
@@ -54,13 +68,13 @@
 						
             			
             			</page>
-            			<page string="Transportation">
+            			<page string="Transportation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
             				<group>
             					<field name="transport_to_camp"/>
             					<field name="transport_from_camp"/>
             				</group>
             			</page>
-						<page string="Special needs">
+						<page string="Special needs" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
 									<group>
 										<field name="need_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('for_staff', '=', True)]"/>
 										<field name="other_need"/>
@@ -68,7 +82,7 @@
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 						</page>
-						<page string="Payment">
+						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
 									<group>
 										<field name="registration_id" attrs="{'readonly': [('payreq_state', '=', 'approved')]}"/>
 										<field name="payreq_state"/>
