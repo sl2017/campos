@@ -423,9 +423,9 @@
 					</header>
 					<sheet>
 						<group name="sheet2">
-							<field name="registration_id" invisible="0"/>
-							<field name="participant" invisible="0"/>
-							<field name="parent_id" invisible="0"/>
+							<field name="registration_id" invisible="1"/>
+							<field name="participant" invisible="1"/>
+							<field name="parent_id" invisible="1"/>
 							<field name="name"/>
 							<field name="birthdate" required="1"/>
 							<field name="email"/>
