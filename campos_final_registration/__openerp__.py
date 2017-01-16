@@ -25,7 +25,9 @@
 
     # always loaded
     'data': ['views/finalregistration.xml',
-             'security/ir.model.access.csv'],
+             'security/ir.model.access.csv',
+             'security/ir.rule.csv',
+             ],
     # only loaded in demonstration mode
     'demo': [ ],
 }

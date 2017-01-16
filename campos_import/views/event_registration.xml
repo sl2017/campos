@@ -10,12 +10,13 @@
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
-            <field name="participant_ids" position="after">
+            <button name="action_open_groupparticipants" position="after">
+            	<button string="Import from Member Service" attrs="{'invisible': [('remote_system_id', '=', False)]}" type="action" name="%(campos_import_manager_wiz_act_window)d" context="{'default_registration_id': id}" />
             	<field name="id" invisible="1"/>
             	<field name="remote_system_id" invisible="1"/>
-            	<button string="Import from Member Service" attrs="{'invisible': [('remote_system_id', '=', False)]}" type="action" name="%(campos_import_manager_wiz_act_window)d" context="{'default_registration_id': id}" />
+            	
             
-            </field>
+            </button>
             <page name="pre_reg" position="before">
             	<page string="Material Order">
             		<button name="action_sale_order" string="Material orders" type="object"/>

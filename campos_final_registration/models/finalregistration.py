@@ -59,6 +59,29 @@ class FinalRegistration(models.Model):
     @api.onchange('other_need_description')
     def _other_need_description_changed(self):
         self.other_need_update_date = fields.Date.today()
+        
+    @api.multi
+    def action_open_groupparticipants(self):
+        self.ensure_one()
+        
+        view = self.env.ref('campos_final_registration.view_form_finalregistration_participant')
+        treeview = self.env.ref('campos_final_registration.view_tree_finalregistration_participant')
+        _logger.info('"OPEN PAR: %s %s', view, treeview)
+        return {
+                'name': _("Participants from %s" % self.name),
+                'view_mode': 'tree,form',
+                'view_type': 'form',
+                'views': [(treeview.id, 'tree'), (view.id, 'form')],
+                'res_model': 'campos.event.participant',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'domain': [('registration_id', '=', self.id)],
+                'context': {
+                            'default_registration_id': self.id,
+                            'default_participant': True,
+                            'default_parent_id': self.partner_id.id,
+                            }
+            }
 
 class FriendshipGroupList(models.Model):
     _name = 'event.registration.friendshipgrouplist'
@@ -173,7 +196,7 @@ class ParticipantCampDay(models.Model):
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     registration_id_stored = fields.Many2one(related='participant_id.registration_id', string='Registration', store=True)
     day_id = fields.Many2one('event.day', 'Event day')
-    the_date = fields.Date(related='day_id.event_date', String='Event date', readonly=True)
+    the_date = fields.Date(related='day_id.event_date', String='Event date', readonly=True, store=True)
     will_participate = fields.Boolean('Will participate this day?')
 
 class EventDay(models.Model):

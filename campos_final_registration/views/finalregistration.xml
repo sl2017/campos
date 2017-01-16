@@ -275,6 +275,7 @@
 												<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
 											</tree>
 										</field>
+										<button name="action_open_groupparticipants" string="Add/Edit Participants" type="object"/>
 									</group>
 								</page>
 								<page string="Friendship Groups">
@@ -354,6 +355,7 @@
 											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
+									
 								</page>
 								<page string="Pioneering Poles">
 									<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1" readonly="1">
@@ -421,8 +423,9 @@
 					</header>
 					<sheet>
 						<group name="sheet2">
-							<field name="registration_id" invisible="1"/>
-							<field name="participant" invisible="1"/>
+							<field name="registration_id" invisible="0"/>
+							<field name="participant" invisible="0"/>
+							<field name="parent_id" invisible="0"/>
 							<field name="name"/>
 							<field name="birthdate" required="1"/>
 							<field name="email"/>
@@ -461,6 +464,21 @@
 			</field>
 		</record>
 		
+		<record id="view_tree_finalregistration_participant" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="priority">17</field>
+			<field name="arch" type="xml">
+				<tree  delete="0">
+					<field name="id" invisible="1"/>
+					<field name="name"/>
+					<field name="transport_to_camp"/>
+					<field name="transport_from_camp"/>
+					<field name="state" readonly="1" string="Registration State"/>
+					<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
+				</tree>
+			</field>							
+		</record>
 		
 		<!-- Menu Actions -->
 		 <!--  Manager view -->
