@@ -40,6 +40,7 @@
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>
+									<field name="day_id" invisible="1"/>
 									<field name="will_participate"/>
 								</tree>
 							</field>
