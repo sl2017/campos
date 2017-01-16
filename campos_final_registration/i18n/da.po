@@ -4,13 +4,14 @@
 # 
 # Translators:
 # christian Eggert Jørgensen <christian@eggert.dk>, 2017
+# Lykke Merete Højsting <lho@sl2017.dk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-15 11:15+0000\n"
-"PO-Revision-Date: 2017-01-15 11:15+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
+"POT-Creation-Date: 2017-01-16 21:48+0000\n"
+"PO-Revision-Date: 2017-01-16 21:48+0000\n"
+"Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,16 +20,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:67
+#: code:addons/campos_final_registration/models/finalregistration.py:90
 #: sql_constraint:event.registration.friendshipgrouplist:0
 #, python-format
 msgid "A group can only be added once as friendship group"
-msgstr "Man kan kun tilknyttes en venskabsgruppe"
+msgstr "En gruppe kan kun tilføjes som venskabsgruppe én gang"
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Access Token Id"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Add/Edit Participants"
 msgstr ""
 
 #. module: campos_final_registration
@@ -63,7 +70,7 @@ msgstr "Marker alle dage"
 #: field:event.registration,child_certificates_accept:0
 msgid "Check declaration of child certificates"
 msgstr ""
-"Erklære at gruppen/kredsen har indhentet børneattest for alle voksne "
+"Erklær at gruppen/kredsen har indhentet børneattest for alle voksne "
 "deltagere"
 
 #. module: campos_final_registration
@@ -133,7 +140,7 @@ msgid "Display Name"
 msgstr "Navn"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:209
+#: code:addons/campos_final_registration/models/finalregistration.py:250
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -348,6 +355,12 @@ msgid "Participants"
 msgstr "Deltagere"
 
 #. module: campos_final_registration
+#: code:addons/campos_final_registration/models/finalregistration.py:71
+#, python-format
+msgid "Participants from %s"
+msgstr ""
+
+#. module: campos_final_registration
 #: field:event.day,event_period:0
 msgid "Period"
 msgstr "Periode"
@@ -399,6 +412,7 @@ msgstr "Registrering"
 
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Registration State"
