@@ -266,7 +266,7 @@
 								<page string="Participants">
 									<group>
 										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant', 'default_participant': True}">
-											<tree  delete="0">
+											<tree  delete="0" create="0">
 												<field name="id" invisible="1"/>
 												<field name="name"/>
 												<field name="transport_to_camp"/>
