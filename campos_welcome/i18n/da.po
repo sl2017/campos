@@ -60,7 +60,7 @@ msgstr ""
 #. module: campos_welcome
 #: view:campos.group.signup:campos_welcome.campos_group_signup_form_view
 msgid "Campos Group Signup"
-msgstr "gruppe/kreds forhåndstilmelding"
+msgstr "gruppe/kreds tilmelding"
 
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_remote_system_act_window
@@ -170,7 +170,7 @@ msgstr ""
 #: model:ir.ui.menu,name:campos_welcome.campos_group_signup_menu
 #: model:ir.ui.menu,name:campos_welcome.menu_campos_groups_top
 msgid "Group Signup"
-msgstr "Forhåndstilmelding grupper/kredse"
+msgstr "Tilmelding grupper/kredse"
 
 #. module: campos_welcome
 #: field:campos.remote.system,host:0

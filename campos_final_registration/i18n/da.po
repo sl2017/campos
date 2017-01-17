@@ -36,7 +36,7 @@ msgstr ""
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Add/Edit Participants"
-msgstr ""
+msgstr "Tilføj/ret deltagere"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -358,7 +358,7 @@ msgstr "Deltagere"
 #: code:addons/campos_final_registration/models/finalregistration.py:71
 #, python-format
 msgid "Participants from %s"
-msgstr ""
+msgstr "Deltager fra %s"
 
 #. module: campos_final_registration
 #: field:event.day,event_period:0
