@@ -90,38 +90,38 @@ msgstr ""
 #. module: campos_welcome
 #: field:campos.group.signup,partner_city:0
 msgid "City"
-msgstr ""
+msgstr "By"
 
 #. module: campos_welcome
 #: selection:campos.welcome,state:0
 msgid "Completed"
-msgstr ""
+msgstr "Afsluttet"
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
 msgid ""
 "Contact information is now completed and the next step is the pre-"
 "registration"
-msgstr ""
+msgstr "Kontakt information er nu afsluttet, næste skridt, er tilmelding"
 
 #. module: campos_welcome
 #: field:campos.group.signup,partner_country_id:0
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: campos_welcome
 #: field:campos.group.signup,create_uid:0
 #: field:campos.remote.system,create_uid:0 field:campos.welcome,create_uid:0
 #: field:campos.welcome.profile,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Oprettet af"
 
 #. module: campos_welcome
 #: field:campos.group.signup,create_date:0
 #: field:campos.remote.system,create_date:0 field:campos.welcome,create_date:0
 #: field:campos.welcome.profile,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Oprettet d."
 
 #. module: campos_welcome
 #: field:campos.remote.system,db_name:0
@@ -134,7 +134,7 @@ msgstr ""
 #: field:campos.welcome,display_name:0
 #: field:campos.welcome.profile,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_welcome
 #: field:campos.group.signup,edit_partner_id:0
@@ -144,7 +144,7 @@ msgstr ""
 #. module: campos_welcome
 #: field:campos.group.signup,partner_email:0
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #. module: campos_welcome
 #: model:ir.ui.menu,name:campos_welcome.campos_welcome_menu
@@ -196,7 +196,7 @@ msgstr ""
 #: field:campos.welcome,__last_update:0
 #: field:campos.welcome.profile,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Sidst ændret d."
 
 #. module: campos_welcome
 #: field:campos.group.signup,write_uid:0
@@ -210,17 +210,17 @@ msgstr ""
 #: field:campos.remote.system,write_date:0 field:campos.welcome,write_date:0
 #: field:campos.welcome.profile,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Sidst opdateret d."
 
 #. module: campos_welcome
 #: field:res.partner,last_import:0 field:res.users,last_import:0
 msgid "Last import"
-msgstr ""
+msgstr "Sidste import"
 
 #. module: campos_welcome
 #: field:campos.welcome,remote_system_id:0
 msgid "Logged in by"
-msgstr ""
+msgstr "Logget ind af"
 
 #. module: campos_welcome
 #: selection:campos.remote.system,systype:0
@@ -242,7 +242,7 @@ msgstr "Min gruppe/kreds"
 #: field:campos.group.signup,name:0 field:campos.group.signup,partner_name:0
 #: field:campos.remote.system,name:0 field:campos.welcome.profile,name:0
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
@@ -268,17 +268,17 @@ msgstr ""
 #. module: campos_welcome
 #: field:campos.remote.system,db_pwd:0
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
 msgid "Please Complete your Scout Group Address"
-msgstr ""
+msgstr "Udfyld venligst din gruppe/kreds adresse"
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
 msgid "Please add treasurer information"
-msgstr ""
+msgstr "Udfyld information om kasserer (den der skal modtage fakturaerne)"
 
 #. module: campos_welcome
 #: view:campos.welcome:campos_welcome.campos_welcome_form_view
@@ -363,27 +363,27 @@ msgstr "Spejdergrupper"
 #. module: campos_welcome
 #: field:campos.welcome,profile_id:0
 msgid "Scout group"
-msgstr ""
+msgstr "Gruppe/kreds"
 
 #. module: campos_welcome
 #: field:campos.remote.system,scoutorg_id:0
 msgid "Scout organization"
-msgstr ""
+msgstr "Spejderkorps"
 
 #. module: campos_welcome
 #: field:campos.group.signup,state:0 field:campos.welcome,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: campos_welcome
 #: field:campos.group.signup,partner_street:0
 msgid "Street"
-msgstr ""
+msgstr "Gade"
 
 #. module: campos_welcome
 #: field:campos.group.signup,partner_street2:0
 msgid "Street2"
-msgstr ""
+msgstr "Gade 2"
 
 #. module: campos_welcome
 #: field:campos.remote.system,systype:0
@@ -403,7 +403,7 @@ msgstr ""
 #. module: campos_welcome
 #: field:campos.remote.system,treasurer_function:0
 msgid "Treasurer function"
-msgstr ""
+msgstr "Kasserer funktion"
 
 #. module: campos_welcome
 #: field:campos.remote.system,db_user:0
@@ -418,13 +418,13 @@ msgstr ""
 #. module: campos_welcome
 #: selection:campos.welcome,state:0
 msgid "Welcome"
-msgstr ""
+msgstr "Velkommen"
 
 #. module: campos_welcome
 #: field:campos.welcome.profile,user_id:0
 #: field:campos.welcome.profile,wiz_id:0
 msgid "Welcome Wizard"
-msgstr ""
+msgstr "Hjælp til tilmelding"
 
 #. module: campos_welcome
 #: selection:campos.group.signup,state:0
@@ -432,6 +432,8 @@ msgid ""
 "Welcome to SL2017 Group Preregistration. Please confirm your contact "
 "information"
 msgstr ""
+"Velkommen til SL2017 gruppe tilmelding. Bekræft venligst dine kontakt "
+"informationer"
 
 #. module: campos_welcome
 #: code:addons/campos_welcome/wizards/campos_group_signup.py:54
@@ -439,31 +441,31 @@ msgstr ""
 #: model:ir.actions.act_window,name:campos_welcome.campos_group_signup_act_window
 #, python-format
 msgid "Welcome to SL2017 Group Registration"
-msgstr ""
+msgstr "Velkommen til SL2017 tilmeldingssystem"
 
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
 msgid "Welcome to SL2017 Group Registration/Import"
-msgstr ""
+msgstr "Velkommen til SL2017 gruppe/kreds tilmelding/import"
 
 #. module: campos_welcome
 #: code:addons/campos_welcome/wizards/campos_welcome.py:58
 #, python-format
 msgid "You must be logged in via your organization's member system"
-msgstr ""
+msgstr "Du skal logge ind via din organisations medlemssystem"
 
 #. module: campos_welcome
 #: field:campos.welcome,name:0
 msgid "Your Name"
-msgstr ""
+msgstr "Dit navn"
 
 #. module: campos_welcome
 #: code:addons/campos_welcome/wizards/campos_welcome.py:70
 #, python-format
 msgid "Your group has already been signed up."
-msgstr ""
+msgstr "Din gruppe/kreds er allerede registreret"
 
 #. module: campos_welcome
 #: field:campos.group.signup,partner_zip:0
 msgid "Zip"
-msgstr ""
+msgstr "Postnummer"
