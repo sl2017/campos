@@ -55,27 +55,30 @@ class CamposImportEvent(models.Model):
     def import_from_membersys(self, registration):
 
         if registration.partner_id.remote_system_id:
-            remote = registration.partner_id.remote_system_id
-            msodoo = odoorpc.ODOO(remote.host, protocol=remote.protocol, port=remote.port)
-            msodoo.login(remote.db_name, remote.db_user, remote.db_pwd)
-            #Partner = msodoo.env['res.partner']
-            #partner = Partner.browse(registration.partner_id.remote_link_id)
-            
-            org = msodoo.execute('member.organization', 'read', registration.partner_id.remote_link_id, ['id','legal_company_id'])
-            _logger.info('ORG: %s', org)
-            remote_event_ids = msodoo.env['event.event'].search([('company_id', '=', org['legal_company_id'][0]), ('date_begin', '<', '2017-07-31 00:00:00'),('date_end', '>', '2017-07-21 00:00:00')])
-            for rev in msodoo.env['event.event'].browse(remote_event_ids):
-                ciev = self.search([('remote_int_id', '=', rev.id),('registration_id', '=', registration.id)])
-                if ciev:
-                    ciev.write({'name': rev.name,
-                                'date_begin': rev.date_begin,
-                                'date_end': rev.date_end,
-                                })
-                else:
-                    self.create({'name': rev.name,
-                                 'date_begin': rev.date_begin,
-                                 'date_end': rev.date_end,
-                                 'remote_int_id': rev.id,
-                                 'registration_id': registration.id,
-                                 })
-                _logger.info('Importing: %s', rev.name)
+            try:
+                remote = registration.partner_id.remote_system_id
+                msodoo = odoorpc.ODOO(remote.host, protocol=remote.protocol, port=remote.port)
+                msodoo.login(remote.db_name, remote.db_user, remote.db_pwd)
+                #Partner = msodoo.env['res.partner']
+                #partner = Partner.browse(registration.partner_id.remote_link_id)
+                
+                org = msodoo.execute('member.organization', 'read', registration.partner_id.remote_link_id, ['id','legal_company_id'])
+                _logger.info('ORG: %s', org)
+                remote_event_ids = msodoo.env['event.event'].search([('company_id', '=', org['legal_company_id'][0]), ('date_begin', '<', '2017-07-31 00:00:00'),('date_end', '>', '2017-07-21 00:00:00')])
+                for rev in msodoo.env['event.event'].browse(remote_event_ids):
+                    ciev = self.search([('remote_int_id', '=', rev.id),('registration_id', '=', registration.id)])
+                    if ciev:
+                        ciev.write({'name': rev.name,
+                                    'date_begin': rev.date_begin,
+                                    'date_end': rev.date_end,
+                                    })
+                    else:
+                        self.create({'name': rev.name,
+                                     'date_begin': rev.date_begin,
+                                     'date_end': rev.date_end,
+                                     'remote_int_id': rev.id,
+                                     'registration_id': registration.id,
+                                     })
+                    _logger.info('Importing: %s', rev.name)
+            except:
+                pass
