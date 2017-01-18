@@ -28,9 +28,9 @@
 						<field name="organization_id" options="{'no_create': True, 'no_open': True}" />
 						<field name="sender_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('user_has_confirmed_numbers', '=', False)]}" />
 						<field name="sender_text" />
-						<field name="user_has_confirmed_numbers" invisible="0" />
-						<field name="sender_is_number" invisible="0" />
-						<field name="sender_state" invisible="0" />
+						<field name="user_has_confirmed_numbers" invisible="1" />
+						<field name="sender_is_number" invisible="1" />
+						<field name="sender_state" invisible="1" />
 					</group>
 					<p>The sender of the SMS can either be a short text (10 letters - no numbers) or your own mobile number.</p>
 					<div attrs="{'invisible': ['|', ('sender_is_number', '=', False), ('sender_state', '=', 'confirmed')]}">

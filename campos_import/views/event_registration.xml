@@ -8,15 +8,51 @@
     <record model="ir.ui.view" id="event_registration_form_view">
         <field name="name">event.registration.form (in campos_welcome)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="campos_preregistration.view_form_preregistration_gl"/>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-            	<field name="id"/>
-            	<button string="Import Members" type="action" name="%(campos_import_member_wiz_act_window)d" context="{'default_registration_id': id}" />
+            <button name="action_open_groupparticipants" position="after">
+            	<button string="Import from Member Service" attrs="{'invisible': [('remote_system_id', '=', False)]}" type="action" name="%(campos_import_manager_wiz_act_window)d" context="{'default_registration_id': id}" />
+            	<field name="id" invisible="1"/>
+            	<field name="remote_system_id" invisible="1"/>
+            	
             
-            </field>
+            </button>
+            <page name="pre_reg" position="before">
+            	<page string="Material Order">
+            		<button name="action_sale_order" string="Material orders" type="object"/>
+            	</page>
+            </page>
         </field>
     </record>
+    
+    
+    <record id="action_group_final_registration" model="ir.actions.act_window">
+			<field name="name">My Group</field>
+			
+			<field name="res_model">event.registration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('scoutgroup','=',True)]</field>
+		</record>
+		
+	<record id="action_final_tree" model="ir.actions.act_window.view">
+    	<field name="view_mode">tree</field>
+    	<field name="view_id" ref="campos_preregistration.view_tree_event_registration" />
+    	<field name="act_window_id" ref="action_group_final_registration" />
+	</record>
+
+	<record id="action_final_form" model="ir.actions.act_window.view">
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="campos_final_registration.view_form_finalregistration_gl" />
+	    <field name="act_window_id" ref="action_group_final_registration" />
+	</record>
+	
+	<!-- Events Groups items: Moved to Own top level Menu-->
+    <menuitem name="Final registration" id="menu_campos_groups_final" sequence="1" parent="campos_welcome.menu_campos_groups_top"/>
+		<menuitem name="My Group"
+            id="menu_action_group_registration" parent="menu_campos_groups_final" sequence="10"
+            action="action_group_final_registration"/>
+    
 
 
 

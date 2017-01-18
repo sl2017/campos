@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 20:41+0000\n"
-"PO-Revision-Date: 2017-01-03 20:41+0000\n"
+"POT-Creation-Date: 2017-01-17 19:48+0000\n"
+"PO-Revision-Date: 2017-01-17 19:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,18 +16,34 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: campos_final_registration
-#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
-msgid "*midlertidig landekode*"
+#: code:addons/campos_final_registration/models/finalregistration.py:90
+#: sql_constraint:event.registration.friendshipgrouplist:0
+#, python-format
+msgid "A group can only be added once as friendship group"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Access Token Id"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Add/Edit Participants"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Agreements"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Assigned Friendship Groups"
 msgstr ""
 
 #. module: campos_final_registration
@@ -37,12 +53,8 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Cancel Registration"
-msgstr ""
-
-#. module: campos_final_registration
-#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
-msgid "Caravan"
 msgstr ""
 
 #. module: campos_final_registration
@@ -56,7 +68,18 @@ msgid "Check declaration of child certificates"
 msgstr ""
 
 #. module: campos_final_registration
+#: field:campos.event.participant,transport_from_camp:0
+msgid "Common transport from camp"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_to_camp:0
+msgid "Common transport to camp"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Contact Person"
 msgstr ""
 
@@ -112,7 +135,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:147
+#: code:addons/campos_final_registration/models/finalregistration.py:250
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -121,6 +144,7 @@ msgstr ""
 #. module: campos_final_registration
 #: view:event.day:campos_final_registration.view_tree_event_days
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 #: model:ir.model,name:campos_final_registration.model_event_event
 msgid "Event"
 msgstr ""
@@ -137,6 +161,11 @@ msgstr ""
 #. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_finalregistration_tree
 msgid "Event Final Registration Tree"
+msgstr ""
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_finalregistration_tree_gl
+msgid "Event Final Registration Tree GL"
 msgstr ""
 
 #. module: campos_final_registration
@@ -167,19 +196,36 @@ msgid "Final Registration"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:event.registration.friendshipgrouplist,friendship_group_id:0
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree_gl
+msgid "Final Registration GL"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.registration.need,for_staff:0
+msgid "For Jobbers"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.registration.need,for_group:0
+msgid "For Scout Groups"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.registration.friendshipgrouplist,friendship_group_registration_id:0
 msgid "Friendship Group"
 msgstr ""
 
 #. module: campos_final_registration
-#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
-#: field:event.registration,friendhip_group_ids:0
-msgid "Friendship Groups"
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_friendshipgrouplist
+msgid "Friendship Group List"
 msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
-msgid "Friendship group"
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+#: field:event.registration,friendship_group_ids:0
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_friendshipgrouplist
+msgid "Friendship Groups"
 msgstr ""
 
 #. module: campos_final_registration
@@ -189,6 +235,7 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Handicaped participants"
 msgstr ""
 
@@ -208,7 +255,13 @@ msgid "Id of Access Token"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Inactivate Participant"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Internal Information"
 msgstr ""
 
@@ -243,8 +296,8 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,last_import:0
-msgid "Last import"
+#: selection:event.day,event_period:0
+msgid "Main Camp"
 msgstr ""
 
 #. module: campos_final_registration
@@ -254,6 +307,7 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 #: field:event.registration.needlist,need_id:0
 msgid "Need"
 msgstr ""
@@ -264,23 +318,13 @@ msgid "Need Name"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:event.registration,other_need_description:0
-msgid "Need desription"
-msgstr ""
-
-#. module: campos_final_registration
 #: field:event.registration,other_need_update_date:0
 msgid "Need updated"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,own_transport_from_camp:0
-msgid "No common transport FROM camp"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,own_transport_to_camp:0
-msgid "No common transport TO camp"
+#: field:event.registration,other_need_description:0
+msgid "Other Need description"
 msgstr ""
 
 #. module: campos_final_registration
@@ -306,7 +350,19 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Participants"
+msgstr ""
+
+#. module: campos_final_registration
+#: code:addons/campos_final_registration/models/finalregistration.py:71
+#, python-format
+msgid "Participants from %s"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.day,event_period:0
+msgid "Period"
 msgstr ""
 
 #. module: campos_final_registration
@@ -322,53 +378,71 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Pioneering Poles"
+msgstr ""
+
+#. module: campos_final_registration
+#: selection:event.day,event_period:0
+msgid "Post Camp"
+msgstr ""
+
+#. module: campos_final_registration
+#: selection:event.day,event_period:0
+msgid "Pre Camp"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Pre-registration"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Re-activate Participant"
+msgstr ""
+
+#. module: campos_final_registration
 #: field:campos.event.participant.day,registration_id_stored:0
-#: field:event.registration.friendshipgrouplist,registration_id:0
+#: field:event.registration.friendshipgrouplist,own_registration_id:0
 #: field:event.registration.needlist,registration_id:0
 msgid "Registration"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,remote_link_id:0
-msgid "Remote System link ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_ext_id:0
-msgid "Remote system external ID"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_system_id:0
-msgid "Remote system id"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,remote_int_id:0
-msgid "Remote system internal ID"
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Registration State"
 msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Reopen Registration"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,reside_in_caravan:0
-msgid "Resides in caravan?!?!"
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Reverse Assigned Friendship Groups"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant,reside_other_group_id:0
-msgid "Resides with this group"
+#: field:event.registration,reverse_friendship_group_ids:0
+msgid "Reverse Friendship Groups"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Saturday to Wednesday"
 msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Scout group"
 msgstr ""
 
@@ -385,17 +459,20 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 #: field:event.registration,need_ids:0
 msgid "Special needs"
 msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Sub Camp"
 msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Total"
 msgstr ""
 
@@ -406,6 +483,7 @@ msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Treasurer (invoice receiver)"
 msgstr ""
 
@@ -420,12 +498,12 @@ msgid "User signing declaration"
 msgstr ""
 
 #. module: campos_final_registration
-#: field:campos.event.participant.day,will_participate:0
-msgid "Will participate this day?"
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Wednesday to Sunday"
 msgstr ""
 
 #. module: campos_final_registration
-#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
-msgid "participants outside camp period"
+#: field:campos.event.participant.day,will_participate:0
+msgid "Will participate this day?"
 msgstr ""
 

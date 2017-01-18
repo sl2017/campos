@@ -18,6 +18,8 @@
 				<field name="arch" type="xml">
 					<tree editable="bottom">
 						<field name="name"/>
+						<field name="for_group"/>
+						<field name="for_staff"/>
 					</tree>
 				</field>
 			</record> 		
@@ -28,6 +30,7 @@
 				<field name="arch" type="xml">
 					<tree>
 						<field name="event_id" string="Event"/>
+						<field name="event_period"/>
 						<field name="event_date"/>
 					</tree>
 				</field>
@@ -61,6 +64,17 @@
 			</record> 	
 -->
 
+			<record id="view_tree_event_registration_friendshipgrouplist" model="ir.ui.view">
+				<field name="name">Friendship Group List</field>
+				<field name="model">event.registration.friendshipgrouplist</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="own_registration_id"/>
+						<field name="friendship_group_registration_id"/>
+					</tree>
+				</field>
+			</record> 	
+
 			<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
 			<field name="name">Final Registration Form Admin</field>
@@ -92,34 +106,46 @@
 							<field name="child_certificates_accept"/>
 							<field name="child_certificates_date" readonly="1"/>
 							<field name="child_certificates_user" readonly="1"/>
-							<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
 					
-		<!--				<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>
--->
-							<notebook colspan="2">
+<!--						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>-->
+
+						<notebook colspan="2">
 								<page string="Participants">
 									<group>
-										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id}">
-											<tree>
+										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant', 'default_participant': True}">
+											<tree delete="0">
 												<field name="id" invisible="1"/>
 												<field name="name"/>
-												<field name="own_transport_to_camp"/>
-												<field name="own_transport_from_camp"/>
-												<field name="reside_other_group_id"/>
-												<field name="reside_in_caravan" string="Caravan"/>
-												<field name="access_token_id" string="Access Token Id"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
+												<field name="state" readonly="1" string="Registration State"/>
+												<field name="access_token_id" string="Access Token Id" invisible="1"/>
 											</tree>
 										</field>
 									</group>
 								</page>
 								<page string="Friendship Groups">
 									<group>
-										<field colspan="2" name="friendhip_group_ids" widget="one2many_list" nolabel="0"  string="Friendship Groups"
-													attrs="{'readonly': [('group_country_code2', '!=', 'DK')]}">
+										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
+													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}">
 											<tree editable="bottom">
 												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
+										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
+													 readonly="1"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
+											<tree>
+												<field name="own_registration_id"/>
+											</tree>
+										</field>
+									</group>
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name"/>
+										<field name="friendship_group_info"/>
+										<field name="friendship_group_desire"/>
+										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}"/>
+										<field name="friendship_group_home_hospitality"/>
 									</group>
 								</page>
 								<page string="Special needs">
@@ -133,6 +159,11 @@
 										<field name="other_need"/>
 										<field name="other_need_description"/>
 										<field name="other_need_update_date"/>
+									</group>
+								</page>
+								<page string="Pioneering Poles">
+									<group>
+										<field name="pioneering_pole_depot_id" options="{'no_create': True}"/>
 									</group>
 								</page>
 								<page string="Agreements" position="after">
@@ -151,7 +182,7 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
-								<page string="Pre-registration">
+								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
 								<page string="Participants">
@@ -184,19 +215,7 @@
 										<field name="handicap_needs" readonly="1"/>
 									</group>
 								</page>
-								<page string="Friendship group">
-									<group>
-										<field name="friendship_group" readonly="1"/>
-										<field name="friendship_group_name" readonly="1"/>
-										<field name="friendship_group_info" readonly="1"/>
-										<field name="friendship_group_desire" readonly="1"/>
-										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}" readonly="1"/>
-										<field name="friendship_group_home_hospitality" readonly="1"/>
-									</group>
-								</page>
 							</notebook>
-<!--								<page string="participants outside camp period">
-								</page>-->
 								</page>
 							</notebook>
 						</group>
@@ -209,6 +228,162 @@
 			</field>
 		</record>
 		
+			<!-- Final Registration for group leaders-->
+		<record id="view_form_finalregistration_gl" model="ir.ui.view">
+			<field name="name">Final Registration Form GL</field>
+			<field name="model">event.registration</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="cancel_registration" 
+										type="object"    
+										string="Cancel Registration"
+										attrs="{'invisible': [('state', '=', 'cancel')]}"  invisible="1"/> 
+						<button name="reopen_registration" 
+										type="object"    
+										string="Reopen Registration"
+										attrs="{'invisible': [('state', '!=', 'cancel')]}" invisible="1"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,open,done,cancel" statusbar_colors="{'cancel':'red'}"/>
+					</header>
+					<sheet>
+						<group name="sheet" colspan="2">
+							<field name="event_id" string="Event"  options="{'no_create': True}" invisible="1"/>
+							<field name="partner_id" string="Scout group"  options="{'no_create': True}"  readonly="1"/>
+							<field name="organization_id" options="{'no_create': True}" readonly="1"/>
+							<field name="group_entrypoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+							<field name="group_exitpoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+							<field name="contact_partner_id" string="Contact Person"  options="{'no_create': True}" readonly="1"/>
+							<field name="group_country_code2" invisible="1"/>
+							<field name="econ_partner_id" string="Treasurer (invoice receiver)"  options="{'no_create': True}" readonly="1"/>
+							<field name="total_price" readonly="1" invisible="1"/>
+							<field name="child_certificates_accept" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"/>
+							<field name="child_certificates_date" readonly="1" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"/>
+							<field name="child_certificates_user" readonly="1" attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}"/>
+					
+					<!-- 	<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>  -->
+
+							<notebook colspan="2">
+								<page string="Participants">
+									<group>
+										<field colspan="5" name="participant_ids" widget="one2many_list" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant', 'default_participant': True}">
+											<tree  delete="0" create="0">
+												<field name="id" invisible="1"/>
+												<field name="name"/>
+												<field name="transport_to_camp"/>
+												<field name="transport_from_camp"/>
+												<field name="state" readonly="1" string="Registration State"/>
+												<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
+											</tree>
+										</field>
+										<button name="action_open_groupparticipants" string="Add/Edit Participants" type="object"/>
+									</group>
+								</page>
+								<page string="Friendship Groups">
+									<group>
+										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
+													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}" readonly="1">
+											<tree editable="bottom">
+												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
+											</tree>
+										</field>
+										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
+													 readonly="1"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
+											<tree>
+												<field name="own_registration_id"/>
+											</tree>
+										</field>
+									</group>
+									<group>
+										<field name="friendship_group"/>
+										<field name="friendship_group_name" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
+										<field name="friendship_group_info" attrs="{'invisible': [('friendship_group', '=', False)]}"/>
+										<field name="friendship_group_desire"/>
+										<field name="friendship_group_desire_country" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('friendship_group_desire', '=', False)]}"/>
+										<field name="friendship_group_home_hospitality" attrs="{'invisible': [('friendship_group_desire', '=', False)]}"/>
+									</group>
+								</page>
+								<page string="Special needs">
+									<group>
+										<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
+											<tree editable="bottom">
+												<field name="need_id"  options="{'no_create': True, 'no_open': True}" string="Need" domain="[('for_group', '=', True)]"/>
+												<field name="need_count"/>
+											</tree>
+										</field>
+										<field name="other_need"/>
+										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}"/>
+										<field name="other_need_update_date" invisible="1"/>
+									</group>
+								</page>
+								<!-- 
+								<page string="Pioneering Poles">
+									<group>
+										<field name="pioneering_pole_depot_id" options="{'no_create': True}" readonly="1"/>
+									</group>
+								</page>
+								 -->
+								<page string="Agreements" position="after">
+									<group>
+										<field name="group_camp_agreements" readonly="1"/>
+									</group>
+								</page>
+								<page string="Sub Camp">
+									<group>
+										<field name="subcamp_id"  options="{'no_create': True}" readonly="1"/>
+										<field name="camp_area_id" options="{'no_create': True}" readonly="1"/>
+									</group>
+								</page>
+								<page string="Internal Information" invisible="1">
+									<group>
+										<field name="internal_information"/>
+									</group>
+								</page>
+								<page name="pre_reg" string="Pre-registration">
+
+							<notebook colspan="2">
+								<page string="Participants">
+									<field colspan="7" name="prereg_participant_ids" widget="one2many_list" readonly="1">
+										<tree string="Participants" editable="bottom">
+											<field name="participant_age_group_id"  options="{'no_create': True, 'no_open': True}"/>
+											<field name="participant_total" sum="Total"/>
+											<field name="participant_from_date"/>
+											<field name="participant_to_date"/>
+											<field name="participant_own_transport_to_camp_total" sum="Total"/>
+											<field name="participant_own_transport_from_camp_total" sum="Total"/>
+											<field name="participant_common_transport_to_camp_total" sum="Total"/>
+											<field name="participant_common_transport_from_camp_total" sum="Total"/>
+											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
+										</tree>
+									</field>
+									
+								</page>
+								<page string="Pioneering Poles">
+									<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1" readonly="1">
+										<tree editable="bottom">
+											<field name="pioneeringpole_id"  options="{'no_create': True}"/>
+											<field name="polecount" sum="Total"/>
+										</tree>
+									</field>				
+								</page>
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap" readonly="1"/>
+										<field name="handicap_description" readonly="1"/>
+										<field name="handicap_needs" readonly="1"/>
+									</group>
+								</page>
+							</notebook>
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form> 
+			</field>
+		</record>
 		
 		<!-- Add to Event view -->
 		<record id="view_event_form" model="ir.ui.view">
@@ -219,9 +394,10 @@
 			<field name="arch" type="xml">
 				<xpath expr="//notebook" position="inside">
 					<page string="Event Days">
-						<field name="event_day_ids" colspan="1" nolabel="1">
-							<tree>
+						<field name="event_day_ids" colspan="1" nolabel="1"  context="{'default_event_id': id}">
+							<tree editable="bottom">
                 <field name="event_date"/>
+                <field name="event_period"/>								
            		</tree>
            	</field>
           </page>
@@ -234,31 +410,51 @@
 		<record id="view_form_finalregistration_participant" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form</field>
 			<field name="model">campos.event.participant</field>
+			<field name="priority">17</field>
 			<field name="arch" type="xml">
 				<form>
 					<header>
+							<button name="inactivate_participant" 
+											type="object"    
+											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '=', 'deregistered')]}" />
+							<button name="activate_participant" 
+											type="object"    
+											string="Re-activate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '!=', 'deregistered')]}" />
 					</header>
 					<sheet>
 						<group name="sheet2">
-							<field name="registration_id"  readonly="1" invisible="1"/>
+							<field name="registration_id" invisible="1"/>
+							<field name="participant" invisible="1"/>
+							<field name="parent_id" invisible="1"/>
 							<field name="name"/>
-							<field name="birthdate"/>
+							<field name="birthdate" required="1"/>
 							<field name="email"/>
 							<field name="mobile"/>
-							<field name="access_token_id"/>
-							<field name="reside_in_caravan"/>
-							<field name="reside_other_group_id"/>							
-							<field name="own_transport_to_camp"/>
-							<field name="own_transport_from_camp"/>
-							<button name="check_all_days" 
+							<field name="street"/>
+							<field name="street2"/>
+							<field name="zip"/>
+							<field name="city"/>
+							<field name="country_id"/>
+							<field name="access_token_id" invisible="1"/>
+							<field name="transport_to_camp"/>
+							<field name="transport_from_camp"/>
+							<field name="state" readonly="1" string="Registration State"/>
+							<button name="check_all_maincamp_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>
 							<button name="uncheck_all_days" 
 											type="object"    
 											string="Un-check all days" class = "oe_edit_only"/> 
+							<button name="check_all_first_half_days" 
+											type="object"    
+											string="Saturday to Wednesday" class = "oe_edit_only"/>
+							<button name="check_all_second_half_days" 
+											type="object"    
+											string="Wednesday to Sunday" class = "oe_edit_only"/>
 							<field colspan="2" name="camp_day_ids" widget="one2many_list" nolabel="1">
 								<tree delete="false" create="false" editable="bottom">
 									<field name="the_date" readonly="1"/>
+									<field name="day_id" invisible="1"/>
 									<field name="will_participate"/>
 								</tree>
 							</field>
@@ -269,6 +465,21 @@
 			</field>
 		</record>
 		
+		<record id="view_tree_finalregistration_participant" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form</field>
+			<field name="model">campos.event.participant</field>
+			<field name="priority">17</field>
+			<field name="arch" type="xml">
+				<tree  delete="0">
+					<field name="id" invisible="1"/>
+					<field name="name"/>
+					<field name="transport_to_camp"/>
+					<field name="transport_from_camp"/>
+					<field name="state" readonly="1" string="Registration State"/>
+					<field name="access_token_id" string="Access Token Id" readonly="1" invisible="1"/>
+				</tree>
+			</field>							
+		</record>
 		
 		<!-- Menu Actions -->
 		 <!--  Manager view -->
@@ -292,9 +503,23 @@
 	    <field name="view_id" ref="campos_final_registration.view_form_finalregistration_admin" />
 	    <field name="act_window_id" ref="action_event_finalregistration_tree" />
 	</record>
+
+
+<!-- GL setup -->	
+    <record id="action_event_finalregistration_tree_gl" model="ir.actions.act_window">
+			<field name="name">Event Final Registration Tree GL</field>
+			
+			<field name="res_model">event.registration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('scoutgroup','=',True)]</field>
+		</record>
 		
-		
-		
+	<record id="action_finale_registration_gl_form" model="ir.actions.act_window.view">
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="campos_final_registration.view_form_finalregistration_gl" />
+	    <field name="act_window_id" ref="action_event_finalregistration_tree_gl" />
+	</record>
 		
 		
 		
@@ -318,11 +543,16 @@
 		res_model="campos.event.participant.day"
 		view_mode="tree,form" />
 
+		<act_window id="action_event_registration_friendshipgrouplist"
+		name="Friendship Group List"
+		res_model="event.registration.friendshipgrouplist"
+		view_mode="tree" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
 		<!-- Menu Items -->
-		
+		<!-- Admin -->
 		<menuitem id="menu_action_event_finalregistration_tree" parent="menu_event_finalregistration" name="Final Registration" action="action_event_finalregistration_tree" groups="campos_event.group_campos_admin" sequence="20"/>
 		
 		<menuitem id="menu_action_finalregistration_menu_pioneeringpoledepot" parent="menu_event_finalregistration" name="Pioneering Pole Depots" action="action_event_registration_pioneeringpoledepot" groups="campos_event.group_campos_admin" sequence="30" />
@@ -332,7 +562,11 @@
 		<menuitem id="menu_action_finalregistration_menu_participant_days" parent="menu_event_finalregistration" name="Participant Days" action="action_participant_days" groups="campos_event.group_campos_admin" sequence="50" />
 
 		<menuitem id="menu_action_finalregistration_menu_needs" parent="menu_event_finalregistration" name="Special Needs" action="action_event_registration_needs" groups="campos_event.group_campos_admin" sequence="60" />
+		
+		<menuitem id="menu_action_finalregistration_menu_friendshipgrouplist" parent="menu_event_finalregistration" name="Friendship Groups" action="action_event_registration_friendshipgrouplist" groups="campos_event.group_campos_admin" sequence="70" />
 
+		<!-- gl -->
+		<menuitem id="menu_action_event_finalregistration_tree_gl" parent="menu_event_finalregistration" name="Final Registration GL" action="action_event_finalregistration_tree_gl" groups="campos_preregistration.group_campos_groupleader" sequence="25"/>
 
 	</data>
 </openerp>

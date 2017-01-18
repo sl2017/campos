@@ -21,11 +21,13 @@
     'license': 'AGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['campos_preregistration'],
+    'depends': ['campos_preregistration', 'campos_event'],
 
     # always loaded
     'data': ['views/finalregistration.xml',
-             'security/ir.model.access.csv'],
+             'security/ir.model.access.csv',
+             'security/ir.rule.csv',
+             ],
     # only loaded in demonstration mode
     'demo': [ ],
 }

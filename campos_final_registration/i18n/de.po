@@ -1,0 +1,506 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_final_registration
+# 
+# Translators:
+# Lykke Merete Højsting <lho@sl2017.dk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-17 19:48+0000\n"
+"PO-Revision-Date: 2017-01-17 19:48+0000\n"
+"Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
+"Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_final_registration
+#: code:addons/campos_final_registration/models/finalregistration.py:90
+#: sql_constraint:event.registration.friendshipgrouplist:0
+#, python-format
+msgid "A group can only be added once as friendship group"
+msgstr ""
+"Eine Gruppe kann nur einmai als Freundschaftsgruppe registriert werden"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Access Token Id"
+msgstr "Id des Eintrittszeichens"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Add/Edit Participants"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Agreements"
+msgstr "Verabredungen"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Assigned Friendship Groups"
+msgstr "Zugeteilte Freundschaftsgruppen"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,camp_day_ids:0
+msgid "Camp Day List"
+msgstr "Taglagerliste"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Cancel Registration"
+msgstr "Registrierung annullieren"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Check all days"
+msgstr "Alle Tagen checken"
+
+#. module: campos_final_registration
+#: field:event.registration,child_certificates_accept:0
+msgid "Check declaration of child certificates"
+msgstr " Check Bekanntgabe um das erweiterte Führungszeugnis"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_from_camp:0
+msgid "Common transport from camp"
+msgstr "Gemeinschaftstransport vom Lager"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,transport_to_camp:0
+msgid "Common transport to camp"
+msgstr "Gemeinschaftstransport zum Lager"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Contact Person"
+msgstr "Kontaktperson"
+
+#. module: campos_final_registration
+#: field:event.registration.needlist,need_count:0
+msgid "Count"
+msgstr "Anzahl"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,create_uid:0
+#: field:event.day,create_uid:0
+#: field:event.registration.friendshipgrouplist,create_uid:0
+#: field:event.registration.need,create_uid:0
+#: field:event.registration.needlist,create_uid:0
+#: field:event.registration.pioneeringpoledepot,create_uid:0
+msgid "Created by"
+msgstr "Errichtet von"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,create_date:0
+#: field:event.day,create_date:0
+#: field:event.registration.friendshipgrouplist,create_date:0
+#: field:event.registration.need,create_date:0
+#: field:event.registration.needlist,create_date:0
+#: field:event.registration.pioneeringpoledepot,create_date:0
+msgid "Created on"
+msgstr "Errichtet am"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,the_date:0 field:event.day,event_date:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: campos_final_registration
+#: field:event.registration,child_certificates_date:0
+msgid "Date of declaration"
+msgstr "Datum der Bekanntgabe"
+
+#. module: campos_final_registration
+#: field:event.registration.pioneeringpoledepot,name:0
+msgid "Depot Name"
+msgstr "Name der Depot"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,display_name:0
+#: field:event.day,display_name:0
+#: field:event.registration.friendshipgrouplist,display_name:0
+#: field:event.registration.need,display_name:0
+#: field:event.registration.needlist,display_name:0
+#: field:event.registration.pioneeringpoledepot,display_name:0
+msgid "Display Name"
+msgstr "Displayname"
+
+#. module: campos_final_registration
+#: code:addons/campos_final_registration/models/finalregistration.py:250
+#: sql_constraint:event.registration.needlist:0
+#, python-format
+msgid "Each need can only be added once"
+msgstr "Jeder Bedarf kann nur einmal zugefügt werden"
+
+#. module: campos_final_registration
+#: view:event.day:campos_final_registration.view_tree_event_days
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+#: model:ir.model,name:campos_final_registration.model_event_event
+msgid "Event"
+msgstr "Event"
+
+#. module: campos_final_registration
+#: view:event.event:campos_final_registration.view_event_form
+#: field:event.event,event_day_ids:0 field:event.registration,event_days:0
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_days
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_event_days
+msgid "Event Days"
+msgstr "Eventtagen"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_finalregistration_tree
+msgid "Event Final Registration Tree"
+msgstr "Endgültige Eventanmeldung"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_finalregistration_tree_gl
+msgid "Event Final Registration Tree GL"
+msgstr "Endgültige Anmeldung"
+
+#. module: campos_final_registration
+#: model:ir.model,name:campos_final_registration.model_campos_event_participant
+msgid "Event Participant"
+msgstr "Teilnehmer/Teilnehmerin des Events"
+
+#. module: campos_final_registration
+#: model:ir.model,name:campos_final_registration.model_event_registration
+msgid "Event Registration"
+msgstr "Anmeldung zum Event"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_pioneeringpoledepot
+msgid "Event Registration Pioneering Pole Depots"
+msgstr "Eventanmeldung Stangenhölzerdepots"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,day_id:0 field:event.day,event_id:0
+msgid "Event day"
+msgstr "Eventtag"
+
+#. module: campos_final_registration
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree
+#: model:ir.ui.menu,name:campos_final_registration.menu_event_finalregistration
+msgid "Final Registration"
+msgstr "Endgültige Anmeldung"
+
+#. module: campos_final_registration
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree_gl
+msgid "Final Registration GL"
+msgstr "Endgültige Anmeldung der Gruppenleiter"
+
+#. module: campos_final_registration
+#: field:event.registration.need,for_staff:0
+msgid "For Jobbers"
+msgstr "Für Jobbern/Jobberinnen"
+
+#. module: campos_final_registration
+#: field:event.registration.need,for_group:0
+msgid "For Scout Groups"
+msgstr "Für Gruppen von Pfadfindern oder Pfadfinderinnen"
+
+#. module: campos_final_registration
+#: field:event.registration.friendshipgrouplist,friendship_group_registration_id:0
+msgid "Friendship Group"
+msgstr "Freundschaftsgruppe"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_friendshipgrouplist
+msgid "Friendship Group List"
+msgstr "Liste von Freundschaftsgruppen"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+#: field:event.registration,friendship_group_ids:0
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_friendshipgrouplist
+msgid "Friendship Groups"
+msgstr "Freundschaftsgruppen"
+
+#. module: campos_final_registration
+#: model:ir.model,name:campos_final_registration.model_event_registration_need
+msgid "Group Need"
+msgstr "Bedarfe der Gruppe"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Handicaped participants"
+msgstr "Behinderte Teilnehmern/Teilnehmerinnen"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,id:0 field:event.day,id:0
+#: field:event.registration.friendshipgrouplist,id:0
+#: field:event.registration.need,id:0 field:event.registration.needlist,id:0
+#: field:event.registration.pioneeringpoledepot,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:campos.event.participant,access_token_id:0
+msgid "Id of Access Token"
+msgstr "id des Eintrittszeichens"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Inactivate Participant"
+msgstr "Abmeldung eines Teilnehmers/einer Teilnehmerin"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Internal Information"
+msgstr "Interne Informationen"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,__last_update:0
+#: field:event.day,__last_update:0
+#: field:event.registration.friendshipgrouplist,__last_update:0
+#: field:event.registration.need,__last_update:0
+#: field:event.registration.needlist,__last_update:0
+#: field:event.registration.pioneeringpoledepot,__last_update:0
+msgid "Last Modified on"
+msgstr "Geändret am"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,write_uid:0 field:event.day,write_uid:0
+#: field:event.registration.friendshipgrouplist,write_uid:0
+#: field:event.registration.need,write_uid:0
+#: field:event.registration.needlist,write_uid:0
+#: field:event.registration.pioneeringpoledepot,write_uid:0
+msgid "Last Updated by"
+msgstr "Geändert von"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,write_date:0
+#: field:event.day,write_date:0
+#: field:event.registration.friendshipgrouplist,write_date:0
+#: field:event.registration.need,write_date:0
+#: field:event.registration.needlist,write_date:0
+#: field:event.registration.pioneeringpoledepot,write_date:0
+msgid "Last Updated on"
+msgstr "Aufdatiert am spätesten am"
+
+#. module: campos_final_registration
+#: selection:event.day,event_period:0
+msgid "Main Camp"
+msgstr "Hauptlager"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,mobile_clean:0
+msgid "Mobile clean"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+#: field:event.registration.needlist,need_id:0
+msgid "Need"
+msgstr "Bedarf"
+
+#. module: campos_final_registration
+#: field:event.registration.need,name:0
+msgid "Need Name"
+msgstr "Name des Bedarfs"
+
+#. module: campos_final_registration
+#: field:event.registration,other_need_update_date:0
+msgid "Need updated"
+msgstr "Bedarf updatiert"
+
+#. module: campos_final_registration
+#: field:event.registration,other_need_description:0
+msgid "Other Need description"
+msgstr "Beschriebung von anderen Bedarfe"
+
+#. module: campos_final_registration
+#: field:event.registration,other_need:0
+msgid "Other special need(s)"
+msgstr "Anderer besondere Bedarf/andere besondere Bedarfe"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,participant_id:0
+msgid "Participant"
+msgstr "Teilnehmer/Teilnehmerin"
+
+#. module: campos_final_registration
+#: field:event.registration,participants_camp_day_ids:0
+msgid "Participant Camp Days"
+msgstr "Anzahl Lagertage des Teilnehmers/der Teilnehmerin"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_participant_days
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_participant_days
+msgid "Participant Days"
+msgstr "Tage des Teilnehmers/der Teilnehmerin"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Participants"
+msgstr "Teilnehmern/Teilnehmerinnen"
+
+#. module: campos_final_registration
+#: code:addons/campos_final_registration/models/finalregistration.py:71
+#, python-format
+msgid "Participants from %s"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.day,event_period:0
+msgid "Period"
+msgstr "Zeitraum"
+
+#. module: campos_final_registration
+#: field:event.registration,pioneering_pole_depot_id:0
+#: model:ir.model,name:campos_final_registration.model_event_registration_pioneeringpoledepot
+msgid "Pioneering Pole Depot"
+msgstr "Depot der Stangenhölzer"
+
+#. module: campos_final_registration
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_pioneeringpoledepot
+msgid "Pioneering Pole Depots"
+msgstr "Depots der Stangenhölzer"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Pioneering Poles"
+msgstr "Stangenhölzer"
+
+#. module: campos_final_registration
+#: selection:event.day,event_period:0
+msgid "Post Camp"
+msgstr "Nachlager"
+
+#. module: campos_final_registration
+#: selection:event.day,event_period:0
+msgid "Pre Camp"
+msgstr "Vorlager"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Pre-registration"
+msgstr "Vorausanmeldung"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Re-activate Participant"
+msgstr "Bereue Abmeldung von Teilnehmer/Teilnehmerin"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,registration_id_stored:0
+#: field:event.registration.friendshipgrouplist,own_registration_id:0
+#: field:event.registration.needlist,registration_id:0
+msgid "Registration"
+msgstr "Anmeldung"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+#: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Registration State"
+msgstr "Status der Anmeldung"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Reopen Registration"
+msgstr "Anmeldung wieder eröffnen"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Reverse Assigned Friendship Groups"
+msgstr "ist zugeteilte Freundschaftsgruppe zu"
+
+#. module: campos_final_registration
+#: field:event.registration,reverse_friendship_group_ids:0
+msgid "Reverse Friendship Groups"
+msgstr "ist Freundschaftsgruppe zu"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Saturday to Wednesday"
+msgstr "Samstag bis Mitwoch"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Scout group"
+msgstr "Gruppe der Pfadfinder oder Pfadfinderinnen"
+
+#. module: campos_final_registration
+#: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_needs
+#: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_needs
+msgid "Special Needs"
+msgstr "Anderer besondere Bedarf/andere besondere Bedarfe"
+
+#. module: campos_final_registration
+#: model:ir.model,name:campos_final_registration.model_event_registration_needlist
+msgid "Special need on a registration"
+msgstr "Besondere Bedarfe bei der Anmeldung"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+#: field:event.registration,need_ids:0
+msgid "Special needs"
+msgstr "Besondere Bedarfe"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Sub Camp"
+msgstr "Unterlager"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Total"
+msgstr "Insgesamt"
+
+#. module: campos_final_registration
+#: field:event.registration,total_price:0
+msgid "Total Price"
+msgstr "Gesamtpreis"
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+#: view:event.registration:campos_final_registration.view_form_finalregistration_gl
+msgid "Treasurer (invoice receiver)"
+msgstr "Kassierer/Kassiererin (Empfänger/Empfängerin von der Rechnung)"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Un-check all days"
+msgstr "Un-check alle Tagen"
+
+#. module: campos_final_registration
+#: field:event.registration,child_certificates_user:0
+msgid "User signing declaration"
+msgstr "Name des Unterzeichner/der Unterzeichnerin von der Bekanntgabe"
+
+#. module: campos_final_registration
+#: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
+msgid "Wednesday to Sunday"
+msgstr "Mittwoch bis Sonntag"
+
+#. module: campos_final_registration
+#: field:campos.event.participant.day,will_participate:0
+msgid "Will participate this day?"
+msgstr "Nehmen am diesen Tag an?"

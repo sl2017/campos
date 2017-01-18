@@ -14,6 +14,7 @@
                 'campos_event',
                 'auth_blaatlogin',
                 'auth_signup',
+                'campos_final_registration',
                 
     ],
     'data': [
