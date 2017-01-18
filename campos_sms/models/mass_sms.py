@@ -50,7 +50,8 @@ class part_sms(models.TransientModel):
     @api.model
     def default_get(self, fields):
         result = super(part_sms, self).default_get(fields)
-        result['organization_id'] = self.env.user.comm_sms_ids[0].id
+        if self.env.user.comm_sms_ids:
+            result['organization_id'] = self.env.user.comm_sms_ids[0].id
 
         # Build receivers lists
         model = self.env.context.get('active_model', 'res.partner')
@@ -71,7 +72,7 @@ class part_sms(models.TransientModel):
         result['sender_id'] = self.env.user.sms_last_sender.id or \
             sms_senders[0].id if sms_senders else False
         if not result['sender_id']:
-            result['sender_text'] = _('SLejr')
+            result['sender_text'] = _('SL2017')
 
         result['user_has_confirmed_numbers'] = len(sms_senders) > 0
 
