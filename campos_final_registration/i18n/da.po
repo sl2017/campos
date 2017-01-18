@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-16 21:48+0000\n"
-"PO-Revision-Date: 2017-01-16 21:48+0000\n"
+"POT-Creation-Date: 2017-01-17 19:48+0000\n"
+"PO-Revision-Date: 2017-01-17 19:48+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Add/Edit Participants"
-msgstr ""
+msgstr "Tilføj/ret deltagere"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -358,7 +358,7 @@ msgstr "Deltagere"
 #: code:addons/campos_final_registration/models/finalregistration.py:71
 #, python-format
 msgid "Participants from %s"
-msgstr ""
+msgstr "Deltager fra %s"
 
 #. module: campos_final_registration
 #: field:event.day,event_period:0
