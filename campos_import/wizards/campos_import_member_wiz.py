@@ -158,7 +158,7 @@ class CamposImportMemberProfile(models.Model):
                                 'street2': rp['street2'],
                                 'zip': rp['zip'],
                                 'city': rp['city'],
-                                'country': rp['country_id'][1],
+                                'country': rp['country_id'][1] if rp['country_id'] else 'Danmark',
                                 'is_leader': rp['is_active_leader']
                                 })
                 else:
@@ -173,7 +173,7 @@ class CamposImportMemberProfile(models.Model):
                                  'street2': rp['street2'],
                                  'zip': rp['zip'],
                                  'city': rp['city'],
-                                 'country': rp['country_id'][1],
+                                 'country': rp['country_id'][1] if rp['country_id'] else 'Danmark',
                                  'is_leader': rp['is_active_leader']
                                  #'wiz_id': wizard.id,
                                  })
