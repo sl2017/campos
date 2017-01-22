@@ -9,6 +9,7 @@
 <field name="destinationidno"/>
 <field name="name"/>
 <field name="placename"/>
+<field name="id"/>
 </tree>
 </field>
 </record>

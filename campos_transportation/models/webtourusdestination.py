@@ -42,8 +42,21 @@ class WebtourUsDestination(models.Model):
             webtour_dict["name"] = get_tag_data("a:Name")
             webtour_dict["placename"] = get_tag_data("a:PlaceName")
             webtour_dict["address"] = get_tag_data("a:Address")
-            webtour_dict["latitude"] = get_tag_data("a:Latitude")
-            webtour_dict["longitude"] = get_tag_data("a:Longitude")
+            lat=get_tag_data("a:Latitude")
+            lon=get_tag_data("a:Longitude")
+            if lat[2] <>'.':
+                webtour_dict["latitude"] = lat[:2] + '.' + lat[2:]
+            else: 
+                webtour_dict["latitude"] = lat
+                
+            if lon[2] <>'.':
+                if (lon[0]=='1'):
+                    webtour_dict["longitude"] = lon[:2] + '.' + lon[2:]
+                else:
+                    webtour_dict["longitude"] = lon[:1] + '.' + lon[1:]
+            else:     
+                webtour_dict["longitude"] = lon
+                
             webtour_dict["note"] = get_tag_data("a:Note")
 
             rs_webtourdestination = self.env['campos.webtourusdestination'].search([('destinationidno','=',destinationidno)])

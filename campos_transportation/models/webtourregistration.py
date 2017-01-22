@@ -9,10 +9,98 @@ _logger = logging.getLogger(__name__)
 
 from openerp import models, fields, api
 from ..interface import webtourinterface
+from math import sin, cos, sqrt, atan2, radians
+from operator import itemgetter
+import googlemaps
+
 class WebtourRegistration(models.Model):
     _inherit = 'event.registration'
-    webtourusgroupidno = fields.Char('webtour us Group ID no', required=False, Default='')
+    webtourusgroupidno = fields.Char('Webtour us Group ID no', required=False, Default='')
+    webtourdefaulthomedestination = fields.Many2one('campos.webtourusdestination','id',ondelete='set null')
+    webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
+    webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
     
+    @api.one
+    def set_webtourdefaulthomedestination(self):
+        # If gep point is missing, try to calculate
+        if (self.partner_id.partner_latitude==0):
+            self.partner_id.geocode_address()
+                   
+        # If geo point pressent lets go....           
+        if (self.partner_id.partner_latitude<>0):    
+
+            destinations = self.env['campos.webtourusdestination'].search([('name', '<>', '')])
+            
+            # approximate radius of earth in km
+            R = 6373.0
+            
+            #Home adresse cord
+            lat1 = radians(self.partner_id.partner_latitude)
+            lon1 = radians(self.partner_id.partner_longitude)  
+
+            dists=[] #placeholder for beeline distance from home to all destinations
+            
+            for d in destinations:
+                lat2 = radians(float(d.latitude))
+                lon2 = radians(float(d.longitude))
+                
+                dlon = lon2 - lon1
+                dlat = lat2 - lat1
+
+                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                distance = R * c
+                
+                dists.append([d.id,distance,float(d.latitude),float(d.longitude)]) 
+              
+            sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
+            
+            self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
+
+            lat1 = self.partner_id.partner_latitude
+            lon1 = self.partner_id.partner_longitude
+            
+            lat2=float(self.webtourdefaulthomedestination.latitude)
+            lon2=float(self.webtourdefaulthomedestination.longitude)
+              
+            n = 0;  #counter for no of dist to googlemaps
+            origins=[] #placeholder list for origons to googlemaps
+            destinations =[] #placeholder list for desinations to googlemaps
+            
+            for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
+                origins.append((lat1,lon1)) #Home add
+                destinations.append((d[2],d[3])) # get geo point stored in loop above
+                n = n+1 
+                if (n > 5):
+                    break       #Max 5 distinations    
+                  
+            # call googlemap to find distances by car to the neerst distinations
+            gmaps = googlemaps.Client(key='AIzaSyDA7swnfwynpg0NBh88pBW6irnOnf8qMJM')
+            matrix = gmaps.distance_matrix(origins, destinations)
+            #_logger.info("Google maps responce %s", matrix)
+            
+            n = 0
+            for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
+                distance=matrix['rows'][n]['elements'][0]['distance']['value']
+                distancekm =  distance/1000.0             
+                duration=matrix['rows'][n]['elements'][0]['duration']['text']
+                
+                if (n == 0): 
+                    self.webtourdefaulthomedistance = distancekm
+                    self.webtourdefaulthomeduration = duration
+                else:
+                    if (self.webtourdefaulthomedistance > distancekm):
+                        self.webtourdefaulthomedestination=d[0]
+                        self.webtourdefaulthomedistance = distancekm
+                        self.webtourdefaulthomeduration = duration                    
+                
+                n = n+1 
+                if (n > 5):
+                    break       #Max 5 distinations
+                                             
+            _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)  
+
+
     @api.one
     def createTestPaticipants(self):
                 
@@ -40,8 +128,8 @@ class WebtourRegistration(models.Model):
                                                   
                     newparticipant_obj = self.env['campos.event.participant']                
                     newparticipant = newparticipant_obj.create(dicto1)
-                    newparticipant.tocampfromdestination_id = self.env['campos.webtourusdestination'].search([('destinationidno','=',4390)]).id 
-                    newparticipant.fromcamptodestination_id = newparticipant.tocampfromdestination_id
+                    newparticipant.tocampfromdestination_id = self.webtourdefaulthomedestination
+                    newparticipant.fromcamptodestination_id = self.webtourdefaulthomedestination
                 
 
 

@@ -2,10 +2,15 @@
 from openerp import models, fields, api
 from ..interface import webtourinterface
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
+    campos_demandneeded = fields.Boolean('CampOs Demand Needed', default=False)
     campos_startdatetime = fields.Char('CampOs StartDateTime', required=False)
     campos_startdestinationidno = fields.Char('CampOs StartDestinationIdNo', required=False)
     campos_startnote = fields.Char('CampOs StartNote', required=False)
@@ -50,16 +55,17 @@ class WebtourUsNeed(models.Model):
         if  self.webtour_groupidno == False or self.webtour_useridno == False or self.campos_startdestinationidno == False or self.campos_startdatetime == False or self.campos_enddestinationidno == False or self.campos_enddatetime == False:
             return True
                
-        if self.webtour_needidno == False or self.webtour_needidno == "0" :
-            request="UserIDno="+self.webtour_useridno
-            request=request+"&GroupIDno="+self.webtour_groupidno
-            request=request+"&StartDestinationIDno="+self.campos_startdestinationidno
-            request=request+"&StartDateTime="+self.campos_startdatetime
-            request=request+"&StartNote="+self.campos_startnote
-            request=request+"&EndDestinationIDno="+self.campos_enddestinationidno
-            request=request+"&EndDateTime="+self.campos_enddatetime
-            request=request+"&EndNote="+self.campos_endnote
-            response_doc=webtourinterface.usneed_create(request)
+        if (self.webtour_needidno == False or self.webtour_needidno == "0"):
+            if (self.campos_demandneeded == True):
+                request="UserIDno="+self.webtour_useridno
+                request=request+"&GroupIDno="+self.webtour_groupidno
+                request=request+"&StartDestinationIDno="+self.campos_startdestinationidno
+                request=request+"&StartDateTime="+self.campos_startdatetime
+                request=request+"&StartNote="+self.campos_startnote
+                request=request+"&EndDestinationIDno="+self.campos_enddestinationidno
+                request=request+"&EndDateTime="+self.campos_enddatetime
+                request=request+"&EndNote="+self.campos_endnote
+                response_doc=webtourinterface.usneed_create(request)
         else :
             if self.campos_transferedseq <> self.campos_writeseq :
                 request="NeedIDno="+self.webtour_needidno
@@ -89,4 +95,35 @@ class WebtourUsNeed(models.Model):
         else :
             self.campos_transferedseq = ""
             
+        return True
+    
+    @api.multi
+    def updatewebtourtofromusneeds(self):
+        needs = campdestination= self.env['campos.webtourusneed'].search([('participant_id','<>',False)])
+        
+        _logger.info("updatewebtourtofromusneeds: Here we go...%s",needs)
+        for need in needs:
+            campdestination= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)]).campdestinationid.destinationidno
+
+            if need.participant_id <> False:
+                if need.campos_enddestinationidno == campdestination :
+                    need.campos_demandneeded = need.participant_id.usecamptransporttocamp
+                    need.campos_startdatetime = need.participant_id.tocampdate
+                    need.campos_enddatetime = need.participant_id.tocampdate
+                    need.campos_startdestinationidno = need.participant_id.tocampfromdestination_id.destinationidno
+                    need.webtour_useridno = need.participant_id.webtourususeridno
+                    need.webtour_groupidno = need.participant_id.webtourusgroupidno
+                    need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
+                
+                if need.campos_startdestinationidno == campdestination :
+                    need.campos_demandneeded = need.participant_id.usecamptransportfromcamp
+                    need.campos_startdatetime = need.participant_id.fromcampdate
+                    need.campos_enddatetime = need.participant_id.fromcampdate
+                    need.campos_enddestinationidno = need.participant_id.fromcamptodestination_id.destinationidno
+                    need.webtour_useridno = need.participant_id.webtourususeridno
+                    need.webtour_groupidno = need.participant_id.webtourusgroupidno                     
+                    need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')
+                    
+                need.get_create_webtour_need()
+                
         return True

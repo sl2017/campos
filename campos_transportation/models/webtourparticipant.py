@@ -108,6 +108,7 @@ class WebtourParticipant(models.Model):
                 if par.tocampusneed_id.id == False:
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
+                    dicto1["campos_demandneeded"] = par.usecamptransporttocamp
                     dicto1["campos_startdatetime"] = par.tocampdate
                     dicto1["campos_enddatetime"] = par.tocampdate
                     dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
@@ -115,10 +116,11 @@ class WebtourParticipant(models.Model):
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
                     dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
-                    
+                
                     usneed_obj = self.env['campos.webtourusneed']                
                     par.tocampusneed_id = usneed_obj.create(dicto1)
                 else:
+                    par.tocampusneed_id.campos_demandneeded = par.usecamptransporttocamp
                     par.tocampusneed_id.campos_startdatetime = par.tocampdate
                     par.tocampusneed_id.campos_enddatetime = par.tocampdate
                     par.tocampusneed_id.campos_startdestinationidno = par.tocampfromdestination_id.destinationidno
@@ -137,6 +139,7 @@ class WebtourParticipant(models.Model):
                 if par.fromcampusneed_id.id == False:
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
+                    dicto1["campos_demandneeded"] = par.usecamptransportfromcamp                    
                     dicto1["campos_startdatetime"] = par.fromcampdate
                     dicto1["campos_enddatetime"] = par.fromcampdate                    
                     dicto1["campos_startdestinationidno"] = campdesination
@@ -144,10 +147,11 @@ class WebtourParticipant(models.Model):
                     dicto1["webtour_useridno"] = par.webtourususeridno
                     dicto1["webtour_groupidno"] = par.webtourusgroupidno
                     dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
-                                                            
+                                                        
                     usneed_obj = self.env['campos.webtourusneed']                
                     par.fromcampusneed_id = usneed_obj.create(dicto1)
                 else:
+                    par.fromcampusneed_id.campos_demandneeded = par.usecamptransportfromcamp
                     par.fromcampusneed_id.campos_startdatetime = par.fromcampdate
                     par.fromcampusneed_id.campos_enddatetime = par.fromcampdate
                     par.fromcampusneed_id.campos_startdestinationidno = campdesination

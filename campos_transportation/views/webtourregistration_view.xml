@@ -9,6 +9,7 @@
 <tree>
 <field name="webtourusgroupidno"/>
 <field name="scoutgroup"/>
+<field name="webtourdefaulthomedistance"/>
 </tree>
 </field>
 </record>
@@ -20,6 +21,7 @@
 <form>
 <header>
 <button name="createTestPaticipants" type="object" string="Create Test Participants" class="oe_highlight" />
+<button name="set_webtourdefaulthomedestination" type="object" string="Set Home Dest" class="oe_highlight" />
 </header>
 <sheet>
 <group name="user_top">
@@ -28,6 +30,9 @@
 <field name="event_id"/>
 <field name="webtourusgroupidno"/>
 <field name="scoutgroup"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
 </group>
 </sheet>
 </form>

@@ -8,7 +8,6 @@
          'views/webtourusdestination_view.xml',
          'views/webtourregistration_view.xml',
          'views/webtourusneed_view.xml',         
-         'views/webtourconfig_view.xml',  
          'data/webtourusdestination_scheduler.xml',
          'security/ir.model.access.csv',
          ],
