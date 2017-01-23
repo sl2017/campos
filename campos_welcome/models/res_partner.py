@@ -33,7 +33,8 @@ class ResPartner(models.Model):
                 org_id = msodoo.env['member.organization'].search([('organization_code', '=', str(rp.remote_ext_id))])
                 org = msodoo.execute('member.organization', 'read', org_id, ['id','partner_id'])
                 _logger.info('ORG: %s', org)
-                rp.write({'remote_system_id': remote.id,
-                          'remote_int_id': org[0]['partner_id'][0],
-                          'remote_link_id': org_id[0],
-                          })
+                if org:
+                    rp.write({'remote_system_id': remote.id,
+                              'remote_int_id': org[0]['partner_id'][0],
+                              'remote_link_id': org_id[0],
+                              })

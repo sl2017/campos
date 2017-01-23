@@ -146,7 +146,7 @@ class FinalRegistrationParticipant(models.Model):
                                                                           'will_participate' : False
                                                                           })
             if par.staff:
-                for day in par.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period != 'maincamp'):
+                for day in par.registration_id.event_id.event_day_ids:
                     new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
                                                                           'day_id': day.id,
                                                                           'will_participate' : False
