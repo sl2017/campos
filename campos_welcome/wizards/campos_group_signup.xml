@@ -101,7 +101,7 @@
 					type='object' states="edit_econ"/>
 										
 			<button name='doit_done'
-						string='Open Pre-reg'
+						string='Open Registration'
 						class='oe_highlight'
 						type='object'
 						states="done"/>
