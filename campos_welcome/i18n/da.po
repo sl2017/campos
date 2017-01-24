@@ -101,7 +101,7 @@ msgstr "Afsluttet"
 #: selection:campos.group.signup,state:0
 msgid ""
 "Contact information is now completed and the next step is the registration"
-msgstr ""
+msgstr "Kontakt informationer er nu afsluttet og næste skridt, er tilmelding"
 
 #. module: campos_welcome
 #: field:campos.group.signup,partner_country_id:0
@@ -259,7 +259,7 @@ msgstr "Åben tilmelding"
 #. module: campos_welcome
 #: view:campos.group.signup:campos_welcome.campos_group_signup_form_view
 msgid "Open Registration"
-msgstr ""
+msgstr "Åben registreringen"
 
 #. module: campos_welcome
 #: model:ir.model,name:campos_welcome.model_res_partner
@@ -441,6 +441,8 @@ msgid ""
 "Welcome to SL2017 Group Registration. Please confirm your contact "
 "information"
 msgstr ""
+"Velkommen til SL2017 gruppe registrering. Bekræft venligst kontakt "
+"informationen"
 
 #. module: campos_welcome
 #: model:ir.actions.act_window,name:campos_welcome.campos_welcome_act_window
