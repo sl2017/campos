@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-17 19:48+0000\n"
-"PO-Revision-Date: 2017-01-17 20:04+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2017-01-24 20:52+0000\n"
+"PO-Revision-Date: 2017-01-24 20:52+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2265,6 +2265,18 @@ msgstr "Registrerings blanket"
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
 msgid "Registration Survey"
 msgstr "Registrering undersøgelse"
+
+#. module: campos_event
+#: code:addons/campos_event/controllers/website_event.py:393
+#, python-format
+msgid "Registration for %s"
+msgstr ""
+
+#. module: campos_event
+#: code:addons/campos_event/controllers/website_event.py:390
+#, python-format
+msgid "Registration for Danish Groups"
+msgstr ""
 
 #. module: campos_event
 #: field:event.registration,reg_survey_input_id:0
