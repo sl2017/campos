@@ -42,7 +42,7 @@ class CamposImportMemberWiz(models.TransientModel):
         _logger.info('DOIT! action_member_import')
         cepd = self.env['campos.event.participant.day']
         for wizard in self:
-            ed_ids = self.env['event.day'].search([('event_period', '=', 'main'),
+            ed_ids = self.env['event.day'].search([('event_period', '=', 'maincamp'),
                                                    ('event_id', '=', wizard.registration_id.event_id.id)])
             # TODO
             for mbr in wizard.member_ids:
