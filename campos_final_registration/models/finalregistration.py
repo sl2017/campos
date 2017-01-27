@@ -113,7 +113,7 @@ class FinalRegistrationParticipant(models.Model):
     transport_from_camp = fields.Boolean('Common transport from camp', default=True)
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
     access_token_id = fields.Char('Id of Access Token')
-    
+    dates_summery = fields.Char('Camp Days', compute='_compute_dates_summery', store=True)
     
     @api.onchange('name')
     def onchange_name(self):
@@ -152,34 +152,75 @@ class FinalRegistrationParticipant(models.Model):
                                                                           'will_participate' : False
                                                                           })
         return par
+    
+    @api.multi
+    @api.depends('camp_day_ids', 'camp_day_ids.will_participate')
+    def _compute_dates_summery(self):
+        for par in self:
+            dates = []
+            for d in par.camp_day_ids:
+                if d.will_participate:
+                    dates.append(d.the_date)
+            dates.sort()
+            text = ''
+            for d in dates:
+                text += ',' + d[8:]
+            if text > '': 
+                text = text[1:]
+                if text == '22,23,24,25,26,27,28,29,30':
+                    text = 'Full camp'
+                par.dates_summery = text
+                
+    def check_camp_days(self):
+        masterdays = set()
+        if self.staff:
+            masterdays = set(self.registration_id.event_id.event_day_ids.ids)
+        else:
+            masterdays = set(self.registration_id.event_id.event_day_ids.filtered(lambda r: r.event_period == 'maincamp').ids)
+        pardays = set(self.camp_day_ids.mapped('day_id').ids)
+        for d in list(masterdays - pardays):
+            self.env['campos.event.participant.day'].create({'participant_id': self.id,
+                                                             'day_id': d})
+        
+            
 
     @api.multi
     def check_all_days(self):
-        for record in self.camp_day_ids:
-            record.will_participate = True
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids:
+                day.will_participate = True
     @api.multi
     def check_all_maincamp_days(self):
-        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp'):
-            record.will_participate = True
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp'):
+                day.will_participate = True
     @api.multi
     def check_all_first_half_days(self):
         wednesday = fields.Datetime.from_string('2017-07-26').date()
-        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() <= wednesday):
-            record.will_participate = True
-        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() > wednesday):
-            record.will_participate = False
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() <= wednesday):
+                day.will_participate = True
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() > wednesday):
+                day.will_participate = False
     @api.multi
     def check_all_second_half_days(self):
         wednesday = fields.Datetime.from_string('2017-07-26').date()
-        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() >= wednesday):
-            record.will_participate = True
-        for record in self.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() < wednesday):
-            record.will_participate = False
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() >= wednesday):
+                day.will_participate = True
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'maincamp' and fields.Datetime.from_string(r.the_date).date() < wednesday):
+                day.will_participate = False
             
     @api.multi
     def uncheck_all_days(self):
-        for record in self.camp_day_ids:
-            record.will_participate = False
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids:
+                day.will_participate = False
     @api.one
     def inactivate_participant(self):
         self.state = 'deregistered'

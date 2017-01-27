@@ -269,6 +269,7 @@
 											<tree  delete="0" create="0">
 												<field name="id" invisible="1"/>
 												<field name="name"/>
+												<field name="dates_summery"/>
 												<field name="transport_to_camp"/>
 												<field name="transport_from_camp"/>
 												<field name="state" readonly="1" string="Registration State"/>
@@ -473,6 +474,7 @@
 				<tree  delete="0">
 					<field name="id" invisible="1"/>
 					<field name="name"/>
+					<field name="dates_summery"/>
 					<field name="transport_to_camp"/>
 					<field name="transport_from_camp"/>
 					<field name="state" readonly="1" string="Registration State"/>
