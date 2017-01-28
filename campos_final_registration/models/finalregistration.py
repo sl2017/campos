@@ -168,7 +168,7 @@ class FinalRegistrationParticipant(models.Model):
             if text > '': 
                 text = text[1:]
                 if text == '22,23,24,25,26,27,28,29,30':
-                    text = 'Full camp'
+                    text = _('Full camp')
                 par.dates_summery = text
                 
     def check_camp_days(self):
