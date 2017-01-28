@@ -240,7 +240,7 @@ msgstr "Venskabsgruppe"
 #: code:addons/campos_final_registration/models/finalregistration.py:171
 #, python-format
 msgid "Full camp"
-msgstr ""
+msgstr "Fuld lejr"
 
 #. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_event_registration_need
