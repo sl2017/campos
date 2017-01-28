@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-24 20:52+0000\n"
-"PO-Revision-Date: 2017-01-24 20:52+0000\n"
+"POT-Creation-Date: 2017-01-28 12:28+0000\n"
+"PO-Revision-Date: 2017-01-28 12:28+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,11 @@ msgstr "Zugeteilte Freundschaftsgruppen"
 #: field:campos.event.participant,camp_day_ids:0
 msgid "Camp Day List"
 msgstr "Taglagerliste"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,dates_summery:0
+msgid "Camp Days"
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -138,7 +143,7 @@ msgid "Display Name"
 msgstr "Displayname"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:250
+#: code:addons/campos_final_registration/models/finalregistration.py:291
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
