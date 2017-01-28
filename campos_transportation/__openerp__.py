@@ -7,8 +7,11 @@
 'data': ['views/webtourparticipant_view.xml',
          'views/webtourusdestination_view.xml',
          'views/webtourregistration_view.xml',
-         'views/webtourusneed_view.xml',         
+         'views/webtourusneed_view.xml',  
+         'views/webtourconfig_view.xml',         
          'data/webtourusdestination_scheduler.xml',
+         'data/webtourusneed_scheduler.xml',
+         'data/webtourparticipant_scheduler.xml',
          'security/ir.model.access.csv',
          ],
 }

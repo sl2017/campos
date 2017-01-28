@@ -7,6 +7,7 @@
 <field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
 <field name="arch" type="xml">
 <tree>
+<field name="id"/>
 <field name="webtourusgroupidno"/>
 <field name="webtourususeridno"/>
 <field name="usecamptransporttocamp"/>

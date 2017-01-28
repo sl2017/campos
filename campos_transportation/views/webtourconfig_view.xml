@@ -7,6 +7,9 @@
 <field name="arch" type="xml">
 <tree>
 <field name="event_id"/>
+<field name="campdestinationid"/>
+<field name="tocamp_campos_TripType_id"/>
+<field name="fromcamp_campos_TripType_id"/>
 </tree>
 </field>
 </record>
@@ -17,16 +20,13 @@
 <form>
 <sheet>
 
-
 <group string="Event">
 	<field name="event_id"/>
 </group>
-<group string="URL's">
-<field name="webtoururl"/>
-<field name="login_url_part"/>
-</group>
 <group string="Camp destination">
 	<field name="campdestinationid"/>
+	<field name="tocamp_campos_TripType_id"/>
+	<field name="fromcamp_campos_TripType_id"/>
 </group>
 </sheet>
 </form>

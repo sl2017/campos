@@ -95,8 +95,9 @@ class WebtourParticipant(models.Model):
     @api.multi
     def write(self, vals):
         _logger.info("Transportation Participant Write Entered %s", vals.keys())
-        ret = super(WebtourParticipant, self).write(vals)    
-        campdesination= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)]).campdestinationid.destinationidno
+        ret = super(WebtourParticipant, self).write(vals)
+        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
+        campdesination= webtourconfig.campdestinationid.destinationidno
                
         for par in self:
      
@@ -109,6 +110,7 @@ class WebtourParticipant(models.Model):
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
                     dicto1["campos_demandneeded"] = par.usecamptransporttocamp
+                    dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
                     dicto1["campos_startdatetime"] = par.tocampdate
                     dicto1["campos_enddatetime"] = par.tocampdate
                     dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
@@ -139,7 +141,8 @@ class WebtourParticipant(models.Model):
                 if par.fromcampusneed_id.id == False:
                     dicto1 = {}
                     dicto1["participant_id"] = par.id
-                    dicto1["campos_demandneeded"] = par.usecamptransportfromcamp                    
+                    dicto1["campos_demandneeded"] = par.usecamptransportfromcamp      
+                    dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
                     dicto1["campos_startdatetime"] = par.fromcampdate
                     dicto1["campos_enddatetime"] = par.fromcampdate                    
                     dicto1["campos_startdestinationidno"] = campdesination

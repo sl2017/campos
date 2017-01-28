@@ -8,11 +8,13 @@
 <tree>
 <field name="id"/>
 <field name="participant_id"/>
+<field name="campos_TripType_id"/>
 <field name="campos_startdatetime"/>
 <field name="campos_startdestinationidno"/>
 <field name="campos_enddestinationidno"/>
 <field name="campos_writeseq"/>
 <field name="campos_transferedseq"/>
+<field name="campos_transfered"/>
 <field name="campos_demandneeded"/>
 <field name="webtour_needidno"/>
 </tree>
@@ -26,10 +28,12 @@
 <header>
 <button name="get_create_webtour_need" type="object" string="Update Webtour" class="oe_highlight" />
 <button name="updatewebtourtofromusneeds" type="object" string="Update Webtour usNeed" class="oe_highlight" />
+<button name="updateusneedtriptypes" type="object" string="Set Trip Types on all usNeeds" class="oe_highlight" />
 </header>
 <sheet>
 <group name="user_top">
 <field name="participant_id" readonly="0"/>
+<field name="campos_TripType_id"/>
 <group name="group_left">
 <field name="campos_startdatetime" readonly="0"/>
 <field name="campos_startdestinationidno" readonly="0"/>
@@ -51,6 +55,7 @@
 <field name="webtour_useridno" readonly="1"/>
 <field name="webtour_groupidno" readonly="1"/>
 <field name="webtour_needidno" readonly="1"/>
+<field name="webtour_touridno" readonly="1"/>
 <field name="webtour_CurrentDateTime" readonly="1"/>
 
 </group>
@@ -60,14 +65,30 @@
 </field>
 </record>
 
+<record id="view_tree_WebtourTripType" model="ir.ui.view">
+	<field name="name">Webtour Trip Type</field>
+	<field name="model">campos.webtourusneed.triptype</field>
+	<field name="arch" type="xml">
+		<tree>
+			<field name="name"/>
+		</tree>
+	</field>
+</record> 
+
 <!-- Action to open Webtour Us Need list -->
 <act_window id="action_webtourusneed"
 name="Camp OS Webtour Us Need"
 res_model="campos.webtourusneed"
 view_mode="tree,form" />
 
+<act_window id="action_WebtourTripType"
+name="Camp OS Webtour Trip Type"
+res_model="campos.webtourusneed.triptype"
+view_mode="tree,form" />
+
 <!-- Menu item to open Campos Webtour usNeed list  -->
 <menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="30"/>
+<menuitem id="menu_action_campos_WebtourTripType" parent="menu_campos_transportation" name="WebtourTripType" action="action_WebtourTripType" groups="campos_event.group_campos_admin" sequence="55"/>
 
 </data>
 </openerp>
