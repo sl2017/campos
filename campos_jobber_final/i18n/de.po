@@ -2,12 +2,15 @@
 # This file contains the translation of the following modules:
 # * campos_jobber_final
 # 
+# Translators:
+# Lykke Merete Højsting <lho@sl2017.dk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-24 20:52+0000\n"
-"PO-Revision-Date: 2017-01-24 20:52+0000\n"
+"POT-Creation-Date: 2017-01-28 12:28+0000\n"
+"PO-Revision-Date: 2017-01-28 12:28+0000\n"
+"Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +22,7 @@ msgstr ""
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: field:campos.event.participant,accomodation_ids:0
 msgid "Accomodation"
-msgstr ""
+msgstr "Unterkunft"
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
