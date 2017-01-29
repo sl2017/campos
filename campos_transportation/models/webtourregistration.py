@@ -22,10 +22,27 @@ class WebtourRegistration(models.Model):
     
     @api.one
     def set_webtourdefaulthomedestination(self):
+        
         # If gep point is missing, try to calculate
         if (self.partner_id.partner_latitude==0):
             self.partner_id.geocode_address()
-                   
+            
+        # if still no result try geocode with Googlemap
+        if (self.partner_id.partner_latitude==0):
+            gmaps2 = googlemaps.Client(key='AIzaSyDJj_jezRITKDHP11DPiL4obmWwAwgzPHc')
+            a = self.partner_id.street+', '+ self.partner_id.zip+' '+self.partner_id.city
+            _logger.info("Try to Geocode with Googlemaps %s",a)
+            
+            geocode_result = gmaps2.geocode(a)
+            try:
+                lat=geocode_result[0]['geometry']['location']['lat']
+                lng=geocode_result[0]['geometry']['location']['lng']
+                self.partner_id.partner_latitude = float(lat)
+                self.partner_id.partner_longitude = float(lng)
+                _logger.info("Got Googlemap Geocoding  %f %f",self.partner_id.partner_latitude,self.partner_id.partner_longitude)
+            except:
+                pass
+                                
         # If geo point pressent lets go....           
         if (self.partner_id.partner_latitude<>0):    
 
