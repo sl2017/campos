@@ -371,32 +371,29 @@ class WebsiteEventEx(WebsiteEvent):
                                                             'action_id': int(http.request.env['ir.config_parameter'].get_param('campos_event.group_login_home_action'))
                                                          })
             return http.request.render(
-                'campos_event.int2group_register_confirm',
+                'campos_event.int2_group_register_confirm',
                 {'registration': registration})
 
         countries = http.request.env['res.country'].search([])
-        scoutorgs = http.request.env['campos.scout.org'].sudo().search([('country_id.code', '=', 'DK')])
+        intl_orgs = http.request.env['campos.scout.org'].search([('country_id', '=', False)])
         languages = http.request.env['res.lang'].search([])
         groups = False
         if scout_org_id:
             groups = http.request.env['res.partner'].sudo().search([('scoutorg_id', '=', int(scout_org_id)),('scoutgroup', '=', True)])
-        if not post.get('group_country_id', False):
-            post['group_country_id'] = http.request.env.ref('base.dk').id
+        
         if not post.get('contact_lang', False):
-            post['contact_lang'] = 'da_DK'
+            post['contact_lang'] = 'en_US'
         _logger.info('POST: %s', post)
         _logger.info('GROUPS: %s', groups)
 
-        pagetitle = _('Registration for Danish Groups')
-        if scout_org_id:
-            scoutorg = http.request.env['campos.scout.org'].sudo().browse(int(scout_org_id))
-            pagetitle = _('Registration for %s') % scoutorg.name
+        pagetitle = _('Registration for International Groups')
+       
             
         values = {
             'event': event,
             'range': range,
             'countries': countries,
-            'scoutorgs': scoutorgs,
+            'intl_orgs': intl_orgs,
             'tickets': post.get('tickets', 1),
             'validate': validate,
             'post': post,
