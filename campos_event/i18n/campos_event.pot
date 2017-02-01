@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-29 02:00+0000\n"
-"PO-Revision-Date: 2017-01-29 02:00+0000\n"
+"POT-Creation-Date: 2017-02-01 02:00+0000\n"
+"PO-Revision-Date: 2017-02-01 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,body_html:campos_event.group_signup_email
+#: model:email.template,body_html:campos_event.int_group_signup_email
 msgid "\n"
 "                \n"
 "                    <p>\n"
@@ -214,6 +215,7 @@ msgstr ""
 
 #. module: campos_event
 #: model:email.template,subject:campos_event.group_signup_email
+#: model:email.template,subject:campos_event.int_group_signup_email
 msgid "${object.company_id.name} invitation to connect on Odoo"
 msgstr ""
 
@@ -385,6 +387,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "City"
@@ -512,12 +515,14 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Country..."
 msgstr ""
@@ -569,6 +574,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.partner_register_form
 msgid "Email"
@@ -851,6 +857,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Language..."
 msgstr ""
@@ -887,6 +894,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Member of"
 msgstr ""
@@ -907,6 +915,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Mobile phone"
 msgstr ""
@@ -940,6 +949,7 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "National Scout Organization"
 msgstr ""
@@ -1024,11 +1034,13 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 msgid "Postcode"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Preferred language"
 msgstr ""
@@ -1065,6 +1077,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Register"
 msgstr ""
@@ -1174,6 +1187,7 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.event_meeting_proposal
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Select..."
 msgstr ""
@@ -1331,6 +1345,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
+#: view:website:campos_event.int2_group_register_confirm
 msgid "Thank you"
 msgstr ""
 
@@ -1434,6 +1449,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Your Address"
@@ -1446,6 +1462,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Contact Details"
 msgstr ""
@@ -1458,6 +1475,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
@@ -1472,12 +1490,14 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Group"
 msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 msgid "Your Scout Groups name"
 msgstr ""
@@ -1499,6 +1519,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
+#: view:website:campos_event.int2_group_register_confirm
 msgid "Your registration for"
 msgstr ""
 
@@ -1557,6 +1578,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dkgroup_register_confirm
+#: view:website:campos_event.int2_group_register_confirm
 msgid "succeeded!"
 msgstr ""
 
