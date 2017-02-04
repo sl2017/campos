@@ -10,6 +10,8 @@
 <field name="webtourusgroupidno"/>
 <field name="scoutgroup"/>
 <field name="webtourdefaulthomedistance"/>
+<field name="webtourPreregTotalSeats"/>
+<field name="webtournoofparticipant"/>
 </tree>
 </field>
 </record>

@@ -19,7 +19,21 @@ class WebtourRegistration(models.Model):
     webtourdefaulthomedestination = fields.Many2one('campos.webtourusdestination','id',ondelete='set null')
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
-    
+    webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats')
+    webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
+    webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant')
+
+    @api.depends('participant_ids.participant_total','participant_ids.participant_own_transport_to_camp_total','participant_ids.participant_own_transport_from_camp_total')
+    def _compute_webtourPreregBusToCamptotal(self):
+        for record in self:
+            record.webtourPreregTotalSeats = sum(2*line.participant_total - line.participant_own_transport_to_camp_total -line.participant_own_transport_from_camp_total for line in record.participant_ids)
+
+    @api.depends()
+    def _compute_webtournoofparticipant(self):
+        for record in self:
+            record.webtournoofparticipant = len(record.webtourparticipant_ids)
+
+
     @api.one
     def set_webtourdefaulthomedestination(self):
         
