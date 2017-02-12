@@ -250,6 +250,30 @@ def usneed_getbyidno(request):
 
     return doc
 
+def usneed_GetByGroupIDno(request):
+    global cookie
+
+    def do_usneed_getbygroupidno():
+        do_url = _url + "usNeed/GetByGroupIDno/?GroupIDno=" + request
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_usneed_getbygroupidno()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login()
+
+    return doc
+
 def usneed_update(request):
     global cookie
 

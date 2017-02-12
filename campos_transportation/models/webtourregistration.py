@@ -19,10 +19,11 @@ class WebtourRegistration(models.Model):
     webtourdefaulthomedestination = fields.Many2one('campos.webtourusdestination','id',ondelete='set null')
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
-    webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats')
+    webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
     webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
-    webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant')
-
+    webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
+    webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
+    
     @api.depends('participant_ids.participant_total','participant_ids.participant_own_transport_to_camp_total','participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
@@ -30,9 +31,13 @@ class WebtourRegistration(models.Model):
 
     @api.depends()
     def _compute_webtournoofparticipant(self):
-        for record in self:
+        for record in self:  
             record.webtournoofparticipant = len(record.webtourparticipant_ids)
 
+    @api.depends('partner_id.partner_latitude','partner_id.partner_longitude')
+    def _compute_webtourhasgeoadd(self):
+        for record in self:
+            record.webtourhasgeoadd = record.partner_id.partner_latitude <> 0 and record.partner_id.partner_longitude <> 0
 
     @api.one
     def set_webtourdefaulthomedestination(self):
@@ -40,24 +45,29 @@ class WebtourRegistration(models.Model):
         # If gep point is missing, try to calculate
         if (self.partner_id.partner_latitude==0):
             self.partner_id.geocode_address()
+            if (self.partner_id.partner_latitude > 0):
+                _logger.info("Try to commit Non Google geocode ##########################")
+                self.env.cr.commit()
             
         # if still no result try geocode with Googlemap
         if (self.partner_id.partner_latitude==0):
             gmaps2 = googlemaps.Client(key='AIzaSyDJj_jezRITKDHP11DPiL4obmWwAwgzPHc')
-            a = self.partner_id.street+', '+ self.partner_id.zip+' '+self.partner_id.city
-            _logger.info("Try to Geocode with Googlemaps %s",a)
+
+            _logger.info("Try to Geocode with Googlemaps %s %s %s",self.partner_id.street,self.partner_id.zip,self.partner_id.city)
             
-            geocode_result = gmaps2.geocode(a)
             try:
+                a = self.partner_id.street+', '+ self.partner_id.zip+' '+self.partner_id.city
+                geocode_result = gmaps2.geocode(a)
                 lat=geocode_result[0]['geometry']['location']['lat']
                 lng=geocode_result[0]['geometry']['location']['lng']
                 self.partner_id.partner_latitude = float(lat)
                 self.partner_id.partner_longitude = float(lng)
                 _logger.info("Got Googlemap Geocoding  %f %f",self.partner_id.partner_latitude,self.partner_id.partner_longitude)
+                self.env.cr.commit()
             except:
                 pass
                                 
-        # If geo point pressent lets go....           
+        # If geo point pressent lets go.... GOOGLEMAP DIAABLED          
         if (self.partner_id.partner_latitude<>0):    
 
             destinations = self.env['campos.webtourusdestination'].search([('name', '<>', '')])
@@ -97,24 +107,24 @@ class WebtourRegistration(models.Model):
             n = 0;  #counter for no of dist to googlemaps
             origins=[] #placeholder list for origons to googlemaps
             destinations =[] #placeholder list for desinations to googlemaps
-            
+            origins.append((lat1,lon1)) #Home add            
             for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
-                origins.append((lat1,lon1)) #Home add
+
                 destinations.append((d[2],d[3])) # get geo point stored in loop above
                 n = n+1 
-                if (n > 5):
+                if (n > 4):
                     break       #Max 5 distinations    
                   
             # call googlemap to find distances by car to the neerst distinations
             gmaps = googlemaps.Client(key='AIzaSyDA7swnfwynpg0NBh88pBW6irnOnf8qMJM')
             matrix = gmaps.distance_matrix(origins, destinations)
-            #_logger.info("Google maps responce %s", matrix)
+            _logger.info("Google maps responce %s", matrix)
             
             n = 0
             for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
-                distance=matrix['rows'][n]['elements'][0]['distance']['value']
+                distance=matrix['rows'][0]['elements'][n]['distance']['value']
                 distancekm =  distance/1000.0             
-                duration=matrix['rows'][n]['elements'][0]['duration']['text']
+                duration=matrix['rows'][0]['elements'][n]['duration']['text']
                 
                 if (n == 0): 
                     self.webtourdefaulthomedistance = distancekm
@@ -126,7 +136,7 @@ class WebtourRegistration(models.Model):
                         self.webtourdefaulthomeduration = duration                    
                 
                 n = n+1 
-                if (n > 5):
+                if (n > 4):
                     break       #Max 5 distinations
                                              
             _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)  
@@ -137,7 +147,7 @@ class WebtourRegistration(models.Model):
                 
         for age_group in self.participant_ids:
             _logger.info("createTestPaticipants: %s",age_group.participant_age_group_id.name)
-            for i in range(1,age_group.participant_total):
+            for i in range(0,age_group.participant_total):
                     dicto0 = {}
                     dicto0["name"] = age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i)   
                     dicto0["email"] = 'jd@darum.name'             
@@ -161,6 +171,19 @@ class WebtourRegistration(models.Model):
                     newparticipant = newparticipant_obj.create(dicto1)
                     newparticipant.tocampfromdestination_id = self.webtourdefaulthomedestination
                     newparticipant.fromcamptodestination_id = self.webtourdefaulthomedestination
+                
+    @api.one
+    def createTestPaticipantsAll(self):
+        regs = self.env['event.registration'].search([('webtourdefaulthomedestination', '=', False),('partner_id', '<>', False),('webtourPreregTotalSeats', '>', 0)])
+        _logger.info("createTestPaticipantsAll Stil to go %s", len(regs)) 
+        n=0
+        for reg in regs:
+            reg.set_webtourdefaulthomedestination()
+            _logger.info("createTestPaticipantsAll %s, Dest: %s, Participants:  %s",reg.name, reg.webtourdefaulthomedestination.id, len(reg.webtourparticipant_ids)) 
+            reg.createTestPaticipants()
+            n= n+1
+            if n> 30: 
+                break
                 
 
 

@@ -88,7 +88,9 @@ class WebtourParticipant(models.Model):
             if newidno <> "0": #Update participant
                 dicto = {}
                 dicto["webtourususeridno"] = newidno
-                rec.write(dicto)            
+                rec.write(dicto)
+              
+        self.env['campos.webtourusneed'].get_create_usneed_tron()        
 
         return True
     

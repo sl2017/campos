@@ -9,6 +9,7 @@
 <tree>
 <field name="webtourusgroupidno"/>
 <field name="scoutgroup"/>
+<field name="webtourhasgeoadd"/>
 <field name="webtourdefaulthomedistance"/>
 <field name="webtourPreregTotalSeats"/>
 <field name="webtournoofparticipant"/>
@@ -22,8 +23,9 @@
 <field name="arch" type="xml">
 <form>
 <header>
-<button name="createTestPaticipants" type="object" string="Create Test Participants" class="oe_highlight" />
+<button name="createTestPaticipants" type="object" string="Create Test Participants this Group" class="oe_highlight" />
 <button name="set_webtourdefaulthomedestination" type="object" string="Set Home Dest" class="oe_highlight" />
+<button name="createTestPaticipantsAll" type="object" string="Create Test Participants All Group" class="oe_highlight" />
 </header>
 <sheet>
 <group name="user_top">

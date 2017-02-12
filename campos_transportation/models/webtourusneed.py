@@ -52,6 +52,14 @@ class WebtourUsNeed(models.Model):
 
             return tag_data
         
+        def get_tag_data_from_node(node,nodetag):
+            try:
+                tag_data = node.getElementsByTagName(nodetag)[0].firstChild.data
+            except:
+                tag_data = None
+
+            return tag_data        
+        
         if self.campos_startnote== False : 
             self.campos_startnote=""
             
@@ -86,8 +94,7 @@ class WebtourUsNeed(models.Model):
                 request=request+"&EndNote="+self.campos_endnote
                 response_doc=webtourinterface.usneed_update(request)    
             else:
-                response_doc=webtourinterface.usneed_getbyidno(self.webtour_needidno)
-        
+                response_doc=webtourinterface.usneed_getbyidno(self.webtour_needidno)        
         Ok = True     
         idno = get_tag_data("a:IDno")
               
@@ -102,8 +109,33 @@ class WebtourUsNeed(models.Model):
             self.webtour_touridno = get_tag_data("a:TourIDno")
             self.webtour_CurrentDateTime = get_tag_data("CurrentDateTime")
             self.campos_transferedseq = self.campos_writeseq
-        else :
-            self.campos_transferedseq = ""
+        else: 
+            if get_tag_data("a:Description") == "Need already exist" :
+                _logger.info("get_create_usneed_tron: Ohh Need already exist")
+                response_doc=webtourinterface.usneed_GetByGroupIDno(self.webtour_groupidno)
+                usNeeds=response_doc.getElementsByTagName('a:usNeed')
+                for node in usNeeds:
+                    try:
+                        StartDestinationIDno = node.getElementsByTagName("a:StartDestinationIDno")[0].firstChild.data
+                        EndDestinationIDno = node.getElementsByTagName("a:EndDestinationIDno")[0].firstChild.data
+                        UserIDno = node.getElementsByTagName("a:UserIDno")[0].firstChild.data
+                        if (self.campos_startdestinationidno == StartDestinationIDno and self.campos_enddestinationidno == EndDestinationIDno and self.webtour_useridno == UserIDno):
+                            self.webtour_needidno = node.getElementsByTagName("a:IDno")[0].firstChild.data
+                            self.webtour_startdatetime = node.getElementsByTagName("a:StartDateTime")[0].firstChild.data
+                            self.webtour_startdestinationidno = StartDestinationIDno
+                            self.webtour_startnote = get_tag_data_from_node(node,"a:StartNote")
+                            self.webtour_enddatetime = node.getElementsByTagName("a:EndDateTime")[0].firstChild.data
+                            self.webtour_enddestinationidno = EndDestinationIDno
+                            self.webtour_endnote = get_tag_data_from_node(node,"a:EndNote")
+                            self.webtour_touridno = node.getElementsByTagName("a:TourIDno")[0].firstChild.data
+                            self.webtour_CurrentDateTime = get_tag_data("CurrentDateTime")
+                            self.campos_transferedseq = self.campos_writeseq
+                            _logger.info("get_create_usneed_tron: Found a usNeed matching %s", node.toprettyxml(indent="   "))
+                            break
+                    except:
+                        Ok = False                    
+            else:
+                self.campos_transferedseq = ""
             
         return True
 
@@ -121,26 +153,28 @@ class WebtourUsNeed(models.Model):
     
     @api.multi
     def updatewebtourtofromusneeds(self):
-        needs = campdestination= self.env['campos.webtourusneed'].search([('participant_id','<>',False)])
+        # needs = self.env['campos.webtourusneed'].search([('participant_id','<>',False)])
         
-        _logger.info("updatewebtourtofromusneeds: Here we go...%s",needs)
-        for need in needs:
-            campdestination= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)]).campdestinationid.destinationidno
-
+        _logger.info("updatewebtourtofromusneeds: Here we go...%s",len(self))
+        for need in self: # (change to needs to update all needs)
             if need.participant_id <> False:
-                if need.campos_enddestinationidno == campdestination :
+                webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)])
+                
+                if need.campos_TripType_id==webtourconfig.tocamp_campos_TripType_id:
                     need.campos_demandneeded = need.participant_id.usecamptransporttocamp
                     need.campos_startdatetime = need.participant_id.tocampdate
                     need.campos_enddatetime = need.participant_id.tocampdate
-                    need.campos_startdestinationidno = need.participant_id.tocampfromdestination_id.destinationidno
+                    need.participant_id.tocampfromdestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
+                    need.campos_startdestinationidno = need.participant_id.tocampfromdestination_id.destinationidno                    
                     need.webtour_useridno = need.participant_id.webtourususeridno
                     need.webtour_groupidno = need.participant_id.webtourusgroupidno
                     need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
                 
-                if need.campos_startdestinationidno == campdestination :
+                if need.campos_TripType_id==webtourconfig.fromcamp_campos_TripType_id :
                     need.campos_demandneeded = need.participant_id.usecamptransportfromcamp
                     need.campos_startdatetime = need.participant_id.fromcampdate
                     need.campos_enddatetime = need.participant_id.fromcampdate
+                    need.participant_id.fromcamptodestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
                     need.campos_enddestinationidno = need.participant_id.fromcamptodestination_id.destinationidno
                     need.webtour_useridno = need.participant_id.webtourususeridno
                     need.webtour_groupidno = need.participant_id.webtourusgroupidno                     
@@ -155,14 +189,15 @@ class WebtourUsNeed(models.Model):
         pars = self.env['campos.event.participant'].search([('registration_id.event_id.id','=',self.participant_id.registration_id.event_id.id)])
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)])
         for par in pars:
-            _logger.info("XXXXXX %s, %s, %s",par.id,par.name,par.registration_id.id)
+
             if (par.tocampusneed_id.id <> False):
-                _logger.info("updateusneedtriptypes: YYYYYYYYYYYY %s",par.tocampusneed_id)
+                _logger.info("updateusneedtriptypes To Camp %s, %s, %s",par.id,par.name,par.registration_id.id)
                 par.tocampusneed_id.campos_TripType_id=webtourconfig.tocamp_campos_TripType_id.id
                 par.tocampusneed_id.campos_enddestinationidno=webtourconfig.campdestinationid.destinationidno
                 par.tocampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
                 
-            if (par.fromcampusneed_id.id <> False):               
+            if (par.fromcampusneed_id.id <> False): 
+                _logger.info("updateusneedtriptypes From Camp %s, %s, %s",par.id,par.name,par.registration_id.id)                              
                 par.fromcampusneed_id.campos_TripType_id=webtourconfig.fromcamp_campos_TripType_id.id
                 par.fromcampusneed_id.campos_startdestinationidno=webtourconfig.campdestinationid.destinationidno
                 par.fromcampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
