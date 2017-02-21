@@ -17,10 +17,10 @@ class CamposGroupSignup(models.TransientModel):
 
     name = fields.Char()
     reg_id = fields.Many2one('event.registration')
-    state = fields.Selection([('welcome', 'Welcome to SL2017 Group Preregistration. Please confirm your contact information'),
+    state = fields.Selection([('welcome', 'Welcome to SL2017 Group Registration. Please confirm your contact information'),
                                ('edit_group', 'Please Complete your Scout Group Address'),
                                ('edit_econ', 'Please add treasurer information'),
-                               ('done', 'Contact information is now completed and the next step is the pre-registration'),
+                               ('done', 'Contact information is now completed and the next step is the registration'),
                                ('cancel', 'Cancel')], 'State', default='welcome')
     edit_partner_id = fields.Many2one('res.partner')
 
@@ -51,7 +51,7 @@ class CamposGroupSignup(models.TransientModel):
     def do_reopen_form(self):
         self.ensure_one()
         return {
-                'name': _('Welcome to SL2017 Group Pre-registration'),
+                'name': _('Welcome to SL2017 Group Registration'),
                 'type': 'ir.actions.act_window',
                 'res_model': self._name, # this model
                 'res_id': self.id, # the current wizard record
@@ -71,7 +71,7 @@ class CamposGroupSignup(models.TransientModel):
         for wizard in self:
             if not wizard.reg_id.econ_partner_id:
                 wizard.reg_id.econ_partner_id = self.env['res.partner'].suspend_security().create({'parent_id': wizard.reg_id.partner_id.id,
-                                                                                                   'country_id': self.env.ref('base.dk').id,
+                                                                                                   'country_id': wizard.reg_id.partner_id.country_id.id,
                                                                                                    'name': ' '})
             wizard.edit_partner_id = wizard.reg_id.econ_partner_id
             wizard.state = 'edit_econ'
@@ -107,7 +107,7 @@ class CamposGroupSignup(models.TransientModel):
     def doit_done(self):
         self.env.user.action_id = False
         for wizard in self:
-            view = self.env.ref('campos_preregistration.view_form_preregistration_gl')
+            view = self.env.ref('campos_final_registration.view_form_finalregistration_gl')
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'event.registration',

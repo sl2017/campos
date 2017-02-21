@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 14:40+0000\n"
-"PO-Revision-Date: 2016-11-16 14:40+0000\n"
+"POT-Creation-Date: 2017-01-24 20:52+0000\n"
+"PO-Revision-Date: 2017-01-24 20:52+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -238,6 +238,12 @@ msgid "# Tasks"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,sale_order_count:0
+#: field:res.users,sale_order_count:0
+msgid "# of Sales Order"
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,subject:campos_event.group_signup_email
 msgid "${object.company_id.name} invitation to connect on Odoo"
 msgstr ""
@@ -278,6 +284,16 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,account:0
 msgid "Account"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,property_account_payable:0
+msgid "Account Payable"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,property_account_receivable:0
+msgid "Account Receivable"
 msgstr ""
 
 #. module: campos_event
@@ -385,7 +401,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:344
+#: code:addons/campos_event/models/participant.py:383
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -458,6 +474,11 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.partner_register_form
 msgid "Birthdate"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,birthdate_short:0
+msgid "Birthdate short"
 msgstr ""
 
 #. module: campos_event
@@ -560,6 +581,13 @@ msgstr ""
 #. module: campos_event
 #: help:campos.event.participant,is_company:0
 msgid "Check if the contact is a company, otherwise it is a person"
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,vat_subjected:0
+msgid ""
+"Check this box if the partner is subjected to the VAT. It will be used for "
+"the VAT legal statement."
 msgstr ""
 
 #. module: campos_event
@@ -736,6 +764,11 @@ msgid "Committees"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,ref_companies:0
+msgid "Companies that refers to partner"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,company_id:0
 msgid "Company"
 msgstr ""
@@ -746,7 +779,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:318
+#: code:addons/campos_event/models/participant.py:330
+#: code:addons/campos_event/models/participant.py:357
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -832,6 +866,12 @@ msgid "Continue To Our Website"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,contract_ids:0
+#: field:campos.event.participant,contracts_count:0
+msgid "Contracts"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.camp.area,part_function_ids:0
 #: field:campos.subcamp,subcamp_function_ids:0
 #: field:event.registration,part_function_view_ids:0
@@ -902,6 +942,11 @@ msgid "Customer"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,property_payment_term:0
+msgid "Customer Payment Term"
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,ddsgroup:0
 msgid "DDS Gruppenr"
 msgstr ""
@@ -927,6 +972,18 @@ msgstr ""
 #: help:campos.event.participant,message_last_post:0
 #: help:campos.job,message_last_post:0
 msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,last_reconciliation_date:0
+msgid ""
+"Date on which the partner accounting entries were fully reconciled last "
+"time. It differs from the last date where a reconciliation has been made for"
+" this partner, as here we depict the fact that nothing more was to be "
+"reconciled at this date. This can be achieved in 2 different ways: either "
+"the last unreconciled debit/credit entry of this partner was reconciled, "
+"either the user pressed the button \"Nothing more to reconcile\" during the "
+"manual reconciliation process."
 msgstr ""
 
 #. module: campos_event
@@ -1104,6 +1161,7 @@ msgstr ""
 #: model:ir.ui.menu,name:campos_event.menu_campos_config_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_event
 #: model:ir.ui.menu,name:campos_event.menu_campos_event_event
+#: model:ir.ui.menu,name:campos_event.menu_campos_signup
 msgid "Events"
 msgstr ""
 
@@ -1125,6 +1183,11 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
 msgid "First time password"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,property_account_position:0
+msgid "Fiscal Position"
 msgstr ""
 
 #. module: campos_event
@@ -1234,6 +1297,11 @@ msgid "Group Name"
 msgstr ""
 
 #. module: campos_event
+#: field:product.template,group_del_ok:0
+msgid "Group delivery"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
 msgid "Groupname"
 msgstr ""
@@ -1244,6 +1312,7 @@ msgid "HR/Manager"
 msgstr ""
 
 #. module: campos_event
+#: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Handed out items"
 msgstr ""
@@ -1363,6 +1432,11 @@ msgid "Intl. Pre-registration"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,invoice_ids:0
+msgid "Invoices"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,leader:0
 msgid "Is Leader"
 msgstr ""
@@ -1370,6 +1444,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,is_company:0
 msgid "Is a Company"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "Is a Company?"
 msgstr ""
 
 #. module: campos_event
@@ -1434,6 +1513,21 @@ msgid "Job tags"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_committee_job_title_tree
+msgid "Job title"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.event_committee_job_title_menu
+msgid "Job titles"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.committee.job.title:campos_event.campos_committee_job_title_tree
+msgid "Job type"
+msgstr ""
+
+#. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_job_when
 msgid "Job when"
 msgstr ""
@@ -1487,6 +1581,11 @@ msgstr ""
 #: code:addons/campos_event/controllers/main.py:184
 #, python-format
 msgid "Jobs tagged: "
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,journal_item_count:0
+msgid "Journal Items"
 msgstr ""
 
 #. module: campos_event
@@ -1574,6 +1673,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,last_reconciliation_date:0
+msgid "Latest Full Reconciliation Date"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,appr_leader:0
 msgid "Leder godkendt"
 msgstr ""
@@ -1600,7 +1704,7 @@ msgid "Mail list"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.committee,parent_id:0
+#: field:campos.committee,main_comm_id:0
 msgid "Main Committee"
 msgstr ""
 
@@ -1898,6 +2002,11 @@ msgid "Parent Category"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee,parent_id:0
+msgid "Parent Committee"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,parent_left:0
 msgid "Parent Left"
 msgstr ""
@@ -1918,7 +2027,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:478
+#: code:addons/campos_event/models/participant.py:525
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -1979,6 +2088,11 @@ msgid "Partner id"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,debit_limit:0
+msgid "Payable Limit"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,phone:0
 #: view:website:campos_event.partner_register_form
 msgid "Phone"
@@ -2013,6 +2127,11 @@ msgstr ""
 #: code:addons/campos_event/controllers/website_event.py:280
 #, python-format
 msgid "Preregistration for Danish Groups"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,primary_committee_id:0
+msgid "Primary committee"
 msgstr ""
 
 #. module: campos_event
@@ -2145,6 +2264,18 @@ msgid "Registration Survey"
 msgstr ""
 
 #. module: campos_event
+#: code:addons/campos_event/controllers/website_event.py:393
+#, python-format
+msgid "Registration for %s"
+msgstr ""
+
+#. module: campos_event
+#: code:addons/campos_event/controllers/website_event.py:390
+#, python-format
+msgid "Registration for Danish Groups"
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,reg_survey_input_id:0
 msgid "Registration survay"
 msgstr ""
@@ -2165,7 +2296,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:366
+#: code:addons/campos_event/models/participant.py:405
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2226,6 +2357,12 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,property_product_pricelist:0
 msgid "Sale Pricelist"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,sale_order_ids:0
+#: field:res.users,sale_order_ids:0
+msgid "Sales Order"
 msgstr ""
 
 #. module: campos_event
@@ -2364,7 +2501,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:290
+#: code:addons/campos_event/models/participant.py:302
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2522,6 +2659,12 @@ msgid "Staff delivery"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.action_graph_staff_del_prod
+#: model:ir.ui.menu,name:campos_event.menu_graph_staff_del_prod
+msgid "Staff products"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.par.reject:campos_event.view_event_participant_reject_form
 #: view:campos.event.participant:campos_event.view_event_participant_standby_form
 msgid "Staff rejection"
@@ -2647,6 +2790,11 @@ msgid "Supplier"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,property_supplier_payment_term:0
+msgid "Supplier Payment Term"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,vat:0
 msgid "TIN"
 msgstr ""
@@ -2714,6 +2862,12 @@ msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
 #. module: campos_event
+#: help:campos.event.participant,property_account_position:0
+msgid ""
+"The fiscal position will determine taxes and accounts used for the partner."
+msgstr ""
+
+#. module: campos_event
 #: help:campos.event.participant,user_id:0
 msgid ""
 "The internal user that is in charge of communicating with this contact if "
@@ -2735,10 +2889,38 @@ msgid "The tag name has to be unique!"
 msgstr ""
 
 #. module: campos_event
+#: help:campos.event.participant,property_account_payable:0
+msgid ""
+"This account will be used instead of the default one as the payable account "
+"for the current partner"
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,property_account_receivable:0
+msgid ""
+"This account will be used instead of the default one as the receivable "
+"account for the current partner"
+msgstr ""
+
+#. module: campos_event
 #: help:campos.event.participant,image:0
 msgid ""
 "This field holds the image used as avatar for this contact, limited to "
 "1024x1024px"
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,property_supplier_payment_term:0
+msgid ""
+"This payment term will be used instead of the default one for purchase "
+"orders and supplier invoices"
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,property_payment_term:0
+msgid ""
+"This payment term will be used instead of the default one for sale orders "
+"and customer invoices"
 msgstr ""
 
 #. module: campos_event
@@ -2761,6 +2943,31 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,title:0
 msgid "Title"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,total_invoiced:0
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,debit:0
+msgid "Total Payable"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,credit:0
+msgid "Total Receivable"
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,credit:0
+msgid "Total amount this customer owes you."
+msgstr ""
+
+#. module: campos_event
+#: help:campos.event.participant,debit:0
+msgid "Total amount you have to pay to this supplier."
 msgstr ""
 
 #. module: campos_event
@@ -2824,6 +3031,11 @@ msgstr ""
 #: field:campos.event.participant,user_ids:0
 #: model:ir.model,name:campos_event.model_res_users
 msgid "Users"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,vat_subjected:0
+msgid "VAT Legal Statement"
 msgstr ""
 
 #. module: campos_event
@@ -3089,6 +3301,11 @@ msgstr ""
 #: field:campos.event.participant,complete_contact:0
 #: field:res.partner,complete_contact:0 field:res.users,complete_contact:0
 msgid "contact"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+msgid "dd/mm/åååå"
 msgstr ""
 
 #. module: campos_event

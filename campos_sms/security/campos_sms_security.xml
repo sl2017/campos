@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+
+		<!-- Can administer SMS settings -->
+		<record id="group_sgsms_organization_admin" model="res.groups">
+			<field name="name">SMS organization admin</field>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+
+		<!-- Can send SMS -->
+		<record id="group_sgsms_send" model="res.groups">
+			<field name="name">SMS send</field>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+
+	</data>
+</openerp>

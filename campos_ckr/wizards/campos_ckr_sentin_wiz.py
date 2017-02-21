@@ -4,6 +4,10 @@
 
 from openerp import api, fields, models, _
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class CamposCkrSentinWiz(models.TransientModel):
 
@@ -20,5 +24,9 @@ class CamposCkrSentinWiz(models.TransientModel):
     def action_mark_req(self):
         for wizard in self:
             for ckr in wizard.ckr_ids:
-                ckr.action_req_ckr()
+                _logger.info('STATE: %s', ckr.state)
+                if ckr.state == 'timeout':
+                    ckr.action_re_req_ckr()
+                else:
+                    ckr.action_req_ckr()
         

@@ -101,7 +101,7 @@
 					type='object' states="edit_econ"/>
 										
 			<button name='doit_done'
-						string='Open Pre-reg'
+						string='Open Registration'
 						class='oe_highlight'
 						type='object'
 						states="done"/>
@@ -114,7 +114,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="campos_group_signup_act_window">
-        <field name="name">Welcome to SL2017 Group Pre-registration</field>
+        <field name="name">Welcome to SL2017 Group Registration</field>
         <field name="res_model">campos.group.signup</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>

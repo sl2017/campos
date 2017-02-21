@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+ 		<act_window id="action_sms_confirm_number" name="Confirm sender"
+            res_model="sms.confirmed_number" view_mode="form" target="new" />
+
+		<record model="ir.ui.view" id="view_sms_confirmed_number_form">
+			<field name="name">SMS Confirmed number form</field>
+			<field name="model">sms.confirmed_number</field>
+			<field name="arch" type="xml">
+				<form string="Confirm sender">
+					<group>
+						<field name="number" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+						<field name="state" />
+						<field name="confirm_tries" attrs="{'invisible': [('state', '!=', 'waiting')]}"  />
+					</group>
+					<button string="Confirm" name="action_check_code" class="oe_highlight" states="waiting" type="object" />
+					<button string="Send code" name="action_send_confirm_code" type="object" confirm="Do you want to send a confirm SMS? (The organization will be charged for one SMS)" class="oe_highlight" states="draft" />
+					<button string="Send a new confirm code" name="action_send_confirm_code" type="object" confirm="Do you want to send a confirm SMS? (The organization will be charged for one SMS)" states="waiting" />
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_sms_confirmed_number_list">
+			<field name="name">SMS Confirmed number list</field>
+			<field name="model">sms.confirmed_number</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="user_id" />
+					<field name="number" />
+					<field name="state" />
+					<field name="confirm_tries" />
+				</tree>
+			</field>
+		</record>
+
+        <record id="action_sms_confirmed_numbers" model="ir.actions.act_window">
+            <field name="name">Confirmed numbers</field>
+            <field name="res_model">sms.confirmed_number</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_sms_confirmed_numbers" parent="campos_sms.menu_sms"
+            sequence="90" action="action_sms_confirmed_numbers"
+            groups="base.group_no_one,campos_event.group_campos_admin" />
+
+	</data>
+</openerp>

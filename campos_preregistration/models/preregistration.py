@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from openerp.addons.base_geoengine import geo_model
+from openerp.addons.base_geoengine import fields as geo_fields
+
 from openerp import models, fields, api, exceptions, _
-class Preregistration(models.Model):
+import logging
+_logger = logging.getLogger(__name__)
+
+
+class Preregistration(geo_model.GeoModel):
+ 
     '''
     Pre-registration for a scout group to an event
     '''
@@ -17,7 +25,7 @@ class Preregistration(models.Model):
 #    group_country_code = fields.Char(related='group_country.code', string='Country Code', readonly=True)
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
 #    association_groupid = fields.Char('Groups id (number) at local association')
-    participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
+    prereg_participant_ids = fields.One2many('event.registration.participants','registration_id','Participants')
     pioneeringpole_ids = fields.One2many('event.registration.polelist','registration_id','Pioneering Poles')
     handicap = fields.Boolean('Participant(s) with handicap or other special considerations?')
     handicap_description = fields.Text('Description of handicap / special considerations')
@@ -30,6 +38,15 @@ class Preregistration(models.Model):
     friendship_group_home_hospitality = fields.Boolean('Would like to offer home hospitality?')
     group_camp_agreements = fields.Text('Official agreements')
     internal_information = fields.Text('Internal information',  groups="campos_event.group_campos_staff,campos_event.group_campos_admin")
+    pre_reg_cnt = fields.Integer('Pre Reg #', compute='_compute_pre_req_cnt')
+    geo_point = geo_fields.GeoPoint(related='partner_id.geo_point')
+    
+    @api.depends('prereg_participant_ids.participant_total')
+    @api.multi
+    def _compute_pre_req_cnt(self):
+        for record in self:
+            record.pre_reg_cnt = sum(line.participant_total for line in record.prereg_participant_ids)
+    
     
     @api.one
     def cancel_registration (self):

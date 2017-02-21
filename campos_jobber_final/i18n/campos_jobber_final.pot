@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_jobber_final
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-29 02:00+0000\n"
+"PO-Revision-Date: 2017-01-29 02:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Accomodation"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:event.registration:campos_jobber_final.event_registration_form_view
+msgid "Associated jobbers"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Camp Days"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_canteen_act_window
+#: model:ir.model,name:campos_jobber_final.model_campos_canteen
+#: model:ir.ui.menu,name:campos_jobber_final.campos_canteen_menu
+msgid "Campos Canteen"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_campos_jobber_accomodation
+msgid "Campos Jobber Accomodation"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_jobber_canteen_act_window
+#: model:ir.model,name:campos_jobber_final.model_campos_jobber_canteen
+#: model:ir.ui.menu,name:campos_jobber_final.campos_jobber_canteen_menu
+msgid "Campos Jobber Canteen"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:event.registration:campos_jobber_final.event_registration_form_view
+msgid "Catering"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Check all days"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Final signup"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:event.registration:campos_jobber_final.event_registration_form_view
+msgid "Jobber to accomodate"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:event.registration:campos_jobber_final.event_registration_form_view
+msgid "Jobber to pay for with the Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Payment"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Sat- to Wednesday"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Special needs"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Transportation"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Un-check all days"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Wed- to Sunday"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:event.registration:campos_jobber_final.event_registration_form_view
+msgid "string"
+msgstr ""
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_import_member_wiz_form_view">
+        <field name="name">campos.import.member.wiz.form (in campos_welcome)</field>
+        <field name="model">campos.import.member.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Campos Import Member Wiz">
+                <!-- TODO -->
+                <group>
+                    <field name="registration_id" readonly="1" options="{'no_open': True}"/>
+                    <field name="participant_from_date" />
+                    <field name="participant_to_date" />
+                    <field name="transport_to_camp"/>
+            		<field name="transport_from_camp"/>
+                    <newline/>
+                    <field name="member_ids" context="{'search_default_factive': True}" domain="[('registration_id', '=', registration_id)]">
+                    	<tree>
+                    		<field name="name" />
+                    		<field name="department" />
+                    		<field name="age" />
+                    		<field name="state" />
+                    	</tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name='action_member_import'
+                        string='OK'
+                        class='btn-primary oe_highlight'
+                        type='object'/>
+                    or
+                    <button string='Cancel'
+                        class='btn-default oe_link'
+                        special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_import_member_wiz_act_window">
+        <field name="name">Import Members from Medlemsservice</field> 
+        <field name="res_model">campos.import.member.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+	<record model="ir.ui.view" id="campos_import_member_profile_tree_view">
+        <field name="name">campos.import.member.profile.tree (in campos_welcome)</field>
+        <field name="model">campos.import.member.profile</field>
+        <field name="arch" type="xml">
+            <tree string="Members" colors="green:participant_id!=False">
+            	<field name="name"/>
+            	<field name="age"/>
+            	<field name="department"/>
+            	<field name="state"/>
+            	<field name="participant_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="campos_import_member_profile_search_view">
+        <field name="name">campos.import.member.profile.search (in campos_welcome)</field>
+        <field name="model">campos.import.member.profile</field>
+        <field name="arch" type="xml">
+            <search string="Members">
+            	<field name="name"/>
+            	<field name="state"/>
+            	<field name="department"/>
+            	<filter string="Active" name="factive" domain="[('state', '=', 'active')]"/>
+            	<filter string="Relative" name="frelative" domain="[('state', '=', 'relative')]"/>
+            </search>
+        </field>
+    </record>
+          
+	<!-- 
+    <record model="ir.values" id="campos_import_member_wiz_act_multi">
+        <field name="name">Campos Import Member Wiz</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('campos_import_member_wiz_act_window'))" />
+        <field name="model">source.model</field>
+        
+    </record>
+ 	-->
+
+</data>
+</openerp>

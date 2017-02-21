@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_campos_import_event,access_campos_import_event,model_campos_import_event,,1,1,1,0

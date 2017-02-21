@@ -58,6 +58,7 @@
         'project_issue',
         'project_model_to_issue',
         'website_event_track',
+        'web_widget_datepicker_options',
         
     ],
 

@@ -15,6 +15,10 @@
                         <field name="staff_del_ok"/>
                         <label for="staff_del_ok"/>
                     </div>
+                    <div>
+                        <field name="group_del_ok"/>
+                        <label for="group_del_ok"/>
+                    </div>
                 </div>
         </field>
     </record>

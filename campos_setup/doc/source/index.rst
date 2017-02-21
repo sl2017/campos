@@ -1,5 +1,5 @@
 Welcome to Camp OS documentation
-====================================
+================================
 
 Contents:
 
@@ -8,7 +8,7 @@ Contents:
 
    struktur
    
-   modules
+   module_list
    
 Indices and tables
 ==================

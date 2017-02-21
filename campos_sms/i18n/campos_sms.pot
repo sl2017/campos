@@ -1,0 +1,273 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_sms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-29 02:00+0000\n"
+"PO-Revision-Date: 2017-01-29 02:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "A code has been sent to your mobile phone by SMS. Please enter the code from the SMS:"
+msgstr ""
+
+#. module: campos_sms
+#: view:campos.committee:campos_sms.view_member_organization_form
+msgid "A limit of zero will disable SMS sending."
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "An SMS with a confirm code will be sent to your mobile phone."
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
+msgid "Apply"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Are you sure you want to send a confirm code?"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Are you sure you want to send this SMS?"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
+msgid "Cancel"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_campos_committee
+msgid "Committee"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
+msgid "Confirm"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Confirm number"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_confirm_number
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
+msgid "Confirm sender"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_confirmed_numbers
+#: model:ir.ui.menu,name:campos_sms.menu_sms_confirmed_numbers
+msgid "Confirmed numbers"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Demo mode"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
+msgid "Do you want to send a confirm SMS? (The organization will be charged for one SMS)"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Gateway"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
+msgid "General Settings"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
+msgid "Group By"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "If you need a new confirm code, you can request it by clicking this button:"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_master
+msgid "Master SMS"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
+msgid "Month"
+msgstr ""
+
+#. module: campos_sms
+#: view:campos.committee:campos_sms.view_member_organization_sms_tree
+msgid "Name"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
+msgid "Organization"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_member_organization_tree_sms
+#: model:ir.ui.menu,name:campos_sms.menu_sms_organization_list
+msgid "Organizations"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Receivers"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.ui.menu,name:campos_sms.menu_sms
+msgid "SMS"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_smsclient
+msgid "SMS Client"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_smsclient_queue_tree
+#: model:ir.ui.menu,name:campos_sms.menu_sms_smsclient_queue_tree
+msgid "SMS Details"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_master_tree
+#: model:ir.ui.menu,name:campos_sms.menu_sms_master_tree
+msgid "SMS Overview"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_sms_smsclient_queue
+msgid "SMS Queue"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_sms_settings
+#: model:ir.ui.menu,name:campos_sms.menu_sms_configuration
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
+msgid "SMS Settings"
+msgstr ""
+
+#. module: campos_sms
+#: model:res.groups,name:campos_sms.group_sgsms_organization_admin
+msgid "SMS organization admin"
+msgstr ""
+
+#. module: campos_sms
+#: model:res.groups,name:campos_sms.group_sgsms_send
+msgid "SMS send"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "SMS text"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.actions.act_window,name:campos_sms.action_function_sms
+#: model:ir.actions.act_window,name:campos_sms.action_participant_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Send SMS"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
+msgid "Send a new confirm code"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
+msgid "Send code"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Send confirm code"
+msgstr ""
+
+#. module: campos_sms
+#: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
+msgid "Sent"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "The price for sending a confirm code by SMS is"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "The sender of the SMS can either be a short text (10 letters - no numbers) or your own mobile number."
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "This database does not allow SMS sending. All created messages will automatically be cancelled."
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Total price:"
+msgstr ""
+
+#. module: campos_sms
+#: model:ir.model,name:campos_sms.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "You have"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "You must confirm that you own the number before you can use it as sender."
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "Your confirm code has expired, because you have tried too many times."
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+#: view:sms.config.settings:campos_sms.view_sms_config_settings
+msgid "or"
+msgstr ""
+
+#. module: campos_sms
+#: view:part.sms:campos_sms.view_part_sms
+msgid "tries left."
+msgstr ""
+

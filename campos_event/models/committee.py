@@ -58,7 +58,8 @@ class CampCommittee(models.Model):
         'Approvers')
     template_id = fields.Many2one('email.template', 'Email Template', ondelete='set null',
                                   domain=[('model_id', '=', 'campos.event.participant')])
-    parent_id = fields.Many2one('campos.committee', 'Main Committee', ondelete='restrict')
+    parent_id = fields.Many2one('campos.committee', 'Parent Committee', ondelete='restrict')
+    main_comm_id = fields.Many2one('campos.committee', 'Main Committee', ondelete='restrict', compute='_compute_main_comm_id')
     committee_type_id = fields.Many2one('campos.committee.type', 'Type')
     
     child_ids = fields.One2many(
@@ -122,6 +123,23 @@ class CampCommittee(models.Model):
         else:
             self.root_name = self.short_name
 
+    @api.multi
+    @api.depends('parent_id')
+    def _compute_main_comm_id(self):
+        for comm in self:
+            parent = comm.parent_id
+            if parent:
+                while parent:
+                    if parent.parent_id:
+                        parent = parent.parent_id
+                    else:
+                        break
+            else:
+                parent = comm
+            _logger.info('in compute: %s', parent)
+            comm.main_comm_id = parent
+
+            
     @api.multi
     @api.depends('name', 'code')
     def name_get(self):

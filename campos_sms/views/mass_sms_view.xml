@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<act_window id="action_participant_sms" name="Send SMS"
+			res_model="part.sms" src_model="campos.event.participant"
+			view_mode="form" target="new" key2="client_action_multi"
+			groups="campos_sms.group_sgsms_send,base.group_erp_manager,campos_event.group_campos_admin" />
+		
+		<act_window id="action_function_sms" name="Send SMS"
+			res_model="part.sms" src_model="campos.committee.function"
+			view_mode="form" target="new" key2="client_action_multi"
+			context="{'partner_id_field': 'participant_id.partner_id'}"
+			groups="campos_sms.group_sgsms_send,base.group_erp_manager,campos_event.group_campos_admin" />
+
+		<record model="ir.ui.view" id="view_part_sms">
+			<field name="name">part.sms.view</field>
+			<field name="model">part.sms</field>
+			<field name="inherit_id" ref="smsclient.view_part_sms" />
+			<field name="arch" type="xml">
+				<group string="Gateway" position="replace">
+					<field name="sms_allowed" invisible="1" />
+					<div attrs="{'invisible': [('sms_allowed', '=', True)]}" style="border: 2px solid black; padding: 10px 10px 0px 10px;">
+						<h2>Demo mode</h2>
+						<p>This database does not allow SMS sending. All created messages will automatically be cancelled.</p>
+					</div>
+					<group>
+						<field name="organization_id" options="{'no_create': True, 'no_open': True}" />
+						<field name="sender_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('user_has_confirmed_numbers', '=', False)]}" />
+						<field name="sender_text" />
+						<field name="user_has_confirmed_numbers" invisible="1" />
+						<field name="sender_is_number" invisible="1" />
+						<field name="sender_state" invisible="1" />
+					</group>
+					<p>The sender of the SMS can either be a short text (10 letters - no numbers) or your own mobile number.</p>
+					<div attrs="{'invisible': ['|', ('sender_is_number', '=', False), ('sender_state', '=', 'confirmed')]}">
+						<!-- Sender is a number that is not confirmed -->
+						<p><b>You must confirm that you own the number before you can use it as sender.</b></p>
+						<div  attrs="{'invisible': [('sender_id', '!=', False), ('sender_state', '!=', 'draft')]}">
+							<!-- A confirm code has NOT been sent -->
+							<p>An SMS with a confirm code will be sent to your mobile phone.</p>
+							<button name="action_send_confirm_code" type="object"
+								string="Send confirm code" confirm="Are you sure you want to send a confirm code?" />
+						</div>
+						<div  attrs="{'invisible': [('sender_state', '!=', 'waiting')]}">
+							<!-- A confirm code has been sent -->
+							<span attrs="{'invisible': [('confirm_tries', '&lt;=', 0)]}">
+								<p>A code has been sent to your mobile phone by SMS. Please enter the code from the SMS:
+								<field name="confirm_code" class="oe_inline" /></p>
+								<p>You have <field name="confirm_tries" class="oe_inline" /> tries left.</p>
+								<button name="action_check_confirm_code" type="object" string="Confirm number" />
+							</span>
+							<span attrs="{'invisible': [('confirm_tries', '&gt;', 0)]}">
+								<p>Your confirm code has expired, because you have tried too many times.</p>
+							</span>
+							<p>If you need a new confirm code, you can request it by clicking this button:
+								<button name="action_send_confirm_code" type="object"
+								string="Send confirm code" confirm="Are you sure you want to send a confirm code?" /></p>
+						</div>
+						<p><i>The price for sending a confirm code by SMS is <field name="confirm_price" class="oe_inline" /></i></p>
+					</div>
+					<h3>SMS text</h3>
+					<field name="text" colspan="4" required="0"/>
+					<group>
+						<field name="receivers_count" />
+						<field name="receivers_foreign_count" attrs="{'invisible': [('receivers_foreign_count', '=', 0)]}" />
+					</group>
+					<h2>Total price: <field name="total_price" class="oe_inline" /></h2>
+					<div>
+						<span attrs="{'invisible': [('sender_is_number', '=', True), ('sender_state', '!=', 'confirmed')]}">
+						<button string="Send SMS" confirm="Are you sure you want to send this SMS?" name="sms_mass_send" type="object" class="oe_highlight" />
+						or</span>
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</div>
+				</group>
+				<notebook position="replace">
+					<br />
+					<h2>Receivers</h2>
+					<field name="receiver_ids" readonly="1" options="{'no_open': True}">
+						<tree colors="gray:not mobile_clean" delete="false" limit="false">
+							<field name="name" />
+							<field name="mobile" />
+							<field name="mobile_clean" />
+						</tree>
+					</field>
+				</notebook>
+				<footer position="replace" />
+			</field>
+		</record>
+
+	</data>
+</openerp>

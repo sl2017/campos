@@ -299,6 +299,113 @@ class WebsiteEventEx(WebsiteEvent):
         return http.request.render(
             'campos_event.dk_groups_register_form', values)
 
+    @http.route(['/event/<model("event.event"):event>/register/int2_groups/<scout_org_id>',
+                 '/event/<model("event.event"):event>/register/int2_groups'],
+                type='http', auth="public", website=True)
+    def event_register_int2_groups(self, event, scout_org_id=None, **post):
+        def validate(name, force_check=False):
+            return self._validate(name, post, force_check=force_check)
+
+        error = {}
+        reg_obj = http.request.env['event.registration']
+        partner_obj = http.request.env['res.partner']
+        group = False
+        registration_vals = {}
+        _logger.info("Post? %s", http.request.httprequest.method)
+        if post.get('group_name', False):
+            post['name'] = post.get('group_name', '')
+            post['email'] = post.get('contact_email', '')
+            post['phone'] = post.get('contact_mobile', '')
+            post['tickets'] = '1'
+        elif post.get('group_partner_id', False):
+            group = partner_obj.sudo().browse(int(post.get('group_partner_id', False)))
+            post['name'] = group.name
+            post['email'] = post.get('contact_email', '')
+            post['phone'] = post.get('contact_mobile', '')
+            post['tickets'] = '1'
+        if http.request.httprequest.method == 'POST' and (http.request.env.ref('base.public_user') !=
+                http.request.env.user and
+                validate('name', force_check=True)):
+            # if logged in, use that info
+            registration_vals = reg_obj._prepare_registration(
+                event, post, http.request.env.user.id,
+                partner=http.request.env.user.partner_id)
+
+        if http.request.httprequest.method == 'POST' and all(map(lambda f: validate(f, force_check=True),
+                   ['name', 'email', 'tickets'])):
+            # otherwise, create a simple registration
+            registration_vals = reg_obj._prepare_registration(
+                event, post, http.request.env.user.id)
+        _logger.info("Reg: %s - post: %s", registration_vals, post)
+
+        if http.request.httprequest.method == 'POST' and registration_vals:
+            if not group:
+                group = partner_obj.sudo().create({'name': post.get('name'),
+                                                   'scoutgroup': True,
+                                                   'country_id': post.get('group_country_id', False),
+                                                   'scoutorg_id': post.get('scoutorg_id', False),
+                                                   'is_company': True,
+                                                   })
+            registration_vals['partner_id'] = group.id
+            registration_vals['organization_id'] = group.scoutorg_id.id
+            for f in ['intl_org', 'natorg']:
+                registration_vals[f] = post.get('group_%s' % (f), False)
+            cvals = {}
+            post['contact_country_id'] = group.country_id.id
+            for f in ['name', 'email', 'mobile', 'street', 'zip', 'city', 'country_id', 'lang']:
+                cvals[f] = post.get('contact_%s' % (f), False)
+            cvals['parent_id'] = group.id
+            contact = partner_obj.sudo().create(cvals)
+            registration_vals['contact_partner_id'] = contact.id
+            registration = reg_obj.sudo().search([('partner_id', '=', registration_vals['partner_id']), ('event_id', '=', registration_vals['event_id'])])
+            if not registration:
+                registration = reg_obj.sudo().create(registration_vals)
+
+            if registration.partner_id:
+                registration._onchange_partner()
+            registration.registration_open()
+            new_user = reg_obj.env['res.users'].sudo().with_context(template_ref='campos_event.int_group_signup_email').create({'login':contact.email,
+                                                            'partner_id': contact.id,
+                                                            'groups_id': [(4, partner_obj.env.ref('campos_preregistration.group_campos_groupleader').id),
+                                                                          (4, partner_obj.env.ref('campos_welcome.group_campos_manuel_group').id)],
+                                                            'action_id': int(http.request.env['ir.config_parameter'].get_param('campos_event.group_login_home_action'))
+                                                         })
+            return http.request.render(
+                'campos_event.int2_group_register_confirm',
+                {'registration': registration})
+
+        countries = http.request.env['res.country'].search([])
+        intl_orgs = http.request.env['campos.scout.org'].search([('country_id', '=', False)])
+        languages = http.request.env['res.lang'].search([])
+        groups = False
+        if scout_org_id:
+            groups = http.request.env['res.partner'].sudo().search([('scoutorg_id', '=', int(scout_org_id)),('scoutgroup', '=', True)])
+        
+        if not post.get('contact_lang', False):
+            post['contact_lang'] = 'en_US'
+        _logger.info('POST: %s', post)
+        _logger.info('GROUPS: %s', groups)
+
+        pagetitle = _('Registration for International Groups')
+       
+            
+        values = {
+            'event': event,
+            'range': range,
+            'countries': countries,
+            'intl_orgs': intl_orgs,
+            'tickets': post.get('tickets', 1),
+            'validate': validate,
+            'post': post,
+            'languages': languages,
+            'error': error,
+            'groups': groups,
+            'scout_org_id': scout_org_id,
+            'pagetitle': pagetitle,
+        }
+        return http.request.render(
+            'campos_event.int2_groups_register_form', values)
+
 
     @http.route(['''/event/<model("event.event"):event>/meeting_proposal'''], type='http', auth="user", website=True)
     def event_meeting_proposal(self, event, **post):

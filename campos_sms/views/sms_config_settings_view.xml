@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_sms_config_settings" model="ir.ui.view">
+            <field name="name">SMS Settings</field>
+            <field name="model">sms.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="SMS Settings" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="General Settings"/>
+                    <group name="national">
+                    	<field name="national_cost_price" />
+                    	<field name="national_price_adjust" />
+                    	<field name="national_price_adjust_method" />
+                    	<field name="national_sell_price" />
+                    </group>
+                    <group name="international">
+                    	<field name="international_cost_price" />
+                    	<field name="international_price_adjust" />
+                    	<field name="international_price_adjust_method" />
+                    	<field name="international_sell_price" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sms_settings" model="ir.actions.act_window">
+            <field name="name">SMS Settings</field>
+            <field name="res_model">sms.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_sms" name="SMS" parent="base.menu_reporting" sequence="9" />
+
+        <menuitem id="menu_sms_configuration" parent="campos_sms.menu_sms"
+            sequence="100" action="action_sms_settings"
+            groups="base.group_no_one,campos_event.group_campos_admin" />
+
+    </data>
+</openerp>

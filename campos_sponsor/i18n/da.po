@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 14:40+0000\n"
-"PO-Revision-Date: 2016-11-16 14:40+0000\n"
+"POT-Creation-Date: 2017-01-28 12:28+0000\n"
+"PO-Revision-Date: 2017-01-28 12:28+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,11 @@ msgid "# Tasks"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,sale_order_count:0
+msgid "# of Sales Order"
+msgstr ""
+
+#. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 #: view:website:campos_sponsor.activity_signup
 msgid "101 - 200"
@@ -76,6 +81,16 @@ msgstr "501 - 750"
 #. module: campos_sponsor
 #: selection:model.activity,activity_expected_participants:0
 msgid ">750"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,property_account_payable:0
+msgid "Account Payable"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,property_account_receivable:0
+msgid "Account Receivable"
 msgstr ""
 
 #. module: campos_sponsor
@@ -307,6 +322,13 @@ msgid "Check if the contact is a company, otherwise it is a person"
 msgstr ""
 
 #. module: campos_sponsor
+#: help:model.sponsor,vat_subjected:0
+msgid ""
+"Check this box if the partner is subjected to the VAT. It will be used for "
+"the VAT legal statement."
+msgstr ""
+
+#. module: campos_sponsor
 #: help:model.sponsor,customer:0
 msgid "Check this box if this contact is a customer."
 msgstr ""
@@ -349,6 +371,11 @@ msgid "Commercial Entity"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,ref_companies:0
+msgid "Companies that refers to partner"
+msgstr ""
+
+#. module: campos_sponsor
 #: field:model.sponsor,company_id:0
 msgid "Company"
 msgstr ""
@@ -366,6 +393,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,child_ids:0
 msgid "Contacts"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,contract_ids:0 field:model.sponsor,contracts_count:0
+msgid "Contracts"
 msgstr ""
 
 #. module: campos_sponsor
@@ -396,6 +428,11 @@ msgid "Customer"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,property_payment_term:0
+msgid "Customer Payment Term"
+msgstr ""
+
+#. module: campos_sponsor
 #: field:model.sponsor,date:0
 msgid "Date"
 msgstr ""
@@ -404,6 +441,18 @@ msgstr ""
 #: help:model.activity,message_last_post:0
 #: help:model.sponsor,message_last_post:0
 msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,last_reconciliation_date:0
+msgid ""
+"Date on which the partner accounting entries were fully reconciled last "
+"time. It differs from the last date where a reconciliation has been made for"
+" this partner, as here we depict the fact that nothing more was to be "
+"reconciled at this date. This can be achieved in 2 different ways: either "
+"the last unreconciled debit/credit entry of this partner was reconciled, "
+"either the user pressed the button \"Nothing more to reconcile\" during the "
+"manual reconciliation process."
 msgstr ""
 
 #. module: campos_sponsor
@@ -514,6 +563,11 @@ msgstr ""
 #: selection:model.activity,activity_type:0
 #: view:website:campos_sponsor.activity_signup
 msgid "Firma"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,property_account_position:0
+msgid "Fiscal Position"
 msgstr ""
 
 #. module: campos_sponsor
@@ -692,6 +746,11 @@ msgid "Indsend ansøgning"
 msgstr "Indsend ansøgning"
 
 #. module: campos_sponsor
+#: field:model.sponsor,invoice_ids:0
+msgid "Invoices"
+msgstr ""
+
+#. module: campos_sponsor
 #: field:model.sponsor,is_company:0
 msgid "Is a Company"
 msgstr ""
@@ -705,6 +764,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,function:0
 msgid "Job Position"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,journal_item_count:0
+msgid "Journal Items"
 msgstr ""
 
 #. module: campos_sponsor
@@ -778,6 +842,11 @@ msgstr ""
 #: field:model.activity,write_date:0 field:model.sponsor,write_date:0
 #: field:sponsor.modydelser,write_date:0 field:sponsor.temaer,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,last_reconciliation_date:0
+msgid "Latest Full Reconciliation Date"
 msgstr ""
 
 #. module: campos_sponsor
@@ -859,6 +928,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,mobile:0
 msgid "Mobile"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,mobile_clean:0
+msgid "Mobile clean"
 msgstr ""
 
 #. module: campos_sponsor
@@ -995,6 +1069,11 @@ msgid "Partnerskabsnavn"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,debit_limit:0
+msgid "Payable Limit"
+msgstr ""
+
+#. module: campos_sponsor
 #: selection:model.sponsor,sponsor_kategori:0
 msgid "Pengeinstitut"
 msgstr ""
@@ -1110,6 +1189,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,property_product_pricelist:0
 msgid "Sale Pricelist"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,sale_order_ids:0
+msgid "Sales Order"
 msgstr ""
 
 #. module: campos_sponsor
@@ -1289,6 +1373,11 @@ msgid "Supplier"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,property_supplier_payment_term:0
+msgid "Supplier Payment Term"
+msgstr ""
+
+#. module: campos_sponsor
 #: view:website:campos_sponsor.partner_signup
 msgid "Sæt spor som partner på Spejdernes Lejr"
 msgstr ""
@@ -1346,6 +1435,12 @@ msgid "The active field allows you to hide the category without removing it."
 msgstr ""
 
 #. module: campos_sponsor
+#: help:model.sponsor,property_account_position:0
+msgid ""
+"The fiscal position will determine taxes and accounts used for the partner."
+msgstr ""
+
+#. module: campos_sponsor
 #: help:model.sponsor,user_id:0
 msgid ""
 "The internal user that is in charge of communicating with this contact if "
@@ -1362,10 +1457,38 @@ msgid ""
 msgstr ""
 
 #. module: campos_sponsor
+#: help:model.sponsor,property_account_payable:0
+msgid ""
+"This account will be used instead of the default one as the payable account "
+"for the current partner"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,property_account_receivable:0
+msgid ""
+"This account will be used instead of the default one as the receivable "
+"account for the current partner"
+msgstr ""
+
+#. module: campos_sponsor
 #: help:model.sponsor,image:0
 msgid ""
 "This field holds the image used as avatar for this contact, limited to "
 "1024x1024px"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,property_supplier_payment_term:0
+msgid ""
+"This payment term will be used instead of the default one for purchase "
+"orders and supplier invoices"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,property_payment_term:0
+msgid ""
+"This payment term will be used instead of the default one for sale orders "
+"and customer invoices"
 msgstr ""
 
 #. module: campos_sponsor
@@ -1411,6 +1534,31 @@ msgid "Title"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,total_invoiced:0
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,debit:0
+msgid "Total Payable"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,credit:0
+msgid "Total Receivable"
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,credit:0
+msgid "Total amount this customer owes you."
+msgstr ""
+
+#. module: campos_sponsor
+#: help:model.sponsor,debit:0
+msgid "Total amount you have to pay to this supplier."
+msgstr ""
+
+#. module: campos_sponsor
 #: view:model.sponsor:campos_sponsor.view_form_sponsor_create
 msgid "Udvalgsfelter"
 msgstr ""
@@ -1446,6 +1594,11 @@ msgstr ""
 #. module: campos_sponsor
 #: field:model.sponsor,user_ids:0
 msgid "Users"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,vat_subjected:0
+msgid "VAT Legal Statement"
 msgstr ""
 
 #. module: campos_sponsor

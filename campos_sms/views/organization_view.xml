@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<!-- Add SMS budget field to organization form -->
+		<record model="ir.ui.view" id="view_member_organization_form">
+			<field name="name">Organisation Form</field>
+			<field name="model">campos.committee</field>
+			<field name="inherit_id" ref="campos_event.campos_committee_form" />
+			<field name="arch" type="xml">
+				<field name="par_contact_id" position="after">
+					<field name="edit_sms_max_monthly_cost" invisible="1" />
+					<field name="sms_max_monthly_cost" attrs="{'readonly': [('edit_sms_max_monthly_cost', '=', False)]}" />
+					<field name="user_sms_ids" widget="many2many_tags" attrs="{'readonly': [('edit_sms_max_monthly_cost', '=', False)]}"/>
+					<p>A limit of zero will disable SMS sending.</p>
+				</field>
+			</field>
+		</record>
+
+		<!-- Organization list with SMS budget and usage -->
+		<record id="view_member_organization_sms_tree" model="ir.ui.view">
+			<field name="name">Organization List SMS</field>
+			<field name="model">campos.committee</field>
+			<field name="priority">30</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="display_name" string="Name" />
+					<field name="sms_max_monthly_cost" />
+					<field name="sms_amount_current_month" />
+				</tree>
+			</field>
+		</record>
+
+		<act_window id="action_member_organization_tree_sms" name="Organizations"
+			res_model="campos.committee" view_mode="tree,form"
+			view_id="view_member_organization_sms_tree" />
+
+        <menuitem id="menu_sms_organization_list" parent="campos_sms.menu_sms"
+            sequence="50" action="action_member_organization_tree_sms" />
+
+	</data>
+</openerp>

@@ -75,7 +75,7 @@ class CamposRemoteSystem(models.Model):
             for row in rows.getroot():
                 rd = dict((e.tag, e.text) for e in row)
                 _logger.info("BM row: %s", rd)
-                if (rd['trustLeaderType'] or rd['trustBoardGroup']) and '-' not in rd['orgCode']:
+                if (rd['trustLeaderType'] or rd['trustBoardGroup'] or rd['trustCode'] == '1000') and '-' not in rd['orgCode']:
                     org = rd['orgCode']
                     if '-' in org:
                         org = org.split('-')[0]

@@ -10,3 +10,4 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
     
     staff_del_ok = fields.Boolean('Staff delivery')
+    group_del_ok = fields.Boolean('Group delivery')
