@@ -89,11 +89,17 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')]}"/>
-										<field name="payreq_state"/>
-										<feild name="payreq_approved_date" readonly="1"/>
-										<field name="payreq_approved_user_id" readonly="1"/>
+										<field name="paybygroup" />
+										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}"/>
+										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" />
+										<feild name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
+										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 						      		</group>
+						 </page>
+						 <page string="Children Island" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
+						 	<group>
+						 		<field name="exp_child_qu" />
+						 	</group>
 						 </page>
             		</notebook>		
             	</page>

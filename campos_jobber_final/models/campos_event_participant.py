@@ -19,12 +19,14 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    paybygroup = fields.Boolean('Pay by Scout Group')
     payreq_state=fields.Selection([('draft', 'Draft'),
                                    ('cancelled', 'Cancelled'),
                                    ('approved', 'Approved'),
                                    ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
     payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    exp_child_qu = fields.Integer("Expected number of children in 'Childrens Island'")
     
     @api.multi
     def action_approve_payreq(self):
@@ -57,3 +59,9 @@ class CamposEventParticipant(models.Model):
             self.payreq_state = 'draft'
         else:
             self.payreq_state = 'approved'
+
+    @api.onchange('paybygroup')
+    def onchange_paybygroup(self):
+        if not self.paybygroup:
+            self.registration_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id)])
+            
