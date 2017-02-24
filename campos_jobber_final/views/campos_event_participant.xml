@@ -10,7 +10,7 @@
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_event.staff_event_registration_participant_form"/>
         <field name="arch" type="xml">
-            <page name="agreements" position="after">
+            <page name="agreements" position="before">
             	<page name="finalreg" string="Final signup">
             		<group>
             			<field name="signup_state"/>
@@ -50,7 +50,9 @@
 								<tree editable="bottom">
 									<field name="date_from"/>
 									<field name="date_to"/>
-									<field name="registration_id" string="Group"/>
+									<field name="accom_type_id" />
+									<field name="group_sel" invisible="1" />
+									<field name="registration_id" string="Group" attrs="{'invisible': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
