@@ -27,7 +27,7 @@ class CamposEventParticipant(models.Model):
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
     
     @api.multi
-    def action_aprove_payreq(self):
+    def action_approve_payreq(self):
         self.write({'payreq_state': 'approved'})
         
     @api.multi
