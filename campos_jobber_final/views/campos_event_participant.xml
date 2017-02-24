@@ -52,7 +52,7 @@
 									<field name="date_to"/>
 									<field name="accom_type_id" />
 									<field name="group_sel" invisible="1" />
-									<field name="registration_id" string="Group" attrs="{'invisible': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]"/>
+									<field name="registration_id" string="Group" attrs="{'invisible': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>

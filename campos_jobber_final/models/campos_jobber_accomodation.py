@@ -21,8 +21,8 @@ class CamposJobberAccomodation(models.Model):
                               ('refused', 'Refused')], default='draft', string='State')
     approved_date = fields.Datetime('Approved')
     approved_user_id = fields.Many2one('res.users', 'Approved By')
-    accom_type_id = fields.Many2one('campos.jobber.accom.type')
-    group_sel = fields.Boolean(related='accom-type_id.group_sel', readonly=True)
+    accom_type_id = fields.Many2one('campos.jobber.accom.type', 'Accomondation Type')
+    group_sel = fields.Boolean(related='accom_type_id.group_sel', readonly=True)
 
     @api.model
     def default_get(self, fields):
