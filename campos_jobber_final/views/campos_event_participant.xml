@@ -45,7 +45,7 @@
 								</tree>
 							</field>
             			</page>
-            			<page string="Accomodation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
+            			<page string="Accomodation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 							<field name="accomodation_ids" context="{'default_participant_id': id}">
 								<tree editable="bottom">
 									<field name="date_from"/>
@@ -57,13 +57,15 @@
 								</tree>
 							</field>
 						</page>
-            			<page string="Catering" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
+            			<page string="Catering" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 							<field name="canteen_ids" context="{'default_participant_id': id}">
 								<tree editable="bottom">
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>/>
+									<!-- 
+									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
+									 -->
 									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="state" readonly="1"/>
 								</tree>
@@ -71,13 +73,13 @@
 						
             			
             			</page>
-            			<page string="Transportation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
+            			<page string="Transportation" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
             				<group>
             					<field name="transport_to_camp"/>
             					<field name="transport_from_camp"/>
             				</group>
             			</page>
-						<page string="Special needs" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
+						<page string="Special needs" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}" >
 									<group>
 										<field name="need_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('for_staff', '=', True)]"/>
 										<field name="other_need"/>
@@ -85,7 +87,7 @@
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 						</page>
-						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">>
+						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')]}"/>
 										<field name="payreq_state"/>
