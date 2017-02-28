@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-29 02:00+0000\n"
-"PO-Revision-Date: 2017-01-29 02:00+0000\n"
+"POT-Creation-Date: 2017-02-25 02:00+0000\n"
+"PO-Revision-Date: 2017-02-25 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,6 +38,13 @@ msgid "Campos Canteen"
 msgstr ""
 
 #. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_jobber_accom_type_act_window
+#: model:ir.model,name:campos_jobber_final.model_campos_jobber_accom_type
+#: model:ir.ui.menu,name:campos_jobber_final.campos_jobber_accom_type_menu
+msgid "Campos Jobber Accom Type"
+msgstr ""
+
+#. module: campos_jobber_final
 #: model:ir.model,name:campos_jobber_final.model_campos_jobber_accomodation
 msgid "Campos Jobber Accomodation"
 msgstr ""
@@ -58,6 +65,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all days"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Children Island"
 msgstr ""
 
 #. module: campos_jobber_final
