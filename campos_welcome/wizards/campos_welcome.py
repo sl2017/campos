@@ -112,7 +112,7 @@ class CamposWelcome(models.TransientModel):
             _logger.info('EVent: %s', event_id)
             if event_id:
                 event_id = int(event_id)
-            group = self.env['res.partner'].suspend_security().search([('remote_int_id', '=', wizard.profile_id.org_int_id),('remote_system_id', '=', wizard.remote_system_id.id)])
+            group = self.env['res.partner'].suspend_security().search([('remote_ext_id', '=', wizard.profile_id.org_ext_id),('remote_system_id', '=', wizard.remote_system_id.id)])
             if group:
                 wizard.message = _("%s has already been signed up") % group.name
                 wizard.reg_id = self.env['event.registration'].suspend_security().search([('partner_id', '=', group.id), ('event_id', '=', event_id)])
@@ -121,6 +121,8 @@ class CamposWelcome(models.TransientModel):
             else:
                 group = wizard.remote_system_id.syncPartner(remote_int_id=wizard.profile_id.org_int_id, is_company=True)
                 self.env.user.partner_id.parent_id = group
+                if group.remote_system_id.systype == 'bm':
+                    group.change_remote_group()
                 wizard.remote_system_id.syncPartner(partner=self.env.user.partner_id)
                 vals = {}
                 if event_id:
