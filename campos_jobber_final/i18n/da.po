@@ -28,7 +28,7 @@ msgstr "Overnatningssted"
 #. module: campos_jobber_final
 #: field:campos.jobber.accomodation,accom_type_id:0
 msgid "Accomondation Type"
-msgstr ""
+msgstr "Overnatningstype"
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
@@ -72,7 +72,7 @@ msgstr "Valg af spisested"
 #: model:ir.model,name:campos_jobber_final.model_campos_jobber_accom_type
 #: model:ir.ui.menu,name:campos_jobber_final.campos_jobber_accom_type_menu
 msgid "Campos Jobber Accom Type"
-msgstr ""
+msgstr "Overnatningstype"
 
 #. module: campos_jobber_final
 #: model:ir.model,name:campos_jobber_final.model_campos_jobber_accomodation
@@ -175,7 +175,7 @@ msgstr "Tilmelding"
 #. module: campos_jobber_final
 #: field:campos.event.participant,exp_child_qu:0
 msgid "Expected number of children in 'Childrens Island'"
-msgstr ""
+msgstr "Forventede antal børn i \"Børnenes Ø\""
 
 #. module: campos_jobber_final
 #: field:campos.event.participant,signup_state:0
@@ -323,7 +323,7 @@ msgstr "Afslået"
 #: field:campos.jobber.accom.type,group_sel:0
 #: field:campos.jobber.accomodation,group_sel:0
 msgid "Req. group selection and approval"
-msgstr ""
+msgstr "registrering gruppe og godkendelse"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
