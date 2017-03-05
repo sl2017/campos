@@ -7,9 +7,11 @@
 <field name="arch" type="xml">
 <tree>
 <field name="destinationidno"/>
-<field name="name"/>
+<field name="webtourname"/>
 <field name="placename"/>
+<field name="name"/>
 <field name="id"/>
+
 </tree>
 </field>
 </record>
@@ -21,8 +23,9 @@
 <sheet>
 <group name="destination_top">
 <field name="destinationidno" readonly="0"/>
-<field name="name" readonly="0"/>
-<field name="placename" readonly="0"/>
+<field name="name"/>
+<field name="webtourname" readonly="0"/>
+<field name="placename"/>
 <field name="address" readonly="0"/>
 <field name="latitude" readonly="0"/>
 <field name="longitude" readonly="0"/>

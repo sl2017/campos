@@ -17,14 +17,18 @@ class WebtourRegistration(models.Model):
     _inherit = 'event.registration'
     webtourusgroupidno = fields.Char('Webtour us Group ID no', required=False, Default='')
     webtourdefaulthomedestination = fields.Many2one('campos.webtourusdestination','id',ondelete='set null')
+    webtourdefaulthomedestination_name  = fields.Char(related='webtourdefaulthomedestination.name', string='Default Pickup Place', readonly=True)
+    webtourgrouptocampdestination_id = fields.Many2one('campos.webtourusdestination','Selected Pick up to Camp',ondelete='set null')
+    webtourgroupfromcampdestination_id = fields.Many2one('campos.webtourusdestination','Selected Drop off from Camp',ondelete='set null')
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
     webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
     webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
+
     
-    @api.depends('participant_ids.participant_total','participant_ids.participant_own_transport_to_camp_total','participant_ids.participant_own_transport_from_camp_total')
+    @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
             record.webtourPreregTotalSeats = sum(2*line.participant_total - line.participant_own_transport_to_camp_total -line.participant_own_transport_from_camp_total for line in record.participant_ids)
@@ -38,7 +42,7 @@ class WebtourRegistration(models.Model):
     def _compute_webtourhasgeoadd(self):
         for record in self:
             record.webtourhasgeoadd = record.partner_id.partner_latitude <> 0 and record.partner_id.partner_longitude <> 0
-
+           
     @api.one
     def set_webtourdefaulthomedestination(self):
         
@@ -162,8 +166,8 @@ class WebtourRegistration(models.Model):
                     #dicto1["fromcamptodestination_id"] = dicto1["tocampfromdestination_id"]  
                     dicto1["tocampdate"] = age_group.participant_from_date
                     dicto1["fromcampdate"] = age_group.participant_to_date
-                    dicto1["usecamptransporttocamp"] = i > age_group.participant_own_transport_to_camp_total
-                    dicto1["usecamptransportfromcamp"] = i > age_group.participant_own_transport_from_camp_total
+                    dicto1["transport_to_camp"] = i > age_group.participant_own_transport_to_camp_total
+                    dicto1["transport_from_camp"] = i > age_group.participant_own_transport_from_camp_total
 
                     _logger.info("createTestPaticipants: %s",dicto1)
                                                   

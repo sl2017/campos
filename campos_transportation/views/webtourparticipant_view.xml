@@ -10,8 +10,8 @@
 <field name="id"/>
 <field name="webtourusgroupidno"/>
 <field name="webtourususeridno"/>
-<field name="usecamptransporttocamp"/>
-<field name="usecamptransportfromcamp"/>
+<field name="transport_to_camp"/>
+<field name="transport_from_camp"/>
 <field name="scoutgroup"/>
 </tree>
 </field>
@@ -48,10 +48,13 @@
 <field name="fromcamptodestination_id" readonly="0"/>
 <field name="tocampdate" readonly="0"/>
 <field name="fromcampdate" readonly="0"/>
-<field name="usecamptransporttocamp" readonly="0"/>
-<field name="usecamptransportfromcamp" readonly="0"/>
+<field name="transport_to_camp" readonly="0"/>
+<field name="transport_from_camp" readonly="0"/>
 <field name="tocampusneed_id" readonly="1"/>
 <field name="fromcampusneed_id" readonly="1"/>
+<field name="specialtocampdatetime"/>
+<field name="specialfromcampdatetime"/>
+<field name="dates_summery"/>
 </group>
 </sheet>
 </form>

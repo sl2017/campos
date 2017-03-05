@@ -5,13 +5,29 @@ from ..interface import webtourinterface
 class WebtourUsDestination(models.Model):
     _name = 'campos.webtourusdestination'
     destinationidno = fields.Char('Destination ID', required=True)
-    name = fields.Char('Name', required=False)
+    name = fields.Char(compute='_compute_name', string='Name')
+    webtourname = fields.Char('WebTour Name', required=False)
     placename = fields.Char('Place', required=False)
     address = fields.Char('Address', required=False)
     latitude = fields.Char('Latitude', required=False)
     longitude = fields.Char('Longitude', required=False)
     note = fields.Char('Note', required=False)
 
+    @api.one
+    @api.depends('placename','address','webtourname','destinationidno')
+    def _compute_name(self):
+        
+        if self.webtourname==False:
+            self.name = '' + self.placename 
+            self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+            self.name = self.name + ' (' + ' IDno:' 
+            self.name = self.name + self.destinationidno + ')'
+        else:
+            self.name = '' + self.placename 
+            self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+            self.name = self.name + ' (' + self.webtourname  
+            self.name = self.name + ' IDno:' + self.destinationidno + ')'
+            
     @api.model
     def get_destinations_cron(self):
         self.get_destinations()
@@ -39,7 +55,7 @@ class WebtourUsDestination(models.Model):
             destinationidno = get_tag_data("a:IDno")
             webtour_dict = {}
             webtour_dict["destinationidno"] = destinationidno
-            webtour_dict["name"] = get_tag_data("a:Name")
+            webtour_dict["webtourname"] = get_tag_data("a:Name")
             webtour_dict["placename"] = get_tag_data("a:PlaceName")
             webtour_dict["address"] = get_tag_data("a:Address")
             lat=get_tag_data("a:Latitude")

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+	<openerp>
+		<data>		
+		<!-- Add to Finalregistration  view -->
+		<record id="view_form_finalregistration_webtour" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit3</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/group/notebook/page[@string='Participants']" position="after">
+					<page string="Camp Transportation">
+						<group name="sheet" colspan="2">
+						<field name="webtourdefaulthomedestination_name" />
+						<field name="webtourgrouptocampdestination_id" options="{'no_create': True, 'no_open': True}"/>
+						<field name="webtourgroupfromcampdestination_id" options="{'no_create': True, 'no_open': True}"/>
+						</group>
+           			</page>
+        		</xpath>
+			</field>	
+		</record>
+	
+		<!-- Add to Finalregistration Particpant view -->
+		<record id="view_form_finalregistration_participant_webtour" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form Webtour</field>
+			<field name="model">campos.event.participant</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/group/field[@name='transport_to_camp']" position="after">
+					<field name="specialtocampdatetime" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" />
+					<field name="individualtocampfromdestination_id" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+        		</xpath>
+        		
+        		<xpath expr="/form/sheet/group/field[@name='transport_from_camp']" position="after">
+					<field name="specialfromcampdatetime" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" />        		
+					<field name="individualfromcamptodestination_id" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+        		</xpath>
+        		
+        		<xpath expr="/form/sheet/group/field/tree/field[@name='will_participate']" position="after">
+					<field name="webtourcamptransportation"/>        		
+	        	</xpath>
+			</field>	
+		</record>		
+			
+	</data>
+</openerp>

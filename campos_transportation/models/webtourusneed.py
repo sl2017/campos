@@ -161,7 +161,7 @@ class WebtourUsNeed(models.Model):
                 webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)])
                 
                 if need.campos_TripType_id==webtourconfig.tocamp_campos_TripType_id:
-                    need.campos_demandneeded = need.participant_id.usecamptransporttocamp
+                    need.campos_demandneeded = need.participant_id.transport_to_camp
                     need.campos_startdatetime = need.participant_id.tocampdate
                     need.campos_enddatetime = need.participant_id.tocampdate
                     need.participant_id.tocampfromdestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
@@ -171,7 +171,7 @@ class WebtourUsNeed(models.Model):
                     need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
                 
                 if need.campos_TripType_id==webtourconfig.fromcamp_campos_TripType_id :
-                    need.campos_demandneeded = need.participant_id.usecamptransportfromcamp
+                    need.campos_demandneeded = need.participant_id.transport_from_camp
                     need.campos_startdatetime = need.participant_id.fromcampdate
                     need.campos_enddatetime = need.participant_id.fromcampdate
                     need.participant_id.fromcamptodestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
