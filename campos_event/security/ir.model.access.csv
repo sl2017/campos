@@ -28,3 +28,4 @@ access_campos_committee_job_title,access_campos_committee_job_title,model_campos
 access_campos_camp_area,access_campos_camp_area,model_campos_camp_area,,1,1,1,0
 access_campos_job_when,access_campos_job_when,model_campos_job_when,,1,0,0,0
 access_campos_job_when_admin,access_campos_job_when_admin,model_campos_job_when,group_campos_admin,1,1,1,1
+access_campos_event_par_api_ro,access_campos_event_par_api_ro,campos_event.model_campos_event_participant,campos_event.group_campos_api_ro,1,0,0,0

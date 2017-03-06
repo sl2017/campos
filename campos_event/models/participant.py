@@ -177,6 +177,9 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
+    participant_number = fields.Char('Participant Number')
+
+    
     @api.one
     def _compute_meeting_registration(self):
         self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
