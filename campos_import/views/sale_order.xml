@@ -26,8 +26,9 @@
                         <button name="cancel" states="draft,sent" string="Cancel Quotation" groups="base.group_user"/>
                         <button name="action_cancel" states="manual,progress" string="Cancel Order" type="object" groups="base.group_user"/>
                         <button name="invoice_cancel" states="invoice_except" string="Cancel Order" groups="base.group_user"/>
-                         -->
-                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,progress,done" statusbar_colors="{&quot;invoice_except&quot;:&quot;red&quot;,&quot;waiting_date&quot;:&quot;blue&quot;}"/>
+                        --> 
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,progress,done" statusbar_colors="{&quot;invoice_except&quot;:&quot;red&quot;,&quot;waiting_date&quot;:&quot;blue&quot;}" invisible="1"/>
+                        
                 </header>
                 <sheet>
                     <h1>
@@ -159,7 +160,7 @@
                     <field name="partner_id" string="Group"/>
                     <field name="user_id" invisible="1"/>
                     <field name="amount_total" sum="Total Tax Included"/>
-                    <field name="state"/>
+                    <field name="state" invisible="1"/>
                 </tree>
         </field>
     </record>
