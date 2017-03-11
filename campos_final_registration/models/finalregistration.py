@@ -232,7 +232,8 @@ class ParticipantCampDay(models.Model):
     '''
     One persons participation to a camp in one day
     '''
-    _name = 'campos.event.participant.day'
+    _name= 'campos.event.participant.day'
+    _description= 'Participant Camp Days'
     _order="day_id"
     participant_id = fields.Many2one('campos.event.participant', 'Participant')
     registration_id_stored = fields.Many2one(related='participant_id.registration_id', string='Registration', store=True)
@@ -251,6 +252,14 @@ class EventDay(models.Model):
                                      ('maincamp', 'Main Camp'),
                                      ('postcamp', 'Post Camp')], default='maincamp', string='Period')
     event_id = fields.Many2one('event.event', 'Event day', required=True)
+    
+    @api.multi
+    @api.depends('event_day', 'event_period')
+    def name_get(self):
+        result = []
+        for ed in self:
+            result.append((ed.id, '%s %s-%s' % (dict(self.fields_get(allfields=['event_period'])['event_period']['selection'])[ed.event_period], ed.event_date[8:], ed.event_date[5:7])))
+        return result
     
 class FinalRegistrationEvent(models.Model):
     '''
