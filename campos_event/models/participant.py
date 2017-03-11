@@ -85,10 +85,10 @@ class EventParticipant(geo_model.GeoModel):
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')  # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration', 'Registration')
-    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
+    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration', readonly=True)
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
-        'Scout Organization', related='registration_id.organization_id', store=True)
+        'Scout Organization', related='registration_id.organization_id', store=True, readonly=True)
     scout_color = fields.Char('Scout Org Color', related='registration_id.organization_id.color')
 
     # Scout Leader Fiedls
