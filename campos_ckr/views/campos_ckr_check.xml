@@ -20,7 +20,7 @@
 							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Approved" name="action_approve" states="ckr_req"
 							type="object" class="oe_highlight" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
-						<button string="Need info" name="action_needinfo" states="ckr_req,re_ckr_req"
+						<button string="Need info" name="action_needinfo" states="sentin,ckr_req,re_ckr_req"
 							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
 						<button string="Rejected" name="action_reject" states="ckr_req,approved,cancel,re_ckr_req"
 							type="object" groups="campos_ckr.group_campos_ckr_admin,base.group_no_one" />
