@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 02:00+0000\n"
-"PO-Revision-Date: 2017-03-07 02:00+0000\n"
+"POT-Creation-Date: 2017-03-11 02:00+0000\n"
+"PO-Revision-Date: 2017-03-11 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -514,6 +514,7 @@ msgstr ""
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: model:ir.model,name:campos_event.model_res_country
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
@@ -1390,6 +1391,11 @@ msgstr ""
 #. module: campos_event
 #: model:email.template,subject:campos_event.request_signupconfirm
 msgid "Velkommen til SL2017"
+msgstr ""
+
+#. module: campos_event
+#: view:res.country:campos_event.res_country_search_view
+msgid "Visa Req."
 msgstr ""
 
 #. module: campos_event
