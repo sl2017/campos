@@ -65,3 +65,16 @@ class CamposEventParticipant(models.Model):
         if not self.paybygroup:
             self.registration_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id)])
             
+    @api.multi
+    def check_all_precamp_days(self):
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'precamp'):
+                day.will_participate = True
+                
+    @api.multi
+    def check_all_postcamp_days(self):
+        for record in self:
+            record.check_camp_days()
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'postcamp'):
+                day.will_participate = True

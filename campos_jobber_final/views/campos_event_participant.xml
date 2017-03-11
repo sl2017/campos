@@ -18,20 +18,26 @@
             		</group>
             		<notebook attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
             			<page string="Camp Days">
-            				<group col="4">
+            				<group col="5">
+            				<button name="check_all_precamp_days" 
+											type="object"    
+											icon="fa-check-square-o"
+											string="Check all Pre Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
             					<button name="check_all_maincamp_days" 
 											type="object"    
 											icon="fa-check-square-o"
-											string="Check all days" class = "oe_edit_only oe_inline oe_stat_button"/>
+											string="Check all Main Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
 							 
-							<button name="check_all_first_half_days" 
-											type="object"
-											icon="fa-check-square-o"    
-											string="Sat- to Wednesday" class = "oe_edit_only oe_inline oe_stat_button"/>
+							
 							<button name="check_all_second_half_days" 
 											type="object"
 											icon="fa-check-square-o"    
 											string="Wed- to Sunday" class = "oe_edit_only oe_inline oe_stat_button"/>
+											
+							<button name="check_all_postcamp_days" 
+											type="object"    
+											icon="fa-check-square-o"
+											string="Check all Post Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
             				<button name="uncheck_all_days" 
 											type="object"    
 											icon="fa-square-o"
