@@ -2,7 +2,7 @@
 # Copyright 2016 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, exceptions, _
 
 
 class CamposJobberCanteen(models.Model):
@@ -41,6 +41,15 @@ class CamposJobberCanteen(models.Model):
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
         return super(CamposJobberCanteen, self).write(vals)
+    
+    @api.one
+    @api.constrains('date_from', 'date_to')
+    def validation_dates(self):
+        if self.date_from > self.date_to:
+            raise exceptions.ValidationError(_('From date must be before To date'))
+        if self.date_from < '2017-07-22' or self.date_to > '2017-07-30':
+            raise exceptions.ValidationError(_('Dates must be in Main Camp Period'))
+
     
     @api.multi
     def action_approve(self):

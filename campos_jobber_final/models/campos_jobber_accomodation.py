@@ -2,7 +2,7 @@
 # Copyright 2016 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, exceptions, _
 
 
 class CamposJobberAccomodation(models.Model):
@@ -34,7 +34,16 @@ class CamposJobberAccomodation(models.Model):
             result['state'] = 'approved'
 
         return result
-    
+
+    @api.one
+    @api.constrains('date_from', 'date_to')
+    def validation_dates(self):
+        if self.date_from > self.date_to:
+            raise exceptions.ValidationError(_('From date must be before To date'))
+        if self.date_from < '2017-07-22' or self.date_to > '2017-07-30':
+            raise exceptions.ValidationError(_('Dates must be in Main Camp Period'))
+
+
     @api.model
     @api.returns('self', lambda value:value.id)
     def create(self, vals):

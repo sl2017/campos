@@ -10,6 +10,7 @@
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_event.staff_event_registration_participant_form"/>
         <field name="arch" type="xml">
+        	<field name="registration_id" position="replace"/>
             <page name="agreements" position="before">
             	<page name="finalreg" string="Final signup">
             		<group>
@@ -52,7 +53,8 @@
 									<field name="date_to"/>
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
-									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																																																													 'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -66,7 +68,8 @@
 									<!-- 
 									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
 									 -->
-									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -90,13 +93,15 @@
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										<field name="paybygroup" />
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}"/>
-										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" />
-										<feild name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
+										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" context="{'search_default_organization_id': reg_organization_id,
+																																																	'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																																																	'show_organization': 1}"/>
+										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
+										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 						      		</group>
 						 </page>
-						 <page string="Children Island" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
+						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
 						 		<field name="exp_child_qu" />
 						 	</group>
@@ -104,6 +109,10 @@
             		</notebook>		
             	</page>
             </page>
+            <field name="birthdate" position="replace">
+            	<field name="birthdate" string="Fødselsdato" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"
+            		attrs="{'required': [('signup_state', 'in', ['oncamp','dayjobber'])]}"/>
+            </field>
         </field>
     </record>
 
