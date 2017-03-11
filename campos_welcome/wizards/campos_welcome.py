@@ -112,7 +112,7 @@ class CamposWelcome(models.TransientModel):
             _logger.info('EVent: %s', event_id)
             if event_id:
                 event_id = int(event_id)
-            if wizard.remote_system_id.type == 'bm':    
+            if wizard.remote_system_id.systype == 'bm':    
                 remote = self.env['campos.remote.system'].search([('host', '=', 'medlem.dds.dk')])
             else:
                 remote = wizard.remote_system_id
