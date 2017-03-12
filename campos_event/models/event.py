@@ -214,6 +214,7 @@ class EventRegistration(models.Model):
         ('cancel', 'Cancelled'),
         ('open', 'Confirmed'),
         ('done', 'Attended'),
+        ('deregistered', 'Deregistered')
     ], string='Status', default='draft', readonly=True, copy=False,
         track_visibility='onchange')
 

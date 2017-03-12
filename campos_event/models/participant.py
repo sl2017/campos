@@ -116,6 +116,7 @@ class EventParticipant(geo_model.GeoModel):
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
     state = fields.Selection([('reg', 'Registered'),
+                              ('duplicate','Duplicate' ),
                               ('draft', 'Received'),
                               ('standby', 'Standby'),
                               ('sent', 'Sent to committee'),
@@ -226,6 +227,11 @@ class EventParticipant(geo_model.GeoModel):
         if self.birthdate:
             self.birthdate_short = '%s%s%s' % (self.birthdate[8:10], self.birthdate[5:7], self.birthdate[2:4])
 
+
+    def check_duplicate(self):
+        if self.email:
+            if self.search_count([('id', '!=', self.id), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
+                self.state = 'duplicate'
     @api.model
     def create(self, vals):
         par = super(EventParticipant, self).create(vals)
@@ -236,6 +242,8 @@ class EventParticipant(geo_model.GeoModel):
                 'contact_partner_id': par.partner_id.id,
                 'econ_partner_id': par.partner_id.id, })
             # par.staff = True
+        if par.state == 'draft':
+            par.check_duplicate()
         return par
 
     @api.multi
@@ -267,6 +275,8 @@ class EventParticipant(geo_model.GeoModel):
                     template.send_mail(par.id)
                 except:
                     pass
+            if 'state' in vals and vals['state'] == 'draft':
+                par.check_duplicate()
         return ret
 
     @api.one
