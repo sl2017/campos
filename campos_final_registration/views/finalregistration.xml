@@ -340,14 +340,6 @@
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 								</page>
-								
-								<page string="Handicaped participants">
-									<group>
-										<field name="handicap" />
-										<field name="handicap_description" />
-										<field name="handicap_needs" />
-									</group>
-								</page>
 								<!-- 
 								<page string="Pioneering Poles">
 									<group>
@@ -398,7 +390,13 @@
 										</tree>
 									</field>				
 								</page>
-								
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap" readonly="1"/>
+										<field name="handicap_description" readonly="1"/>
+										<field name="handicap_needs" readonly="1"/>
+									</group>
+								</page>
 							</notebook>
 								</page>
 							</notebook>
