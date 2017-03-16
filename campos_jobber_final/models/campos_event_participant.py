@@ -4,6 +4,9 @@
 
 from openerp import api, fields, models, _
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class CamposEventParticipant(models.Model):
 
@@ -20,13 +23,17 @@ class CamposEventParticipant(models.Model):
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
     paybygroup = fields.Boolean('Pay by Scout Group')
-    payreq_state=fields.Selection([('draft', 'Draft'),
+    payreq_state=fields.Selection([('draft', 'In process'),
                                    ('cancelled', 'Cancelled'),
                                    ('approved', 'Approved'),
                                    ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
     payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
     exp_child_qu = fields.Integer("Expected number of children in 'Childrens Island'")
+    
+    ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
+    info_html = fields.Html(compute='_compute_info_html')
+    
     
     @api.multi
     def action_approve_payreq(self):
@@ -52,7 +59,23 @@ class CamposEventParticipant(models.Model):
                                        'the_date': day.event_date,
                                       }))
             self.camp_day_ids = days_ids
-    
+        if self.staff and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids and self.signup_state != 'draft' and not self.cpr:
+            self.ckr_needed = True
+            self.info_html = _('CKR Attest Needed. Please Request one')
+        else:
+            self.ckr_needed = False
+            self.info_html = False
+        
+            
+    @api.depends('staff','birthdate','ckr_ids')
+    def onchange_recalc_ckr_needed(self):
+        if self.staff and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids and self.signup_state != 'draft' and not self.cpr:
+            self.ckr_needed = True
+            self.info_html = _('CKR Attest Needed. Please Request one')
+        else:
+            self.ckr_needed = False
+            self.info_html = False
+            
     @api.onchange('registration_id')
     def onchange_registration_id(self):
         if self.registration_id.partner_id.id != self.partner_id.id:
@@ -78,3 +101,42 @@ class CamposEventParticipant(models.Model):
             record.check_camp_days()
             for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'postcamp'):
                 day.will_participate = True
+
+    @api.one
+    @api.depends('staff','birthdate','ckr_ids','signup_state')
+    def _compute_ckr_needed(self):
+        _logger.info('COMPUTE CKR NEEDED')
+        if self.staff and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids and self.signup_state != 'draft':
+            self.ckr_needed = True
+        else:
+            self.ckr_needed = False
+
+    @api.one
+    @api.depends('ckr_needed')
+    def _compute_info_html(self):
+        if self.ckr_needed:
+            self.info_html = _('CKR Attest Needed. Please Request one')
+        else:
+            self.info_html = False
+            
+    @api.multi
+    def action_top_request_ckr(self):
+        return self.action_request_own_ckr()
+    
+    @api.multi
+    def write(self, vals):
+        res = super(CamposEventParticipant, self).write(vals)
+        for cep in self:
+            if cep.ckr_needed:
+                ckr_id = self.env['campos.ckr.check'].suspend_security().create({'state': 'draft',
+                                                                         'participant_id': cep.id,
+                                                                        })
+                if cep.partner_id.user_ids:
+                    self.suspend_security().partner_id.user_ids[0].action_id = self.env.ref('campos_ckr.campos_ckr_fetch_wiz_act_window').id
+                    template = self.env.ref('campos_ckr.template_ckr_request_mail')
+                    assert template._name == 'email.template'
+                    try:
+                        template.sendmail(cep.id)
+                    except:
+                        pass
+        return res
