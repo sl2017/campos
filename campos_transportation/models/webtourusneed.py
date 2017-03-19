@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, tools
 from ..interface import webtourinterface
 
 import logging
@@ -228,3 +228,53 @@ class WebtourTripTypeDate(models.Model):
     campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
     name = fields.Date('Date', required=True) 
     date = fields.Date('Date', required=True) 
+    
+class WebtourNeedOverview(models.Model):
+    _name = 'campos.webtourusneed.overview'
+    _auto = False
+    _log_access = False
+
+    registration_id = fields.Many2one('event.registration','Registration ID')
+    webtour_groupidno = fields.Char('Webtour us Group ID no')
+    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour Trip Type')    
+    campos_startdatetime = fields.Char('CampOs StartDateTime')
+    campos_startdestinationidno = fields.Char('CampOs Start Destination IdNo')
+    campos_enddestinationidno = fields.Char('CampOs End Destination IdNo')    
+    pax = fields.Integer('CampOS PAX')
+        
+    excessdemand = fields.Integer('Excess demand in WEBTour')
+    nottransfered = fields.Integer('Needs Not transfered to WEBTour')
+    notdeleted = fields.Integer('Needs Not Deleted in WEBTour')
+    startdestdiffer = fields.Integer('Needs where start destination differ')    
+    enddestdiffer = fields.Integer('Needs where end destination differ')   
+    startdatetimediffer = fields.Integer('Needs where startdatetime differ')
+    enddatetimediffer = fields.Integer('Needs where end datetime differ')
+    startnotediffer = fields.Integer('Needs where start note differ')    
+    endnotediffer = fields.Integer('Needs where end note differ')
+     
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_overview as
+                    SELECT min(campos_webtourusneed.id) as id, event_registration.id as registration_id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
+                    , count(campos_webtourusneed.id) as pax
+                    , sum(case when campos_demandneeded then 0 else 1 end) as excessdemand 
+                    , sum(case when campos_transfered then 0 else 1 end) as nottransfered
+                    , sum(case when campos_deleted and not webtour_deleted then 1 else 0 end) as notdeleted
+                    , sum(case when webtour_startdestinationidno = campos_startdestinationidno then 0 else 1 end) as startdestdiffer
+                    , sum(case when webtour_enddestinationidno = campos_enddestinationidno then 0 else 1 end) as enddestdiffer
+                    , sum(case when campos_startdatetime::timestamp = webtour_startdatetime::timestamp then 0 else 1 end) as startdatetimediffer
+                    , sum(case when campos_enddatetime::timestamp = webtour_enddatetime::timestamp then 0 else 1 end) as enddatetimediffer
+                    , sum(case when (case when campos_startnote isnull then '' else campos_startnote end) = (case when webtour_startnote isnull then '' else webtour_startnote end) then 0 else 1 end) as startnotediffer
+                    , sum(case when (case when campos_endnote isnull then '' else campos_endnote end) = (case when webtour_endnote isnull then '' else webtour_endnote end) then 0 else 1 end) as endnotediffer
+                    FROM campos_webtourusneed
+                    left outer join event_registration on webtourusgroupidno = webtour_groupidno
+                    where campos_demandneeded or (not webtour_deleted and webtour_needidno::INT4>0)
+                    group by                
+                    event_registration.id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp
+                    ,campos_startdestinationidno
+                    ,campos_enddestinationidno
+                    """
+                    )
+    
