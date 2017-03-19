@@ -128,8 +128,20 @@
             	<field name="birthdate" string="Fødselsdato" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"
             		attrs="{'required': [('signup_state', 'in', ['oncamp','dayjobber'])]}"/>
             	<field name="ckr_needed" invisible="0"/>
-            	
             </field>
+            <field name="country_id" position="replace">
+            	<field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}" required="1"/>
+            </field>
+            <field name="street" position="replace">
+            		<field name="street" placeholder="Street..." attrs="{'readonly': [('use_parent_address','=',True)], 'required': ['|',('transport_to_camp','=', True),('transport_from_camp','=', True)]}"/>
+			</field>
+			<field name="zip" position="replace">
+                    <field name="zip" placeholder="ZIP" style="width: 27%" attrs="{'readonly': [('use_parent_address','=',True)], 'required': ['|',('transport_to_camp','=', True),('transport_from_camp','=', True)]}"/>
+            </field>
+            <field name="city" position="replace">
+                     <field name="city" placeholder="City" style="width: 70%" attrs="{'readonly': [('use_parent_address','=',True)], 'required': ['|',('transport_to_camp','=', True),('transport_from_camp','=', True)]}"/>
+            </field>
+            
         </field>
     </record>
 
