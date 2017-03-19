@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 13:50+0000\n"
-"PO-Revision-Date: 2017-02-24 13:50+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2017-03-19 12:50+0000\n"
+"PO-Revision-Date: 2017-03-19 13:13+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -406,7 +406,7 @@ msgid "Approval Procedure"
 msgstr "Godkendelsesprocedure"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:383
+#: code:addons/campos_event/models/participant.py:396
 #, python-format
 msgid "Approval of %s"
 msgstr "Approval of %s"
@@ -785,8 +785,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:330
-#: code:addons/campos_event/models/participant.py:357
+#: code:addons/campos_event/models/participant.py:343
+#: code:addons/campos_event/models/participant.py:370
 #, python-format
 msgid "Compose Email"
 msgstr "Compose Email"
@@ -889,6 +889,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,country_id:0
 #: field:campos.scout.org,country_id:0 field:event.registration,country_id:0
+#: model:ir.model,name:campos_event.model_res_country
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
@@ -1083,6 +1084,11 @@ msgstr "Division/distrikt"
 #: selection:campos.staff.del.prod,state:0
 msgid "Draft"
 msgstr "Kladde"
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Duplicate"
+msgstr "Dublet"
 
 #. module: campos_event
 #: field:campos.event.participant,ean13:0
@@ -1610,7 +1616,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,lang:0
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
@@ -2035,7 +2041,7 @@ msgid "Paricipant"
 msgstr "Deltager"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:525
+#: code:addons/campos_event/models/participant.py:538
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2045,6 +2051,11 @@ msgstr "Deltager"
 #, python-format
 msgid "Participant"
 msgstr "Deltager"
+
+#. module: campos_event
+#: field:campos.event.participant,participant_number:0
+msgid "Participant Number"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -2301,7 +2312,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:405
+#: code:addons/campos_event/models/participant.py:418
 #, python-format
 msgid "Reject %s"
 msgstr "Reject %s"
@@ -2507,7 +2518,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:302
+#: code:addons/campos_event/models/participant.py:315
 #, python-format
 msgid "Set to standby: %s"
 msgstr "Set to standby: %s"
@@ -3051,6 +3062,16 @@ msgid "Velkommen til SL2017"
 msgstr "Velkommen til SL2017"
 
 #. module: campos_event
+#: view:res.country:campos_event.res_country_search_view
+msgid "Visa Req."
+msgstr ""
+
+#. module: campos_event
+#: field:res.country,visa_req:0
+msgid "Visa required"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,website_published:0
 msgid "Visible in Website"
 msgstr "Synlige på web"
@@ -3100,6 +3121,11 @@ msgstr "Ønsked antal i udvalg"
 #: view:website:campos_event.event_meeting_proposal
 msgid "Wanted people"
 msgstr "Ønsker at mødes med navn(e), funktion, udvalg (hvis mere end et)"
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_api_ro
+msgid "Web service ReadOnly"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,website:0

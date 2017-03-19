@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 02:00+0000\n"
-"PO-Revision-Date: 2017-02-25 02:00+0000\n"
+"POT-Creation-Date: 2017-03-19 12:50+0000\n"
+"PO-Revision-Date: 2017-03-19 12:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: campos_sms
+#: code:addons/campos_sms/models/organization.py:57
+#, python-format
+msgid "%s (Remaining SMS budget: %.2f)"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "A code has been sent to your mobile phone by SMS. Please enter the code from the SMS:"
+msgstr ""
+
+#. module: campos_sms
+#: sql_constraint:sms.confirmed_number:0
+msgid "A confirmation for this user/number has already been created"
 msgstr ""
 
 #. module: campos_sms
@@ -26,8 +37,30 @@ msgid "A limit of zero will disable SMS sending."
 msgstr ""
 
 #. module: campos_sms
+#: field:campos.committee,user_sms_ids:0
+msgid "Allowed to send SMS"
+msgstr ""
+
+#. module: campos_sms
+#: field:res.users,comm_sms_ids:0
+msgid "Allowed to send SMS for"
+msgstr ""
+
+#. module: campos_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Amount surcharge"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "An SMS with a confirm code will be sent to your mobile phone."
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/smsclient.py:79
+#, python-format
+msgid "An error occured. No paying organization set when sending SMS."
 msgstr ""
 
 #. module: campos_sms
@@ -62,8 +95,33 @@ msgid "Confirm"
 msgstr ""
 
 #. module: campos_sms
+#: field:part.sms,confirm_tries:0
+#: field:sms.confirmed_number,confirm_tries:0
+msgid "Confirm Tries left"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,confirm_code:0
+#: field:sms.confirmed_number,confirm_code:0
+msgid "Confirm code"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:187
+#: code:addons/campos_sms/models/mass_sms.py:199
+#: code:addons/campos_sms/models/mass_sms.py:214
+#, python-format
+msgid "Confirm mobile number"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "Confirm number"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,confirm_price:0
+msgid "Confirm price"
 msgstr ""
 
 #. module: campos_sms
@@ -73,9 +131,41 @@ msgid "Confirm sender"
 msgstr ""
 
 #. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:32
+#: selection:sms.confirmed_number,state:0
+#, python-format
+msgid "Confirmed"
+msgstr ""
+
+#. module: campos_sms
 #: model:ir.actions.act_window,name:campos_sms.action_sms_confirmed_numbers
 #: model:ir.ui.menu,name:campos_sms.menu_sms_confirmed_numbers
 msgid "Confirmed numbers"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,sender_id:0
+msgid "Confirmed sender numbers"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.master,cost_price:0
+#: field:sms.smsclient.queue,cost_price:0
+msgid "Cost price"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,create_uid:0
+#: field:sms.confirmed_number,create_uid:0
+#: field:sms.master,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,create_date:0
+#: field:sms.confirmed_number,create_date:0
+#: field:sms.master,create_date:0
+msgid "Created on"
 msgstr ""
 
 #. module: campos_sms
@@ -84,8 +174,45 @@ msgid "Demo mode"
 msgstr ""
 
 #. module: campos_sms
+#: field:sms.config.settings,display_name:0
+#: field:sms.confirmed_number,display_name:0
+#: field:sms.master,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_sms
 #: view:sms.confirmed_number:campos_sms.view_sms_confirmed_number_form
 msgid "Do you want to send a confirm SMS? (The organization will be charged for one SMS)"
+msgstr ""
+
+#. module: campos_sms
+#: selection:sms.confirmed_number,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: campos_sms
+#: field:campos.committee,edit_sms_max_monthly_cost:0
+msgid "Edit sms max monthly cost"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:84
+#: code:addons/campos_sms/models/sms_confirmed_number.py:85
+#, python-format
+msgid "Enter this code to confirm your mobile number: %s"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/smsclient.py:131
+#: code:addons/campos_sms/models/smsclient.py:134
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: campos_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Fixed sell price"
 msgstr ""
 
 #. module: campos_sms
@@ -104,13 +231,93 @@ msgid "Group By"
 msgstr ""
 
 #. module: campos_sms
+#: help:sms.smsclient.queue,parts:0
+msgid "How many parts the SMS is split into"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,id:0
+#: field:sms.confirmed_number,id:0
+#: field:sms.master,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "If you need a new confirm code, you can request it by clicking this button:"
 msgstr ""
 
 #. module: campos_sms
+#: field:sms.master,sms_queue_ids:0
+msgid "Individual messages"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,international_price_adjust:0
+msgid "International adjustment"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,international_cost_price:0
+msgid "International cost price"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,international_price_adjust_method:0
+msgid "International price adjust method"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,international_sell_price:0
+msgid "International sell price"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,__last_update:0
+#: field:sms.confirmed_number,__last_update:0
+#: field:sms.master,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_sms
+#: field:res.users,sms_last_sender:0
+msgid "Last SMS sender number"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,write_uid:0
+#: field:sms.confirmed_number,write_uid:0
+#: field:sms.master,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,write_date:0
+#: field:sms.confirmed_number,write_date:0
+#: field:sms.master,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_sms
 #: model:ir.model,name:campos_sms.model_sms_master
+#: field:sms.smsclient.queue,sms_master_id:0
 msgid "Master SMS"
+msgstr ""
+
+#. module: campos_sms
+#: field:campos.committee,sms_max_monthly_cost:0
+msgid "Max monthly SMS cost"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.master,msg:0
+msgid "Message"
+msgstr ""
+
+#. module: campos_sms
+#: field:res.partner,mobile_clean:0
+#: field:res.users,mobile_clean:0
+msgid "Mobile clean"
 msgstr ""
 
 #. module: campos_sms
@@ -124,7 +331,62 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_sms
+#: field:sms.config.settings,national_price_adjust:0
+msgid "National adjustment"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,national_cost_price:0
+msgid "National cost price"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,national_prefix:0
+msgid "National prefix"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,national_price_adjust_method:0
+msgid "National price adjust method"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.config.settings,national_sell_price:0
+msgid "National sell price"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:234
+#, python-format
+msgid "No Gateway Found"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:32
+#, python-format
+msgid "Not confirmed"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.confirmed_number,number:0
+msgid "Number"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,sender_state:0
+msgid "Number state"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_config_settings.py:62
+#, python-format
+msgid "Only administrator may change these settings"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.master,organization_id:0
 #: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
+#: field:sms.smsclient.queue,organization_id:0
 msgid "Organization"
 msgstr ""
 
@@ -140,8 +402,55 @@ msgid "Partner"
 msgstr ""
 
 #. module: campos_sms
+#: field:sms.smsclient.queue,parts:0
+msgid "Parts"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,organization_id:0
+msgid "Paying Committee"
+msgstr ""
+
+#. module: campos_sms
+#: selection:sms.config.settings,international_price_adjust_method:0
+#: selection:sms.config.settings,national_price_adjust_method:0
+msgid "Percent surcharge"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:230
+#, python-format
+msgid "Please enter a text to send"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:92
+#, python-format
+msgid "Please enter the verification code that was send to your phone by SMS."
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.master,sell_price:0
+#: field:sms.smsclient.queue,sell_price:0
+msgid "Price"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
+#: field:part.sms,receiver_ids:0
+#: field:sms.master,receivers_count:0
 msgid "Receivers"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,receivers_foreign_count:0
+msgid "Receivers with a foreign mobile number"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:75
+#, python-format
+msgid "SL2017"
 msgstr ""
 
 #. module: campos_sms
@@ -179,6 +488,16 @@ msgid "SMS Settings"
 msgstr ""
 
 #. module: campos_sms
+#: field:part.sms,sms_allowed:0
+msgid "SMS allowed"
+msgstr ""
+
+#. module: campos_sms
+#: field:campos.committee,sms_amount_current_month:0
+msgid "SMS amount current month"
+msgstr ""
+
+#. module: campos_sms
 #: model:res.groups,name:campos_sms.group_sgsms_organization_admin
 msgid "SMS organization admin"
 msgstr ""
@@ -194,9 +513,13 @@ msgid "SMS text"
 msgstr ""
 
 #. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:86
+#: code:addons/campos_sms/models/mass_sms.py:150
+#: code:addons/campos_sms/models/mass_sms.py:169
 #: model:ir.actions.act_window,name:campos_sms.action_function_sms
 #: model:ir.actions.act_window,name:campos_sms.action_participant_sms
 #: view:part.sms:campos_sms.view_part_sms
+#, python-format
 msgid "Send SMS"
 msgstr ""
 
@@ -216,8 +539,48 @@ msgid "Send confirm code"
 msgstr ""
 
 #. module: campos_sms
+#: field:part.sms,sender_text:0
+#: field:sms.master,sender_text:0
+#: field:sms.smsclient.queue,sender_text:0
+msgid "Sender"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,sender_is_number:0
+msgid "Sender is number"
+msgstr ""
+
+#. module: campos_sms
 #: view:sms.smsclient.queue:campos_sms.view_smsclient_queue_search
 msgid "Sent"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.confirmed_number,state:0
+msgid "State"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/smsclient.py:99
+#, python-format
+msgid "The SMS could not be sent because it would exceed the SMS budget for %s."
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:105
+#, python-format
+msgid "The code was not entered correct. Please note that the code contains only letters (no digits)."
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:97
+#, python-format
+msgid "The confirmation code has expired, because you have tried more than %d times. You may request a new code and try again."
+msgstr ""
+
+#. module: campos_sms
+#: help:campos.committee,sms_max_monthly_cost:0
+msgid "The maximum total amount that all users can spend sending SMS in this organization"
 msgstr ""
 
 #. module: campos_sms
@@ -236,8 +599,34 @@ msgid "This database does not allow SMS sending. All created messages will autom
 msgstr ""
 
 #. module: campos_sms
+#: field:part.sms,total_price:0
+msgid "Total price"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "Total price:"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,receivers_count:0
+msgid "Total receivers with a valid mobile number"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_config_settings.py:30
+#, python-format
+msgid "Unknown price adjustment method: %s"
+msgstr ""
+
+#. module: campos_sms
+#: field:sms.confirmed_number,user_id:0
+msgid "User"
+msgstr ""
+
+#. module: campos_sms
+#: field:part.sms,user_has_confirmed_numbers:0
+msgid "User has confirmed numbers"
 msgstr ""
 
 #. module: campos_sms
@@ -246,8 +635,37 @@ msgid "Users"
 msgstr ""
 
 #. module: campos_sms
+#: selection:sms.confirmed_number,state:0
+msgid "Waiting"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:131
+#, python-format
+msgid "When sender is a text string, it cannot be more than %d chars."
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/mass_sms.py:137
+#, python-format
+msgid "You are not allowed to send SMSs charged to %s"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/smsclient.py:81
+#, python-format
+msgid "You do not have access to send SMS for %s"
+msgstr ""
+
+#. module: campos_sms
 #: view:part.sms:campos_sms.view_part_sms
 msgid "You have"
+msgstr ""
+
+#. module: campos_sms
+#: code:addons/campos_sms/models/sms_confirmed_number.py:72
+#, python-format
+msgid "You have already confirmed the number %s"
 msgstr ""
 
 #. module: campos_sms
