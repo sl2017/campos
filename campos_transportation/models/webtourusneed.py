@@ -42,7 +42,7 @@ class WebtourUsNeed(models.Model):
     
     @api.one
     def get_create_webtour_need(self):
-        
+                
         def get_tag_data(nodetag):
             try:
                 tag_data = response_doc.getElementsByTagName(nodetag)[0].firstChild.data
@@ -68,8 +68,10 @@ class WebtourUsNeed(models.Model):
             
         if self.campos_enddatetime == False:
             self.campos_enddatetime = self.campos_startdatetime
+            
         
         if  self.webtour_groupidno == False or self.webtour_useridno == False or self.campos_startdestinationidno == False or self.campos_startdatetime == False or self.campos_enddestinationidno == False or self.campos_enddatetime == False:
+            _logger.info("get_create_usneed_tron: Info missing %s %s %s %s %s %s", self.webtour_useridno,self.webtour_groupidno,self.campos_startdestinationidno,self.campos_startdatetime,self.campos_enddestinationidno,self.campos_enddatetime)
             return True
                
         if (self.webtour_needidno == False or self.webtour_needidno == "0"):
@@ -82,7 +84,7 @@ class WebtourUsNeed(models.Model):
                 request=request+"&EndDestinationIDno="+self.campos_enddestinationidno
                 request=request+"&EndDateTime="+self.campos_enddatetime
                 request=request+"&EndNote="+self.campos_endnote
-                response_doc=webtourinterface.usneed_create(request)
+                response_doc=webtourinterface.usneed_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
         else :
             if self.campos_transferedseq <> self.campos_writeseq :
                 request="NeedIDno="+self.webtour_needidno
@@ -92,9 +94,9 @@ class WebtourUsNeed(models.Model):
                 request=request+"&EndDestinationIDno="+self.campos_enddestinationidno
                 request=request+"&EndDateTime="+self.campos_enddatetime
                 request=request+"&EndNote="+self.campos_endnote
-                response_doc=webtourinterface.usneed_update(request)    
+                response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)    
             else:
-                response_doc=webtourinterface.usneed_getbyidno(self.webtour_needidno)        
+                response_doc=webtourinterface.usneed_getbyidno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)        
         Ok = True     
         idno = get_tag_data("a:IDno")
               
@@ -112,7 +114,7 @@ class WebtourUsNeed(models.Model):
         else: 
             if get_tag_data("a:Description") == "Need already exist" :
                 _logger.info("get_create_usneed_tron: Ohh Need already exist")
-                response_doc=webtourinterface.usneed_GetByGroupIDno(self.webtour_groupidno)
+                response_doc=webtourinterface.usneed_GetByGroupIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_groupidno)
                 usNeeds=response_doc.getElementsByTagName('a:usNeed')
                 for node in usNeeds:
                     try:
@@ -136,20 +138,30 @@ class WebtourUsNeed(models.Model):
                         Ok = False                    
             else:
                 self.campos_transferedseq = ""
-            
+                
+        self.env.cr.commit()    
         return True
 
     @api.model
     def get_create_usneed_tron(self):
+        MAX_LOOPS_usNeed = 1000  #Max No of Needs pr Scheduled call
         
         # find usneeds not beeing transfered
         rs_needs= self.env['campos.webtourusneed'].search([('campos_transfered', '=', False),('campos_demandneeded', '=', True)])
 
         _logger.info("get_create_usneed_tron: Here we go... %i usNeeds to update in Webtour", len(rs_needs))
         
+        loops=0
         for need in rs_needs:
-            need.get_create_webtour_need()
-
+            
+            if  need.webtour_groupidno == False or need.webtour_useridno == False or need.campos_startdestinationidno == False or need.campos_startdatetime == False or need.campos_enddestinationidno == False or need.campos_enddatetime == False:
+                _logger.info("get_create_usneed_tron: Info missing %s %s %s %s %s %s", need.webtour_useridno,need.webtour_groupidno,need.campos_startdestinationidno,need.campos_startdatetime,need.campos_enddestinationidno,need.campos_enddatetime)
+            else:
+                need.get_create_webtour_need()
+                loops = loops + 1
+            
+            if loops > MAX_LOOPS_usNeed:
+                break
     
     @api.multi
     def updatewebtourtofromusneeds(self):
@@ -206,6 +218,13 @@ class WebtourUsNeed(models.Model):
 class WebtourTripType(models.Model):
     _description = 'Webtour Trip Types'
     _name = 'campos.webtourusneed.triptype'
-    
+   
     name = fields.Char('Webtour Trip Type', required=True)
-    
+    traveldate_ids = fields.One2many('campos.webtourusneed.triptype.date','campos_TripType_id','Travel Days')
+
+class WebtourTripTypeDate(models.Model):
+    _description = 'Webtour Trip Types Date'
+    _name = 'campos.webtourusneed.triptype.date'
+    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
+    name = fields.Date('Date', required=True) 
+    date = fields.Date('Date', required=True) 

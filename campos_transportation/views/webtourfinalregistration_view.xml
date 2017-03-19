@@ -14,6 +14,14 @@
 						<field name="webtourdefaulthomedestination_name" />
 						<field name="webtourgrouptocampdestination_id" options="{'no_create': True, 'no_open': True}"/>
 						<field name="webtourgroupfromcampdestination_id" options="{'no_create': True, 'no_open': True}"/>
+						<field colspan="2" name="webtourtravelneed_ids" widget="one2many_list" nolabel="0" string="Travel needs">
+							<tree editable="bottom">
+								<field name="name"/>
+								<field name="campos_TripType_id" string="Travel"/>
+								<field name="traveldate_id" options="{'no_create': True, 'no_open': True}"/>
+								<field name="deadline" string="Deadline"/> 
+							</tree>
+						</field>
 						</group>
            			</page>
         		</xpath>

@@ -103,11 +103,12 @@ class WebtourParticipant(models.Model):
   
     @api.model
     def get_create_usgroupidno_tron(self):
-        
+        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
-        rs_missingusGroupIDno= self.env['campos.event.participant'].search([('registration_id.event_id', '=', 1),('webtourusgroupidno', '=', False)
+        rs_missingusGroupIDno= self.env['campos.event.participant'].search([('registration_id.event_id', '=', 1),('webtourusgroupidno', '=', False),('registration_id.scoutgroup', '=', True)
                                                                             ,'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
         # make at list of distinct Registrationid missing
         missingRegistrationidlist=[]
@@ -120,7 +121,7 @@ class WebtourParticipant(models.Model):
         #_logger.info("get_create_usgroupidno_tron: %s usGroupIDno's missing ",missingRegistrationidlist)
              
         #Get all usGroupIDno's from webtour and conver to a simple list
-        response_doc=webtourinterface.usgroup_getall()
+        response_doc=webtourinterface.usgroup_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
         usgroups = response_doc.getElementsByTagName("a:IDno")
         usgrouplist=[]
 
@@ -134,10 +135,11 @@ class WebtourParticipant(models.Model):
         _logger.info("get_create_usgroupidno_tron: %d (%d) usGroupIDno's missing. Got %d usGroupIDno's from Webtour",len(missingRegistrationidlist),len(rs_missingusgroupidno),len(usgrouplist))    
         
         # for each registation check usgroupidno name and create if missing
+        g = 0
         for rec in rs_missingusgroupidno:
-            newidno=webtourinterface.usgroup_getbyname(str(rec.id))
+            newidno=webtourinterface.usgroup_getbyname(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
             if newidno == "0":
-                newidno=webtourinterface.usgroup_create(str(rec.id))
+                # xx newidno=webtourinterface.usgroup_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
                 if newidno != "0": #remember also this usgroupidno
                     usgrouplist.append
                 
@@ -146,17 +148,25 @@ class WebtourParticipant(models.Model):
             if newidno <> "0": #Update registration
                 dicto = {}
                 dicto["webtourusgroupidno"] = newidno
-                rec.write(dicto) 
+                rec.write(dicto)
+                 
+            rec.env.cr.commit()                 
+            
+            g = g +1
+            if g > MAX_LOOPS_usGroup:
+                break
 
+               
         # find participants missing usUserIDno, from Registration having a usGroupIDno
         rs_missingususeridno= self.env['campos.event.participant'].search([('webtourususeridno', '=', False),('webtourusgroupidno', 'in', usgrouplist)
                                                                           ,'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
         
         # for each participant check ususeridno name and create if missing
+        g=0
         for rec in rs_missingususeridno:
-            newidno=webtourinterface.ususer_getbyexternalid(str(rec.id))
+            newidno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
             if newidno == "0":
-                newidno=webtourinterface.ususer_create(str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
+                newidno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
             
             _logger.info("get_create_usgroupidno_tron User: %s %s %s %s %s",str(rec.id), rec.name, rec.webtourusgroupidno, rec.webtourususeridno,newidno)
             
@@ -164,7 +174,13 @@ class WebtourParticipant(models.Model):
                 dicto = {}
                 dicto["webtourususeridno"] = newidno
                 rec.write(dicto)
-              
+                
+            rec.env.cr.commit()               
+            
+            g = g +1
+            if g > MAX_LOOPS_usUser:
+                break
+            
         self.env['campos.webtourusneed'].get_create_usneed_tron()        
 
         return True
@@ -254,7 +270,7 @@ class WebtourParticipant(models.Model):
     
 class WebtourParticipantCampDay(models.Model):
     '''
-    One persons participation to a camp in one day Webtour  datetime.strptime(tmp,'%Y-%m-%d %H:%M:%S')
+    One persons participation to a camp in one day Webtour
     '''
     _inherit = 'campos.event.participant.day'
     webtourcamptransportation = fields.Char('Camp transportation',compute='_compute_webtourcamptransportation')

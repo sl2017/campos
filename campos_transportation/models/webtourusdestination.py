@@ -5,7 +5,7 @@ from ..interface import webtourinterface
 class WebtourUsDestination(models.Model):
     _name = 'campos.webtourusdestination'
     destinationidno = fields.Char('Destination ID', required=True)
-    name = fields.Char(compute='_compute_name', string='Name')
+    name = fields.Char(compute='_compute_name', string='Name', store=True)
     webtourname = fields.Char('WebTour Name', required=False)
     placename = fields.Char('Place', required=False)
     address = fields.Char('Address', required=False)
@@ -47,7 +47,7 @@ class WebtourUsDestination(models.Model):
 
         webtourusdestination_obj = self.env['campos.webtourusdestination']
 
-        response_doc=webtourinterface.usdestinations_getall()
+        response_doc=webtourinterface.usdestinations_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
 
         destinations = response_doc.getElementsByTagName("a:usDestination")
 

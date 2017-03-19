@@ -6,8 +6,6 @@ import sys
 
 cookie = None
 
-_url = "https://services.techhouse.dk/webTourManager/1.3/SL2017.svc/rest/xml/"
-
 def is_authenticated(doc):
 
     access_xml = doc.getElementsByTagName("Access")[0]
@@ -20,9 +18,10 @@ def is_authenticated(doc):
 
     return authenticated.firstChild.data == "true"
 
-def login():
+def login(_url,_key):
     global cookie
-    login_url = _url + "Login?OwnerIDno=107&Alias=testonly&AuthKey=F3ACDD1A-046D-42D7-A3B8-8A20488AA016"
+
+    login_url = _url + _key
 
     response = requests.get(login_url,data=None)
 
@@ -33,7 +32,7 @@ def login():
     if authenticated.firstChild.data == "true":
         cookie = response.cookies
 
-def usgroup_getall():
+def usgroup_getall(_url,_key):
     global cookie
 
     def do_usgroup_getall():
@@ -53,11 +52,11 @@ def usgroup_getall():
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc
 
-def usgroup_getbyname(groupname):
+def usgroup_getbyname(_url,_key,groupname):
     global cookie
 
     def do_usgroup_getbyname():
@@ -77,14 +76,14 @@ def usgroup_getbyname(groupname):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
         return idno.firstChild.data
 
-def usgroup_create(groupname):
+def usgroup_create(_url,_key,groupname):
     global cookie
 
     def do_usgroup_create():
@@ -104,14 +103,14 @@ def usgroup_create(groupname):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
         return idno.firstChild.data
 
-def ususer_getbygroupidno(groupidno):
+def ususer_getbygroupidno(_url,_key,groupidno):
     global cookie
 
     def do_ususer__getbygroupidno():
@@ -131,13 +130,13 @@ def ususer_getbygroupidno(groupidno):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     if cookie is not None:
             return doc
 
-def ususer_getbygroupidnoList(groupidno):
-    response_doc=ususer_getbygroupidno(groupidno)
+def ususer_getbygroupidnoList(_url,_key,groupidno):
+    response_doc=ususer_getbygroupidno(_url,_key,groupidno)
     qty = response_doc.getElementsByTagName("Total")[0].firstChild.data
     ususerlist=[]
     if qty <> '0':
@@ -148,7 +147,7 @@ def ususer_getbygroupidnoList(groupidno):
     
     return ususerlist
 
-def ususer_getbyexternalid(externalid):
+def ususer_getbyexternalid(_url,_key,externalid):
     global cookie
 
     def do_ususer_getbyexternalid():
@@ -168,14 +167,14 @@ def ususer_getbyexternalid(externalid):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
         return idno.firstChild.data
 
-def ususer_create(externalid, groupidno, firstname, lastname):
+def ususer_create(_url,_key,externalid, groupidno, firstname, lastname):
     global cookie
 
     def do_ususer_create():
@@ -195,14 +194,14 @@ def ususer_create(externalid, groupidno, firstname, lastname):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
         return idno.firstChild.data
 
-def usneed_create(request):
+def usneed_create(_url,_key,request):
     global cookie
 
     def do_usneed_create():
@@ -222,11 +221,11 @@ def usneed_create(request):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc
 
-def usneed_getbyidno(request):
+def usneed_getbyidno(_url,_key,request):
     global cookie
 
     def do_usneed_getbyidno():
@@ -246,11 +245,11 @@ def usneed_getbyidno(request):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc
 
-def usneed_GetByGroupIDno(request):
+def usneed_GetByGroupIDno(_url,_key,request):
     global cookie
 
     def do_usneed_getbygroupidno():
@@ -270,11 +269,11 @@ def usneed_GetByGroupIDno(request):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc
 
-def usneed_update(request):
+def usneed_update(_url,_key,request):
     global cookie
 
     def do_usneed_update():
@@ -294,11 +293,11 @@ def usneed_update(request):
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc
 
-def usdestinations_getall():
+def usdestinations_getall(_url,_key):
     global cookie
 
     def do_usdestinations_getall():
@@ -318,6 +317,6 @@ def usdestinations_getall():
         if is_authenticated(doc):
             repeat_read = False
         else:
-            login()
+            login(_url,_key)
 
     return doc

@@ -32,9 +32,9 @@ class WebtourUsUser(models.Model):
         get_create_useridno(self, cr, uid, context)
 
     def get_create_useridno(self, cr, uid, context=None):
-        ususeridno=webtourinterface.ususer_getbyexternalid(self.participant_id)
+        ususeridno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.participant_id)
         if ususeridno == "0":
-            ususeridno=webtourinterface.ususer_create(self.participant_id, self.usgroupidno, self.participant_id, self.troop_id)
+            ususeridno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.participant_id, self.usgroupidno, self.participant_id, self.troop_id)
         if self.ususeridno != ususeridno:
             self.write({'ususeridno': ususeridno})
         return True

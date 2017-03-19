@@ -26,8 +26,9 @@ class WebtourRegistration(models.Model):
     webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
+    jdatemp1 = fields.Boolean('jdatemp1')
+    webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
 
-    
     @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
@@ -188,7 +189,89 @@ class WebtourRegistration(models.Model):
             n= n+1
             if n> 30: 
                 break
-                
+    
+    @api.one
+    def seteventdaysRegPaticipantsAll(self):
+        #regs = self.env['event.registration'].search([('event_id', '=', 1),('partner_id', '<>', False),('jdatemp1','=',True)])
+        #for reg in regs:
+        #    reg.jdatemp1=False
+                                
+        regs = self.env['event.registration'].search([('event_id', '=', 1),('partner_id', '<>', False),('jdatemp1','=',False),('partner_id.scoutgroup', '=', True)])
+        _logger.info("seteventdaysRegPaticipantsAll Stil to go %s", len(regs))
+        n = 0 
+        for reg in regs:
+            _logger.info("seteventdaysRegPaticipantsAll Here we go %s", reg.name)
+            reg.seteventdaysRegPaticipants()
+            reg.jdatemp1=True
+            n= n+1
+            if n> 4000:
+                break
+ 
+    @api.one
+    def seteventdaysRegPaticipants(self):
+        _logger.info("seteventdaysRegPaticipant %s %s", self.name, len(self.participant_ids)) 
 
+        for par in self.participant_ids:
+            par.check_camp_days()
+            for day in par.camp_day_ids:
+                day.will_participate = False
+                     
+        for age_group in self.prereg_participant_ids:
+            _logger.info("seteventdaysRegPaticipant in agegroup: %s",age_group.participant_age_group_id.name)
 
+            for i in range(0,age_group.participant_total):
+                found = False
+                s= age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i)
+                _logger.info("seteventdaysRegPaticipant in agegroup %s, %s, %s",str(i),s,age_group.participant_from_date)
+
+                for p in self.participant_ids.search([('partner_id.name','=',age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i))]):                 
+                    if p.dates_summery == False and found == False:
+                        for day in p.camp_day_ids:
+                            if day.the_date >= age_group.participant_from_date and day.the_date <= age_group.participant_to_date:
+                                day.will_participate = True
+                        _logger.info("seteventdaysRegPaticipant in agegroup TRANSPORT %s, %s, %s",str(i),age_group.participant_own_transport_to_camp_total,age_group.participant_own_transport_from_camp_total )                   
+                        p.transport_to_camp = i > age_group.participant_own_transport_to_camp_total
+                        p.transport_from_camp = i > age_group.participant_own_transport_from_camp_total        
+                        found = True
                     
+                    if found:
+                        break            
+ 
+
+
+class WebtourRegistrationTravelNeed(models.Model):
+    '''
+    Special Travel need on a registration
+    '''
+    _description = 'Special Travel need on a registration'
+    _name='event.registration.travelneed'
+    registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
+    name = fields.Char('Name', required=True)
+    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
+    traveldate_id = fields.Many2one('campos.webtourusneed.triptype.date','Date', required=True,  domain="[('campos_TripType_id','=',campos_TripType_id)]")
+    deadline = fields.Selection([    ('Select', 'Please Select'),
+                                     ('00:00', '00:00'),
+                                     ('01:00', '01:00'),
+                                     ('02:00', '02:00'),
+                                     ('03:00', '03:00'),
+                                     ('04:00', '04:00'),
+                                     ('05:00', '05:00'),                                    
+                                     ('06:00', '06:00'),
+                                     ('07:00', '07:00'),
+                                     ('08:00', '08:00'),
+                                     ('09:00', '09:00'),                                     
+                                     ('10:00', '10:00'),                                     
+                                     ('11:00', '11:00'),
+                                     ('12:00', '12:00'),
+                                     ('13:00', '13:00'),
+                                     ('14:00', '14:00'),
+                                     ('15:00', '15:00'),                                    
+                                     ('16:00', '16:00'),
+                                     ('17:00', '17:00'),
+                                     ('18:00', '18:00'),
+                                     ('19:00', '19:00'),                                     
+                                     ('20:00', '20:00'),                                     
+                                     ('21:00', '21:00'),
+                                     ('22:00', '22:00'),
+                                     ('23:00', '23:00')                                                                         
+                                     ], default='Select', string='Time')      
