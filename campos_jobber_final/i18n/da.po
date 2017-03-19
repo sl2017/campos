@@ -124,17 +124,17 @@ msgstr "Bespisning"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Main Camp"
-msgstr "deltager på alle dage hovedlejren"
+msgstr "Alle dage hovedlejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Post Camp"
-msgstr "Deltager på alle dage efterlejren"
+msgstr "Alle dage efterlejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Pre Camp"
-msgstr "Deltager alle dage under forlejr"
+msgstr "Alle dage under forlejr"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -385,7 +385,7 @@ msgstr "Betaling"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Pre Camp Wed-Friday"
-msgstr ""
+msgstr "Onsdag til fredag forlejr"
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
