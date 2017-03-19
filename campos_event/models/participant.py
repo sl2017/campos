@@ -85,10 +85,10 @@ class EventParticipant(geo_model.GeoModel):
 
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict')  # Relation to inherited res.partner
     registration_id = fields.Many2one('event.registration', 'Registration')
-    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration')
+    staff_qty_pre_reg = fields.Integer(related='registration_id.staff_qty_pre_reg', string='Number of Staff - Pre-registration', readonly=True)
     reg_organization_id = fields.Many2one(
         'campos.scout.org',
-        'Scout Organization', related='registration_id.organization_id', store=True)
+        'Scout Organization', related='registration_id.organization_id', store=True, readonly=True)
     scout_color = fields.Char('Scout Org Color', related='registration_id.organization_id.color')
 
     # Scout Leader Fiedls
@@ -116,6 +116,7 @@ class EventParticipant(geo_model.GeoModel):
     reject_ids = fields.One2many('campos.event.par.reject', 'participant_id', string='Rejects')
     jobfunc_ids = fields.One2many('campos.committee.function', 'participant_id', string='Committee/Function')
     state = fields.Selection([('reg', 'Registered'),
+                              ('duplicate','Duplicate' ),
                               ('draft', 'Received'),
                               ('standby', 'Standby'),
                               ('sent', 'Sent to committee'),
@@ -177,6 +178,9 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
+    participant_number = fields.Char('Participant Number')
+
+    
     @api.one
     def _compute_meeting_registration(self):
         self.meeting_registration_ids = self.partner_id.event_registration_ids.filtered(lambda r: r.id != self.registration_id.id)
@@ -223,6 +227,11 @@ class EventParticipant(geo_model.GeoModel):
         if self.birthdate:
             self.birthdate_short = '%s%s%s' % (self.birthdate[8:10], self.birthdate[5:7], self.birthdate[2:4])
 
+
+    def check_duplicate(self):
+        if self.email:
+            if self.search_count([('id', '!=', self.id), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
+                self.state = 'duplicate'
     @api.model
     def create(self, vals):
         par = super(EventParticipant, self).create(vals)
@@ -233,6 +242,8 @@ class EventParticipant(geo_model.GeoModel):
                 'contact_partner_id': par.partner_id.id,
                 'econ_partner_id': par.partner_id.id, })
             # par.staff = True
+        if par.state == 'draft':
+            par.check_duplicate()
         return par
 
     @api.multi
@@ -264,6 +275,8 @@ class EventParticipant(geo_model.GeoModel):
                     template.send_mail(par.id)
                 except:
                     pass
+            if 'state' in vals and vals['state'] == 'draft':
+                par.check_duplicate()
         return ret
 
     @api.one

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-28 15:43+0000\n"
-"PO-Revision-Date: 2017-01-28 15:43+0000\n"
+"POT-Creation-Date: 2017-03-19 12:50+0000\n"
+"PO-Revision-Date: 2017-03-19 12:50+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Id des Eintrittszeichens"
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Add/Edit Participants"
-msgstr ""
+msgstr "Zufüge oder editiere Teilnehmern/Teilnehmerinnen "
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -58,7 +58,7 @@ msgstr "Taglagerliste"
 #. module: campos_final_registration
 #: field:campos.event.participant,dates_summery:0
 msgid "Camp Days"
-msgstr ""
+msgstr "Lagertage"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -143,7 +143,7 @@ msgid "Display Name"
 msgstr "Displayname"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:291
+#: code:addons/campos_final_registration/models/finalregistration.py:300
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -238,7 +238,7 @@ msgstr "Freundschaftsgruppen"
 #: code:addons/campos_final_registration/models/finalregistration.py:171
 #, python-format
 msgid "Full camp"
-msgstr ""
+msgstr "Ganzes Lager"
 
 #. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_event_registration_need
@@ -348,6 +348,7 @@ msgstr "Teilnehmer/Teilnehmerin"
 
 #. module: campos_final_registration
 #: field:event.registration,participants_camp_day_ids:0
+#: model:ir.model,name:campos_final_registration.model_campos_event_participant_day
 msgid "Participant Camp Days"
 msgstr "Anzahl Lagertage des Teilnehmers/der Teilnehmerin"
 
@@ -367,6 +368,11 @@ msgstr "Teilnehmern/Teilnehmerinnen"
 #: code:addons/campos_final_registration/models/finalregistration.py:71
 #, python-format
 msgid "Participants from %s"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:campos.event.participant.day:campos_final_registration.view_search_event_participant_days
+msgid "Participate"
 msgstr ""
 
 #. module: campos_final_registration

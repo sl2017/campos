@@ -48,6 +48,30 @@
 					</tree>
 				</field>
 			</record> 	
+			
+			<record id="view_graph_event_participant_days" model="ir.ui.view">
+				<field name="name">Participant Camp Days</field>
+				<field name="model">campos.event.participant.day</field>
+				<field name="arch" type="xml">
+					<graph>
+						<field name="day_id"  type="col"/>
+						<field name="registration_id_stored"  type="row"/>
+					</graph>
+				</field>
+			</record> 	
+
+		<record id="view_search_event_participant_days" model="ir.ui.view">
+				<field name="name">Participant Camp Days</field>
+				<field name="model">campos.event.participant.day</field>
+				<field name="arch" type="xml">
+					<search>
+						<field name="day_id"/>
+						<field name="registration_id_stored"/>
+						<field name="participant_id" />
+						<filter string="Participate" name="fwill_participate" domain="[('will_participate','=',1)]" help="Participate"/>
+					</search>
+				</field>
+			</record>
 
 			<!--
 			<record id="view_tree_event_participant" model="ir.ui.view">
@@ -110,7 +134,7 @@
 <!--						<field name="participants_camp_day_ids" widget="x2many_2d_matrix" field_x_axis="the_date" field_y_axis="participant_id" field_value="will_participate"  nolabel="1"  colspan="5"/>-->
 
 						<notebook colspan="2">
-								<page string="Participants">
+								<page name="participants" string="Participants">
 									<group>
 										<field colspan="5" name="participant_ids" nolabel="0"  string="Participants" context="{'default_registration_id': id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant', 'default_participant': True}">
 											<tree delete="0">
@@ -428,7 +452,7 @@
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
 							<field name="name"/>
-							<field name="birthdate" required="1"/>
+							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="email"/>
 							<field name="mobile"/>
 							<field name="street"/>
@@ -543,7 +567,8 @@
 		<act_window id="action_participant_days"
 		name="Participant Days"
 		res_model="campos.event.participant.day"
-		view_mode="tree,form" />
+		view_mode="tree,form,graph" 
+		context="{'search_default_fwill_participate': 1}"/>
 
 		<act_window id="action_event_registration_friendshipgrouplist"
 		name="Friendship Group List"

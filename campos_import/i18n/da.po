@@ -4,13 +4,14 @@
 # 
 # Translators:
 # christian Eggert Jørgensen <christian@eggert.dk>, 2017
+# Lykke Merete Højsting <lho@sl2017.dk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-28 12:28+0000\n"
-"PO-Revision-Date: 2017-01-28 12:28+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
+"POT-Creation-Date: 2017-03-19 12:50+0000\n"
+"PO-Revision-Date: 2017-03-19 12:50+0000\n"
+"Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +66,7 @@ msgstr "Afmeld"
 #. module: campos_import
 #: selection:campos.import.member.profile,state:0
 msgid "Cancelled"
-msgstr "Admeldt"
+msgstr "Afmeldt"
 
 #. module: campos_import
 #: field:campos.import.member.profile,city:0
@@ -199,7 +200,7 @@ msgstr "Gruppe/kreds salgsordre"
 #: field:campos.import.member.profile,id:0 field:campos.import.member.wiz,id:0
 #: field:campos.import.participant.wiz,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: campos_import
 #: view:campos.import.manager.wiz:campos_import.campos_import_manager_wiz_form_view
@@ -239,7 +240,7 @@ msgstr "Faktura"
 #. module: campos_import
 #: field:campos.import.member.profile,is_leader:0
 msgid "Is leader"
-msgstr ""
+msgstr "er leder"
 
 #. module: campos_import
 #: field:campos.import.event,__last_update:0
@@ -271,7 +272,7 @@ msgstr "Sidst opdateret d."
 #. module: campos_import
 #: field:campos.event.participant,last_import:0
 msgid "Last import"
-msgstr ""
+msgstr "Senest importeret"
 
 #. module: campos_import
 #: view:event.registration:campos_import.event_registration_form_view
@@ -299,7 +300,7 @@ msgstr "Materiel bestillinger"
 #: field:campos.import.member.wiz,member_ids:0
 #: field:campos.import.participant.wiz,member_ids:0
 msgid "Member ids"
-msgstr ""
+msgstr "Medlems ids"
 
 #. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view
@@ -310,7 +311,7 @@ msgstr "Medlemmer"
 #. module: campos_import
 #: field:campos.import.member.profile,mobile:0
 msgid "Mobile"
-msgstr ""
+msgstr "Mobil"
 
 #. module: campos_import
 #: model:ir.actions.act_window,name:campos_import.action_group_final_registration
@@ -339,7 +340,7 @@ msgstr "Anden information"
 #. module: campos_import
 #: field:campos.import.member.profile,participant_id:0
 msgid "Participant id"
-msgstr ""
+msgstr "Deltager ID"
 
 #. module: campos_import
 #: view:sale.order:campos_import.group_sale_order_form_view
@@ -363,7 +364,7 @@ msgstr "Registrering"
 #: field:campos.import.event,registration_id:0
 #: field:campos.import.member.profile,registration_id:0
 msgid "Registration id"
-msgstr ""
+msgstr "Registreringsid"
 
 #. module: campos_import
 #: view:campos.import.member.profile:campos_import.campos_import_member_profile_search_view

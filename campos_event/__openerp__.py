@@ -64,6 +64,7 @@
 
     # always loaded
     'data': [
+        'views/res_country.xml',
         'views/product_template.xml',
         
         'views/campos_staff_del_prod.xml',

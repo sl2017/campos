@@ -145,7 +145,7 @@ class CamposRemoteSystem(models.Model):
                     'last_import': fields.Datetime.now(),
                     }
             if is_company:
-                vals['remote_ext_id'] = remote_partner.organization_id.organization_code
+                vals['remote_ext_id'] = remote_partner.organization_id.organization_code if remote_partner.organization_id.organization_code else remote_partner.organization_id.id
                 vals['remote_link_id'] = remote_partner.organization_id.id
             else:
                 vals['remote_ext_id'] = remote_partner.member_number

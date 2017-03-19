@@ -205,12 +205,12 @@ class CamposImportMemberProfile(models.Model):
                                 'remote_int_id': rp['id'],
                                 'remote_partner_int_id': rp['partner_id'][0] if partner else False,
                                 'remote_event_id': remote_event.id,
-                                'street': partner.street,
-                                'street2': partner.street2,
-                                'zip': partner.zip,
-                                'city': partner.city,
-                                'country': partner.country_id.name,
-                                'is_leader': partner.member_id.is_active_leader,
+                                'street': partner.street if partner else False,
+                                'street2': partner.street2 if partner else False,
+                                'zip': partner.zip if partner else False,
+                                'city': partner.city if partner else False,
+                                'country': partner.country_id.name if partner and partner.country_id else False,
+                                'is_leader': partner.member_id.is_active_leader if partner else False,
                                 })
                 else:
                     self.create({'name': rp['name'],
@@ -221,12 +221,12 @@ class CamposImportMemberProfile(models.Model):
                                  'state': rp['state'],
                                  'remote_event_id': remote_event.id,
                                  #'wiz_id': wizard.id,
-                                 'street': partner.street,
-                                 'street2': partner.street2,
-                                 'zip': partner.zip,
-                                 'city': partner.city,
-                                 'country': partner.country_id.name,
-                                 'is_leader': partner.member_id.is_active_leader,
+                                 'street': partner.street if partner else False,
+                                 'street2': partner.street2 if partner else False,
+                                 'zip': partner.zip if partner else False,
+                                 'city': partner.city if partner else False,
+                                 'country': partner.country_id.name if partner and partner.country_id else False,
+                                 'is_leader': partner.member_id.is_active_leader if partner and partner.member_id else False,
                                  })
                 _logger.info('Importing: %s', rp['name'])
 
