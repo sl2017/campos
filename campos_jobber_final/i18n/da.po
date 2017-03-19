@@ -57,11 +57,13 @@ msgstr "Jobbere tilknyttet gruppen"
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
+"Du har ikke anmodet om en børneattest. Du skal gøre dette før du kan komme "
+"videre."
 
 #. module: campos_jobber_final
 #: field:campos.event.participant,ckr_needed:0
 msgid "CKR Needed"
-msgstr ""
+msgstr "Børneattest mangler"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -122,17 +124,17 @@ msgstr "Bespisning"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Main Camp"
-msgstr ""
+msgstr "deltager på alle dage hovedlejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Post Camp"
-msgstr ""
+msgstr "Deltager på alle dage efterlejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Pre Camp"
-msgstr ""
+msgstr "Deltager alle dage under forlejr"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -142,7 +144,7 @@ msgstr "Børnenes Ø"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "City"
-msgstr ""
+msgstr "By"
 
 #. module: campos_jobber_final
 #: field:campos.canteen,committee_id:0
@@ -152,7 +154,7 @@ msgstr "Udvalg"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: campos_jobber_final
 #: field:campos.canteen,create_uid:0
@@ -175,14 +177,14 @@ msgstr "Oprettet d."
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:67
 #, python-format
 msgid "Dates must be in Main Camp Period"
-msgstr ""
+msgstr "Perioden skal ligge under hovedlejren"
 
 #. module: campos_jobber_final
 #: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:64
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:71
 #, python-format
 msgid "Dates must not be overlapping"
-msgstr ""
+msgstr "Datoer må ikke overlappe"
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,signup_state:0
@@ -244,12 +246,12 @@ msgstr "Fra dato"
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:65
 #, python-format
 msgid "From date must be before To date"
-msgstr ""
+msgstr "Fra dato skal ligge før til dato"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Fødselsdato"
-msgstr ""
+msgstr "Fødselsdato"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -267,12 +269,12 @@ msgstr "ID"
 #. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
 msgid "In process"
-msgstr ""
+msgstr "Under behandling"
 
 #. module: campos_jobber_final
 #: field:campos.event.participant,info_html:0
 msgid "Info html"
-msgstr ""
+msgstr "Info html"
 
 #. module: campos_jobber_final
 #: field:event.registration,jobber_accomodation_ids:0
@@ -397,7 +399,7 @@ msgstr "registrering gruppe og godkendelse"
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:133
 #, python-format
 msgid "Request CKR"
-msgstr ""
+msgstr "Anmod om børneattest"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -414,7 +416,7 @@ msgstr "Status"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Street..."
-msgstr ""
+msgstr "Gade"
 
 #. module: campos_jobber_final
 #: field:campos.canteen,subcamp_id:0
@@ -451,23 +453,25 @@ msgstr "Hos spejdergruppe"
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid ""
 "You need to fill in your Birthdate to get access to the final camp signup"
-msgstr ""
+msgstr "Du skal udfylde din fødselsdato for at kunne tilmelde dig lejren."
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid ""
 "You need to request a CKR Attest to get access to the final camp signup"
 msgstr ""
+"Du mangler at udfylde en børneattest for at kunne lave din tilmelding til "
+"lejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "ZIP"
-msgstr ""
+msgstr "Postnummer"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "dd/mm/åååå"
-msgstr ""
+msgstr "dd/mm/åååå"
 
 #. module: campos_jobber_final
 #: view:event.registration:campos_jobber_final.event_registration_form_view
