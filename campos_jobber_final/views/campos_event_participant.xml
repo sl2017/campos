@@ -32,17 +32,21 @@
 											type="object"    
 											icon="fa-check-square-o"
 											string="Check all Pre Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
+							<button name="check_precamp_wed_fri" 
+											type="object"
+											icon="fa-check-square-o"    
+											string="Pre Camp Wed-Friday" class = "oe_edit_only oe_inline oe_stat_button"/>
             					<button name="check_all_maincamp_days" 
 											type="object"    
 											icon="fa-check-square-o"
 											string="Check all Main Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
 							 
-							
+							<!-- 
 							<button name="check_all_second_half_days" 
 											type="object"
 											icon="fa-check-square-o"    
 											string="Wed- to Sunday" class = "oe_edit_only oe_inline oe_stat_button"/>
-											
+							 -->				
 							<button name="check_all_postcamp_days" 
 											type="object"    
 											icon="fa-check-square-o"
@@ -127,7 +131,7 @@
             <field name="birthdate" position="replace">
             	<field name="birthdate" string="Fødselsdato" placeholder="dd/mm/åååå" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"
             		attrs="{'required': [('signup_state', 'in', ['oncamp','dayjobber'])]}"/>
-            	<field name="ckr_needed" invisible="0"/>
+            	<field name="ckr_needed" invisible="1"/>
             </field>
             <field name="country_id" position="replace">
             	<field name="country_id" placeholder="Country" class="oe_no_button" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}" required="1"/>

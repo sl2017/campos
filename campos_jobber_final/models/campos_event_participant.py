@@ -98,12 +98,19 @@ class CamposEventParticipant(models.Model):
             record.check_camp_days()
             for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'precamp'):
                 day.will_participate = True
-                
+
     @api.multi
     def check_all_postcamp_days(self):
         for record in self:
             record.check_camp_days()
             for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'postcamp'):
+                day.will_participate = True
+
+    @api.multi
+    def check_precamp_wed_fri(self):
+        for record in self:
+            record.check_camp_days()    
+            for day in record.camp_day_ids.filtered(lambda r: r.day_id.event_period == 'precamp' and r.the_date >= '2017-07-19' and r.the_date <= '2017-07-21'):
                 day.will_participate = True
 
     @api.one
