@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 12:50+0000\n"
-"PO-Revision-Date: 2017-03-19 12:50+0000\n"
+"POT-Creation-Date: 2017-03-19 15:51+0000\n"
+"PO-Revision-Date: 2017-03-19 15:51+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr "zugehörige Jobber/Jobberinnen"
 #. module: campos_jobber_final
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:64
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:76
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:122
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:129
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
@@ -380,6 +380,11 @@ msgid "Payment"
 msgstr "Zahlung"
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Pre Camp Wed-Friday"
+msgstr ""
+
+#. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
 #: selection:campos.jobber.accomodation,state:0
 #: selection:campos.jobber.canteen,state:0
@@ -393,7 +398,7 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:133
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:140
 #, python-format
 msgid "Request CKR"
 msgstr ""
@@ -435,11 +440,6 @@ msgstr "Transport"
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Un-check all days"
 msgstr "Un-check alle Tagen"
-
-#. module: campos_jobber_final
-#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
-msgid "Wed- to Sunday"
-msgstr "Mittwoch bis Sonntag"
 
 #. module: campos_jobber_final
 #: selection:campos.jobber.canteen,eat_at:0
