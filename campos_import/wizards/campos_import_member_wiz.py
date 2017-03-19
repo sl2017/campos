@@ -226,7 +226,7 @@ class CamposImportMemberProfile(models.Model):
                                  'zip': partner.zip if partner else False,
                                  'city': partner.city if partner else False,
                                  'country': partner.country_id.name if partner and partner.country_id else False,
-                                 'is_leader': partner.member_id.is_active_leader,
+                                 'is_leader': partner.member_id.is_active_leader if partner and partner.member_id else False,
                                  })
                 _logger.info('Importing: %s', rp['name'])
 
