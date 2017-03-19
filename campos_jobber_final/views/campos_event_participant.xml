@@ -21,7 +21,7 @@
             			</div>
             			<div attrs="{'invisible': [('ckr_needed', '=', False)]}">
             			<p>You need to request a CKR Attest to get access to the final camp signup</p>
-            			<button name="action_top_request_ckr" type="object" string="Request CKR"  class='btn-primary oe_highlight' />
+            			
             			</div>
             			<field name="signup_state" attrs="{'invisible': ['|',('ckr_needed', '=', True),('birthdate','=', False)]}"/>
             		</group>
