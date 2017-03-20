@@ -451,6 +451,7 @@
 							<field name="registration_id" invisible="1"/>
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
+							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="email"/>

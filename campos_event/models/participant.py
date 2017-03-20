@@ -543,3 +543,9 @@ class EventParticipant(geo_model.GeoModel):
         for par in self.search([('primary_committee_id', '=', False)]):
             if par.jobfunc_ids:
                 par.primary_committee_id = par.jobfunc_ids[0].committee_id 
+                
+    @api.multi
+    def assign_participant_number(self):
+        for par in self:
+            if not par.participant_number:
+                par.participant_number = self.env['ir.sequence'].next_by_code('participant.number')
