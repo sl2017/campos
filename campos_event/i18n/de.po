@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 12:50+0000\n"
-"PO-Revision-Date: 2017-03-19 12:50+0000\n"
+"POT-Creation-Date: 2017-03-21 23:01+0000\n"
+"PO-Revision-Date: 2017-03-21 23:01+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -431,6 +431,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,approvers_ids:0
 msgid "Approvers"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.server,name:campos_event.action_participant_number_assign
+msgid "Assign Participant Number"
 msgstr ""
 
 #. module: campos_event
