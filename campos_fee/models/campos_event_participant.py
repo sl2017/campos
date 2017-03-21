@@ -56,7 +56,7 @@ class CamposEventParticipant(models.Model):
                     if par.transport_to_camp:
                         transport_co += 1
                 par.transport_co = transport_co
-                if transport_co:
+                if transport_co and par.registration_id.partner_id.municipality_id.product_attribute_id.id:
                     pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
                     if pp_id:
                         par.transport_product_id = pp_id[0]
