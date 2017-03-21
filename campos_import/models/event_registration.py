@@ -60,6 +60,6 @@ class EventRegistration(models.Model):
             'res_model': 'sale.order.line',
             'type': 'ir.actions.act_window',
             'nodestroy': True,
-            'domain': [('order_partner_id', '=', self.partner_id.id)],
+            'domain': [('order_partner_id', '=', self.partner_id.id),('order_id.state', '!=', 'cancel')],
             
         }
