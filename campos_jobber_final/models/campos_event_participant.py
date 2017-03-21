@@ -96,7 +96,10 @@ class CamposEventParticipant(models.Model):
                 event_id = int(event_id)
                 reg_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id), ('event_id', '=', event_id)])
                 if reg_id:
-                    self.registration_id = reg_id[0] 
+                    self.registration_id = reg_id[0]
+        else:
+            self.payreq_state = 'draft'
+             
             
     @api.multi
     def check_all_precamp_days(self):
