@@ -18,8 +18,8 @@
 				<field name="arch" type="xml">
 					<tree editable="bottom">
 						<field name="name"/>
-						<field name="for_group"/>
-						<field name="for_staff"/>
+						<field name="for_group" groups="campos_event.group_campos_admin"/>
+						<field name="for_staff" groups="campos_event.group_campos_admin"/>
 					</tree>
 				</field>
 			</record> 		
