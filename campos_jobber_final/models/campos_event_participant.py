@@ -90,7 +90,11 @@ class CamposEventParticipant(models.Model):
     @api.onchange('paybygroup')
     def onchange_paybygroup(self):
         if not self.paybygroup:
-            self.registration_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id)])
+            event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
+            _logger.info('EVent: %s', event_id)
+            if event_id:
+                event_id = int(event_id)
+                self.registration_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id), ('event_id', '=', event_id)])
             
     @api.multi
     def check_all_precamp_days(self):
