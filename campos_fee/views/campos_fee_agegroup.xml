@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_fee_agegroup_form_view">
+        <field name="name">campos.fee.agegroup.form (in campos_fee)</field>
+        <field name="model">campos.fee.agegroup</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                		<field name="birthdate_from"/>
+                		<field name="birthdate_to"/>
+                		<field name="template_id"/>
+                		<field name="transport_tmpl_id"/>
+                		<field name="transport_incl"/>
+                		<field name="default_group"/>        
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_agegroup_search_view">
+        <field name="name">campos.fee.agegroup.search (in campos_fee)</field>
+        <field name="model">campos.fee.agegroup</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+           		<field name="template_id"/>
+           		<field name="transport_tmpl_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_agegroup_tree_view">
+        <field name="name">campos.fee.agegroup.tree (in campos_fee)</field>
+        <field name="model">campos.fee.agegroup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+           		<field name="birthdate_from"/>
+           		<field name="birthdate_to"/>
+           		<field name="template_id"/>
+           		<field name="transport_tmpl_id"/>
+           		<field name="transport_incl"/>
+           		<field name="default_group"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_fee_agegroup_act_window">
+        <field name="name">Campos Fee Agegroup</field> <!-- TODO -->
+        <field name="res_model">campos.fee.agegroup</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_fee_agegroup_menu">
+        <field name="name">Campos Fee Agegroup</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config"/>
+        <field name="action" ref="campos_fee_agegroup_act_window"/>
+        <field name="sequence" eval="70"/> 
+    </record>
+
+</data>
+</openerp>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_municipality_form_view">
+        <field name="name">campos.municipality.form (in campos_fee)</field>
+        <field name="model">campos.municipality</field>
+        <field name="inherit_id" ref="campos_event.municipality_form"/>
+        <field name="arch" type="xml">
+        	<field name="subcamp_id" position="after">
+        		<field name="product_attribute_id"/>
+            </field>
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>

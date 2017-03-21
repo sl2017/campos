@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+<!-- TODO 
+    <record model="ir.ui.view" id="event_registration_form_view">
+        <field name="name">event.registration.form (in campos_fee)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="TODO othermodule.form_view"/>
+        <field name="arch" type="xml">
+            
+        </field>
+    </record>
+-->
+
+
+
+</data>
+</openerp>
