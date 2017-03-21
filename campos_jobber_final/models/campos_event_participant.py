@@ -173,4 +173,5 @@ class CamposEventParticipant(models.Model):
                         reg_id = self.env['event.registration'].suspend_security().search([('partner_id', '=', cep.partner_id.id), ('event_id', '=', event_id)])
                         if reg_id:
                             cep.registration_id = reg_id[0]
+                            cep.payreq_state = 'approved'
         return res
