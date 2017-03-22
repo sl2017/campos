@@ -11,7 +11,8 @@
     'author': 'Stein & Gabelgaard ApS',
     'website': 'www.steingabelgaard.dk',
     'depends': [
-        'campos_final_registration'
+        'campos_event',
+        'campos_final_registration',
     ],
     'data': [
         'views/campos_municipality.xml',

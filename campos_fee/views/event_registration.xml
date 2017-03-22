@@ -4,16 +4,28 @@
 
 <openerp>
 <data>
-<!-- TODO 
-    <record model="ir.ui.view" id="event_registration_form_view">
+ 
+    <record model="ir.ui.view" id="view_form_finalregistration_gl">
         <field name="name">event.registration.form (in campos_fee)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="TODO othermodule.form_view"/>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
-            
+            <page name="pre_reg" position="before">
+            	<page string="Camp Fee">
+            		<group>
+            			<field name="number_participants"/>
+            			<field name="fee_participants"/>
+            			<field name="fee_transport"/>
+            			<field name="material_cost"/>
+            			<field name="fee_total"/>
+            		
+            		</group>
+
+            	</page>
+            </page>
         </field>
     </record>
--->
+
 
 
 
