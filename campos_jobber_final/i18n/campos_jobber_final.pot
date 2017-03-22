@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:01+0000\n"
-"PO-Revision-Date: 2017-03-21 23:01+0000\n"
+"POT-Creation-Date: 2017-03-22 09:54+0000\n"
+"PO-Revision-Date: 2017-03-22 09:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.event.participant,accomodation_ids:0
 msgid "Accomodation"
 msgstr ""
@@ -73,6 +74,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Camp Days"
 msgstr ""
 
@@ -122,6 +124,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.event.participant,canteen_ids:0
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "Catering"
@@ -141,26 +144,31 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Main Camp"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Post Camp"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Pre Camp"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Children Island"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "City"
 msgstr ""
 
@@ -171,6 +179,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Country"
 msgstr ""
 
@@ -236,6 +245,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Final signup"
 msgstr ""
 
@@ -254,11 +264,13 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Fødselsdato"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.jobber.accomodation,registration_id:0
 #: field:campos.jobber.canteen,registration_id:0
 msgid "Group"
@@ -388,11 +400,13 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Payment"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Pre Camp Wed-Friday"
 msgstr ""
 
@@ -417,6 +431,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.event.participant,need_ids:0
 msgid "Special needs"
 msgstr ""
@@ -429,6 +444,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Street..."
 msgstr ""
 
@@ -445,11 +461,13 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Transportation"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Un-check all days"
 msgstr ""
 
@@ -460,21 +478,25 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "You need to fill in your Birthdate to get access to the final camp signup"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "You need to request a CKR Attest to get access to the final camp signup"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "ZIP"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "dd/mm/åååå"
 msgstr ""
 
