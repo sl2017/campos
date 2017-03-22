@@ -19,7 +19,7 @@
             </button>
             <page name="pre_reg" position="before">
             	<page string="Material Order">
-            		<button name="action_sale_order" string="Material orders" type="object"/>
+            		<button name="action_sale_order_lines" string="Material orders" type="object"/>
             	</page>
             </page>
         </field>

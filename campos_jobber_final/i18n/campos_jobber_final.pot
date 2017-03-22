@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 15:51+0000\n"
-"PO-Revision-Date: 2017-03-19 15:51+0000\n"
+"POT-Creation-Date: 2017-03-21 23:01+0000\n"
+"PO-Revision-Date: 2017-03-21 23:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,18 @@ msgstr ""
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: field:campos.event.participant,accomodation_ids:0
 msgid "Accomodation"
+msgstr ""
+
+#. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:60
+#, python-format
+msgid "Accomodation dates must be in Main Camp Period"
+msgstr ""
+
+#. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:64
+#, python-format
+msgid "Accomodation dates must not be overlapping"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -49,7 +61,7 @@ msgstr ""
 #. module: campos_jobber_final
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:64
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:76
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:129
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:138
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
@@ -116,6 +128,18 @@ msgid "Catering"
 msgstr ""
 
 #. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:67
+#, python-format
+msgid "Catering dates must be in Main Camp Period"
+msgstr ""
+
+#. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:71
+#, python-format
+msgid "Catering dates must not be overlapping"
+msgstr ""
+
+#. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Check all Main Camp"
 msgstr ""
@@ -164,20 +188,6 @@ msgstr ""
 #: field:campos.jobber.accomodation,create_date:0
 #: field:campos.jobber.canteen,create_date:0
 msgid "Created on"
-msgstr ""
-
-#. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:60
-#: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:67
-#, python-format
-msgid "Dates must be in Main Camp Period"
-msgstr ""
-
-#. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:64
-#: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:71
-#, python-format
-msgid "Dates must not be overlapping"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -400,7 +410,7 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:140
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:149
 #, python-format
 msgid "Request CKR"
 msgstr ""

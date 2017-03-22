@@ -90,7 +90,16 @@ class CamposEventParticipant(models.Model):
     @api.onchange('paybygroup')
     def onchange_paybygroup(self):
         if not self.paybygroup:
-            self.registration_id = self.env['event.registration'].search([('partner_id', '=', self.partner_id.id)])
+            event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
+            _logger.info('EVent: %s %s', event_id, self.partner_id.id)
+            if event_id:
+                event_id = int(event_id)
+                reg_id = self.env['event.registration'].suspend_security().search([('partner_id', '=', self.partner_id.id), ('event_id', '=', event_id)])
+                if reg_id:
+                    self.registration_id = reg_id[0]
+        else:
+            self.payreq_state = 'draft'
+             
             
     @api.multi
     def check_all_precamp_days(self):
@@ -151,20 +160,18 @@ class CamposEventParticipant(models.Model):
     def action_request_ckr2(self):
         return self.action_request_own_ckr()
     
-#     @api.multi
-#     def write(self, vals):
-#         res = super(CamposEventParticipant, self).write(vals)
-#         for cep in self:
-#             if cep.ckr_needed:
-#                 ckr_id = self.env['campos.ckr.check'].suspend_security().create({'state': 'draft',
-#                                                                          'participant_id': cep.id,
-#                                                                         })
-#                 if cep.partner_id.user_ids:
-#                     self.suspend_security().partner_id.user_ids[0].action_id = self.env.ref('campos_ckr.campos_ckr_fetch_wiz_act_window').id
-#                     template = self.env.ref('campos_ckr.template_ckr_request_mail')
-#                     assert template._name == 'email.template'
-#                     try:
-#                         template.sendmail(cep.id)
-#                     except:
-#                         pass
-#         return res
+    @api.multi
+    def write(self, vals):
+        res = super(CamposEventParticipant, self).write(vals)
+        for cep in self:
+            if cep.staff:
+                if not cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.id:
+                    event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
+                    _logger.info('EVent: %s %s', event_id, self.partner_id.id)
+                    if event_id:
+                        event_id = int(event_id)
+                        reg_id = self.env['event.registration'].suspend_security().search([('partner_id', '=', cep.partner_id.id), ('event_id', '=', event_id)])
+                        if reg_id:
+                            cep.registration_id = reg_id[0]
+                            cep.payreq_state = 'approved'
+        return res

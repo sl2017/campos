@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 12:50+0000\n"
-"PO-Revision-Date: 2017-03-19 12:50+0000\n"
+"POT-Creation-Date: 2017-03-21 23:01+0000\n"
+"PO-Revision-Date: 2017-03-21 23:01+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -286,6 +286,7 @@ msgstr "Auftrag über Materialen für %s"
 
 #. module: campos_import
 #: code:addons/campos_import/models/event_registration.py:36
+#: code:addons/campos_import/models/event_registration.py:56
 #, python-format
 msgid "Material Orders for %s"
 msgstr "Aufträge über Materialen für %s"
@@ -451,6 +452,11 @@ msgstr ""
 #. module: campos_import
 #: view:sale.order:campos_import.group_sale_order_form_view
 msgid "Terms and conditions..."
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order.line:campos_import.group_sale_order_line_tree_view
+msgid "Total"
 msgstr ""
 
 #. module: campos_import

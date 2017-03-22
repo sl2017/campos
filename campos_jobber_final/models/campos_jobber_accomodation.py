@@ -57,11 +57,11 @@ class CamposJobberAccomodation(models.Model):
         if self.date_from > self.date_to:
             raise exceptions.ValidationError(_('From date must be before To date'))
         if self.date_from < '2017-07-22' or self.date_to > '2017-07-30':
-            raise exceptions.ValidationError(_('Dates must be in Main Camp Period'))
+            raise exceptions.ValidationError(_('Accomodation dates must be in Main Camp Period'))
         if self.search_count([('participant_id', '=', self.participant_id.id),
                               ('id', '!=', self.id)] + 
                              self._date_overlaps()) > 0:
-            raise exceptions.ValidationError(_('Dates must not be overlapping'))
+            raise exceptions.ValidationError(_('Accomodation dates must not be overlapping'))
 
 
     @api.model

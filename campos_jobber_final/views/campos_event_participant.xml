@@ -111,10 +111,11 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
+										<field name="partner_id" invisible="1" />
 										<field name="paybygroup" />
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" context="{'search_default_organization_id': reg_organization_id,
-																																																	'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																	'show_organization': 1}"/>
+										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
+																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																																																												   'show_organization': 1}"/>
 										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
