@@ -445,6 +445,7 @@
 							<button name="activate_participant" 
 											type="object"    
 											string="Re-activate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '!=', 'deregistered')]}" />
+							<field name="state" widget="statusbar" statusbar_visible="draft,deregistered" statusbar_colors="{'cancel':'red'}"/>
 					</header>
 					<sheet>
 						<group name="sheet2">
@@ -454,17 +455,26 @@
 							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
-							<field name="email"/>
-							<field name="mobile"/>
-							<field name="street"/>
-							<field name="street2"/>
-							<field name="zip"/>
-							<field name="city"/>
-							<field name="country_id"/>
-							<field name="access_token_id" invisible="1"/>
+						</group>
+						<notebook name="top">
+							<page name="contact" string="Contact info">
+								<group>
+									<field name="email"/>
+									<field name="mobile"/>
+									<field name="street"/>
+									<field name="street2"/>
+									<field name="zip"/>
+									<field name="city"/>
+									<field name="country_id"/>
+									<field name="access_token_id" invisible="1"/>
+								</group>
+							</page>
+						</notebook>
+						<group>
+							<separator string="Transport" colspan="2"/>
 							<field name="transport_to_camp"/>
 							<field name="transport_from_camp"/>
-							<field name="state" readonly="1" string="Registration State"/>
+							<separator string="Participation" colspan="2"/>
 							<button name="check_all_maincamp_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>
