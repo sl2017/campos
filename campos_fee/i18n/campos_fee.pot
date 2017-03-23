@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:01+0000\n"
-"PO-Revision-Date: 2017-03-21 23:01+0000\n"
+"POT-Creation-Date: 2017-03-23 02:00+0000\n"
+"PO-Revision-Date: 2017-03-23 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,16 +56,6 @@ msgid "Bornholms Regionsk."
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.fee.agegroup,birthdate_from:0
-msgid "Brithdate From"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,birthdate_to:0
-msgid "Brithdate To"
-msgstr ""
-
-#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_106
 msgid "Brøndby"
 msgstr ""
@@ -76,19 +66,8 @@ msgid "Brønderslev"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.event.participant,camp_price:0
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Camp Fee"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,camp_product_id:0
-#: field:campos.fee.agegroup,template_id:0
-msgid "Camp Fee Product"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,camp_price_total:0
-msgid "Camp Total"
 msgstr ""
 
 #. module: campos_fee
@@ -99,28 +78,8 @@ msgid "Campos Fee Agegroup"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.fee.agegroup,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: campos_fee
 #: model:ir.model,name:campos_fee.model_campos_municipality
 msgid "DK Kommuner"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,default_group:0
-msgid "Default Agegroup"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,display_name:0
-msgid "Display Name"
 msgstr ""
 
 #. module: campos_fee
@@ -166,11 +125,6 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_113
 msgid "Faxe"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,fee_agegroup_id:0
-msgid "Fee Agegroup"
 msgstr ""
 
 #. module: campos_fee
@@ -304,11 +258,6 @@ msgid "Hørsholm"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.fee.agegroup,id:0
-msgid "ID"
-msgstr ""
-
-#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_141
 msgid "Ikast-Brande"
 msgstr ""
@@ -359,21 +308,6 @@ msgid "Langeland"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.fee.agegroup,__last_update:0
-msgid "Last Modified on"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,write_date:0
-msgid "Last Updated on"
-msgstr ""
-
-#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_149
 msgid "Lejre"
 msgstr ""
@@ -414,16 +348,6 @@ msgid "Morsø"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.fee.agegroup,name:0
-msgid "Name"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,nights:0
-msgid "Nights"
-msgstr ""
-
-#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_157
 msgid "Norddjurs"
 msgstr ""
@@ -456,11 +380,6 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_163
 msgid "Odsherred"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.municipality,product_attribute_id:0
-msgid "Product attribute id"
 msgstr ""
 
 #. module: campos_fee
@@ -569,36 +488,6 @@ msgid "Thisted"
 msgstr ""
 
 #. module: campos_fee
-#: field:campos.event.participant,transport_price:0
-msgid "Transport Fee"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,transport_product_id:0
-msgid "Transport Fee Product"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,transport_tmpl_id:0
-msgid "Transport Product"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,transport_price_total:0
-msgid "Transport Total"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.fee.agegroup,transport_incl:0
-msgid "Transport included"
-msgstr ""
-
-#. module: campos_fee
-#: field:campos.event.participant,transport_co:0
-msgid "Transports"
-msgstr ""
-
-#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_185
 msgid "Tårnby"
 msgstr ""
@@ -606,11 +495,6 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_184
 msgid "Tønder"
-msgstr ""
-
-#. module: campos_fee
-#: help:campos.fee.agegroup,default_group:0
-msgid "Used when birthdate is unknown or outside intervals"
 msgstr ""
 
 #. module: campos_fee
