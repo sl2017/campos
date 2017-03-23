@@ -34,6 +34,7 @@ class CamposEventParticipant(models.Model):
     def _compute_nights_product(self):
         for par in self:
             if par.state not in ['deregistered','rejected']:
+                camp_price = 0.0
                 nights = len(par.camp_day_ids.filtered('will_participate')) - 1
                 if nights < 1:
                     nights = 1
@@ -42,7 +43,7 @@ class CamposEventParticipant(models.Model):
                     pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
                     if pp_id:
                         par.camp_product_id = pp_id[0]
-                                
+                        camp_price = pp_id[0].lst_price
                 transport_co = 0
                 transport_price_total = 0.0
                 if par.fee_agegroup_id.transport_incl:
@@ -60,11 +61,11 @@ class CamposEventParticipant(models.Model):
                     pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
                     if pp_id:
                         par.transport_product_id = pp_id[0]
-                    transport_price_total = par.transport_price * transport_co
+                    transport_price_total = pp_id[0].lst_price * transport_co
                     
                 par.nights = nights
                 par.transport_price_total = transport_price_total
-                par.camp_price_total = transport_price_total + par.camp_price
+                par.camp_price_total = transport_price_total + camp_price
                 
             else:
                 par.nights = 0

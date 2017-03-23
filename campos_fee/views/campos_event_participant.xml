@@ -10,18 +10,21 @@
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
         <field name="arch" type="xml">
-            <field name="state" position="after">
-            	<field name="fee_agegroup_id" options="{'no_open': True}" reaadonly="1"/>
-            	<field name="nights" readonly="1"/>
-            	<field name="camp_product_id" readonly="1"/>
-            	<field name="camp_price"/>
-            	<field name="transport_co" readonly="1"/>
-            	<field name="transport_product_id" readonly="1"/>
-            	<field name="transport_price"/>
-            	<field name="transport_price_total"/>
-            	<field name="camp_price_total"/>
-            	
-            </field>
+            <page name="contact" position="after">
+            	<page name="camp_fee" string="Camp Fee">
+            		<group>
+		            	<field name="fee_agegroup_id" options="{'no_open': True}" readonly="1"/>
+		            	<field name="nights" readonly="1"/>
+		            	<field name="camp_product_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+		            	<field name="camp_price" nolabel="1"/>
+		            	<field name="transport_co" readonly="1"/>
+		            	<field name="transport_product_id" nolabel="1" readonly="1" options="{'no_open': True}"/>
+		            	<field name="transport_price" nolabel="1"/>
+		            	<field name="transport_price_total"/>
+		            	<field name="camp_price_total"/>
+	            	</group>
+            	</page>
+            </page>
         </field>
     </record>
 
