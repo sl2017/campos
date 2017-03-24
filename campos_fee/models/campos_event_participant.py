@@ -91,7 +91,7 @@ class CamposEventParticipant(models.Model):
                                                                   'transport_product_id': par.transport_product_id.id,
                                                                   'transport_price_total': par.transport_price_total,
                                                                   'camp_price_total': par.camp_price_total,
-                                                                  'dates_summery': par.dates_summery.
+                                                                  'dates_summery': par.dates_summery,
                                                                   })
             
 
