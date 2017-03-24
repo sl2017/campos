@@ -40,7 +40,7 @@ class CamposEventParticipant(models.Model):
                 if nights < 1:
                     nights = 1
                 pav_id = False
-                if self.uid == SUPERUSER_ID:
+                if self.env.uid == SUPERUSER_ID:
                     pav_id = self.env['product.attribute.value'].search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
                 else:
                     pav_id = self.env['product.attribute.value'].suspend_security().search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
@@ -65,7 +65,7 @@ class CamposEventParticipant(models.Model):
                 par.transport_co = transport_co
                 if transport_co and par.registration_id.partner_id.municipality_id.product_attribute_id.id:
                     pp_id = False
-                    if self.uid == SUPERUSER_ID:
+                    if self.env.uid == SUPERUSER_ID:
                         pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
                     else:
                         pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
