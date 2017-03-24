@@ -15,6 +15,12 @@
         'campos_final_registration',
     ],
     'data': [
+        'security/campos_fee_snapshot.xml',
+        'views/campos_fee_snapshot.xml',
+        'security/campos_fee_ss_participant.xml',
+        'views/campos_fee_ss_participant.xml',
+        'security/campos_fee_ss_registration.xml',
+        'views/campos_fee_ss_registration.xml',
         'views/campos_municipality.xml',
         'security/campos_fee_agegroup.xml',
         'views/campos_fee_agegroup.xml',

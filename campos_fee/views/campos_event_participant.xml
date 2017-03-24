@@ -24,6 +24,11 @@
 		            	<field name="camp_price_total"/>
 	            	</group>
             	</page>
+            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            		<group>
+						<field name="sspar_ids" readonly="1" nolabel="1"/>            		
+            		</group>
+            	</page>
             </page>
         </field>
     </record>

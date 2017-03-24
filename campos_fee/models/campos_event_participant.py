@@ -18,6 +18,7 @@ class CamposEventParticipant(models.Model):
     transport_price = fields.Float(related='transport_product_id.lst_price', string="Transport Fee", readonly=True)
     transport_price_total = fields.Float("Transport Total", compute='_compute_nights_product' )
     camp_price_total = fields.Float("Camp Total", compute='_compute_nights_product')
+    sspar_ids = fields.One2many('campos.fee.ss.participant', 'participant_id', 'Snapshot')
     
     @api.multi
     @api.depends('birthdate')
@@ -61,7 +62,7 @@ class CamposEventParticipant(models.Model):
                     pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
                     if pp_id:
                         par.transport_product_id = pp_id[0]
-                    transport_price_total = pp_id[0].lst_price * transport_co
+                        transport_price_total = pp_id[0].lst_price * transport_co
                     
                 par.nights = nights
                 par.transport_price_total = transport_price_total
@@ -73,6 +74,23 @@ class CamposEventParticipant(models.Model):
                 par.transport_co
                 par.transport_product_id = False
                 par.camp_price_total = 0
-        
-        
+    
+    @api.multi
+    def do_snapshot(self, ssreg):
+        for par in self:
+            sspar = self.env['campos.fee.ss.participant'].create({'ssreg_id': ssreg.id,
+                                                                  'participant_id': self.id,
+                                                                  'state': self.state,
+                                                                  'name': self.name,
+                                                                  'fee_agegroup_id': self.fee_agegroup_id.id,
+                                                                  'nights': self.nights,
+                                                                  'transport_co': self.transport_co,
+                                                                  'transport_to_camp': self.transport_to_camp,
+                                                                  'transport_from_camp': self.transport_from_camp,
+                                                                  'camp_product_id': self.camp_product_id.id,
+                                                                  'transport_product_id': self.transport_product_id.id,
+                                                                  'transport_price_total': self.transport_price_total,
+                                                                  'camp_price_total': self.camp_price_total
+                                                                  })
+            
 

@@ -22,6 +22,11 @@
             		</group>
 
             	</page>
+            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            		<group>
+						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
+            		</group>
+            	</page>
             </page>
         </field>
     </record>

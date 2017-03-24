@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_fee_ss_registration_form_view">
+        <field name="name">campos.fee.ss.registration.form (in campos_fee)</field>
+        <field name="model">campos.fee.ss.registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                    	<field name="snapshot_id"/>
+                    	<field name="registration_id"/>
+                    	<field name="name"/>
+                        <field name="number_participants"/>
+            			<field name="fee_participants"/>
+            			<field name="fee_transport"/>
+            			<field name="material_cost"/>
+            			<field name="fee_total"/>
+            			<field name="state"/>
+            			<field name="sspar_ids" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_ss_registration_search_view">
+        <field name="name">campos.fee.ss.registration.search (in campos_fee)</field>
+        <field name="model">campos.fee.ss.registration</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="snapshot_id"/>
+               	<field name="registration_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_ss_registration_tree_view">
+        <field name="name">campos.fee.ss.registration.tree (in campos_fee)</field>
+        <field name="model">campos.fee.ss.registration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="snapshot_id"/>
+               	<field name="registration_id"/>
+               	<field name="name"/>
+                <field name="number_participants"/>
+       			<field name="fee_participants"/>
+       			<field name="fee_transport"/>
+       			<field name="material_cost"/>
+       			<field name="fee_total"/>
+       			<field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_fee_ss_registration_act_window">
+        <field name="name">Registration Snapshot</field> <!-- TODO -->
+        <field name="res_model">campos.fee.ss.registration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_fee_ss_registration_menu">
+        <field name="name">Registrations</field>
+        <field name="parent_id" ref="campos_fee_snapshot_top_menu"/>
+        <field name="action" ref="campos_fee_ss_registration_act_window"/>
+        <field name="sequence" eval="20"/>
+    </record>
+
+</data>
+</openerp>

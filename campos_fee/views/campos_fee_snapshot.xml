@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_fee_snapshot_form_view">
+        <field name="name">campos.fee.snapshot.form (in campos_fee)</field>
+        <field name="model">campos.fee.snapshot</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                	<button name="action_do_snapshot" string="Execute" type="object" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,inprogress,completed" />
+                </header>
+                <sheet>
+                    
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_snapshot_search_view">
+        <field name="name">campos.fee.snapshot.search (in campos_fee)</field>
+        <field name="model">campos.fee.snapshot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_snapshot_tree_view">
+        <field name="name">campos.fee.snapshot.tree (in campos_fee)</field>
+        <field name="model">campos.fee.snapshot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_fee_snapshot_act_window">
+        <field name="name">Campos Fee Snapshot</field> <!-- TODO -->
+        <field name="res_model">campos.fee.snapshot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+	 <record model="ir.ui.menu" id="campos_fee_snapshot_top_menu">
+        <field name="name">Snapshots</field>
+        <field name="parent_id" ref="base.menu_reporting"/>
+        <field name="sequence" eval="16"/>
+    </record>
+    
+    <record model="ir.ui.menu" id="campos_fee_snapshot_menu">
+        <field name="name">Snapshots</field>
+        <field name="parent_id" ref="campos_fee_snapshot_top_menu"/>
+        <field name="action" ref="campos_fee_snapshot_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</data>
+</openerp>
