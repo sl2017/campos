@@ -18,6 +18,7 @@
                     <group>
                         <field name="name"/>
                         <field name="fee_agegroup_id"/>
+                        <field name="dates_summery"/>
 						<field name="nights"/>
 						<field name="transport_co"/>
 						<field name="camp_product_id"/>
@@ -53,14 +54,8 @@
             <tree>
                 <field name="ssreg_id"/>
                 <field name="name"/>
-                <field name="fee_agegroup_id"/>
-				<field name="nights"/>
-				<field name="transport_co"/>
-				<field name="camp_product_id"/>
-				<field name="camp_price"/>
-				<field name="transport_product_id"/>
-				<field name="transport_price"/>
-				<field name="transport_price_total"/>
+                <field name="dates_summery"/>
+                <field name="transport_co"/>
 				<field name="camp_price_total"/>
 				<field name="state"/>
             </tree>

@@ -36,3 +36,4 @@ class CamposFeeSsParticipant(models.Model):
                              'Approval Procedure')
     transport_to_camp = fields.Boolean('Common transport to camp')
     transport_from_camp = fields.Boolean('Common transport from camp')
+    dates_summery = fields.Char('Camp Days')

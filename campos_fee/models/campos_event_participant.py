@@ -79,18 +79,19 @@ class CamposEventParticipant(models.Model):
     def do_snapshot(self, ssreg):
         for par in self:
             sspar = self.env['campos.fee.ss.participant'].create({'ssreg_id': ssreg.id,
-                                                                  'participant_id': self.id,
-                                                                  'state': self.state,
-                                                                  'name': self.name,
-                                                                  'fee_agegroup_id': self.fee_agegroup_id.id,
-                                                                  'nights': self.nights,
-                                                                  'transport_co': self.transport_co,
-                                                                  'transport_to_camp': self.transport_to_camp,
-                                                                  'transport_from_camp': self.transport_from_camp,
-                                                                  'camp_product_id': self.camp_product_id.id,
-                                                                  'transport_product_id': self.transport_product_id.id,
-                                                                  'transport_price_total': self.transport_price_total,
-                                                                  'camp_price_total': self.camp_price_total
+                                                                  'participant_id': par.id,
+                                                                  'state': par.state,
+                                                                  'name': par.name,
+                                                                  'fee_agegroup_id': par.fee_agegroup_id.id,
+                                                                  'nights': par.nights,
+                                                                  'transport_co': par.transport_co,
+                                                                  'transport_to_camp': par.transport_to_camp,
+                                                                  'transport_from_camp': par.transport_from_camp,
+                                                                  'camp_product_id': par.camp_product_id.id,
+                                                                  'transport_product_id': par.transport_product_id.id,
+                                                                  'transport_price_total': par.transport_price_total,
+                                                                  'camp_price_total': par.camp_price_total,
+                                                                  'dates_summery' par.dates_summery.
                                                                   })
             
 
