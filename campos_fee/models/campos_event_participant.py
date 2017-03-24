@@ -46,7 +46,10 @@ class CamposEventParticipant(models.Model):
                     pav_id = self.env['product.attribute.value'].suspend_security().search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
                 
                 if pav_id:
-                    pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
+                    if self.env.uid == SUPERUSER_ID:
+                        pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
+                    else:    
+                        pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
                     if pp_id:
                         par.camp_product_id = pp_id[0]
                         camp_price = pp_id[0].lst_price
