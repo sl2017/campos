@@ -2,7 +2,7 @@
 # Copyright 2017 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, SUPERUSER_ID, _
 
 
 class CamposEventParticipant(models.Model):
@@ -39,7 +39,12 @@ class CamposEventParticipant(models.Model):
                 nights = len(par.camp_day_ids.filtered('will_participate')) - 1
                 if nights < 1:
                     nights = 1
-                pav_id = self.env['product.attribute.value'].suspend_security().search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
+                pav_id = False
+                if self.uid == SUPERUSER_ID:
+                    pav_id = self.env['product.attribute.value'].search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
+                else:
+                    pav_id = self.env['product.attribute.value'].suspend_security().search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
+                
                 if pav_id:
                     pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
                     if pp_id:
@@ -59,7 +64,11 @@ class CamposEventParticipant(models.Model):
                         transport_co += 1
                 par.transport_co = transport_co
                 if transport_co and par.registration_id.partner_id.municipality_id.product_attribute_id.id:
-                    pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
+                    pp_id = False
+                    if self.uid == SUPERUSER_ID:
+                        pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
+                    else:
+                        pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
                     if pp_id:
                         par.transport_product_id = pp_id[0]
                         transport_price_total = pp_id[0].lst_price * transport_co
