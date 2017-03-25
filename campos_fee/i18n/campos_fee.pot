@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-23 14:15+0000\n"
-"PO-Revision-Date: 2017-03-23 14:15+0000\n"
+"POT-Creation-Date: 2017-03-25 02:00+0000\n"
+"PO-Revision-Date: 2017-03-25 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,22 @@ msgid "Campos Fee Agegroup"
 msgstr ""
 
 #. module: campos_fee
+#: model:ir.actions.act_window,name:campos_fee.campos_fee_snapshot_act_window
+#: model:ir.model,name:campos_fee.model_campos_fee_snapshot
+msgid "Campos Fee Snapshot"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.model,name:campos_fee.model_campos_fee_ss_participant
+msgid "Campos Fee Ss Participant"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.model,name:campos_fee.model_campos_fee_ss_registration
+msgid "Campos Fee Ss Registration"
+msgstr ""
+
+#. module: campos_fee
 #: model:ir.model,name:campos_fee.model_campos_municipality
 msgid "DK Kommuner"
 msgstr ""
@@ -106,6 +122,11 @@ msgstr ""
 #. module: campos_fee
 #: model:ir.model,name:campos_fee.model_event_registration
 msgid "Event Registration"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.fee.snapshot:campos_fee.campos_fee_snapshot_form_view
+msgid "Execute"
 msgstr ""
 
 #. module: campos_fee
@@ -384,6 +405,16 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
+#: model:ir.actions.act_window,name:campos_fee.campos_fee_ss_participant_act_window
+msgid "Participant Snapshot"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.ui.menu,name:campos_fee.campos_fee_ss_participant_menu
+msgid "Participants"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_164
 msgid "Randers"
 msgstr ""
@@ -391,6 +422,16 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_165
 msgid "Rebild"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.actions.act_window,name:campos_fee.campos_fee_ss_registration_act_window
+msgid "Registration Snapshot"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.ui.menu,name:campos_fee.campos_fee_ss_registration_menu
+msgid "Registrations"
 msgstr ""
 
 #. module: campos_fee
@@ -441,6 +482,14 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_175
 msgid "Slagelse"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.event.participant:campos_fee.campos_event_participant_form_view
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
+#: model:ir.ui.menu,name:campos_fee.campos_fee_snapshot_menu
+#: model:ir.ui.menu,name:campos_fee.campos_fee_snapshot_top_menu
+msgid "Snapshots"
 msgstr ""
 
 #. module: campos_fee
