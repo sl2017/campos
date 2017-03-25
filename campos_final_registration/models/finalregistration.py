@@ -16,8 +16,8 @@ class FinalRegistration(models.Model):
     child_certificates_accept = fields.Boolean('Check declaration of child certificates')
     child_certificates_date = fields.Date('Date of declaration') 
     child_certificates_user = fields.Char('User signing declaration')
-    friendship_group_ids = fields.One2many('event.registration.friendshipgrouplist','own_registration_id','Friendship Groups')
-    reverse_friendship_group_ids = fields.One2many('event.registration.friendshipgrouplist','friendship_group_registration_id','Reverse Friendship Groups')
+    friendship_group_ids = fields.One2many('campos.reg.friendship','own_registration_id','Friendship Groups')
+    reverse_friendship_group_ids = fields.One2many('campos.reg.friendship','friendship_group_reg_id','Reverse Friendship Groups')
     pioneering_pole_depot_id = fields.Many2one('event.registration.pioneeringpoledepot','Pioneering Pole Depot')
     event_days = fields.One2many(related='event_id.event_day_ids', string='Event Days', readonly=True)
     participants_camp_day_ids = fields.One2many('campos.event.participant.day','registration_id_stored','Participant Camp Days')
@@ -52,7 +52,7 @@ class FinalRegistration(models.Model):
                     vals2['camp_area_id'] = vals['camp_area_id']
                 if 'subcamp_id' in vals:
                     vals2['subcamp_id'] = vals['subcamp_id']
-                reg_id = friendship_group_reg.friendship_group_registration_id
+                reg_id = friendship_group_reg.friendship_group_reg_id
                 reg_id.write(vals2)
         return retval
 
@@ -84,10 +84,10 @@ class FinalRegistration(models.Model):
             }
 
 class FriendshipGroupList(models.Model):
-    _name = 'event.registration.friendshipgrouplist'
+    _name = 'campos.reg.friendship'
     own_registration_id = fields.Many2one('event.registration', 'Registration', required=True,  domain="[('partner_id.country_id.code','=','DK')]")
-    friendship_group_registration_id = fields.Many2one('event.registration','Friendship Group', required=True,  domain="[('partner_id.scoutgroup','=',True),('partner_id.country_id.code','!=','DK')]")
-    _sql_constraints = [('unique_friendship_group_regid', 'unique(friendship_group_registration_id)', _('A group can only be added once as friendship group'))]
+    friendship_group_reg_id = fields.Many2one('event.registration','Friendship Group', required=True,  domain="[('partner_id.scoutgroup','=',True),('partner_id.country_id.code','!=','DK')]")
+    _sql_constraints = [('unique_friendship_group_regid', 'unique(friendship_group_reg_id)', _('A group can only be added once as friendship group'))]
 # When connecting friendship group to registration, then copy camp_area_id+subcamp_id to friendship groups registration
     @api.model
     def create(self, vals):
@@ -99,8 +99,8 @@ class FriendshipGroupList(models.Model):
         vals2 = {}
         vals2['camp_area_id'] = camp_area_id
         vals2['subcamp_id'] = subcamp_id
-        friendship_group_registration_id = vals['friendship_group_registration_id']
-        friendship_group_registration = self.env['event.registration'].search([('id', '=', friendship_group_registration_id)])
+        friendship_group_reg_id = vals['friendship_group_reg_id']
+        friendship_group_registration = self.env['event.registration'].search([('id', '=', friendship_group_reg_id)])
         friendship_group_registration.write(vals2)
         return retval
 

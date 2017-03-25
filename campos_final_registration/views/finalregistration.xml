@@ -90,14 +90,28 @@
 
 			<record id="view_tree_event_registration_friendshipgrouplist" model="ir.ui.view">
 				<field name="name">Friendship Group List</field>
-				<field name="model">event.registration.friendshipgrouplist</field>
+				<field name="model">campos.reg.friendship</field>
 				<field name="arch" type="xml">
 					<tree>
 						<field name="own_registration_id"/>
-						<field name="friendship_group_registration_id"/>
+						<field name="friendship_group_reg_id"/>
 					</tree>
 				</field>
+			</record>
+			
+			<record id="view_tree_event_registration_friendshipgroupform" model="ir.ui.view">
+				<field name="name">Friendship Group form</field>
+				<field name="model">campos.reg.friendship</field>
+				<field name="arch" type="xml">
+					<form>
+						<group>
+							<field name="own_registration_id"/>
+							<field name="friendship_group_reg_id"/>
+						</group>
+					</form>
+				</field>
 			</record> 	
+			 	
 
 			<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
@@ -153,11 +167,11 @@
 										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
 													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}">
 											<tree editable="bottom">
-												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
+												<field name="friendship_group_reg_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
 										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
-													 readonly="1"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
+													  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
 											<tree>
 												<field name="own_registration_id"/>
 											</tree>
@@ -308,7 +322,7 @@
 										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
 													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}" readonly="1">
 											<tree editable="bottom">
-												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
+												<field name="friendship_group_reg_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
 										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
@@ -354,9 +368,60 @@
 								</page>
 								<page string="Sub Camp">
 									<group>
-										<field name="subcamp_id"  options="{'no_create': True}" readonly="1"/>
-										<field name="camp_area_id" options="{'no_create': True}" readonly="1"/>
+										<field name="subcamp_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
+										<field name="camp_area_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
 									</group>
+									<separator string="Sub Camp Responsible"/>
+									<field name="subcamp_function_view_ids" options="{'no_open': True}" readonly="1" >
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+                         			<separator string="Camp Area Coordinators"/>
+									<field name="part_function_view_ids" readonly="1" options="{'no_open': True, 'reload_on_button': True}">
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+		                         	<separator string="Scout Groups Contacts"/>
+		                         	<field name="reg_view_ids" readonly="1" >
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}" options="{'no_open': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         			</group>
+		                         		</form>
+		                         	</field>
 								</page>
 								<page string="Internal Information" invisible="1">
 									<group>
@@ -583,8 +648,8 @@
 
 		<act_window id="action_event_registration_friendshipgrouplist"
 		name="Friendship Group List"
-		res_model="event.registration.friendshipgrouplist"
-		view_mode="tree" />
+		res_model="campos.reg.friendship"
+		view_mode="tree,form" />
 
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>

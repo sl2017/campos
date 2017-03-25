@@ -11,7 +11,7 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
-            	<page string="Camp Fee">
+            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
             		<group>
             			<field name="number_participants"/>
             			<field name="fee_participants"/>

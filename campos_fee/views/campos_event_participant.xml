@@ -11,7 +11,7 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
         <field name="arch" type="xml">
             <page name="contact" position="after">
-            	<page name="camp_fee" string="Camp Fee">
+            	<page name="camp_fee" string="Camp Fee" groups="campos_event.group_campos_admin">
             		<group>
 		            	<field name="fee_agegroup_id" options="{'no_open': True}" readonly="1"/>
 		            	<field name="nights" readonly="1"/>
