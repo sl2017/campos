@@ -29,6 +29,21 @@ class WebtourRegistration(models.Model):
     jdatemp1 = fields.Boolean('jdatemp1')
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
 
+    @api.multi
+    def write(self, vals):
+        _logger.info("Write Entered %s", vals.keys())
+        ret = super(WebtourRegistration, self).write(vals)
+                      
+        for reg in self:
+            if  ('webtourdefaulthomedestination' in vals 
+                 or 'webtourgrouptocampdestination_id' in vals 
+                 or 'webtourgroupfromcampdestination_id' in vals
+                 ):
+                for par in reg.webtourparticipant_ids:
+                    par.recalcneed=True
+                    
+        return ret
+    
     @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
@@ -146,6 +161,12 @@ class WebtourRegistration(models.Model):
                                              
             _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)  
 
+    @api.multi
+    def action_update_webtourtravelneed_ids(self):
+        for reg in self:
+            for par in reg.webtourparticipant_ids:
+                par.tocampusneed_id.calc_travelneed_id()
+                par.fromcampusneed_id.calc_travelneed_id()
 
     @api.one
     def createTestPaticipants(self):
@@ -246,9 +267,15 @@ class WebtourRegistrationTravelNeed(models.Model):
     _description = 'Special Travel need on a registration'
     _name='event.registration.travelneed'
     registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
+    travelgroup = fields.Char('Travel Group')
+    group_country_code2 = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code2', readonly=True)
+    groupisdanish = fields.Char(compute='_compute_groupisdanish', string='groupisdanish', store = False)
     name = fields.Char('Name', required=True)
     campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
-    traveldate_id = fields.Many2one('campos.webtourusneed.triptype.date','Date', required=True,  domain="[('campos_TripType_id','=',campos_TripType_id)]")
+    traveldate = fields.Date('Travel Date')
+    startdestinationidno = fields.Many2one('campos.webtourusdestination.view','From',ondelete='set null')
+    enddestinationidno = fields.Many2one('campos.webtourusdestination.view','To',ondelete='set null')
+    travelconnectiondetails = fields.Char('Connection Details')
     deadline = fields.Selection([    ('Select', 'Please Select'),
                                      ('00:00', '00:00'),
                                      ('01:00', '01:00'),
@@ -274,4 +301,14 @@ class WebtourRegistrationTravelNeed(models.Model):
                                      ('21:00', '21:00'),
                                      ('22:00', '22:00'),
                                      ('23:00', '23:00')                                                                         
-                                     ], default='Select', string='Time')      
+                                     ], default='Select', string='Time')
+    
+    overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
+    pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
+    
+    @api.depends('group_country_code2')
+    def _compute_groupisdanish(self):
+        for record in self:
+            record.groupisdanish = record.group_country_code2 == 'DK'
+
+            

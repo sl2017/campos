@@ -35,11 +35,25 @@ class WebtourParticipant(models.Model):
     individualfromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
                                             'Individual From camp Drop off',
                                             ondelete='set null')
-
+    
+    recalcneed = fields.Boolean('recalcneed')
+    tocamptravelgroup = fields.Selection([    ('1', 'Group 1'),
+                                              ('2', 'Group 2'),
+                                              ('3', 'Group 3'),
+                                              ('4', 'Group 4'),
+                                              ('5', 'Group 5')], default='1', string='Travel Group to Camp')
+    
+    fromcamptravelgroup = fields.Selection([  ('1', 'Group 1'),
+                                              ('2', 'Group 2'),
+                                              ('3', 'Group 3'),
+                                              ('4', 'Group 4'),
+                                              ('5', 'Group 5')], default='1', string='Travel Group from Camp')      
+      
     @api.multi
-    @api.depends('individualtocampfromdestination_id','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')
+    @api.depends('individualtocampfromdestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')
     def _compute_tocampfromdestination_id(self):
         for par in self:
+            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
             if par.individualtocampfromdestination_id:
                 par.tocampfromdestination_id = par.individualtocampfromdestination_id
             elif par.registration_id.webtourgrouptocampdestination_id:
@@ -48,11 +62,13 @@ class WebtourParticipant(models.Model):
                 par.tocampfromdestination_id = par.registration_id.webtourdefaulthomedestination
             else:
                 par.tocampfromdestination_id = False
-                
+            #par.update_tocampusneed()
+                          
     @api.multi
-    @api.depends('individualfromcamptodestination_id','registration_id.webtourdefaulthomedestination','registration_id.webtourgroupfromcampdestination_id')
+    @api.depends('individualfromcamptodestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgroupfromcampdestination_id')
     def _compute_fromcamptomdestination_id(self):
         for par in self:
+            #_logger.info("_compute_fromcamptomdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
             if par.individualfromcamptodestination_id:
                 par.fromcamptodestination_id = par.individualfromcamptodestination_id
             elif par.registration_id.webtourgroupfromcampdestination_id:
@@ -61,12 +77,14 @@ class WebtourParticipant(models.Model):
                 par.fromcamptodestination_id = par.registration_id.webtourdefaulthomedestination
             else:
                 par.fromcamptodestination_id = False
-                
+            #par.update_fromcampusneed()   
+                         
     @api.multi
     @api.depends('dates_summery','specialtocampdatetime')
     def _compute_tocampdate(self):
 
         for par in self:
+            
             if par.specialtocampdatetime:
                 par.tocampdate = par.specialtocampdatetime
             else:
@@ -80,12 +98,15 @@ class WebtourParticipant(models.Model):
                     par.tocampdate = dates[0]
                 else :
                     par.tocampdate = False
-
+            #xxxpar.update_tocampusneed()
+            _logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_tocampdate, % % %",par.specialtocampdatetime,dates,par.tocampdate)
+            
     @api.multi
     @api.depends('dates_summery','specialfromcampdatetime')
     def _compute_fromcampdate(self):
 
         for par in self:
+            #_logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_fromcampdate")            
             if par.specialfromcampdatetime:
                 par.fromcampdate = par.specialfromcampdatetime
             else:
@@ -99,8 +120,9 @@ class WebtourParticipant(models.Model):
                     par.fromcampdate = dates[0]
                 else :
                     par.fromcampdate = False
-
-  
+            #xxxpar.update_fromcampusneed()
+            _logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_fromcampdate, % % %",par.specialfromcampdatetime,dates,par.fromcampdate)
+              
     @api.model
     def get_create_usgroupidno_tron(self):
         MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
@@ -187,78 +209,118 @@ class WebtourParticipant(models.Model):
     
     @api.multi
     def write(self, vals):
-        _logger.info("Transportation Participant Write Entered %s", vals.keys())
+        _logger.info("Write Entered %s", vals.keys())
         ret = super(WebtourParticipant, self).write(vals)
-        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
-        campdesination= webtourconfig.campdestinationid.destinationidno
-               
+                      
         for par in self:
-     
+            if  ('recalcneed' in vals):
+                _logger.info("Write xxxxxxxxxxxx recalcneed change %s", par.id)
+                par._compute_tocampfromdestination_id()
+                par._compute_fromcamptomdestination_id()
+            
+            if  ('camp_day_ids' in vals):    
+                par._compute_tocampdate()
+                par._compute_fromcampdate()
+                
             if  ('tocampfromdestination_id' in vals 
+                or 'individualtocampfromdestination_id' in vals 
+                or 'tocamptravelgroup' in vals
+                or 'camp_day_ids' in vals
                 or 'tocampdate' in vals
                 or 'transport_to_camp' in vals 
                 or 'webtourususeridno' in vals
                 ):
-                if par.tocampusneed_id.id == False:
-                    dicto1 = {}
-                    dicto1["participant_id"] = par.id
-                    dicto1["campos_demandneeded"] = par.transport_to_camp
-                    dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
-                    dicto1["campos_startdatetime"] = par.tocampdate
-                    dicto1["campos_enddatetime"] = par.tocampdate
-                    dicto1["campos_startdestinationidno"] = par.tocampfromdestination_id.destinationidno
-                    dicto1["campos_enddestinationidno"] = campdesination
-                    dicto1["webtour_useridno"] = par.webtourususeridno
-                    dicto1["webtour_groupidno"] = par.webtourusgroupidno
-                    dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
                 
-                    usneed_obj = self.env['campos.webtourusneed']                
-                    par.tocampusneed_id = usneed_obj.create(dicto1)
-                else:
-                    par.tocampusneed_id.campos_demandneeded = par.transport_to_camp
-                    par.tocampusneed_id.campos_startdatetime = par.tocampdate
-                    par.tocampusneed_id.campos_enddatetime = par.tocampdate
-                    par.tocampusneed_id.campos_startdestinationidno = par.tocampfromdestination_id.destinationidno
-                    par.tocampusneed_id.campos_enddestinationidno = campdesination
-                    par.tocampusneed_id.webtour_useridno = par.webtourususeridno
-                    par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno
-                    par.tocampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
-                                       
-                _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id
-                
+                par.update_tocampusneed()        
+                               
             if  ('fromcamptodestination_id' in vals 
+                or 'individualfromcamptodestination_id' in vals
+                or 'fromcamptravelgroup' in vals                
+                or 'camp_day_ids' in vals                 
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals 
                 or 'webtourususeridno' in vals
                 ):
-                if par.fromcampusneed_id.id == False:
-                    dicto1 = {}
-                    dicto1["participant_id"] = par.id
-                    dicto1["campos_demandneeded"] = par.transport_from_camp      
-                    dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
-                    dicto1["campos_startdatetime"] = par.fromcampdate
-                    dicto1["campos_enddatetime"] = par.fromcampdate                    
-                    dicto1["campos_startdestinationidno"] = campdesination
-                    dicto1["campos_enddestinationidno"] = par.fromcamptodestination_id.destinationidno
-                    dicto1["webtour_useridno"] = par.webtourususeridno
-                    dicto1["webtour_groupidno"] = par.webtourusgroupidno
-                    dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
-                                                        
-                    usneed_obj = self.env['campos.webtourusneed']                
-                    par.fromcampusneed_id = usneed_obj.create(dicto1)
-                else:
-                    par.fromcampusneed_id.campos_demandneeded = par.transport_from_camp
-                    par.fromcampusneed_id.campos_startdatetime = par.fromcampdate
-                    par.fromcampusneed_id.campos_enddatetime = par.fromcampdate
-                    par.fromcampusneed_id.campos_startdestinationidno = campdesination
-                    par.fromcampusneed_id.campos_enddestinationidno = par.fromcamptodestination_id.destinationidno
-                    par.fromcampusneed_id.webtour_useridno = par.webtourususeridno
-                    par.fromcampusneed_id.webtour_groupidno = par.webtourusgroupidno     
-                    par.fromcampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')
-                                                           
-                _logger.info("Transportation Participant Write Change in To camp transportation for %s %s",par.webtourususeridno),par.tocampusneed_id.id                            
+                par.update_fromcampusneed()   
+                        
         return ret
-    
+
+    @api.one
+    def update_tocampusneed(self):
+      
+        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
+        campdesination= webtourconfig.campdestinationid.destinationidno
+
+        
+        if self.tocampusneed_id.id == False:
+            dicto1 = {}
+            dicto1["participant_id"] = self.id
+            dicto1["travelgroup"] = self.tocamptravelgroup
+            dicto1["campos_demandneeded"] = self.transport_to_camp
+            dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
+            dicto1["campos_startdatetime"] = self.tocampdate
+            dicto1["campos_enddatetime"] = self.tocampdate
+            dicto1["campos_startdestinationidno"] = self.tocampfromdestination_id.destinationidno
+            dicto1["campos_enddestinationidno"] = campdesination
+            dicto1["webtour_useridno"] = self.webtourususeridno
+            dicto1["webtour_groupidno"] = self.webtourusgroupidno
+            dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
+        
+            usneed_obj = self.env['campos.webtourusneed']                
+            self.tocampusneed_id = usneed_obj.create(dicto1)
+        else:
+            dicto1 = {}   
+            dicto1["travelgroup"] = self.tocamptravelgroup                             
+            dicto1["campos_demandneeded"]  = self.transport_to_camp
+            dicto1["campos_startdatetime"]  = self.tocampdate
+            dicto1["campos_enddatetime"]  = self.tocampdate
+            dicto1["campos_startdestinationidno"]  = self.tocampfromdestination_id.destinationidno
+            dicto1["campos_enddestinationidno"]  = campdesination
+            dicto1["webtour_useridno"]  = self.webtourususeridno
+            dicto1["webtour_groupidno"]  = self.webtourusgroupidno
+            dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')  
+            self.tocampusneed_id.write(dicto1)
+            
+        _logger.info("Update_tocampusneed %s", dicto1)
+        
+    @api.one
+    def update_fromcampusneed(self):
+      
+        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
+        campdesination= webtourconfig.campdestinationid.destinationidno           
+            
+        if self.fromcampusneed_id.id == False:
+            dicto1 = {}
+            dicto1["participant_id"] = self.id
+            dicto1["travelgroup"] = self.fromcamptravelgroup            
+            dicto1["campos_demandneeded"] = self.transport_from_camp      
+            dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
+            dicto1["campos_startdatetime"] = self.fromcampdate
+            dicto1["campos_enddatetime"] = self.fromcampdate                    
+            dicto1["campos_startdestinationidno"] = campdesination
+            dicto1["campos_enddestinationidno"] = self.fromcamptodestination_id.destinationidno
+            dicto1["webtour_useridno"] = self.webtourususeridno
+            dicto1["webtour_groupidno"] = self.webtourusgroupidno
+            dicto1["campos_writeseq"] = self.env['ir.sequence'].get('webtour.transaction')
+                                                
+            usneed_obj = self.env['campos.webtourusneed']                
+            self.fromcampusneed_id = usneed_obj.create(dicto1)
+        else:
+            dicto1 = {} 
+            dicto1["travelgroup"] = self.fromcamptravelgroup               
+            dicto1["campos_demandneeded"]  = self.transport_from_camp
+            dicto1["campos_startdatetime"]  = self.fromcampdate
+            dicto1["campos_enddatetime"]  = self.fromcampdate
+            dicto1["campos_startdestinationidno"]  = campdesination
+            dicto1["campos_enddestinationidno"]  = self.fromcamptodestination_id.destinationidno
+            dicto1["webtour_useridno"]  = self.webtourususeridno
+            dicto1["webtour_groupidno"]  = self.webtourusgroupidno     
+            dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')
+            self.fromcampusneed_id.write(dicto1)
+                       
+        _logger.info("update_fromcampusneed %s", dicto1)
+         
+                 
     @api.multi
     def clearusecamptransport(self):
         # find participants missing usUserIDno, from Registration having a usGroupIDno

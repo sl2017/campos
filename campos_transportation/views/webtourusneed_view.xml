@@ -9,6 +9,7 @@
 <field name="id"/>
 <field name="participant_id"/>
 <field name="campos_TripType_id"/>
+<field name="travelgroup"/>
 <field name="campos_startdatetime"/>
 <field name="campos_startdestinationidno"/>
 <field name="campos_enddestinationidno"/>
@@ -34,6 +35,7 @@
 <group name="user_top">
 <field name="participant_id" readonly="0"/>
 <field name="campos_TripType_id"/>
+<field name="travelgroup"/>
 <group name="group_left">
 <field name="campos_startdatetime" readonly="0"/>
 <field name="campos_startdestinationidno" readonly="0"/>
@@ -44,6 +46,7 @@
 <field name="campos_writeseq"/>
 <field name="campos_transferedseq"/>
 <field name="campos_demandneeded"/>
+<field name="travelneed_id"/>
 </group>
 <group name="group_right">
 <field name="webtour_startdatetime" readonly="1"/>
@@ -99,7 +102,8 @@
 		<tree>
 	    <field name="registration_id" />
     	<field name="webtour_groupidno" />
-	    <field name="campos_TripType_id" />  
+	    <field name="campos_TripType_id" /> 
+	    <field name="travelgroup" />	    
     	<field name="campos_startdatetime" />
 	    <field name="campos_startdestinationidno" />
     	<field name="campos_enddestinationidno" />

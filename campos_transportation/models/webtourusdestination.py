@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, tools
 from xml.dom import minidom
 from ..interface import webtourinterface
 class WebtourUsDestination(models.Model):
@@ -83,3 +83,18 @@ class WebtourUsDestination(models.Model):
                 rs_webtourdestination.write(webtour_dict)
 
         return True
+    
+class WebtourUsDestinationView(models.Model):
+    _name = 'campos.webtourusdestination.view'
+    _auto = False
+    _log_access = False
+
+    name = fields.Char('Place', required=False)
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusdestination_view as
+                    SELECT destinationidno::int as id, placename as name FROM campos_webtourusdestination
+                    """
+                    )

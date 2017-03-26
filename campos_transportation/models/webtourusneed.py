@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
+    travelgroup = fields.Char('Travel Group')
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
     campos_demandneeded = fields.Boolean('CampOs Demand Needed', default=False)
     campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
@@ -33,8 +34,53 @@ class WebtourUsNeed(models.Model):
     webtour_endnote = fields.Char('Webtour EndNote', required=False)
     webtour_CurrentDateTime = fields.Char('CurrentDateTime', required=False)
     webtour_touridno = fields.Char('Webtour TourIDno', required=False)
+    travelneed_id= fields.Many2one('event.registration.travelneed','Travel need',ondelete='set null')
+
+    @api.multi
+    def write(self, vals):
+        _logger.info("WebtourUsNeed Write Entered %s", vals.keys())
+        ret = super(WebtourUsNeed, self).write(vals)
+        
+        for need in self:
+     
+            if  ('campos_TripType_id' in vals 
+                or 'travelgroup' in vals
+                or 'campos_startdatetime' in vals
+                or 'campos_startdestinationidno' in vals
+                or 'campos_enddestinationidno' in vals 
+                ):
+                #_logger.info("WebtourUsNeed Write Change %s %s", need.campos_startdatetime,fields.Date.from_string(need.campos_startdatetime))
+                need.calc_travelneed_id()
+             
+        return ret
     
-    api.multi
+    @api.one
+    def calc_travelneed_id(self):
+                # find travelneed matching usneeds
+                rs_travelneed= self.env['event.registration.travelneed'].search([('registration_id', '=', self.participant_id.registration_id.id),('travelgroup', '=', self.travelgroup),('campos_TripType_id', '=', self.campos_TripType_id.id)
+                                                                                 ,('startdestinationidno.id', '=', self.campos_startdestinationidno),('enddestinationidno.id', '=', self.campos_enddestinationidno),('traveldate', '=', fields.Date.from_string(self.campos_startdatetime))])
+                
+                #_logger.info("calc_travelneed_id Entered %s %s %s %s",self.travelneed_id.traveldate , rs_travelneed,self.campos_startdatetime,fields.Date.from_string(self.campos_startdatetime))
+                if rs_travelneed:
+                    #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_startdatetime,fields.Date.from_string(self.webtour_startdatetime))
+                    if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):
+                        #_logger.info("WebtourUsNeed Write Change BBBBBBBBBBBBBBBBBBBBBBBBBBB")  
+                        self.travelneed_id=rs_travelneed[0] 
+        
+                else:
+                    dicto0 = {}
+                    dicto0["registration_id"] = self.participant_id.registration_id.id
+                    dicto0["travelgroup"] =self.travelgroup
+                    dicto0["name"] = 'Bus Trip'   
+                    dicto0["campos_TripType_id"] = self.campos_TripType_id.id
+                    dicto0["startdestinationidno"] = self.campos_startdestinationidno
+                    dicto0["enddestinationidno"] = self.campos_enddestinationidno
+                    dicto0["traveldate"] = fields.Date.from_string(self.campos_startdatetime)
+                    dicto0["deadline"] ='Select'
+                    _logger.info("calc_travelneed_id Create %s",dicto0)
+                    self.travelneed_id = self.env['event.registration.travelneed'].create(dicto0)          
+            
+    @api.multi
     @api.depends('campos_writeseq','campos_transferedseq') 
     def _computediff(self):
         for record in self: 
@@ -235,6 +281,7 @@ class WebtourNeedOverview(models.Model):
     _log_access = False
 
     registration_id = fields.Many2one('event.registration','Registration ID')
+    travelgroup = fields.Char('Travel Group')
     webtour_groupidno = fields.Char('Webtour us Group ID no')
     campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour Trip Type')    
     campos_startdatetime = fields.Char('CampOs StartDateTime')
@@ -257,7 +304,7 @@ class WebtourNeedOverview(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusneed_overview as
-                    SELECT min(campos_webtourusneed.id) as id, event_registration.id as registration_id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
+                    SELECT case when travelneed_id is not null then travelneed_id else -min(campos_webtourusneed.id) end as id, event_registration.id as registration_id,travelgroup,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
                     , count(campos_webtourusneed.id) as pax
                     , sum(case when campos_demandneeded then 0 else 1 end) as excessdemand 
                     , sum(case when campos_transfered then 0 else 1 end) as nottransfered
@@ -271,8 +318,8 @@ class WebtourNeedOverview(models.Model):
                     FROM campos_webtourusneed
                     left outer join event_registration on webtourusgroupidno = webtour_groupidno
                     where campos_demandneeded or (not webtour_deleted and webtour_needidno::INT4>0)
-                    group by                
-                    event_registration.id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp
+                    group by travelneed_id, travelgroup            
+                    ,event_registration.id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp
                     ,campos_startdestinationidno
                     ,campos_enddestinationidno
                     """
