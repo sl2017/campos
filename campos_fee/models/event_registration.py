@@ -65,3 +65,8 @@ class EventRegistration(models.Model):
                 func = getattr(ssreg, snapshot.execute_func)
                 func()
 
+    @api.multi
+    def assign_group_number(self):
+        for reg in self:
+            if not reg.partner_id.ref:
+                reg.partner_id.ref = self.env['ir.sequence'].next_by_code('group.number')

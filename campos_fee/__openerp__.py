@@ -29,6 +29,7 @@
         'data/product.attribute.csv',
         'data/product.attribute.value.csv',
         'data/campos.municipality.csv',
+        'data/group_number.xml',
     ],
     'demo': [
     ],
