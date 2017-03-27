@@ -57,8 +57,11 @@ class EventRegistration(models.Model):
                          'fee_total': reg.fee_total,
                          'state': reg.state,
                          'name': reg.name})
+<<<<<<< HEAD
             
             if snapshot.execute_func:
                 func = getattr(ssreg, snapshot.execute_func)
                 func()
 
+=======
+>>>>>>> branch '8.0' of https://github.com/sl2017/campos.git
