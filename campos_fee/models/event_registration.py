@@ -30,7 +30,7 @@ def related_action_generic(session, job):
 @related_action(action=related_action_generic)
 def do_delayed_snapshot(session, model, ssreg_id):
     _logger.info("DO SSREG: %d", ssreg_id)
-    ssreg = session.env['campos.fee.ss.registration'].browse(product_id)
+    ssreg = session.env['campos.fee.ss.registration'].browse(ssreg_id)
     if ssreg.exists():
         ssreg.do_delayed_snapshot()
 
