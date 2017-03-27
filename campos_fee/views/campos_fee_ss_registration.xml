@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <button name="make_invoice_50" string="Test invoice" type="object" />
                 </header>
                 <sheet>
                     <!-- TODO -->
@@ -25,6 +25,7 @@
             			<field name="material_cost"/>
             			<field name="fee_total"/>
             			<field name="state"/>
+            			<field name="invoice_id"/>
             			<field name="sspar_ids" nolabel="1" colspan="2"/>
                     </group>
                 </sheet>

@@ -18,6 +18,7 @@
                     
                     <group>
                         <field name="name"/>
+                        <field name="execute_func"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

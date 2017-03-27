@@ -35,7 +35,7 @@ class EventRegistration(models.Model):
             reg.number_participants = number_participants
             reg.number_participants_stored = number_participants
             so_cost = 0.0
-            for so in self.env['sale.order.line'].suspend_secutiry().search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
+            for so in self.env['sale.order.line'].suspend_security().search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
                 so_cost += so.price_subtotal
             reg.material_cost = so_cost
             reg.fee_total = fee_participants + fee_transport + so_cost
@@ -57,3 +57,8 @@ class EventRegistration(models.Model):
                          'fee_total': reg.fee_total,
                          'state': reg.state,
                          'name': reg.name})
+            
+            if snapshot.execute_func:
+                func = getattr(ssreg, snapshot.execute_func)
+                func()
+

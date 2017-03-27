@@ -16,6 +16,7 @@
                 <sheet>
                     <!-- TODO -->
                     <group>
+                    	<field name="ssreg_id"/>
                         <field name="name"/>
                         <field name="fee_agegroup_id"/>
                         <field name="dates_summery"/>
