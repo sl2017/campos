@@ -2,7 +2,7 @@
 # Copyright 2017 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models, SUPERUSER_ID, _
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -35,8 +35,12 @@ class EventRegistration(models.Model):
             reg.number_participants = number_participants
             reg.number_participants_stored = number_participants
             so_cost = 0.0
-            for so in self.env['sale.order.line'].suspend_security().search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
-                so_cost += so.price_subtotal
+            if self.env.uid == SUPERUSER_ID:
+                for so in self.env['sale.order.line'].search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
+                    so_cost += so.price_subtotal
+            else:
+                for so in self.env['sale.order.line'].suspend_security().search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
+                    so_cost += so.price_subtotal
             reg.material_cost = so_cost
             reg.fee_total = fee_participants + fee_transport + so_cost
             
@@ -57,11 +61,7 @@ class EventRegistration(models.Model):
                          'fee_total': reg.fee_total,
                          'state': reg.state,
                          'name': reg.name})
-<<<<<<< HEAD
-            
             if snapshot.execute_func:
                 func = getattr(ssreg, snapshot.execute_func)
                 func()
 
-=======
->>>>>>> branch '8.0' of https://github.com/sl2017/campos.git
