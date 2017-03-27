@@ -15,11 +15,12 @@
 				 	<field name="participant"/>
 				 	<field name="staff"/>
 				 	<field name="sponsor"/>
+				 	
 				 	</group>
 				 	<group>
 				 	<field name="scoutorg_id"/>
 				 	<field name="municipality_id"/>
-				 	
+				 	<field name="primary_reg_id"/>
 				 	</group>
 				 </group>
 				 </page>
