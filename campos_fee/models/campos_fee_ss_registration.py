@@ -38,7 +38,7 @@ class CamposFeeSsRegistration(models.Model):
         aio = self.env['account.invoice']
         for ssreg in self:
             
-            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK':
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
             
                 query = """  select camp_product_id, count(*) 
                              from campos_fee_ss_participant 
@@ -73,7 +73,10 @@ class CamposFeeSsRegistration(models.Model):
         '''
         ailo = self.env['account.invoice.line']
         
-        partner = self.registration_id.partner_id
+        if self.registration_id.econ_partner_id:
+            partner = self.registration_id.econ_partner_id
+        else:
+            partner = self.registration_id.partner_id
         
         il_vals = ailo.product_id_change(
             product.id, product.uom_id.id, type=type,
@@ -101,7 +104,11 @@ class CamposFeeSsRegistration(models.Model):
         '''
         aio = self.env['account.invoice']
         
-        partner = self.registration_id.partner_id
+        if self.registration_id.econ_partner_id:
+            partner = self.registration_id.econ_partner_id
+        else:
+            partner = self.registration_id.partner_id
+        
         if not date_invoice:
             date_invoice = fields.Date.today()
         
