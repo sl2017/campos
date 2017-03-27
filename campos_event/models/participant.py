@@ -549,3 +549,5 @@ class EventParticipant(geo_model.GeoModel):
         for par in self:
             if not par.participant_number:
                 par.participant_number = self.env['ir.sequence'].next_by_code('participant.number')
+            if par.partner_id.ref != par.participant_number:
+                 par.partner_id.ref = par.participant_number
