@@ -4,8 +4,36 @@
 
 from openerp import api, fields, models, SUPERUSER_ID, _
 
+
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
 import logging
 _logger = logging.getLogger(__name__)
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+@job(default_channel='root.inv')
+@related_action(action=related_action_generic)
+def do_delayed_snapshot(session, model, ssreg_id):
+    _logger.info("DO SSREG: %d", ssreg_id)
+    ssreg = session.env['campos.fee.ss.registration'].browse(product_id)
+    if ssreg.exists():
+        ssreg.do_delayed_snapshot()
+
 
 class EventRegistration(models.Model):
 
@@ -51,19 +79,22 @@ class EventRegistration(models.Model):
             ssreg = self.env['campos.fee.ss.registration'].create({'snapshot_id': snapshot.id,
                                                                    'registration_id': reg.id})
             
-            for par in reg.participant_ids:
-                par.do_snapshot(ssreg)
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_snapshot.delay(session, 'campos.fee.ss.registration', ssreg.id)
             
-            ssreg.write({'number_participants': reg.number_participants,
-                         'fee_participants': reg.fee_participants,
-                         'fee_transport': reg.fee_transport,
-                         'material_cost': reg.material_cost,
-                         'fee_total': reg.fee_total,
-                         'state': reg.state,
-                         'name': reg.name})
-            if snapshot.execute_func:
-                func = getattr(ssreg, snapshot.execute_func)
-                func()
+#             for par in reg.participant_ids:
+#                 par.do_snapshot(ssreg)
+#             
+#             ssreg.write({'number_participants': reg.number_participants,
+#                          'fee_participants': reg.fee_participants,
+#                          'fee_transport': reg.fee_transport,
+#                          'material_cost': reg.material_cost,
+#                          'fee_total': reg.fee_total,
+#                          'state': reg.state,
+#                          'name': reg.name})
+#             if snapshot.execute_func:
+#                 func = getattr(ssreg, snapshot.execute_func)
+#                 func()
 
     @api.multi
     def assign_group_number(self):

@@ -13,6 +13,7 @@
     'depends': [
         'campos_event',
         'campos_final_registration',
+        'connector',
     ],
     'data': [
         'security/campos_fee_snapshot.xml',

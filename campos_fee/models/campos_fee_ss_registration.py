@@ -4,8 +4,16 @@
 
 from openerp import api, fields, models, _
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
 import logging
 _logger = logging.getLogger(__name__)
+
+
+
+
 
 class CamposFeeSsRegistration(models.Model):
 
@@ -32,6 +40,25 @@ class CamposFeeSsRegistration(models.Model):
     material_cost = fields.Float('Material orders')
     fee_total = fields.Float('Total Fee')
     invoice_id = fields.Many2one('account.invoice', 'Invoice')
+
+
+    @api.multi
+    def do_delayed_snapshot(self):
+        for ssreg in self:
+        
+            for par in ssreg.registration_id.participant_ids:
+                par.do_snapshot(ssreg)
+            
+            ssreg.write({'number_participants': ssreg.registration_id.number_participants,
+                         'fee_participants': ssreg.registration_id.fee_participants,
+                         'fee_transport': ssreg.registration_id.fee_transport,
+                         'material_cost': ssreg.registration_id.material_cost,
+                         'fee_total': ssreg.registration_id.fee_total,
+                         'state': ssreg.registration_id.state,
+                         'name': ssreg.registration_id.name})
+            if ssreg.snapshot_id.execute_func:
+                func = getattr(ssreg, ssreg.snapshot_id.execute_func)
+                func()
 
     @api.multi            
     def make_invoice_50(self):
@@ -85,7 +112,6 @@ class CamposFeeSsRegistration(models.Model):
         il_vals.update({
             'product_id': product.id,
             'price_unit': amount,
-            'profile_id': self.id,
             'quantity': quantity
         })
         if description:
@@ -117,7 +143,6 @@ class CamposFeeSsRegistration(models.Model):
             'currency_id': self.env.user.company_id.currency_id.id,
             'type': type,
             'company_id': self.env.user.company_id.id,
-            'is_subscription_invoice': True,
             'date_invoice': date_invoice,
             'invoice_line': [],
         
