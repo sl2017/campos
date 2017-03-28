@@ -56,7 +56,16 @@
         </field>
     </record>
 
-
+	 <record model="ir.ui.view" id="registration_search_tree_view">
+        <field name="name">event.registration.tree (in campos_jobber_final)</field>
+        <field name="model">event.registration</field>
+        <field name="arch" type="xml">
+        	<tree>
+        		<field name="name"/>
+        		<field name="organization_id"/>
+        	</tree>
+        </field>
+	</record>
 
 
 </data>

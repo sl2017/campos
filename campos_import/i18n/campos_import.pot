@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-29 02:00+0000\n"
-"PO-Revision-Date: 2017-01-29 02:00+0000\n"
+"POT-Creation-Date: 2017-03-26 02:00+0000\n"
+"PO-Revision-Date: 2017-03-26 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -126,6 +126,7 @@ msgstr ""
 
 #. module: campos_import
 #: model:ir.actions.act_window,name:campos_import.action_group_final_registration
+#: model:ir.actions.act_window,name:campos_import.action_group_final_registration_admin
 #: model:ir.ui.menu,name:campos_import.menu_action_group_registration
 msgid "My Group"
 msgstr ""
@@ -173,8 +174,18 @@ msgid "Sales Order Lines"
 msgstr ""
 
 #. module: campos_import
+#: model:ir.ui.menu,name:campos_import.menu_action_group_reg_admin
+msgid "Scout Groups"
+msgstr ""
+
+#. module: campos_import
 #: view:sale.order:campos_import.group_sale_order_form_view
 msgid "Terms and conditions..."
+msgstr ""
+
+#. module: campos_import
+#: view:sale.order.line:campos_import.group_sale_order_line_tree_view
+msgid "Total"
 msgstr ""
 
 #. module: campos_import

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+ 
+    <record model="ir.ui.view" id="view_form_finalregistration_gl">
+        <field name="name">event.registration.form (in campos_fee)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
+        <field name="arch" type="xml">
+            <page name="pre_reg" position="before">
+            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
+            		<group>
+            			<field name="number_participants"/>
+            			<field name="fee_participants"/>
+            			<field name="fee_transport"/>
+            			<field name="material_cost"/>
+            			<field name="fee_total"/>
+            		
+            		</group>
+
+            	</page>
+            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            		<group>
+						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
+            		</group>
+            	</page>
+            </page>
+        </field>
+    </record>
+
+	<record model="ir.ui.view" id="view_tree_event_registration">
+        <field name="name">event.registration.tree (in campos_fee)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_preregistration.view_tree_event_registration"/>
+        <field name="arch" type="xml">
+            <field name="pre_reg_cnt" position="after">
+           		<field name="number_participants_stored"/>
+           </field>
+        </field>
+    </record>
+	    
+    
+
+	<record model="ir.ui.view" id="view_form_finalregistration_gl">
+        <field name="name">event.registration.form (in campos_fee)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
+        <field name="arch" type="xml">
+            <page name="pre_reg" position="before">
+            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
+            		<group>
+            			<field name="number_participants"/>
+            			<field name="fee_participants"/>
+            			<field name="fee_transport"/>
+            			<field name="material_cost"/>
+            			<field name="fee_total"/>
+            		
+            		</group>
+
+            	</page>
+            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            		<group>
+						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
+            		</group>
+            	</page>
+            </page>
+        </field>
+    </record>
+
+
+
+</data>
+</openerp>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="res_country_form_view">
+        <field name="name">res.country.form (in campos_event)</field>
+        <field name="model">res.country</field>
+        <field name="inherit_id" ref="base.view_country_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+            		<field name="visa_req" groups="campos_event.group_campos_admin"/>
+            	</field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_country_search_view">
+        <field name="name">res.country.search (in campos_event)</field>
+        <field name="model">res.country</field>
+        <field name="arch" type="xml">
+        	<search>
+	        	<field name="name"/>
+	            <field name="code"/>
+	            <filter name="fvisa_req" string="Visa Req." domain="[('visa_req', '=', True)]" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_country_tree_view">
+        <field name="name">res.country.tree (in campos_event)</field>
+        <field name="model">res.country</field>
+        <field name="inherit_id" ref="base.view_country_tree"/>
+        <field name="arch" type="xml">
+            	<field name="code" position="after">
+            		<field name="visa_req" groups="campos_event.group_campos_admin"/>
+            	</field>
+        </field>
+    </record>
+
+
+</data>
+</openerp>

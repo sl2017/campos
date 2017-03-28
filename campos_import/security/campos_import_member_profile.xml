@@ -27,7 +27,7 @@
         <field name="name">campos.event.participant import</field>
         <field name="model_id" ref="model_campos_event_participant"/>
         <!-- TODO review and adapt -->
-        <field name="group_id" ref="campos_welcome.group_campos_imported_group"/>
+        <field name="group_id" ref="campos_preregistration.group_campos_groupleader"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_fee_ss_participant_form_view">
+        <field name="name">campos.fee.ss.participant.form (in campos_fee)</field>
+        <field name="model">campos.fee.ss.participant</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                    	<field name="ssreg_id"/>
+                        <field name="name"/>
+                        <field name="fee_agegroup_id"/>
+                        <field name="dates_summery"/>
+						<field name="nights"/>
+						<field name="transport_co"/>
+						<field name="camp_product_id"/>
+						<field name="camp_price"/>
+						<field name="transport_product_id"/>
+						<field name="transport_price"/>
+						<field name="transport_price_total"/>
+						<field name="camp_price_total"/>
+						<filed name="state"/>
+                    </group>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+<!-- 
+    <record model="ir.ui.view" id="campos_fee_ss_participant_search_view">
+        <field name="name">campos.fee.ss.participant.search (in campos_fee)</field>
+        <field name="model">campos.fee.ss.participant</field>
+        <field name="arch" type="xml">
+            <search>
+    
+            </search>
+        </field>
+    </record>
+ -->
+ 
+    <record model="ir.ui.view" id="campos_fee_ss_participant_tree_view">
+        <field name="name">campos.fee.ss.participant.tree (in campos_fee)</field>
+        <field name="model">campos.fee.ss.participant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ssreg_id"/>
+                <field name="name"/>
+                <field name="dates_summery"/>
+                <field name="transport_co"/>
+				<field name="camp_price_total"/>
+				<field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_fee_ss_participant_act_window">
+        <field name="name">Participant Snapshot</field> <!-- TODO -->
+        <field name="res_model">campos.fee.ss.participant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_fee_ss_participant_menu">
+        <field name="name">Participants</field>
+        <field name="parent_id" ref="campos_fee_snapshot_top_menu"/>
+        <field name="action" ref="campos_fee_ss_participant_act_window"/>
+        <field name="sequence" eval="30"/>
+    </record>
+
+</data>
+</openerp>

@@ -48,6 +48,8 @@ class ResPartner(models.Model):
         select=True,
         ondelete='set null')
     scoutorg_id = fields.Many2one('campos.scout.org', 'Scout organization')
+    primary_reg_id = fields.Many2one('event.registration', 'Group registration', compute='_compute_primary_reg', store=True)
+    customer_type = fields.Char('Export Type', compute='_compute_customer_type')
     
     def name_get(self, cr, uid, ids, context=None):
         if context is None:
@@ -57,8 +59,8 @@ class ResPartner(models.Model):
         res = []
         for record in self.browse(cr, uid, ids, context=context):
             name = record.name
-            #if record.parent_id and not record.is_company and not context.get('without_company'):
-            #    name =  "%s, %s" % (record.parent_id.name, name)
+            if record.parent_id and not record.is_company and not context.get('without_company'):
+                name =  "%s, %s" % (record.parent_id.name, name)
             if context.get('show_address'):
                 name = name + "\n" + self._display_address(cr, uid, record, without_company=True, context=context)
                 name = name.replace('\n\n','\n')
@@ -76,4 +78,31 @@ class ResPartner(models.Model):
     @api.depends('name', 'email', 'mobile')
     def _get_complete_contact(self):
         self.complete_contact = '\n'.join(filter(None, [self.name, self.email, self.mobile]))
+        
+    @api.multi
+    @api.depends('event_registration_ids')
+    def _compute_primary_reg(self):
+        event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
+        if event_id:
+            event_id = int(event_id)
+        for par in self:
+            regs = par.event_registration_ids.filtered(lambda r: r.event_id == event_id and r.state in ['open', 'done'])
+            if regs:
+                par.primary_reg_id = regs[0]
       
+    @api.multi
+    @api.depends('scoutgroup','staff','country_id')
+    def _compute_customer_type(self):
+        for par in self:
+            p1 = ''
+            p2 = ''
+            if par.staff:
+                p1 = 'Jobber'
+            elif par.scoutgroup:
+                p1 = 'Grupper'
+            
+            if par.country_id.code == 'DK':
+                p2 = 'In'
+            else:
+                p2 = 'Ud'
+            par.customer_type = '%s %s' % (p1, p2)

@@ -214,6 +214,7 @@ class EventRegistration(models.Model):
         ('cancel', 'Cancelled'),
         ('open', 'Confirmed'),
         ('done', 'Attended'),
+        ('deregistered', 'Deregistered')
     ], string='Status', default='draft', readonly=True, copy=False,
         track_visibility='onchange')
 
@@ -284,4 +285,17 @@ class EventRegistration(models.Model):
                 'url': '/survey/fill/%s/%s' % (self.event_id.survey_id.id, self.reg_survey_input_id.token),
                 'nodestroy': True,
                 'target': 'new' }
+        
+    @api.multi
+    @api.depends('name', 'organization_id')
+    def name_get(self):
+        result = []
+        show_org = self.env.context.get('show_organization', False)
+        _logger.info('SHOW ORG: %s', show_org)
+        for reg in self:
+            if show_org and reg.organization_id:
+                result.append((reg.id, '%s (%s)' % (reg.name, reg.organization_id.name)))
+            else:
+                result.append((reg.id, reg.name)) 
+        return result
 

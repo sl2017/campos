@@ -57,6 +57,7 @@ class CamposImportParticipantWiz(models.TransientModel):
                                 'parent_id': wizard.registration_id.partner_id.id,
                                 'transport_to_camp': wizard.transport_to_camp,
                                 'transport_from_camp': wizard.transport_to_camp,
+                                'participant': True,
                                 })
                     mbr.participant_id = part
                 else:
