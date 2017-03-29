@@ -38,3 +38,12 @@ class ResPartner(models.Model):
                               'remote_int_id': org[0]['partner_id'][0],
                               'remote_link_id': org_id[0],
                               })
+
+    @api.multi
+    def reimport_partner(self):
+        for par in self:
+            if not par.remote_system_id:
+                par.remote_system_id = par.parent_id.remote_system_id
+            if par.remote_system_id:    
+                par.remote_system_id.syncPartner(partner=par)
+
