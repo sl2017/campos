@@ -86,7 +86,7 @@ class ResPartner(models.Model):
         if event_id:
             event_id = int(event_id)
         for par in self:
-            regs = par.event_registration_ids.filtered(lambda r: r.event_id == event_id and r.state in ['open', 'done'])
+            regs = par.event_registration_ids.filtered(lambda r: r.event_id.id == event_id and r.state in ['open', 'done'])
             if regs:
                 par.primary_reg_id = regs[0]
       
