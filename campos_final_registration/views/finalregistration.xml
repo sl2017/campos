@@ -123,7 +123,8 @@
 						<button name="cancel_registration" 
 										type="object"    
 										string="Cancel Registration"
-										attrs="{'invisible': [('state', '=', 'cancel')]}"/> 
+										attrs="{'invisible': [('state', '=', 'cancel')]}"
+										confirm="Deregister this group from the Camp?" groups="campos_event.group_campos_admin"/> 
 						<button name="reopen_registration" 
 										type="object"    
 										string="Reopen Registration"
