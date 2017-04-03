@@ -14,10 +14,10 @@ class CamposActivityInstanse(models.Model):
     name = fields.Char('Name', size=128, translate=True)
     seats_max = fields.Integer('Maximum Avalaible Seats')
     seats_hard = fields.Boolean('Hard limit')
-    seats_reserved': fields.function(_get_seats, string='Reserved Seats', type='integer', multi='seats_reserved'),
-        'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved', fnct_search=_search_seats),
-        'seats_used': fields.function(_get_seats, string='Number of Participations', type='integer', multi='seats_reserved'),
-        #'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', multi='seats_reserved'),
+    #seats_reserved': fields.function(_get_seats, string='Reserved Seats', type='integer', multi='seats_reserved'),
+    #    'seats_available': fields.function(_get_seats, string='Available Seats', type='integer', multi='seats_reserved', fnct_search=_search_seats),
+    #    'seats_used': fields.function(_get_seats, string='Number of Participations', type='integer', multi='seats_reserved'),
+    #'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', multi='seats_reserved'),
     activity_id = fields.Many2one('campos.activity.activity', 'Activity'),
     period_id =  fields.Many2one('campos.activity.period', 'Period'),
     staff_ids = fields.Many2many('campos.event.participant','campos_activity_staff_rel', 'act_ins_id','par_id','Staff')
