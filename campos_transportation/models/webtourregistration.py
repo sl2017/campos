@@ -23,7 +23,7 @@ class WebtourRegistration(models.Model):
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
     webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
-    webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
+    #webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
     jdatemp1 = fields.Boolean('jdatemp1')
@@ -39,7 +39,7 @@ class WebtourRegistration(models.Model):
                  or 'webtourgrouptocampdestination_id' in vals 
                  or 'webtourgroupfromcampdestination_id' in vals
                  ):
-                for par in reg.webtourparticipant_ids:
+                for par in reg.participant_ids:
                     par.recalcneed=True
                     
         return ret
@@ -52,7 +52,8 @@ class WebtourRegistration(models.Model):
     @api.depends()
     def _compute_webtournoofparticipant(self):
         for record in self:  
-            record.webtournoofparticipant = len(record.webtourparticipant_ids)
+            record.webtournoofparticipant = len(record.participant_ids)
+
 
     @api.depends('partner_id.partner_latitude','partner_id.partner_longitude')
     def _compute_webtourhasgeoadd(self):
@@ -164,15 +165,15 @@ class WebtourRegistration(models.Model):
     @api.multi
     def action_update_webtourtravelneed_ids(self):
         for reg in self:
-            for par in reg.webtourparticipant_ids:
+            for par in reg.participant_ids:
                 par.tocampusneed_id.calc_travelneed_id()
                 par.fromcampusneed_id.calc_travelneed_id()
 
     @api.one
-    def createTestPaticipants(self):
+    def createTestParticipants(self):
                 
         for age_group in self.participant_ids:
-            _logger.info("createTestPaticipants: %s",age_group.participant_age_group_id.name)
+            _logger.info("createTestParticipants: %s",age_group.participant_age_group_id.name)
             for i in range(0,age_group.participant_total):
                     dicto0 = {}
                     dicto0["name"] = age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i)   
@@ -191,7 +192,7 @@ class WebtourRegistration(models.Model):
                     dicto1["transport_to_camp"] = i > age_group.participant_own_transport_to_camp_total
                     dicto1["transport_from_camp"] = i > age_group.participant_own_transport_from_camp_total
 
-                    _logger.info("createTestPaticipants: %s",dicto1)
+                    _logger.info("createTestParticipants: %s",dicto1)
                                                   
                     newparticipant_obj = self.env['campos.event.participant']                
                     newparticipant = newparticipant_obj.create(dicto1)
@@ -199,38 +200,38 @@ class WebtourRegistration(models.Model):
                     newparticipant.fromcamptodestination_id = self.webtourdefaulthomedestination
                 
     @api.one
-    def createTestPaticipantsAll(self):
+    def createTestParticipantsAll(self):
         regs = self.env['event.registration'].search([('webtourdefaulthomedestination', '=', False),('partner_id', '<>', False),('webtourPreregTotalSeats', '>', 0)])
-        _logger.info("createTestPaticipantsAll Stil to go %s", len(regs)) 
+        _logger.info("createTestParticipantsAll Stil to go %s", len(regs)) 
         n=0
         for reg in regs:
             reg.set_webtourdefaulthomedestination()
-            _logger.info("createTestPaticipantsAll %s, Dest: %s, Participants:  %s",reg.name, reg.webtourdefaulthomedestination.id, len(reg.webtourparticipant_ids)) 
-            reg.createTestPaticipants()
+            _logger.info("createTestParticipantsAll %s, Dest: %s, Participants:  %s",reg.name, reg.webtourdefaulthomedestination.id, len(reg.participant_ids)) 
+            reg.createTestParticipants()
             n= n+1
             if n> 30: 
                 break
     
     @api.one
-    def seteventdaysRegPaticipantsAll(self):
+    def seteventdaysRegParticipantsAll(self):
         #regs = self.env['event.registration'].search([('event_id', '=', 1),('partner_id', '<>', False),('jdatemp1','=',True)])
         #for reg in regs:
         #    reg.jdatemp1=False
                                 
         regs = self.env['event.registration'].search([('event_id', '=', 1),('partner_id', '<>', False),('jdatemp1','=',False),('partner_id.scoutgroup', '=', True)])
-        _logger.info("seteventdaysRegPaticipantsAll Stil to go %s", len(regs))
+        _logger.info("seteventdaysRegParticipantsAll Stil to go %s", len(regs))
         n = 0 
         for reg in regs:
-            _logger.info("seteventdaysRegPaticipantsAll Here we go %s", reg.name)
-            reg.seteventdaysRegPaticipants()
+            _logger.info("seteventdaysRegParticipantsAll Here we go %s", reg.name)
+            reg.seteventdaysRegParticipants()
             reg.jdatemp1=True
             n= n+1
             if n> 4000:
                 break
  
     @api.one
-    def seteventdaysRegPaticipants(self):
-        _logger.info("seteventdaysRegPaticipant %s %s", self.name, len(self.participant_ids)) 
+    def seteventdaysRegParticipants(self):
+        _logger.info("seteventdaysRegParticipant %s %s", self.name, len(self.participant_ids)) 
 
         for par in self.participant_ids:
             par.check_camp_days()
@@ -238,19 +239,19 @@ class WebtourRegistration(models.Model):
                 day.will_participate = False
                      
         for age_group in self.prereg_participant_ids:
-            _logger.info("seteventdaysRegPaticipant in agegroup: %s",age_group.participant_age_group_id.name)
+            _logger.info("seteventdaysRegParticipant in agegroup: %s",age_group.participant_age_group_id.name)
 
             for i in range(0,age_group.participant_total):
                 found = False
                 s= age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i)
-                _logger.info("seteventdaysRegPaticipant in agegroup %s, %s, %s",str(i),s,age_group.participant_from_date)
+                _logger.info("seteventdaysRegParticipant in agegroup %s, %s, %s",str(i),s,age_group.participant_from_date)
 
                 for p in self.participant_ids.search([('partner_id.name','=',age_group.registration_id.name + ' ' + age_group.participant_age_group_id.name + 'Test ID ' + str(i))]):                 
                     if p.dates_summery == False and found == False:
                         for day in p.camp_day_ids:
                             if day.the_date >= age_group.participant_from_date and day.the_date <= age_group.participant_to_date:
                                 day.will_participate = True
-                        _logger.info("seteventdaysRegPaticipant in agegroup TRANSPORT %s, %s, %s",str(i),age_group.participant_own_transport_to_camp_total,age_group.participant_own_transport_from_camp_total )                   
+                        _logger.info("seteventdaysRegParticipant in agegroup TRANSPORT %s, %s, %s",str(i),age_group.participant_own_transport_to_camp_total,age_group.participant_own_transport_from_camp_total )                   
                         p.transport_to_camp = i > age_group.participant_own_transport_to_camp_total
                         p.transport_from_camp = i > age_group.participant_own_transport_from_camp_total        
                         found = True

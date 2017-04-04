@@ -23,10 +23,10 @@
 <field name="arch" type="xml">
 <form>
 <header>
-<button name="createTestPaticipants" type="object" string="Create Test Participants this Group" class="oe_highlight" />
+<button name="createTestParticipants" type="object" string="Create Test Participants this Group" class="oe_highlight" />
 <button name="set_webtourdefaulthomedestination" type="object" string="Set Home Dest" class="oe_highlight" />
-<button name="createTestPaticipantsAll" type="object" string="Create Test Participants All Group" class="oe_highlight" />
-<button name="seteventdaysRegPaticipantsAll" type="object" string="Create set Event days All" class="oe_highlight" />
+<button name="createTestParticipantsAll" type="object" string="Create Test Participants All Group" class="oe_highlight" />
+<button name="seteventdaysRegParticipantsAll" type="object" string="Create set Event days All" class="oe_highlight" />
 </header>
 <sheet>
 <group name="user_top">
