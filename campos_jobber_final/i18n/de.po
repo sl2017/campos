@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 16:14+0000\n"
-"PO-Revision-Date: 2017-03-29 16:14+0000\n"
+"POT-Creation-Date: 2017-04-04 20:32+0000\n"
+"PO-Revision-Date: 2017-04-04 20:32+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -170,6 +170,29 @@ msgid "Children Island"
 msgstr "Die Kinderinsel Børneøen"
 
 #. module: campos_jobber_final
+#: help:campos.event.participant,signup_state:0
+msgid ""
+"Chose weather you are going to stay at the campsite or not. Must be filled "
+"in."
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,canteen_ids:0
+msgid ""
+"Chose where you would like to eat at the campsite. You may chose between "
+"several different locations - but only within the jamboree site. During the "
+"pre/post camp everybody is catered in Øen."
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,accomodation_ids:0
+msgid ""
+"Chose where you would like to stay at the campsite. You may chose between "
+"several different locations - but only within the jamboree site. During the "
+"pre/post camp everybody is accommodated in Øen."
+msgstr ""
+
+#. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "City"
@@ -293,6 +316,20 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.event.participant,info_html:0
 msgid "Info html"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,need_ids:0
+msgid ""
+"Is chosen if you have any kind special needs - or have a caravan with you. "
+"See page 20 in the instructions."
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,paybygroup:0
+msgid ""
+"Is only chosen if you have to pay through a group. See page 21 in the "
+"instructions."
 msgstr ""
 
 #. module: campos_jobber_final

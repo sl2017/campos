@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 16:14+0000\n"
-"PO-Revision-Date: 2017-03-29 16:14+0000\n"
+"POT-Creation-Date: 2017-04-04 20:32+0000\n"
+"PO-Revision-Date: 2017-04-04 20:32+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -81,6 +81,11 @@ msgid "Check declaration of child certificates"
 msgstr ""
 
 #. module: campos_final_registration
+#: help:campos.event.participant,camp_day_ids:0
+msgid "Chose which days you're participating in the jamboree"
+msgstr ""
+
+#. module: campos_final_registration
 #: field:campos.event.participant,transport_from_camp:0
 msgid "Common transport from camp"
 msgstr ""
@@ -137,6 +142,11 @@ msgstr ""
 #. module: campos_final_registration
 #: field:event.registration.pioneeringpoledepot,name:0
 msgid "Depot Name"
+msgstr ""
+
+#. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
+msgid "Deregister this group from the Camp?"
 msgstr ""
 
 #. module: campos_final_registration
@@ -450,6 +460,14 @@ msgstr ""
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Registration State"
 msgstr "Status"
+
+#. module: campos_final_registration
+#: help:campos.event.participant,transport_from_camp:0
+#: help:campos.event.participant,transport_to_camp:0
+msgid ""
+"Remember to mark this, with you wish to use the joint transportation. See "
+"page 29 in the instructions."
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
