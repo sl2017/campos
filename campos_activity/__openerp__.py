@@ -10,7 +10,8 @@
     'license': 'AGPL-3',
     'author': 'Stein & Gabelgaard ApS',
     'website': 'www.steingabelgaard.dk',
-    'depends': [ 'mail',
+    'depends': [ 'mail', 
+                'campos_event',
     ],
     'data': [
         'security/campos_activity_ticket.xml',
