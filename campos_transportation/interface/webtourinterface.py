@@ -249,6 +249,30 @@ def usneed_getbyidno(_url,_key,request):
 
     return doc
 
+def usneed_delete(_url,_key,request):
+    global cookie
+
+    def do_usneed_delete():
+        do_url = _url + "usNeed/Delete/?NeedIDno=" + request
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_usneed_delete()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login(_url,_key)
+
+    return doc
+
 def usneed_GetByGroupIDno(_url,_key,request):
     global cookie
 
@@ -265,6 +289,30 @@ def usneed_GetByGroupIDno(_url,_key,request):
 
     while repeat_read:
         doc = do_usneed_getbygroupidno()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login(_url,_key)
+
+    return doc
+
+def usneed_GetPending_ByIDno(_url,_key,request):
+    global cookie
+
+    def do_usneed_getpendingbyidno():
+        do_url = _url + "usNeed/GetPending_ByIDno/?IDno=" + request
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = minidom.parseString(response.content)
+
+        return doc
+
+    repeat_read = True
+
+    while repeat_read:
+        doc = do_usneed_getpendingbyidno()
 
         if is_authenticated(doc):
             repeat_read = False

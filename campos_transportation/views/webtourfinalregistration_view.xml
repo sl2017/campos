@@ -33,6 +33,12 @@
 						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
            			</page>
         		</xpath>
+        		<!-- xxxxxx
+        		<xpath expr="/form/sheet/group/notebook/page/group/field/tree/field[@name='transport_to_camp']" position="after">
+					<field name="tocampusneed_id"/>        		
+	        	</xpath>  
+	        	-->     		
+        		  		
 			</field>	
 		</record>
 	

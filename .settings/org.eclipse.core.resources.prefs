@@ -15,6 +15,7 @@ encoding//campos_event/models/participant.py=utf-8
 encoding//campos_event/models/res_partner.py=utf-8
 encoding//campos_final_registration/__openerp__.py=utf-8
 encoding//campos_final_registration/models/finalregistration.py=utf-8
+encoding//campos_jobber_final/models/campos_event_participant.py=utf-8
 encoding//campos_preregistration/__init__.py=utf-8
 encoding//campos_preregistration/__openerp__.py=utf-8
 encoding//campos_preregistration/models/__init__.py=utf-8

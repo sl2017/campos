@@ -311,4 +311,34 @@ class WebtourRegistrationTravelNeed(models.Model):
         for record in self:
             record.groupisdanish = record.group_country_code2 == 'DK'
 
+class WebtourEntryExitPoint(models.Model):
+    _inherit = 'event.registration.entryexitpoint'
+    address = fields.Char('Address', required=False)
+    latitude = fields.Char(string='Latitude', required=False)
+    longitude = fields.Char(string='Longitude', required=False)
+
+    @api.multi
+    def write(self, vals):
+        _logger.info("Write Entered %s", vals.keys())
+        ret = super(WebtourEntryExitPoint, self).write(vals)              
+        for rec in self:
+            if  ('address' in vals):
+                gmaps = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.geocode'))
             
+                _logger.info("Try to Geocode with Googlemaps %s %s",rec.name,rec.address)
+                
+                try:
+                    geocode_result = gmaps.geocode(rec.address)
+                    lat=geocode_result[0]['geometry']['location']['lat']
+                    lng=geocode_result[0]['geometry']['location']['lng']
+                    rec.latitude = float(lat)
+                    rec.longitude = float(lng)
+                    _logger.info("Got Googlemap Geocoding  %f %f",rec.latitude,rec.longitude)
+                    self.env.cr.commit()
+                except:
+                    rec.latitude = False
+                    rec.longitude = False  
+                    
+        return ret
+
+                
