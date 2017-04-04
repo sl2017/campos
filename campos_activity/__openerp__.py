@@ -15,13 +15,13 @@
     ],
     'data': [
         'security/campos_activity_ticket.xml',
-        'views/campos_activity_ticket.xml',
+        #'views/campos_activity_ticket.xml',
         'security/campos_activity_instanse.xml',
-        'views/campos_activity_instanse.xml',
+        #'views/campos_activity_instanse.xml',
         'security/campos_activity_period.xml',
-        'views/campos_activity_period.xml',
+        #'views/campos_activity_period.xml',
         'security/campos_activity_activity.xml',
-        'views/campos_activity_activity.xml',
+        #'views/campos_activity_activity.xml',
     ],
     'demo': [
     ],
