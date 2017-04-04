@@ -230,7 +230,7 @@ class EventParticipant(geo_model.GeoModel):
 
     def check_duplicate(self):
         if self.email and self.staff:
-            if self.search_count([('id', '!=', self.id), ('state', '!=', 'deregistered'), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
+            if self.search_count([('id', '!=', self.id), ('state', '!=', 'deregistered'), ('staff','=',True), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
                 self.state = 'duplicate'
     @api.model
     def create(self, vals):
