@@ -13,6 +13,7 @@ class CamposActivityActivity(models.Model):
     _inherit = 'mail.thread'
     
     name = fields.Char('Name', size=128, translate=True)
+    code = name = fields.Char('Code', size=20)
     committee_id = fields.Many2one('campos.committee', 'Committee')
     desc = fields.Text('Description', translate=True)
     age_from =  fields.Integer('Age from', default=0)
