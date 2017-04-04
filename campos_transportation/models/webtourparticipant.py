@@ -53,7 +53,7 @@ class WebtourParticipant(models.Model):
     @api.depends('individualtocampfromdestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')
     def _compute_tocampfromdestination_id(self):
         for par in self:
-            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
+            _logger.info("_compute_tocampfromdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
             if par.individualtocampfromdestination_id:
                 par.tocampfromdestination_id = par.individualtocampfromdestination_id
             elif par.registration_id.webtourgrouptocampdestination_id:
@@ -62,6 +62,7 @@ class WebtourParticipant(models.Model):
                 par.tocampfromdestination_id = par.registration_id.webtourdefaulthomedestination
             else:
                 par.tocampfromdestination_id = False
+            _logger.info("_compute_tocampfromdestination_id result %s",par.tocampfromdestination_id)
             #par.update_tocampusneed()
                           
     @api.multi
@@ -339,13 +340,14 @@ class WebtourParticipantCampDay(models.Model):
 
     @api.one
     def _compute_webtourcamptransportation(self):
+        _logger.info("_compute_webtourcamptransportation %s %s %s", self, self.participant_id,self.participant_id.tocampfromdestination_id)
         if self.the_date == self.participant_id.tocampdate:
-            if self.participant_id.transport_to_camp:
+            if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
                 self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.placename
             else:
                 self.webtourcamptransportation = ''
         elif self.the_date == self.participant_id.fromcampdate:
-            if self.participant_id.transport_from_camp:
+            if self.participant_id.transport_from_camp and self.participant_id.fromcamptodestination_id.placename:
                 self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.placename
             else:
                 self.webtourcamptransportation = ''
