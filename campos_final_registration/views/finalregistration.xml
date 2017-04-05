@@ -278,7 +278,7 @@
 						<button name="cancel_registration" 
 										type="object"    
 										string="Cancel Registration"
-										attrs="{'invisible': ['|',('state', '=', 'cancel'),('staff','=',True)]}" />
+										attrs="{'invisible': ['|',('state', '=', 'cancel')]}" />
 						<button name="reopen_registration" 
 										type="object"    
 										string="Reopen Registration"
@@ -287,7 +287,6 @@
 					</header>
 					<sheet>
 						<group name="sheet" colspan="2">
-							<field name="staff" invisible="1" />
 							<field name="event_id" string="Event"  options="{'no_create': True}" invisible="1"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"  readonly="1"/>
 							<field name="organization_id" options="{'no_create': True}" readonly="1"/>
@@ -509,7 +508,7 @@
 					<header>
 							<button name="inactivate_participant" 
 											type="object"    
-											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '=', 'deregistered')]}" />
+											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': ['|',('state', '=', 'deregistered'),('staff','=',True)]}" />
 							<button name="activate_participant" 
 											type="object"    
 											string="Re-activate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '!=', 'deregistered')]}" />
@@ -517,6 +516,7 @@
 					</header>
 					<sheet>
 						<group name="sheet2">
+							<field name="staff" />
 							<field name="registration_id" invisible="1"/>
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
