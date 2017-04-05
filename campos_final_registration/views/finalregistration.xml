@@ -516,7 +516,7 @@
 					</header>
 					<sheet>
 						<group name="sheet2">
-							<field name="staff" />
+							<field name="staff" invisible="1"/>
 							<field name="registration_id" invisible="1"/>
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
