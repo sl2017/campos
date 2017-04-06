@@ -15,6 +15,17 @@
         <field name="perm_write" eval="0"/>
         <field name="perm_unlink" eval="0"/>
     </record>
+    
+    <record model="ir.model.access" id="campos_rfid_device_access_admin"> <!-- TODO acl id -->
+        <field name="name">campos.rfid.device access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_rfid_device"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="campos_event.group_campos_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
 
 </data>
 </openerp>
