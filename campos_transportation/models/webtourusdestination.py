@@ -2,6 +2,10 @@
 from openerp import models, fields, api, tools
 from xml.dom import minidom
 from ..interface import webtourinterface
+
+#import logging
+#_logger = logging.getLogger(__name__)
+
 class WebtourUsDestination(models.Model):
     _name = 'campos.webtourusdestination'
     destinationidno = fields.Char('Destination ID', required=True)
@@ -9,6 +13,7 @@ class WebtourUsDestination(models.Model):
     webtourname = fields.Char('WebTour Name', required=False)
     placename = fields.Char('Place', required=False)
     address = fields.Char('Address', required=False)
+    zip_city = fields.Char('Zip City', required=False)
     latitude = fields.Char('Latitude', required=False)
     longitude = fields.Char('Longitude', required=False)
     note = fields.Char('Note', required=False)
@@ -23,10 +28,14 @@ class WebtourUsDestination(models.Model):
             self.name = self.name + ' (' + ' IDno:' 
             self.name = self.name + self.destinationidno + ')'
         else:
-            self.name = '' + self.placename 
-            self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
-            self.name = self.name + ' (' + self.webtourname  
-            self.name = self.name + ' IDno:' + self.destinationidno + ')'
+            if self.webtourname[:7] == 'SL2017-':
+                self.name = '' + self.placename 
+                self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+                self.name = self.name + ' (' + self.webtourname  
+                self.name = self.name + ' IDno:' + self.destinationidno + ')'
+            else:
+                self.name = '' + self.webtourname 
+                self.name = self.name + ' (IDno:' + self.destinationidno + ')'
             
     @api.model
     def get_destinations_cron(self):
@@ -57,28 +66,38 @@ class WebtourUsDestination(models.Model):
             webtour_dict["destinationidno"] = destinationidno
             webtour_dict["webtourname"] = get_tag_data("a:Name")
             webtour_dict["placename"] = get_tag_data("a:PlaceName")
-            webtour_dict["address"] = get_tag_data("a:Address")
+            address = '' + get_tag_data("a:Address")
+            webtour_dict["address"] = address
+            crlf1 = address.find('\r')
+            crlf2 = address.find('\r',crlf1+1)          
+            if crlf1> 0 and crlf2 > 0 :
+                webtour_dict["zip_city"] = address[crlf1+1:crlf2]
+            
             lat=get_tag_data("a:Latitude")
             lon=get_tag_data("a:Longitude")
-            if lat[2] <>'.':
-                webtour_dict["latitude"] = lat[:2] + '.' + lat[2:]
-            else: 
-                webtour_dict["latitude"] = lat
+            #if len(lat) > 2: 
+            #    if lat[2] <>'.':
+            #        webtour_dict["latitude"] = lat[:2] + '.' + lat[2:]
+            #else: 
+            webtour_dict["latitude"] = lat
                 
-            if lon[2] <>'.':
-                if (lon[0]=='1'):
-                    webtour_dict["longitude"] = lon[:2] + '.' + lon[2:]
-                else:
-                    webtour_dict["longitude"] = lon[:1] + '.' + lon[1:]
-            else:     
-                webtour_dict["longitude"] = lon
+            #if len(lon) > 2:
+            #    if  lon[2] <>'.':
+            #        if (lon[0]=='1'):
+            #            webtour_dict["longitude"] = lon[:2] + '.' + lon[2:]
+            #   else:
+            #       webtour_dict["longitude"] = lon[:1] + '.' + lon[1:]
+            #else:     
+            webtour_dict["longitude"] = lon
                 
             webtour_dict["note"] = get_tag_data("a:Note")
-
+            
             rs_webtourdestination = self.env['campos.webtourusdestination'].search([('destinationidno','=',destinationidno)])
             rs_webtourdestination_count = len(rs_webtourdestination)
             if rs_webtourdestination_count == 0:
-                webtourusdestination_obj.create(webtour_dict)
+                name = get_tag_data("a:Name")
+                if name[:7] != 'SL2017-' and name not in ['Ringsted Centrum','Slagelse Vestsjællandscenter','Roskilde station','Næstved station']:
+                    webtourusdestination_obj.create(webtour_dict)
             else:
                 rs_webtourdestination.write(webtour_dict)
 

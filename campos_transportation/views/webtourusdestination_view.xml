@@ -7,11 +7,12 @@
 <field name="arch" type="xml">
 <tree>
 <field name="destinationidno"/>
-<field name="webtourname"/>
-<field name="placename"/>
 <field name="name"/>
+<field name="placename"/>
+<field name="latitude"/>
+<field name="longitude"/>
+<field name="zip_city"/>
 <field name="id"/>
-
 </tree>
 </field>
 </record>

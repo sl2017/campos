@@ -58,6 +58,8 @@ class WebtourParticipant(models.Model):
                 par.tocampfromdestination_id = par.individualtocampfromdestination_id
             elif par.registration_id.webtourgrouptocampdestination_id:
                 par.tocampfromdestination_id = par.registration_id.webtourgrouptocampdestination_id
+            elif par.registration_id.group_entrypoint.defaultdestination_id:
+                par.tocampfromdestination_id = par.registration_id.group_entrypoint.defaultdestination_id
             elif par.registration_id.webtourdefaulthomedestination:
                 par.tocampfromdestination_id = par.registration_id.webtourdefaulthomedestination
             else:
@@ -74,6 +76,8 @@ class WebtourParticipant(models.Model):
                 par.fromcamptodestination_id = par.individualfromcamptodestination_id
             elif par.registration_id.webtourgroupfromcampdestination_id:
                 par.fromcamptodestination_id = par.registration_id.webtourgroupfromcampdestination_id
+            elif par.registration_id.group_exitpoint.defaultdestination_id:
+                par.fromcamptodestination_id = par.registration_id.group_exitpoint.defaultdestination_id
             elif par.registration_id.webtourdefaulthomedestination:
                 par.fromcamptodestination_id = par.registration_id.webtourdefaulthomedestination
             else:

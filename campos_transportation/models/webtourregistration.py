@@ -23,21 +23,22 @@ class WebtourRegistration(models.Model):
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
     webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
-    #webtourparticipant_ids = fields.One2many('campos.event.participant','registration_id',ondelete='set null')
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
-    jdatemp1 = fields.Boolean('jdatemp1')
+#    jdatemp1 = fields.Boolean('jdatemp1')
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
 
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
         ret = super(WebtourRegistration, self).write(vals)
-                      
+    
         for reg in self:
             if  ('webtourdefaulthomedestination' in vals 
                  or 'webtourgrouptocampdestination_id' in vals 
                  or 'webtourgroupfromcampdestination_id' in vals
+                 or 'group_entrypoint' in vals
+                 or 'group_exitpoint' in vals
                  ):
                 for par in reg.participant_ids:
                     par.recalcneed=True
@@ -62,106 +63,111 @@ class WebtourRegistration(models.Model):
            
     @api.one
     def set_webtourdefaulthomedestination(self):
-        
-        # If gep point is missing, try to calculate
-        if (self.partner_id.partner_latitude==0):
-            self.partner_id.geocode_address()
-            if (self.partner_id.partner_latitude > 0):
-                _logger.info("Try to commit Non Google geocode ##########################")
-                self.env.cr.commit()
-            
-        # if still no result try geocode with Googlemap
-        if (self.partner_id.partner_latitude==0):
-            gmaps2 = googlemaps.Client(key='AIzaSyDJj_jezRITKDHP11DPiL4obmWwAwgzPHc')
-
-            _logger.info("Try to Geocode with Googlemaps %s %s %s",self.partner_id.street,self.partner_id.zip,self.partner_id.city)
-            
-            try:
-                a = self.partner_id.street+', '+ self.partner_id.zip+' '+self.partner_id.city
-                geocode_result = gmaps2.geocode(a)
-                lat=geocode_result[0]['geometry']['location']['lat']
-                lng=geocode_result[0]['geometry']['location']['lng']
-                self.partner_id.partner_latitude = float(lat)
-                self.partner_id.partner_longitude = float(lng)
-                _logger.info("Got Googlemap Geocoding  %f %f",self.partner_id.partner_latitude,self.partner_id.partner_longitude)
-                self.env.cr.commit()
-            except:
-                pass
-                                
-        # If geo point pressent lets go.... GOOGLEMAP DIAABLED          
-        if (self.partner_id.partner_latitude<>0):    
-
-            destinations = self.env['campos.webtourusdestination'].search([('name', '<>', '')])
-            
-            # approximate radius of earth in km
-            R = 6373.0
-            
-            #Home adresse cord
-            lat1 = radians(self.partner_id.partner_latitude)
-            lon1 = radians(self.partner_id.partner_longitude)  
-
-            dists=[] #placeholder for beeline distance from home to all destinations
-            
-            for d in destinations:
-                lat2 = radians(float(d.latitude))
-                lon2 = radians(float(d.longitude))
+        if self.group_country_code2 == 'DK':
+            # If gep point is missing, try to calculate
+            if (self.partner_id.partner_latitude==0):
+                self.partner_id.geocode_address()
+                if (self.partner_id.partner_latitude > 0):
+                    _logger.info("Try to commit Non Google geocode")
+                    self.env.cr.commit()
                 
-                dlon = lon2 - lon1
-                dlat = lat2 - lat1
-
-                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-                c = 2 * atan2(sqrt(a), sqrt(1 - a))
-                distance = R * c
+            # if still no result try geocode with Googlemap
+            if (self.partner_id.partner_latitude==0):
+                gmaps2 = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.geocode'))
+    
+                _logger.info("Try to Geocode with Googlemaps %s %s %s",self.partner_id.street,self.partner_id.zip,self.partner_id.city)
                 
-                dists.append([d.id,distance,float(d.latitude),float(d.longitude)]) 
-              
-            sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
-            
-            self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
-
-            lat1 = self.partner_id.partner_latitude
-            lon1 = self.partner_id.partner_longitude
-            
-            lat2=float(self.webtourdefaulthomedestination.latitude)
-            lon2=float(self.webtourdefaulthomedestination.longitude)
-              
-            n = 0;  #counter for no of dist to googlemaps
-            origins=[] #placeholder list for origons to googlemaps
-            destinations =[] #placeholder list for desinations to googlemaps
-            origins.append((lat1,lon1)) #Home add            
-            for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
-
-                destinations.append((d[2],d[3])) # get geo point stored in loop above
-                n = n+1 
-                if (n > 4):
-                    break       #Max 5 distinations    
+                try:
+                    a = self.partner_id.street+', '+ self.partner_id.zip+' '+self.partner_id.city
+                    geocode_result = gmaps2.geocode(a)
+                    lat=geocode_result[0]['geometry']['location']['lat']
+                    lng=geocode_result[0]['geometry']['location']['lng']
+                    self.partner_id.partner_latitude = float(lat)
+                    self.partner_id.partner_longitude = float(lng)
+                    _logger.info("Got Googlemap Geocoding  %f %f",self.partner_id.partner_latitude,self.partner_id.partner_longitude)
+                    self.env.cr.commit()
+                except:
+                    pass
+                                    
+            # If geo point pressent lets go.... GOOGLEMAP DIAABLED          
+            if (self.partner_id.partner_latitude<>0):    
+    
+                destinations = self.env['campos.webtourusdestination'].search([('name', '<>', '')])
+                
+                # approximate radius of earth in km
+                R = 6373.0
+                
+                #Home adresse cord
+                lat1 = radians(self.partner_id.partner_latitude)
+                lon1 = radians(self.partner_id.partner_longitude)  
+    
+                dists=[] #placeholder for beeline distance from home to all destinations
+                
+                for d in destinations:
+                    lat2 = radians(float(d.latitude))
+                    lon2 = radians(float(d.longitude))
+                    
+                    dlon = lon2 - lon1
+                    dlat = lat2 - lat1
+    
+                    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                    distance = R * c
+                    
+                    dists.append([d.id,distance,float(d.latitude),float(d.longitude)]) 
                   
-            # call googlemap to find distances by car to the neerst distinations
-            gmaps = googlemaps.Client(key='AIzaSyDA7swnfwynpg0NBh88pBW6irnOnf8qMJM')
-            matrix = gmaps.distance_matrix(origins, destinations)
-            _logger.info("Google maps responce %s", matrix)
-            
-            n = 0
-            for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
-                distance=matrix['rows'][0]['elements'][n]['distance']['value']
-                distancekm =  distance/1000.0             
-                duration=matrix['rows'][0]['elements'][n]['duration']['text']
+                sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
                 
-                if (n == 0): 
-                    self.webtourdefaulthomedistance = distancekm
-                    self.webtourdefaulthomeduration = duration
-                else:
-                    if (self.webtourdefaulthomedistance > distancekm):
-                        self.webtourdefaulthomedestination=d[0]
+                self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
+    
+                lat1 = self.partner_id.partner_latitude
+                lon1 = self.partner_id.partner_longitude
+                
+                lat2=float(self.webtourdefaulthomedestination.latitude)
+                lon2=float(self.webtourdefaulthomedestination.longitude)
+                  
+                n = 0;  #counter for no of dist to googlemaps
+                origins=[] #placeholder list for origons to googlemaps
+                destinations =[] #placeholder list for desinations to googlemaps
+                origins.append((lat1,lon1)) #Home add            
+                for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
+    
+                    destinations.append((d[2],d[3])) # get geo point stored in loop above
+                    n = n+1 
+                    if (n > 4):
+                        break       #Max 5 distinations    
+                      
+                # call googlemap to find distances by car to the neerst distinations
+                gmaps = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.distance_matrix'))
+                matrix = gmaps.distance_matrix(origins, destinations)
+                _logger.info("Google maps responce %s", matrix)
+                
+                n = 0
+                for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
+                    distance=matrix['rows'][0]['elements'][n]['distance']['value']
+                    distancekm =  distance/1000.0             
+                    duration=matrix['rows'][0]['elements'][n]['duration']['text']
+                    
+                    if (n == 0): 
                         self.webtourdefaulthomedistance = distancekm
-                        self.webtourdefaulthomeduration = duration                    
-                
-                n = n+1 
-                if (n > 4):
-                    break       #Max 5 distinations
-                                             
-            _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)  
-
+                        self.webtourdefaulthomeduration = duration
+                    else:
+                        if (self.webtourdefaulthomedistance > distancekm):
+                            self.webtourdefaulthomedestination=d[0]
+                            self.webtourdefaulthomedistance = distancekm
+                            self.webtourdefaulthomeduration = duration                    
+                    
+                    n = n+1 
+                    if (n > 4):
+                        break       #Max 5 distinations
+                                                 
+                _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)
+        else:
+            self.webtourdefaulthomedistance = False
+            self.webtourdefaulthomeduration = False
+            self.webtourdefaulthomedestination = False
+            
+            
     @api.multi
     def action_update_webtourtravelneed_ids(self):
         for reg in self:
@@ -169,6 +175,7 @@ class WebtourRegistration(models.Model):
                 par.tocampusneed_id.calc_travelneed_id()
                 par.fromcampusneed_id.calc_travelneed_id()
 
+'''
     @api.one
     def createTestParticipants(self):
                 
@@ -258,7 +265,7 @@ class WebtourRegistration(models.Model):
                     
                     if found:
                         break            
- 
+''' 
 
 
 class WebtourRegistrationTravelNeed(models.Model):
@@ -317,6 +324,7 @@ class WebtourEntryExitPoint(models.Model):
     address = fields.Char('Address', required=False)
     latitude = fields.Char(string='Latitude', required=False)
     longitude = fields.Char(string='Longitude', required=False)
+    defaultdestination_id = fields.Many2one('campos.webtourusdestination','Selected Destination',ondelete='set null')
 
     @api.multi
     def write(self, vals):
