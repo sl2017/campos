@@ -9,6 +9,7 @@
 			],
 	'application': True,
 	'data': [
+		'security/campos_network_security.xml',
 		'view_createnetwork.xml',
 		'security/ir.rule.csv',
 		'security/ir.model.access.csv',

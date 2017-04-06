@@ -1,2 +1,4 @@
 "id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
-"campos_network_public_access","Alle brugeres rettigheder til network modul","model_model_network","[(1,'=',1)]",,"True","True","True","False"
+"campos_network_public_read","read access","model_model_network","[(1,'=',1)]",,"True","False","False","False"
+"campos_network_public_access","Alle brugeres rettigheder til network modul","model_model_network","[('state','=','draft')]",,"False","True","True","False"
+"campos_network_admin_access","admin access","model_model_network","[(1,'=',1)]",,"False","True","True","False"

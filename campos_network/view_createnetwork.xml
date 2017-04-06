@@ -137,7 +137,8 @@
 			name="Network"
 			parent="campos_event.menu_campos_comittee"
 			sequence="20"
-			action="action_network_create" />
+			action="action_network_create" 
+			groups="group_campos_network_group"/>
 			
 			
 			
