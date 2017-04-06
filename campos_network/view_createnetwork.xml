@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_form_network_create" model="ir.ui.view">
+            <field name="name">Create new network</field>
+            <field name="model">model.network</field>
+            <field name="arch" type="xml">
+                <form>
+					<header>
+						<button name="btn_network_order" type="object" string="Opret ansøgning" attrs="{'invisible':[('network_state','==','state_ordered')]}" class="oe_highlight" />
+						<button name="btn_network_processing" type="object" string="Behandles" attrs="{'invisible':['|',('network_state','==','state_processing'),('network_state','==','state_draft')]}" class="oe_highlight" />
+						<button name="btn_network_confirm" type="object" string="Godkend ansøgning" attrs="{'invisible':['|',('network_state','==','state_approved'),('network_state','==','state_draft')]}" class="oe_highlight" />
+						<button name="btn_network_reject" type="object" string="Afvis ansøgning" attrs="{'invisible':['|',('network_state','==','state_rejected'),('network_state','==','state_draft')]}" class="oe_highlight" />
+						
+						<field name="network_state" widget="statusbar" statusbar_visible="state_ordered,state_processing,state_approved"/>
+					</header>
+                    <sheet>
+                        <!--Network information -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Aktivitets beskrivelse</h1>
+						<hr/>						
+						<h2>Ansøger</h2>
+						<hr/>
+						
+						<h4 sytle="margin-top: 20px;">Ansøger</h4>
+						<field name="network_participant_id" attrs="{'readonly':True}" options="{'no_create': True}" />
+						
+						<h4 style="margin-top: 20px;">Udvald</h4>
+						<field name="network_committee_id" attrs="{'readonly':True}" options="{'no_create': True}" />
+						
+						
+						<h2 style="margin-top: 50px;">Behov</h2>
+						<hr/>
+						<h4 style="margin-top: 20px;">Forbindelse*</h4>
+						<field name="network_connection" attrs="{'required':True}"/>
+						
+						<h4 style="margin-top: 20px;">Anvendelse*</h4>
+						<field name="network_usage" attrs="{'required':True}"/>
+						
+						<h2 style="margin-top: 50px;">Hvornår skal netværket bruges?</h2>
+						<hr/>
+						<h3>Leveringsdato</h3>
+						<p>Hvornår I gerne vil have jeres forbindelse er klar til brug.</p>
+						<div style="width: 10%;"><p>Dag: <field name="network_delivery_day"/></p></div>
+						<div style="width: 10%;"><p>Måned: <field name="network_delivery_month"/></p></div>
+						<div style="width: 10%;"><p>2017</p></div>
+						<br/><br/>
+									
+						<h3>Ibrugtagelse</h3>
+						<p>Hvornår ankommer de første der skal anvende forbindelsen.</p>
+						<div style="width: 10%;"><p>Dag: <field name="network_usage_day"/></p></div>
+						<div style="width: 10%;"><p>Måned: <field name="network_usage_month"/></p></div>
+						<div style="width: 10%;"><p>2017</p></div>
+						<br/><br/>
+						
+						<h3>Sidste anvendelse</h3>
+						<p>Hvornår I er færdige med at bruge forbindelsen.</p>
+						<div style="width: 10%;"><p>Dag: <field name="network_last_day"/></p></div>
+						<div style="width: 10%;"><p>Måned: <field name="network_last_month"/></p></div>
+						<div style="width: 10%;"><p>2017</p></div>
+						
+						<h2 style="margin-top: 50px;">Hvor</h2>
+						<hr/>
+						<p>Sådan finder du koordinaterne</p>
+						<ul>
+							<li>Start med at zoome ind på kort og find det sted du skal bruge netværk.</li>
+							<li>Klik derefter på trekant-ikonet i menu øverst til venstre på kortet. Herefter skulle menuen til højre ændre udseende.</li>
+							<li>Klik nu på sigtekorns-ikonet i menuen til højre.</li>
+							<li>Du er nu klar til at finde koordinaterne på kortet. Klik cirka der hvor du gerne vil have netværk. Rammer du forkert første gang kan du bare klik på kortet igen.</li>
+							<li>Notér koordinaterne i felterne under kortet <strong><u>husk alle cifre og at bruge punktum som komma.</u></strong></li>
+						</ul>                        
+                        <iframe src="https://spejderneslejr.maps.arcgis.com/apps/View/index.html?appid=954bc9faa12147658fecb5a3e253b72d" style="width: 100%; height: 500px;"></iframe>
+                        <h4 style="margin-top: 20px;">Latitude/breddegrad*</h4>
+						<field name="network_lat" attrs="{'required':True}"/>
+						<h4 style="margin-top: 20px;">Longitude/længdegrad*</h4>
+						<field name="network_lon" attrs="{'required':True}"/>
+						
+                        
+                        <h2 style="margin-top: 50px;">Andet</h2>
+						<hr/>
+						<h4 style="margin-top: 20px;">Eventuelle bemærkninger</h4>
+						<field name="network_other" attrs="{'required':True}"/>
+						                        
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+		
+		
+        
+		
+		<record model="ir.ui.view" id="network_order_form_view">
+			<field name="name">network.order.button (in campos_network)</field>
+			<field name="model">campos.committee</field>
+			<field name="inherit_id" ref="campos_event.campos_committee_form"/>
+			<field name="arch" type="xml">
+				<field name="par_contact_id" position="after">
+					<button name="btn_network_order" string="Bestil netværk" type="object" class="oe_highlight"/>
+				</field>
+			</field>
+		</record>
+		
+        
+        <record id="view_network_overview" model="ir.ui.view">
+			<field name="name">Network Tree View</field>
+			<field name="model">model.network</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="network_committee_id"/>
+					<field name="network_delivery_day"/>
+					<field name="network_delivery_month"/>
+					<field name="network_usage_day"/>
+					<field name="network_usage_month"/>
+					<field name="network_last_day"/>
+					<field name="network_last_month"/>
+					<field name="network_state"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<!-- Action to open Network list -->
+		<act_window id="action_network_create"
+			name="SL2017 Network overview"
+			res_model="model.network"
+			view_mode="tree,form"
+			view_id="view_network_overview" />
+			
+			
+		<!-- Menu item to open Network list -->
+		<menuitem id="menu_network_create"
+			name="Network"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_network_create" />
+			
+			
+			
+        
+    </data>
+</openerp>

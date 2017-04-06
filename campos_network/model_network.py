@@ -1,24 +1,32 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
 
+
+
 class NetworkMain(models.Model):
 	_name = 'model.network'
-	_inherit=['mail.thread', 'ir.needaction_mixin']
+	_inherit=['mail.thread', 'ir.needaction_mixin', 'campos.committee']
     
-    
-	network_state = fields.Selection([('state_ordered',u'Bestilt'),
+	
+	
+	network_state = fields.Selection([('state_draft',u'Kladde'),
+									('state_ordered',u'Bestilt'),
 									('state_processing',u'Behandles'),
 									('state_approved',u'Godkendt'),
 									('state_rejected',u'Afvist')],
 									track_visibility='onchange',
-									default='state_application')
+									default='state_draft')
 									
 									
-	#Ansøger
-	#TODO Inkluder udvalg
-	network_name = fields.Char(u'Navn', track_visibility='onchance', required=True)
-	network_email = fields.Char(u'Email', track_visibility='onchance', required=True)
-	network_phone = fields.Char(u'Telefon', track_visibility='onchance', required=True)
+	#Ansøger	
+	network_participant_id = fields.Many2one('campos.event.participant', 
+											'Participant',
+											track_visibility='onchange',
+											required=True)
+	network_committee_id = fields.Many2one('campos.committee',
+										   'Committee',
+										   track_visibility='onchange',
+										   required=True)
 	
 	
 	#Behov
@@ -26,7 +34,7 @@ class NetworkMain(models.Model):
                                       ('type_network_wireless',u'Trådløs'),
                                       ('type_network_both',u'Begge')]
                                      ,track_visibility='onchange',required=True)
-	network_usage = fields.Char(u'Anvendelse', track_visibility='onchance', required=True)
+	network_usage = fields.Char(u'Anvendelse', track_visibility='onchange', required=True)
 	
 	
 	#Hvornår
@@ -68,6 +76,7 @@ class NetworkMain(models.Model):
                                       ('network_delivery_month_jun',u'Juni'),
                                       ('network_delivery_month_jul',u'Juli')]
                                      ,track_visibility='onchange',required=True)
+	
 	#Ibrugtagelse
 	network_usage_day = fields.Selection([('network_usage_day_01',u'01'),
                                       ('network_usage_day_02',u'02'),
@@ -156,8 +165,6 @@ class NetworkMain(models.Model):
 	network_other = fields.Text(u'Evt. bemærkninger', track_visibility='onchange')
 	
 	
-	#Admin
-	network_admin_notes = fields.Text(u'Admin noter', track_visibility='onchange')
 	
 	
 	
@@ -178,3 +185,26 @@ class NetworkMain(models.Model):
 	@api.one
 	def btn_network_reject(self):
 		self.network_state='state_rejected'
+		
+		
+
+class foo(models.Model):
+	_inherit = 'campos.committee'
+	#Button for ordering network
+	@api.multi
+	def btn_network_order(self):
+		self.ensure_one
+		context = {
+			'default_network_participant_id': self.env.user.participant_id.id,		
+            'default_network_committee_id': self.id,
+        }
+		return {
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'model.network',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': context
+        }

@@ -9,6 +9,8 @@
 			],
 	'application': True,
 	'data': [
-        'createnetwork_template.xml',
+		'view_createnetwork.xml',
+		'security/ir.rule.csv',
+		'security/ir.model.access.csv',
         ],
 }
