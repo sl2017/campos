@@ -26,35 +26,38 @@ class CamposRfidDevice(models.Model):
     def checkin(self, device_macid, participant_number):
         device = self.search([('device_macid', '=', device_macid)])
         if not device:
-            return build_response(u'Unknown Scanner\nDevice', False)
+            return self.build_response(u'Unknown Scanner\nDevice', False)
         
         if device.check_method == 'canteen':
             return device.checkin_canteen(participant_number)
         elif device.check_method == 'meat':
-            return device.checkin_meat(participant_number)
+            return self.checkin_meat(participant_number)
         else:
-            return build_response(u'Device not configured', False)
+            return self.build_response(u'Device not configured', False)
         
-        
+    
     def checkin_canteen(self, participant_number):
         if participant_number == '1000':
-            return build_response(u'Godkendt\nVelbekommen', True)
+            return self.build_response(u'Godkendt\nVelbekommen', True)
         if participant_number == '2000':
-            return build_response(u'Afvist\nGå til Øen', False)
+            return self.build_response(u'Afvist\nGå til Øen', False)
         if participant_number == '3000':
-            return build_response(u'Afvist\nAllerede scannet', False)
+            return self.build_response(u'Afvist\nAllerede scannet', False)
         if participant_number == '4000':
-            return build_response(u'Afvist\nEj tilmeldt mad', False)
-        
+            return self.build_response(u'Afvist\nEj tilmeldt mad', False)
+
+        return self.build_response(u'Ukendt deltager', False)
+                                   
     def checkin_meat(self, participant_number):
         if participant_number == '100':
-            return build_response(u' 3 Kylling\n 3 Oksekød', True)
+            return self.build_response(u' 3 Kylling\n 3 Oksekød', True)
         if participant_number == '200':
-            return build_response(u'Afvist\nGå til Slottet', False)
+            return self.build_response(u'Afvist\nGå til Slottet', False)
         if participant_number == '300':
-            return build_response(u'Afvist\nAllerede afhentet', False)
+            return self.build_response(u'Afvist\nAllerede afhentet', False)
         if participant_number == '400':
-            return build_response(u'Afvist\nEj tilmeldt kød', False)
+            return self.build_response(u'Afvist\nEj tilmeldt kød', False)
         
+        return self.build_response(u'Ukendt gruppe', False)
             
         
