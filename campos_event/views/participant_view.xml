@@ -158,6 +158,7 @@
                                 </div>
                              -->    
                             <field name="reg_organization_id" string="Korps"/>
+                            <field name="scoutorg_id"/>
                             <field name="participant" groups="campos_event.group_campos_admin"/>
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
 				 		    <field name="participant_number" groups="campos_event.group_campos_admin" />

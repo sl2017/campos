@@ -19,6 +19,7 @@
 						<field name="remote_link_id" groups="campos_event.group_campos_admin"/>
 						<field name="last_import"/>
 						<button name="change_remote_group" string="Change Remote" type="object"/>
+						<button name="reimport_partner" string="Reimport" type="object" />
 					
 					</group>            	
             	
