@@ -259,8 +259,7 @@ class WebtourParticipant(models.Model):
             dicto1["travelgroup"] = self.tocamptravelgroup
             dicto1["campos_demandneeded"] = self.transport_to_camp
             dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
-            dicto1["campos_startdatetime"] = self.tocampdate
-            dicto1["campos_enddatetime"] = self.tocampdate
+            dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"] = self.tocampfromdestination_id.destinationidno
             dicto1["campos_enddestinationidno"] = campdesination
             dicto1["webtour_useridno"] = self.webtourususeridno
@@ -273,8 +272,7 @@ class WebtourParticipant(models.Model):
             dicto1 = {}   
             dicto1["travelgroup"] = self.tocamptravelgroup                             
             dicto1["campos_demandneeded"]  = self.transport_to_camp
-            dicto1["campos_startdatetime"]  = self.tocampdate
-            dicto1["campos_enddatetime"]  = self.tocampdate
+            dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"]  = self.tocampfromdestination_id.destinationidno
             dicto1["campos_enddestinationidno"]  = campdesination
             dicto1["webtour_useridno"]  = self.webtourususeridno
@@ -296,8 +294,7 @@ class WebtourParticipant(models.Model):
             dicto1["travelgroup"] = self.fromcamptravelgroup            
             dicto1["campos_demandneeded"] = self.transport_from_camp      
             dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
-            dicto1["campos_startdatetime"] = self.fromcampdate
-            dicto1["campos_enddatetime"] = self.fromcampdate                    
+            dicto1["campos_traveldate"] = self.fromcampdate                  
             dicto1["campos_startdestinationidno"] = campdesination
             dicto1["campos_enddestinationidno"] = self.fromcamptodestination_id.destinationidno
             dicto1["webtour_useridno"] = self.webtourususeridno
@@ -310,8 +307,7 @@ class WebtourParticipant(models.Model):
             dicto1 = {} 
             dicto1["travelgroup"] = self.fromcamptravelgroup               
             dicto1["campos_demandneeded"]  = self.transport_from_camp
-            dicto1["campos_startdatetime"]  = self.fromcampdate
-            dicto1["campos_enddatetime"]  = self.fromcampdate
+            dicto1["campos_traveldate"] = self.fromcampdate 
             dicto1["campos_startdestinationidno"]  = campdesination
             dicto1["campos_enddestinationidno"]  = self.fromcamptodestination_id.destinationidno
             dicto1["webtour_useridno"]  = self.webtourususeridno

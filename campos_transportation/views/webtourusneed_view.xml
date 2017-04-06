@@ -11,7 +11,7 @@
 <field name="participant_id"/>
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
-<field name="campos_startdatetime"/>
+<field name="campos_traveldate"/>
 <field name="campos_startdestinationidno"/>
 <field name="campos_enddestinationidno"/>
 <field name="campos_writeseq"/>
@@ -40,17 +40,36 @@
 <field name="participant_id" readonly="0"/>
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
-<group name="group_left">
-<field name="campos_startdatetime" readonly="0"/>
-<field name="campos_startdestinationidno" readonly="0"/>
-<field name="campos_startnote" readonly="0"/>
-<field name="campos_enddatetime" readonly="0"/>
-<field name="campos_enddestinationidno" readonly="0"/>
-<field name="campos_endnote" readonly="0"/>
-<field name="campos_demandneeded"/>
-<field name="campos_writeseq"/>
-<field name="campos_transferedseq"/>
 <field name="travelneed_id"/>
+
+<group name="group_left">
+<field name="campos_demandneeded"/>
+<field name="campos_traveldate" readonly="0"/>
+<field name="travelneed_deadline"/>
+<field name="travelneed_travelconnectiondetails"/>
+<field name="campos_writeseq"/>
+
+<field name="campos_startdestinationidno" readonly="0"/>
+<field name="campos_enddestinationidno" readonly="0"/>
+</group>
+<group name="group_right">
+<field name="campos_transfered_demandneeded"/>
+<field name="campos_transfered_traveldate" readonly="0"/>
+<field name="campos_transfered_deadline"/>
+<field name="campos_transfered_travelconnectiondetails"/>
+<field name="campos_transferedseq"/>
+<field name="webtour_deleted" readonly="0"/>
+<field name="webtour_needidno" readonly="1"/>
+<field name="webtour_useridno" readonly="1"/>
+<field name="webtour_groupidno" readonly="1"/>
+</group>
+<group name="group_left">
+<field name="campos_transfered_startdatetime"/>
+<field name="campos_transfered_startdestinationidno" readonly="0"/>
+<field name="campos_transfered_startnote"/>
+<field name="campos_transfered_enddatetime"/>
+<field name="campos_transfered_enddestinationidno" readonly="0"/>
+<field name="campos_transfered_endnote"/>
 </group>
 <group name="group_right">
 <field name="webtour_startdatetime" readonly="1"/>
@@ -59,10 +78,6 @@
 <field name="webtour_enddatetime" readonly="1"/>
 <field name="webtour_enddestinationidno" readonly="1"/>
 <field name="webtour_endnote" readonly="1"/>
-<field name="webtour_deleted" readonly="0"/>
-<field name="webtour_useridno" readonly="1"/>
-<field name="webtour_groupidno" readonly="1"/>
-<field name="webtour_needidno" readonly="1"/>
 <field name="webtour_touridno" readonly="1"/>
 <field name="webtour_CurrentDateTime" readonly="1"/>
 </group>
@@ -102,6 +117,7 @@
 		<form>
 		<sheet>
 			<field name="name"/>
+			<field name="returnjourney" string = 'Return Journey'/>
 			<field name="traveldate_ids" widget="one2many_list" nolabel="0" string="Travel Dates">
 				<tree editable="bottom">
 					<field name="name" widget="date"/>
@@ -121,7 +137,7 @@
     	<field name="webtour_groupidno" />
 	    <field name="campos_TripType_id" /> 
 	    <field name="travelgroup" />	    
-    	<field name="campos_startdatetime" />
+
 	    <field name="campos_startdestinationidno" />
     	<field name="campos_enddestinationidno" />
     	<field name="pax" /> 

@@ -8,7 +8,10 @@ cookie = None
 
 def is_authenticated(doc):
 
-    access_xml = doc.getElementsByTagName("Access")[0]
+    try:
+        access_xml = doc.getElementsByTagName("Access")[0]
+    except:
+        return False
 
     try:
         authenticated = access_xml.getElementsByTagName("a:IsAuthenticated")[0]
@@ -213,7 +216,7 @@ def usneed_create(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = 4
 
     while repeat_read:
         doc = do_usneed_create()
@@ -222,6 +225,7 @@ def usneed_create(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1
 
     return doc
 
