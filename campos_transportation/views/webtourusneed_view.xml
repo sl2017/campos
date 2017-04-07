@@ -100,34 +100,6 @@
 </field>
 </record>
 
-<record id="view_tree_WebtourTripType" model="ir.ui.view">
-	<field name="name">Webtour Trip Type</field>
-	<field name="model">campos.webtourusneed.triptype</field>
-	<field name="arch" type="xml">
-		<tree>
-			<field name="name"/>	
-		</tree>
-	</field>
-</record> 
-
-<record id="view_form_WebtourTripType" model="ir.ui.view">
-	<field name="name">Webtour Trip Type</field>
-	<field name="model">campos.webtourusneed.triptype</field>
-	<field name="arch" type="xml">
-		<form>
-		<sheet>
-			<field name="name"/>
-			<field name="returnjourney" string = 'Return Journey'/>
-			<field name="traveldate_ids" widget="one2many_list" nolabel="0" string="Travel Dates">
-				<tree editable="bottom">
-					<field name="name" widget="date"/>
-				</tree>
-			</field>
-		</sheet>	
-		</form>
-	</field>
-</record> 
-
 <record id="view_tree_WebtourTripOverview" model="ir.ui.view">
 	<field name="name">Webtour Trip Overview</field>
 	<field name="model">campos.webtourusneed.overview</field>
@@ -154,22 +126,13 @@
 	</field>
 </record> 
 
-
 <!-- Action to open Webtour Us Need list -->
 <act_window id="action_webtourusneed"
 name="Camp OS Webtour Us Need"
 res_model="campos.webtourusneed"
 view_mode="tree,form" />
 
-<act_window id="action_WebtourTripType"
-name="Camp OS Webtour Trip Type"
-res_model="campos.webtourusneed.triptype"
-view_mode="tree,form" />
 
-<act_window id="action_WebtourTripTypeDate"
-name="Camp OS Webtour Trip Type Date"
-res_model="campos.webtourusneed.triptype.date"
-view_mode="tree,form" />
 
 <act_window id="action_WebtourOverview"
 name="Camp OS Webtour Trip Overview"
@@ -178,8 +141,6 @@ view_mode="tree,form" />
 
 <!-- Menu item to open Campos Webtour usNeed list  -->
 <menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="30"/>
-<menuitem id="menu_action_campos_WebtourTripType" parent="menu_campos_transportation" name="WebtourTripType" action="action_WebtourTripType" groups="campos_event.group_campos_admin" sequence="55"/>
-<menuitem id="menu_action_campos_WebtourTripTypeDate" parent="menu_campos_transportation" name="WebtourTripTypeDate" action="action_WebtourTripTypeDate" groups="campos_event.group_campos_admin" sequence="56"/>
 <menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="WebtourTripTypeOverview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
 
 </data>

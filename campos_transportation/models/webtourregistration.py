@@ -48,7 +48,7 @@ class WebtourRegistration(models.Model):
     @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
-            record.webtourPreregTotalSeats = sum(2*line.participant_total - line.participant_own_transport_to_camp_total -line.participant_own_transport_from_camp_total for line in record.participant_ids)
+            record.webtourPreregTotalSeats = sum(2*line.participant_total - line.participant_own_transport_to_camp_total -line.participant_own_transport_from_camp_total for line in record.prereg_participant_ids)
 
     @api.depends()
     def _compute_webtournoofparticipant(self):
@@ -279,7 +279,7 @@ class WebtourRegistrationTravelNeed(models.Model):
     group_country_code2 = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code2', readonly=True)
     groupisdanish = fields.Char(compute='_compute_groupisdanish', string='groupisdanish', store = False)
     name = fields.Char('Name', required=True)
-    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
+    campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
     traveldate = fields.Date('Travel Date')
     startdestinationidno = fields.Many2one('campos.webtourusdestination.view','From',ondelete='set null')
     enddestinationidno = fields.Many2one('campos.webtourusdestination.view','To',ondelete='set null')

@@ -6,6 +6,9 @@ import sys
 
 cookie = None
 
+MAXREPEATREAD = 2
+
+
 def is_authenticated(doc):
 
     try:
@@ -47,7 +50,7 @@ def usgroup_getall(_url,_key):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usgroup_getall()
@@ -56,6 +59,7 @@ def usgroup_getall(_url,_key):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1
 
     return doc
 
@@ -71,7 +75,7 @@ def usgroup_getbyname(_url,_key,groupname):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usgroup_getbyname()
@@ -80,6 +84,7 @@ def usgroup_getbyname(_url,_key,groupname):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
@@ -98,7 +103,7 @@ def usgroup_create(_url,_key,groupname):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usgroup_create()
@@ -107,7 +112,8 @@ def usgroup_create(_url,_key,groupname):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
@@ -125,7 +131,7 @@ def ususer_getbygroupidno(_url,_key,groupidno):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_ususer__getbygroupidno()
@@ -134,6 +140,7 @@ def ususer_getbygroupidno(_url,_key,groupidno):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1             
 
     if cookie is not None:
             return doc
@@ -162,7 +169,7 @@ def ususer_getbyexternalid(_url,_key,externalid):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_ususer_getbyexternalid()
@@ -171,6 +178,7 @@ def ususer_getbyexternalid(_url,_key,externalid):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1             
 
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
@@ -189,7 +197,7 @@ def ususer_create(_url,_key,externalid, groupidno, firstname, lastname):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_ususer_create()
@@ -198,7 +206,8 @@ def ususer_create(_url,_key,externalid, groupidno, firstname, lastname):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     if cookie is not None:
         idno = doc.getElementsByTagName("a:IDno")[0]
 
@@ -216,7 +225,7 @@ def usneed_create(_url,_key,request):
 
         return doc
 
-    repeat_read = 4
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_create()
@@ -241,7 +250,7 @@ def usneed_getbyidno(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_getbyidno()
@@ -250,7 +259,7 @@ def usneed_getbyidno(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
     return doc
 
 def usneed_delete(_url,_key,request):
@@ -265,7 +274,7 @@ def usneed_delete(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_delete()
@@ -274,7 +283,8 @@ def usneed_delete(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     return doc
 
 def usneed_GetByGroupIDno(_url,_key,request):
@@ -289,7 +299,7 @@ def usneed_GetByGroupIDno(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_getbygroupidno()
@@ -298,7 +308,8 @@ def usneed_GetByGroupIDno(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     return doc
 
 def usneed_GetPending_ByIDno(_url,_key,request):
@@ -313,7 +324,7 @@ def usneed_GetPending_ByIDno(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_getpendingbyidno()
@@ -322,6 +333,7 @@ def usneed_GetPending_ByIDno(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
+            repeat_read = repeat_read -1
 
     return doc
 
@@ -337,7 +349,7 @@ def usneed_update(_url,_key,request):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usneed_update()
@@ -346,7 +358,8 @@ def usneed_update(_url,_key,request):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     return doc
 
 def usdestinations_getall(_url,_key):
@@ -361,7 +374,7 @@ def usdestinations_getall(_url,_key):
 
         return doc
 
-    repeat_read = True
+    repeat_read = MAXREPEATREAD
 
     while repeat_read:
         doc = do_usdestinations_getall()
@@ -370,5 +383,6 @@ def usdestinations_getall(_url,_key):
             repeat_read = False
         else:
             login(_url,_key)
-
+            repeat_read = repeat_read -1
+            
     return doc

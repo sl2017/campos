@@ -11,8 +11,7 @@
          'views/webtourconfig_view.xml',   
          'views/webtourfinalregistration_view.xml',                                            
          'data/webtourusdestination_scheduler.xml',
-         'data/webtourusneed_scheduler.xml',
-         'data/webtourparticipant_scheduler.xml',     
+         'data/webtourusneed_scheduler.xml',    
          'security/ir.model.access.csv',
          ],
 }

@@ -3,9 +3,8 @@
 ..  automodule:: package
 
 """
-from . import webtourconfig
 from . import webtourusdestination
+from . import webtourconfig
 from . import webtourparticipant
 from . import webtourregistration
 from . import webtourusneed
-#from . import webtourmunicipality

@@ -13,7 +13,7 @@ class WebtourUsNeed(models.Model):
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
     
     campos_demandneeded = fields.Boolean('CampOs Demand Needed', default=False)
-    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
+    campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
     campos_traveldate = fields.Char('CampOs StartDateTime', required=False)
     campos_startdestinationidno = fields.Char('CampOs StartDestinationIdNo', required=False)
     campos_enddestinationidno = fields.Char('CampOs EndDestinationIdNo', required=False)
@@ -521,22 +521,6 @@ class WebtourUsNeed(models.Model):
                 par.fromcampusneed_id.campos_TripType_id=webtourconfig.fromcamp_campos_TripType_id.id
                 par.fromcampusneed_id.campos_startdestinationidno=webtourconfig.campdestinationid.destinationidno
                 par.fromcampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
-
-    
-class WebtourTripType(models.Model):
-    _description = 'Webtour Trip Types'
-    _name = 'campos.webtourusneed.triptype'
-   
-    name = fields.Char('Webtour Trip Type', required=True)
-    traveldate_ids = fields.One2many('campos.webtourusneed.triptype.date','campos_TripType_id','Travel Days')
-    returnjourney = fields.Boolean('Return Journey')
-
-class WebtourTripTypeDate(models.Model):
-    _description = 'Webtour Trip Types Date'
-    _name = 'campos.webtourusneed.triptype.date'
-    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour_TripType', ondelete='set null')
-    name = fields.Date('Date', required=True) 
-    date = fields.Date('Date', required=True) 
     
 class WebtourNeedOverview(models.Model):
     _name = 'campos.webtourusneed.overview'
@@ -546,7 +530,7 @@ class WebtourNeedOverview(models.Model):
     registration_id = fields.Many2one('event.registration','Registration ID')
     travelgroup = fields.Char('Travel Group')
     webtour_groupidno = fields.Char('Webtour us Group ID no')
-    campos_TripType_id = fields.Many2one('campos.webtourusneed.triptype','Webtour Trip Type')    
+    campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour Trip Type')    
     campos_startdatetime = fields.Char('CampOs StartDateTime')
     campos_startdestinationidno = fields.Char('CampOs Start Destination IdNo')
     campos_enddestinationidno = fields.Char('CampOs End Destination IdNo')    
@@ -567,22 +551,22 @@ class WebtourNeedOverview(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusneed_overview as
-                    SELECT case when travelneed_id is not null then travelneed_id else -min(campos_webtourusneed.id) end as id, event_registration.id as registration_id,travelgroup,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
+                    SELECT case when travelneed_id is not null then travelneed_id else -min(campos_webtourusneed.id) end as id, event_registration.id as registration_id,travelgroup,webtour_groupidno, "campos_TripType_id",campos_transfered_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
                     , count(campos_webtourusneed.id) as pax
                     , sum(case when campos_demandneeded then 0 else 1 end) as excessdemand 
                     , sum(case when campos_transfered then 0 else 1 end) as nottransfered
                     , sum(case when campos_deleted and not webtour_deleted then 1 else 0 end) as notdeleted
                     , sum(case when webtour_startdestinationidno = campos_startdestinationidno then 0 else 1 end) as startdestdiffer
                     , sum(case when webtour_enddestinationidno = campos_enddestinationidno then 0 else 1 end) as enddestdiffer
-                    , sum(case when campos_startdatetime::timestamp = webtour_startdatetime::timestamp then 0 else 1 end) as startdatetimediffer
-                    , sum(case when campos_enddatetime::timestamp = webtour_enddatetime::timestamp then 0 else 1 end) as enddatetimediffer
-                    , sum(case when (case when campos_startnote isnull then '' else campos_startnote end) = (case when webtour_startnote isnull then '' else webtour_startnote end) then 0 else 1 end) as startnotediffer
-                    , sum(case when (case when campos_endnote isnull then '' else campos_endnote end) = (case when webtour_endnote isnull then '' else webtour_endnote end) then 0 else 1 end) as endnotediffer
+                    , sum(case when campos_transfered_startdatetime::timestamp = webtour_startdatetime::timestamp then 0 else 1 end) as startdatetimediffer
+                    , sum(case when campos_transfered_enddatetime::timestamp = webtour_enddatetime::timestamp then 0 else 1 end) as enddatetimediffer
+                    , sum(case when (case when campos_transfered_startnote isnull then '' else campos_transfered_startnote end) = (case when webtour_startnote isnull then '' else webtour_startnote end) then 0 else 1 end) as startnotediffer
+                    , sum(case when (case when campos_transfered_endnote isnull then '' else campos_transfered_endnote end) = (case when webtour_endnote isnull then '' else webtour_endnote end) then 0 else 1 end) as endnotediffer
                     FROM campos_webtourusneed
                     left outer join event_registration on webtourusgroupidno = webtour_groupidno
                     where campos_demandneeded or (not webtour_deleted and webtour_needidno::INT4>0)
                     group by travelneed_id, travelgroup            
-                    ,event_registration.id,webtour_groupidno, "campos_TripType_id",campos_startdatetime::timestamp
+                    ,event_registration.id,webtour_groupidno,"campos_TripType_id",campos_transfered_startdatetime::timestamp
                     ,campos_startdestinationidno
                     ,campos_enddestinationidno
                     """

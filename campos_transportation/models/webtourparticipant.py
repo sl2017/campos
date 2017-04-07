@@ -3,7 +3,7 @@ from openerp import models, fields, api
 from ..interface import webtourinterface
 
 import logging
-import datetime
+#import datetime
 
 _logger = logging.getLogger(__name__)
 
