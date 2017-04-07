@@ -5,7 +5,7 @@ from openerp import models, fields, api
 
 class NetworkMain(models.Model):
 	_name = 'model.network'
-	_inherit=['mail.thread', 'ir.needaction_mixin', 'campos.committee']
+	_inherit=['mail.thread', 'ir.needaction_mixin']
     
 	
 	
