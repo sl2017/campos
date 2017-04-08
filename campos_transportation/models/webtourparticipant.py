@@ -47,7 +47,14 @@ class WebtourParticipant(models.Model):
                                               ('2', 'Group 2'),
                                               ('3', 'Group 3'),
                                               ('4', 'Group 4'),
-                                              ('5', 'Group 5')], default='1', string='Travel Group from Camp')      
+                                              ('5', 'Group 5')], default='1', string='Travel Group from Camp')
+    
+    groupisdanish = fields.Boolean(compute='_compute_groupisdanish', string='groupisdanish', store = False)
+
+    @api.depends('registration_id.partner_id.country_id.code')
+    def _compute_groupisdanish(self):
+        for record in self:
+            record.groupisdanish = record.registration_id.partner_id.country_id.code == 'DK'
       
     @api.multi
     @api.depends('individualtocampfromdestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')

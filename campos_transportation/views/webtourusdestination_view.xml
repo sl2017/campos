@@ -6,13 +6,13 @@
 <field name="model">campos.webtourusdestination</field>
 <field name="arch" type="xml">
 <tree>
-<field name="destinationidno"/>
-<field name="name"/>
-<field name="placename"/>
-<field name="latitude"/>
-<field name="longitude"/>
-<field name="zip_city"/>
-<field name="id"/>
+<field name="destinationidno" string="Destination ID"/>
+<field name="name" string="Name"/>
+<field name="placename" string="Place"/>
+<field name="latitude" string="latitude"/>
+<field name="longitude" string="longitude"/>
+<field name="zip_city" string="Zip City"/>
+<field name="id" string="Id"/>
 </tree>
 </field>
 </record>
@@ -23,14 +23,14 @@
 <form>
 <sheet>
 <group name="destination_top">
-<field name="destinationidno" readonly="0"/>
-<field name="name"/>
-<field name="webtourname" readonly="0"/>
-<field name="placename"/>
-<field name="address" readonly="0"/>
-<field name="latitude" readonly="0"/>
-<field name="longitude" readonly="0"/>
-<field name="note" readonly="0"/>
+<field name="destinationidno" readonly="0" string="Destination ID"/>
+<field name="name" string="Name"/>
+<field name="webtourname" readonly="0" string="Webtour name"/>
+<field name="placename" string="Place"/>
+<field name="address" readonly="0" string="address"/>
+<field name="latitude" readonly="0" string="latitude"/>
+<field name="longitude" readonly="0" string="longitude"/>
+<field name="note" readonly="0" string="Note"/>
 </group>
 </sheet>
 </form>

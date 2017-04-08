@@ -25,8 +25,8 @@ class WebtourRegistration(models.Model):
     webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
-#    jdatemp1 = fields.Boolean('jdatemp1')
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
+    #webtourhasbeeninitialized = fields.Boolean('Webtour has been initialized')
 
     @api.multi
     def write(self, vals):

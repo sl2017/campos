@@ -21,21 +21,20 @@ class WebtourUsDestination(models.Model):
     @api.one
     @api.depends('placename','address','webtourname','destinationidno')
     def _compute_name(self):
-        
-        if self.webtourname==False:
-            self.name = '' + self.placename 
-            self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
-            self.name = self.name + ' (' + ' IDno:' 
-            self.name = self.name + self.destinationidno + ')'
+        self.name = ''
+        if self.webtourname==False:            
+            if self.placename: self.name = self.name  + self.placename
+            if self.address: self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+            if self.destinationidno: self.name = self.name + ' (' + ' IDno:' + self.destinationidno + ')'
         else:
             if self.webtourname[:7] == 'SL2017-':
-                self.name = '' + self.placename 
-                self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
-                self.name = self.name + ' (' + self.webtourname  
-                self.name = self.name + ' IDno:' + self.destinationidno + ')'
+                if self.placename: self.name = self.name  + self.placename 
+                if self.address: self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+                if self.webtourname: self.name = self.name + ' (' + self.webtourname  
+                if self.destinationidno: self.name = self.name + ' IDno:' + self.destinationidno + ')'
             else:
-                self.name = '' + self.webtourname 
-                self.name = self.name + ' (IDno:' + self.destinationidno + ')'
+                if self.webtourname: self.name = '' + self.webtourname 
+                if self.destinationidno: self.name = self.name + ' (IDno:' + self.destinationidno + ')'
             
     @api.model
     def get_destinations_cron(self):
