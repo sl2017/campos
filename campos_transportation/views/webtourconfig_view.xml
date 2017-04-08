@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourconfig" model="ir.ui.view">
+<field name="name">Webtour Configuration</field>
+<field name="model">campos.webtourconfig</field>
+<field name="arch" type="xml">
+<tree>
+<field name="event_id"/>
+<field name="campdestinationid"/>
+<field name="tocamp_campos_TripType_id"/>
+<field name="fromcamp_campos_TripType_id"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourconfig" model="ir.ui.view">
+<field name="name">Webtour Configuration</field>
+<field name="model">campos.webtourconfig</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+
+<group string="Event">
+	<field name="event_id"/>
+</group>
+<group string="Camp destination">
+	<field name="campdestinationid"/>
+	<field name="tocamp_campos_TripType_id"/>
+	<field name="fromcamp_campos_TripType_id"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<record id="view_form_WebtourTripType" model="ir.ui.view">
+	<field name="name">Webtour Trip Type</field>
+	<field name="model">campos.webtourconfig.triptype</field>
+	<field name="arch" type="xml">
+		<form>
+		<sheet>
+			<field name="name"/>
+			<field name="returnjourney" string = 'Return Journey'/>
+			<field name="traveldate_ids" widget="one2many_list" nolabel="0" string="Travel Dates">
+				<tree editable="bottom">
+					<field name="name" widget="date"/>
+				</tree>
+			</field>
+		</sheet>	
+		</form>
+	</field>
+</record> 
+
+<!-- Action to open Webtour Config list -->
+<act_window id="action_webtourconfig"
+name="Camp OS Webtour Config"
+res_model="campos.webtourconfig"
+view_mode="tree,form" />
+
+<act_window id="action_WebtourTripType"
+name="Camp OS Webtour Trip Type"
+res_model="campos.webtourconfig.triptype"
+view_mode="tree,form" />
+
+<act_window id="action_WebtourTripTypeDate"
+name="Camp OS Webtour Trip Type Date"
+res_model="campos.webtourconfig.triptype.date"
+view_mode="tree,form" />
+
+
+<record id="view_tree_WebtourTripType" model="ir.ui.view">
+	<field name="name">Webtour Trip Type</field>
+	<field name="model">campos.webtourconfig.triptype</field>
+	<field name="arch" type="xml">
+		<tree>
+			<field name="name"/>	
+		</tree>
+	</field>
+</record> 
+
+<!-- Menu item to open Campos Webtour Destination list  -->
+<menuitem id="menu_action_campos_webtour_config" parent="menu_campos_transportation" name="Webtour Configuration" action="action_webtourconfig" groups="campos_event.group_campos_admin" sequence="50"/>
+<menuitem id="menu_action_campos_WebtourTripType" parent="menu_campos_transportation" name="WebtourTripType" action="action_WebtourTripType" groups="campos_event.group_campos_admin" sequence="55"/>
+<menuitem id="menu_action_campos_WebtourTripTypeDate" parent="menu_campos_transportation" name="WebtourTripTypeDate" action="action_WebtourTripTypeDate" groups="campos_event.group_campos_admin" sequence="56"/>
+
+</data>
+</openerp>

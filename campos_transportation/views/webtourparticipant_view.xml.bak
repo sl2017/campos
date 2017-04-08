@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourparticipant" model="ir.ui.view">
+<field name="name">Webtour Participant</field>
+<field name="model">webtour.campos.event.participant</field>
+<field name="arch" type="xml">
+<tree>
+<field name="participant_id"/>
+<field name="troop_id"/>
+<field name="ususeridno"/>
+<field name="usgroupidno"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourparticipant" model="ir.ui.view">
+<field name="name">Webtour Participant</field>
+<field name="model">webtour.campos.event.participant</field>
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="create_update_needs_online" type="object" string="Update Webtour" class="oe_highlight" />
+</header>
+<sheet>
+<group name="user_top">
+<field name="participant_id" readonly="0"/>
+<field name="troop_id" readonly="0"/>
+<field name="usgroupidno" on_change="on_change_troop(troop_id)"/>
+<field name="ususeridno" on_change="on_change_Participant(participant_id,usgroupidno)"/>
+<field name="tocampfromdestination" readonly="0"/>
+<field name="fromcamptodestination" readonly="0"/>
+<field name="tocampdate" readonly="0"/>
+<field name="fromcampdate" readonly="0"/>
+<field name="usecamptransporttocamp" readonly="0"/>
+<field name="usecamptransportfromcamp" readonly="0"/>
+<field name="tocampneedidno" readonly="0"/>
+<field name="fromcampneedidno" readonly="0"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Participant list -->
+<act_window id="action_webtourparticipant"
+name="Camp OS Webtour Participant"
+res_model="webtour.campos.event.participant"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourparticipant"
+name="Campos transportation Participant"
+parent="mail.mail_feeds"
+sequence="32"
+action="action_webtourparticipant" />
+</data>
+</openerp>
