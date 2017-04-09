@@ -174,7 +174,6 @@ class WebtourRegistration(models.Model):
                     n = n+1 
                     if (n > 4):
                         break       #Max 5 distinations
-
                             
                 if homedestination:
                     _logger.info("Closest Home Destination found %s %f %s",homedestination, homedistance,homeduration)    
@@ -187,7 +186,9 @@ class WebtourRegistration(models.Model):
         else:
             self.webtourdefaulthomedistance = False
             self.webtourdefaulthomeduration = False
-            self.webtourdefaulthomedestination = False
+            if self.webtourdefaulthomedestination: self.webtourdefaulthomedestination = False
+            for par in self.participant_ids:
+                    par.recalcneed=True
             
             
     @api.multi
@@ -200,8 +201,7 @@ class WebtourRegistration(models.Model):
     @api.multi
     def action_update_webtourdefaulthomedestination(self):
         for reg in self:
-            reg.set_webtourdefaulthomedestination()             
-                
+            reg.set_webtourdefaulthomedestination()               
                 
 
 '''

@@ -127,6 +127,13 @@ class WebtourUsNeed(models.Model):
              
         return ret
     
+    @api.model
+    def create(self, vals):
+        _logger.info("WebtourUsNeed Create Entered %s", vals.keys())
+        rec = super(WebtourUsNeed, self).create(vals)
+        rec.calc_travelneed_id()       
+        return rec
+    
     @api.one
     def calc_travelneed_id(self):
         # find travelneed matching usneeds
