@@ -27,7 +27,12 @@ class WebtourRegistration(models.Model):
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
     #webtourhasbeeninitialized = fields.Boolean('Webtour has been initialized')
-
+    group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
+    org_country_code2 = fields.Char(related='organization_id.country_id.code', string='Org Country Code2', readonly=True)
+    groupisdanish = fields.Boolean(compute='_compute_groupisdanish', string='groupisdanish', store = False)
+    webtourgroup_entrypointname = fields.Char(related="group_entrypoint.defaultdestination_id.name")
+    webtourgroup_exitpointname = fields.Char(related="group_exitpoint.defaultdestination_id.name")
+    
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
@@ -44,6 +49,11 @@ class WebtourRegistration(models.Model):
                     par.recalcneed=True
                     
         return ret
+    
+    @api.depends('group_country_code2')
+    def _compute_groupisdanish(self):
+        for record in self:
+            record.groupisdanish = record.group_country_code2 == 'DK' or record.organization_id.country_id.code == 'DK'
     
     @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
@@ -63,7 +73,7 @@ class WebtourRegistration(models.Model):
            
     @api.one
     def set_webtourdefaulthomedestination(self):
-        if self.group_country_code2 == 'DK':
+        if self.groupisdanish:
             # If gep point is missing, try to calculate
             if (self.partner_id.partner_latitude==0):
                 self.partner_id.geocode_address()
@@ -118,18 +128,21 @@ class WebtourRegistration(models.Model):
                   
                 sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
                 
-                self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
+                #self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
     
                 lat1 = self.partner_id.partner_latitude
                 lon1 = self.partner_id.partner_longitude
                 
-                lat2=float(self.webtourdefaulthomedestination.latitude)
-                lon2=float(self.webtourdefaulthomedestination.longitude)
+                #lat2=float(self.webtourdefaulthomedestination.latitude)
+                #lon2=float(self.webtourdefaulthomedestination.longitude)
                   
                 n = 0;  #counter for no of dist to googlemaps
                 origins=[] #placeholder list for origons to googlemaps
                 destinations =[] #placeholder list for desinations to googlemaps
                 origins.append((lat1,lon1)) #Home add            
+                homedestination = False
+                homedistance = False
+                homeduration = False
                 for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
     
                     destinations.append((d[2],d[3])) # get geo point stored in loop above
@@ -149,19 +162,28 @@ class WebtourRegistration(models.Model):
                     duration=matrix['rows'][0]['elements'][n]['duration']['text']
                     
                     if (n == 0): 
-                        self.webtourdefaulthomedistance = distancekm
-                        self.webtourdefaulthomeduration = duration
+                        homedistance = distancekm
+                        homeduration = duration
+                        homedestination = d[0]
                     else:
-                        if (self.webtourdefaulthomedistance > distancekm):
-                            self.webtourdefaulthomedestination=d[0]
-                            self.webtourdefaulthomedistance = distancekm
-                            self.webtourdefaulthomeduration = duration                    
+                        if (homedistance > distancekm):
+                            homedestination = d[0]
+                            homedistance = distancekm
+                            homeduration = duration                    
                     
                     n = n+1 
                     if (n > 4):
                         break       #Max 5 distinations
+
+                            
+                if homedestination:
+                    _logger.info("Closest Home Destination found %s %f %s",homedestination, homedistance,homeduration)    
+                    self.webtourdefaulthomedistance = homedistance
+                    self.webtourdefaulthomeduration = homeduration
+                    self.webtourdefaulthomedestination = homedestination
+                else:
+                    _logger.info("!!!!!!!!!!!! No Home Destination found")                  
                                                  
-                _logger.info("Select Pickup Destination %s %f %s",self.webtourdefaulthomedestination, self.webtourdefaulthomedistance,self.webtourdefaulthomeduration)
         else:
             self.webtourdefaulthomedistance = False
             self.webtourdefaulthomeduration = False
@@ -174,6 +196,13 @@ class WebtourRegistration(models.Model):
             for par in reg.participant_ids:
                 par.tocampusneed_id.calc_travelneed_id()
                 par.fromcampusneed_id.calc_travelneed_id()
+                
+    @api.multi
+    def action_update_webtourdefaulthomedestination(self):
+        for reg in self:
+            reg.set_webtourdefaulthomedestination()             
+                
+                
 
 '''
     @api.one
@@ -276,13 +305,11 @@ class WebtourRegistrationTravelNeed(models.Model):
     _name='event.registration.travelneed'
     registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
     travelgroup = fields.Char('Travel Group')
-    group_country_code2 = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code2', readonly=True)
-    groupisdanish = fields.Char(compute='_compute_groupisdanish', string='groupisdanish', store = False)
     name = fields.Char('Name', required=True)
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
     traveldate = fields.Date('Travel Date')
     startdestinationidno = fields.Many2one('campos.webtourusdestination.view','From',ondelete='set null')
-    enddestinationidno = fields.Many2one('campos.webtourusdestination.view','To',ondelete='set null')
+    enddestinationidno = fields.Many2one('campos.webtourusdestination.view','To',ondelete='set null') 
     travelconnectiondetails = fields.Char('Connection Details')
     deadline = fields.Selection([    ('Select', 'Please Select'),
                                      ('00:00', '00:00'),
@@ -314,11 +341,6 @@ class WebtourRegistrationTravelNeed(models.Model):
     overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
     
-    @api.depends('group_country_code2')
-    def _compute_groupisdanish(self):
-        for record in self:
-            record.groupisdanish = record.group_country_code2 == 'DK'
-
 class WebtourEntryExitPoint(models.Model):
     _inherit = 'event.registration.entryexitpoint'
     address = fields.Char('Address', required=False)

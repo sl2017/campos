@@ -534,7 +534,7 @@ class WebtourNeedOverview(models.Model):
     travelgroup = fields.Char('Travel Group')
     webtour_groupidno = fields.Char('Webtour us Group ID no')
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour Trip Type')    
-    campos_startdatetime = fields.Char('CampOs StartDateTime')
+    campos_transfered_startdatetime = fields.Char('CampOs StartDateTime')
     campos_startdestinationidno = fields.Char('CampOs Start Destination IdNo')
     campos_enddestinationidno = fields.Char('CampOs End Destination IdNo')    
     pax = fields.Integer('CampOS PAX')

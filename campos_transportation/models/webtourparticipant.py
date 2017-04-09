@@ -49,12 +49,12 @@ class WebtourParticipant(models.Model):
                                               ('4', 'Group 4'),
                                               ('5', 'Group 5')], default='1', string='Travel Group from Camp')
     
-    groupisdanish = fields.Boolean(compute='_compute_groupisdanish', string='groupisdanish', store = False)
-
-    @api.depends('registration_id.partner_id.country_id.code')
-    def _compute_groupisdanish(self):
-        for record in self:
-            record.groupisdanish = record.registration_id.partner_id.country_id.code == 'DK'
+    #groupisdanish = fields.Boolean(compute='_compute_groupisdanish', string='groupisdanish', store = False)
+    groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
+    #@api.depends('registration_id.partner_id.country_id.code')
+    #def _compute_groupisdanish(self):
+    #    for record in self:
+    #        record.groupisdanish = record.registration_id.partner_id.country_id.code == 'DK'
       
     @api.multi
     @api.depends('individualtocampfromdestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')
@@ -350,12 +350,12 @@ class WebtourParticipantCampDay(models.Model):
         _logger.info("_compute_webtourcamptransportation %s %s %s", self, self.participant_id,self.participant_id.tocampfromdestination_id)
         if self.the_date == self.participant_id.tocampdate:
             if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
-                self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.placename
+                self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.webtourname
             else:
                 self.webtourcamptransportation = ''
         elif self.the_date == self.participant_id.fromcampdate:
             if self.participant_id.transport_from_camp and self.participant_id.fromcamptodestination_id.placename:
-                self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.placename
+                self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.webtourname
             else:
                 self.webtourcamptransportation = ''
         else:

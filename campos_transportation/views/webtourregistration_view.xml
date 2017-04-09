@@ -9,6 +9,8 @@
 <tree>
 <field name="webtourusgroupidno"/>
 <field name="scoutgroup"/>
+<field name="org_country_code2"/>
+<field name="groupisdanish" />
 <field name="webtourhasgeoadd"/>
 <field name="webtourdefaulthomedistance"/>
 <field name="webtourPreregTotalSeats"/>

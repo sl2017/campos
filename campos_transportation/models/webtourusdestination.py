@@ -69,9 +69,12 @@ class WebtourUsDestination(models.Model):
             webtour_dict["address"] = address
             crlf1 = address.find('\r')
             crlf2 = address.find('\r',crlf1+1)          
-            if crlf1> 0 and crlf2 > 0 :
-                webtour_dict["zip_city"] = address[crlf1+1:crlf2]
-            
+            if crlf1 > 0:
+                if crlf2 > 0:
+                    webtour_dict["zip_city"] = address[crlf1+1:crlf2]
+                else:
+                    webtour_dict["zip_city"] = address[crlf1+1:]           
+
             lat=get_tag_data("a:Latitude")
             lon=get_tag_data("a:Longitude")
             #if len(lat) > 2: 
@@ -113,6 +116,6 @@ class WebtourUsDestinationView(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusdestination_view as
-                    SELECT destinationidno::int as id, placename as name FROM campos_webtourusdestination
+                    SELECT destinationidno::int as id, webtourname as name FROM campos_webtourusdestination
                     """
                     )
