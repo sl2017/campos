@@ -21,21 +21,20 @@ class WebtourUsDestination(models.Model):
     @api.one
     @api.depends('placename','address','webtourname','destinationidno')
     def _compute_name(self):
-        
-        if self.webtourname==False:
-            self.name = '' + self.placename 
-            self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
-            self.name = self.name + ' (' + ' IDno:' 
-            self.name = self.name + self.destinationidno + ')'
+        self.name = ''
+        if self.webtourname==False:            
+            if self.placename: self.name = self.name  + self.placename
+            if self.address: self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+            if self.destinationidno: self.name = self.name + ' (' + ' IDno:' + self.destinationidno + ')'
         else:
             if self.webtourname[:7] == 'SL2017-':
-                self.name = '' + self.placename 
-                self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
-                self.name = self.name + ' (' + self.webtourname  
-                self.name = self.name + ' IDno:' + self.destinationidno + ')'
+                if self.placename: self.name = self.name  + self.placename 
+                if self.address: self.name = self.name + ', ' + self.address.replace('\n', ', ').replace('\r', '')
+                if self.webtourname: self.name = self.name + ' (' + self.webtourname  
+                if self.destinationidno: self.name = self.name + ' IDno:' + self.destinationidno + ')'
             else:
-                self.name = '' + self.webtourname 
-                self.name = self.name + ' (IDno:' + self.destinationidno + ')'
+                if self.webtourname: self.name = '' + self.webtourname 
+                if self.destinationidno: self.name = self.name + ' (IDno:' + self.destinationidno + ')'
             
     @api.model
     def get_destinations_cron(self):
@@ -70,9 +69,12 @@ class WebtourUsDestination(models.Model):
             webtour_dict["address"] = address
             crlf1 = address.find('\r')
             crlf2 = address.find('\r',crlf1+1)          
-            if crlf1> 0 and crlf2 > 0 :
-                webtour_dict["zip_city"] = address[crlf1+1:crlf2]
-            
+            if crlf1 > 0:
+                if crlf2 > 0:
+                    webtour_dict["zip_city"] = address[crlf1+1:crlf2]
+                else:
+                    webtour_dict["zip_city"] = address[crlf1+1:]           
+
             lat=get_tag_data("a:Latitude")
             lon=get_tag_data("a:Longitude")
             #if len(lat) > 2: 
@@ -114,6 +116,6 @@ class WebtourUsDestinationView(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusdestination_view as
-                    SELECT destinationidno::int as id, placename as name FROM campos_webtourusdestination
+                    SELECT destinationidno::int as id, webtourname as name FROM campos_webtourusdestination
                     """
                     )

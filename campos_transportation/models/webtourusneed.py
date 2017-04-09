@@ -127,31 +127,41 @@ class WebtourUsNeed(models.Model):
              
         return ret
     
+    @api.model
+    def create(self, vals):
+        _logger.info("WebtourUsNeed Create Entered %s", vals.keys())
+        rec = super(WebtourUsNeed, self).create(vals)
+        rec.calc_travelneed_id()       
+        return rec
+    
     @api.one
     def calc_travelneed_id(self):
-                # find travelneed matching usneeds
-                rs_travelneed= self.env['event.registration.travelneed'].search([('registration_id', '=', self.participant_id.registration_id.id),('travelgroup', '=', self.travelgroup),('campos_TripType_id', '=', self.campos_TripType_id.id)
-                                                                                 ,('startdestinationidno.id', '=', self.campos_startdestinationidno),('enddestinationidno.id', '=', self.campos_enddestinationidno),('traveldate', '=', fields.Date.from_string(self.campos_traveldate))])
-                
-                #_logger.info("calc_travelneed_id Entered %s %s %s %s",self.travelneed_id.traveldate , rs_travelneed,self.campos_traveldate,fields.Date.from_string(self.campos_startdatetime))
-                if rs_travelneed:
-                    #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_traveldate,fields.Date.from_string(self.webtour_startdatetime))
-                    if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):
-                        #_logger.info("WebtourUsNeed Write Change BBBBBBBBBBBBBBBBBBBBBBBBBBB")  
-                        self.travelneed_id=rs_travelneed[0] 
-        
-                else:
-                    dicto0 = {}
-                    dicto0["registration_id"] = self.participant_id.registration_id.id
-                    dicto0["travelgroup"] =self.travelgroup
-                    dicto0["name"] = 'Bus Trip'   
-                    dicto0["campos_TripType_id"] = self.campos_TripType_id.id
-                    dicto0["startdestinationidno"] = self.campos_startdestinationidno
-                    dicto0["enddestinationidno"] = self.campos_enddestinationidno
-                    dicto0["traveldate"] = fields.Date.from_string(self.campos_traveldate)
-                    dicto0["deadline"] ='Select'
-                    _logger.info("calc_travelneed_id Create %s",dicto0)
-                    self.travelneed_id = self.env['event.registration.travelneed'].create(dicto0)          
+        # find travelneed matching usneeds
+        rs_travelneed= self.env['event.registration.travelneed'].search([('registration_id', '=', self.participant_id.registration_id.id),('travelgroup', '=', self.travelgroup),('campos_TripType_id', '=', self.campos_TripType_id.id)
+                                                                        ,('startdestinationidno.id', '=', self.campos_startdestinationidno),('enddestinationidno.id', '=', self.campos_enddestinationidno),('traveldate', '=', self.campos_traveldate)])
+    
+        if self.campos_TripType_id.id and self.campos_startdestinationidno and self.campos_enddestinationidno:
+            _logger.info("calc_travelneed_id Entered %s %s %s %s %s %s %s",self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
+            if rs_travelneed:
+                #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_traveldate,fields.Date.from_string(self.webtour_startdatetime))
+                if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):
+                    #_logger.info("WebtourUsNeed Write Change BBBBBBBBBBBBBBBBBBBBBBBBBBB")  
+                    self.travelneed_id=rs_travelneed[0]     
+            else:
+                dicto0 = {}
+                dicto0["registration_id"] = self.participant_id.registration_id.id
+                dicto0["travelgroup"] =self.travelgroup
+                dicto0["name"] = 'Bus Trip'   
+                dicto0["campos_TripType_id"] = self.campos_TripType_id.id
+                dicto0["startdestinationidno"] = self.campos_startdestinationidno
+                dicto0["enddestinationidno"] = self.campos_enddestinationidno
+                dicto0["traveldate"] = fields.Date.from_string(self.campos_traveldate)
+                dicto0["deadline"] ='Select'
+                _logger.info("calc_travelneed_id Create %s",dicto0)
+                self.travelneed_id = self.env['event.registration.travelneed'].create(dicto0)     
+        else:
+            _logger.info("calc_travelneed_id Entered with insufficent data %s %s %s %s %s %s %s",self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,fields.Date.from_string(self.campos_traveldate))
+     
             
     @api.multi
     @api.depends('campos_writeseq','campos_transferedseq') 
@@ -531,7 +541,7 @@ class WebtourNeedOverview(models.Model):
     travelgroup = fields.Char('Travel Group')
     webtour_groupidno = fields.Char('Webtour us Group ID no')
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour Trip Type')    
-    campos_startdatetime = fields.Char('CampOs StartDateTime')
+    campos_transfered_startdatetime = fields.Char('CampOs StartDateTime')
     campos_startdestinationidno = fields.Char('CampOs Start Destination IdNo')
     campos_enddestinationidno = fields.Char('CampOs End Destination IdNo')    
     pax = fields.Integer('CampOS PAX')
