@@ -161,7 +161,6 @@ class WebtourUsNeed(models.Model):
                 self.travelneed_id = self.env['event.registration.travelneed'].create(dicto0)     
         else:
             _logger.info("calc_travelneed_id Entered with insufficent data %s %s %s %s %s %s %s",self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,fields.Date.from_string(self.campos_traveldate))
-     
             
     @api.multi
     @api.depends('campos_writeseq','campos_transferedseq') 

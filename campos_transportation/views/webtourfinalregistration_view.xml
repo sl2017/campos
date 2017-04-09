@@ -16,9 +16,20 @@
 						<field name="webtourgroup_exitpointname" string="Default From Camp Drop off loaction" attrs="{'invisible': [('groupisdanish', '=', True)]}" />
 						<field name="webtourgrouptocampdestination_id" options="{'no_create': True, 'no_open': True}" string="Group to camp pick up location"/>
 						<field name="webtourgroupfromcampdestination_id" options="{'no_create': True, 'no_open': True}" string="Group from camp drop off location"/>
-						<field name="groupisdanish" invisible="1" string="Danish Group"/>	
-						</group>
-						<field  name="webtourtravelneed_ids" widget="one2many_list" nolabel="0" string="Travel needs">
+						<field name="groupisdanish" invisible="1" string="Danish Group"/>
+						</group>					
+							<field  name="webtourtravelneed_ids" widget="one2many_list" nolabel="0" string="Travel needs" attrs="{'invisible': [('groupisdanish', '=', False)]}">
+							<tree editable="bottom" default_order="traveldate">
+								<field name="name" string="Name"/>
+								<field name="campos_TripType_id" string="Travel"/>
+								<field name="travelgroup" string="Group"/>
+								<field name="traveldate" string="Date"/>								
+								<field name="startdestinationidno" string="From"/>
+								<field name="enddestinationidno" string="To"/>										
+								<field name="pax" string="PAX"/>
+							</tree>
+						</field>
+						<field  name="webtourtravelneed2_ids" widget="one2many_list" nolabel="0" string="Travel needs2 " attrs="{'invisible': [('groupisdanish', '=', True)]}">
 							<tree editable="bottom" default_order="traveldate">
 								<field name="name" string="Name"/>
 								<field name="campos_TripType_id" string="Travel"/>
@@ -26,11 +37,12 @@
 								<field name="traveldate" string="Date"/>								
 								<field name="startdestinationidno" string="From"/>
 								<field name="enddestinationidno" string="To"/>
-								<field name="pax" string="PAX"/>															
-								<field name="deadline" string="Deadline" invisible="context.get('groupisdanish')"/>
-								<field name="travelconnectiondetails" string="Connection" invisible="context.get('groupisdanish')"/>
+								<field name="pax" string="PAX"/>
+								<field name="deadline" string="Deadline"/>
+								<field name="travelconnectiondetails" string="Connection"/>																			
 							</tree>
 						</field>
+											
 						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
 						<button name="action_update_webtourdefaulthomedestination" string="Update Default Home Destination" type="object"/>
            			</page>

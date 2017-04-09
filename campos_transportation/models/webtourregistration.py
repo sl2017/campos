@@ -26,6 +26,7 @@ class WebtourRegistration(models.Model):
     webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
+    webtourtravelneed2_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs 2')
     #webtourhasbeeninitialized = fields.Boolean('Webtour has been initialized')
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
     org_country_code2 = fields.Char(related='organization_id.country_id.code', string='Org Country Code2', readonly=True)
@@ -337,9 +338,10 @@ class WebtourRegistrationTravelNeed(models.Model):
                                      ('22:00', '22:00'),
                                      ('23:00', '23:00')                                                                         
                                      ], default='Select', string='Time')
-    
+
     overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
+    
     
 class WebtourEntryExitPoint(models.Model):
     _inherit = 'event.registration.entryexitpoint'
