@@ -15,13 +15,14 @@ class WebtourParticipant(models.Model):
     
     tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'To camp Pick up',
-                                            ondelete='set null',compute='_compute_tocampfromdestination_id')
+                                            ondelete='set null') #, store=Truecompute='_compute_tocampfromdestination_id',
+  
     fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
                                             'From camp Drop off',
-                                            ondelete='set null',compute='_compute_fromcamptomdestination_id')
+                                            ondelete='set null')#,compute='_compute_fromcamptomdestination_id', store=True
     
-    tocampdate = fields.Date(compute='_compute_tocampdate', string='To Camp Date', store = True)
-    fromcampdate = fields.Date(compute='_compute_fromcampdate', string='From Camp Date', store = True)
+    tocampdate = fields.Date(string='To Camp Date') #compute='_compute_tocampdate', , store = True
+    fromcampdate = fields.Date(string='From Camp Date') #compute='_compute_fromcampdate', , store = True
     
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
@@ -36,7 +37,9 @@ class WebtourParticipant(models.Model):
                                             'Individual From camp Drop off',
                                             ondelete='set null')
     
-    recalcneed = fields.Boolean('recalcneed')
+    recalctoneed = fields.Boolean('recalctoneed')
+    recalcfromneed = fields.Boolean('recalcfromneed')
+    
     tocamptravelgroup = fields.Selection([    ('1', 'Group 1'),
                                               ('2', 'Group 2'),
                                               ('3', 'Group 3'),
@@ -51,84 +54,100 @@ class WebtourParticipant(models.Model):
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
 
-    @api.multi
-    @api.depends('individualtocampfromdestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgrouptocampdestination_id')
+    @api.one
     def _compute_tocampfromdestination_id(self):
-        for par in self:
-            _logger.info("_compute_tocampfromdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
-            if par.individualtocampfromdestination_id:
-                par.tocampfromdestination_id = par.individualtocampfromdestination_id
-            elif par.registration_id.webtourgrouptocampdestination_id:
-                par.tocampfromdestination_id = par.registration_id.webtourgrouptocampdestination_id
-            elif par.registration_id.group_entrypoint.defaultdestination_id:
-                par.tocampfromdestination_id = par.registration_id.group_entrypoint.defaultdestination_id
-            elif par.registration_id.webtourdefaulthomedestination:
-                par.tocampfromdestination_id = par.registration_id.webtourdefaulthomedestination
+            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+            destination=False
+            if self.individualtocampfromdestination_id:
+                destination = self.individualtocampfromdestination_id
+            elif self.registration_id.webtourgrouptocampdestination_id:
+                destination = self.registration_id.webtourgrouptocampdestination_id
+            elif self.registration_id.group_entrypoint.defaultdestination_id:
+                destination = self.registration_id.group_entrypoint.defaultdestination_id
+            elif self.registration_id.webtourdefaulthomedestination:
+                destination = self.registration_id.webtourdefaulthomedestination
+            
+            if  destination == False:
+                _logger.info("_compute_tocampfromdestination_id No Destination known !!!!!!! %s", self.id)
+                self.tocampfromdestination_id = False;
             else:
-                par.tocampfromdestination_id = False
-            _logger.info("_compute_tocampfromdestination_id result %s",par.tocampfromdestination_id)
-            #par.update_tocampusneed()
-                          
-    @api.multi
-    @api.depends('individualfromcamptodestination_id','recalcneed','registration_id.webtourdefaulthomedestination','registration_id.webtourgroupfromcampdestination_id')
+                if self.tocampfromdestination_id != destination:
+                    _logger.info("_compute_tocampfromdestination_id Update %s %s %s",self.id,self.tocampfromdestination_id,destination)
+                    self.tocampfromdestination_id = destination
+                    return True
+            
+            return False 
+                                                  
+    @api.one
     def _compute_fromcamptomdestination_id(self):
-        for par in self:
-            #_logger.info("_compute_fromcamptomdestination_id %s %s %s %s %s", len(self), par.id, par.individualtocampfromdestination_id.destinationidno,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.webtourdefaulthomedestination)
-            if par.individualfromcamptodestination_id:
-                par.fromcamptodestination_id = par.individualfromcamptodestination_id
-            elif par.registration_id.webtourgroupfromcampdestination_id:
-                par.fromcamptodestination_id = par.registration_id.webtourgroupfromcampdestination_id
-            elif par.registration_id.group_exitpoint.defaultdestination_id:
-                par.fromcamptodestination_id = par.registration_id.group_exitpoint.defaultdestination_id
-            elif par.registration_id.webtourdefaulthomedestination:
-                par.fromcamptodestination_id = par.registration_id.webtourdefaulthomedestination
-            else:
-                par.fromcamptodestination_id = False
-            #par.update_fromcampusneed()   
+        #_logger.info("_compute_fromcamptomdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+        destination=self.fromcamptodestination_id
+        if self.individualfromcamptodestination_id:
+            destination = self.individualfromcamptodestination_id
+        elif self.registration_id.webtourgroupfromcampdestination_id:
+            destination = self.registration_id.webtourgroupfromcampdestination_id
+        elif self.registration_id.group_exitpoint.defaultdestination_id:
+            destination = self.registration_id.group_exitpoint.defaultdestination_id
+        elif self.registration_id.webtourdefaulthomedestination:
+            destination = self.registration_id.webtourdefaulthomedestination
+
+        if  destination == False:
+            _logger.info("individualfromcamptodestination_id No Destination known !!!!!!! %s",self.id)
+            self.fromcamptodestination_id = False;
+        else:
+            if self.fromcamptodestination_id != destination:
+                _logger.info("individualfromcamptodestination_id Update %s %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
+                self.fromcamptodestination_id = destination
+                return True
+        
+        return False                
                          
-    @api.multi
-    @api.depends('dates_summery','specialtocampdatetime')
-    def _compute_tocampdate(self):
-
-        for par in self:
-            
-            if par.specialtocampdatetime:
-                par.tocampdate = par.specialtocampdatetime
-            else:
-                dates = []
-                for d in par.camp_day_ids:
-                    if d.will_participate:
-                        dates.append(d.the_date)
+    @api.one
+    def _compute_tocampdate(self):        
+        tocampdate = False
+        if self.specialtocampdatetime:
+            tocampdate = self.specialtocampdatetime
+        else:
+            dates = []
+            for d in self.camp_day_ids:
+                if d.will_participate:
+                    dates.append(d.the_date)
+    
+            dates.sort()
+            if len(dates) > 0:
+                tocampdate = dates[0]
+            else :
+                tocampdate = False
+                
+        if self.tocampdate != tocampdate:
+            _logger.info("_compute_tocampdate, Update %s %s %s %s %s",self.id, self.specialtocampdatetime,dates,self.tocampdate,tocampdate)
+            self.tocampdate = tocampdate      
+            return True
         
-                dates.sort()
-                if len(dates) > 0:
-                    par.tocampdate = dates[0]
-                else :
-                    par.tocampdate = False
-            #xxxpar.update_tocampusneed()
-            _logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_tocampdate, % % %",par.specialtocampdatetime,dates,par.tocampdate)
+        return False                
             
-    @api.multi
-    @api.depends('dates_summery','specialfromcampdatetime')
+    @api.one
     def _compute_fromcampdate(self):
-
-        for par in self:
-            #_logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_fromcampdate")            
-            if par.specialfromcampdatetime:
-                par.fromcampdate = par.specialfromcampdatetime
-            else:
-                dates = []
-                for d in par.camp_day_ids:
-                    if d.will_participate:
-                        dates.append(d.the_date)
+        fromcampdate = False           
+        if self.specialfromcampdatetime:
+            fromcampdate = self.specialfromcampdatetime
+        else:
+            dates = []
+            for d in self.camp_day_ids:
+                if d.will_participate:
+                    dates.append(d.the_date)
+    
+            dates.sort(reverse=True)
+            if len(dates) > 0:
+                fromcampdate = dates[0]
+            else :
+                fromcampdate = False
+        if self.fromcampdate != fromcampdate:
+            _logger.info("_compute_fromcampdate, Update %s %s %s %s %s",self.id,self.specialfromcampdatetime,dates,self.fromcampdate,fromcampdate)
+            self.fromcampdate = fromcampdate
+            return True
         
-                dates.sort(reverse=True)
-                if len(dates) > 0:
-                    par.fromcampdate = dates[0]
-                else :
-                    par.fromcampdate = False
-            #xxxpar.update_fromcampusneed()
-            _logger.info("xxxxxxxxxxxxxxxxxxxxxxxx _compute_fromcampdate, % % %",par.specialfromcampdatetime,dates,par.fromcampdate)
+        return False
               
     @api.model
     def get_create_usgroupidno_tron(self):
@@ -220,36 +239,39 @@ class WebtourParticipant(models.Model):
         ret = super(WebtourParticipant, self).write(vals)
                       
         for par in self:
-            if  ('recalcneed' in vals):
-                _logger.info("Write xxxxxxxxxxxx recalcneed change %s", par.id)
-                par._compute_tocampfromdestination_id()
-                par._compute_fromcamptomdestination_id()
+            notdoneto = True
+            notdonefrom = True
+            if  'recalctoneed' in vals or 'individualtocampfromdestination_id' in vals:           
+                if [True] == par._compute_tocampfromdestination_id():
+                    notdoneto = False
+                   
+            if  'recalcfromneed' in vals or 'individualfromcamptodestination_id' in vals:
+                if [True] == par._compute_fromcamptomdestination_id():
+                    notdonefrom = False
             
             if  ('camp_day_ids' in vals):    
-                par._compute_tocampdate()
-                par._compute_fromcampdate()
+                if [True] == par._compute_tocampdate():
+                    notdoneto = False
+                if [True] == par._compute_fromcampdate():
+                    notdonefrom = False                
                 
             if  ('tocampfromdestination_id' in vals 
-                or 'individualtocampfromdestination_id' in vals 
                 or 'tocamptravelgroup' in vals
-                or 'camp_day_ids' in vals
                 or 'tocampdate' in vals
-                or 'transport_to_camp' in vals 
-                or 'webtourususeridno' in vals
+                or 'transport_to_camp' in vals
+                or ('recalctoneed' in vals and notdoneto)
                 ):
-                
-                par.update_tocampusneed()        
-                               
+                par.update_tocampusneed()
+
+
             if  ('fromcamptodestination_id' in vals 
-                or 'individualfromcamptodestination_id' in vals
-                or 'fromcamptravelgroup' in vals                
-                or 'camp_day_ids' in vals                 
+                or 'fromcamptravelgroup' in vals                                
                 or 'fromcampdate' in vals
-                or 'transport_from_camp' in vals 
-                or 'webtourususeridno' in vals
+                or 'transport_from_camp' in vals
+                or ('recalcfromneed' in vals and notdonefrom)
                 ):
-                par.update_fromcampusneed()   
-                        
+                par.update_fromcampusneed()
+                                                                      
         return ret
 
     @api.one
@@ -257,7 +279,6 @@ class WebtourParticipant(models.Model):
       
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno
-
         
         if self.tocampusneed_id.id == False:
             dicto1 = {}
@@ -342,7 +363,7 @@ class WebtourParticipantCampDay(models.Model):
 
     @api.one
     def _compute_webtourcamptransportation(self):
-        _logger.info("_compute_webtourcamptransportation %s %s %s", self, self.participant_id,self.participant_id.tocampfromdestination_id)
+        #_logger.info("_compute_webtourcamptransportation %s %s %s", self, self.participant_id,self.participant_id.tocampfromdestination_id)
         if self.the_date == self.participant_id.tocampdate:
             if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
                 self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.webtourname
