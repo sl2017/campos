@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 16:14+0000\n"
-"PO-Revision-Date: 2017-03-29 16:14+0000\n"
+"POT-Creation-Date: 2017-04-10 04:39+0000\n"
+"PO-Revision-Date: 2017-04-10 04:39+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2016\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -247,11 +247,6 @@ msgid "Group Preregistration"
 msgstr "Vorausanmeldung der Gruppe"
 
 #. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_layer_pre_reg_colored_on_cnt
-msgid "Group colored on total pre reg"
-msgstr ""
-
-#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Handicaped participants"
@@ -313,11 +308,6 @@ msgid "Length"
 msgstr ""
 
 #. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_layer_basictest0
-msgid "Municipality"
-msgstr ""
-
-#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Name"
 msgstr "Name"
@@ -367,16 +357,6 @@ msgstr ""
 #: code:addons/campos_preregistration/models/preregistration.py:126
 #, python-format
 msgid "Own transport to camp more than total participants"
-msgstr ""
-
-#. module: campos_preregistration
-#: model:geoengine.raster.layer,name:campos_preregistration.geoengine_vector_layer_prereg_tree
-msgid "Participant background"
-msgstr ""
-
-#. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_participant
-msgid "Participant location"
 msgstr ""
 
 #. module: campos_preregistration
@@ -558,9 +538,4 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_home_hospitality:0
 msgid "Would like to offer home hospitality?"
-msgstr ""
-
-#. module: campos_preregistration
-#: model:geoengine.raster.layer,name:campos_preregistration.geoengine_vector_layer_prereg
-msgid "pre_reg background"
 msgstr ""
