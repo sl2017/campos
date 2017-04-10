@@ -30,13 +30,13 @@ msgstr "Overnatningssted"
 #: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:60
 #, python-format
 msgid "Accomodation dates must be in Main Camp Period"
-msgstr ""
+msgstr " Overnatning skal ligge indenfor hovedlejrens periode 22/7 - 30/7"
 
 #. module: campos_jobber_final
 #: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:64
 #, python-format
 msgid "Accomodation dates must not be overlapping"
-msgstr ""
+msgstr "Datoer for overnatning må ikke overlappe hinanden"
 
 #. module: campos_jobber_final
 #: field:campos.jobber.accomodation,accom_type_id:0
@@ -118,13 +118,13 @@ msgstr "Jobber kantiner"
 #: selection:campos.jobber.accomodation,state:0
 #: selection:campos.jobber.canteen,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Afmeldt"
 
 #. module: campos_jobber_final
 #: field:campos.jobber.canteen,canteen_id:0
 #: selection:campos.jobber.canteen,eat_at:0
 msgid "Canteen"
-msgstr ""
+msgstr "Kantine"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -138,13 +138,13 @@ msgstr "Bespisning"
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:67
 #, python-format
 msgid "Catering dates must be in Main Camp Period"
-msgstr ""
+msgstr "Forplejning skal ligge indenfor hoved lejren periode 22/7 - 30/7"
 
 #. module: campos_jobber_final
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:71
 #, python-format
 msgid "Catering dates must not be overlapping"
-msgstr ""
+msgstr "Datoer for forplejning må ikke overlappe hinanden"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -175,7 +175,7 @@ msgstr "Børnenes Ø"
 msgid ""
 "Chose weather you are going to stay at the campsite or not. Must be filled "
 "in."
-msgstr ""
+msgstr "Vælg om du overnatter på lejrpladsen. Skal vælges "
 
 #. module: campos_jobber_final
 #: help:campos.event.participant,canteen_ids:0
@@ -184,6 +184,8 @@ msgid ""
 "several different locations - but only within the jamboree site. During the "
 "pre/post camp everybody is catered in Øen."
 msgstr ""
+"Vælg hvor du spiser på lejren. Du kan vælge flere steder – men kun indenfor "
+"hovedlejren. Under for/efterlejr spiser alle i Øen. Se vejledning side 19."
 
 #. module: campos_jobber_final
 #: help:campos.event.participant,accomodation_ids:0
@@ -192,6 +194,9 @@ msgid ""
 "several different locations - but only within the jamboree site. During the "
 "pre/post camp everybody is accommodated in Øen."
 msgstr ""
+"Vælg hvor du overnatter på lejren. Du kan vælge flere steder – men kun "
+"indenfor hovedlejren. Under for/efterlejr bor alle i Øen. Se vejledning side"
+" 16."
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
