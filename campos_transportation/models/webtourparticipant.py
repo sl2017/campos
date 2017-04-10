@@ -53,6 +53,8 @@ class WebtourParticipant(models.Model):
                                               ('5', 'Group 5')], default='1', string='Travel Group from Camp')
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
+    
+    donotparticipate = fields.Boolean('Do not participate') 
 
     @api.one
     def _compute_tocampfromdestination_id(self):
@@ -255,22 +257,29 @@ class WebtourParticipant(models.Model):
                 if [True] == par._compute_fromcampdate():
                     notdonefrom = False                
                 
-            if  ('tocampfromdestination_id' in vals 
+            if  ('tocampfromdestination_id' in vals
                 or 'tocamptravelgroup' in vals
                 or 'tocampdate' in vals
-                or 'transport_to_camp' in vals
+                or 'transport_to_camp' in vals               
                 or ('recalctoneed' in vals and notdoneto)
+                or 'deregistered' in vals 
                 ):
                 par.update_tocampusneed()
-
 
             if  ('fromcamptodestination_id' in vals 
                 or 'fromcamptravelgroup' in vals                                
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals
                 or ('recalcfromneed' in vals and notdonefrom)
+                or 'deregistered' in vals                
                 ):
                 par.update_fromcampusneed()
+                
+            if 'state' in vals:
+                par.donotparticipate = par.state == 'deregistered'
+            else:
+                if par.donotparticipate != (par.state == 'deregistered'):
+                    par.donotparticipate = par.state == 'deregistered'                            
                                                                       
         return ret
 
@@ -284,7 +293,7 @@ class WebtourParticipant(models.Model):
             dicto1 = {}
             dicto1["participant_id"] = self.id
             dicto1["travelgroup"] = self.tocamptravelgroup
-            dicto1["campos_demandneeded"] = self.transport_to_camp
+            dicto1["campos_demandneeded"] = self.transport_to_camp and not self.donotparticipate
             dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
             dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"] = self.tocampfromdestination_id.destinationidno
@@ -298,7 +307,7 @@ class WebtourParticipant(models.Model):
         else:
             dicto1 = {}   
             dicto1["travelgroup"] = self.tocamptravelgroup                             
-            dicto1["campos_demandneeded"]  = self.transport_to_camp
+            dicto1["campos_demandneeded"]  = self.transport_to_camp and not self.donotparticipate
             dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"]  = self.tocampfromdestination_id.destinationidno
             dicto1["campos_enddestinationidno"]  = campdesination
@@ -319,7 +328,7 @@ class WebtourParticipant(models.Model):
             dicto1 = {}
             dicto1["participant_id"] = self.id
             dicto1["travelgroup"] = self.fromcamptravelgroup            
-            dicto1["campos_demandneeded"] = self.transport_from_camp      
+            dicto1["campos_demandneeded"] = self.transport_from_camp and not self.donotparticipate     
             dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
             dicto1["campos_traveldate"] = self.fromcampdate                  
             dicto1["campos_startdestinationidno"] = campdesination
@@ -333,7 +342,7 @@ class WebtourParticipant(models.Model):
         else:
             dicto1 = {} 
             dicto1["travelgroup"] = self.fromcamptravelgroup               
-            dicto1["campos_demandneeded"]  = self.transport_from_camp
+            dicto1["campos_demandneeded"]  = self.transport_from_camp and not self.donotparticipate
             dicto1["campos_traveldate"] = self.fromcampdate 
             dicto1["campos_startdestinationidno"]  = campdesination
             dicto1["campos_enddestinationidno"]  = self.fromcamptodestination_id.destinationidno

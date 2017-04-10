@@ -40,7 +40,7 @@ class WebtourRegistration(models.Model):
     
         for reg in self:
             
-            if 'webtourdefaulthomedestination' in vals:
+            if ('webtourdefaulthomedestination' in vals):
                 dicto={}
                 dicto["recalctoneed"]=True
                 dicto["recalcfromneed"]=True
