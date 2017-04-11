@@ -237,7 +237,7 @@ class WebtourRegistration(models.Model):
     def action_batchupdate_webtourdefaulthomedestination(self):
         for reg in self:
             session = ConnectorSession.from_env(self.env)
-            do_delayed_webtourdefaulthomedestination.delay(session, 'campos.fee.ss.registration', reg.id)
+            do_delayed_webtourdefaulthomedestination.delay(session, 'event.registration', reg.id)
                     
 
 '''
