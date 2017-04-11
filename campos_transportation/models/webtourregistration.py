@@ -13,6 +13,34 @@ from math import sin, cos, sqrt, atan2, radians
 from operator import itemgetter
 import googlemaps
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_snapshot(session, model, reg_id):
+    reg = session.env['event.registration'].browse(reg_id)
+    if reg.exists():
+        reg.set_webtourdefaulthomedestination()
+
+
 class WebtourRegistration(models.Model):
     _inherit = 'event.registration'
     webtourusgroupidno = fields.Char('Webtour us Group ID no', required=False, Default='')
@@ -202,7 +230,13 @@ class WebtourRegistration(models.Model):
     def action_update_webtourdefaulthomedestination(self):
         for reg in self:
             reg.set_webtourdefaulthomedestination()               
-                
+        
+    @api.multi
+    def action_batchupdate_webtourdefaulthomedestination(self):
+        for reg in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_webtourdefaulthomedestination.delay(session, 'campos.fee.ss.registration', reg.id)
+                    
 
 '''
     @api.one
