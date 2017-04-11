@@ -23,9 +23,9 @@ class WebtourRegistration(models.Model):
     webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance')
     webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration')
     webtourPreregTotalSeats = fields.Integer(compute='_compute_webtourPreregBusToCamptotal', string='webtour Prereg Total Seats', store = True)
-    webtournoofparticipant = fields.Integer(compute='_compute_webtournoofparticipant', string='webtour No of participant', store = False)
     webtourhasgeoadd = fields.Boolean(compute='_compute_webtourhasgeoadd', string='webtour Has Geo Adress', store = False)
     webtourtravelneed_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs')
+    webtourtravelneed2_ids = fields.One2many('event.registration.travelneed','registration_id','Special travel needs 2')
     #webtourhasbeeninitialized = fields.Boolean('Webtour has been initialized')
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
     org_country_code2 = fields.Char(related='organization_id.country_id.code', string='Org Country Code2', readonly=True)
@@ -39,15 +39,21 @@ class WebtourRegistration(models.Model):
         ret = super(WebtourRegistration, self).write(vals)
     
         for reg in self:
-            if  ('webtourdefaulthomedestination' in vals 
-                 or 'webtourgrouptocampdestination_id' in vals 
-                 or 'webtourgroupfromcampdestination_id' in vals
-                 or 'group_entrypoint' in vals
-                 or 'group_exitpoint' in vals
-                 ):
-                for par in reg.participant_ids:
-                    par.recalcneed=True
-                    
+            
+            if ('webtourdefaulthomedestination' in vals):
+                dicto={}
+                dicto["recalctoneed"]=True
+                dicto["recalcfromneed"]=True
+                for par in self.participant_ids:
+                    par.write(dicto)  
+            else:  
+                if  ('webtourgrouptocampdestination_id' in vals or 'group_entrypoint' in vals):
+                    for par in reg.participant_ids:
+                        par.recalctoneed=True
+        
+                if  ('webtourgroupfromcampdestination_id' in vals or 'group_exitpoint' in vals ):
+                    for par in reg.participant_ids:
+                        par.recalcfromneed=True                               
         return ret
     
     @api.depends('group_country_code2')
@@ -59,12 +65,6 @@ class WebtourRegistration(models.Model):
     def _compute_webtourPreregBusToCamptotal(self):
         for record in self:
             record.webtourPreregTotalSeats = sum(2*line.participant_total - line.participant_own_transport_to_camp_total -line.participant_own_transport_from_camp_total for line in record.prereg_participant_ids)
-
-    @api.depends()
-    def _compute_webtournoofparticipant(self):
-        for record in self:  
-            record.webtournoofparticipant = len(record.participant_ids)
-
 
     @api.depends('partner_id.partner_latitude','partner_id.partner_longitude')
     def _compute_webtourhasgeoadd(self):
@@ -181,15 +181,17 @@ class WebtourRegistration(models.Model):
                     self.webtourdefaulthomeduration = homeduration
                     self.webtourdefaulthomedestination = homedestination
                 else:
-                    _logger.info("!!!!!!!!!!!! No Home Destination found")                  
-                                                 
+                    _logger.info("!!!!!!!!!!!! No Home Destination found")
+                                               
         else:
             self.webtourdefaulthomedistance = False
             self.webtourdefaulthomeduration = False
             if self.webtourdefaulthomedestination: self.webtourdefaulthomedestination = False
+            dicto={}
+            dicto["recalctoneed"]=True
+            dicto["recalcfromneed"]=True
             for par in self.participant_ids:
-                    par.recalcneed=True
-            
+                    par.write(dicto)       
             
     @api.multi
     def action_update_webtourtravelneed_ids(self):
@@ -337,9 +339,10 @@ class WebtourRegistrationTravelNeed(models.Model):
                                      ('22:00', '22:00'),
                                      ('23:00', '23:00')                                                                         
                                      ], default='Select', string='Time')
-    
+
     overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
+    
     
 class WebtourEntryExitPoint(models.Model):
     _inherit = 'event.registration.entryexitpoint'
