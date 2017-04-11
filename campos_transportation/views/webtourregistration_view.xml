@@ -14,7 +14,6 @@
 <field name="webtourhasgeoadd"/>
 <field name="webtourdefaulthomedistance"/>
 <field name="webtourPreregTotalSeats"/>
-<field name="webtournoofparticipant"/>
 </tree>
 </field>
 </record>
