@@ -35,7 +35,7 @@ def related_action_generic(session, job):
 
 @job(default_channel='root.webtour')
 @related_action(action=related_action_generic)
-def do_delayed_snapshot(session, model, reg_id):
+def do_delayed_webtourdefaulthomedestination(session, model, reg_id):
     reg = session.env['event.registration'].browse(reg_id)
     if reg.exists():
         reg.set_webtourdefaulthomedestination()
