@@ -3,7 +3,9 @@ from openerp import models, fields, api
 from ..interface import webtourinterface
 
 import logging
-#import datetime
+from math import sin, cos, sqrt, atan2, radians
+from operator import itemgetter
+import googlemaps
 
 _logger = logging.getLogger(__name__)
 
@@ -21,14 +23,20 @@ class WebtourParticipant(models.Model):
                                             'From camp Drop off',
                                             ondelete='set null')#,compute='_compute_fromcamptomdestination_id', store=True
     
-    tocampdate = fields.Date(string='To Camp Date') #compute='_compute_tocampdate', , store = True
-    fromcampdate = fields.Date(string='From Camp Date') #compute='_compute_fromcampdate', , store = True
+    tocampdate = fields.Date(string='To Camp Date')
+    fromcampdate = fields.Date(string='From Camp Date')
     
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
     
-    specialtocampdatetime = fields.Datetime('Special To Camp Date', required=False)
-    specialfromcampdatetime = fields.Datetime('Special From Camp Date', required=False)
+    tocamp_TripType_id = fields.Integer('tocamp_TripType_id', compute='_compute_tocamp_TripType_id') #related="registration_id".event_id.webtourconfig_id.tocamp_campos_TripType_id.id   
+    specialtocampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special To Camp Date', domain="[('campos_TripType_id','=',tocamp_TripType_id)]", ondelete='set null', required=False) 
+    
+    fromcamp_TripType_id = fields.Integer('fromcamp_TripType_id', compute='_compute_fromcamp_TripType_id') #related="registration_id".event_id.webtourconfig_id.tocamp_campos_TripType_id.id   
+    specialfromcampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special From Camp Date', domain="[('campos_TripType_id','=',fromcamp_TripType_id)]", ondelete='set null', required=False) 
+
+    #specialtocampdate = fields.Date('Special To Camp Date', required=False)
+    #specialfromcampdate = fields.Date('Special From Camp Date', required=False)
 
     individualtocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'Individual To camp Pick up',
@@ -56,6 +64,18 @@ class WebtourParticipant(models.Model):
     
     donotparticipate = fields.Boolean('Do not participate') 
 
+    @api.multi
+    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
+    def _compute_tocamp_TripType_id(self):
+        for record in self:
+            record.tocamp_TripType_id = record.registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id.id
+    
+    @api.multi
+    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
+    def _compute_fromcamp_TripType_id(self):
+        for record in self:
+            record.fromcamp_TripType_id = record.registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id.id            
+            
     @api.one
     def _compute_tocampfromdestination_id(self):
             #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
@@ -107,10 +127,10 @@ class WebtourParticipant(models.Model):
     @api.one
     def _compute_tocampdate(self):        
         tocampdate = False
-        if self.specialtocampdatetime:
-            tocampdate = self.specialtocampdatetime
+        dates = []
+        if self.specialtocampdate_id:
+            tocampdate = self.specialtocampdate_id.name
         else:
-            dates = []
             for d in self.camp_day_ids:
                 if d.will_participate:
                     dates.append(d.the_date)
@@ -122,7 +142,7 @@ class WebtourParticipant(models.Model):
                 tocampdate = False
                 
         if self.tocampdate != tocampdate:
-            _logger.info("_compute_tocampdate, Update %s %s %s %s %s",self.id, self.specialtocampdatetime,dates,self.tocampdate,tocampdate)
+            _logger.info("_compute_tocampdate, Update %s %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)
             self.tocampdate = tocampdate      
             return True
         
@@ -130,11 +150,11 @@ class WebtourParticipant(models.Model):
             
     @api.one
     def _compute_fromcampdate(self):
+        dates = []
         fromcampdate = False           
-        if self.specialfromcampdatetime:
-            fromcampdate = self.specialfromcampdatetime
+        if self.specialfromcampdate_id:
+            fromcampdate = self.specialfromcampdate_id.name
         else:
-            dates = []
             for d in self.camp_day_ids:
                 if d.will_participate:
                     dates.append(d.the_date)
@@ -145,7 +165,7 @@ class WebtourParticipant(models.Model):
             else :
                 fromcampdate = False
         if self.fromcampdate != fromcampdate:
-            _logger.info("_compute_fromcampdate, Update %s %s %s %s %s",self.id,self.specialfromcampdatetime,dates,self.fromcampdate,fromcampdate)
+            _logger.info("_compute_fromcampdate, Update %s %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
             self.fromcampdate = fromcampdate
             return True
         
@@ -251,9 +271,13 @@ class WebtourParticipant(models.Model):
                 if [True] == par._compute_fromcamptomdestination_id():
                     notdonefrom = False
             
-            if  ('camp_day_ids' in vals):    
+            if  ('camp_day_ids' in vals
+                 or 'specialtocampdate_id'):    
                 if [True] == par._compute_tocampdate():
                     notdoneto = False
+                    
+            if  ('camp_day_ids' in vals
+                 or 'specialfromcampdate_id'):        
                 if [True] == par._compute_fromcampdate():
                     notdonefrom = False                
                 
@@ -288,12 +312,14 @@ class WebtourParticipant(models.Model):
       
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno
+        # Check if date included in to From camp dates
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id),('name', '=', self.tocampdate)])
         
         if self.tocampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
             dicto1["travelgroup"] = self.tocamptravelgroup
-            dicto1["campos_demandneeded"] = self.transport_to_camp and not self.donotparticipate
+            dicto1["campos_demandneeded"] = self.transport_to_camp and not self.donotparticipate and len(rs)> 0 
             dicto1["campos_TripType_id"] = webtourconfig.tocamp_campos_TripType_id.id
             dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"] = self.tocampfromdestination_id.destinationidno
@@ -307,7 +333,7 @@ class WebtourParticipant(models.Model):
         else:
             dicto1 = {}   
             dicto1["travelgroup"] = self.tocamptravelgroup                             
-            dicto1["campos_demandneeded"]  = self.transport_to_camp and not self.donotparticipate
+            dicto1["campos_demandneeded"]  = self.transport_to_camp and not self.donotparticipate and len(rs)> 0 
             dicto1["campos_traveldate"]  = self.tocampdate
             dicto1["campos_startdestinationidno"]  = self.tocampfromdestination_id.destinationidno
             dicto1["campos_enddestinationidno"]  = campdesination
@@ -323,12 +349,14 @@ class WebtourParticipant(models.Model):
       
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno           
-            
+        # Check if date included in to From camp dates
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id),('name', '=', self.fromcampdate)])
+                            
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
             dicto1["travelgroup"] = self.fromcamptravelgroup            
-            dicto1["campos_demandneeded"] = self.transport_from_camp and not self.donotparticipate     
+            dicto1["campos_demandneeded"] = self.transport_from_camp and not self.donotparticipate and len(rs)> 0      
             dicto1["campos_TripType_id"] = webtourconfig.fromcamp_campos_TripType_id.id                                  
             dicto1["campos_traveldate"] = self.fromcampdate                  
             dicto1["campos_startdestinationidno"] = campdesination
@@ -342,7 +370,7 @@ class WebtourParticipant(models.Model):
         else:
             dicto1 = {} 
             dicto1["travelgroup"] = self.fromcamptravelgroup               
-            dicto1["campos_demandneeded"]  = self.transport_from_camp and not self.donotparticipate
+            dicto1["campos_demandneeded"]  = self.transport_from_camp and not self.donotparticipate and len(rs)> 0 
             dicto1["campos_traveldate"] = self.fromcampdate 
             dicto1["campos_startdestinationidno"]  = campdesination
             dicto1["campos_enddestinationidno"]  = self.fromcamptodestination_id.destinationidno
@@ -353,6 +381,115 @@ class WebtourParticipant(models.Model):
                        
         _logger.info("update_fromcampusneed %s", dicto1)
          
+    
+    
+    @api.multi
+    def action_webtour_jobber_findclosestlocations(self):
+        for par in self:
+            if par.groupisdanish:
+                # If gep point is missing, try to calculate
+                if (par.partner_id.partner_latitude==0):
+                    par.partner_id.geocode_address()
+                    if (par.partner_id.partner_latitude > 0):
+                        _logger.info("Try to commit Non Google geocode")
+                        par.env.cr.commit()
+                    
+                # if still no result try geocode with Googlemap
+                if (par.partner_id.partner_latitude==0):
+                    gmaps2 = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.geocode'))
+        
+                    _logger.info("Try to Geocode with Googlemaps %s %s %s",par.partner_id.street,par.partner_id.zip,par.partner_id.city)
+                    
+                    try:
+                        a = par.partner_id.street+', '+ par.partner_id.zip+' '+par.partner_id.city
+                        geocode_result = gmaps2.geocode(a)
+                        lat=geocode_result[0]['geometry']['location']['lat']
+                        lng=geocode_result[0]['geometry']['location']['lng']
+                        par.partner_id.partner_latitude = float(lat)
+                        par.partner_id.partner_longitude = float(lng)
+                        _logger.info("Got Googlemap Geocoding  %f %f",par.partner_id.partner_latitude,par.partner_id.partner_longitude)
+                        par.env.cr.commit()
+                    except:
+                        pass
+                                        
+                # If geo point pressent lets go.... GOOGLEMAP DIAABLED          
+                if (par.partner_id.partner_latitude<>0):    
+        
+                    destinations = self.env['campos.webtourusdestination'].search([('name', '<>', '')])
+                    
+                    # approximate radius of earth in km
+                    R = 6373.0
+                    
+                    #Home adresse cord
+                    lat1 = radians(par.partner_id.partner_latitude)
+                    lon1 = radians(par.partner_id.partner_longitude)  
+        
+                    dists=[] #placeholder for beeline distance from home to all destinations
+                    
+                    for d in destinations:
+                        lat2 = radians(float(d.latitude))
+                        lon2 = radians(float(d.longitude))
+                        
+                        dlon = lon2 - lon1
+                        dlat = lat2 - lat1
+        
+                        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                        distance = R * c
+                        
+                        dists.append([d.id,distance,float(d.latitude),float(d.longitude)]) 
+                      
+                    sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
+                          
+                    lat1 = par.partner_id.partner_latitude
+                    lon1 = par.partner_id.partner_longitude
+                                          
+                    n = 0;  #counter for no of dist to googlemaps
+                    origins=[] #placeholder list for origons to googlemaps
+                    destinations =[] #placeholder list for desinations to googlemaps
+                    origins.append((lat1,lon1)) #Home add            
+                    homedestination = False
+                    homedistance = False
+                    homeduration = False
+                    for d in sdists: # loop through sorted pickuplocations and prepare datat for googlemaps request
+        
+                        destinations.append((d[2],d[3])) # get geo point stored in loop above
+                        n = n+1 
+                        if (n > 4):
+                            break       #Max 5 distinations    
+                          
+                    # call googlemap to find distances by car to the neerst distinations
+                    gmaps = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.distance_matrix'))
+                    matrix = gmaps.distance_matrix(origins, destinations)
+                    _logger.info("Google maps responce %s", matrix)
+                    
+                    n = 0
+                    for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
+                        distance=matrix['rows'][0]['elements'][n]['distance']['value']
+                        distancekm =  distance/1000.0             
+                        duration=matrix['rows'][0]['elements'][n]['duration']['text']
+                        
+                        if (n == 0): 
+                            homedistance = distancekm
+                            homeduration = duration
+                            homedestination = d[0]
+                        else:
+                            if (homedistance > distancekm):
+                                homedestination = d[0]
+                                homedistance = distancekm
+                                homeduration = duration                    
+                        
+                        n = n+1 
+                        if (n > 4):
+                            break       #Max 5 distinations                       
+                        
+                    if homedestination:
+                        _logger.info("Closest Home Destination found %s %f %s",homedestination, homedistance,homeduration)
+                        par.individualtocampfromdestination_id=homedestination
+                        par.individualfromcamptodestination_id=homedestination
+
+                    else:
+                        _logger.info("!!!!!!!!!!!! No Home Destination found")    
                  
     @api.multi
     def clearusecamptransport(self):
@@ -375,14 +512,29 @@ class WebtourParticipantCampDay(models.Model):
         #_logger.info("_compute_webtourcamptransportation %s %s %s", self, self.participant_id,self.participant_id.tocampfromdestination_id)
         if self.the_date == self.participant_id.tocampdate:
             if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
-                self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.webtourname
+                # Check if date included in to To camp dates
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.tocamp_TripType_id),('name', '=', self.participant_id.tocampdate)])
+                #_logger.info("_compute_webtourcamptransportation rs %s", rs)
+                
+                if len(rs)> 0:
+                    self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.webtourname
+                else:
+                    self.webtourcamptransportation = 'No Camp Transportation To camp avaible this day!!!'
             else:
                 self.webtourcamptransportation = ''
+                           
         elif self.the_date == self.participant_id.fromcampdate:
             if self.participant_id.transport_from_camp and self.participant_id.fromcamptodestination_id.placename:
-                self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.webtourname
+                # Check if date included in to To camp dates
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.fromcamp_TripType_id),('name', '=', self.participant_id.fromcampdate)])
+                #_logger.info("_compute_webtourcamptransportation rs %s", rs)
+                
+                if len(rs)> 0:
+                    self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.webtourname                    
+                else:
+                    self.webtourcamptransportation = 'No Camp Transportation From camp avaible this day!!!'
             else:
                 self.webtourcamptransportation = ''
         else:
-            self.webtourcamptransportation = ''
+                self.webtourcamptransportation = ''       
         
