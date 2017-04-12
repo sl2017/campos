@@ -8,6 +8,7 @@
 <tree>
 <field name="id"/>
 <field name="status"/>
+<field name="registration_id"/>
 <field name="participant_id"/>
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
@@ -38,6 +39,7 @@
 <sheet>
 <group name="user_top">
 <field name="participant_id" readonly="0"/>
+<field name="registration_id" readonly="0"/>
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
 <field name="travelneed_id"/>
@@ -105,11 +107,11 @@
 	<field name="model">campos.webtourusneed.overview</field>
 	<field name="arch" type="xml">
 		<tree>
+		<field name="id" />
 	    <field name="registration_id" />
     	<field name="webtour_groupidno" />
 	    <field name="campos_TripType_id" /> 
 	    <field name="travelgroup" />	    
-
 	    <field name="campos_startdestinationidno" />
     	<field name="campos_enddestinationidno" />
     	<field name="pax" /> 
@@ -132,8 +134,6 @@ name="Camp OS Webtour Us Need"
 res_model="campos.webtourusneed"
 view_mode="tree,form" />
 
-
-
 <act_window id="action_WebtourOverview"
 name="Camp OS Webtour Trip Overview"
 res_model="campos.webtourusneed.overview"
@@ -141,7 +141,7 @@ view_mode="tree,form" />
 
 <!-- Menu item to open Campos Webtour usNeed list  -->
 <menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="30"/>
-<menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="WebtourTripTypeOverview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
+<menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="Webtour Trip Type Overview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
 
 </data>
 </openerp>

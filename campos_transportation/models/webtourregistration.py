@@ -127,14 +127,9 @@ class WebtourRegistration(models.Model):
                     dists.append([d.id,distance,float(d.latitude),float(d.longitude)]) 
                   
                 sdists = sorted(dists, key=itemgetter(1)) #we need the distance i acending order
-                
-                #self.webtourdefaulthomedestination=sdists[0][0] #let us use the shortest one...
     
                 lat1 = self.partner_id.partner_latitude
                 lon1 = self.partner_id.partner_longitude
-                
-                #lat2=float(self.webtourdefaulthomedestination.latitude)
-                #lon2=float(self.webtourdefaulthomedestination.longitude)
                   
                 n = 0;  #counter for no of dist to googlemaps
                 origins=[] #placeholder list for origons to googlemaps

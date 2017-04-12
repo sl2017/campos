@@ -4,7 +4,9 @@
 <record id="view_tree_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
 <field name="model">campos.event.participant</field>
+<!--
 <field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
+-->
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
@@ -34,7 +36,9 @@
 <record id="view_form_webtourparticipant" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
 <field name="model">campos.event.participant</field>
+<!--
 <field name="inherit_id" ref="campos_event.view_event_registration_participant_form"/>
+-->
 <field name="arch" type="xml">
 <form>
 <sheet>
@@ -70,9 +74,6 @@
 name="Camp OS Webtour Participant"
 res_model="campos.event.participant"
 view_mode="tree,form" />
-
-<!-- Transportation sub menu -->
-<menuitem id="menu_campos_transportation" parent="campos_event.menu_campos" name="Transportation" groups="campos_event.group_campos_admin" sequence="30"/>
 
 <!-- Menu item to open Campos Participant list with Webtour details -->
 <menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant" groups="campos_event.group_campos_admin" sequence="20"/>
