@@ -46,15 +46,19 @@
 <field name="scoutgroup"/>
 <field name="tocampfromdestination_id" readonly="0"/>
 <field name="fromcamptodestination_id" readonly="0"/>
+  
 <field name="tocampdate" readonly="0"/>
 <field name="fromcampdate" readonly="0"/>
+<!--
 <field name="transport_to_camp" readonly="0"/>
 <field name="transport_from_camp" readonly="0"/>
+<field name="specialtocampdate_id"/>
+<field name="specialfromcampdate_id"/>
+<field name="dates_summery"/>
+-->
 <field name="tocampusneed_id" readonly="1"/>
 <field name="fromcampusneed_id" readonly="1"/>
-<field name="specialtocampdatetime"/>
-<field name="specialfromcampdatetime"/>
-<field name="dates_summery"/>
+
 </group>
 </sheet>
 </form>

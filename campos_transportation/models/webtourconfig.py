@@ -28,4 +28,9 @@ class WebtourTripTypeDate(models.Model):
     _name = 'campos.webtourconfig.triptype.date'
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
     name = fields.Date('Date', required=True) 
-    #date = fields.Date('Date', required=True) 
+    #date = fields.Date('Date', required=True)
+    
+class WebtourEvent(models.Model):
+    _inherit = 'event.event'
+    
+    webtourconfig_id = fields.Many2one('campos.webtourconfig','Webtour Configuration')
