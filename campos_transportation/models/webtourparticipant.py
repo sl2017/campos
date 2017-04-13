@@ -29,10 +29,10 @@ class WebtourParticipant(models.Model):
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
     
-    tocamp_TripType_id = fields.Integer('tocamp_TripType_id', compute='_compute_tocamp_TripType_id') #related="registration_id".event_id.webtourconfig_id.tocamp_campos_TripType_id.id   
+    tocamp_TripType_id = fields.Integer('tocamp_TripType_id', compute='_compute_tocamp_TripType_id', store=True) 
     specialtocampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special To Camp Date', domain="[('campos_TripType_id','=',tocamp_TripType_id)]", ondelete='set null', required=False) 
     
-    fromcamp_TripType_id = fields.Integer('fromcamp_TripType_id', compute='_compute_fromcamp_TripType_id') #related="registration_id".event_id.webtourconfig_id.tocamp_campos_TripType_id.id   
+    fromcamp_TripType_id = fields.Integer('fromcamp_TripType_id', compute='_compute_fromcamp_TripType_id', store=True)
     specialfromcampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special From Camp Date', domain="[('campos_TripType_id','=',fromcamp_TripType_id)]", ondelete='set null', required=False) 
 
     #specialtocampdate = fields.Date('Special To Camp Date', required=False)
@@ -69,12 +69,14 @@ class WebtourParticipant(models.Model):
     def _compute_tocamp_TripType_id(self):
         for record in self:
             record.tocamp_TripType_id = record.registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id.id
+            #_logger.info("_compute_tocamp_TripType_id %s",record.tocamp_TripType_id)
     
     @api.multi
     @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
     def _compute_fromcamp_TripType_id(self):
         for record in self:
             record.fromcamp_TripType_id = record.registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id.id            
+            #_logger.info("_compute_fromcamp_TripType_id %s",record.fromcamp_TripType_id)
             
     @api.one
     def _compute_tocampfromdestination_id(self):

@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
+    registration_id = fields.Many2one('event.registration','Registration ID', ondelete='set null', related="participant_id.registration_id")
     travelgroup = fields.Char('Travel Group')
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
     
@@ -560,7 +561,7 @@ class WebtourNeedOverview(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusneed_overview as
-                    SELECT case when travelneed_id is not null then travelneed_id else -min(campos_webtourusneed.id) end as id, event_registration.id as registration_id,travelgroup,webtour_groupidno, "campos_TripType_id",campos_transfered_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
+                    SELECT case when travelneed_id is not null then travelneed_id else -min(campos_webtourusneed.id) end as id, campos_event_participant.registration_id as registration_id,travelgroup,webtour_groupidno, "campos_TripType_id",campos_transfered_startdatetime::timestamp,campos_startdestinationidno,campos_enddestinationidno
                     , count(campos_webtourusneed.id) as pax
                     , sum(case when campos_demandneeded then 0 else 1 end) as excessdemand 
                     , sum(case when campos_transfered then 0 else 1 end) as nottransfered
@@ -572,10 +573,10 @@ class WebtourNeedOverview(models.Model):
                     , sum(case when (case when campos_transfered_startnote isnull then '' else campos_transfered_startnote end) = (case when webtour_startnote isnull then '' else webtour_startnote end) then 0 else 1 end) as startnotediffer
                     , sum(case when (case when campos_transfered_endnote isnull then '' else campos_transfered_endnote end) = (case when webtour_endnote isnull then '' else webtour_endnote end) then 0 else 1 end) as endnotediffer
                     FROM campos_webtourusneed
-                    left outer join event_registration on webtourusgroupidno = webtour_groupidno
+                    left outer join campos_event_participant on campos_event_participant.id = participant_id
                     where campos_demandneeded or (not webtour_deleted and webtour_needidno::INT4>0)
                     group by travelneed_id, travelgroup            
-                    ,event_registration.id,webtour_groupidno,"campos_TripType_id",campos_transfered_startdatetime::timestamp
+                    ,campos_event_participant.registration_id,webtour_groupidno,"campos_TripType_id",campos_transfered_startdatetime::timestamp
                     ,campos_startdestinationidno
                     ,campos_enddestinationidno
                     """
