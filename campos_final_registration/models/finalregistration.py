@@ -252,6 +252,7 @@ class EventDay(models.Model):
                                      ('maincamp', 'Main Camp'),
                                      ('postcamp', 'Post Camp')], default='maincamp', string='Period')
     event_id = fields.Many2one('event.event', 'Event day', required=True)
+#    event_day_meat_ids = fields.One2many('event.day.meat','event_day_id','Meat Types')
     
     @api.multi
     @api.depends('event_day', 'event_period')
@@ -267,7 +268,7 @@ class FinalRegistrationEvent(models.Model):
     '''
     _inherit = 'event.event'
     event_day_ids = fields.One2many('event.day','event_id','Event Days')
-
+#virker ikke    event_day_meat_ids = fields.One2many('event.day.meat','event_day_id.event_id','Meat list per day')
 
 class PioneeringPoleDepot(models.Model):
     '''
@@ -298,5 +299,41 @@ class RegistrationNeeds(models.Model):
     need_id = fields.Many2one('event.registration.need','Need', required=True)
     need_count = fields.Integer('Count', required=True)
     _sql_constraints = [('need_id_unique_on_registration', 'unique(registration_id,need_id)', _('Each need can only be added once'))]
+    
+class RegistrationMeatType(models.Model):
+    '''
+    List of meat types
+    '''
+    _description = 'List of meat types'
+    _name='event.registration.meat'
+    name = fields.Char('Name', required=True, translate=True)
+    
+class EventDayMeat(models.Model):
+    '''
+    Available meat types per event day
+    '''
+    _description = 'Available meat types per event day'
+    _name='event.day.meat'
+    meat_id = fields.Many2one('event.registration.meat', 'Meat Type', required=True)
+    event_day_id = fields.Many2one('event.day', 'Event Day', required=True)
+    event_id = fields.Many2one(related='event_day_id.event_id')
+#TODO   _sql_constraints = [('meat_unique_per_day', 'unique(meat_id,event_day_id)', _('Each meat type can only be added once per day'))]
+
+class RegistrationMeat(models.Model):
+    '''
+    Chosen meat on a registration
+    '''
+    _description = 'Chosen meat on a registration'
+    _name='event.registration.meatlist'
+    registration_id = fields.Many2one('event.registration', 'Registration', required=True)
+    event_id = fields.Many2one(related='registration_id.event_id')
+    event_day_meat_id = fields.Many2one('event.day.meat','Meat type choice', required=True)
+#    event_day_ids = fields.One2many(related='event_id.event_day_ids')
+#    event_day_id = fields.One2many('event.day','event_id','Event Days')
+#    event_day_id = fields.Many2one('event.day', 'Event Day', required=True)
+#    meat_id = fields.Many2one('event.registration.meat', 'Meat Type', required=True)
+    meat_count = fields.Integer('Count', required=True)
+#TODO   _sql_constraints = [('meat_unique_per_registration_camp_day', 'unique(meat_id,event_day_id)', _('Each meat type can only be added once per day'))]
+
     
     

@@ -206,6 +206,16 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
+								<page string="Meat">
+								</page>
+								<page string="Tents and other">
+								</page>
+								<page string="Green Transport">
+								</page>
+								<page string="GloFo">
+								</page>
+								<page string="Cars">
+								</page>
 								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
@@ -371,6 +381,16 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
+								<page string="Meat">
+								</page>
+								<page string="Tents and other">
+								</page>
+								<page string="Green Transport">
+								</page>
+								<page string="GloFo">
+								</page>
+								<page string="Cars">
+								</page>
 								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
@@ -428,6 +448,9 @@
            		</tree>
            	</field>
           </page>
+					<page string="Meat Types per event day">
+					
+					</page>
         </xpath>
 			</field>	
 		</record>
@@ -508,8 +531,18 @@
 				</tree>
 			</field>							
 		</record>
-		
-		<!-- Menu Actions -->
+
+			<record id="view_tree_event_registration_meat" model="ir.ui.view">
+				<field name="name">Meat Types</field>
+				<field name="model">event.registration.meat</field>
+				<field name="arch" type="xml">
+					<tree  editable="bottom">
+						<field name="name"/>
+					</tree>
+				</field>
+			</record> 	
+
+			<!-- Menu Actions -->
 		 <!--  Manager view -->
        <record id="action_event_finalregistration_tree" model="ir.actions.act_window">
 			<field name="name">Event Final Registration Tree</field>
@@ -577,6 +610,11 @@
 		res_model="event.registration.friendshipgrouplist"
 		view_mode="tree" />
 
+		<act_window id="action_event_registration_meat"
+		name="Meat Types"
+		res_model="event.registration.meat"
+		view_mode="tree" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
@@ -593,6 +631,8 @@
 		<menuitem id="menu_action_finalregistration_menu_needs" parent="menu_event_finalregistration" name="Special Needs" action="action_event_registration_needs" groups="campos_event.group_campos_admin" sequence="60" />
 		
 		<menuitem id="menu_action_finalregistration_menu_friendshipgrouplist" parent="menu_event_finalregistration" name="Friendship Groups" action="action_event_registration_friendshipgrouplist" groups="campos_event.group_campos_admin" sequence="70" />
+
+		<menuitem id="menu_action_finalregistration_menu_meat" parent="menu_event_finalregistration" name="Meat Types" action="action_event_registration_meat" groups="campos_event.group_campos_admin" sequence="80" />
 
 		<!-- gl -->
 		<menuitem id="menu_action_event_finalregistration_tree_gl" parent="menu_event_finalregistration" name="Final Registration GL" action="action_event_finalregistration_tree_gl" groups="campos_preregistration.group_campos_groupleader" sequence="25"/>
