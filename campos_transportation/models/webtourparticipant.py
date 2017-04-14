@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, tools
 from ..interface import webtourinterface
 
 import logging
@@ -29,14 +29,11 @@ class WebtourParticipant(models.Model):
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
     
-    tocamp_TripType_id = fields.Integer('tocamp_TripType_id', compute='_compute_tocamp_TripType_id', store=True) 
+    tocamp_TripType_id = fields.Many2one(related='registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id', readonly=True) 
     specialtocampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special To Camp Date', domain="[('campos_TripType_id','=',tocamp_TripType_id)]", ondelete='set null', required=False) 
     
-    fromcamp_TripType_id = fields.Integer('fromcamp_TripType_id', compute='_compute_fromcamp_TripType_id', store=True)
+    fromcamp_TripType_id = fields.Many2one(related='registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id', readonly=True)
     specialfromcampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special From Camp Date', domain="[('campos_TripType_id','=',fromcamp_TripType_id)]", ondelete='set null', required=False) 
-
-    #specialtocampdate = fields.Date('Special To Camp Date', required=False)
-    #specialfromcampdate = fields.Date('Special From Camp Date', required=False)
 
     individualtocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'Individual To camp Pick up',
@@ -61,22 +58,8 @@ class WebtourParticipant(models.Model):
                                               ('5', 'Group 5')], default='1', string='Travel Group from Camp')
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
-    
     donotparticipate = fields.Boolean('Do not participate') 
-
-    @api.multi
-    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
-    def _compute_tocamp_TripType_id(self):
-        for record in self:
-            record.tocamp_TripType_id = record.registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id.id
-            #_logger.info("_compute_tocamp_TripType_id %s",record.tocamp_TripType_id)
     
-    @api.multi
-    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
-    def _compute_fromcamp_TripType_id(self):
-        for record in self:
-            record.fromcamp_TripType_id = record.registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id.id            
-            #_logger.info("_compute_fromcamp_TripType_id %s",record.fromcamp_TripType_id)
             
     @api.one
     def _compute_tocampfromdestination_id(self):
@@ -315,7 +298,7 @@ class WebtourParticipant(models.Model):
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
-        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id),('name', '=', self.tocampdate)])
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
         
         if self.tocampusneed_id.id == False:
             dicto1 = {}
@@ -352,7 +335,7 @@ class WebtourParticipant(models.Model):
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno           
         # Check if date included in to From camp dates
-        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id),('name', '=', self.fromcampdate)])
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
                             
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
@@ -515,7 +498,7 @@ class WebtourParticipantCampDay(models.Model):
         if self.the_date == self.participant_id.tocampdate:
             if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
                 # Check if date included in to To camp dates
-                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.tocamp_TripType_id),('name', '=', self.participant_id.tocampdate)])
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.tocamp_TripType_id.id),('name', '=', self.participant_id.tocampdate)])
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
@@ -528,7 +511,7 @@ class WebtourParticipantCampDay(models.Model):
         elif self.the_date == self.participant_id.fromcampdate:
             if self.participant_id.transport_from_camp and self.participant_id.fromcamptodestination_id.placename:
                 # Check if date included in to To camp dates
-                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.fromcamp_TripType_id),('name', '=', self.participant_id.fromcampdate)])
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.fromcamp_TripType_id.id),('name', '=', self.participant_id.fromcampdate)])
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
@@ -538,5 +521,77 @@ class WebtourParticipantCampDay(models.Model):
             else:
                 self.webtourcamptransportation = ''
         else:
-                self.webtourcamptransportation = ''       
+                self.webtourcamptransportation = ''
+
+'''                
+class WebtourParticipantOverview(models.Model):
+    _name = 'campos.event.participant.overview'
+    _auto = False
+    _log_access = False
+    
+    registration_id = fields.Many2one('event.registration','Registration ID', readonly=True)
+    participant_id = fields.Many2one('campos.event.participant','Participant ID', readonly=True)
+    partner_id = fields.Many2one('res.partner','Participant Partner ID', readonly=True)
+    regpartner_id = fields.Many2one('res.partner','Registration Partner ID', readonly=True)
+    state = fields.Char('participant state', readonly=True)
+    RegState = fields.Char('registration state', readonly=True)
+    donotparticipate = fields.Boolean('do not participate', readonly=True)
+    workas_jobber = fields.Boolean('workas jobber', readonly=True)
+    workas_planner = fields.Boolean('work as planner', readonly=True)
+    tocampdate = fields.Date(string='To Camp Date', readonly=True)
+    fromcampdate = fields.Date(string='From Camp Date', readonly=True)
+    tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID', readonly=True)
+    fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID', readonly=True)
+    tocamptravelgroup = fields.Char('to camp travelgroup', readonly=True)
+    fromcamptravelgroup = fields.Char('from camp travelgroup', readonly=True)
+    group_entrypoint = fields.Many2one('event.registration.entryexitpoint','Point of entry into Denmark', readonly=True)
+    group_exitpoint = fields.Many2one('event.registration.entryexitpoint','Point of exit from Denmark', readonly=True)
+    webtourdefaulthomedestination = fields.Many2one('campos.webtourusdestination','default home destination', readonly=True)
+    webtourdefaulthomedistance = fields.Float('Webtour Pickup Map Distance', readonly=True)
+    webtourdefaulthomeduration = fields.Char('Webtour Pickup Map Duration', readonly=True)
+    tocamp_TripType_id = fields.Many2one('campos.webtourconfig.triptype','To Camp TripType', readonly=True)
+    fromcamp_TripType_id = fields.Many2one('campos.webtourconfig.triptype','From Camp TripType', readonly=True)
+    webtourususeridno = fields.Char('webtour us User ID no', readonly=True)
+    webtourusgroupidno = fields.Char(string='webtour us Group ID no', readonly=True) 
+    toneeded = fields.Boolean('to camp needed', readonly=True)
+    fromneeded = fields.Boolean('from camp needed', readonly=True)
+    towebtour_deleted = fields.Boolean('webtour to camp deleted', readonly=True)
+    fromwebtour_deleted = fields.Boolean('webtour from camp deleted', readonly=True)   
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourparticipant_overview as
+                    SELECT p.id,registration_id,p.id as participant_id
+                    ,p.partner_id,regpartner.id as regpartner_id
+                    ,p.state,r.state as RegState,donotparticipate,workas_jobber,workas_planner
+                    ,transport_to_camp, transport_from_camp
+                    ,regpcountry.code as countrycode
+                    ,scoutorgcountry.code as scoutorgcountrycode                                       
+                    ,tocampdate,fromcampdate
+                    ,tocampusneed_id,fromcampusneed_id
+                    ,tocampfromdestination_id, fromcamptodestination_id
+                    ,tocamptravelgroup,fromcamptravelgroup
+                    ,group_entrypoint,group_exitpoint
+                    ,webtourdefaulthomedestination,webtourdefaulthomedistance,webtourdefaulthomeduration
+                    ,"tocamp_TripType_id","fromcamp_TripType_id"
+                    ,webtourusgroupidno, webtourususeridno
+                    ,toneed.campos_demandneeded as toneeded,fromneed.campos_demandneeded as fromneeded
+                    ,toneed.webtour_deleted as towebtour_deleted,fromneed.webtour_deleted as fromwebtour_deleted                    
+                    FROM campos_event_participant p
+                    left outer join event_registration r on r.id = registration_id
+                    left outer join event_registration_entryexitpoint as entry on entry.id = group_entrypoint
+                    left outer join event_registration_entryexitpoint as exit on exit.id = group_exitpoint
+                    left outer join campos_webtourusneed as toneed on toneed.id = tocampusneed_id
+                    left outer join campos_webtourusneed as fromneed on fromneed.id = fromcampusneed_id
+                    left outer join res_partner as regpartner on regpartner.id = r.partner_id
+                    left outer join res_country as regpcountry on regpcountry.id = regpartner.country_id
+                    left outer join campos_scout_org as scoutorg on scoutorg.id = regpartner.scoutorg_id
+                    left outer join res_country as scoutorgcountry on scoutorgcountry.id = scoutorg.country_id
+                    where p.state <> 'deregistered' and (transport_to_camp or transport_from_camp or toneed.campos_demandneeded or fromneed.campos_demandneeded) and  r.event_id=1  
+                    """
+                    )
+                    
+'''
+                
         
