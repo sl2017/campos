@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <openerp>
 <data>
-<record id="view_tree_webtourparticipant.overview" model="ir.ui.view">
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
 <field name="name">Webtour Participant overview</field>
-<field name="model">campos.event.participant.overview</field>
+<field name="model">campos.event.participant.webtouroverview</field>
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
@@ -32,6 +32,7 @@
 </field>
 </record>
 
+<!--
 <record id="seq_type_my_transaction" model="ir.sequence.type">
 <field name="name">webtour Sequence</field>
 <field name="code">webtour.transaction</field>
@@ -45,10 +46,11 @@
 <field name="company_id" eval="False"/>
 <field name="implementation">no_gap</field>
 </record>
+-->
 
-<record id="view_tree_webtourparticipant.overview" model="ir.ui.view">
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
 <field name="name">Webtour Participant</field>
-<field name="model">campos.event.participant.overview</field>
+<field name="model">campos.event.participant.webtouroverview</field>
 <field name="arch" type="xml">
 <form>
 <sheet>
@@ -82,13 +84,13 @@
 </record>
 
 <!-- Action to open Webtour Participant list -->
-<act_window id="action_webtourparticipant"
+<act_window id="action_webtourparticipant_overview"
 name="Camp OS Webtour Participant"
-res_model="campos.event.participant.overview"
+res_model="campos.event.participant.webtouroverview"
 view_mode="tree,form" />
 
 <!-- Menu item to open Campos Participant list with Webtour details -->
-<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant" groups="campos_event.group_campos_admin" sequence="20"/>
+<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant_overview" groups="campos_event.group_campos_admin" sequence="20"/>
 
 </data>
 </openerp>
