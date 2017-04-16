@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools
 from ..interface import webtourinterface
+from xml.dom import minidom
 
 import logging
 
@@ -303,10 +304,11 @@ class WebtourUsNeed(models.Model):
                         updatewebtourfields()
                         needtransfered = True
                     else: 
-                        _logger.info("4b.usNeed NOT created")
+                        _logger.info("4b.usNeed NOT created") 
                         if get_tag_data("a:Description") == "Need already exist" :
                             _logger.info("5. Ohh usNeed already exist")
                             response_doc=webtourinterface.usneed_GetByGroupIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_groupidno)
+                            #response_doc2 = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByGroupIDno/?GroupIDno=' + self.webtour_groupidno}).responce)
                             usNeeds=response_doc.getElementsByTagName('a:usNeed')
                             for node in usNeeds:
                                 try:

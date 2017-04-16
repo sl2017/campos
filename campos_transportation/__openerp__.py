@@ -4,7 +4,7 @@
 'author': 'Doobi & Darum',
 'depends': ['mail','campos_preregistration','campos_final_registration','campos_event'],
 'application': True,
-'data': [#'views/webtourparticipant_view.xml',
+'data': ['views/webtourrequestlogger_view.xml',
          'views/webtourusdestination_view.xml',
          #'views/webtourregistration_view.xml',
          'views/webtourusneed_view.xml',  
