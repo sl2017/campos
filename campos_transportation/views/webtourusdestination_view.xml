@@ -44,9 +44,6 @@ name="Camp OS Webtour Us Destination"
 res_model="campos.webtourusdestination"
 view_mode="tree,form" />
 
-<!-- Transportation sub menu -->
-<menuitem id="menu_campos_transportation" parent="campos_event.menu_campos" name="Transportation" groups="campos_event.group_campos_admin" sequence="30"/>
-
 <!-- Menu item to open Campos Webtour Destination list  -->
 <menuitem id="menu_action_campos_transportation_destinations" parent="menu_campos_transportation" name="Webtour Destinations" action="action_webtourusdestination" groups="campos_event.group_campos_admin" sequence="40"/>
 

@@ -42,6 +42,10 @@ res_model="campos.webtour_req_logger"
 view_mode="tree,form" />
 
 
+<!-- Transportation sub menu -->
+<menuitem id="menu_campos_transportation" parent="campos_event.menu_campos" name="Transportation" groups="campos_event.group_campos_admin" sequence="30"/>
+
+
 <!-- Menu item to open Campos Webtour Destination list  -->
 <menuitem id="menu_action_campos_webtour_reqlog" parent="menu_campos_transportation" name="Webtour Request log" action="action_webtourreqlog" groups="campos_event.group_campos_admin" sequence="90"/>
 
