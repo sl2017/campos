@@ -1,13 +1,10 @@
 import requests
 from xml.dom import minidom
 import sys
-#from urllib3.util import response
-#from __builtin__ import None
 
 cookie = None
 
 MAXREPEATREAD = 2
-
 
 def is_authenticated(doc):
 
@@ -37,6 +34,31 @@ def login(_url,_key):
 
     if authenticated.firstChild.data == "true":
         cookie = response.cookies
+
+def get(_url,_key,req):
+    global cookie
+
+    def do_req():
+        do_url = _url + req
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = response.content
+
+        return doc
+
+    repeat_read = MAXREPEATREAD
+
+    while repeat_read:
+        doc = do_req()
+
+        if is_authenticated(minidom.parseString(doc)):
+            repeat_read = False
+        else:
+            login(_url,_key)
+            repeat_read = repeat_read -1
+
+    return doc
 
 def usgroup_getall(_url,_key):
     global cookie

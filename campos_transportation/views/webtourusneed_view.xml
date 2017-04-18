@@ -140,7 +140,7 @@ res_model="campos.webtourusneed.overview"
 view_mode="tree,form" />
 
 <!-- Menu item to open Campos Webtour usNeed list  -->
-<menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="30"/>
+<menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="10"/>
 <menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="Webtour Trip Type Overview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
 
 </data>

@@ -1,24 +1,38 @@
 <?xml version="1.0"?>
 <openerp>
 <data>
-<record id="view_tree_webtourparticipant" model="ir.ui.view">
-<field name="name">Webtour Participant</field>
-<field name="model">campos.event.participant</field>
-<!--
-<field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
--->
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
+<field name="name">Webtour Participant overview</field>
+<field name="model">campos.event.participant.webtouroverview</field>
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
-<field name="webtourusgroupidno"/>
+<field name="registration_id"/>
+<field name="participant_id"/>
+<field name="state"/>
+<field name="RegState"/>
+<field name="workas_jobber"/>
+<field name="workas_planner"/>
+<field name="tocampdate"/>
+<field name="fromcampdate"/>
+<field name="tocamptravelgroup"/>
+<field name="fromcamptravelgroup"/>
+<field name="group_entrypoint"/>
+<field name="group_exitpoint"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
 <field name="webtourususeridno"/>
-<field name="transport_to_camp"/>
-<field name="transport_from_camp"/>
-<field name="scoutgroup"/>
+<field name="webtourusgroupidno"/>
+<field name="toneeded"/>
+<field name="fromneeded"/>
+<field name="towebtour_deleted"/>
+<field name="fromwebtour_deleted"/>
 </tree>
 </field>
 </record>
 
+<!--
 <record id="seq_type_my_transaction" model="ir.sequence.type">
 <field name="name">webtour Sequence</field>
 <field name="code">webtour.transaction</field>
@@ -32,37 +46,37 @@
 <field name="company_id" eval="False"/>
 <field name="implementation">no_gap</field>
 </record>
-
-<record id="view_form_webtourparticipant" model="ir.ui.view">
-<field name="name">Webtour Participant</field>
-<field name="model">campos.event.participant</field>
-<!--
-<field name="inherit_id" ref="campos_event.view_event_registration_participant_form"/>
 -->
+
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
+<field name="name">Webtour Participant</field>
+<field name="model">campos.event.participant.webtouroverview</field>
 <field name="arch" type="xml">
 <form>
 <sheet>
 <group name="user_top">
-<field name="partner_id"/>
+<field name="id"/>
 <field name="registration_id"/>
-<field name="webtourusgroupidno"/>
+<field name="participant_id"/>
+<field name="state"/>
+<field name="RegState"/>
+<field name="workas_jobber"/>
+<field name="workas_planner"/>
+<field name="tocampdate"/>
+<field name="fromcampdate"/>
+<field name="tocamptravelgroup"/>
+<field name="fromcamptravelgroup"/>
+<field name="group_entrypoint"/>
+<field name="group_exitpoint"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
 <field name="webtourususeridno"/>
-<field name="scoutgroup"/>
-<field name="tocampfromdestination_id" readonly="0"/>
-<field name="fromcamptodestination_id" readonly="0"/>
-  
-<field name="tocampdate" readonly="0"/>
-<field name="fromcampdate" readonly="0"/>
-<!--
-<field name="transport_to_camp" readonly="0"/>
-<field name="transport_from_camp" readonly="0"/>
-<field name="specialtocampdate_id"/>
-<field name="specialfromcampdate_id"/>
-<field name="dates_summery"/>
--->
-<field name="tocampusneed_id" readonly="1"/>
-<field name="fromcampusneed_id" readonly="1"/>
-
+<field name="webtourusgroupidno"/>
+<field name="toneeded"/>
+<field name="fromneeded"/>
+<field name="towebtour_deleted"/>
+<field name="fromwebtour_deleted"/>
 </group>
 </sheet>
 </form>
@@ -70,13 +84,13 @@
 </record>
 
 <!-- Action to open Webtour Participant list -->
-<act_window id="action_webtourparticipant"
+<act_window id="action_webtourparticipant_overview"
 name="Camp OS Webtour Participant"
-res_model="campos.event.participant"
+res_model="campos.event.participant.webtouroverview"
 view_mode="tree,form" />
 
 <!-- Menu item to open Campos Participant list with Webtour details -->
-<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant" groups="campos_event.group_campos_admin" sequence="20"/>
+<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant_overview" groups="campos_event.group_campos_admin" sequence="20"/>
 
 </data>
 </openerp>

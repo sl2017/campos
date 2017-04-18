@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, tools
 from ..interface import webtourinterface
+from xml.dom import minidom
 
 import logging
 from math import sin, cos, sqrt, atan2, radians
@@ -29,14 +30,11 @@ class WebtourParticipant(models.Model):
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
     
-    tocamp_TripType_id = fields.Integer('tocamp_TripType_id', compute='_compute_tocamp_TripType_id', store=True) 
+    tocamp_TripType_id = fields.Many2one(related='registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id', readonly=True) 
     specialtocampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special To Camp Date', domain="[('campos_TripType_id','=',tocamp_TripType_id)]", ondelete='set null', required=False) 
     
-    fromcamp_TripType_id = fields.Integer('fromcamp_TripType_id', compute='_compute_fromcamp_TripType_id', store=True)
+    fromcamp_TripType_id = fields.Many2one(related='registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id', readonly=True)
     specialfromcampdate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Special From Camp Date', domain="[('campos_TripType_id','=',fromcamp_TripType_id)]", ondelete='set null', required=False) 
-
-    #specialtocampdate = fields.Date('Special To Camp Date', required=False)
-    #specialfromcampdate = fields.Date('Special From Camp Date', required=False)
 
     individualtocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'Individual To camp Pick up',
@@ -61,22 +59,8 @@ class WebtourParticipant(models.Model):
                                               ('5', 'Group 5')], default='1', string='Travel Group from Camp')
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
-    
     donotparticipate = fields.Boolean('Do not participate') 
-
-    @api.multi
-    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
-    def _compute_tocamp_TripType_id(self):
-        for record in self:
-            record.tocamp_TripType_id = record.registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id.id
-            #_logger.info("_compute_tocamp_TripType_id %s",record.tocamp_TripType_id)
     
-    @api.multi
-    @api.depends('registration_id.event_id.webtourconfig_id.tocamp_campos_TripType_id')
-    def _compute_fromcamp_TripType_id(self):
-        for record in self:
-            record.fromcamp_TripType_id = record.registration_id.event_id.webtourconfig_id.fromcamp_campos_TripType_id.id            
-            #_logger.info("_compute_fromcamp_TripType_id %s",record.fromcamp_TripType_id)
             
     @api.one
     def _compute_tocampfromdestination_id(self):
@@ -175,8 +159,8 @@ class WebtourParticipant(models.Model):
               
     @api.model
     def get_create_usgroupidno_tron(self):
-        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
-        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
+        MAX_LOOPS_usGroup = 10  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 10  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
@@ -193,7 +177,8 @@ class WebtourParticipant(models.Model):
         #_logger.info("get_create_usgroupidno_tron: %s usGroupIDno's missing ",missingRegistrationidlist)
              
         #Get all usGroupIDno's from webtour and conver to a simple list
-        response_doc=webtourinterface.usgroup_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
+        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))                  
+        #response_doc=webtourinterface.usgroup_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
         usgroups = response_doc.getElementsByTagName("a:IDno")
         usgrouplist=[]
 
@@ -209,9 +194,12 @@ class WebtourParticipant(models.Model):
         # for each registation check usgroupidno name and create if missing
         g = 0
         for rec in rs_missingusgroupidno:
-            newidno=webtourinterface.usgroup_getbyname(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            #newidno=webtourinterface.usgroup_getbyname(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
             if newidno == "0":
                 # xx newidno=webtourinterface.usgroup_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+            
                 if newidno != "0": #remember also this usgroupidno
                     usgrouplist.append
                 
@@ -236,10 +224,14 @@ class WebtourParticipant(models.Model):
         # for each participant check ususeridno name and create if missing
         g=0
         for rec in rs_missingususeridno:
-            newidno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            #newidno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+           
             if newidno == "0":
-                newidno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
-            
+                #newidno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
+                req="usUser/Create/WithGroupIDno/?FirstName=" + str(rec.id) + "&LastName=" + str(rec.registration_id.id) + "&ExternalID=" + str(rec.id) + "&GroupIDno=" + rec.webtourusgroupidno
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+
             _logger.info("get_create_usgroupidno_tron User: %s %s %s %s %s",str(rec.id), rec.name, rec.webtourusgroupidno, rec.webtourususeridno,newidno)
             
             if newidno <> "0": #Update participant
@@ -253,7 +245,7 @@ class WebtourParticipant(models.Model):
             if g > MAX_LOOPS_usUser:
                 break
             
-        self.env['campos.webtourusneed'].get_create_usneed_tron()        
+        #####################self.env['campos.webtourusneed'].get_create_usneed_tron()        
 
         return True
     
@@ -315,7 +307,7 @@ class WebtourParticipant(models.Model):
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
-        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id),('name', '=', self.tocampdate)])
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
         
         if self.tocampusneed_id.id == False:
             dicto1 = {}
@@ -352,7 +344,7 @@ class WebtourParticipant(models.Model):
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno           
         # Check if date included in to From camp dates
-        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id),('name', '=', self.fromcampdate)])
+        rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
                             
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
@@ -515,7 +507,7 @@ class WebtourParticipantCampDay(models.Model):
         if self.the_date == self.participant_id.tocampdate:
             if self.participant_id.transport_to_camp and self.participant_id.tocampfromdestination_id.placename:
                 # Check if date included in to To camp dates
-                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.tocamp_TripType_id),('name', '=', self.participant_id.tocampdate)])
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.tocamp_TripType_id.id),('name', '=', self.participant_id.tocampdate)])
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
@@ -528,7 +520,7 @@ class WebtourParticipantCampDay(models.Model):
         elif self.the_date == self.participant_id.fromcampdate:
             if self.participant_id.transport_from_camp and self.participant_id.fromcamptodestination_id.placename:
                 # Check if date included in to To camp dates
-                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.fromcamp_TripType_id),('name', '=', self.participant_id.fromcampdate)])
+                rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.participant_id.fromcamp_TripType_id.id),('name', '=', self.participant_id.fromcampdate)])
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
@@ -538,5 +530,9 @@ class WebtourParticipantCampDay(models.Model):
             else:
                 self.webtourcamptransportation = ''
         else:
-                self.webtourcamptransportation = ''       
+                self.webtourcamptransportation = ''
+
+             
+
+                
         
