@@ -35,7 +35,7 @@ class NetworkMain(models.Model):
                                       ('type_network_both',u'Begge')],
 									  default='type_network_wire',
                                       track_visibility='onchange',required=True)
-	network_connection_amount = fields.Integer('Antal forbindelser', 
+	network_connection_amount = fields.Integer('Antal kablet forbindelser', 
 												track_visibility='onchange')
 	network_usage = fields.Char(u'Anvendelse', track_visibility='onchange', required=True)
 	
@@ -74,8 +74,7 @@ class NetworkMain(models.Model):
                                       ('network_delivery_day_30',u'30'),
                                       ('network_delivery_day_31',u'31')]
                                      ,track_visibility='onchange',required=True)
-	network_delivery_month = fields.Selection([('network_delivery_month_apr',u'April'),
-                                      ('network_delivery_month_maj',u'Maj'),
+	network_delivery_month = fields.Selection([('network_delivery_month_maj',u'Maj'),
                                       ('network_delivery_month_jun',u'Juni'),
                                       ('network_delivery_month_jul',u'Juli')]
                                      ,track_visibility='onchange',required=True)
@@ -113,8 +112,7 @@ class NetworkMain(models.Model):
                                       ('network_usage_day_30',u'30'),
                                       ('network_usage_day_31',u'31')]
                                      ,track_visibility='onchange',required=True)
-	network_usage_month = fields.Selection([('network_usage_month_apr',u'April'),
-                                      ('network_usage_month_maj',u'Maj'),
+	network_usage_month = fields.Selection([('network_usage_month_maj',u'Maj'),
                                       ('network_usage_month_jun',u'Juni'),
                                       ('network_usage_month_jul',u'Juli')]
                                      ,track_visibility='onchange',required=True)
@@ -151,8 +149,7 @@ class NetworkMain(models.Model):
                                       ('network_last_day_30',u'30'),
                                       ('network_last_day_31',u'31')]
                                      ,track_visibility='onchange',required=True)
-	network_last_month = fields.Selection([('network_last_month_apr',u'April'),
-                                      ('network_last_month_maj',u'Maj'),
+	network_last_month = fields.Selection([('network_last_month_maj',u'Maj'),
                                       ('network_last_month_jun',u'Juni'),
                                       ('network_last_month_jul',u'Juli')]
                                      ,track_visibility='onchange',required=True)
