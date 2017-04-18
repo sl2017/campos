@@ -5,7 +5,7 @@
 <field name="name">Webtour Request Log</field>
 <field name="model">campos.webtour_req_logger</field>
 <field name="arch" type="xml">
-<tree>
+<tree default_order='id desc'>
 <field name="id"/>
 <field name="name"/>
 <field name="write_date"/>

@@ -23,7 +23,12 @@
 			<field name="event_id" string="Event"  options="{'no_create': True}"/>
 			<field name="campdestinationid" string="Camp Destination"  options="{'no_create': True}"/>
 			<field name="tocamp_campos_TripType_id" string="To Camp TripType"/>
-			<field name="fromcamp_campos_TripType_id" string="From Camp TripType"/>
+			<field name="fromcamp_campos_TripType_id" string="From Camp TripType"/>action_webtour_check_usgroup_ususer
+			<button name="action_webtour_getcreate_usgroup_ususer" string="Get Create usGroup and usUser" type="object"/> 
+			<button name="action_webtour_get_create_usneed_tron" string="Get Create Webtour usNeed" type="object"/> 
+			<button name="action_webtour_check_usgroup" string="Check usGroups" type="object"/>
+			<button name="action_webtour_check_ususer" string="Check usUsers" type="object"/>
+			<button name="action_webtour_check_usneed" string="Check usNeeds" type="object"/>
 		</group>
 </sheet>
 </form>

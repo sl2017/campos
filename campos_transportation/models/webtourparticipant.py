@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools
 from ..interface import webtourinterface
+from xml.dom import minidom
 
 import logging
 from math import sin, cos, sqrt, atan2, radians
@@ -158,8 +159,8 @@ class WebtourParticipant(models.Model):
               
     @api.model
     def get_create_usgroupidno_tron(self):
-        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
-        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
+        MAX_LOOPS_usGroup = 10  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 10  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
@@ -176,7 +177,8 @@ class WebtourParticipant(models.Model):
         #_logger.info("get_create_usgroupidno_tron: %s usGroupIDno's missing ",missingRegistrationidlist)
              
         #Get all usGroupIDno's from webtour and conver to a simple list
-        response_doc=webtourinterface.usgroup_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
+        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))                  
+        #response_doc=webtourinterface.usgroup_getall(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'))
         usgroups = response_doc.getElementsByTagName("a:IDno")
         usgrouplist=[]
 
@@ -192,9 +194,12 @@ class WebtourParticipant(models.Model):
         # for each registation check usgroupidno name and create if missing
         g = 0
         for rec in rs_missingusgroupidno:
-            newidno=webtourinterface.usgroup_getbyname(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            #newidno=webtourinterface.usgroup_getbyname(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
             if newidno == "0":
                 # xx newidno=webtourinterface.usgroup_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+            
                 if newidno != "0": #remember also this usgroupidno
                     usgrouplist.append
                 
@@ -219,10 +224,14 @@ class WebtourParticipant(models.Model):
         # for each participant check ususeridno name and create if missing
         g=0
         for rec in rs_missingususeridno:
-            newidno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            #newidno=webtourinterface.ususer_getbyexternalid(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id))
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+str(rec.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+           
             if newidno == "0":
-                newidno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
-            
+                #newidno=webtourinterface.ususer_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),str(rec.id), rec.webtourusgroupidno,str(rec.id),str(rec.registration_id))
+                req="usUser/Create/WithGroupIDno/?FirstName=" + str(rec.id) + "&LastName=" + str(rec.registration_id.id) + "&ExternalID=" + str(rec.id) + "&GroupIDno=" + rec.webtourusgroupidno
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+
             _logger.info("get_create_usgroupidno_tron User: %s %s %s %s %s",str(rec.id), rec.name, rec.webtourusgroupidno, rec.webtourususeridno,newidno)
             
             if newidno <> "0": #Update participant
@@ -236,7 +245,7 @@ class WebtourParticipant(models.Model):
             if g > MAX_LOOPS_usUser:
                 break
             
-        self.env['campos.webtourusneed'].get_create_usneed_tron()        
+        #####################self.env['campos.webtourusneed'].get_create_usneed_tron()        
 
         return True
     

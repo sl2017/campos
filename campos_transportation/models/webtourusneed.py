@@ -188,7 +188,7 @@ class WebtourUsNeed(models.Model):
                 tag_data = None
 
             return tag_data
-        
+        '''
         def camposeqwebtour():
             sd = (fields.Date.from_string(self.campos_startdatetime) == fields.Date.from_string(self.webtour_startdatetime))
             sdi = (self.campos_startdestinationidno ==  self.webtour_startdestinationidno)
@@ -199,7 +199,7 @@ class WebtourUsNeed(models.Model):
             _logger.info("camposeqwebtour %s %s %s %s %s %s %s",self.campos_startdatetime , fields.Date.from_string(self.webtour_startdatetime) ,sd,  sdi,sn , edi , en)
             
             return sd and sdi and sn and edi and en 
-
+'''
         def updatewebtourfields():
             dicto ={}
             if self.webtour_needidno != get_tag_data("a:IDno"): dicto['webtour_needidno'] = get_tag_data("a:IDno")
@@ -293,12 +293,9 @@ class WebtourUsNeed(models.Model):
                     
                     _logger.info("3a. request %s",request)
                     response_doc=webtourinterface.usneed_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
-
-                
                     
                     idno = get_tag_data("a:IDno") #Let us check response
-                    
-                    
+                                       
                     if (idno <> "0") and idno:
                         _logger.info("4a. New usNeed Created")
                         updatewebtourfields()
@@ -464,7 +461,7 @@ class WebtourUsNeed(models.Model):
     
     @api.model
     def get_create_usneed_tron(self):
-        MAX_LOOPS_usNeed = 1000  #Max No of Needs pr Scheduled call
+        MAX_LOOPS_usNeed = 100  #Max No of Needs pr Scheduled call
         
         # find usneeds not beeing transfered
         rs_needs= self.env['campos.webtourusneed'].search([('campos_transfered', '=', False),('campos_demandneeded', '=', True)])
@@ -474,8 +471,8 @@ class WebtourUsNeed(models.Model):
         loops=0
         for need in rs_needs:
             
-            if  need.webtour_groupidno == False or need.webtour_useridno == False or need.campos_startdestinationidno == False or need.campos_startdatetime == False or need.campos_enddestinationidno == False or need.campos_enddatetime == False:
-                _logger.info("get_create_usneed_tron: Info missing %s %s %s %s %s %s", need.webtour_useridno,need.webtour_groupidno,need.campos_startdestinationidno,need.campos_startdatetime,need.campos_enddestinationidno,need.campos_enddatetime)
+            if  need.webtour_groupidno == False or need.webtour_useridno == False or need.campos_startdestinationidno == False or need.campos_traveldate == False or need.campos_enddestinationidno == False:
+                _logger.info("get_create_usneed_tron: Info missing %s %s %s %s %s", need.webtour_useridno,need.webtour_groupidno,need.campos_startdestinationidno,need.campos_traveldate,need.campos_enddestinationidno)
             else:
                 need.get_create_webtour_need()
                 loops = loops + 1

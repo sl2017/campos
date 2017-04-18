@@ -33,6 +33,8 @@ class WebtourRequestLogger(models.Model):
         rec.responce = webtourinterface.get(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),
                                             self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),
                                             rec.name)
+        self.env.cr.commit()
+        
         return rec
 
 

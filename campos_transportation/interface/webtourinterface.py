@@ -52,7 +52,7 @@ def get(_url,_key,req):
     while repeat_read:
         doc = do_req()
 
-        if is_authenticated(doc):
+        if is_authenticated(minidom.parseString(doc)):
             repeat_read = False
         else:
             login(_url,_key)
