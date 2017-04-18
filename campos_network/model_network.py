@@ -32,8 +32,11 @@ class NetworkMain(models.Model):
 	#Behov
 	network_connection = fields.Selection([('type_network_wire',u'Kablet'),
                                       ('type_network_wireless',u'Trådløs'),
-                                      ('type_network_both',u'Begge')]
-                                     ,track_visibility='onchange',required=True)
+                                      ('type_network_both',u'Begge')],
+									  default='type_network_wire',
+                                      track_visibility='onchange',required=True)
+	network_connection_amount = fields.Integer('Antal forbindelser', 
+												track_visibility='onchange')
 	network_usage = fields.Char(u'Anvendelse', track_visibility='onchange', required=True)
 	
 	
