@@ -35,6 +35,9 @@
 						<h4 style="margin-top: 20px;">Forbindelse*</h4>
 						<field name="network_connection" attrs="{'required':True}"/>
 						
+						<h4 style="margin-top: 20px;" attrs="{'invisible':[('network_connection','==','type_network_wireless')]}">Antal forbindelser</h4>
+						<field name="network_connection_amount" attrs="{'invisible':[('network_connection','==','type_network_wireless')]}" />
+						
 						<h4 style="margin-top: 20px;">Anvendelse*</h4>
 						<field name="network_usage" attrs="{'required':True}"/>
 						
