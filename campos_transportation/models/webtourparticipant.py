@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools, _
-from ..interface import webtourinterface
+#from ..interface import webtourinterface
 from xml.dom import minidom
 
 import logging
@@ -159,8 +159,8 @@ class WebtourParticipant(models.Model):
               
     @api.model
     def get_create_usgroupidno_tron(self):
-        MAX_LOOPS_usGroup = 10  #Max No of Groups pr Scheduled call
-        MAX_LOOPS_usUser = 10  #Max No of Users pr Scheduled call
+        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
