@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
+<field name="name">Webtour Participant overview</field>
+<field name="model">campos.event.participant.webtouroverview</field>
+<field name="arch" type="xml">
+<tree>
+<field name="id"/>
+<field name="registration_id"/>
+<field name="participant_id"/>
+<field name="state"/>
+<field name="RegState"/>
+<field name="workas_jobber"/>
+<field name="workas_planner"/>
+<field name="tocampdate"/>
+<field name="fromcampdate"/>
+<field name="tocamptravelgroup"/>
+<field name="fromcamptravelgroup"/>
+<field name="group_entrypoint"/>
+<field name="group_exitpoint"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
+<field name="webtourususeridno"/>
+<field name="webtourusgroupidno"/>
+<field name="toneeded"/>
+<field name="fromneeded"/>
+<field name="towebtour_deleted"/>
+<field name="fromwebtour_deleted"/>
+</tree>
+</field>
+</record>
+
+<!--
+<record id="seq_type_my_transaction" model="ir.sequence.type">
+<field name="name">webtour Sequence</field>
+<field name="code">webtour.transaction</field>
+</record>
+
+<record id="seq_my_transaction" model="ir.sequence">
+<field name="name">webtour Sequence</field>
+<field name="code">webtour.transaction</field>
+<field name="prefix"></field>
+<field name="padding">0</field>
+<field name="company_id" eval="False"/>
+<field name="implementation">no_gap</field>
+</record>
+-->
+
+<record id="view_tree_participant.webtouroverview" model="ir.ui.view">
+<field name="name">Webtour Participant</field>
+<field name="model">campos.event.participant.webtouroverview</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="user_top">
+<field name="id"/>
+<field name="registration_id"/>
+<field name="participant_id"/>
+<field name="state"/>
+<field name="RegState"/>
+<field name="workas_jobber"/>
+<field name="workas_planner"/>
+<field name="tocampdate"/>
+<field name="fromcampdate"/>
+<field name="tocamptravelgroup"/>
+<field name="fromcamptravelgroup"/>
+<field name="group_entrypoint"/>
+<field name="group_exitpoint"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
+<field name="webtourususeridno"/>
+<field name="webtourusgroupidno"/>
+<field name="toneeded"/>
+<field name="fromneeded"/>
+<field name="towebtour_deleted"/>
+<field name="fromwebtour_deleted"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<!-- Action to open Webtour Participant list -->
+<act_window id="action_webtourparticipant_overview"
+name="Camp OS Webtour Participant"
+res_model="campos.event.participant.webtouroverview"
+view_mode="tree,form" />
+
+<!-- Menu item to open Campos Participant list with Webtour details -->
+<menuitem id="menu_action_campos_transportation_participant" parent="menu_campos_transportation" name="Webtour Participants" action="action_webtourparticipant_overview" groups="campos_event.group_campos_admin" sequence="20"/>
+
+</data>
+</openerp>

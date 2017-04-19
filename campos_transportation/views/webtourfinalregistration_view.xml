@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+	<openerp>
+		<data>		
+		<!-- Add to Finalregistration  view -->
+		<record id="view_form_finalregistration_webtour" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit3</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/group/notebook/page[@string='Participants']" position="after">
+					<page string="Camp Transportation">
+						<group name="sheet" colspan="2">
+						<field name="webtourdefaulthomedestination_name" string="Default home destination" attrs="{'invisible': [('groupisdanish', '=', False)]}" />
+						<field name="webtourgroup_entrypointname" string="Default To Camp Pick up location" attrs="{'invisible': [('groupisdanish', '=', True)]}" />
+						<field name="webtourgroup_exitpointname" string="Default From Camp Drop off loaction" attrs="{'invisible': [('groupisdanish', '=', True)]}" />
+						<field name="webtourgrouptocampdestination_id" options="{'no_create': True, 'no_open': True}" string="Group to camp pick up location"/>
+						<field name="webtourgroupfromcampdestination_id" options="{'no_create': True, 'no_open': True}" string="Group from camp drop off location"/>
+						<field name="groupisdanish" invisible="1" string="Danish Group"/>
+						</group>					
+							<field  name="webtourtravelneed_ids" widget="one2many_list" nolabel="0" string="Travel needs" attrs="{'invisible': [('groupisdanish', '=', False)]}">
+							<tree editable="bottom" default_order="traveldate">
+								<field name="name" string="Name"/>
+								<field name="campos_TripType_id" string="Travel"/>
+								<field name="travelgroup" string="Group"/>
+								<field name="traveldate" string="Date"/>								
+								<field name="startdestinationidno" string="From"/>
+								<field name="enddestinationidno" string="To"/>										
+								<field name="pax" string="PAX"/>
+							</tree>
+						</field>
+						<field  name="webtourtravelneed2_ids" widget="one2many_list" nolabel="0" string="Travel needs2 " attrs="{'invisible': [('groupisdanish', '=', True)]}">
+							<tree editable="bottom" default_order="traveldate">
+								<field name="name" string="Name"/>
+								<field name="campos_TripType_id" string="Travel"/>
+								<field name="travelgroup" string="Group"/>
+								<field name="traveldate" string="Date"/>								
+								<field name="startdestinationidno" string="From"/>
+								<field name="enddestinationidno" string="To"/>
+								<field name="pax" string="PAX"/>
+								<field name="deadline" string="Deadline"/>
+								<field name="travelconnectiondetails" string="Connection"/>																			
+							</tree>
+						</field>
+											
+						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
+						<button name="action_update_webtourdefaulthomedestination" string="Update Default Home Destination" type="object"/>
+           			</page>
+        		</xpath>
+        		<!-- xxxxxx  
+        		<xpath expr="/form/sheet/group/notebook/page/group/field/tree/field[@name='transport_to_camp']" position="after">
+					<field name="tocampusneed_id"/>        		
+	        	</xpath>  
+	        	-->     		
+        		  		
+			</field>	
+		</record>
+	
+		<!-- Add to Finalregistration Particpant view -->
+		<record id="view_form_finalregistration_participant_webtour" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form Webtour</field>
+			<field name="model">campos.event.participant</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/group/field[@name='transport_to_camp']" position="after">
+					<field name="tocamptravelgroup" string="To Camp Travel Group" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
+					<field name="individualtocampfromdestination_id" string="Individual to camp pick up location" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialtocampdate_id" string="Individual to camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" readonly="1" />
+					<field name="groupisdanish" invisible="1"/>
+        		</xpath>
+        		
+        		<xpath expr="/form/sheet/group/field[@name='transport_from_camp']" position="after">
+					<field name="fromcamptravelgroup"  string="From Camp Travel Group" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" />	       		
+					<field name="individualfromcamptodestination_id" string="Individual From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialfromcampdate_id" string="Individual from camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" readonly="1"/>
+        		</xpath>
+        		
+        		<xpath expr="/form/sheet/group/field/tree/field[@name='will_participate']" position="after">
+					<field name="webtourcamptransportation" string="Camp transportation" />        		
+	        	</xpath>
+			</field>	
+		</record>		
+		
+		
+		<!-- Add to Finalregistration Jobber Particpant view -->
+		<record id="view_form_finalregistration_Jobber_webtour" model="ir.ui.view">
+			<field name="name">Final Registration Jobber Form Webtour</field>
+			<field name="model">campos.event.participant</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='transport_to_camp']" position="after">
+					<field name="tocamptravelgroup" string="To Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
+					<field name="individualtocampfromdestination_id" string="To camp pick up location" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialtocampdate_id" string="To camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}"/>
+					<field name="tocamp_TripType_id" invisible="1"/>
+					<field name="groupisdanish" invisible="1"/>
+        		</xpath>
+        		
+        		<xpath expr="//field[@name='transport_from_camp']" position="after">
+					<field name="fromcamptravelgroup"  string="From Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" />	       		
+					<field name="individualfromcamptodestination_id" string="From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialfromcampdate_id" string="From camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}"/>
+					<field name="fromcamp_TripType_id" invisible="1"/>
+					<button name="action_webtour_jobber_findclosestlocations" string="Find Closest Pickup/dropoff Locations" type="object" class="oe_edit_only"/>
+        		</xpath>
+        		
+        		<xpath expr="//field[@name='will_participate']" position="after">
+					<field name="webtourcamptransportation" string="Camp transportation" />        		
+	        	</xpath>
+	        	
+			</field>	
+		</record>	
+			
+		<record id="view_event_form" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit_Webtour</field>
+			<field name="model">event.event</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_event_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//notebook" position="inside">
+                        <page string="Webtour Transportation ">
+                        	<group name="sheet" colspan="2">
+ 								<field name="webtourconfig_id"/>
+ 							</group>
+                        </page>
+                   </xpath>
+			</field>	
+		</record>			
+			
+	</data> 	
+</openerp>

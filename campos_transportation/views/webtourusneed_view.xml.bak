@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourusneed" model="ir.ui.view">
+<field name="name">Webtour Us Need</field>
+<field name="model">campos.webtourusneed</field>
+<field name="arch" type="xml">
+<tree>
+<field name="id"/>
+<field name="participant_id"/>
+<field name="campos_startdatetime"/>
+<field name="campos_startdestinationidno"/>
+<field name="campos_startnote"/>
+<field name="campos_enddatetime"/>
+<field name="campos_enddestinationidno"/>
+<field name="campos_endnote"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourusneed" model="ir.ui.view">
+<field name="name">Webtour Us Need</field>
+<field name="model">campos.webtourusneed</field>
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="get_create_webtour_need" type="object" string="Update Webtour" class="oe_highlight" />
+</header>
+<sheet>
+<group name="user_top">
+<field name="participant_id" readonly="0"/>
+<group name="group_left">
+<field name="campos_startdatetime" readonly="0"/>
+<field name="campos_startdestinationidno" readonly="0"/>
+<field name="campos_startnote" readonly="0"/>
+<field name="campos_enddatetime" readonly="0"/>
+<field name="campos_enddestinationidno" readonly="0"/>
+<field name="campos_endnote" readonly="0"/>
+</group>
+<group name="group_right">
+<field name="webtour_startdatetime" readonly="1"/>
+<field name="webtour_startdestinationidno" readonly="1"/>
+<field name="webtour_startnote" readonly="1"/>
+<field name="webtour_enddatetime" readonly="1"/>
+<field name="webtour_enddestinationidno" readonly="1"/>
+<field name="webtour_endnote" readonly="1"/>
+<field name="webtour_needidno" readonly="1"/>
+<field name="webtour_useridno" readonly="1"/>
+<field name="webtour_groupidno" readonly="1"/>
+</group>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Us User list -->
+<act_window id="action_webtourusneed"
+name="Camp OS Webtour Us User"
+res_model="campos.webtourusneed"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourusneed"
+name="Campos transportation Us User"
+parent="mail.mail_feeds"
+sequence="24"
+action="action_webtourusneed" />
+</data>
+</openerp>

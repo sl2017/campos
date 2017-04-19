@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourusdestination" model="ir.ui.view">
+<field name="name">Webtour Us Destination</field>
+<field name="model">campos.webtourusdestination</field>
+<field name="arch" type="xml">
+<tree>
+<field name="destinationidno"/>
+<field name="name"/>
+<field name="placename"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourusdestination" model="ir.ui.view">
+<field name="name">Webtour Us Destination</field>
+<field name="model">campos.webtourusdestination</field>
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="get_destinations_online" type="object" string="Get Webtour" class="oe_highlight" />
+</header>
+<sheet>
+<group name="destination_top">
+<field name="destinationidno" readonly="0"/>
+<field name="name" readonly="0"/>
+<field name="placename" readonly="0"/>
+<field name="address" readonly="0"/>
+<field name="latitude" readonly="0"/>
+<field name="longitude" readonly="0"/>
+<field name="note" readonly="0"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+<!-- Action to open Webtour Us Destination list -->
+<act_window id="action_webtourusdestination"
+name="Camp OS Webtour Us Destination"
+res_model="campos.webtourusdestination"
+view_mode="tree,form" />
+<!-- Menu item to open Webtour Order list -->
+<menuitem id="menu _webtourusdestination"
+name="Campos transportation Us Destination"
+parent="mail.mail_feeds"
+sequence="28"
+action="action_webtourusdestination" />
+</data>
+</openerp>

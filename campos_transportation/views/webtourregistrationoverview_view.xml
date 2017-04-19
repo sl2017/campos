@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourregistrationoverview" model="ir.ui.view">
+<field name="name">Webtour Registration overview</field>
+<field name="model">campos.webtourregistrationoverview</field>
+<field name="arch" type="xml">
+<tree>
+<field name="registration_id"/>
+<field name="regstate"/>
+<field name="scoutgroup"/>
+<field name="countrycode"/>
+<field name="scoutorgcountrycode"/>
+<field name="group_entrypoint"/>
+<field name="group_exitpoint"/>
+<field name="webtourgrouptocampdestination_id"/>
+<field name="webtourgroupfromcampdestination_id"/>
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
+<field name="webtourusgroupidno"/>
+</tree>
+</field>
+</record>
+
+<record id="view_form_webtourregistrationoverview" model="ir.ui.view">
+<field name="name">Webtour Registration overview</field>
+<field name="model">campos.webtourregistrationoverview</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="user_top">
+<group name="group_left">
+<field name="id"/>
+<field name="registration_id"/>
+<field name="regstate"/>
+<field name="scoutgroup"/>
+<button name="action_open_registration" string="Edit Registration" type="object"/>
+<button name="action_open_groupparticipants" string="Add/Edit Participants" type="object"/>
+</group>
+<group name="group_right">
+<field name="webtourdefaulthomedestination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
+<field name="countrycode"/>
+<field name="scoutorgcountrycode"/>
+<field name="webtourusgroupidno"/>
+</group>
+<group name="group_left">
+<field name="group_entrypoint"/>
+<field name="webtourgrouptocampdestination_id"/>
+</group>
+<group name="group_right">
+<field name="group_exitpoint"/>
+<field name="webtourgroupfromcampdestination_id"/>
+</group>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<record id="view_search_webtourregistrationoverview" model="ir.ui.view">
+	<field name="name">webtourregistrationoverview</field>
+	<field name="model">campos.webtourregistrationoverview</field>
+	<field name="arch" type="xml">
+		<search>
+			<filter string="scoutgroup" name="fscoutgroup" domain="[('scoutgroup','=',1)]" help="scoutgroup"/>
+		</search>
+	</field>
+</record>
+
+<!-- Action to open Webtour Participant list -->
+<act_window id="action_webtourregistrationoverview"
+name="Camp OS Webtour Registration"
+res_model="campos.webtourregistrationoverview"
+view_mode="tree,form" 
+context="{'search_default_fscoutgroup': 1 }"/>
+
+<!-- Menu item to open Campos Participant list with Webtour details -->
+<menuitem id="menu_action_campos_transportation_registration" parent="menu_campos_transportation" name="Webtour Registration" action="action_webtourregistrationoverview" groups="campos_event.group_campos_admin" sequence="30"/>
+
+</data>
+</openerp>
