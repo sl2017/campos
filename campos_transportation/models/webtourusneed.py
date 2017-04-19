@@ -573,7 +573,7 @@ class WebtourNeedOverview(models.Model):
                     , sum(case when (case when campos_transfered_endnote isnull then '' else campos_transfered_endnote end) = (case when webtour_endnote isnull then '' else webtour_endnote end) then 0 else 1 end) as endnotediffer
                     FROM campos_webtourusneed
                     left outer join campos_event_participant on campos_event_participant.id = participant_id
-                    where campos_demandneeded or (not webtour_deleted and webtour_needidno::INT4>0)
+                    where campos_demandneeded or( not webtour_deleted and webtour_needidno::INT4>0)
                     group by travelneed_id, travelgroup            
                     ,campos_event_participant.registration_id,webtour_groupidno,"campos_TripType_id",campos_transfered_startdatetime::timestamp
                     ,campos_startdestinationidno
