@@ -52,7 +52,7 @@
                     </group>
                     <notebook>
                         <page string="Order Lines">
-                            <field name="order_line">
+                            <field name="order_line"  attrs="{'readonly': [('state','not in',('draft'))]}">
                                 <form string="Sales Order Lines">
                                     <header groups="base.group_user">
                                         <button name="566" states="confirmed" string="Invoice" type="action" icon="terp-document-new"/>

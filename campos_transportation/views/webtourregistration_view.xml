@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourregistration" model="ir.ui.view">
+<field name="name">Webtour Registration</field>
+<field name="model">event.registration</field>
+<!--
+<field name="inherit_id" ref="campos_preregistration.view_tree_event_registration"/>
+-->
+<field name="arch" type="xml">
+<tree>
+<!--
+<field name="webtourusgroupidno"/>
+<field name="scoutgroup"/>
+<field name="org_country_code2"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourPreregTotalSeats"/>
+<field name="groupisdanish" />
+<field name="webtourhasgeoadd"/>
+-->
+</tree>
+</field>
+</record>
+<record id="view_form_webtourregistration" model="ir.ui.view">
+<field name="name">Webtour Registration</field>
+<field name="model">event.registration</field>
+<!--
+<field name="inherit_id" ref="event.view_event_registration_form"/>
+-->
+<field name="arch" type="xml">
+<form>
+<header>
+<button name="set_webtourdefaulthomedestination" type="object" string="Set Home Dest" class="oe_highlight" />
+<!--
+<button name="createTestParticipants" type="object" string="Create Test Participants this Group" class="oe_highlight" />
+<button name="createTestParticipantsAll" type="object" string="Create Test Participants All Group" class="oe_highlight" />
+<button name="seteventdaysRegParticipantsAll" type="object" string="Create set Event days All" class="oe_highlight" />
+-->
+</header>
+<!--
+<sheet>
+<group name="user_top">
+<field name="partner_id"/>
+<field name="name"/>
+<field name="event_id"/>
+<field name="webtourusgroupidno"/>
+<field name="scoutgroup"/>
+<field name="webtourdefaulthomedestination" string="Webtour Default Home Destination"/>
+<field name="webtourdefaulthomedistance"/>
+<field name="webtourdefaulthomeduration"/>
+</group>
+</sheet>
+-->
+</form>
+</field>
+</record>
+
+<!-- Action to open Webtour Participant list -->
+<act_window id="action_webtourregistration"
+name="Camp OS Webtour Registration"
+res_model="event.registration"
+view_mode="tree,form" />
+
+<!-- Menu item to open Campos Registration list with Webtour details -->
+<menuitem id="menu_action_campos_transportation_registration" parent="menu_campos_transportation" name="Webtour Registrations" action="action_webtourregistration" groups="campos_event.group_campos_admin" sequence="10"/>
+</data>
+</openerp>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="ir_cron_webtourusdestination_action" model="ir.cron">
+            <field name="name">Webtour UsDestination</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="False"/>
+            <field eval="False" name="doall"/>
+            <field eval="'campos.webtourusdestination'" name="model"/>
+            <field eval="'get_destinations_cron'" name="function"/>
+        </record>
+   </data>
+</openerp>

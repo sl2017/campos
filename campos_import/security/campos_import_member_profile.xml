@@ -37,8 +37,8 @@
      <record model="ir.rule" id="campos_participant_import_gl">
             <field name="name">Imported Participants</field>
             <field name="model_id" ref="model_campos_event_participant"/>
-            <field name="domain_force">[('registration_id.partner_id.id','=', user.commercial_partner_id.id)]</field>
-            <field name="groups" eval="[(4,ref('campos_welcome.group_campos_imported_group'))]"/>
+            <field name="domain_force">['|','|',('registration_id.partner_id.id','=', user.commercial_partner_id.id),('accomodation_ids.registration_id.partner_id', '=', user.commercial_partner_id.id), ('canteen_ids.registration_id.partner_id', '=', user.commercial_partner_id.id)]</field>
+            <field name="groups" eval="[(4,ref('campos_preregistration.group_campos_groupleader'))]"/>
         </record>
 	
 </data>
