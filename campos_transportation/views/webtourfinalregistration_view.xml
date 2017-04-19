@@ -118,7 +118,7 @@
 			<field name="name">Final Registration Jobber Form Webtour</field>
 			<field name="model">campos.event.participant</field>
 			<field name="type">form</field>
-			<field name="inherit_id" ref="campos_event.staff_event_registration_participant_form" />												      
+			<field name="inherit_id" ref="campos_jobber_final.campos_event_participant_staff_form_view" />							          											      
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='transport_to_camp']" position="after">
 					<field name="tocamptravelgroup" string="To Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
