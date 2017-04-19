@@ -292,6 +292,14 @@ class WebtourParticipant(models.Model):
                 or ('recalctoneed' in vals and notdoneto)
                 or 'deregistered' in vals 
                 ):
+                if not self.tocampdate and 'tocampdate' not in vals:
+                    self._compute_tocampdate()
+                    _logger.info("update_tocampusneed tocampdate %s", self.tocampdate)
+                    
+                if not self.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
+                    self._compute_tocampfromdestination_id()   
+                    _logger.info("update_tocampusneed tocampfromdestination_id %s", self.tocampfromdestination_id)    
+                
                 par.update_tocampusneed()
 
             if  ('fromcamptodestination_id' in vals 
@@ -301,6 +309,15 @@ class WebtourParticipant(models.Model):
                 or ('recalcfromneed' in vals and notdonefrom)
                 or 'deregistered' in vals                
                 ):
+                
+                if not self.fromcampdate and 'fromcampdate' not in vals: 
+                    self._compute_fromcampdate()
+                    _logger.info("update_fromcampusneed fromcampdate %s", self.fromcampdate)
+                    
+                if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
+                    self._compute_fromcamptodestination_id() 
+                    _logger.info("update_tocampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
+                    
                 par.update_fromcampusneed()
                 
             if 'state' in vals:
@@ -317,12 +334,6 @@ class WebtourParticipant(models.Model):
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
-        if not self.tocampdate:
-            self._compute_tocampdate()
-            _logger.info("update_tocampusneed tocampdate %s", self.tocampdate)
-        if not self.tocampfromdestination_id:
-            self._compute_tocampfromdestination_id()   
-            _logger.info("update_tocampusneed tocampfromdestination_id %s", self.tocampfromdestination_id)
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
         _logger.info("TO CAMP campos_demandneeded %s %s %s %s %s",self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
         if self.tocampusneed_id.id == False:
@@ -359,9 +370,7 @@ class WebtourParticipant(models.Model):
       
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno           
-        # Check if date included in to From camp dates
-        if not self.fromcampdate: self._compute_fromcampdate()
-        if not self.fromcamptodestination_id: self._compute_fromcamptodestination_id()  
+        # Check if date included in to From camp dates 
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
         _logger.info("From CAMP campos_demandneeded %s %s %s %s %s",self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
         if self.fromcampusneed_id.id == False:
