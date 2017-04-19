@@ -17,6 +17,14 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="committee_id"/>
+                        <field name="desc"/>
+                        <field name="lang_ok" widget="many2many_checkboxes"/>
+                        <field name="age_from"/>
+                        <field name="age_to"/>
+                        <field name="audience"/>
+                        <field name="act_ins_ids"/>
+                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

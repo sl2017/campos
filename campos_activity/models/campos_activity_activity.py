@@ -23,3 +23,4 @@ class CamposActivityActivity(models.Model):
                                  ('staff','ITS'),
                                  ('all', 'All')], 'Audience', default='par')
     act_ins_ids = fields.One2many('campos.activity.instanse', 'activity_id', 'Instanses')
+    lang_ok = fields.Many2many('res.lang', string="Language status")

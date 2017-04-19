@@ -14,6 +14,12 @@
                 'campos_event',
     ],
     'data': [
+        'security/campos_activity_pitag.xml',
+        'views/campos_activity_pitag.xml',
+        'security/campos_activity_location.xml',
+        'views/campos_activity_location.xml',
+        'security/campos_activity_tag.xml',
+        'views/campos_activity_tag.xml',
         'security/campos_activity_ticket.xml',
         #'views/campos_activity_ticket.xml',
         'security/campos_activity_instanse.xml',
