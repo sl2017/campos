@@ -253,10 +253,31 @@ class WebtourParticipant(models.Model):
     def create(self, vals):
         _logger.info("Create Entered")
         par = super(WebtourParticipant, self).create(vals)
-        
-        par.update_tocampusneed()
-        par.update_fromcampusneed()
-        
+   
+        par.recalctoneed= True
+        par.recalcfromneed=True
+        '''
+        dicto={}
+        dicto['webtourusgroupidno'] = par.webtourusgroupidno
+        dicto['tocampfromdestination_id'] = par.tocampfromdestination_id
+        dicto['fromcamptodestination_id'] = par.fromcamptodestination_id
+        dicto['tocampdate'] = par.tocampdate
+        dicto['fromcampdate'] = par.fromcampdate
+        dicto['tocampusneed_id'] = par.tocampusneed_id
+        dicto['fromcampusneed_id'] = par.fromcampusneed_id
+        dicto['tocamp_TripType_id'] = par.tocamp_TripType_id
+        dicto['specialtocampdate_id'] = par.specialtocampdate_id
+        dicto['fromcamp_TripType_id'] = par.fromcamp_TripType_id
+        dicto['specialfromcampdate_id'] = par.specialfromcampdate_id
+        dicto['individualtocampfromdestination_id'] = par.individualtocampfromdestination_id
+        dicto['individualfromcamptodestination_id'] = par.individualfromcamptodestination_id
+        dicto['recalctoneed'] = par.recalctoneed
+        dicto['recalcfromneed'] = par.recalcfromneed
+        dicto['tocamptravelgroup'] = par.tocamptravelgroup
+        dicto['fromcamptravelgroup'] = par.fromcamptravelgroup
+        dicto['groupisdanish'] = par.groupisdanish
+        _logger.info("Create Par %s", dicto)'''
+                   
         return par
         
     @api.multi
@@ -316,7 +337,7 @@ class WebtourParticipant(models.Model):
                     
                 if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
                     self._compute_fromcamptodestination_id() 
-                    _logger.info("update_tocampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
+                    _logger.info("update_fromcampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
                     
                 par.update_fromcampusneed()
                 
