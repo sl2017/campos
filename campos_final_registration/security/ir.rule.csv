@@ -1,2 +1,2 @@
 "id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
-"res_partner_gl","CampOS Group Leader","base.model_res_partner","['|','|',('registration_id.partner_id.id','=', user.commercial_partner_id.id),('accomodation_ids.registration_id.partner_id', '=', user.commercial_partner_id.id), ('canteen_ids.registration_id.partner_id', '=', user.commercial_partner_id.id)]","campos_preregistration.group_campos_groupleader","True","True","True","False"
+"res_partner_gl","CampOS Group Leader","base.model_res_partner","[('id', 'child_of', user.commercial_partner_id.id)]","campos_preregistration.group_campos_groupleader","True","True","True","False"
