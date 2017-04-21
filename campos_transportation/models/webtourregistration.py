@@ -8,7 +8,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 from openerp import models, fields, api
-from ..interface import webtourinterface
+#from ..interface import webtourinterface
 from math import sin, cos, sqrt, atan2, radians
 from operator import itemgetter
 import googlemaps
