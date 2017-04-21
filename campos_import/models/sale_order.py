@@ -22,12 +22,11 @@ class SaleOrder(models.Model):
                 order.pricelist_id.id, line.product_id.id,
                 qty=line.product_uom_qty, uom=line.product_uom.id,
                 qty_uos=line.product_uos_qty, uos=line.product_uos.id,
-                name=line.name, partner_id=order.partner_id.id, lang=False,
+                name='', partner_id=order.partner_id.id, lang=False,
                 update_tax=True, date_order=order.date_order, packaging=False,
                 fiscal_position=order.fiscal_position.id, flag=price)
             if price:
                 line.write(res['value'])
-            else:
                 if 'name' in res['value']:
                     line.write({'name': res['value']['name']})
         return True
