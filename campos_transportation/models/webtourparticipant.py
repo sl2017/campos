@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools, _
-#from ..interface import webtourinterface
+#from ..interface import webtourinterface test
 from xml.dom import minidom
 
 import logging
@@ -64,27 +64,27 @@ class WebtourParticipant(models.Model):
             
     @api.one
     def _compute_tocampfromdestination_id(self):
-            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
-            destination=False
-            if self.individualtocampfromdestination_id:
-                destination = self.individualtocampfromdestination_id
-            elif self.registration_id.webtourgrouptocampdestination_id:
-                destination = self.registration_id.webtourgrouptocampdestination_id
-            elif self.registration_id.group_entrypoint.defaultdestination_id:
-                destination = self.registration_id.group_entrypoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
-            
-            if  destination == False:
-                _logger.info("_compute_tocampfromdestination_id No Destination known !!!!!!! %s", self.id)
-                self.tocampfromdestination_id = False;
-            else:
-                if self.tocampfromdestination_id != destination:
-                    _logger.info("_compute_tocampfromdestination_id Update %s %s %s",self.id,self.tocampfromdestination_id,destination)
-                    self.tocampfromdestination_id = destination
-                    return True
-            
-            return False 
+        #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+        destination=False
+        if self.individualtocampfromdestination_id:
+            destination = self.individualtocampfromdestination_id
+        elif self.registration_id.webtourgrouptocampdestination_id:
+            destination = self.registration_id.webtourgrouptocampdestination_id
+        elif self.registration_id.group_entrypoint.defaultdestination_id:
+            destination = self.registration_id.group_entrypoint.defaultdestination_id
+        elif self.registration_id.webtourdefaulthomedestination:
+            destination = self.registration_id.webtourdefaulthomedestination
+        
+        if  destination == False:
+            _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", self.id)
+            self.tocampfromdestination_id = False;
+        else:
+            if self.tocampfromdestination_id != destination:
+                _logger.info("%s _compute_tocampfromdestination_id Update %s %s",self.id,self.tocampfromdestination_id.id,destination.id)
+                self.tocampfromdestination_id = destination
+                return True
+        
+        return False 
                                                   
     @api.one
     def _compute_fromcamptodestination_id(self):
@@ -100,11 +100,11 @@ class WebtourParticipant(models.Model):
             destination = self.registration_id.webtourdefaulthomedestination
 
         if  destination == False:
-            _logger.info("individualfromcamptodestination_id No Destination known !!!!!!! %s",self.id)
+            _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",self.id)
             self.fromcamptodestination_id = False;
         else:
             if self.fromcamptodestination_id != destination:
-                _logger.info("individualfromcamptodestination_id Update %s %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
+                _logger.info("%s _compute_fromcamptodestination_id Update %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
                 self.fromcamptodestination_id = destination
                 return True
         
@@ -128,7 +128,7 @@ class WebtourParticipant(models.Model):
                 tocampdate = False
                 
         if self.tocampdate != tocampdate:
-            _logger.info("_compute_tocampdate, Update %s %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)
+            _logger.info("%s _compute_tocampdate, Update %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)
             self.tocampdate = tocampdate      
             return True
         
@@ -151,7 +151,7 @@ class WebtourParticipant(models.Model):
             else :
                 fromcampdate = False
         if self.fromcampdate != fromcampdate:
-            _logger.info("_compute_fromcampdate, Update %s %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
+            _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
             self.fromcampdate = fromcampdate
             return True
         
@@ -258,28 +258,6 @@ class WebtourParticipant(models.Model):
         if len(rs)> 0:
             rs[0].recalctoneed= True
             rs[0].recalcfromneed=True
-            
-        '''
-        dicto={}
-        dicto['webtourusgroupidno'] = par.webtourusgroupidno
-        dicto['tocampfromdestination_id'] = par.tocampfromdestination_id
-        dicto['fromcamptodestination_id'] = par.fromcamptodestination_id
-        dicto['tocampdate'] = par.tocampdate
-        dicto['fromcampdate'] = par.fromcampdate
-        dicto['tocampusneed_id'] = par.tocampusneed_id
-        dicto['fromcampusneed_id'] = par.fromcampusneed_id
-        dicto['tocamp_TripType_id'] = par.tocamp_TripType_id
-        dicto['specialtocampdate_id'] = par.specialtocampdate_id
-        dicto['fromcamp_TripType_id'] = par.fromcamp_TripType_id
-        dicto['specialfromcampdate_id'] = par.specialfromcampdate_id
-        dicto['individualtocampfromdestination_id'] = par.individualtocampfromdestination_id
-        dicto['individualfromcamptodestination_id'] = par.individualfromcamptodestination_id
-        dicto['recalctoneed'] = par.recalctoneed
-        dicto['recalcfromneed'] = par.recalcfromneed
-        dicto['tocamptravelgroup'] = par.tocamptravelgroup
-        dicto['fromcamptravelgroup'] = par.fromcamptravelgroup
-        dicto['groupisdanish'] = par.groupisdanish
-        _logger.info("Create Par %s", dicto)'''
                    
         return par
         
@@ -316,13 +294,13 @@ class WebtourParticipant(models.Model):
                 or ('recalctoneed' in vals and notdoneto)
                 or 'deregistered' in vals 
                 ):
-                if not self.tocampdate and 'tocampdate' not in vals:
-                    self._compute_tocampdate()
-                    _logger.info("update_tocampusneed tocampdate %s", self.tocampdate)
+                if not par.tocampdate and 'tocampdate' not in vals:
+                    par._compute_tocampdate()
+                    _logger.info("%s update_tocampusneed tocampdate %s", par.id, par.tocampdate)
                     
-                if not self.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
-                    self._compute_tocampfromdestination_id()   
-                    _logger.info("update_tocampusneed tocampfromdestination_id %s", self.tocampfromdestination_id)    
+                if not par.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
+                    par._compute_tocampfromdestination_id()   
+                    _logger.info("%s update_tocampusneed tocampfromdestination_id %s", par.id, par.tocampfromdestination_id)    
                 
                 par.update_tocampusneed()
 
@@ -335,12 +313,12 @@ class WebtourParticipant(models.Model):
                 ):
                 
                 if not self.fromcampdate and 'fromcampdate' not in vals: 
-                    self._compute_fromcampdate()
-                    _logger.info("update_fromcampusneed fromcampdate %s", self.fromcampdate)
+                    par._compute_fromcampdate()
+                    _logger.info("%s update_fromcampusneed fromcampdate %s", par.id, par.fromcampdate)
                     
                 if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
-                    self._compute_fromcamptodestination_id() 
-                    _logger.info("update_fromcampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
+                    par._compute_fromcamptodestination_id() 
+                    _logger.info("%s update_fromcampusneed fromcamptodestination_id %s", par.id, par.fromcamptodestination_id)  
                     
                 par.update_fromcampusneed()
                 
@@ -359,7 +337,7 @@ class WebtourParticipant(models.Model):
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
-        _logger.info("TO CAMP campos_demandneeded %s %s %s %s %s",self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
+        _logger.info("%s TO CAMP campos_demandneeded %s %s %s %s %s",self.id, self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
         if self.tocampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -387,7 +365,7 @@ class WebtourParticipant(models.Model):
             dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')  
             self.tocampusneed_id.write(dicto1)
             
-        _logger.info("Update_tocampusneed %s", dicto1)
+        _logger.info("%s Update_tocampusneed %s", self.id, dicto1)
         
     @api.one
     def update_fromcampusneed(self):
@@ -396,7 +374,7 @@ class WebtourParticipant(models.Model):
         campdesination= webtourconfig.campdestinationid.destinationidno           
         # Check if date included in to From camp dates 
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
-        _logger.info("From CAMP campos_demandneeded %s %s %s %s %s",self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
+        _logger.info("%s FROM CAMP campos_demandneeded %s %s %s %s %s",self.id,self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -424,7 +402,7 @@ class WebtourParticipant(models.Model):
             dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')
             self.fromcampusneed_id.write(dicto1)
                        
-        _logger.info("update_fromcampusneed %s", dicto1)
+        _logger.info("%s update_fromcampusneed %s", self.id,dicto1)
          
     
     
@@ -443,7 +421,7 @@ class WebtourParticipant(models.Model):
                 if (par.partner_id.partner_latitude==0):
                     gmaps2 = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.geocode'))
         
-                    _logger.info("Try to Geocode with Googlemaps %s %s %s",par.partner_id.street,par.partner_id.zip,par.partner_id.city)
+                    _logger.info("%s Try to Geocode with Googlemaps %s %s %s",par.id,par.partner_id.street,par.partner_id.zip,par.partner_id.city)
                     
                     try:
                         a = par.partner_id.street+', '+ par.partner_id.zip+' '+par.partner_id.city
@@ -452,7 +430,7 @@ class WebtourParticipant(models.Model):
                         lng=geocode_result[0]['geometry']['location']['lng']
                         par.partner_id.partner_latitude = float(lat)
                         par.partner_id.partner_longitude = float(lng)
-                        _logger.info("Got Googlemap Geocoding  %f %f",par.partner_id.partner_latitude,par.partner_id.partner_longitude)
+                        _logger.info("%s Got Googlemap Geocoding  %f %f",par.id,par.partner_id.partner_latitude,par.partner_id.partner_longitude)
                         par.env.cr.commit()
                     except:
                         pass
@@ -506,7 +484,7 @@ class WebtourParticipant(models.Model):
                     # call googlemap to find distances by car to the neerst distinations
                     gmaps = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.distance_matrix'))
                     matrix = gmaps.distance_matrix(origins, destinations)
-                    _logger.info("Google maps responce %s", matrix)
+                    _logger.info("%s Google maps responce %s", par.id,matrix)
                     
                     n = 0
                     for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
@@ -529,12 +507,12 @@ class WebtourParticipant(models.Model):
                             break       #Max 5 distinations                       
                         
                     if homedestination:
-                        _logger.info("Closest Home Destination found %s %f %s",homedestination, homedistance,homeduration)
+                        _logger.info("%s Closest Home Destination found %s %f %s",par.id,homedestination, homedistance,homeduration)
                         par.individualtocampfromdestination_id=homedestination
                         par.individualfromcamptodestination_id=homedestination
 
                     else:
-                        _logger.info("!!!!!!!!!!!! No Home Destination found")    
+                        _logger.info("%s !!!!!!!!!!!! No Home Destination found",par.id,)    
                  
     @api.multi
     def clearusecamptransport(self):

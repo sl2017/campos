@@ -82,5 +82,10 @@ class CamposImportParticipantWiz(models.TransientModel):
                                      'day_id': day.id,
                                      'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
+                    
+                    rs = self.search([('id', '=', par.id)]) #JDa Need to trig Transportaion usNeed update
+                    if len(rs)> 0:
+                        rs[0].recalctoneed= True
+                        rs[0].recalcfromneed=True    
                 
 
