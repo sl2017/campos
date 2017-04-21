@@ -254,8 +254,11 @@ class WebtourParticipant(models.Model):
         _logger.info("Create Entered")
         par = super(WebtourParticipant, self).create(vals)
    
-        par.recalctoneed= True
-        par.recalcfromneed=True
+        rs = self.search([('id', '=', par.id)])
+        if len(rs)> 0:
+            rs[0].recalctoneed= True
+            rs[0].recalcfromneed=True
+            
         '''
         dicto={}
         dicto['webtourusgroupidno'] = par.webtourusgroupidno
