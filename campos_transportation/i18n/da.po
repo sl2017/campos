@@ -455,35 +455,35 @@ msgstr "Afrejsedato"
 #. module: campos_transportation
 #: field:campos.event.participant,fromcampusneed_id:0
 msgid "From Camp Need ID"
-msgstr ""
+msgstr "Fra lejr Need ID"
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
 msgid "From Camp Travel Group"
-msgstr ""
+msgstr "Rejsegruppe fra lejren"
 
 #. module: campos_transportation
 #: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
 #: view:campos.webtourconfig:campos_transportation.view_tree_webtourconfig
 #: field:campos.webtourconfig,fromcamp_campos_TripType_id:0
 msgid "From Camp TripType"
-msgstr ""
+msgstr "Transporttypre fra lejren"
 
 #. module: campos_transportation
 #: field:campos.event.participant,fromcamptodestination_id:0
 msgid "From camp Drop off"
-msgstr ""
+msgstr "Afsætningssted for hjemrejse"
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
 msgid "From camp drop off location"
-msgstr ""
+msgstr "Afsætningssted for hjemrejse"
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
 msgid "From camp travel date"
-msgstr ""
+msgstr "Hjemrejsedato"
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -775,7 +775,7 @@ msgstr "Valgt opsamlingssted til lejren"
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_webtourregistration
 msgid "Set Home Dest"
-msgstr ""
+msgstr "Beregn Hjemme destination"
 
 #. module: campos_transportation
 #: field:campos.event.participant,specialfromcampdate_id:0
