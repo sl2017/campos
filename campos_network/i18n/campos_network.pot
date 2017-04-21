@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 04:39+0000\n"
-"PO-Revision-Date: 2017-04-10 04:39+0000\n"
+"POT-Creation-Date: 2017-04-21 08:37+0000\n"
+"PO-Revision-Date: 2017-04-21 08:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -258,6 +258,12 @@ msgid "Ansøger"
 msgstr ""
 
 #. module: campos_network
+#: view:model.network:campos_network.view_form_network_create
+#: field:model.network,network_connection_amount:0
+msgid "Antal kablet forbindelser"
+msgstr ""
+
+#. module: campos_network
 #: field:model.network,network_usage:0
 msgid "Anvendelse"
 msgstr ""
@@ -265,13 +271,6 @@ msgstr ""
 #. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Anvendelse*"
-msgstr ""
-
-#. module: campos_network
-#: selection:model.network,network_delivery_month:0
-#: selection:model.network,network_last_month:0
-#: selection:model.network,network_usage_month:0
-msgid "April"
 msgstr ""
 
 #. module: campos_network
