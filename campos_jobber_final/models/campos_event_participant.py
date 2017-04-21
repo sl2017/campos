@@ -125,7 +125,7 @@ class CamposEventParticipant(models.Model):
     @api.one
     @api.depends('staff','birthdate','ckr_ids','partner_id.country_id')
     def _compute_ckr_needed(self):
-        _logger.info('COMPUTE CKR NEEDED')
+        #_logger.info('COMPUTE CKR NEEDED')
         if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids:
             self.ckr_needed = True
         else:
@@ -174,4 +174,6 @@ class CamposEventParticipant(models.Model):
                         if reg_id:
                             cep.registration_id = reg_id[0]
                             cep.payreq_state = 'approved'
+                elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id:
+                    cep.partner_id.parent_id = cep.registration_id.partner_id
         return res

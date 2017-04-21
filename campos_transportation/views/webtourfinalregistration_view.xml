@@ -82,13 +82,43 @@
 			</field>	
 		</record>		
 		
+
+		<!-- Add to Finalregistration Jobber Particpant view ************* ADMIN ***************  -->
+		<record id="view_form_finalregistration_Jobber_webtour_admin" model="ir.ui.view">
+			<field name="name">Final Registration Jobber Form Webtour ADMIN </field>
+			<field name="model">campos.event.participant</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='transport_to_camp']" position="after">
+					<field name="tocamptravelgroup" string="To Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
+					<field name="individualtocampfromdestination_id" string="To camp pick up location" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialtocampdate_id" string="To camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}"/>
+					<field name="tocamp_TripType_id" invisible="1"/>
+					<field name="groupisdanish" invisible="1"/>
+        		</xpath>
+        		
+        		<xpath expr="//field[@name='transport_from_camp']" position="after">
+					<field name="fromcamptravelgroup"  string="From Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" />	       		
+					<field name="individualfromcamptodestination_id" string="From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+					<field name="specialfromcampdate_id" string="From camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}"/>
+					<field name="fromcamp_TripType_id" invisible="1"/>
+					<button name="action_webtour_jobber_findclosestlocations" string="Find Closest Pickup/dropoff Locations" type="object" class="oe_edit_only"/>
+        		</xpath>
+        		
+        		<xpath expr="//field[@name='will_participate']" position="after">
+					<field name="webtourcamptransportation" string="Camp transportation" />        		
+	        	</xpath>
+	        	
+			</field>	
+		</record>	
 		
 		<!-- Add to Finalregistration Jobber Particpant view -->
 		<record id="view_form_finalregistration_Jobber_webtour" model="ir.ui.view">
 			<field name="name">Final Registration Jobber Form Webtour</field>
 			<field name="model">campos.event.participant</field>
 			<field name="type">form</field>
-			<field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form" />
+			<field name="inherit_id" ref="campos_jobber_final.campos_event_participant_staff_form_view" />							          											      
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='transport_to_camp']" position="after">
 					<field name="tocamptravelgroup" string="To Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
