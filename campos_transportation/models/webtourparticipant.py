@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools, _
-#from ..interface import webtourinterface
+#from ..interface import webtourinterface test
 from xml.dom import minidom
 
 import logging

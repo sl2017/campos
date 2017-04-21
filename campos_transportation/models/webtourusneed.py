@@ -143,7 +143,7 @@ class WebtourUsNeed(models.Model):
                                                                         ,('startdestinationidno.id', '=', self.campos_startdestinationidno),('enddestinationidno.id', '=', self.campos_enddestinationidno),('traveldate', '=', self.campos_traveldate)])
     
         if self.campos_TripType_id.id and self.campos_startdestinationidno and self.campos_enddestinationidno:
-            _logger.info("%s calc_travelneed_id Entered %s %s %s %s %s %s %s",self.id,self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
+            _logger.info("%s calc_travelneed_id Entered %s %s %s %s %s %s %s",self.id, self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
             if rs_travelneed:
                 #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_traveldate,fields.Date.from_string(self.webtour_startdatetime))
                 if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):

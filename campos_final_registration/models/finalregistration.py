@@ -109,9 +109,9 @@ class FinalRegistrationParticipant(models.Model):
     Extending event participant for final registration
     '''
     _inherit = 'campos.event.participant'
-    transport_to_camp = fields.Boolean('Common transport to camp', default=True)
-    transport_from_camp = fields.Boolean('Common transport from camp', default=True)
-    camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List')
+    transport_to_camp = fields.Boolean('Common transport to camp', default=True, help="Remember to mark this, with you wish to use the joint transportation. See page 29 in the instructions.")
+    transport_from_camp = fields.Boolean('Common transport from camp', default=True, help="Remember to mark this, with you wish to use the joint transportation. See page 29 in the instructions.")
+    camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List', help="Chose which days you're participating in the jamboree")
     access_token_id = fields.Char('Id of Access Token')
     dates_summery = fields.Char('Camp Days', compute='_compute_dates_summery', store=True)
     

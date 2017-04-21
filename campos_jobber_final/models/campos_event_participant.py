@@ -14,15 +14,15 @@ class CamposEventParticipant(models.Model):
 
     signup_state = fields.Selection([('draft', 'Not signed up'),
                                      ('oncamp', 'Camp Jobber'),
-                                     ('dayjobber', 'Day Jobber')], default='draft', string='Final registration', track_visibility='onchange')
-    accomodation_ids = fields.One2many('campos.jobber.accomodation', 'participant_id', 'Accomodation')
+                                     ('dayjobber', 'Day Jobber')], default='draft', string='Final registration', track_visibility='onchange', help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+    accomodation_ids = fields.One2many('campos.jobber.accomodation', 'participant_id', 'Accomodation', help=u'Chose where you would like to stay at the campsite. You may chose between several different locations - but only within the jamboree site. During the pre/post camp everybody is accommodated in Øen.')
     # AS on registration
-    canteen_ids = fields.One2many('campos.jobber.canteen', 'participant_id', 'Catering')
-    need_ids = fields.Many2many('event.registration.need', string='Special needs')
+    canteen_ids = fields.One2many('campos.jobber.canteen', 'participant_id', 'Catering', help=u"Chose where you would like to eat at the campsite. You may chose between several different locations - but only within the jamboree site. During the pre/post camp everybody is catered in Øen.")
+    need_ids = fields.Many2many('event.registration.need', string='Special needs', help="Is chosen if you have any kind special needs - or have a caravan with you. See page 20 in the instructions.")
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
-    paybygroup = fields.Boolean('Pay by Scout Group')
+    paybygroup = fields.Boolean('Pay by Scout Group', help="Is only chosen if you have to pay through a group. See page 21 in the instructions.")
     payreq_state=fields.Selection([('draft', 'In process'),
                                    ('cancelled', 'Cancelled'),
                                    ('approved', 'Approved'),
@@ -125,7 +125,7 @@ class CamposEventParticipant(models.Model):
     @api.one
     @api.depends('staff','birthdate','ckr_ids','partner_id.country_id')
     def _compute_ckr_needed(self):
-        _logger.info('COMPUTE CKR NEEDED')
+        #_logger.info('COMPUTE CKR NEEDED')
         if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids:
             self.ckr_needed = True
         else:
@@ -174,4 +174,6 @@ class CamposEventParticipant(models.Model):
                         if reg_id:
                             cep.registration_id = reg_id[0]
                             cep.payreq_state = 'approved'
+                elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id:
+                    cep.partner_id.parent_id = cep.registration_id.partner_id
         return res

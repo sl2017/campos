@@ -56,7 +56,7 @@ class CamposImportParticipantWiz(models.TransientModel):
                                 'mobile': mbr.mobile if mbr.is_leader else False,
                                 'parent_id': wizard.registration_id.partner_id.id,
                                 'transport_to_camp': wizard.transport_to_camp,
-                                'transport_from_camp': wizard.transport_to_camp,
+                                'transport_from_camp': wizard.transport_from_camp,
                                 'participant': True,
                                 })
                     mbr.participant_id = part
@@ -75,7 +75,7 @@ class CamposImportParticipantWiz(models.TransientModel):
                                                                                                          'mobile': mbr.mobile if mbr.is_leader else False,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
                                                                                                          'transport_to_camp': wizard.transport_to_camp,
-                                                                                                         'transport_from_camp': wizard.transport_to_camp,
+                                                                                                         'transport_from_camp': wizard.transport_from_camp,
                                                                                                          })
                     for day in ed_ids:
                         cepd.create({'participant_id': mbr.participant_id.id,
