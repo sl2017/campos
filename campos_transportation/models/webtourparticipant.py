@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, tools
-from ..interface import webtourinterface
+from openerp import models, fields, api, tools, _
+#from ..interface import webtourinterface
 from xml.dom import minidom
 
 import logging
@@ -22,7 +22,7 @@ class WebtourParticipant(models.Model):
   
     fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
                                             'From camp Drop off',
-                                            ondelete='set null')#,compute='_compute_fromcamptomdestination_id', store=True
+                                            ondelete='set null')#,compute='_compute_fromcamptodestination_id', store=True
     
     tocampdate = fields.Date(string='To Camp Date')
     fromcampdate = fields.Date(string='From Camp Date')
@@ -87,8 +87,8 @@ class WebtourParticipant(models.Model):
             return False 
                                                   
     @api.one
-    def _compute_fromcamptomdestination_id(self):
-        #_logger.info("_compute_fromcamptomdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+    def _compute_fromcamptodestination_id(self):
+        #_logger.info("_compute_fromcamptodestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
         destination=self.fromcamptodestination_id
         if self.individualfromcamptodestination_id:
             destination = self.individualfromcamptodestination_id
@@ -159,8 +159,8 @@ class WebtourParticipant(models.Model):
               
     @api.model
     def get_create_usgroupidno_tron(self):
-        MAX_LOOPS_usGroup = 10  #Max No of Groups pr Scheduled call
-        MAX_LOOPS_usUser = 10  #Max No of Users pr Scheduled call
+        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
@@ -248,7 +248,41 @@ class WebtourParticipant(models.Model):
         #####################self.env['campos.webtourusneed'].get_create_usneed_tron()        
 
         return True
-    
+
+    @api.model
+    def create(self, vals):
+        _logger.info("Create Entered")
+        par = super(WebtourParticipant, self).create(vals)
+   
+        rs = self.search([('id', '=', par.id)])
+        if len(rs)> 0:
+            rs[0].recalctoneed= True
+            rs[0].recalcfromneed=True
+            
+        '''
+        dicto={}
+        dicto['webtourusgroupidno'] = par.webtourusgroupidno
+        dicto['tocampfromdestination_id'] = par.tocampfromdestination_id
+        dicto['fromcamptodestination_id'] = par.fromcamptodestination_id
+        dicto['tocampdate'] = par.tocampdate
+        dicto['fromcampdate'] = par.fromcampdate
+        dicto['tocampusneed_id'] = par.tocampusneed_id
+        dicto['fromcampusneed_id'] = par.fromcampusneed_id
+        dicto['tocamp_TripType_id'] = par.tocamp_TripType_id
+        dicto['specialtocampdate_id'] = par.specialtocampdate_id
+        dicto['fromcamp_TripType_id'] = par.fromcamp_TripType_id
+        dicto['specialfromcampdate_id'] = par.specialfromcampdate_id
+        dicto['individualtocampfromdestination_id'] = par.individualtocampfromdestination_id
+        dicto['individualfromcamptodestination_id'] = par.individualfromcamptodestination_id
+        dicto['recalctoneed'] = par.recalctoneed
+        dicto['recalcfromneed'] = par.recalcfromneed
+        dicto['tocamptravelgroup'] = par.tocamptravelgroup
+        dicto['fromcamptravelgroup'] = par.fromcamptravelgroup
+        dicto['groupisdanish'] = par.groupisdanish
+        _logger.info("Create Par %s", dicto)'''
+                   
+        return par
+        
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
@@ -262,7 +296,7 @@ class WebtourParticipant(models.Model):
                     notdoneto = False
                    
             if  'recalcfromneed' in vals or 'individualfromcamptodestination_id' in vals:
-                if [True] == par._compute_fromcamptomdestination_id():
+                if [True] == par._compute_fromcamptodestination_id():
                     notdonefrom = False
             
             if  ('camp_day_ids' in vals
@@ -274,7 +308,7 @@ class WebtourParticipant(models.Model):
                  or 'specialfromcampdate_id'):        
                 if [True] == par._compute_fromcampdate():
                     notdonefrom = False                
-                
+               
             if  ('tocampfromdestination_id' in vals
                 or 'tocamptravelgroup' in vals
                 or 'tocampdate' in vals
@@ -282,6 +316,14 @@ class WebtourParticipant(models.Model):
                 or ('recalctoneed' in vals and notdoneto)
                 or 'deregistered' in vals 
                 ):
+                if not self.tocampdate and 'tocampdate' not in vals:
+                    self._compute_tocampdate()
+                    _logger.info("update_tocampusneed tocampdate %s", self.tocampdate)
+                    
+                if not self.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
+                    self._compute_tocampfromdestination_id()   
+                    _logger.info("update_tocampusneed tocampfromdestination_id %s", self.tocampfromdestination_id)    
+                
                 par.update_tocampusneed()
 
             if  ('fromcamptodestination_id' in vals 
@@ -291,6 +333,15 @@ class WebtourParticipant(models.Model):
                 or ('recalcfromneed' in vals and notdonefrom)
                 or 'deregistered' in vals                
                 ):
+                
+                if not self.fromcampdate and 'fromcampdate' not in vals: 
+                    self._compute_fromcampdate()
+                    _logger.info("update_fromcampusneed fromcampdate %s", self.fromcampdate)
+                    
+                if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
+                    self._compute_fromcamptodestination_id() 
+                    _logger.info("update_fromcampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
+                    
                 par.update_fromcampusneed()
                 
             if 'state' in vals:
@@ -308,7 +359,7 @@ class WebtourParticipant(models.Model):
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
-        
+        _logger.info("TO CAMP campos_demandneeded %s %s %s %s %s",self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
         if self.tocampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -343,9 +394,9 @@ class WebtourParticipant(models.Model):
       
         webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.registration_id.event_id.id)])
         campdesination= webtourconfig.campdestinationid.destinationidno           
-        # Check if date included in to From camp dates
+        # Check if date included in to From camp dates 
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
-                            
+        _logger.info("From CAMP campos_demandneeded %s %s %s %s %s",self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -511,9 +562,9 @@ class WebtourParticipantCampDay(models.Model):
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
-                    self.webtourcamptransportation = 'To Camp from: ' + self.participant_id.tocampfromdestination_id.webtourname
+                    self.webtourcamptransportation = _('To Camp from: ') + self.participant_id.tocampfromdestination_id.webtourname
                 else:
-                    self.webtourcamptransportation = 'No Camp Transportation To camp avaible this day!!!'
+                    self.webtourcamptransportation = _('No Camp Transportation To camp avaible this day!!!')
             else:
                 self.webtourcamptransportation = ''
                            
@@ -524,9 +575,9 @@ class WebtourParticipantCampDay(models.Model):
                 #_logger.info("_compute_webtourcamptransportation rs %s", rs)
                 
                 if len(rs)> 0:
-                    self.webtourcamptransportation = 'From Camp to: ' + self.participant_id.fromcamptodestination_id.webtourname                    
+                    self.webtourcamptransportation = _('From Camp to: ') + self.participant_id.fromcamptodestination_id.webtourname                    
                 else:
-                    self.webtourcamptransportation = 'No Camp Transportation From camp avaible this day!!!'
+                    self.webtourcamptransportation = _('No Camp Transportation From camp avaible this day!!!')
             else:
                 self.webtourcamptransportation = ''
         else:

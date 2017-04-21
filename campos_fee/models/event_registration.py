@@ -50,7 +50,7 @@ class EventRegistration(models.Model):
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state')
     def _compute_fees(self):
-        for reg in self:
+        for reg in self.sudo():
             fee_participants = 0.0
             fee_transport = 0.0
             number_participants = 0
