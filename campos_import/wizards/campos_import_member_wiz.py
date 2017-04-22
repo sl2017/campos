@@ -88,8 +88,7 @@ class CamposImportMemberWiz(models.TransientModel):
                 
                     rs = self.env['campos.event.participant'].search([('id', '=', mbr.participant_id.id)]) #JDa Need to trig Transportaion usNeed update
                     if len(rs)> 0:
-                        rs[0].recalctoneed= True
-                        rs[0].recalcfromneed=True    
+                        rs[0].write({'recalctoneed':True, 'recalcfromneed':True})   
                                             
                 _logger.info('Saved %s', mbr.name)
                 
