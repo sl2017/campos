@@ -289,7 +289,7 @@ class WebtourParticipant(models.Model):
                 or 'tocampdate' in vals
                 or 'transport_to_camp' in vals               
                 or 'recalctoneed' in vals
-                or 'deregistered' in vals 
+                or 'donotparticipate' in vals 
                 ):
                 if not par.tocampdate and 'tocampdate' not in vals:
                     _compute_tocampdate()
@@ -299,17 +299,17 @@ class WebtourParticipant(models.Model):
                     _compute_tocampfromdestination_id()                  
                     _logger.info("%s update_tocampusneed tocampfromdestination_id %s", par.id, par.tocampfromdestination_id)
                       
-                _logger.info("%s XXXXXXXXXXXXXX tocampdate %s", par.id,notdoneto)
+                #_logger.info("%s XXXXXXXXXXXXXX tocampdate %s", par.id,notdoneto)
                 if notdoneto:
                     par.update_tocampusneed()
             
-            _logger.info("%s Kilroy %s", par.id,vals)
+            #_logger.info("%s Kilroy %s", par.id,vals)
             if  ('fromcamptodestination_id' in vals 
                 or 'fromcamptravelgroup' in vals                                
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals
                 or 'recalcfromneed' in vals
-                or 'deregistered' in vals                
+                or 'donotparticipate' in vals                
                 ):              
                 if not self.fromcampdate and 'fromcampdate' not in vals: 
                     _compute_fromcampdate()                   
@@ -319,7 +319,7 @@ class WebtourParticipant(models.Model):
                     _compute_fromcamptodestination_id()                   
                     _logger.info("%s update_fromcampusneed fromcamptodestination_id %s", par.id, par.fromcamptodestination_id)
                     
-                _logger.info("%s XXXXXXXXXXXXXX fromcampdate %s", par.id,notdonefrom)
+                #_logger.info("%s XXXXXXXXXXXXXX fromcampdate %s", par.id,notdonefrom)
                 if notdonefrom:    
                     par.update_fromcampusneed()                                    
             
@@ -415,7 +415,7 @@ class WebtourParticipant(models.Model):
     def action_webtour_jobber_findclosestlocations(self):
         for par in self:
             if par.groupisdanish:
-                # If gep point is missing, try to calculate
+                # If geo point is missing, try to calculate
                 if (par.partner_id.partner_latitude==0):
                     par.partner_id.geocode_address()
                     if (par.partner_id.partner_latitude > 0):
