@@ -207,6 +207,16 @@
 									</group>
 								</page>
 								<page string="Meat">
+									<group>
+										<field colspan="2" name="meatlist_ids" widget="one2many_list" nolabel="0" string="Meat Choices">
+											<tree editable="bottom">
+												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
+												<field name="meat_count"/>
+<!--												<field name="day_meat_total"/>
+												<field name="day_participant_total"/>-->
+											</tree>
+										</field>
+									</group>
 								</page>
 								<page string="Tents and other">
 								</page>
@@ -382,6 +392,14 @@
 									</group>
 								</page>
 								<page string="Meat">
+									<group>
+										<field colspan="2" name="meatlist_ids" widget="one2many_list" nolabel="0" string="Meat Choices">
+											<tree editable="bottom">
+												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
+												<field name="meat_count"/>
+											</tree>
+										</field>
+									</group>
 								</page>
 								<page string="Tents and other">
 								</page>
@@ -449,7 +467,12 @@
            	</field>
           </page>
 					<page string="Meat Types per event day">
-					
+						<field name="event_day_meat_ids" colspan="1" nolabel="1"  context="{'default_event_id': id}">
+							<tree editable="bottom">
+                <field name="event_day_id"/>								
+                <field name="meat_id"/>
+           		</tree>
+           	</field>
 					</page>
         </xpath>
 			</field>	
@@ -542,6 +565,18 @@
 				</field>
 			</record> 	
 
+			<record id="view_tree_event_day_meat" model="ir.ui.view">
+				<field name="name">Event Day Meat</field>
+				<field name="model">event.day.meat</field>
+				<field name="arch" type="xml">
+					<tree  editable="bottom">
+						<field name="event_id"/>
+						<field name="event_day_id"/>
+						<field name="meat_id"/>
+					</tree>
+				</field>
+			</record> 	
+
 			<!-- Menu Actions -->
 		 <!--  Manager view -->
        <record id="action_event_finalregistration_tree" model="ir.actions.act_window">
@@ -615,6 +650,11 @@
 		res_model="event.registration.meat"
 		view_mode="tree" />
 
+		<act_window id="action_event_day_meat"
+		name="Event Day Meat"
+		res_model="event.day.meat"
+		view_mode="tree" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
@@ -633,6 +673,8 @@
 		<menuitem id="menu_action_finalregistration_menu_friendshipgrouplist" parent="menu_event_finalregistration" name="Friendship Groups" action="action_event_registration_friendshipgrouplist" groups="campos_event.group_campos_admin" sequence="70" />
 
 		<menuitem id="menu_action_finalregistration_menu_meat" parent="menu_event_finalregistration" name="Meat Types" action="action_event_registration_meat" groups="campos_event.group_campos_admin" sequence="80" />
+
+		<menuitem id="menu_action_finalregistration_menu_event_day_meat" parent="menu_event_finalregistration" name="Event Day Meat" action="action_event_day_meat" groups="campos_event.group_campos_admin" sequence="90" />
 
 		<!-- gl -->
 		<menuitem id="menu_action_event_finalregistration_tree_gl" parent="menu_event_finalregistration" name="Final Registration GL" action="action_event_finalregistration_tree_gl" groups="campos_preregistration.group_campos_groupleader" sequence="25"/>

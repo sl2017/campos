@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields, api, _
-
-
+from openerp import models, fields, api, _, exceptions
+import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -25,6 +24,7 @@ class FinalRegistration(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    meatlist_ids = fields.One2many('event.registration.meatlist','registration_id','Meat Choices')
     @api.onchange('child_certificates_accept')
     @api.one
     def _child_certificates_accept_checked (self):
@@ -268,7 +268,7 @@ class FinalRegistrationEvent(models.Model):
     '''
     _inherit = 'event.event'
     event_day_ids = fields.One2many('event.day','event_id','Event Days')
-#virker ikke    event_day_meat_ids = fields.One2many('event.day.meat','event_day_id.event_id','Meat list per day')
+    event_day_meat_ids = fields.One2many('event.day.meat','event_id','Meat list per day')
 
 class PioneeringPoleDepot(models.Model):
     '''
@@ -314,26 +314,66 @@ class EventDayMeat(models.Model):
     '''
     _description = 'Available meat types per event day'
     _name='event.day.meat'
+    _order="event_day_id"
     meat_id = fields.Many2one('event.registration.meat', 'Meat Type', required=True)
     event_day_id = fields.Many2one('event.day', 'Event Day', required=True)
-    event_id = fields.Many2one(related='event_day_id.event_id')
+    event_id = fields.Many2one(related='event_day_id.event_id', store=True)
 #TODO   _sql_constraints = [('meat_unique_per_day', 'unique(meat_id,event_day_id)', _('Each meat type can only be added once per day'))]
-
+    @api.multi
+    def name_get(self):
+        data = []
+        for rec in self:
+            display_value = ''
+            display_value += rec.event_day_id.event_date or ""
+            display_value += ' ['
+            display_value += rec.meat_id.name or ""
+            display_value += ']'
+            data.append((rec.id, display_value))
+        return data
+    
 class RegistrationMeat(models.Model):
     '''
     Chosen meat on a registration
     '''
     _description = 'Chosen meat on a registration'
     _name='event.registration.meatlist'
+    _order="event_day_meat_id"
     registration_id = fields.Many2one('event.registration', 'Registration', required=True)
-    event_id = fields.Many2one(related='registration_id.event_id')
     event_day_meat_id = fields.Many2one('event.day.meat','Meat type choice', required=True)
-#    event_day_ids = fields.One2many(related='event_id.event_day_ids')
-#    event_day_id = fields.One2many('event.day','event_id','Event Days')
-#    event_day_id = fields.Many2one('event.day', 'Event Day', required=True)
-#    meat_id = fields.Many2one('event.registration.meat', 'Meat Type', required=True)
     meat_count = fields.Integer('Count', required=True)
-#TODO   _sql_constraints = [('meat_unique_per_registration_camp_day', 'unique(meat_id,event_day_id)', _('Each meat type can only be added once per day'))]
+    event_day_id = fields.Many2one(related='event_day_meat_id.event_day_id')
+    event_date = fields.Date(related='event_day_id.event_date')
+    day_meat_total = fields.Integer('Day meat total', compute='_compute_meat_day_total')
+    day_participant_total = fields.Integer('Day part. total', compute='_compute_participant_day_total')
+#TODO   _sql_constraints = [('meat_unique_per_registration_camp_day', 'unique(registration_id,event_day_meat_id)', _('Each meat type can only be chosen once per day'))]
+    
+    @api.one
+    @api.depends('event_day_meat_id', 'meat_count')
+    def _compute_meat_day_total(self):
+        self.day_meat_total = sum(self.env['event.registration.meatlist'].sudo().search([('registration_id', '=', self.registration_id.id),
+                                                                                    ('event_day_id', '=', self.event_day_id.id)]).mapped('meat_count'))
+    @api.one
+    @api.depends('event_day_meat_id', 'meat_count')
+    def _compute_participant_day_total(self):
+        if self.event_date:
+            participants_this_day = self.env['campos.event.participant.day'].search([('registration_id_stored', '=', self.registration_id.id),
+                                                                                     ('will_participate', '=', True),
+                                                                                     ('the_date','=',self.event_date),
+                                                                                     ('participant_id.state','!=','deregistered'),
+                                                                                     ('participant_id.birthdate','<','2015-07-22')]).mapped('participant_id')
+            participants_next_day = self.env['campos.event.participant.day'].search([('registration_id_stored', '=', self.registration_id.id),
+                                                                                     ('will_participate', '=', True),
+                                                                                     ('the_date','=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1)),
+                                                                                     ('participant_id.state','!=','deregistered'),
+                                                                                     ('participant_id.birthdate','<','2015-07-22')]).mapped('participant_id')
+            participants_both_days = participants_this_day & participants_next_day
+            self.day_participant_total = len(participants_both_days)
+        else:
+            self.day_participant_total=0
 
-    
-    
+    @api.multi
+    @api.constrains('event_day_meat_id','meat_count')
+    def _check_meat_count(self):
+        for rec in self:
+            if (rec.day_meat_total>rec.day_participant_total):
+                raise exceptions.ValidationError(_('Number of ordered meat potions (%d) exceeds the number of dinner participants (%d) on %s. ' % (rec.day_meat_total,rec.day_participant_total, rec.event_date)))
