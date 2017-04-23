@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 16. apr. 2017
 
@@ -12,7 +13,7 @@ When the record is saved will the request be executed
 
 @author: jda.dk
 '''
-# -*- coding: utf-8 -*-
+
 from openerp import models, fields, api, tools
 from ..interface import webtourinterface
 from xml.dom import minidom
