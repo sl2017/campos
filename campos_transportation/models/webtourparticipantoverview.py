@@ -79,7 +79,7 @@ class WebtourParticipantOverview(models.Model):
                     left outer join res_country as regpcountry on regpcountry.id = regpartner.country_id
                     left outer join campos_scout_org as scoutorg on scoutorg.id = regpartner.scoutorg_id
                     left outer join res_country as scoutorgcountry on scoutorgcountry.id = scoutorg.country_id
-                    where p.state != 'deregistered' and (transport_to_camp or transport_from_camp or toneed.campos_demandneeded or fromneed.campos_demandneeded) and  r.event_id=1  
+                    where (transport_to_camp or transport_from_camp or toneed.campos_demandneeded or fromneed.campos_demandneeded) and  r.event_id=1  
                     """
                     )
 
