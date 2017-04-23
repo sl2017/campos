@@ -18,8 +18,8 @@
 				<field name="arch" type="xml">
 					<tree editable="bottom">
 						<field name="name"/>
-						<field name="for_group"/>
-						<field name="for_staff"/>
+						<field name="for_group" groups="campos_event.group_campos_admin"/>
+						<field name="for_staff" groups="campos_event.group_campos_admin"/>
 					</tree>
 				</field>
 			</record> 		
@@ -90,14 +90,28 @@
 
 			<record id="view_tree_event_registration_friendshipgrouplist" model="ir.ui.view">
 				<field name="name">Friendship Group List</field>
-				<field name="model">event.registration.friendshipgrouplist</field>
+				<field name="model">campos.reg.friendship</field>
 				<field name="arch" type="xml">
 					<tree>
 						<field name="own_registration_id"/>
-						<field name="friendship_group_registration_id"/>
+						<field name="friendship_group_reg_id"/>
 					</tree>
 				</field>
+			</record>
+			
+			<record id="view_tree_event_registration_friendshipgroupform" model="ir.ui.view">
+				<field name="name">Friendship Group form</field>
+				<field name="model">campos.reg.friendship</field>
+				<field name="arch" type="xml">
+					<form>
+						<group>
+							<field name="own_registration_id"/>
+							<field name="friendship_group_reg_id"/>
+						</group>
+					</form>
+				</field>
 			</record> 	
+			 	
 
 			<!-- Final Registration for admin-->
 		<record id="view_form_finalregistration_admin" model="ir.ui.view">
@@ -109,7 +123,8 @@
 						<button name="cancel_registration" 
 										type="object"    
 										string="Cancel Registration"
-										attrs="{'invisible': [('state', '=', 'cancel')]}"/> 
+										attrs="{'invisible': ['|',('state', '=', 'cancel'),('staff','=',True)]}"
+										confirm="Deregister this group from the Camp?" groups="campos_event.group_campos_admin"/> 
 						<button name="reopen_registration" 
 										type="object"    
 										string="Reopen Registration"
@@ -118,6 +133,7 @@
 					</header>
 					<sheet>
 						<group name="sheet" colspan="2">
+						    <field name="staff" invisible="1"/>
 							<field name="event_id" string="Event"  options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
 							<field name="organization_id" options="{'no_create': True}"/>
@@ -153,11 +169,11 @@
 										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
 													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}">
 											<tree editable="bottom">
-												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
+												<field name="friendship_group_reg_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
 										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
-													 readonly="1"  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
+													  attrs="{'invisible': [('group_country_code2', '=', 'DK')]}">
 											<tree>
 												<field name="own_registration_id"/>
 											</tree>
@@ -282,7 +298,7 @@
 						<button name="cancel_registration" 
 										type="object"    
 										string="Cancel Registration"
-										attrs="{'invisible': [('state', '=', 'cancel')]}"  invisible="1"/> 
+										attrs="{'invisible': ['|',('state', '=', 'cancel')]}" groups="campos_event.group_campos_admin"/>
 						<button name="reopen_registration" 
 										type="object"    
 										string="Reopen Registration"
@@ -328,7 +344,7 @@
 										<field colspan="2" name="friendship_group_ids" widget="one2many_list" nolabel="0"  string="Assigned Friendship Groups"
 													attrs="{'invisible': [('group_country_code2', '!=', 'DK')]}" readonly="1">
 											<tree editable="bottom">
-												<field name="friendship_group_registration_id"  options="{'no_create': True}"/>
+												<field name="friendship_group_reg_id"  options="{'no_create': True}"/>
 											</tree>
 										</field>
 										<field colspan="2" name="reverse_friendship_group_ids" widget="one2many_list" nolabel="0"  string="Reverse Assigned Friendship Groups"
@@ -360,14 +376,6 @@
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 								</page>
-								
-								<page string="Handicaped participants">
-									<group>
-										<field name="handicap" />
-										<field name="handicap_description" />
-										<field name="handicap_needs" />
-									</group>
-								</page>
 								<!-- 
 								<page string="Pioneering Poles">
 									<group>
@@ -382,9 +390,60 @@
 								</page>
 								<page string="Sub Camp">
 									<group>
-										<field name="subcamp_id"  options="{'no_create': True}" readonly="1"/>
-										<field name="camp_area_id" options="{'no_create': True}" readonly="1"/>
+										<field name="subcamp_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
+										<field name="camp_area_id"  readonly="1"  options="{'no_create': True, 'no_open': True}"/>
 									</group>
+									<separator string="Sub Camp Responsible"/>
+									<field name="subcamp_function_view_ids" options="{'no_open': True}" readonly="1" >
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+                         			<separator string="Camp Area Coordinators"/>
+									<field name="part_function_view_ids" readonly="1" options="{'no_open': True, 'reload_on_button': True}">
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="function_type_id" />
+											<field name="participant_id" string="Name"/>
+											<field name="email" />
+											<field name="mobile" />
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="function_type_id" options="{'no_open': True}"/>
+											<field name="participant_id" string="Name" options="{'no_open': True}"/>
+											<field name="email" />
+											<field name="mobile" />
+											</group>
+		                         		</form>
+		                         	</field>
+		                         	<separator string="Scout Groups Contacts"/>
+		                         	<field name="reg_view_ids" readonly="1" >
+		                         		<tree editable="bottom" delete="false">
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         		</tree>
+		                         		<form>
+		                         			<group>
+		                         			<field name="name" string="Group" options="{'no_open': True}"/>
+		                         			<field name="contact_partner_id"  context="{'without_company': True}" options="{'no_open': True}"/>
+		                         			<field name="contact_email"/>
+		                         			<field name="state"/>
+		                         			</group>
+		                         		</form>
+		                         	</field>
 								</page>
 								<page string="Internal Information" invisible="1">
 									<group>
@@ -436,7 +495,13 @@
 										</tree>
 									</field>				
 								</page>
-								
+								<page string="Handicaped participants">
+									<group>
+										<field name="handicap" readonly="1"/>
+										<field name="handicap_description" readonly="1"/>
+										<field name="handicap_needs" readonly="1"/>
+									</group>
+								</page>
 							</notebook>
 								</page>
 							</notebook>
@@ -489,29 +554,41 @@
 					<header>
 							<button name="inactivate_participant" 
 											type="object"    
-											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '=', 'deregistered')]}" />
+											string="Inactivate Participant" class = "oe_edit_only" attrs="{'invisible': ['|',('state', '=', 'deregistered'),('staff','=',True)]}" />
 							<button name="activate_participant" 
 											type="object"    
 											string="Re-activate Participant" class = "oe_edit_only" attrs="{'invisible': [('state', '!=', 'deregistered')]}" />
+							<field name="state" widget="statusbar" statusbar_visible="draft,deregistered" statusbar_colors="{'cancel':'red'}"/>
 					</header>
 					<sheet>
 						<group name="sheet2">
+							<field name="staff" invisible="1"/>
 							<field name="registration_id" invisible="1"/>
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
+							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
-							<field name="email"/>
-							<field name="mobile"/>
-							<field name="street"/>
-							<field name="street2"/>
-							<field name="zip"/>
-							<field name="city"/>
-							<field name="country_id"/>
-							<field name="access_token_id" invisible="1"/>
+						</group>
+						<notebook name="top">
+							<page name="contact" string="Contact info">
+								<group>
+									<field name="email"/>
+									<field name="mobile"/>
+									<field name="street"/>
+									<field name="street2"/>
+									<field name="zip"/>
+									<field name="city"/>
+									<field name="country_id"/>
+									<field name="access_token_id" invisible="1"/>
+								</group>
+							</page>
+						</notebook>
+						<group>
+							<separator string="Transport" colspan="2"/>
 							<field name="transport_to_camp"/>
 							<field name="transport_from_camp"/>
-							<field name="state" readonly="1" string="Registration State"/>
+							<separator string="Participation" colspan="2"/>
 							<button name="check_all_maincamp_days" 
 											type="object"    
 											string="Check all days" class = "oe_edit_only"/>
@@ -642,8 +719,8 @@
 
 		<act_window id="action_event_registration_friendshipgrouplist"
 		name="Friendship Group List"
-		res_model="event.registration.friendshipgrouplist"
-		view_mode="tree" />
+		res_model="campos.reg.friendship"
+		view_mode="tree,form" />
 
 		<act_window id="action_event_registration_meat"
 		name="Meat Types"

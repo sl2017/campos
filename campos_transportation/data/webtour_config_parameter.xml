@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+		<record id="myid" model="ir.config_parameter">
+			<field name="key">campos_transportation_googlemaps_key.geocode</field>
+			<field name="value">Enter Googlemaps Key for Geocoding</field>
+		</record>
+	</data>	
+	<data noupdate="1">		
+		<record id="myid2" model="ir.config_parameter">
+			<field name="key">campos_transportation_googlemaps_key.distance_matrix</field>
+			<field name="value">Enter Googlemaps Key for distance_matrix</field>
+		</record>
+	</data>	
+	<data noupdate="1">			
+		<record id="myid3" model="ir.config_parameter">
+			<field name="key">campos_transportation_webtour.url</field>
+			<field name="value">Enter Webtour url</field>
+		</record>
+	</data>	
+	<data noupdate="1">			
+		<record id="myid4" model="ir.config_parameter">
+			<field name="key">campos_transportation_webtour.url_loginpart</field>
+			<field name="value">Enter Webtour url login part</field>
+		</record>		
+   </data>
+</openerp>
+

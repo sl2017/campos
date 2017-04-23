@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 13:50+0000\n"
-"PO-Revision-Date: 2017-02-24 13:50+0000\n"
+"POT-Creation-Date: 2017-03-29 16:14+0000\n"
+"PO-Revision-Date: 2017-03-29 16:14+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -552,6 +552,11 @@ msgid "Evt. hjemmeside"
 msgstr ""
 
 #. module: campos_sponsor
+#: field:model.sponsor,customer_type:0
+msgid "Export Type"
+msgstr ""
+
+#. module: campos_sponsor
 #: field:model.sponsor,fax:0
 msgid "Fax"
 msgstr ""
@@ -632,6 +637,11 @@ msgstr ""
 #: selection:model.activity,activity_state:0
 #: selection:model.sponsor,partner_state:0
 msgid "Godkendt"
+msgstr ""
+
+#. module: campos_sponsor
+#: field:model.sponsor,primary_reg_id:0
+msgid "Group registration"
 msgstr ""
 
 #. module: campos_sponsor

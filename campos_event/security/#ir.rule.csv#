@@ -1,0 +1,4 @@
+"id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
+"campos_event.par_access","Participant access","campos_event.model_campos_event_participant","[('partner_id.id','=', user.partner_id.id)]","campos_event.group_campos_user","True","True","False","False"
+"campos_event.com","Committee access","campos_event.model_campos_event_participant","[('id','in', user.participant_ids.ids)]","campos_event.group_campos_committee","True","True","True","False"
+"campos_event.ir_rule_52","CampOS Manager Access All","campos_event.model_campos_event_participant","[(1, '=', 1)]","campos_event.group_campos_manager","True","True","True","False"

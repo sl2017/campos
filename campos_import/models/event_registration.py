@@ -45,3 +45,21 @@ class EventRegistration(models.Model):
                         'default_partner_id': self.partner_id.id,
                 }
             }
+
+    @api.multi
+    def action_sale_order_lines(self):
+        self.ensure_one()
+        
+        
+        treeview = self.env.ref('campos_import.group_sale_order_line_tree_view')
+        return {
+            'name': _("Material Orders for %s" % self.name),
+            'view_mode': 'tree',
+            'view_type': 'form',
+            'views': [(treeview.id, 'tree')],
+            'res_model': 'sale.order.line',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'domain': [('order_partner_id', '=', self.partner_id.id),('order_id.state', '!=', 'cancel')],
+            
+        }

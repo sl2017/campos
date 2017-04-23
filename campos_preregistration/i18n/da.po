@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 13:50+0000\n"
-"PO-Revision-Date: 2017-02-24 13:50+0000\n"
+"POT-Creation-Date: 2017-04-10 04:39+0000\n"
+"PO-Revision-Date: 2017-04-10 04:39+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -248,11 +248,6 @@ msgid "Group Preregistration"
 msgstr "Forhåndstilmelding for grupper/kredse"
 
 #. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_layer_pre_reg_colored_on_cnt
-msgid "Group colored on total pre reg"
-msgstr ""
-
-#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_admin
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Handicaped participants"
@@ -314,11 +309,6 @@ msgid "Length"
 msgstr ""
 
 #. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_layer_basictest0
-msgid "Municipality"
-msgstr ""
-
-#. module: campos_preregistration
 #: view:event.registration:campos_preregistration.view_form_preregistration_gl
 msgid "Name"
 msgstr ""
@@ -371,16 +361,6 @@ msgid "Own transport to camp more than total participants"
 msgstr ""
 
 #. module: campos_preregistration
-#: model:geoengine.raster.layer,name:campos_preregistration.geoengine_vector_layer_prereg_tree
-msgid "Participant background"
-msgstr ""
-
-#. module: campos_preregistration
-#: model:geoengine.vector.layer,name:campos_preregistration.geoengine_vector_participant
-msgid "Participant location"
-msgstr ""
-
-#. module: campos_preregistration
 #: field:event.registration,handicap:0
 msgid "Participant(s) with handicap or other special considerations?"
 msgstr ""
@@ -422,7 +402,7 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,group_exitpoint:0
 msgid "Point of exit from Denmark"
-msgstr "Udrejse sted i Danmark (kun udlændinge)"
+msgstr ""
 
 #. module: campos_preregistration
 #: field:event.registration.polelist,pioneeringpole_id:0
@@ -559,9 +539,4 @@ msgstr ""
 #. module: campos_preregistration
 #: field:event.registration,friendship_group_home_hospitality:0
 msgid "Would like to offer home hospitality?"
-msgstr ""
-
-#. module: campos_preregistration
-#: model:geoengine.raster.layer,name:campos_preregistration.geoengine_vector_layer_prereg
-msgid "pre_reg background"
 msgstr ""

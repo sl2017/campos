@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_rfid_device_form_view">
+        <field name="name">campos.rfid.device.form (in campos_rfid)</field>
+        <field name="model">campos.rfid.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="device_macid"/>
+                        <field name="check_method"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_rfid_device_search_view">
+        <field name="name">campos.rfid.device.search (in campos_rfid)</field>
+        <field name="model">campos.rfid.device</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="device_macid"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_rfid_device_tree_view">
+        <field name="name">campos.rfid.device.tree (in campos_rfid)</field>
+        <field name="model">campos.rfid.device</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name"/>
+                <field name="device_macid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_rfid_device_act_window">
+        <field name="name">Campos Rfid Device</field> <!-- TODO -->
+        <field name="res_model">campos.rfid.device</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+	<record model="ir.ui.menu" id="campos_rfid_top_menu">
+        <field name="name">Scanners</field>
+        <field name="parent_id" ref="campos_event.menu_campos"/>
+        <field name="sequence" eval="300"/>
+    </record>
+    
+    <record model="ir.ui.menu" id="campos_rfid_device_menu">
+        <field name="name">Device</field>
+        <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
+        <field name="action" ref="campos_rfid_device_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

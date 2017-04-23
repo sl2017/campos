@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<!-- Member number sequence. Noupdate is essential here - otherwise we'll 
+		reset the member number sequence! -->
+	<data noupdate="1">
+		<record model="ir.sequence.type" id="sequence_type_member_number">
+			<field name="name">Group Number</field>
+			<field name="code">group.number</field>
+		</record>
+		<record model="ir.sequence" id="sequence_member_number">
+			<field name="name">Group Number</field>
+			<field name="code">group.number</field>
+			<field name="number_next_actual">100001</field>
+			<field name="padding">6</field>
+			<field name="implementation">no_gap</field>
+		</record>
+		
+		<!-- Server action and bindig to present iframe embed code -->
+		<record id="action_group_number_assign" model="ir.actions.server">
+			<field name="name">Assign Group Number</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="event.model_event_registration" />
+			<field name="state">code</field>
+			<field name="code">
+				self.assign_group_number(cr, uid, context.get('active_ids'), context)
+			</field>
+		</record>
+		<record id="ir_group_number_assign" model="ir.values">
+			<field name="model">campos.event.group</field>
+			<field name="name">Assign Group Number</field>
+			<field name="key2">client_action_relate</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_group_number_assign" />
+		</record>
+	</data>
+</openerp>

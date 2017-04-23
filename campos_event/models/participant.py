@@ -229,8 +229,8 @@ class EventParticipant(geo_model.GeoModel):
 
 
     def check_duplicate(self):
-        if self.email:
-            if self.search_count([('id', '!=', self.id), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
+        if self.email and self.staff:
+            if self.search_count([('id', '!=', self.id), ('state', '!=', 'deregistered'), ('staff','=',True), '|', '|', ('email', '=', self.email), ('sharepoint_mailaddress', '=', self.email), ('private_mailaddress', '=', self.email)]):
                 self.state = 'duplicate'
     @api.model
     def create(self, vals):
@@ -543,3 +543,11 @@ class EventParticipant(geo_model.GeoModel):
         for par in self.search([('primary_committee_id', '=', False)]):
             if par.jobfunc_ids:
                 par.primary_committee_id = par.jobfunc_ids[0].committee_id 
+                
+    @api.multi
+    def assign_participant_number(self):
+        for par in self:
+            if not par.participant_number:
+                par.participant_number = self.env['ir.sequence'].next_by_code('participant.number')
+            if par.partner_id.ref != par.participant_number:
+                 par.partner_id.ref = par.participant_number

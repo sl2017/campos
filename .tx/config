@@ -50,6 +50,12 @@ source_file = campos_final_registration/i18n/campos_final_registration.pot
 source_lang = en
 type = PO
 
+[campos.campos_transportation]
+file_filter = campos_transportation/i18n/<lang>.po
+source_file = campos_transportation/i18n/campos_transportation.pot
+source_lang = en
+type = PO
+
 
 [campos.project_model_to_issue]
 file_filter = project_model_to_issue/i18n/<lang>.po

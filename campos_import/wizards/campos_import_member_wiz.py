@@ -85,6 +85,11 @@ class CamposImportMemberWiz(models.TransientModel):
                                      'day_id': day.id,
                                      'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
+                
+                    rs = self.env['campos.event.participant'].search([('id', '=', mbr.participant_id.id)]) #JDa Need to trig Transportaion usNeed update
+                    if len(rs)> 0:
+                        rs[0].write({'recalctoneed':True, 'recalcfromneed':True})   
+                                            
                 _logger.info('Saved %s', mbr.name)
                 
 #         action = {
@@ -145,7 +150,7 @@ class CamposImportMemberProfile(models.Model):
             Partner = msodoo.env['res.partner']
             partner = Partner.browse(registration.partner_id.remote_int_id)
             remote_profiles_ids = msodoo.env['member.profile'].search([('organization_id', '=', partner.organization_id.id), ('state', 'in', ['active', 'relative'])])
-            for rp in msodoo.execute('member.profile', 'read', remote_profiles_ids, ['id','firstname','lastname','birthdate','state', 'partner_id', 'street','street2','zip','city','country_id', 'is_active_leader']):
+            for rp in msodoo.execute('member.profile', 'read', remote_profiles_ids, ['id','firstname','lastname','birthdate','state', 'partner_id', 'street','street2','zip','city','country_id', 'is_active_leader','mobile', 'email']):
                 cimp = self.search([('remote_partner_int_id', '=', rp['partner_id'][0]),('registration_id', '=', registration.id)])
                 if cimp:
                     cimp.write({'name': ' '.join(filter(None, [rp['firstname'], rp['lastname']])),
@@ -160,7 +165,9 @@ class CamposImportMemberProfile(models.Model):
                                 'zip': rp['zip'],
                                 'city': rp['city'],
                                 'country': rp['country_id'][1] if rp['country_id'] else 'Danmark',
-                                'is_leader': rp['is_active_leader']
+                                'is_leader': rp['is_active_leader'],
+                                'mobile': rp['mobile'],
+                                'email': rp['email'],
                                 })
                 else:
                     self.create({'name': ' '.join(filter(None, [rp['firstname'], rp['lastname']])),
@@ -175,7 +182,9 @@ class CamposImportMemberProfile(models.Model):
                                  'zip': rp['zip'],
                                  'city': rp['city'],
                                  'country': rp['country_id'][1] if rp['country_id'] else 'Danmark',
-                                 'is_leader': rp['is_active_leader']
+                                 'is_leader': rp['is_active_leader'],
+                                 'mobile': rp['mobile'],
+                                 'email': rp['email'],
                                  #'wiz_id': wizard.id,
                                  })
                 _logger.info('Importing: %s %s', rp['firstname'], rp['lastname'])
@@ -211,6 +220,8 @@ class CamposImportMemberProfile(models.Model):
                                 'city': partner.city if partner else False,
                                 'country': partner.country_id.name if partner and partner.country_id else False,
                                 'is_leader': partner.member_id.is_active_leader if partner else False,
+                                'mobile': partner.mobile if partner else False,
+                                'email': partner.email if partner else False,
                                 })
                 else:
                     self.create({'name': rp['name'],
@@ -226,7 +237,9 @@ class CamposImportMemberProfile(models.Model):
                                  'zip': partner.zip if partner else False,
                                  'city': partner.city if partner else False,
                                  'country': partner.country_id.name if partner and partner.country_id else False,
-                                 'is_leader': partner.member_id.is_active_leader,
+                                 'is_leader': partner.member_id.is_active_leader if partner and partner.member_id else False,
+                                 'mobile': partner.mobile if partner else False,
+                                 'email': partner.email if partner else False,
                                  })
                 _logger.info('Importing: %s', rp['name'])
 

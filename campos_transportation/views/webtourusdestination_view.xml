@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourusdestination" model="ir.ui.view">
+<field name="name">Webtour Us Destination</field>
+<field name="model">campos.webtourusdestination</field>
+<field name="arch" type="xml">
+<tree>
+<field name="destinationidno" string="Destination ID"/>
+<field name="name" string="Name"/>
+<field name="placename" string="Place"/>
+<field name="latitude" string="latitude"/>
+<field name="longitude" string="longitude"/>
+<field name="zip_city" string="Zip City"/>
+<field name="address" string="address"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourusdestination" model="ir.ui.view">
+<field name="name">Webtour Us Destination</field>
+<field name="model">campos.webtourusdestination</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="destination_top">
+<field name="destinationidno" readonly="0" string="Destination ID"/>
+<field name="name" string="Name"/>
+<field name="webtourname" readonly="0" string="Webtour name"/>
+<field name="placename" string="Place"/>
+<field name="address" readonly="0" string="address"/>
+<field name="latitude" readonly="0" string="latitude"/>
+<field name="longitude" readonly="0" string="longitude"/>
+<field name="note" readonly="0" string="Note"/>
+<field name="zip_city" string="Zip City"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<record id="view_search_webtourusdestination" model="ir.ui.view">
+	<field name="name">Webtour usdestination Search</field>
+	<field name="model">campos.webtourusdestination</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="zip_city"/>
+			<field name="address"/>
+			<field name="note"/>
+		</search>
+	</field>
+</record>
+
+<!-- Action to open Webtour Us Destination list -->
+<act_window id="action_webtourusdestination"
+name="Camp OS Webtour Us Destination"
+res_model="campos.webtourusdestination"
+view_mode="tree,form" />
+
+<!-- Menu item to open Campos Webtour Destination list  -->
+<menuitem id="menu_action_campos_transportation_destinations" parent="menu_campos_transportation" name="Webtour Destinations" action="action_webtourusdestination" groups="campos_event.group_campos_admin" sequence="40"/>
+
+</data>
+</openerp>

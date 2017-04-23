@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourreqlog" model="ir.ui.view">
+<field name="name">Webtour Request Log</field>
+<field name="model">campos.webtour_req_logger</field>
+<field name="arch" type="xml">
+<tree default_order='id desc'>
+<field name="id"/>
+<field name="name"/>
+<field name="write_date"/>
+</tree>
+</field>
+</record>
+
+<record id="view_form_webtourreqlog" model="ir.ui.view">
+	<field name="name">Webtour Request Log</field>
+	<field name="model">campos.webtour_req_logger</field>
+<field name="arch" type="xml">
+<form>
+<header>
+</header>
+<sheet>
+<group string="CampOS Webtour Requests">
+<field name="id"/>
+<field name="name"/>
+<field name="write_date"/>
+<field name="responce"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+
+
+<!-- Action to open Webtour Config list -->
+<act_window id="action_webtourreqlog"
+name="Camp OS Webtour Request Log"
+res_model="campos.webtour_req_logger"
+view_mode="tree,form" />
+
+
+<!-- Transportation sub menu -->
+<menuitem id="menu_campos_transportation" parent="campos_event.menu_campos" name="Transportation" groups="campos_event.group_campos_admin" sequence="30"/>
+
+
+<!-- Menu item to open Campos Webtour Destination list  -->
+<menuitem id="menu_action_campos_webtour_reqlog" parent="menu_campos_transportation" name="Webtour Request log" action="action_webtourreqlog" groups="campos_event.group_campos_admin" sequence="90"/>
+
+</data>
+</openerp>

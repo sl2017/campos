@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+		<record id="group_campos_network_group" model="res.groups">
+			<field name="name">Network Group</field>
+			<field name="implied_ids" eval="[(4, ref('campos_event.group_campos_user'))]"/>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+		
+	</data>
+</openerp>

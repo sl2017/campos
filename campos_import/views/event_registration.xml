@@ -19,7 +19,10 @@
             </button>
             <page name="pre_reg" position="before">
             	<page string="Material Order">
-            		<button name="action_sale_order" string="Material orders" type="object"/>
+            	<button name="action_sale_order" string="Material orders" type="object"/>
+            	<!-- 
+            		<button name="action_sale_order_lines" string="Material orders" type="object"/>
+            	 -->
             	</page>
             </page>
         </field>
@@ -54,6 +57,31 @@
             action="action_group_final_registration"/>
     
 
+	<record id="action_group_final_registration_admin" model="ir.actions.act_window">
+			<field name="name">My Group</field>
+			
+			<field name="res_model">event.registration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('scoutgroup','=',True)]</field>
+		</record>
+		
+	<record id="action_final_tree_admin" model="ir.actions.act_window.view">
+    	<field name="view_mode">tree</field>
+    	<field name="view_id" ref="campos_preregistration.view_tree_event_registration" />
+    	<field name="act_window_id" ref="action_group_final_registration_admin" />
+	</record>
+
+	<record id="action_final_form_admin" model="ir.actions.act_window.view">
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="campos_final_registration.view_form_finalregistration_admin" />
+	    <field name="act_window_id" ref="action_group_final_registration_admin" />
+	</record>
+	
+		<menuitem name="Scout Groups"
+            id="menu_action_group_reg_admin" parent="campos_final_registration.menu_event_finalregistration" sequence="5"
+            action="action_group_final_registration_admin"/>
+	
 
 
 

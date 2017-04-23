@@ -1,0 +1,1534 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_transportation
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-23 16:27+0000\n"
+"PO-Revision-Date: 2017-04-23 16:27+0000\n"
+"Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "00:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "01:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "02:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "03:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "04:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "05:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "06:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "07:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "08:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "09:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "10:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "11:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "12:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "13:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "14:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "15:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "16:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "17:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "18:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "19:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "20:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "21:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "22:00"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "23:00"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,action:0
+msgid "Action"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,actiondatetime:0
+msgid "ActionDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourregistrationoverview:campos_transportation.view_form_webtourregistrationoverview
+msgid "Add/Edit Participants"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusdestination,address:0
+#: field:event.registration.entryexitpoint,address:0
+msgid "Address"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+#: view:campos.webtourconfig:campos_transportation.view_tree_webtourconfig
+msgid "Camp Destination"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourconfig
+msgid "Camp OS Webtour Config"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourparticipantoverview
+msgid "Camp OS Webtour Participant"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourregistrationoverview
+msgid "Camp OS Webtour Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourreqlog
+msgid "Camp OS Webtour Request Log"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_WebtourOverview
+msgid "Camp OS Webtour Trip Overview"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_WebtourTripType
+msgid "Camp OS Webtour Trip Type"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_WebtourTripTypeDate
+msgid "Camp OS Webtour Trip Type Date"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourusdestination
+msgid "Camp OS Webtour Us Destination"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourusneed
+msgid "Camp OS Webtour Us Need"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Camp Transportation"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+#: field:campos.event.participant.day,webtourcamptransportation:0
+msgid "Camp transportation"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,pax:0
+msgid "CampOS PAX"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "CampOS Webtour Configuration"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour_req_logger:campos_transportation.view_form_webtourreqlog
+msgid "CampOS Webtour Requests"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_deleted:0
+msgid "CampOs Deleted"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_demandneeded:0
+msgid "CampOs Demand Needed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,campos_enddestinationidno:0
+msgid "CampOs End Destination IdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_enddestinationidno:0
+msgid "CampOs EndDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_writeseq:0
+msgid "CampOs Last Write Seq."
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transferedseq:0
+msgid "CampOs Last transfered Seq."
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,campos_startdestinationidno:0
+msgid "CampOs Start Destination IdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_traveldate:0
+#: field:campos.webtourusneed.overview,campos_transfered_startdatetime:0
+msgid "CampOs StartDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_startdestinationidno:0
+msgid "CampOs StartDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,status:0
+msgid "Change Pending"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "Check usGroups"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "Check usNeeds"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "Check usUsers"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Connection"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,travelneed_travelconnectiondetails:0
+#: field:event.registration.travelneed,travelconnectiondetails:0
+msgid "Connection Details"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,create_uid:0
+#: field:campos.webtourconfig,create_uid:0
+#: field:campos.webtourconfig.triptype,create_uid:0
+#: field:campos.webtourconfig.triptype.date,create_uid:0
+#: field:campos.webtourusdestination,create_uid:0
+#: field:campos.webtourusneed,create_uid:0
+#: field:campos.webtourusneed.changes,create_uid:0
+#: field:event.registration.travelneed,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,create_date:0
+#: field:campos.webtourconfig,create_date:0
+#: field:campos.webtourconfig.triptype,create_date:0
+#: field:campos.webtourconfig.triptype.date,create_date:0
+#: field:campos.webtourusdestination,create_date:0
+#: field:campos.webtourusneed,create_date:0
+#: field:campos.webtourusneed.changes,create_date:0
+#: field:event.registration.travelneed,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_CurrentDateTime:0
+#: field:campos.webtourusneed.changes,currentdatetime:0
+msgid "CurrentDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Danish Group"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype.date:campos_transportation.view_form_WebtourTripType_Date
+#: view:campos.webtourconfig.triptype.date:campos_transportation.view_tree_WebtourTripType_Date
+#: field:campos.webtourconfig.triptype.date,name:0
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Date"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Deadline"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Default From Camp Drop off loaction"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourdefaulthomedestination_name:0
+msgid "Default Pickup Place"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Default To Camp Pick up location"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Default home destination"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+#: field:campos.webtourusdestination,destinationidno:0
+msgid "Destination ID"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,display_name:0
+#: field:campos.webtourconfig,display_name:0
+#: field:campos.webtourconfig.triptype,display_name:0
+#: field:campos.webtourconfig.triptype.date,display_name:0
+#: field:campos.webtourparticipantoverview,display_name:0
+#: field:campos.webtourregistrationoverview,display_name:0
+#: field:campos.webtourusdestination,display_name:0
+#: field:campos.webtourusdestination.view,display_name:0
+#: field:campos.webtourusneed,display_name:0
+#: field:campos.webtourusneed.changes,display_name:0
+#: field:campos.webtourusneed.overview,display_name:0
+#: field:event.registration.travelneed,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,donotparticipate:0
+msgid "Do not participate"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourregistrationoverview:campos_transportation.view_form_webtourregistrationoverview
+msgid "Edit Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,enddatetime:0
+msgid "EndDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,enddestinationidno:0
+msgid "EndDestinationIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,endnote:0
+msgid "EndNote"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+#: model:ir.model,name:campos_transportation.model_event_event
+msgid "Event"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,excessdemand:0
+msgid "Excess demand in WEBTour"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+msgid "Find Closest Pickup/dropoff Locations"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+#: field:event.registration.travelneed,startdestinationidno:0
+msgid "From"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,fromcampdate:0
+#: field:campos.webtourparticipantoverview,fromcampdate:0
+msgid "From Camp Date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,fromcampusneed_id:0
+#: field:campos.webtourparticipantoverview,fromcampusneed_id:0
+msgid "From Camp Need ID"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "From Camp Travel Group"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,fromcamp_TripType_id:0
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+#: view:campos.webtourconfig:campos_transportation.view_tree_webtourconfig
+#: field:campos.webtourconfig,fromcamp_campos_TripType_id:0
+#: field:campos.webtourparticipantoverview,fromcamp_TripType_id:0
+msgid "From Camp TripType"
+msgstr ""
+
+#. module: campos_transportation
+#: code:addons/campos_transportation/models/webtourparticipant.py:561
+#, python-format
+msgid "From Camp to: "
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,fromcamptodestination_id:0
+msgid "From camp Drop off"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+msgid "From camp drop off location"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+msgid "From camp travel date"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "Get Create Webtour usNeed"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "Get Create usGroup and usUser"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Group"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.event.participant,fromcamptravelgroup:0
+#: selection:campos.event.participant,tocamptravelgroup:0
+msgid "Group 1"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.event.participant,fromcamptravelgroup:0
+#: selection:campos.event.participant,tocamptravelgroup:0
+msgid "Group 2"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.event.participant,fromcamptravelgroup:0
+#: selection:campos.event.participant,tocamptravelgroup:0
+msgid "Group 3"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.event.participant,fromcamptravelgroup:0
+#: selection:campos.event.participant,tocamptravelgroup:0
+msgid "Group 4"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.event.participant,fromcamptravelgroup:0
+#: selection:campos.event.participant,tocamptravelgroup:0
+msgid "Group 5"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourregistrationoverview,webtourgroupfromcampdestination_id:0
+msgid "Group from camp destination"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Group from camp drop off location"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourregistrationoverview,webtourgrouptocampdestination_id:0
+msgid "Group to camp destination"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Group to camp pick up location"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,groupidno:0
+msgid "GroupIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,id:0 field:campos.webtourconfig,id:0
+#: field:campos.webtourconfig.triptype,id:0
+#: field:campos.webtourconfig.triptype.date,id:0
+#: field:campos.webtourparticipantoverview,id:0
+#: field:campos.webtourregistrationoverview,id:0
+#: field:campos.webtourusdestination,id:0
+#: field:campos.webtourusdestination.view,id:0 field:campos.webtourusneed,id:0
+#: field:campos.webtourusneed.changes,id:0
+#: field:campos.webtourusneed.overview,id:0
+#: field:event.registration.travelneed,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,status:0
+msgid "In Planning"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,individualfromcamptodestination_id:0
+msgid "Individual From camp Drop off"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "Individual From camp drop off location"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,individualtocampfromdestination_id:0
+msgid "Individual To camp Pick up"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "Individual from camp date"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "Individual to camp date"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "Individual to camp pick up location"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,status:0
+msgid "Initiated"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,__last_update:0
+#: field:campos.webtourconfig,__last_update:0
+#: field:campos.webtourconfig.triptype,__last_update:0
+#: field:campos.webtourconfig.triptype.date,__last_update:0
+#: field:campos.webtourparticipantoverview,__last_update:0
+#: field:campos.webtourregistrationoverview,__last_update:0
+#: field:campos.webtourusdestination,__last_update:0
+#: field:campos.webtourusdestination.view,__last_update:0
+#: field:campos.webtourusneed,__last_update:0
+#: field:campos.webtourusneed.changes,__last_update:0
+#: field:campos.webtourusneed.overview,__last_update:0
+#: field:event.registration.travelneed,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,write_uid:0
+#: field:campos.webtourconfig,write_uid:0
+#: field:campos.webtourconfig.triptype,write_uid:0
+#: field:campos.webtourconfig.triptype.date,write_uid:0
+#: field:campos.webtourusdestination,write_uid:0
+#: field:campos.webtourusneed,write_uid:0
+#: field:campos.webtourusneed.changes,write_uid:0
+#: field:event.registration.travelneed,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,write_date:0
+#: field:campos.webtourconfig,write_date:0
+#: field:campos.webtourconfig.triptype,write_date:0
+#: field:campos.webtourconfig.triptype.date,write_date:0
+#: field:campos.webtourusdestination,write_date:0
+#: field:campos.webtourusneed,write_date:0
+#: field:campos.webtourusneed.changes,write_date:0
+#: field:event.registration.travelneed,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusdestination,latitude:0
+#: field:event.registration.entryexitpoint,latitude:0
+msgid "Latitude"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusdestination,longitude:0
+#: field:event.registration.entryexitpoint,longitude:0
+msgid "Longitude"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype:campos_transportation.view_form_WebtourTripType
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+#: field:campos.webtourusdestination,name:0
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+#: field:event.registration,webtourgroup_entrypointname:0
+#: field:event.registration,webtourgroup_exitpointname:0
+#: field:event.registration.travelneed,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,notdeleted:0
+msgid "Needs Not Deleted in WEBTour"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,nottransfered:0
+msgid "Needs Not transfered to WEBTour"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,enddatetimediffer:0
+msgid "Needs where end datetime differ"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,enddestdiffer:0
+msgid "Needs where end destination differ"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,endnotediffer:0
+msgid "Needs where end note differ"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,startdestdiffer:0
+msgid "Needs where start destination differ"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,startnotediffer:0
+msgid "Needs where start note differ"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,startdatetimediffer:0
+msgid "Needs where startdatetime differ"
+msgstr ""
+
+#. module: campos_transportation
+#: code:addons/campos_transportation/models/webtourparticipant.py:563
+#, python-format
+msgid "No Camp Transportation From camp avaible this day!!!"
+msgstr ""
+
+#. module: campos_transportation
+#: code:addons/campos_transportation/models/webtourparticipant.py:550
+#, python-format
+msgid "No Camp Transportation To camp avaible this day!!!"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: field:campos.webtourusdestination,note:0
+msgid "Note"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,org_country_code2:0
+msgid "Org Country Code2"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration.travelneed,overview:0
+msgid "Overview"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+#: field:event.registration.travelneed,pax:0
+msgid "PAX"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "Participant"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_campos_event_participant_day
+msgid "Participant Camp Days"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,participant_id:0
+#: field:campos.webtourusneed,participant_id:0
+msgid "Participant ID"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,partner_id:0
+msgid "Participant Partner ID"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "Participate"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "Participate Participant"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+#: field:campos.webtourusdestination,placename:0
+#: field:campos.webtourusdestination.view,name:0
+msgid "Place"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,status:0
+msgid "Planned"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,campos_transfered_deadline:0
+#: selection:event.registration.travelneed,deadline:0
+msgid "Please Select"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,group_entrypoint:0
+#: field:campos.webtourregistrationoverview,group_entrypoint:0
+msgid "Point of entry into Denmark"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,group_exitpoint:0
+#: field:campos.webtourregistrationoverview,group_exitpoint:0
+msgid "Point of exit from Denmark"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration.travelneed,registration_id:0
+msgid "Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,registration_id:0
+#: field:campos.webtourregistrationoverview,registration_id:0
+#: field:campos.webtourusneed,registration_id:0
+#: field:campos.webtourusneed.overview,registration_id:0
+msgid "Registration ID"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,regpartner_id:0
+msgid "Registration Partner ID"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,status:0
+msgid "Rejected"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,name:0
+msgid "Request"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour_req_logger,responce:0
+msgid "Responce"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype:campos_transportation.view_form_WebtourTripType
+#: field:campos.webtourconfig.triptype,returnjourney:0
+msgid "Return Journey"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration.entryexitpoint,defaultdestination_id:0
+msgid "Selected Destination"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourgroupfromcampdestination_id:0
+msgid "Selected Drop off from Camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourgrouptocampdestination_id:0
+msgid "Selected Pick up to Camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,specialfromcampdate_id:0
+msgid "Special From Camp Date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,specialtocampdate_id:0
+msgid "Special To Camp Date"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_event_registration_travelneed
+msgid "Special Travel need on a registration"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourtravelneed_ids:0
+msgid "Special travel needs"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourtravelneed2_ids:0
+msgid "Special travel needs 2"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,startdatetime:0
+msgid "StartDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,startdestinationidno:0
+msgid "StartDestinationIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,startnote:0
+msgid "StartNote"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,status:0
+msgid "Status"
+msgstr ""
+
+#. module: campos_transportation
+#: help:event.registration,org_country_code2:0
+msgid ""
+"The ISO country code in two chars.\n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_deadline:0
+#: field:campos.webtourusneed,travelneed_deadline:0
+#: field:event.registration.travelneed,deadline:0
+msgid "Time"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration.travelneed,enddestinationidno:0
+msgid "To"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,tocampdate:0
+#: field:campos.webtourparticipantoverview,tocampdate:0
+msgid "To Camp Date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,tocampusneed_id:0
+#: field:campos.webtourparticipantoverview,tocampusneed_id:0
+msgid "To Camp Need ID"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
+msgid "To Camp Travel Group"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,tocamp_TripType_id:0
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+#: view:campos.webtourconfig:campos_transportation.view_tree_webtourconfig
+#: field:campos.webtourconfig,tocamp_campos_TripType_id:0
+#: field:campos.webtourparticipantoverview,tocamp_TripType_id:0
+msgid "To Camp TripType"
+msgstr ""
+
+#. module: campos_transportation
+#: code:addons/campos_transportation/models/webtourparticipant.py:548
+#, python-format
+msgid "To Camp from: "
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,tocampfromdestination_id:0
+msgid "To camp Pick up"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+msgid "To camp pick up location"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
+#: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
+msgid "To camp travel date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,touridno:0
+msgid "TourIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_demandneeded:0
+msgid "Transfered Demand Needed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_enddatetime:0
+msgid "Transfered EndDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_enddestinationidno:0
+msgid "Transfered EndDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_endnote:0
+msgid "Transfered EndNote"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_startdatetime:0
+msgid "Transfered StartDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_startdestinationidno:0
+msgid "Transfered StartDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_startnote:0
+msgid "Transfered StartNote"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_traveldate:0
+msgid "Transfered Travel Date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered_travelconnectiondetails:0
+msgid "Transfered connection details"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_campos_transportation
+msgid "Transportation"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Travel"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration.travelneed,traveldate:0
+msgid "Travel Date"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype:campos_transportation.view_form_WebtourTripType
+msgid "Travel Dates"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourconfig.triptype,traveldate_ids:0
+msgid "Travel Days"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,travelgroup:0
+#: field:campos.webtourusneed.overview,travelgroup:0
+#: field:event.registration.travelneed,travelgroup:0
+msgid "Travel Group"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,fromcamptravelgroup:0
+msgid "Travel Group from Camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,tocamptravelgroup:0
+msgid "Travel Group to Camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,travelneed_id:0
+msgid "Travel need"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Travel needs"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusneed:campos_transportation.view_form_webtourusneed
+msgid "Travel needs Changes"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Travel needs2"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype:campos_transportation.view_tree_WebtourTripType
+#: view:campos.webtourconfig.triptype.date:campos_transportation.view_form_WebtourTripType_Date
+#: view:campos.webtourconfig.triptype.date:campos_transportation.view_tree_WebtourTripType_Date
+msgid "Trip Type"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Update Default Home Destination"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.registration:campos_transportation.view_form_finalregistration_webtour
+msgid "Update Travel Needs"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusneed:campos_transportation.view_form_webtourusneed
+msgid "Update Webtour"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,useridno:0
+msgid "UserIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusdestination,webtourname:0
+msgid "WebTour Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.event,webtourconfig_id:0
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_webtour_config
+msgid "Webtour Configuration"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_deleted:0
+msgid "Webtour Deleted"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_destinations
+msgid "Webtour Destinations"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_enddatetime:0
+msgid "Webtour EndDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_enddestinationidno:0
+msgid "Webtour EndDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_endnote:0
+msgid "Webtour EndNote"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_groupidno:0
+msgid "Webtour Groupidno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_needidno:0
+msgid "Webtour Need ID"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_participant
+msgid "Webtour Participants"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,webtourdefaulthomedistance:0
+#: field:campos.webtourregistrationoverview,webtourdefaulthomedistance:0
+#: field:event.registration,webtourdefaulthomedistance:0
+msgid "Webtour Pickup Map Distance"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,webtourdefaulthomeduration:0
+#: field:campos.webtourregistrationoverview,webtourdefaulthomeduration:0
+#: field:event.registration,webtourdefaulthomeduration:0
+msgid "Webtour Pickup Map Duration"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_registration
+msgid "Webtour Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_webtour_reqlog
+msgid "Webtour Request log"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_startdatetime:0
+msgid "Webtour StartDateTime"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_startdestinationidno:0
+msgid "Webtour StartDestinationIdNo"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_startnote:0
+msgid "Webtour StartNote"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_touridno:0
+msgid "Webtour TourIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: view:event.event:campos_transportation.view_event_form
+msgid "Webtour Transportation"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype:campos_transportation.view_form_WebtourTripType
+#: field:campos.webtourconfig.triptype,name:0
+#: field:campos.webtourusneed.overview,campos_TripType_id:0
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_WebtourTripType
+msgid "Webtour Trip Type"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig.triptype.date:campos_transportation.view_form_WebtourTripType_Date
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_WebtourTripTypeDate
+msgid "Webtour Trip Type Date"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_WebtourOverview
+msgid "Webtour Trip Type Overview"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_campos_webtourconfig_triptype
+msgid "Webtour Trip Types"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_campos_webtourconfig_triptype_date
+msgid "Webtour Trip Types Date"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,webtour_useridno:0
+msgid "Webtour User ID"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+msgid "Webtour name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.overview,webtour_groupidno:0
+#: field:event.registration,webtourusgroupidno:0
+msgid "Webtour us Group ID no"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_usneed
+msgid "Webtour usNeed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourconfig.triptype.date,campos_TripType_id:0
+#: field:campos.webtourusneed,campos_TripType_id:0
+#: field:event.registration.travelneed,campos_TripType_id:0
+msgid "Webtour_TripType"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,WebtourUsNeedChanges_ids:0
+msgid "Webtourusneedchanges ids"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+#: field:campos.webtourusdestination,zip_city:0
+msgid "Zip City"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
+msgid "action_webtour_check_usgroup_ususer"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+msgid "address"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed,campos_transfered:0
+msgid "campos transfered"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,countrycode:0
+#: field:campos.webtourregistrationoverview,countrycode:0
+msgid "country code"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,webtourdefaulthomedestination:0
+#: field:campos.webtourregistrationoverview,webtourdefaulthomedestination:0
+msgid "default home destination"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,donotparticipate:0
+msgid "do not participate"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,fromneeded:0
+msgid "from camp needed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,fromcamptravelgroup:0
+msgid "from camp travelgroup"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,groupisdanish:0
+#: field:event.registration,groupisdanish:0
+msgid "groupisdanish"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourconfig,campdestinationid:0
+#: field:campos.webtourconfig,event_id:0
+#: field:campos.webtourusneed.changes,WebtourUsNeed_id:0
+#: field:event.registration,webtourdefaulthomedestination:0
+msgid "id"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+msgid "latitude"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
+#: view:campos.webtourusdestination:campos_transportation.view_tree_webtourusdestination
+msgid "longitude"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourregistrationoverview,name:0
+msgid "name"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "not deregistered"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "not deregistered not scoutgroup"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
+msgid "not scoutgroup"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,state:0
+msgid "participant state"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourregistrationoverview,partnerid:0
+msgid "partnerid"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,recalcfromneed:0
+msgid "recalcfromneed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,recalctoneed:0
+msgid "recalctoneed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,regstate:0
+#: field:campos.webtourregistrationoverview,regstate:0
+msgid "registration state"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,scoutorgcountrycode:0
+#: field:campos.webtourregistrationoverview,scoutorgcountrycode:0
+msgid "scout org country code"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,scoutgroup:0
+#: view:campos.webtourregistrationoverview:campos_transportation.view_search_webtourregistrationoverview
+#: field:campos.webtourregistrationoverview,scoutgroup:0
+msgid "scoutgroup"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,toneeded:0
+msgid "to camp needed"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,tocamptravelgroup:0
+msgid "to camp travelgroup"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,transport_from_camp:0
+msgid "transport from camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,transport_to_camp:0
+msgid "transport to camp"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourhasgeoadd:0
+msgid "webtour Has Geo Adress"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourPreregTotalSeats:0
+msgid "webtour Prereg Total Seats"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,fromwebtour_deleted:0
+msgid "webtour from camp deleted"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,towebtour_deleted:0
+msgid "webtour to camp deleted"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,webtourusgroupidno:0
+#: field:campos.webtourparticipantoverview,webtourusgroupidno:0
+#: field:campos.webtourregistrationoverview,webtourusgroupidno:0
+msgid "webtour us Group ID no"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.event.participant,webtourususeridno:0
+#: field:campos.webtourparticipantoverview,webtourususeridno:0
+msgid "webtour us User ID no"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.changes,idno:0
+msgid "webtour_needidno"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,workas_planner:0
+msgid "work as planner"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourparticipantoverview,workas_jobber:0
+msgid "workas jobber"
+msgstr ""

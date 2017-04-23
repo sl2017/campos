@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourusneed" model="ir.ui.view">
+<field name="name">Webtour Us Need</field>
+<field name="model">campos.webtourusneed</field>
+<field name="arch" type="xml">
+<tree>
+<field name="id"/>
+<field name="status"/>
+<field name="registration_id"/>
+<field name="participant_id"/>
+<field name="campos_TripType_id"/>
+<field name="travelgroup"/>
+<field name="campos_traveldate"/>
+<field name="campos_startdestinationidno"/>
+<field name="campos_enddestinationidno"/>
+<field name="campos_writeseq"/>
+<field name="campos_transferedseq"/>
+<field name="campos_transfered"/>
+<field name="campos_demandneeded"/>
+<field name="webtour_needidno"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourusneed" model="ir.ui.view">
+<field name="name">Webtour Us Need</field>
+<field name="model">campos.webtourusneed</field>
+<field name="arch" type="xml">
+<form>
+<header>
+  
+<button name="get_create_webtour_need" type="object" string="Update Webtour" class="oe_highlight" />
+<!--
+<button name="updatewebtourtofromusneeds" type="object" string="Update Webtour usNeed" class="oe_highlight" />
+<button name="updateusneedtriptypes" type="object" string="Set Trip Types on all usNeeds" class="oe_highlight" />
+-->
+</header>
+<sheet>
+<group name="user_top">
+<field name="participant_id" readonly="0"/>
+<field name="registration_id" readonly="0"/>
+<field name="campos_TripType_id"/>
+<field name="travelgroup"/>
+<field name="travelneed_id"/>
+
+<group name="group_left">
+<field name="campos_demandneeded"/>
+<field name="campos_traveldate" readonly="0"/>
+<field name="travelneed_deadline"/>
+<field name="travelneed_travelconnectiondetails"/>
+<field name="campos_writeseq"/>
+
+<field name="campos_startdestinationidno" readonly="0"/>
+<field name="campos_enddestinationidno" readonly="0"/>
+</group>
+<group name="group_right">
+<field name="campos_transfered_demandneeded"/>
+<field name="campos_transfered_traveldate" readonly="0"/>
+<field name="campos_transfered_deadline"/>
+<field name="campos_transfered_travelconnectiondetails"/>
+<field name="campos_transferedseq"/>
+<field name="webtour_deleted" readonly="0"/>
+<field name="webtour_needidno" readonly="1"/>
+<field name="webtour_useridno" readonly="1"/>
+<field name="webtour_groupidno" readonly="1"/>
+</group>
+<group name="group_left">
+<field name="campos_transfered_startdatetime"/>
+<field name="campos_transfered_startdestinationidno" readonly="0"/>
+<field name="campos_transfered_startnote"/>
+<field name="campos_transfered_enddatetime"/>
+<field name="campos_transfered_enddestinationidno" readonly="0"/>
+<field name="campos_transfered_endnote"/>
+</group>
+<group name="group_right">
+<field name="webtour_startdatetime" readonly="1"/>
+<field name="webtour_startdestinationidno" readonly="1"/>
+<field name="webtour_startnote" readonly="1"/>
+<field name="webtour_enddatetime" readonly="1"/>
+<field name="webtour_enddestinationidno" readonly="1"/>
+<field name="webtour_endnote" readonly="1"/>
+<field name="webtour_touridno" readonly="1"/>
+<field name="webtour_CurrentDateTime" readonly="1"/>
+</group>
+</group>
+<field  name="WebtourUsNeedChanges_ids" widget="one2many_list" nolabel="0" string="Travel needs Changes">
+	<tree editable="bottom">
+    <field name="action" readonly="1"/>
+    <field name="actiondatetime" readonly="1"/>
+    <field name="touridno" readonly="1"/>
+    <field name="startdatetime" readonly="1"/>
+    <field name="startdestinationidno" readonly="1"/>
+    <field name="startnote" readonly="1"/>
+    <field name="enddatetime" readonly="1"/>
+    <field name="enddestinationidno" readonly="1"/>
+    <field name="endnote" readonly="1"/>
+	</tree>
+</field>
+</sheet>
+</form>
+</field>
+</record>
+
+<record id="view_tree_WebtourTripOverview" model="ir.ui.view">
+	<field name="name">Webtour Trip Overview</field>
+	<field name="model">campos.webtourusneed.overview</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="id" />
+	    <field name="registration_id" />
+    	<field name="webtour_groupidno" />
+	    <field name="campos_TripType_id" /> 
+	    <field name="travelgroup" />	    
+	    <field name="campos_startdestinationidno" />
+    	<field name="campos_enddestinationidno" />
+    	<field name="pax" /> 
+    	<field name="excessdemand" />
+    	<field name="nottransfered" />
+    	<field name="notdeleted" />
+    	<field name="startdestdiffer" />
+    	<field name="enddestdiffer"/>
+    	<field name="startdatetimediffer" />
+    	<field name="enddatetimediffer" />
+    	<field name="startnotediffer" />    
+    	<field name="endnotediffer" />		
+		</tree>
+	</field>
+</record> 
+
+<!-- Action to open Webtour Us Need list -->
+<act_window id="action_webtourusneed"
+name="Camp OS Webtour Us Need"
+res_model="campos.webtourusneed"
+view_mode="tree,form" />
+
+<act_window id="action_WebtourOverview"
+name="Camp OS Webtour Trip Overview"
+res_model="campos.webtourusneed.overview"
+view_mode="tree,form" />
+
+<!-- Menu item to open Campos Webtour usNeed list  -->
+<menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="10"/>
+<menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="Webtour Trip Type Overview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
+
+</data>
+</openerp>

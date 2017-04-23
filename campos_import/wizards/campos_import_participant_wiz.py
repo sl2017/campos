@@ -56,7 +56,7 @@ class CamposImportParticipantWiz(models.TransientModel):
                                 'mobile': mbr.mobile if mbr.is_leader else False,
                                 'parent_id': wizard.registration_id.partner_id.id,
                                 'transport_to_camp': wizard.transport_to_camp,
-                                'transport_from_camp': wizard.transport_to_camp,
+                                'transport_from_camp': wizard.transport_from_camp,
                                 'participant': True,
                                 })
                     mbr.participant_id = part
@@ -75,12 +75,17 @@ class CamposImportParticipantWiz(models.TransientModel):
                                                                                                          'mobile': mbr.mobile if mbr.is_leader else False,
                                                                                                          'parent_id': wizard.registration_id.partner_id.id,
                                                                                                          'transport_to_camp': wizard.transport_to_camp,
-                                                                                                         'transport_from_camp': wizard.transport_to_camp,
+                                                                                                         'transport_from_camp': wizard.transport_from_camp,
                                                                                                          })
                     for day in ed_ids:
                         cepd.create({'participant_id': mbr.participant_id.id,
                                      'day_id': day.id,
                                      'will_participate': True if day.event_date >= wizard.participant_from_date and day.event_date <= wizard.participant_to_date else False,
                                      })
+                    
+                    rs = self.env['campos.event.participant'].search([('id', '=', mbr.participant_id.id)]) #JDa Need to trig Transportaion usNeed update
+                    if len(rs)> 0:
+                        rs[0].write({'recalctoneed':True, 'recalcfromneed':True})
+
                 
 

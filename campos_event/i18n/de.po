@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 13:50+0000\n"
-"PO-Revision-Date: 2017-02-24 13:50+0000\n"
+"POT-Creation-Date: 2017-03-29 16:14+0000\n"
+"PO-Revision-Date: 2017-03-29 16:14+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -403,7 +403,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:383
+#: code:addons/campos_event/models/participant.py:396
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -431,6 +431,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,approvers_ids:0
 msgid "Approvers"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.server,name:campos_event.action_participant_number_assign
+msgid "Assign Participant Number"
 msgstr ""
 
 #. module: campos_event
@@ -782,8 +787,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:330
-#: code:addons/campos_event/models/participant.py:357
+#: code:addons/campos_event/models/participant.py:343
+#: code:addons/campos_event/models/participant.py:370
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -886,6 +891,7 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,country_id:0
 #: field:campos.scout.org,country_id:0 field:event.registration,country_id:0
+#: model:ir.model,name:campos_event.model_res_country
 #: view:website:campos_event.dk_groups_register_form
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
@@ -1082,6 +1088,11 @@ msgid "Draft"
 msgstr ""
 
 #. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Duplicate"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,ean13:0
 msgid "EAN13"
 msgstr ""
@@ -1174,6 +1185,12 @@ msgstr ""
 #. module: campos_event
 #: view:event.event:campos_event.view_event_form
 msgid "Export"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,customer_type:0
+#: field:res.partner,customer_type:0 field:res.users,customer_type:0
+msgid "Export Type"
 msgstr ""
 
 #. module: campos_event
@@ -1305,6 +1322,12 @@ msgstr ""
 #. module: campos_event
 #: field:product.template,group_del_ok:0
 msgid "Group delivery"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,primary_reg_id:0
+#: field:res.partner,primary_reg_id:0 field:res.users,primary_reg_id:0
+msgid "Group registration"
 msgstr ""
 
 #. module: campos_event
@@ -2032,7 +2055,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:525
+#: code:addons/campos_event/models/participant.py:538
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2041,6 +2064,11 @@ msgstr ""
 #: field:res.partner,participant:0 field:res.users,participant:0
 #, python-format
 msgid "Participant"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,participant_number:0
+msgid "Participant Number"
 msgstr ""
 
 #. module: campos_event
@@ -2298,7 +2326,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:405
+#: code:addons/campos_event/models/participant.py:418
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2504,7 +2532,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:302
+#: code:addons/campos_event/models/participant.py:315
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -3048,6 +3076,16 @@ msgid "Velkommen til SL2017"
 msgstr ""
 
 #. module: campos_event
+#: view:res.country:campos_event.res_country_search_view
+msgid "Visa Req."
+msgstr ""
+
+#. module: campos_event
+#: field:res.country,visa_req:0
+msgid "Visa required"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee,website_published:0
 msgid "Visible in Website"
 msgstr ""
@@ -3096,6 +3134,11 @@ msgstr ""
 #: field:event.track,wanted_people:0
 #: view:website:campos_event.event_meeting_proposal
 msgid "Wanted people"
+msgstr ""
+
+#. module: campos_event
+#: model:res.groups,name:campos_event.group_campos_api_ro
+msgid "Web service ReadOnly"
 msgstr ""
 
 #. module: campos_event

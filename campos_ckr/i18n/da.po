@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 13:50+0000\n"
-"PO-Revision-Date: 2017-02-24 13:50+0000\n"
+"POT-Creation-Date: 2017-03-29 16:14+0000\n"
+"PO-Revision-Date: 2017-03-29 16:14+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr "Vi har brug for yderligere oplysninger til børneattest"
 #. module: campos_ckr
 #: field:campos.ckr.check,appr_date:0
 msgid "Approval date"
-msgstr "Godkendelsesdato"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -97,18 +97,18 @@ msgstr "Godkendt"
 #. module: campos_ckr
 #: field:campos.ckr.check,appr_user_id:0
 msgid "Approved by"
-msgstr "Godkendt af"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,birthdate_short:0
 #: field:campos.ckr.fetch.wiz,birthdate_short:0
 msgid "Birthdate short"
-msgstr "Kort fødselsdato"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.event.participant,ckr_ids:0
 msgid "CKR"
-msgstr "CKR"
+msgstr ""
 
 #. module: campos_ckr
 #: model:res.groups,name:campos_ckr.group_campos_ckr_admin
@@ -150,7 +150,7 @@ msgstr "Anmodning om børneattest"
 #. module: campos_ckr
 #: field:campos.ckr.check,cpr:0 field:campos.ckr.fetch.wiz,cpr:0
 msgid "CPR"
-msgstr "Cpr"
+msgstr ""
 
 #. module: campos_ckr
 #: model:email.template,subject:campos_ckr.template_ckr_request_mail
@@ -185,7 +185,7 @@ msgstr "Annuller"
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Cancelled"
-msgstr "Annulleret"
+msgstr ""
 
 #. module: campos_ckr
 #: model:ir.actions.act_window,name:campos_ckr.campos_ckr_check_act_window
@@ -196,12 +196,12 @@ msgstr "Børneattest Check"
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,ckr_id:0
 msgid "Ckr id"
-msgstr "Børneattest ID"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.sentin.wiz,ckr_ids:0
 msgid "Ckr ids"
-msgstr "Børneattest ID"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
@@ -212,36 +212,36 @@ msgstr "Luk"
 #: field:campos.ckr.check,create_uid:0 field:campos.ckr.fetch.wiz,create_uid:0
 #: field:campos.ckr.sentin.wiz,create_uid:0
 msgid "Created by"
-msgstr "Oprettet af"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,create_date:0
 #: field:campos.ckr.fetch.wiz,create_date:0
 #: field:campos.ckr.sentin.wiz,create_date:0
 msgid "Created on"
-msgstr "Oprette den"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,birthdate:0
 msgid "Date of birth"
-msgstr "Fødselsdato"
+msgstr ""
 
 #. module: campos_ckr
 #: help:campos.ckr.check,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr "Dato for sidste meddelelse"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,display_name:0
 #: field:campos.ckr.fetch.wiz,display_name:0
 #: field:campos.ckr.sentin.wiz,display_name:0
 msgid "Display Name"
-msgstr "Navn"
+msgstr ""
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Draft"
-msgstr "Kladde"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,edit_appr_date:0
@@ -266,7 +266,7 @@ msgstr "Udløbet sendt til funktionschef"
 #. module: campos_ckr
 #: field:campos.ckr.check,message_follower_ids:0
 msgid "Followers"
-msgstr "Følgere"
+msgstr ""
 
 #. module: campos_ckr
 #: help:campos.ckr.check,message_summary:0
@@ -294,35 +294,35 @@ msgstr "Under behandling hos politiet"
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Info Needed"
-msgstr "Mangler informationer"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_is_follower:0
 msgid "Is a Follower"
-msgstr "Er en følger"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_last_post:0
 msgid "Last Message Date"
-msgstr "Dato for sidste meddelelse"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,__last_update:0
 #: field:campos.ckr.fetch.wiz,__last_update:0
 #: field:campos.ckr.sentin.wiz,__last_update:0
 msgid "Last Modified on"
-msgstr "Sidst ændret d."
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,date_last_state_update:0
 msgid "Last State change"
-msgstr "Dato for sidste ændring i status"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,write_uid:0 field:campos.ckr.fetch.wiz,write_uid:0
 #: field:campos.ckr.sentin.wiz,write_uid:0
 msgid "Last Updated by"
-msgstr "Sidst opdateret af"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,write_date:0 field:campos.ckr.fetch.wiz,write_date:0
@@ -333,7 +333,7 @@ msgstr ""
 #. module: campos_ckr
 #: field:campos.ckr.check,main_comm_id:0
 msgid "Main Committee"
-msgstr "Hovedudvalg"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
@@ -343,12 +343,12 @@ msgstr "Marker som afsendt til Politiet"
 #. module: campos_ckr
 #: field:campos.ckr.sentin.wiz,message:0
 msgid "Message"
-msgstr "Besked"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_ids:0
 msgid "Messages"
-msgstr "Beskeder"
+msgstr ""
 
 #. module: campos_ckr
 #: help:campos.ckr.check,message_ids:0
@@ -358,7 +358,7 @@ msgstr ""
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,name:0
 msgid "Name"
-msgstr "Navn"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -373,7 +373,7 @@ msgstr ""
 #. module: campos_ckr
 #: field:campos.ckr.check,participant_id:0
 msgid "Participant"
-msgstr "Deltager"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,participant_id:0
@@ -383,7 +383,7 @@ msgstr ""
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Re-Requested"
-msgstr "Genfremsendt til Politiet"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -405,7 +405,7 @@ msgstr "Anmodning om børneattest er udløbet"
 #: code:addons/campos_ckr/models/campos_ckr_check.py:156
 #, python-format
 msgid "Request"
-msgstr "Anmodning"
+msgstr ""
 
 #. module: campos_ckr
 #: code:addons/campos_ckr/models/campos_event_participant.py:33
@@ -419,12 +419,12 @@ msgstr "Anmodning om børneattest"
 #: code:addons/campos_ckr/models/campos_ckr_check.py:106
 #, python-format
 msgid "Request action from Main Committee"
-msgstr "Sendt til HU for behandling"
+msgstr ""
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Requested"
-msgstr "Under behandling hos politiet"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -435,7 +435,7 @@ msgstr "Anmodning om børneattest"
 #: code:addons/campos_ckr/models/campos_ckr_check.py:100
 #, python-format
 msgid "Send mail asking for additional info"
-msgstr "Mail for at få yderligere information fra jobber"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -445,12 +445,12 @@ msgstr "Send til SL2017 sekretariat"
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Sent to CO"
-msgstr "Sendt til SL2017 sekretariatet"
+msgstr ""
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Sent to Main Committee"
-msgstr "Sendt til HU"
+msgstr ""
 
 #. module: campos_ckr
 #: model:ir.actions.server,name:campos_ckr.action_participant_cpr_list
@@ -460,7 +460,7 @@ msgstr "Vis liste over CPR-numre"
 #. module: campos_ckr
 #: field:campos.ckr.check,state:0
 msgid "State"
-msgstr "Status"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_summary:0
@@ -471,12 +471,12 @@ msgstr ""
 #: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:50
 #, python-format
 msgid "Thank you"
-msgstr "Tak"
+msgstr ""
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0
 msgid "Timeout"
-msgstr "Tid udløbet"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
@@ -487,12 +487,12 @@ msgstr "Ikke fremsendte børneattester"
 #: code:addons/campos_ckr/models/campos_ckr_check.py:197
 #, python-format
 msgid "Unknown"
-msgstr "ukendt"
+msgstr ""
 
 #. module: campos_ckr
 #: field:campos.ckr.check,message_unread:0
 msgid "Unread Messages"
-msgstr "Ulæste beskeder"
+msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -535,8 +535,6 @@ msgid ""
 "Your CKR request will be processed and you can expect a message in E-Boks "
 "soon."
 msgstr ""
-"Din børneattest-ansøgning er nu afsendt, og du vil modtage en besked i  E-BOKS FRA RIGSPOLITIET. \n"
-"Du skal inden 14 dage godkende børneattest ansøgningen."
 
 #. module: campos_ckr
 #: view:campos.ckr.fetch.wiz:campos_ckr.campos_ckr_fetch_wiz_form_view
