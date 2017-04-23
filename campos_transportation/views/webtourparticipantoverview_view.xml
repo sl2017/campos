@@ -93,8 +93,13 @@
 	<field name="arch" type="xml">
 		<search>
 			<field name="tocampdate"/>
-			<filter string="Participant" name="fscoutgroup" domain="[('scoutgroup','=',0)]" help="not scoutgroup"/>
+			<field name="fromcampdate"/>
+			<field name="registration_id"/>
+			<field name="participant_id"/>
+			<field name="countrycode"/>
+			<filter string="Participant" name="fpartcipant" domain="[('scoutgroup','=',0)]" help="not scoutgroup"/>
 			<filter string="Participate" name="fparticipate" domain="[('state','!=','deregistered')]" help="not deregistered"/>
+			<filter string="Participate Participant" name="fparticipate" domain="[('state','!=','deregistered'),('scoutgroup','=',0)]" help="not deregistered not scoutgroup"/>
 		</search>
 	</field>
 </record>
@@ -105,7 +110,7 @@
 name="Camp OS Webtour Participant"
 res_model="campos.webtourparticipantoverview"
 view_mode="tree,form" 
-context="{'search_default_fscoutgroup': 1 }"/>
+context="{'search_default_fpartcipant': 1 }"/>
 <!--context="{'search_default_fscoutgroup': 1 , 'search_default_fparticipate': 1 }"/> -->
 
 <!-- Menu item to open Campos Participant list with Webtour details -->
