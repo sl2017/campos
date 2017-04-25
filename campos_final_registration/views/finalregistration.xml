@@ -569,6 +569,7 @@
 							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+							<field name="own_note" />
 						</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
@@ -624,6 +625,7 @@
 					<field name="id" invisible="1"/>
 					<field name="name"/>
 					<field name="dates_summery"/>
+					<field name="own_note"/>
 					<field name="transport_to_camp"/>
 					<field name="transport_from_camp"/>
 					<field name="state" readonly="1" string="Registration State"/>
@@ -631,6 +633,22 @@
 				</tree>
 			</field>							
 		</record>
+		
+		<record id="campos_event_participant_search" model="ir.ui.view">
+            <field name="name">campos.event.participant.tree.search</field>
+            <field name="model">campos.event.participant</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="campos_event.campos_event_participant_search" />
+            <field name="arch" type="xml">
+            	<field name="state" position="after">
+            		<field name="own_note"/>
+            	</field>
+            	<field name="fgroup" position="after">
+            		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
+            	</field>
+            </field>
+         </record>
+            	
 
 			<record id="view_tree_event_registration_meat" model="ir.ui.view">
 				<field name="name">Meat Types</field>
