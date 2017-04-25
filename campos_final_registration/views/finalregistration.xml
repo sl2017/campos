@@ -235,6 +235,22 @@
 									</group>
 								</page>
 								<page string="Tents and other">
+									<group>
+										<field name="number_of_tents"/>
+										<field name="number_of_other_small_tents"/>
+									</group>
+									<p><b>Number of assembly and staff tents, more than 50 m2, incl. their sizes</b></p>
+									<field name="large_tents"/>
+									<p><b>Number of mast sails, incl. diameters, if they have sides and fraction of cercumfence with side</b></p>
+									<field name="mast_sails"/>
+									<group>
+										<field name="number_gas_burners"/>
+										<field name="pioneering_in_height"/>
+										<field name="pioneering_in_height_with_persons"/>
+										<field name="raised_sleeping"/>
+									</group>
+									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
+									<field name="gear_transport"/>
 								</page>
 								<page string="Green Transport">
 								</page>
@@ -461,6 +477,22 @@
 									</group>
 								</page>
 								<page string="Tents and other">
+									<group>
+										<field name="number_of_tents"/>
+										<field name="number_of_other_small_tents"/>
+									</group>
+									<p><b>Number of assembly and staff tents, more than 50 m2, incl. their sizes</b></p>
+									<field name="large_tents"/>
+									<p><b>Number of mast sails, incl. diameters, if they have sides and fraction of cercumfence with side</b></p>
+									<field name="mast_sails"/>
+									<group>
+										<field name="number_gas_burners"/>
+										<field name="pioneering_in_height"/>
+										<field name="pioneering_in_height_with_persons"/>
+										<field name="raised_sleeping"/>
+									</group>
+									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
+									<field name="gear_transport"/>
 								</page>
 								<page string="Green Transport">
 								</page>

@@ -25,6 +25,16 @@ class FinalRegistration(models.Model):
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
     meatlist_ids = fields.One2many('event.registration.meatlist','registration_id','Meat Choices')
+    number_of_tents = fields.Integer('Number of patrol tents (for personal accommodation)')
+    number_of_other_small_tents = fields.Integer('Number of other tents, less than 50 m2')
+    large_tents = fields.Text('Number of assembly and staff tents, more than 50 m2, incl. their sizes')
+    mast_sails = fields.Text('Number of mast sails, incl. diameters, if they have sides and fraction of cercumfence with side')
+    number_gas_burners = fields.Integer('Number of gas burners with tanks more than 2 kg')
+    pioneering_in_height = fields.Boolean('Are you planning to construct pioneering more than 4 meters high?')
+    pioneering_in_height_with_persons = fields.Boolean('Are you planning to construct pioneering with persons staying above 2 meters?')
+    raised_sleeping = fields.Boolean('Are you planning to have raised sleeping places?')
+    gear_transport = fields.Text('How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)?')
+    
     @api.onchange('child_certificates_accept')
     @api.one
     def _child_certificates_accept_checked (self):
