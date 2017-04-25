@@ -523,6 +523,7 @@
 							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+							<field name="own_note" />
 						</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
@@ -577,7 +578,9 @@
 				<tree  delete="0">
 					<field name="id" invisible="1"/>
 					<field name="name"/>
+					<field name="age"/>
 					<field name="dates_summery"/>
+					<field name="own_note"/>
 					<field name="transport_to_camp"/>
 					<field name="transport_from_camp"/>
 					<field name="state" readonly="1" string="Registration State"/>
@@ -586,7 +589,25 @@
 			</field>							
 		</record>
 		
+
 		<!-- Menu Actions -->
+
+		<record id="campos_event_participant_search" model="ir.ui.view">
+            <field name="name">campos.event.participant.tree.search</field>
+            <field name="model">campos.event.participant</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="campos_event.campos_event_participant_search" />
+            <field name="arch" type="xml">
+            	<field name="state" position="after">
+            		<field name="own_note"/>
+            	</field>
+            	<filter name="fGroup" position="after">
+            		<filter name="factive" string="Active" domain="[('state', 'not in', ['rejected','deregistered')]" />
+            		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
+            	</filter>
+            </field>
+         </record>
+            	
 		 <!--  Manager view -->
        <record id="action_event_finalregistration_tree" model="ir.actions.act_window">
 			<field name="name">Event Final Registration Tree</field>
