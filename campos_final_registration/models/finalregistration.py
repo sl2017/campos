@@ -124,6 +124,7 @@ class FinalRegistrationParticipant(models.Model):
     camp_day_ids = fields.One2many('campos.event.participant.day','participant_id','Camp Day List', help="Chose which days you're participating in the jamboree")
     access_token_id = fields.Char('Id of Access Token')
     dates_summery = fields.Char('Camp Days', compute='_compute_dates_summery', store=True)
+    own_note = fields.Char('Own Note')
     
     @api.onchange('name')
     def onchange_name(self):

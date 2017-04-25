@@ -76,7 +76,8 @@ class NetworkMain(models.Model):
                                      ,track_visibility='onchange',required=True)
 	network_delivery_month = fields.Selection([('network_delivery_month_maj',u'Maj'),
                                       ('network_delivery_month_jun',u'Juni'),
-                                      ('network_delivery_month_jul',u'Juli')]
+                                      ('network_delivery_month_jul',u'Juli'),
+									  ('network_delivery_month_aug',u'August')]
                                      ,track_visibility='onchange',required=True)
 	
 	#Ibrugtagelse
@@ -114,8 +115,9 @@ class NetworkMain(models.Model):
                                      ,track_visibility='onchange',required=True)
 	network_usage_month = fields.Selection([('network_usage_month_maj',u'Maj'),
                                       ('network_usage_month_jun',u'Juni'),
-                                      ('network_usage_month_jul',u'Juli')]
-                                     ,track_visibility='onchange',required=True)
+                                      ('network_usage_month_jul',u'Juli'),
+									  ('network_delivery_month_aug',u'August')],
+                                      track_visibility='onchange',required=True)
 	#Sidste anvendelse
 	network_last_day = fields.Selection([('network_last_day_01',u'01'),
                                       ('network_last_day_02',u'02'),
@@ -151,8 +153,9 @@ class NetworkMain(models.Model):
                                      ,track_visibility='onchange',required=True)
 	network_last_month = fields.Selection([('network_last_month_maj',u'Maj'),
                                       ('network_last_month_jun',u'Juni'),
-                                      ('network_last_month_jul',u'Juli')]
-                                     ,track_visibility='onchange',required=True)
+                                      ('network_last_month_jul',u'Juli'),
+									  ('network_delivery_month_aug',u'August')],
+                                      track_visibility='onchange',required=True)
 	
 	
 	

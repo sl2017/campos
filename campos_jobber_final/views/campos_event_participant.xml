@@ -121,6 +121,26 @@
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 						      		</group>
 						 </page>
+						 <page string="Children">
+						 	<field name="partner_id" invisible="1"/>
+						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id}">
+						 		<tree editable="bottom">
+						 			<field name="registration_id" invisible="1"/>
+						 			<field name="name"/>
+						 			<field name="birthdate"/>
+						 			<field name="street"/>
+						 			<field name="zip"/>
+						 			<field name="city"/>
+						 			<field name="country_id"/>
+						 			<field name="parent_id" invisible="1"/>
+						 			<field name="jobber_child" invisible="1"/>
+						 		
+						 		
+						 		</tree>
+						 	
+						 	</field>
+						 
+						 </page>
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
 						 		<field name="exp_child_qu" />
@@ -162,6 +182,9 @@
         <field name="arch" type="xml">
         	
         	<field name="registration_id" position="replace"/>
+        	<field name="staff" position="after">
+        		<field name="jobber_child"/>
+        	</field>
             <page name="agreements" position="before">
             	<page name="finalreg" string="Final signup">
             		 
@@ -269,6 +292,26 @@
 										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 						      		</group>
+						 </page>
+						 <page string="Children">
+						 	<field name="partner_id" invisible="1"/>
+						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id}">
+						 		<tree editable="bottom">
+						 			<field name="registration_id" invisible="1"/>
+						 			<field name="name"/>
+						 			<field name="birthdate"/>
+						 			<field name="street"/>
+						 			<field name="zip"/>
+						 			<field name="city"/>
+						 			<field name="country_id"/>
+						 			<field name="parent_id" invisible="1"/>
+						 			<field name="jobber_child" invisible="1"/>
+						 		
+						 		
+						 		</tree>
+						 	
+						 	</field>
+						 
 						 </page>
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
