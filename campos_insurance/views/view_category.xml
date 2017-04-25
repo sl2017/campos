@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_form_insurance_category_create" model="ir.ui.view">
+            <field name="name">Create new category</field>
+            <field name="model">campos.insurance.cat</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!--Category information -->
+                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Forsikringskategori</h1>
+                        <group>
+                        	<field name="cat_name" attrs="{'required':True}"/>
+                        	<field name="cat_parent_id"/>
+							<field name="cat_child_id"/>
+							<field name="cat_desc"/>
+						</group>                       
+                        
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_insurance_category_overview" model="ir.ui.view">
+			<field name="name">Category Tree view</field>
+			<field name="model">campos.insurance.cat</field>
+			<field name="arch" type="xml">
+				<tree>
+					<!--<field name="id"/>-->
+					<field name="cat_name"/>
+					<field name="cat_desc"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<!-- Action to open Activity list -->
+		<act_window id="action_insurance_category_create"
+			name="SL2017 Insurance category overview"
+			res_model="campos.insurance.cat"
+			view_mode="tree,form"
+			view_id="view_insurance_category_overview" />
+			
+			
+		<!-- Menu item to open Activity list -->
+		<menuitem id="menu_insurance_category_create"
+			name="Forsikringskategorier"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_insurance_category_create" />
+			
+			
+			
+        
+    </data>
+</openerp>
