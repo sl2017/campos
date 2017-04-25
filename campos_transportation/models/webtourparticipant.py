@@ -518,7 +518,21 @@ class WebtourParticipant(models.Model):
 
                     else:
                         _logger.info("%s !!!!!!!!!!!! No Home Destination found",par.id,)    
-                 
+
+
+    @api.one
+    def clearusecamptransportjobber_nocampdays(self):
+        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s", self.id,self.transport_to_camp,self.transport_from_camp)
+        
+        if self.workas_jobber and not self.camp_day_ids and self.transport_to_camp:            
+            self.transport_to_camp = False
+            
+        if self.workas_jobber and not self.camp_day_ids and self.transport_from_camp:   
+            self.transport_from_camp = False
+        
+        return
+    
+             
     @api.multi
     def clearusecamptransport(self):
         # find participants missing usUserIDno, from Registration having a usGroupIDno
