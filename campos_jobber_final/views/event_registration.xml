@@ -29,7 +29,7 @@
             		<field name="jobber_pay_for_ids" readonly="1">
             			<tree>
             				<field name="name"/>
-            				<field name="state"/>
+            				<field name="payreq_state"/>
             				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
             				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>	
             			
