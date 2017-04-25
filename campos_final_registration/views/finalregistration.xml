@@ -643,9 +643,9 @@
             	<field name="state" position="after">
             		<field name="own_note"/>
             	</field>
-            	<field name="fgroup" position="after">
+            	<filter name="fgroup" position="after">
             		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
-            	</field>
+            	</filter>
             </field>
          </record>
             	
