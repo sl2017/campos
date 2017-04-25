@@ -19,7 +19,6 @@
 <field name="arch" type="xml">
 <form>
 <header>
-<button name="get_usdestination_getall" type="object" string="usdestination getall" class="oe_highlight" />
 </header>
 <sheet>
 <group string="CampOS Webtour Requests">

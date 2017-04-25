@@ -222,6 +222,26 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
+								<page string="Meat">
+									<group>
+										<field colspan="2" name="meatlist_ids" widget="one2many_list" nolabel="0" string="Meat Choices">
+											<tree editable="bottom">
+												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
+												<field name="meat_count"/>
+<!--												<field name="day_meat_total"/>
+												<field name="day_participant_total"/>-->
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Tents and other">
+								</page>
+								<page string="Green Transport">
+								</page>
+								<page string="GloFo">
+								</page>
+								<page string="Cars">
+								</page>
 								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
@@ -430,6 +450,24 @@
 										<field name="internal_information"/>
 									</group>
 								</page>
+								<page string="Meat">
+									<group>
+										<field colspan="2" name="meatlist_ids" widget="one2many_list" nolabel="0" string="Meat Choices">
+											<tree editable="bottom">
+												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
+												<field name="meat_count"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Tents and other">
+								</page>
+								<page string="Green Transport">
+								</page>
+								<page string="GloFo">
+								</page>
+								<page string="Cars">
+								</page>
 								<page name="pre_reg" string="Pre-registration">
 
 							<notebook colspan="2">
@@ -493,6 +531,14 @@
            		</tree>
            	</field>
           </page>
+					<page string="Meat Types per event day">
+						<field name="event_day_meat_ids" colspan="1" nolabel="1"  context="{'default_event_id': id}">
+							<tree editable="bottom">
+                <field name="event_day_id"/>								
+                <field name="meat_id"/>
+           		</tree>
+           	</field>
+					</page>
         </xpath>
 			</field>	
 		</record>
@@ -523,6 +569,7 @@
 							<field name="participant_number" />
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+							<field name="own_note" />
 						</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
@@ -578,6 +625,7 @@
 					<field name="id" invisible="1"/>
 					<field name="name"/>
 					<field name="dates_summery"/>
+					<field name="own_note"/>
 					<field name="transport_to_camp"/>
 					<field name="transport_from_camp"/>
 					<field name="state" readonly="1" string="Registration State"/>
@@ -586,7 +634,45 @@
 			</field>							
 		</record>
 		
-		<!-- Menu Actions -->
+		<record id="campos_event_participant_search" model="ir.ui.view">
+            <field name="name">campos.event.participant.tree.search</field>
+            <field name="model">campos.event.participant</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="campos_event.campos_event_participant_search" />
+            <field name="arch" type="xml">
+            	<field name="state" position="after">
+            		<field name="own_note"/>
+            	</field>
+            	<filter name="fGroup" position="after">
+            		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
+            	</filter>
+            </field>
+         </record>
+            	
+
+			<record id="view_tree_event_registration_meat" model="ir.ui.view">
+				<field name="name">Meat Types</field>
+				<field name="model">event.registration.meat</field>
+				<field name="arch" type="xml">
+					<tree  editable="bottom">
+						<field name="name"/>
+					</tree>
+				</field>
+			</record> 	
+
+			<record id="view_tree_event_day_meat" model="ir.ui.view">
+				<field name="name">Event Day Meat</field>
+				<field name="model">event.day.meat</field>
+				<field name="arch" type="xml">
+					<tree  editable="bottom">
+						<field name="event_id"/>
+						<field name="event_day_id"/>
+						<field name="meat_id"/>
+					</tree>
+				</field>
+			</record> 	
+
+			<!-- Menu Actions -->
 		 <!--  Manager view -->
        <record id="action_event_finalregistration_tree" model="ir.actions.act_window">
 			<field name="name">Event Final Registration Tree</field>
@@ -654,6 +740,16 @@
 		res_model="campos.reg.friendship"
 		view_mode="tree,form" />
 
+		<act_window id="action_event_registration_meat"
+		name="Meat Types"
+		res_model="event.registration.meat"
+		view_mode="tree" />
+
+		<act_window id="action_event_day_meat"
+		name="Event Day Meat"
+		res_model="event.day.meat"
+		view_mode="tree" />
+
 		<!-- sub menu -->
 		<menuitem id="menu_event_finalregistration" parent="campos_event.menu_campos" name="Final Registration" groups="campos_event.group_campos_admin"/>
 
@@ -670,6 +766,10 @@
 		<menuitem id="menu_action_finalregistration_menu_needs" parent="menu_event_finalregistration" name="Special Needs" action="action_event_registration_needs" groups="campos_event.group_campos_admin" sequence="60" />
 		
 		<menuitem id="menu_action_finalregistration_menu_friendshipgrouplist" parent="menu_event_finalregistration" name="Friendship Groups" action="action_event_registration_friendshipgrouplist" groups="campos_event.group_campos_admin" sequence="70" />
+
+		<menuitem id="menu_action_finalregistration_menu_meat" parent="menu_event_finalregistration" name="Meat Types" action="action_event_registration_meat" groups="campos_event.group_campos_admin" sequence="80" />
+
+		<menuitem id="menu_action_finalregistration_menu_event_day_meat" parent="menu_event_finalregistration" name="Event Day Meat" action="action_event_day_meat" groups="campos_event.group_campos_admin" sequence="90" />
 
 		<!-- gl -->
 		<menuitem id="menu_action_event_finalregistration_tree_gl" parent="menu_event_finalregistration" name="Final Registration GL" action="action_event_finalregistration_tree_gl" groups="campos_preregistration.group_campos_groupleader" sequence="25"/>

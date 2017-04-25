@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools
-from ..interface import webtourinterface
+#from ..interface import webtourinterface
 from xml.dom import minidom
 
 import logging
@@ -143,7 +143,7 @@ class WebtourUsNeed(models.Model):
                                                                         ,('startdestinationidno.id', '=', self.campos_startdestinationidno),('enddestinationidno.id', '=', self.campos_enddestinationidno),('traveldate', '=', self.campos_traveldate)])
     
         if self.campos_TripType_id.id and self.campos_startdestinationidno and self.campos_enddestinationidno:
-            _logger.info("calc_travelneed_id Entered %s %s %s %s %s %s %s",self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
+            _logger.info("%s calc_travelneed_id Entered %s %s %s %s %s %s %s",self.id, self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
             if rs_travelneed:
                 #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_traveldate,fields.Date.from_string(self.webtour_startdatetime))
                 if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):
@@ -159,10 +159,10 @@ class WebtourUsNeed(models.Model):
                 dicto0["enddestinationidno"] = self.campos_enddestinationidno
                 dicto0["traveldate"] = fields.Date.from_string(self.campos_traveldate)
                 dicto0["deadline"] ='Select'
-                _logger.info("calc_travelneed_id Create %s",dicto0)
+                _logger.info("%s calc_travelneed_id Create %s",self.id,dicto0)
                 self.travelneed_id = self.env['event.registration.travelneed'].create(dicto0)     
         else:
-            _logger.info("calc_travelneed_id Entered with insufficent data %s %s %s %s %s %s %s",self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,fields.Date.from_string(self.campos_traveldate))
+            _logger.info("%s calc_travelneed_id Entered with insufficent data %s %s %s %s %s %s %s",self.id,self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,fields.Date.from_string(self.campos_traveldate))
             
     @api.multi
     @api.depends('campos_writeseq','campos_transferedseq') 
@@ -188,18 +188,7 @@ class WebtourUsNeed(models.Model):
                 tag_data = None
 
             return tag_data
-        '''
-        def camposeqwebtour():
-            sd = (fields.Date.from_string(self.campos_startdatetime) == fields.Date.from_string(self.webtour_startdatetime))
-            sdi = (self.campos_startdestinationidno ==  self.webtour_startdestinationidno)
-            sn = ((self.campos_startnote ==  self.webtour_startnote) or (self.campos_startnote == "" and self.webtour_startnote == False)) 
-            edi = (self.campos_enddestinationidno ==  self.webtour_enddestinationidno)  
-            en = ((self.campos_endnote ==  self.webtour_endnote) or (self.campos_endnote == "" and self.webtour_endnote == False))
-            
-            _logger.info("camposeqwebtour %s %s %s %s %s %s %s",self.campos_startdatetime , fields.Date.from_string(self.webtour_startdatetime) ,sd,  sdi,sn , edi , en)
-            
-            return sd and sdi and sn and edi and en 
-'''
+
         def updatewebtourfields():
             dicto ={}
             if self.webtour_needidno != get_tag_data("a:IDno"): dicto['webtour_needidno'] = get_tag_data("a:IDno")
@@ -233,7 +222,7 @@ class WebtourUsNeed(models.Model):
         _logger.info("Here we go !!!!!!!!!!!")
                           
         if  self.webtour_groupidno == False or self.webtour_useridno == False or self.campos_startdestinationidno == False or self.campos_traveldate == False or self.campos_enddestinationidno == False:
-            _logger.info("get_create_usneed_tron: Info missing %s %s %s %s %s", self.webtour_useridno,self.webtour_groupidno,self.campos_traveldate,self.campos_startdestinationidno,self.campos_enddestinationidno)
+            _logger.info("%s get_create_usneed_tron: Info missing %s %s %s %s %s", self.id, self.webtour_useridno,self.webtour_groupidno,self.campos_traveldate,self.campos_startdestinationidno,self.campos_enddestinationidno)
             return True
 
         needtransfered = False
@@ -245,7 +234,7 @@ class WebtourUsNeed(models.Model):
             or (self.campos_startdestinationidno != self.campos_transfered_startdestinationidno)
             or (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno)         
             ):
-            _logger.info("1A. Change in travel data")       
+            _logger.info("%s 1A. Change in travel data",self.id)       
                  
             #compose note (for non Danish groups)
             note = False
@@ -274,9 +263,9 @@ class WebtourUsNeed(models.Model):
                 enddatetime = self.campos_traveldate                
             
             if (self.campos_demandneeded == True): # there is demand
-                _logger.info("2A. demand needed")
+                _logger.info("%s 2A. demand needed",self.id)
                 if (self.webtour_needidno == False or self.webtour_needidno == "0"): #no need known, so try to create
-                    _logger.info("3. No need - Try to create")
+                    _logger.info("%s 3. No need - Try to create",self.id)
                     request="UserIDno=" + self.webtour_useridno
                     request=request+"&GroupIDno="+self.webtour_groupidno
                     request=request+"&StartDestinationIDno="+self.campos_startdestinationidno
@@ -291,21 +280,22 @@ class WebtourUsNeed(models.Model):
                     request=request+"&StartNote="+startnote
                     request=request+"&EndNote="+endnote                        
                     
-                    _logger.info("3a. request %s",request)
-                    response_doc=webtourinterface.usneed_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
+                    _logger.info("%s 3a. request %s",self.id,request)
+                    #response_doc=webtourinterface.usneed_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
+                    response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Create/?' + request}).responce.encode('utf-8'))
                     
                     idno = get_tag_data("a:IDno") #Let us check response
                                        
                     if (idno <> "0") and idno:
-                        _logger.info("4a. New usNeed Created")
+                        _logger.info("%s 4a. New usNeed Created",self.id)
                         updatewebtourfields()
                         needtransfered = True
                     else: 
-                        _logger.info("4b.usNeed NOT created") 
+                        _logger.info("%s 4b.usNeed NOT created",self.id) 
                         if get_tag_data("a:Description") == "Need already exist" :
-                            _logger.info("5. Ohh usNeed already exist")
-                            response_doc=webtourinterface.usneed_GetByGroupIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_groupidno)
-                            #response_doc2 = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByGroupIDno/?GroupIDno=' + self.webtour_groupidno}).responce)
+                            _logger.info("%s 5. Ohh usNeed already exist",self.id)
+                            #response_doc=webtourinterface.usneed_GetByGroupIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_groupidno)
+                            response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByGroupIDno/?GroupIDno=' + self.webtour_groupidno}).responce.encode('utf-8'))
                             usNeeds=response_doc.getElementsByTagName('a:usNeed')
                             for node in usNeeds:
                                 try:
@@ -313,24 +303,25 @@ class WebtourUsNeed(models.Model):
                                     EndDestinationIDno = node.getElementsByTagName("a:EndDestinationIDno")[0].firstChild.data
                                     UserIDno = node.getElementsByTagName("a:UserIDno")[0].firstChild.data
                                     if (self.campos_startdestinationidno == StartDestinationIDno and self.campos_enddestinationidno == EndDestinationIDno and self.webtour_useridno == UserIDno):
-                                        _logger.info("6. Found a usNeed matching %s", node.toprettyxml(indent="   "))
+                                        _logger.info("%s 6. Found a usNeed matching %s",self.id, node.toprettyxml(indent="   "))
                                         self.webtour_needidno = get_tag_data_from_node(node,"a:IDno") # save found usNeed IDno
                                         
                                         request="NeedIDno="+self.webtour_needidno + "&" + request
-                                        response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
-
+                                        #response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
+                                        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Update/?' + request}).responce.encode('utf-8'))
+                
                                         if get_tag_data("a:IDno") <> "0": # Stil OK?
                                             updatewebtourfields()
                                             needtransfered = True
                                         else:
-                                            _logger.info("7. Still problem with the response %s %s", request,response_doc.toprettyxml(indent="   "))
+                                            _logger.info("%s 7. Still problem with the response %s %s",self.id, request,response_doc.toprettyxml(indent="   "))
                                             
                                         break
                                 except:
                                     pass                    
                         else:
                             self.campos_transferedseq = False
-                            _logger.info("8. Not possible to update usNeed!!!!!!!!!!!!! %s", response_doc.toprettyxml(indent="   ")) 
+                            _logger.info("%s 8. Not possible to update usNeed!!!!!!!!!!!!! %s",self.id, response_doc.toprettyxml(indent="   ")) 
                 else: # There is a Need to try to update
                     request="NeedIDno="+self.webtour_needidno      
                     request=request+"&UserIDno="+self.webtour_useridno
@@ -359,56 +350,63 @@ class WebtourUsNeed(models.Model):
                     if (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno):
                         request=request+"&EndDestinationIDno="+self.campos_enddestinationidno                          
                     
-                    response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
-
+                    #response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
+                    response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Update/?' + request}).responce.encode('utf-8'))
+                
                     if get_tag_data("a:IDno") <> "0": # Stil OK?
-                        _logger.info("9A. Need updated with the Request %s Response %s", request, response_doc.toprettyxml(indent="   ")) 
+                        _logger.info("%s 9A. Need updated with the Request %s Response %s",self.id, request, response_doc.toprettyxml(indent="   ")) 
                         updatewebtourfields()
                         needtransfered = True
                     else:
-                        _logger.info("9B. Problem with the Request %s Response %s", request, response_doc.toprettyxml(indent="   "))
+                        _logger.info("%s 9B. Problem with the Request %s Response %s",self.id, request, response_doc.toprettyxml(indent="   "))
                         if get_tag_data("a:Description") == "NeedIDno not found" :
-                            _logger.info("15. webtour_needidno %s removed from usNeed %s", self.webtour_needidno, self.id)
+                            _logger.info("%s 15. webtour_needidno %s removed from usNeed %s",self.id, self.webtour_needidno, self.id)
                             self.webtour_needidno=False
             
-                if (needtransfered): ## usNeed has been updated :-)   
-                    if self.campos_transfered_demandneeded != True: self.campos_transfered_demandneeded = True
-                    if self.campos_transfered_deadline != self.travelneed_deadline: self.campos_transfered_deadline = self.travelneed_deadline
-                    if self.campos_transfered_travelconnectiondetails != self.travelneed_travelconnectiondetails: self.campos_transfered_travelconnectiondetails = self.travelneed_travelconnectiondetails
-                    if self.campos_transfered_traveldate != self.campos_traveldate:self.campos_transfered_traveldate = self.campos_traveldate
-                    if self.campos_transfered_startdatetime != startdatetime: self.campos_transfered_startdatetime = startdatetime
-                    if self.campos_transfered_enddatetime != enddatetime : self.campos_transfered_enddatetime = enddatetime
-                    if self.campos_transfered_startdestinationidno != self.campos_startdestinationidno: self.campos_transfered_startdestinationidno = self.campos_startdestinationidno
-                    if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: self.campos_transfered_enddestinationidno = self.campos_enddestinationidno
-                    if self.campos_transfered_startnote != startnote: self.campos_transfered_startnote = startnote
-                    if self.campos_transfered_endnote != endnote: self.campos_transfered_endnote = endnote
-                    if self.webtour_deleted: self.webtour_deleted = False # Clear Delete falg
+                if (needtransfered): ## usNeed has been updated :-)
+                    dicto ={}
+                    if self.campos_transfered_demandneeded != True: dicto['campos_transfered_demandneeded']  = True
+                    if self.campos_transfered_deadline != self.travelneed_deadline: dicto['campos_transfered_deadline']  = self.travelneed_deadline
+                    if self.campos_transfered_travelconnectiondetails != self.travelneed_travelconnectiondetails: dicto['campos_transfered_travelconnectiondetails']  = self.travelneed_travelconnectiondetails
+                    if self.campos_transfered_traveldate != self.campos_traveldate:dicto['campos_transfered_traveldate']  = self.campos_traveldate
+                    if self.campos_transfered_startdatetime != startdatetime: dicto['campos_transfered_startdatetime']  = startdatetime
+                    if self.campos_transfered_enddatetime != enddatetime : dicto['campos_transfered_enddatetime']  = enddatetime
+                    if self.campos_transfered_startdestinationidno != self.campos_startdestinationidno: dicto['campos_transfered_startdestinationidno']  = self.campos_startdestinationidno
+                    if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: dicto['ampos_transfered_enddestinationidno']  = self.campos_enddestinationidno
+                    if self.campos_transfered_startnote != startnote: dicto['campos_transfered_startnote']  = startnote
+                    if self.campos_transfered_endnote != endnote: dicto['campos_transfered_endnote']  = endnote
+                    if self.webtour_deleted: dicto['webtour_deleted']  = False # Clear Delete falg
+                    if len(dicto) > 0:
+                        self.write(dicto)
                     self.get_webtour_need_change()
                                                                             
             else: #No demand now        
-                _logger.info("2B. No demand needed")
+                _logger.info("%s 2B. No demand needed",self.id)
                 if not self.webtour_deleted:
-                    _logger.info("10. Deleting usNeed %s", self.webtour_needidno)
+                    _logger.info("%s 10. Deleting usNeed %s",self.id, self.webtour_needidno)
                     if self.webtour_needidno and (self.webtour_needidno <> '0'):
-                        _logger.info("11. There is usNeedID No - Try to delete")
-                        response_doc=webtourinterface.usneed_delete(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)                         
+                        _logger.info("%s 11. There is usNeedID No - Try to delete",self.id)
+                        #response_doc=webtourinterface.usneed_delete(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)                         
+                        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Delete/?NeedIDno=' + self.webtour_needidno}).responce.encode('utf-8'))
+
                         updatewebtourfields()
                         self.get_webtour_need_change()
-                        _logger.info("12. Deleted responce %s", response_doc.toprettyxml(indent="   "))
+                        _logger.info("%s 12. Deleted responce %s",self.id, response_doc.toprettyxml(indent="   "))
                     self.webtour_deleted = True
         else: 
-            _logger.info("1B. No changes in travel data")
+            _logger.info("%s 1B. No changes in travel data",self.id)
             if self.webtour_needidno and self.webtour_needidno <> '0' and self.webtour_deleted == False:
-                _logger.info("13. There is usNeed IDno")
-                response_doc=webtourinterface.usneed_getbyidno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
+                _logger.info("%s 13. There is usNeed IDno",self.id)
+                #response_doc=webtourinterface.usneed_getbyidno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
+                response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))
                 
                 idno = get_tag_data("a:IDno")
                 if idno <> "0":
-                    _logger.info("14A. Got usNeed reponce")
+                    _logger.info("%s 14A. Got usNeed reponce",self.id)
                     updatewebtourfields()
                     self.get_webtour_need_change()
                 else:
-                    _logger.info("14B. Dit not Get usNeed reponce !!!!!!!!!!!!!!!!!!!!! %s %s",self.webtour_needidno, response_doc.toprettyxml(indent="   "))
+                    _logger.info("%s 14B. Dit not Get usNeed reponce !!!!!!!!!!!!!!!!!!!!! %s %s",self.id,self.webtour_needidno, response_doc.toprettyxml(indent="   "))
                   
         self.env.cr.commit()                                                                
         return True
@@ -416,7 +414,9 @@ class WebtourUsNeed(models.Model):
     @api.one
     def get_webtour_need_change(self):
          
-        response_doc=webtourinterface.usneed_GetPending_ByIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
+        #response_doc=webtourinterface.usneed_GetPending_ByIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
+        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetPending_ByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))
+                    
         usContent = response_doc.getElementsByTagName("Content")
 
         element = usContent[0]

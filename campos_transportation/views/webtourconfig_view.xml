@@ -29,6 +29,7 @@
 			<button name="action_webtour_check_usgroup" string="Check usGroups" type="object"/>
 			<button name="action_webtour_check_ususer" string="Check usUsers" type="object"/>
 			<button name="action_webtour_check_usneed" string="Check usNeeds" type="object"/>
+			<button name="action_clearusecamptransportjobber_nocampdays" string="clear jobber transport nocampdays" type="object"/>
 		</group>
 </sheet>
 </form>
@@ -109,7 +110,7 @@ res_model="campos.webtourconfig.triptype.date"
 view_mode="tree,form" />
 
 
-<!-- Menu item to open Campos Webtour Destination list  -->
+<!-- Menu item to open Campos Webtour Destination list  --> 
 <menuitem id="menu_action_campos_webtour_config" parent="menu_campos_transportation" name="Webtour Configuration" action="action_webtourconfig" groups="campos_event.group_campos_admin" sequence="50"/>
 <menuitem id="menu_action_campos_WebtourTripType" parent="menu_campos_transportation" name="Webtour Trip Type" action="action_WebtourTripType" groups="campos_event.group_campos_admin" sequence="55"/>
 <menuitem id="menu_action_campos_WebtourTripTypeDate" parent="menu_campos_transportation" name="Webtour Trip Type Date" action="action_WebtourTripTypeDate" groups="campos_event.group_campos_admin" sequence="56"/>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, tools, _
-from ..interface import webtourinterface
+#from ..interface import webtourinterface test
 from xml.dom import minidom
 
 import logging
@@ -62,105 +62,11 @@ class WebtourParticipant(models.Model):
     donotparticipate = fields.Boolean('Do not participate') 
     
             
-    @api.one
-    def _compute_tocampfromdestination_id(self):
-            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
-            destination=False
-            if self.individualtocampfromdestination_id:
-                destination = self.individualtocampfromdestination_id
-            elif self.registration_id.webtourgrouptocampdestination_id:
-                destination = self.registration_id.webtourgrouptocampdestination_id
-            elif self.registration_id.group_entrypoint.defaultdestination_id:
-                destination = self.registration_id.group_entrypoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
-            
-            if  destination == False:
-                _logger.info("_compute_tocampfromdestination_id No Destination known !!!!!!! %s", self.id)
-                self.tocampfromdestination_id = False;
-            else:
-                if self.tocampfromdestination_id != destination:
-                    _logger.info("_compute_tocampfromdestination_id Update %s %s %s",self.id,self.tocampfromdestination_id,destination)
-                    self.tocampfromdestination_id = destination
-                    return True
-            
-            return False 
-                                                  
-    @api.one
-    def _compute_fromcamptodestination_id(self):
-        #_logger.info("_compute_fromcamptodestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
-        destination=self.fromcamptodestination_id
-        if self.individualfromcamptodestination_id:
-            destination = self.individualfromcamptodestination_id
-        elif self.registration_id.webtourgroupfromcampdestination_id:
-            destination = self.registration_id.webtourgroupfromcampdestination_id
-        elif self.registration_id.group_exitpoint.defaultdestination_id:
-            destination = self.registration_id.group_exitpoint.defaultdestination_id
-        elif self.registration_id.webtourdefaulthomedestination:
-            destination = self.registration_id.webtourdefaulthomedestination
-
-        if  destination == False:
-            _logger.info("individualfromcamptodestination_id No Destination known !!!!!!! %s",self.id)
-            self.fromcamptodestination_id = False;
-        else:
-            if self.fromcamptodestination_id != destination:
-                _logger.info("individualfromcamptodestination_id Update %s %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
-                self.fromcamptodestination_id = destination
-                return True
-        
-        return False                
-                         
-    @api.one
-    def _compute_tocampdate(self):        
-        tocampdate = False
-        dates = []
-        if self.specialtocampdate_id:
-            tocampdate = self.specialtocampdate_id.name
-        else:
-            for d in self.camp_day_ids:
-                if d.will_participate:
-                    dates.append(d.the_date)
-    
-            dates.sort()
-            if len(dates) > 0:
-                tocampdate = dates[0]
-            else :
-                tocampdate = False
-                
-        if self.tocampdate != tocampdate:
-            _logger.info("_compute_tocampdate, Update %s %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)
-            self.tocampdate = tocampdate      
-            return True
-        
-        return False                
-            
-    @api.one
-    def _compute_fromcampdate(self):
-        dates = []
-        fromcampdate = False           
-        if self.specialfromcampdate_id:
-            fromcampdate = self.specialfromcampdate_id.name
-        else:
-            for d in self.camp_day_ids:
-                if d.will_participate:
-                    dates.append(d.the_date)
-    
-            dates.sort(reverse=True)
-            if len(dates) > 0:
-                fromcampdate = dates[0]
-            else :
-                fromcampdate = False
-        if self.fromcampdate != fromcampdate:
-            _logger.info("_compute_fromcampdate, Update %s %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
-            self.fromcampdate = fromcampdate
-            return True
-        
-        return False
               
     @api.model
     def get_create_usgroupidno_tron(self):
-        MAX_LOOPS_usGroup = 10  #Max No of Groups pr Scheduled call
-        MAX_LOOPS_usUser = 10  #Max No of Users pr Scheduled call
+        MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
+        MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
 
         # find participants having transort need but missing usGroupIDno
@@ -253,73 +159,174 @@ class WebtourParticipant(models.Model):
     def create(self, vals):
         _logger.info("Create Entered")
         par = super(WebtourParticipant, self).create(vals)
-        
-        par.update_tocampusneed()
-        par.update_fromcampusneed()
-        
+   
+        rs = self.search([('id', '=', par.id)])
+        if len(rs)> 0:
+            rs[0].write({'recalctoneed':True, 'recalcfromneed':True})  
+                   
         return par
         
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
-        ret = super(WebtourParticipant, self).write(vals)
-                      
+        ret = super(WebtourParticipant, self).write(vals)         
+
+        pardic={}      
+          
+        def _compute_tocampfromdestination_id():
+            #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+            destination=False
+            if self.individualtocampfromdestination_id:
+                destination = self.individualtocampfromdestination_id
+            elif self.registration_id.webtourgrouptocampdestination_id:
+                destination = self.registration_id.webtourgrouptocampdestination_id
+            elif self.registration_id.group_entrypoint.defaultdestination_id:
+                destination = self.registration_id.group_entrypoint.defaultdestination_id
+            elif self.registration_id.webtourdefaulthomedestination:
+                destination = self.registration_id.webtourdefaulthomedestination
+            
+            if  destination == False:
+                _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", self.id)
+                pardic['tocampfromdestination_id'] = False
+            else:
+                if self.tocampfromdestination_id != destination:
+                    _logger.info("%s _compute_tocampfromdestination_id Update %s %s",self.id,self.tocampfromdestination_id.id,destination.id)
+                    pardic['tocampfromdestination_id'] = destination.id
+                    return False
+            return True
+
+        def _compute_fromcamptodestination_id():
+            #_logger.info("_compute_fromcamptodestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
+            destination=self.fromcamptodestination_id
+            if self.individualfromcamptodestination_id:
+                destination = self.individualfromcamptodestination_id
+            elif self.registration_id.webtourgroupfromcampdestination_id:
+                destination = self.registration_id.webtourgroupfromcampdestination_id
+            elif self.registration_id.group_exitpoint.defaultdestination_id:
+                destination = self.registration_id.group_exitpoint.defaultdestination_id
+            elif self.registration_id.webtourdefaulthomedestination:
+                destination = self.registration_id.webtourdefaulthomedestination
+    
+            if  destination == False:
+                _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",self.id)
+                pardic['fromcamptodestination_id'] = False
+            else:
+                if self.fromcamptodestination_id != destination:
+                    _logger.info("%s _compute_fromcamptodestination_id Update %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
+                    pardic['fromcamptodestination_id'] = destination.id
+                    return False
+            return True
+        
+                                       
+        def _compute_tocampdate():        
+            tocampdate = False
+            dates = []
+            if self.specialtocampdate_id:
+                tocampdate = self.specialtocampdate_id.name
+            else:
+                for d in self.camp_day_ids:
+                    if d.will_participate:
+                        dates.append(d.the_date)
+        
+                dates.sort()
+                if len(dates) > 0:
+                    tocampdate = dates[0]
+                else :
+                    tocampdate = False
+                    
+            if self.tocampdate != tocampdate:
+                _logger.info("%s _compute_tocampdate, Update %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)   
+                pardic['tocampdate'] = tocampdate
+                return False
+            return True        
+
+                
+        def _compute_fromcampdate():
+            dates = []
+            fromcampdate = False           
+            if self.specialfromcampdate_id:
+                fromcampdate = self.specialfromcampdate_id.name
+            else:
+                for d in self.camp_day_ids:
+                    if d.will_participate:
+                        dates.append(d.the_date)
+        
+                dates.sort(reverse=True)
+                if len(dates) > 0:
+                    fromcampdate = dates[0]
+                else :
+                    fromcampdate = False
+            if self.fromcampdate != fromcampdate:
+                _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
+                pardic['fromcampdate'] = fromcampdate
+                return False
+            return True  
+  
+                  
         for par in self:
             notdoneto = True
-            notdonefrom = True
+            notdonefrom = True          
+            pardic={}
+            
             if  'recalctoneed' in vals or 'individualtocampfromdestination_id' in vals:           
-                if [True] == par._compute_tocampfromdestination_id():
-                    notdoneto = False
+                notdoneto=_compute_tocampfromdestination_id()
                    
             if  'recalcfromneed' in vals or 'individualfromcamptodestination_id' in vals:
-                if [True] == par._compute_fromcamptodestination_id():
-                    notdonefrom = False
-            
-            if  ('camp_day_ids' in vals
-                 or 'specialtocampdate_id'):    
-                if [True] == par._compute_tocampdate():
-                    notdoneto = False
+                notdonefrom=_compute_fromcamptodestination_id()
                     
-            if  ('camp_day_ids' in vals
-                 or 'specialfromcampdate_id'):        
-                if [True] == par._compute_fromcampdate():
-                    notdonefrom = False                
-               
+            if  ('recalctoneed' in vals
+                 or 'camp_day_ids' in vals
+                 or 'specialtocampdate_id'): 
+                notdoneto = notdoneto and _compute_tocampdate()   
+                    
+            if  ('recalcfromneed' in vals
+                 or 'camp_day_ids' in vals
+                 or 'specialfromcampdate_id'):
+                notdonefrom = notdonefrom and _compute_fromcampdate()
+
             if  ('tocampfromdestination_id' in vals
                 or 'tocamptravelgroup' in vals
                 or 'tocampdate' in vals
                 or 'transport_to_camp' in vals               
-                or ('recalctoneed' in vals and notdoneto)
-                or 'deregistered' in vals 
+                or 'recalctoneed' in vals
+                or 'donotparticipate' in vals 
                 ):
-                if not self.tocampdate and 'tocampdate' not in vals:
-                    self._compute_tocampdate()
-                    _logger.info("update_tocampusneed tocampdate %s", self.tocampdate)
+                if not par.tocampdate and 'tocampdate' not in vals:
+                    _compute_tocampdate()
+                    _logger.info("%s update_tocampusneed tocampdate %s", par.id, par.tocampdate)
                     
-                if not self.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
-                    self._compute_tocampfromdestination_id()   
-                    _logger.info("update_tocampusneed tocampfromdestination_id %s", self.tocampfromdestination_id)    
-                
-                par.update_tocampusneed()
-
+                if not par.tocampfromdestination_id and 'tocampfromdestination_id' not in vals:
+                    _compute_tocampfromdestination_id()                  
+                    _logger.info("%s update_tocampusneed tocampfromdestination_id %s", par.id, par.tocampfromdestination_id)
+                      
+                #_logger.info("%s XXXXXXXXXXXXXX tocampdate %s", par.id,notdoneto)
+                if notdoneto:
+                    par.update_tocampusneed()
+            
+            #_logger.info("%s Kilroy %s", par.id,vals)
             if  ('fromcamptodestination_id' in vals 
                 or 'fromcamptravelgroup' in vals                                
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals
-                or ('recalcfromneed' in vals and notdonefrom)
-                or 'deregistered' in vals                
-                ):
-                
+                or 'recalcfromneed' in vals
+                or 'donotparticipate' in vals                
+                ):              
                 if not self.fromcampdate and 'fromcampdate' not in vals: 
-                    self._compute_fromcampdate()
-                    _logger.info("update_fromcampusneed fromcampdate %s", self.fromcampdate)
+                    _compute_fromcampdate()                   
+                    _logger.info("%s update_fromcampusneed fromcampdate %s", par.id, par.fromcampdate)
                     
                 if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
-                    self._compute_fromcamptodestination_id() 
-                    _logger.info("update_tocampusneed fromcamptodestination_id %s", self.fromcamptodestination_id)  
+                    _compute_fromcamptodestination_id()                   
+                    _logger.info("%s update_fromcampusneed fromcamptodestination_id %s", par.id, par.fromcamptodestination_id)
                     
-                par.update_fromcampusneed()
-                
+                #_logger.info("%s XXXXXXXXXXXXXX fromcampdate %s", par.id,notdonefrom)
+                if notdonefrom:    
+                    par.update_fromcampusneed()                                    
+            
+            if len(pardic) > 0:
+                _logger.info("%s write dict %s",par.id, pardic)
+                par.write(pardic)
+
             if 'state' in vals:
                 par.donotparticipate = par.state == 'deregistered'
             else:
@@ -335,7 +342,7 @@ class WebtourParticipant(models.Model):
         campdesination= webtourconfig.campdestinationid.destinationidno
         # Check if date included in to From camp dates
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.tocamp_TripType_id.id),('name', '=', self.tocampdate)])
-        _logger.info("TO CAMP campos_demandneeded %s %s %s %s %s",self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
+        _logger.info("%s TO CAMP campos_demandneeded %s %s %s %s %s",self.id, self.transport_to_camp, self.donotparticipate , len(rs),self.tocamp_TripType_id.id,self.tocampdate)
         if self.tocampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -363,7 +370,7 @@ class WebtourParticipant(models.Model):
             dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')  
             self.tocampusneed_id.write(dicto1)
             
-        _logger.info("Update_tocampusneed %s", dicto1)
+        _logger.info("%s Update_tocampusneed %s", self.id, dicto1)
         
     @api.one
     def update_fromcampusneed(self):
@@ -372,7 +379,7 @@ class WebtourParticipant(models.Model):
         campdesination= webtourconfig.campdestinationid.destinationidno           
         # Check if date included in to From camp dates 
         rs= self.env['campos.webtourconfig.triptype.date'].search([('campos_TripType_id', '=', self.fromcamp_TripType_id.id),('name', '=', self.fromcampdate)])
-        _logger.info("From CAMP campos_demandneeded %s %s %s %s %s",self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
+        _logger.info("%s FROM CAMP campos_demandneeded %s %s %s %s %s",self.id,self.transport_from_camp, self.donotparticipate , len(rs), self.fromcamp_TripType_id.id, self.fromcampdate)                            
         if self.fromcampusneed_id.id == False:
             dicto1 = {}
             dicto1["participant_id"] = self.id
@@ -400,7 +407,7 @@ class WebtourParticipant(models.Model):
             dicto1["campos_writeseq"]  = self.env['ir.sequence'].get('webtour.transaction')
             self.fromcampusneed_id.write(dicto1)
                        
-        _logger.info("update_fromcampusneed %s", dicto1)
+        _logger.info("%s update_fromcampusneed %s", self.id,dicto1)
          
     
     
@@ -408,7 +415,7 @@ class WebtourParticipant(models.Model):
     def action_webtour_jobber_findclosestlocations(self):
         for par in self:
             if par.groupisdanish:
-                # If gep point is missing, try to calculate
+                # If geo point is missing, try to calculate
                 if (par.partner_id.partner_latitude==0):
                     par.partner_id.geocode_address()
                     if (par.partner_id.partner_latitude > 0):
@@ -419,7 +426,7 @@ class WebtourParticipant(models.Model):
                 if (par.partner_id.partner_latitude==0):
                     gmaps2 = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.geocode'))
         
-                    _logger.info("Try to Geocode with Googlemaps %s %s %s",par.partner_id.street,par.partner_id.zip,par.partner_id.city)
+                    _logger.info("%s Try to Geocode with Googlemaps %s %s %s",par.id,par.partner_id.street,par.partner_id.zip,par.partner_id.city)
                     
                     try:
                         a = par.partner_id.street+', '+ par.partner_id.zip+' '+par.partner_id.city
@@ -428,7 +435,7 @@ class WebtourParticipant(models.Model):
                         lng=geocode_result[0]['geometry']['location']['lng']
                         par.partner_id.partner_latitude = float(lat)
                         par.partner_id.partner_longitude = float(lng)
-                        _logger.info("Got Googlemap Geocoding  %f %f",par.partner_id.partner_latitude,par.partner_id.partner_longitude)
+                        _logger.info("%s Got Googlemap Geocoding  %f %f",par.id,par.partner_id.partner_latitude,par.partner_id.partner_longitude)
                         par.env.cr.commit()
                     except:
                         pass
@@ -482,7 +489,7 @@ class WebtourParticipant(models.Model):
                     # call googlemap to find distances by car to the neerst distinations
                     gmaps = googlemaps.Client(key=self.env['ir.config_parameter'].get_param('campos_transportation_googlemaps_key.distance_matrix'))
                     matrix = gmaps.distance_matrix(origins, destinations)
-                    _logger.info("Google maps responce %s", matrix)
+                    _logger.info("%s Google maps responce %s", par.id,matrix)
                     
                     n = 0
                     for d in sdists: # loop through sorted pickuplocations and evaluate corosponing googlemaps responce
@@ -505,13 +512,27 @@ class WebtourParticipant(models.Model):
                             break       #Max 5 distinations                       
                         
                     if homedestination:
-                        _logger.info("Closest Home Destination found %s %f %s",homedestination, homedistance,homeduration)
+                        _logger.info("%s Closest Home Destination found %s %f %s",par.id,homedestination, homedistance,homeduration)
                         par.individualtocampfromdestination_id=homedestination
                         par.individualfromcamptodestination_id=homedestination
 
                     else:
-                        _logger.info("!!!!!!!!!!!! No Home Destination found")    
-                 
+                        _logger.info("%s !!!!!!!!!!!! No Home Destination found",par.id,)    
+
+
+    @api.one
+    def clearusecamptransportjobber_nocampdays(self):
+        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s", self.id,self.transport_to_camp,self.transport_from_camp)
+        
+        if self.workas_jobber and not self.camp_day_ids and self.transport_to_camp:            
+            self.transport_to_camp = False
+            
+        if self.workas_jobber and not self.camp_day_ids and self.transport_from_camp:   
+            self.transport_from_camp = False
+        
+        return
+    
+             
     @api.multi
     def clearusecamptransport(self):
         # find participants missing usUserIDno, from Registration having a usGroupIDno

@@ -12,7 +12,7 @@
 <field name="latitude" string="latitude"/>
 <field name="longitude" string="longitude"/>
 <field name="zip_city" string="Zip City"/>
-<field name="id" string="Id"/>
+<field name="address" string="address"/>
 </tree>
 </field>
 </record>
@@ -36,6 +36,18 @@
 </sheet>
 </form>
 </field>
+</record>
+
+<record id="view_search_webtourusdestination" model="ir.ui.view">
+	<field name="name">Webtour usdestination Search</field>
+	<field name="model">campos.webtourusdestination</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="zip_city"/>
+			<field name="address"/>
+			<field name="note"/>
+		</search>
+	</field>
 </record>
 
 <!-- Action to open Webtour Us Destination list -->
