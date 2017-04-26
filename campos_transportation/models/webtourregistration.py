@@ -12,6 +12,7 @@ from openerp import models, fields, api
 from math import sin, cos, sqrt, atan2, radians
 from operator import itemgetter
 import googlemaps
+from xml.dom import minidom
 
 from openerp.addons.connector.queue.job import job, related_action
 from openerp.addons.connector.session import ConnectorSession
@@ -40,6 +41,12 @@ def do_delayed_webtourdefaulthomedestination(session, model, reg_id):
     if reg.exists():
         reg.set_webtourdefaulthomedestination()
 
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_webtourupdate(session, model, reg_id):
+    reg = session.env['event.registration'].browse(reg_id)
+    if reg.exists():
+        reg.webtourupdate()               
 
 class WebtourRegistration(models.Model):
     _inherit = 'event.registration'
@@ -215,6 +222,66 @@ class WebtourRegistration(models.Model):
             dicto["recalcfromneed"]=True
             for par in self.participant_ids:
                     par.write(dicto)       
+    
+    @api.one
+    def webtourupdate(self):
+        _logger.info('webtourupdate XXXXXXXX ')
+        webtoutexternalid_prefix = self.event_id.webtourconfig_id.webtoutexternalid_prefix
+        
+        if self.webtourusgroupidno:
+            # Test if usGroup exist in Webtour
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+ # HUsk Check NAME       
+            if newidno == "0": #If not try to Create new usGroup
+                _logger.info("webtourupdate Group Could not find usGroup in Webtour: %s %s %s",str(self.id), self.name, self.webtourusgroupidno)
+                
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                
+                if newidno <> "0": # usGroup created succesfully
+                    _logger.info("webtourupdate Recreate usGroup %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                    self.webtourusgroupidno = newidno
+                else:
+                    _logger.info("webtourupdate Could not Recreate usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno) 
+            elif newidno <> self.webtourusgroupidno : #STRANGE got other usGroup Id
+                _logger.info("webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                self.webtourusgroupidno = newidno
+
+        else: #If not try to Create new usGroup
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+            
+            if newidno <> "0": # usGroup created succesfully
+                _logger.info("webtourupdate Created usGroup %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                self.webtourusgroupidno = newidno
+            else:
+                _logger.info("webtourupdate Could not Create usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno) 
+         
+        if self.webtourusgroupidno: # Check usUser
+            
+            #Get all usUserIDno's from webtour and conver to a simple list
+            response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/GroupIDno/?GroupIDno='+self.webtourusgroupidno}).responce.encode('utf-8'))                  
+            ususers = response_doc.getElementsByTagName("a:IDno")
+            ususerslist=[]
+            for u in ususers:
+                ususerslist.append(str(u.firstChild.data))
+                
+            #find participants not in list and try to Create usUser
+            rs_missingususeridno= self.env['campos.event.participant'].search([('webtourusgroupidno', '=', self.webtourusgroupidno),('webtourususeridno', 'not in', ususerslist)
+                                                                          ,'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])           
+            for par in rs_missingususeridno:
+                req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+                
+                if newidno <> "0":
+                    _logger.info("webtourupdate Created usUser: %s %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                    par.webtourususeridno=newidno
+                else:
+                    _logger.info("webtourupdate Could not Create usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                    par.webtourususeridno=False
+
+            usneeds= self.env['campos.webtourusneed'].search([('webtour_groupidno', '=', self.webtourusgroupidno),('webtour_useridno', '!=', False)])           
+            _logger.info('webtourupdate ZZZZZZZZZZZZZ No of usNeeds %s',len(usneeds))
+            for usneed in usneeds:
+                usneed.get_create_webtour_need()
             
     @api.multi
     def action_update_webtourtravelneed_ids(self):
@@ -233,7 +300,12 @@ class WebtourRegistration(models.Model):
         for reg in self:
             session = ConnectorSession.from_env(self.env)
             do_delayed_webtourdefaulthomedestination.delay(session, 'event.registration', reg.id)
-                    
+ 
+    @api.multi
+    def action_webtourupdate(self):
+        for reg in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_webtourupdate.delay(session, 'event.registration', reg.id)                   
 
 '''
     @api.one

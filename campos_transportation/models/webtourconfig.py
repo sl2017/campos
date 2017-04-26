@@ -16,6 +16,7 @@ class webtourconfig(models.Model):
     campdestinationid = fields.Many2one('campos.webtourusdestination', 'id',ondelete='set null')
     tocamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','To Camp TripType', ondelete='set null')
     fromcamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','From Camp TripType', ondelete='set null')
+    webtoutexternalid_prefix = fields.Char('webtour ExternaiId prefix', default='0')
     
     @api.multi
     def action_webtour_get_create_usneed_tron(self):
@@ -190,7 +191,7 @@ class webtourconfig(models.Model):
     @api.multi
     def action_clearusecamptransportjobber_nocampdays(self):
  
-        pars = self.env['campos.event.participant'].search([('workas_jobber', '=', True),('camp_day_ids', '=', False),'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
+        pars = self.env['campos.event.participant'].search([('staff', '=', True),('camp_day_ids', '=', False),'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
         _logger.info("action_clearusecamptransportjobber_nocampdays %s",len(pars))
         n=100
         for par in pars:     
@@ -198,9 +199,7 @@ class webtourconfig(models.Model):
             
             if n > 0: n= n-1
             else: break
-              
-        
-            
+                          
                    
 class WebtourTripType(models.Model):
     _description = 'Webtour Trip Types'

@@ -522,12 +522,12 @@ class WebtourParticipant(models.Model):
 
     @api.one
     def clearusecamptransportjobber_nocampdays(self):
-        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s", self.id,self.transport_to_camp,self.transport_from_camp)
+        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s %s", self.id,self.transport_to_camp,self.transport_from_camp,self.camp_day_ids)
         
-        if self.workas_jobber and not self.camp_day_ids and self.transport_to_camp:            
+        if self.staff and not self.camp_day_ids and self.transport_to_camp:            
             self.transport_to_camp = False
             
-        if self.workas_jobber and not self.camp_day_ids and self.transport_from_camp:   
+        if self.staff and not self.camp_day_ids and self.transport_from_camp:   
             self.transport_from_camp = False
         
         return

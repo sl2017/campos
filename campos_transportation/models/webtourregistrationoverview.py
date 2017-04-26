@@ -89,7 +89,7 @@ class WebtourRegistrationOverview(models.Model):
         _logger.info('"OPEN Reg: %s %s', view, treeview)
         return {
                 'name': ("Registration from %s" % self.name),
-                'view_mode': 'tree,form',
+                'view_mode': 'form',
                 'view_type': 'form',
                 'views': [(treeview.id, 'tree'), (view.id, 'form')],
                 'res_model': 'event.registration',
@@ -97,3 +97,9 @@ class WebtourRegistrationOverview(models.Model):
                 'nodestroy': True,
                 'domain': [('id', '=', self.id)]
             }
+        
+    @api.multi    
+    def action_updatewebtour(self):
+        self.ensure_one()
+        _logger.info('action_updatewebtour XXXXXXXX ')
+        self.env['event.registration'].search([('id','=',self.registration_id.id)]).webtourupdate()

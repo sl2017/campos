@@ -45,8 +45,8 @@
 <group name="user_top">
 <group name="group_left">
 <field name="id"/>
-<field name="registration_id"/>
-<field name="participant_id"/>
+<field name="registration_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_gl'}"/>
+<field name="participant_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_participant'}"/>
 <field name="state"/>
 <field name="regstate"/>
 <field name="workas_jobber"/>
