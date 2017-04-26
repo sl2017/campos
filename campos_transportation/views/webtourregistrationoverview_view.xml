@@ -32,10 +32,10 @@
 <group name="user_top">
 <group name="group_left">
 <field name="id"/>
-<field name="registration_id"/>
+<field name="registration_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_gl'}"/>
 <field name="regstate"/>
 <field name="scoutgroup"/>
-<button name="action_open_registration" string="Edit Registration" type="object"/>
+<button name="action_updatewebtour" string="Update Webtour" type="object"/>
 <button name="action_open_groupparticipants" string="Add/Edit Participants" type="object"/>
 </group>
 <group name="group_right">
