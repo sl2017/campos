@@ -91,9 +91,12 @@ class CamposFeeSsRegistration(models.Model):
         aio = self.env['account.invoice']
         for ssreg in self:
             
-            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            # Sydslesvig
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.make_invoice_spec(subtract1=False)
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
                 ssreg.make_invoice_spec(subtract1=True)
-            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
     
     @api.multi            
