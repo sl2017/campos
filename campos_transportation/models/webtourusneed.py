@@ -240,11 +240,13 @@ class WebtourUsNeed(models.Model):
             note = False
             if self.travelneed_id.deadline and (self.travelneed_id.deadline != 'Select'):
                 note = 'Deadline: ' + self.travelneed_id.deadline
+              
             if self.travelneed_id.travelconnectiondetails:
                 if note:
-                    note = note + ', '
-                note = note + 'Connection: ' + self.travelneed_id.travelconnectiondetails     
-        
+                    note = note + ', Connection: ' + self.travelneed_id.travelconnectiondetails 
+                else:
+                    note = 'Connection: ' + self.travelneed_id.travelconnectiondetails 
+                         
             if self.travelneed_id.campos_TripType_id.returnjourney: #Return jurney
                 startnote = False
                 endnote = note
@@ -329,13 +331,15 @@ class WebtourUsNeed(models.Model):
                     
                     if ((self.travelneed_deadline != self.campos_transfered_deadline)
                         or (self.travelneed_travelconnectiondetails != self.campos_transfered_travelconnectiondetails)):
-                        if startnote == False:
-                            startnote=""  
-                        request=request+"&StartNote="+startnote
+                        if startnote == False: 
+                            request=request+"&StartNote= "
+                        else:
+                            request=request+"&StartNote="+startnote
                         
                         if endnote == False:
-                            endnote="" 
-                        request=request+"&EndNote="+endnote
+                            request=request+"&EndNote= "
+                        else:    
+                            request=request+"&EndNote="+endnote
                         
                         request=request+"&StartDateTime="+startdatetime
                         request=request+"&EndDateTime="+enddatetime      
@@ -354,7 +358,7 @@ class WebtourUsNeed(models.Model):
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Update/?' + request}).responce.encode('utf-8'))
                 
                     if get_tag_data("a:IDno") <> "0": # Stil OK?
-                        _logger.info("%s 9A. Need updated with the Request %s Response %s",self.id, request, response_doc.toprettyxml(indent="   ")) 
+                        _logger.info("%s 9A. Need updated with the Request %s Response %s",self.id, request, response_doc) #.toprettyxml(indent="   ")
                         updatewebtourfields()
                         needtransfered = True
                     else:
@@ -372,7 +376,7 @@ class WebtourUsNeed(models.Model):
                     if self.campos_transfered_startdatetime != startdatetime: dicto['campos_transfered_startdatetime']  = startdatetime
                     if self.campos_transfered_enddatetime != enddatetime : dicto['campos_transfered_enddatetime']  = enddatetime
                     if self.campos_transfered_startdestinationidno != self.campos_startdestinationidno: dicto['campos_transfered_startdestinationidno']  = self.campos_startdestinationidno
-                    if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: dicto['ampos_transfered_enddestinationidno']  = self.campos_enddestinationidno
+                    if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: dicto['campos_transfered_enddestinationidno']  = self.campos_enddestinationidno
                     if self.campos_transfered_startnote != startnote: dicto['campos_transfered_startnote']  = startnote
                     if self.campos_transfered_endnote != endnote: dicto['campos_transfered_endnote']  = endnote
                     if self.webtour_deleted: dicto['webtour_deleted']  = False # Clear Delete falg
@@ -391,7 +395,7 @@ class WebtourUsNeed(models.Model):
 
                         updatewebtourfields()
                         self.get_webtour_need_change()
-                        _logger.info("%s 12. Deleted responce %s",self.id, response_doc.toprettyxml(indent="   "))
+                        _logger.info("%s 12. Deleted responce %s",self.id, response_doc) #.toprettyxml(indent="   ")
                     self.webtour_deleted = True
         else: 
             _logger.info("%s 1B. No changes in travel data",self.id)

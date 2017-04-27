@@ -5,7 +5,7 @@ from xml.dom import minidom
 
 import logging
 from math import sin, cos, sqrt, atan2, radians
-from operator import itemgetter
+from operator import itemgetter, is_
 import googlemaps
 
 _logger = logging.getLogger(__name__)
@@ -61,8 +61,27 @@ class WebtourParticipant(models.Model):
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
     donotparticipate = fields.Boolean('Do not participate') 
     
-            
-              
+    is_admin = fields.Boolean('is admin', compute="_check_is_admin") 
+    is_groupisdanish_notadmin = fields.Boolean('is Danish and Not admin', compute="_check_user_group")
+    show_specialtocampdate = fields.Boolean('show special to campdate', compute="_compute_show_specialtocampdate")
+    show_specialfromcampdate = fields.Boolean('show special from campdate', compute="_compute_show_specialfromcampdate")
+    
+    @api.one
+    def _check_is_admin(self):
+         self.is_admin = self.user_has_groups('campos_event.group_campos_admin')
+
+    @api.one
+    def _compute_show_specialtocampdate(self):
+         self.show_specialtocampdate = self.transport_to_camp and (self.is_admin or (not self.groupisdanish) or self.specialtocampdate_id)
+
+    @api.one
+    def _compute_show_specialfromcampdate(self):
+         self.show_specialfromcampdate = self.transport_from_camp and (self.is_admin or (not self.groupisdanish) or self.specialfromcampdate_id)
+
+    @api.one
+    def _check_user_group(self):
+         self.is_groupisdanish_notadmin = (not self.user_has_groups('campos_event.group_campos_admin')) and self.groupisdanish
+        
     @api.model
     def get_create_usgroupidno_tron(self):
         MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
@@ -290,6 +309,7 @@ class WebtourParticipant(models.Model):
                 or 'transport_to_camp' in vals               
                 or 'recalctoneed' in vals
                 or 'donotparticipate' in vals 
+                or 'webtourususeridno' in vals
                 ):
                 if not par.tocampdate and 'tocampdate' not in vals:
                     _compute_tocampdate()
@@ -309,7 +329,8 @@ class WebtourParticipant(models.Model):
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals
                 or 'recalcfromneed' in vals
-                or 'donotparticipate' in vals                
+                or 'donotparticipate' in vals
+                or 'webtourususeridno' in vals          
                 ):              
                 if not self.fromcampdate and 'fromcampdate' not in vals: 
                     _compute_fromcampdate()                   
