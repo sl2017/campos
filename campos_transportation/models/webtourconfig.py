@@ -188,7 +188,7 @@ class webtourconfig(models.Model):
                     if need.webtour_needidno != str(usneedgroupidnolist[n]):
                         _logger.info("action_webtour_check_usneed webtourusgroupidno !! id:%s, par:%s, db:%s, wt:%s",need.id,need.participant_id ,need.webtour_groupidno,usneedgroupidnolist[n])
         
-    @api.multi
+    @api.model
     def action_clearusecamptransportjobber_nocampdays(self):
  
         pars = self.env['campos.event.participant'].search([('staff', '=', True),('camp_day_ids', '=', False),'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
