@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="make_invoice_50" string="Test invoice" type="object" />
+                    <button name="make_invoice_100" string="Test invoice" type="object" />
                 </header>
                 <sheet>
                     <!-- TODO -->

@@ -85,7 +85,96 @@ class CamposFeeSsRegistration(models.Model):
                         vals['invoice_id'] = ssreg.invoice_id.id
                         self.env['account.invoice.line'].create(vals)
                         ssreg.invoice_id.button_compute(set_total=True)
+    
+    @api.multi            
+    def make_invoice_100(self):
+        aio = self.env['account.invoice']
+        for ssreg in self:
             
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.make_invoice_spec(subtract1=True)
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+    
+    @api.multi            
+    def make_invoice_spec(self, subtract1=False):
+        aio = self.env['account.invoice']
+        for ssreg in self:
+            
+                #1 Camp PArticipations
+                query = """  select camp_product_id, count(*) 
+                             from campos_fee_ss_participant 
+                             where ssreg_id in %s 
+                             group by camp_product_id
+                        """
+                self._cr.execute(query, (tuple([ssreg.id]), ))
+                for product_id, quantity in self._cr.fetchall():
+                    product = self.env['product.product'].browse(product_id)
+                    if product:
+                        if not ssreg.invoice_id:
+                            vals = self._prepare_create_invoice_vals()
+                            _logger.info("Create invoice: %s", vals)
+                            ssreg.invoice_id = aio.create(vals)
+                        desc = product.name_get()[0][1]
+                        vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
+                        vals['invoice_id'] = ssreg.invoice_id.id
+                        self.env['account.invoice.line'].create(vals)
+                        ssreg.invoice_id.button_compute(set_total=True)
+                
+                #2 Transport
+                query = """  select transport_product_id, count(*) 
+                             from campos_fee_ss_participant 
+                             where ssreg_id in %s 
+                             group by transport_product_id
+                        """
+                self._cr.execute(query, (tuple([ssreg.id]), ))
+                for product_id, quantity in self._cr.fetchall():
+                    product = self.env['product.product'].browse(product_id)
+                    if product:
+                        if not ssreg.invoice_id:
+                            vals = self._prepare_create_invoice_vals()
+                            _logger.info("Create invoice: %s", vals)
+                            ssreg.invoice_id = aio.create(vals)
+                        desc = product.name_get()[0][1]
+                        vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
+                        vals['invoice_id'] = ssreg.invoice_id.id
+                        self.env['account.invoice.line'].create(vals)
+                        ssreg.invoice_id.button_compute(set_total=True)
+                        
+                # 3 Other orders (Invoice sales orders)
+                invoices = {}
+                sales_order_line_obj = self.env['sale.order.line']
+                sales_order_obj = self.env['sale.order']
+                for line in sales_order_line_obj.search([('order_partner_id', '=', self.registration_id.partner_id.id)]):
+                    _logger.info('SO %s', line)
+                    if (not line.invoiced) and (line.state not in ('draft', 'cancel')) and line.product_uom_qty != 0:
+                        product = line.product_id
+                        if product:
+                            if not ssreg.invoice_id:
+                                vals = self._prepare_create_invoice_vals()
+                                _logger.info("Create invoice: %s", vals)
+                                ssreg.invoice_id = aio.create(vals)
+                            desc = product.name_get()[0][1]
+                            vals = self._prepare_create_invoice_line_vals(False, line.product_uom_qty, type='out_invoice', description=desc, product=product)
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            ail_id = self.env['account.invoice.line'].create(vals)
+                            line.invoice_lines = ail_id
+                
+                if subtract1:
+                    ssreg1 = self.search([('registration_id', '=', ssreg.registration_id.id),('invoice_id', '!=', False),('snapshot_id', '=', 2)])
+                    if ssreg1:
+                        product = self.env['product.product'].search([('default_code', '=', 'RATE1')])
+                        if product:
+                            desc = u'Opkrævet på fak %s' % ssreg1.invoice_id.number
+                            _logger.info('RATE1 %s %s', desc, ssreg1.invoice_id.amount_total)
+                            vals = self._prepare_create_invoice_line_vals(-ssreg1.invoice_id.amount_total, 1, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                                
+                        
+                ssreg.invoice_id.button_compute(set_total=True)
+                        
     def _prepare_create_invoice_line_vals(self, amount, quantity, type='out_invoice', description=False, product=False):
         '''
         Returns a "Vals" dict ready to create a invoice line.
@@ -100,23 +189,25 @@ class CamposFeeSsRegistration(models.Model):
         '''
         ailo = self.env['account.invoice.line']
         
-        if self.registration_id.econ_partner_id:
-            partner = self.registration_id.econ_partner_id
-        else:
-            partner = self.registration_id.partner_id
+        partner = self.registration_id.partner_id
+        _logger.info('IL Call amount %s', amount)
         
+        _logger.info('IL Call %s : %s', partner.property_account_receivable.currency_id.id if partner.property_account_receivable.currency_id else self.env.user.company_id.currency_id.id, self.env.user.company_id.currency_id.id)
         il_vals = ailo.product_id_change(
             product.id, product.uom_id.id, type=type,
             partner_id=partner.id,
-            fposition_id=partner.property_account_position.id)['value']
+            fposition_id=partner.property_account_position.id, 
+            currency_id=partner.property_account_receivable.currency_id.id if partner.property_account_receivable.currency_id else self.env.user.company_id.currency_id.id,
+            company_id=self.env.user.company_id.id)['value']
         il_vals.update({
             'product_id': product.id,
-            'price_unit': amount,
             'quantity': quantity
         })
+        if amount:
+            il_vals['price_unit'] = amount
         if description:
             il_vals['name'] = description
-        
+        _logger.info('IL Vals %s', il_vals)
         return il_vals
 
     def _prepare_create_invoice_vals(self, type='out_invoice', date_invoice=False):
@@ -130,17 +221,17 @@ class CamposFeeSsRegistration(models.Model):
         '''
         aio = self.env['account.invoice']
         
-        if self.registration_id.econ_partner_id:
-            partner = self.registration_id.econ_partner_id
-        else:
-            partner = self.registration_id.partner_id
+#         if self.registration_id.econ_partner_id:
+#             partner = self.registration_id.econ_partner_id
+#         else:
+        partner = self.registration_id.partner_id
         
         if not date_invoice:
             date_invoice = fields.Date.today()
         
         vals = {
             'partner_id': partner.id,
-            'currency_id': self.env.user.company_id.currency_id.id,
+            'currency_id': partner.property_account_receivable.currency_id.id if partner.property_account_receivable.currency_id else self.env.user.company_id.currency_id.id,
             'type': type,
             'company_id': self.env.user.company_id.id,
             'date_invoice': date_invoice,
@@ -170,15 +261,14 @@ class CamposFeeSsRegistration(models.Model):
         if not org:
             org = self.organization_id
         invoice = False
-        if self.partner_payer_id:
-            partner = self.partner_payer_id
-        else:
-            partner = self.partner_id
+#         if self.partner_payer_id:
+#             partner = self.partner_payer_id
+#         else:
+        partner = self.partner_id
         if auto:
             # Find invoice to add to
             invoice = aio.search([('partner_id', '=', partner.id),
                                   ('state', '=', 'draft'),
-                                  ('auto_subscription', '=', True),
                                   ('company_id', '=', org.legal_company_id.id)],
                                  order='date_invoice', limit=1)
 
