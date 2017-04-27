@@ -26,6 +26,7 @@
             			<field name="fee_total"/>
             			<field name="state"/>
             			<field name="invoice_id"/>
+            			<field name="audit"/>
             			<field name="sspar_ids" nolabel="1" colspan="2"/>
                     </group>
                 </sheet>
@@ -41,6 +42,7 @@
             <search>
                 <field name="snapshot_id"/>
                	<field name="registration_id"/>
+               	<field name="audit"/>
             </search>
         </field>
     </record>

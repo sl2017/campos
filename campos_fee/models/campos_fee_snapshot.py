@@ -19,7 +19,7 @@ class CamposFeeSnapshot(models.Model):
     state = fields.Selection([('draft', 'Draft'),
                               ('inprogress', 'In Progress'),
                               ('completed', 'Completed')], default='draft', string='State', track_visibility='onchange')
-    execute_func = fields.Selection([('make_invoice_50', '1. rate 50%')], 'Excute')
+    execute_func = fields.Selection([('make_invoice_50', '1. rate 50%'), ('make_invoice_100', '2. rate 100%')], 'Excute')
 
     @api.multi
     def action_do_snapshot(self):

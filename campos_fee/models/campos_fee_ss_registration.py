@@ -40,6 +40,7 @@ class CamposFeeSsRegistration(models.Model):
     material_cost = fields.Float('Material orders')
     fee_total = fields.Float('Total Fee')
     invoice_id = fields.Many2one('account.invoice', 'Invoice')
+    audit = fields.Boolean('Audit')
 
 
     @api.multi
@@ -174,6 +175,8 @@ class CamposFeeSsRegistration(models.Model):
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
+                if ssreg.number_participants < ssreg.number_participants:
+                    ssreg.audit = True 
                                 
                         
                 ssreg.invoice_id.button_compute(set_total=True)
