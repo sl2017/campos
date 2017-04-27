@@ -225,7 +225,7 @@ class WebtourRegistration(models.Model):
     
     @api.one
     def webtourupdate(self):
-        _logger.info('webtourupdate XXXXXXXX ')
+        _logger.info('%s webtourupdate Entered', self.id)
         webtoutexternalid_prefix = self.event_id.webtourconfig_id.webtoutexternalid_prefix
         
         if self.webtourusgroupidno:
@@ -233,27 +233,27 @@ class WebtourRegistration(models.Model):
             newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
  # HUsk Check NAME       
             if newidno == "0": #If not try to Create new usGroup
-                _logger.info("webtourupdate Group Could not find usGroup in Webtour: %s %s %s",str(self.id), self.name, self.webtourusgroupidno)
+                _logger.info("%s webtourupdate Group Could not find usGroup in Webtour: %s %s",str(self.id), self.name, self.webtourusgroupidno)
                 
                 newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
                 
                 if newidno <> "0": # usGroup created succesfully
-                    _logger.info("webtourupdate Recreate usGroup %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                    _logger.info("%s webtourupdate Recreate usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
                     self.webtourusgroupidno = newidno
                 else:
-                    _logger.info("webtourupdate Could not Recreate usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno) 
+                    _logger.info("%s webtourupdate Could not Recreate usGroup %s %s",str(self.id), self.name, self.webtourusgroupidno) 
             elif newidno <> self.webtourusgroupidno : #STRANGE got other usGroup Id
-                _logger.info("webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                _logger.info("%s webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
                 self.webtourusgroupidno = newidno
 
         else: #If not try to Create new usGroup
             newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
             
             if newidno <> "0": # usGroup created succesfully
-                _logger.info("webtourupdate Created usGroup %s %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
+                _logger.info("%s webtourupdate Created usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
                 self.webtourusgroupidno = newidno
             else:
-                _logger.info("webtourupdate Could not Create usGroup %s %s %s",str(self.id), self.name, self.webtourusgroupidno) 
+                _logger.info("%s webtourupdate Could not Create usGroup %s %s",str(self.id), self.name, self.webtourusgroupidno) 
          
         if self.webtourusgroupidno: # Check usUser
             
@@ -272,14 +272,14 @@ class WebtourRegistration(models.Model):
                 newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
                 
                 if newidno <> "0":
-                    _logger.info("webtourupdate Created usUser: %s %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                    _logger.info("%s webtourupdate Created usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
                     par.webtourususeridno=newidno
                 else:
-                    _logger.info("webtourupdate Could not Create usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                    _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
                     par.webtourususeridno=False
 
             usneeds= self.env['campos.webtourusneed'].search([('webtour_groupidno', '=', self.webtourusgroupidno),('webtour_useridno', '!=', False)])           
-            _logger.info('webtourupdate ZZZZZZZZZZZZZ No of usNeeds %s',len(usneeds))
+            _logger.info('%s webtourupdate No of usNeeds to update %s',self.id,len(usneeds))
             for usneed in usneeds:
                 usneed.get_create_webtour_need()
             
