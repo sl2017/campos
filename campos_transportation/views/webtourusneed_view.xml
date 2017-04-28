@@ -102,6 +102,40 @@
 </field>
 </record>
 
+<record id="view_search_webtourusneed" model="ir.ui.view">
+	<field name="name">webtourusneed</field>
+	<field name="model">campos.webtourusneed</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="registration_id"/>		
+			<field name="campos_startdestinationidno"/>
+			<field name="campos_enddestinationidno"/>
+			<field name="campos_traveldate"/>
+			<field name="participant_id"/>   
+			<field name="webtour_needidno"/>
+			<field name="webtour_useridno"/>
+			<field name="webtour_groupidno"/>
+			<field name="webtour_touridno"/>
+			
+			<filter string="transfered_demandneeded" name="ftransfered_demandneeded" domain="[('campos_transfered_demandneeded','=',1)]" help="campos_transfered_demandneeded"/>
+			<filter string="campos_demandneeded" name="fdemandneeded" domain="[('campos_demandneeded','=',1)]" help="campos_demandneeded"/>
+			<filter string="To Camp" name="ftocamp" domain="[('campos_demandneeded','=',1),('campos_TripType_id.id','=',1)]" help="campos_TripType_id = 1 and Demand needed"/>
+			<filter string="From Camp" name="ftocamp" domain="[('campos_demandneeded','=',1),('campos_TripType_id.id','=',2)]" help="campos_TripType_id = 2 and Demand needed"/>
+		
+			<group expand="0" string="Group By...">
+            <filter name="fcampos_traveldate" string="traveldate" icon="terp-personal" domain="[]" context="{'group_by':'campos_traveldate'}"/>
+            <filter name="fstartdestinationidno" string="start destination" icon="terp-personal" domain="[]" context="{'group_by':'campos_startdestinationidno'}"/>
+            <filter name="fenddestinationidno" string="end destination" icon="terp-personal" domain="[]" context="{'group_by':'campos_enddestinationidno'}"/>  
+            <filter name="fwebtour_groupidno" string="webtour_groupidno" icon="terp-personal" domain="[]" context="{'group_by':'webtour_groupidno'}"/>
+            <filter name="fwebtour_touridno" string="webtour_touridno" icon="terp-personal" domain="[]" context="{'group_by':'webtour_touridno'}"/>          
+			</group>
+		</search>
+	</field>
+</record>
+
+
+
+
 <record id="view_tree_WebtourTripOverview" model="ir.ui.view">
 	<field name="name">Webtour Trip Overview</field>
 	<field name="model">campos.webtourusneed.overview</field>

@@ -109,6 +109,27 @@
 			</field>	
 		</record>
 
+		<!-- Server action and bindig to present iframe embed code -->
+		<record id="action_start_webtour_update_par" model="ir.actions.server">
+			<field name="name">Start Webtour Update Job Par</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="campos_event.model_campos_event_participant" />
+			<field name="state">code</field>
+			<field name="code">
+				self.webtourupdate(cr, uid, context.get('active_ids'), context)
+			</field>
+		</record>
+		
+		<record id="ir_start_webtour_update_par" model="ir.values">
+			<field name="model">campos.event.participant</field>
+			<field name="name">Start Webtour Update Job Par</field>
+			<field name="key2">client_action_multi</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_start_webtour_update_par" />
+		</record>
+
+
 	
 		<!-- Add to Finalregistration Particpant view --> 
 		<record id="view_form_finalregistration_participant_webtour" model="ir.ui.view">
