@@ -178,11 +178,17 @@ class CamposFeeSsRegistration(models.Model):
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
-                if ssreg.number_participants < ssreg.number_participants:
-                    ssreg.audit = True 
+                
+                
+                    if ssreg.number_participants < ssreg1.number_participants:
+                        ssreg.audit = True
+                
+                ssreg.invoice_id.button_compute(set_total=True)
+                if not ssreg.audit:
+                    ssreg.invoice_id.signal_workflow('invoice_open')
                                 
                         
-                ssreg.invoice_id.button_compute(set_total=True)
+                
                         
     def _prepare_create_invoice_line_vals(self, amount, quantity, type='out_invoice', description=False, product=False):
         '''
