@@ -40,6 +40,9 @@ class CamposFeeSsRegistration(models.Model):
     material_cost = fields.Float('Material orders')
     fee_total = fields.Float('Total Fee')
     invoice_id = fields.Many2one('account.invoice', 'Invoice')
+    inv_currency_id = fields.Many2one(related='invoice_id.currency_id', readonly=True)
+    inv_amount_total = fields.Float(related='invoice_id.amount_total', readonly=True)
+    invoice_line = fields.One2many(related='invoice_id.invoice_line', readonly=True)
     audit = fields.Boolean('Audit')
 
 
@@ -94,9 +97,9 @@ class CamposFeeSsRegistration(models.Model):
             
             # Sydslesvig
             if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
-                ssreg.make_invoice_spec(subtract1=False)
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
             elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
-                ssreg.make_invoice_spec(subtract1=True)
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=True)
             elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
     
