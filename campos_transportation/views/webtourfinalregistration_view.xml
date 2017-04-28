@@ -1,6 +1,27 @@
 <?xml version="1.0"?>
 	<openerp>
 		<data>
+		<!-- Server action and bindig to present iframe embed code -->
+		<record id="action_start_webtour_update" model="ir.actions.server">
+			<field name="name">Start Webtour Update Job</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="event.model_event_registration" />
+			<field name="state">code</field>
+			<field name="code">
+				self.action_webtourupdate(cr, uid, context.get('active_ids'), context)
+			</field>
+		</record>
+		
+		<record id="ir_start_webtour_update" model="ir.values">
+			<field name="model">event.registration</field>
+			<field name="name">Start Webtour Update Job</field>
+			<field name="key2">client_action_multi</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_start_webtour_update" />
+		</record>
+
+	
 		<!-- Add to Finalregistration  GL view -->
 		<record id="view_form_finalregistration_webtour" model="ir.ui.view">
 			<field name="name">event.event.campos.reg.inherit3</field>
@@ -44,7 +65,7 @@
 						</field>											
 						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
 						<button name="action_update_webtourdefaulthomedestination" string="Update Default Home Destination" type="object"/>
-           			</page>
+           			</page> 
         		</xpath>        		  		
 			</field>	
 		</record>
@@ -82,6 +103,7 @@
 						</field>
 						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
 						<button name="action_update_webtourdefaulthomedestination" string="Update Default Home Destination" type="object"/>
+						<button name="webtourupdate" string="Update Webtour" type="object"/> 						
            			</page>
         		</xpath> 		        		  		
 			</field>	
@@ -98,16 +120,21 @@
 				<xpath expr="/form/sheet/group/field[@name='transport_to_camp']" position="after">
 					<field name="tocamptravelgroup" string="To Camp Travel Group" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
 					<field name="individualtocampfromdestination_id" string="Individual to camp pick up location" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
-					<field name="specialtocampdate_id" string="Individual to camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" readonly="1" />
+					<field name="specialtocampdate_id" string="Individual to camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':[('show_specialtocampdate', '=', False)], 'readonly':[('is_admin','=',False)]}"/>
 					<field name="tocampusneed_id" string="To camp Webtour usNeed" options="{'no_create': True, 'no_open': False}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}" readonly="1" groups="campos_event.group_campos_admin"/>					
 					<field name="groupisdanish" invisible="1"/>
+					<field name="is_admin" invisible="1"/>
+					<field name="show_specialtocampdate" invisible="1"/>
+					<field name="tocamp_TripType_id" invisible="1"/>
         		</xpath>
         		
         		<xpath expr="/form/sheet/group/field[@name='transport_from_camp']" position="after">
 					<field name="fromcamptravelgroup"  string="From Camp Travel Group" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" />	       		
 					<field name="individualfromcamptodestination_id" string="Individual From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
-					<field name="specialfromcampdate_id" string="Individual from camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" readonly="1"/>
-        			<field name="fromcampusneed_id" string="From camp Webtour usNeed" options="{'no_create': True, 'no_open': False}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}" readonly="1" groups="campos_event.group_campos_admin"/>										
+					<field name="specialfromcampdate_id" string="Individual from camp date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':[('show_specialfromcampdate', '=', False)], 'readonly':[('is_admin','=',False)]}"/>
+        			<field name="fromcampusneed_id" string="From camp Webtour usNeed" options="{'no_create': True, 'no_open': False}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}" readonly="1" groups="campos_event.group_campos_admin"/>
+        			<field name="fromcamp_TripType_id" invisible="1"/>
+        			<field name="show_specialfromcampdate" invisible="1"/>								
         		</xpath>
         		
         		<xpath expr="/form/sheet/group/field/tree/field[@name='will_participate']" position="after">
@@ -142,8 +169,7 @@
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
 					<field name="webtourcamptransportation" string="Camp transportation" />        		
-	        	</xpath>
-	        	
+	        	</xpath>        	
 			</field>	
 		</record>	
 		
@@ -172,8 +198,7 @@
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
 					<field name="webtourcamptransportation" string="Camp transportation" />        		
-	        	</xpath>
-	        	
+	        	</xpath>     	
 			</field>	
 		</record>	
 			
