@@ -66,6 +66,9 @@ class WebtourParticipant(models.Model):
     show_specialtocampdate = fields.Boolean('show special to campdate', compute="_compute_show_specialtocampdate")
     show_specialfromcampdate = fields.Boolean('show special from campdate', compute="_compute_show_specialfromcampdate")
     
+    webtourtravelneed_ids = fields.One2many(related='registration_id.webtourtravelneed_ids', string = 'Special travel needs')
+    
+    
     @api.one
     def _check_is_admin(self):
          self.is_admin = self.user_has_groups('campos_event.group_campos_admin')
