@@ -68,8 +68,8 @@ class EventRegistration(models.Model):
                 _logger.info('Calc loop %s', par.name)
             reg.fee_participants = fee_participants
             reg.fee_transport = fee_transport
-            reg.write({'number_participants': number_participants,
-                       'number_participants_stored': number_participants})
+            reg.number_participants = number_participants
+            reg.number_participants_stored = number_participants
             _logger.info('Calc # %d', number_participants)
             so_cost = 0.0
             if self.env.uid == SUPERUSER_ID:
