@@ -55,7 +55,7 @@ class EventRegistration(models.Model):
         if self.env.uid == SUPERUSER_ID:
             s = self
         else:
-            s = self.suspend_security():
+            s = self.suspend_security()
         for reg in s:
             _logger.info('INit Calc')
             fee_participants = 0.0
