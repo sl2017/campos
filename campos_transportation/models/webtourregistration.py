@@ -443,7 +443,7 @@ class WebtourRegistrationTravelNeed(models.Model):
 
     overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
-    
+      
     
 class WebtourEntryExitPoint(models.Model):
     _inherit = 'event.registration.entryexitpoint'
