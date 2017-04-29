@@ -51,7 +51,8 @@ class EventRegistration(models.Model):
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state')
     def _compute_fees(self):
-        for reg in self.sudo():
+        for reg in self.suspend_security():
+            _logger.info('INit Calc')
             fee_participants = 0.0
             fee_transport = 0.0
             number_participants = 0
@@ -59,10 +60,12 @@ class EventRegistration(models.Model):
                 fee_participants += par.camp_price
                 fee_transport += par.transport_price_total
                 number_participants += 1
+                _logger.info('Calc loop %s', par.name)
             reg.fee_participants = fee_participants
             reg.fee_transport = fee_transport
-            reg.number_participants = number_participants
-            reg.number_participants_stored = number_participants
+            reg.write({'number_participants': number_participants,
+                       'number_participants_stored': number_participants})
+            _logger.info('Calc # %d', number_participants)
             so_cost = 0.0
             if self.env.uid == SUPERUSER_ID:
                 for so in self.env['sale.order.line'].search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):

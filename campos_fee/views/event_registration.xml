@@ -13,7 +13,7 @@
             <page name="pre_reg" position="before">
             	<page string="Camp Fee">
             		<group>
-            			<field name="number_participants"/>
+            			<field name="number_participants_stored"/>
             		</group>
             		<group groups="campos_event.group_campos_admin">
             			<field name="fee_participants"/>
