@@ -258,7 +258,10 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
-
+    
+    fallback_email = fields.Char(string='Fallback Email', compute='_compute_fallback')
+    fallback_contact = fields.Char(string='Fallback Contact', compute='_compute_fallback')
+    
     reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
     reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
@@ -273,6 +276,27 @@ class EventRegistration(models.Model):
     part_function_view_ids = fields.One2many(related='camp_area_id.committee_id.part_function_view_ids', string='Coordinators')
     reg_view_ids = fields.One2many(related='camp_area_id.reg_view_ids', string='Troops')
 
+    @api.multi
+    def _compute_fallback(self):
+        for reg in self:
+            if reg.econ_email:
+                reg.fallback_email = reg.econ_email
+            elif reg.contact_email:
+                reg.fallback_email = reg.contact_email
+            elif reg.partner_id.email:
+                reg.fallback_email = reg.partner_id.email
+            else:
+                reg.fallback_email = reg.email
+            
+            if reg.econ_partner_id:
+                reg.fallback_contact = reg.econ_partner_id.name
+            elif reg.contact_partner_id:
+                reg.fallback_contact = reg.contact_partner_id.name
+            elif reg.partner_id:
+                reg.fallback_contact = reg.partner_id.name
+            else:
+                reg.fallback_contact = reg.name
+                  
     @api.multi
     def action_edit_survey_response(self):
         fields = []
