@@ -51,7 +51,12 @@ class EventRegistration(models.Model):
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state')
     def _compute_fees(self):
-        for reg in self.suspend_security():
+        
+        if self.env.uid == SUPERUSER_ID:
+            s = self
+        else:
+            s = self.suspend_security():
+        for reg in s:
             _logger.info('INit Calc')
             fee_participants = 0.0
             fee_transport = 0.0
