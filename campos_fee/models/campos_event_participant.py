@@ -66,13 +66,18 @@ class CamposEventParticipant(models.Model):
                     if par.transport_to_camp:
                         transport_co += 1
                 par.transport_co = transport_co
-                if transport_co and par.registration_id.partner_id.municipality_id.product_attribute_id.id:
+                muni_prod_attr_ids = [par.registration_id.partner_id.municipality_id.product_attribute_id.id]
+                if not muni_prod_attr_ids:
+                    if par.registration_id.group_entrypoint and par.registration_id.group_exitpoint:
+                         muni_prod_attr_ids = [par.registration_id.group_entrypoint.municipality_id.product_attribute_id.id, par.registration_id.group_exitpoint.municipality_id.product_attribute_id.id] 
+                if transport_co and muni_prod_attr_ids:
                     pp_id = False
                     if self.env.uid == SUPERUSER_ID:
-                        pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
+                        pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', muni_prod_attr_ids)])
                     else:
-                        pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', [par.registration_id.partner_id.municipality_id.product_attribute_id.id])])
+                        pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.transport_tmpl_id.id),('attribute_value_ids', 'in', muni_prod_attr_ids)])
                     if pp_id:
+                        pp_id = pp_id.sorted(key=lambda r: r.lst_price)
                         par.transport_product_id = pp_id[0]
                         transport_price_total = pp_id[0].lst_price * transport_co
                     
