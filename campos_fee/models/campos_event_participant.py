@@ -66,7 +66,9 @@ class CamposEventParticipant(models.Model):
                     if par.transport_to_camp:
                         transport_co += 1
                 par.transport_co = transport_co
-                muni_prod_attr_ids = [par.registration_id.partner_id.municipality_id.product_attribute_id.id]
+                muni_prod_attr_ids = False 
+                if par.registration_id.partner_id.municipality_id.product_attribute_id.id:
+                    muni_prod_attr_ids = [par.registration_id.partner_id.municipality_id.product_attribute_id.id]
                 if not muni_prod_attr_ids:
                     if par.registration_id.group_entrypoint and par.registration_id.group_exitpoint:
                          muni_prod_attr_ids = [par.registration_id.group_entrypoint.municipality_id.product_attribute_id.id, par.registration_id.group_exitpoint.municipality_id.product_attribute_id.id] 
