@@ -4,6 +4,9 @@
 
 from openerp import api, fields, models, SUPERUSER_ID, _
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class CamposEventParticipant(models.Model):
 
@@ -70,8 +73,9 @@ class CamposEventParticipant(models.Model):
                 if par.registration_id.partner_id.municipality_id.product_attribute_id.id:
                     muni_prod_attr_ids = [par.registration_id.partner_id.municipality_id.product_attribute_id.id]
                 if not muni_prod_attr_ids:
-                    if par.registration_id.group_entrypoint and par.registration_id.group_exitpoint:
-                         muni_prod_attr_ids = [par.registration_id.group_entrypoint.municipality_id.product_attribute_id.id, par.registration_id.group_exitpoint.municipality_id.product_attribute_id.id] 
+                    if par.registration_id.group_entrypoint.municipality_id.product_attribute_id.id and par.registration_id.group_exitpoint.municipality_id.product_attribute_id.id:
+                         muni_prod_attr_ids = [par.registration_id.group_entrypoint.municipality_id.product_attribute_id.id, par.registration_id.group_exitpoint.municipality_id.product_attribute_id.id]
+                _logger.info('Muni: %s', muni_prod_attr_ids) 
                 if transport_co and muni_prod_attr_ids:
                     pp_id = False
                     if self.env.uid == SUPERUSER_ID:
