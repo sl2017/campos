@@ -174,6 +174,6 @@ class CamposEventParticipant(models.Model):
                         if reg_id:
                             cep.registration_id = reg_id[0]
                             cep.payreq_state = 'approved'
-                elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id:
+                elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id and cep.registration_id.partner_id.id != cep.partner_id.id:
                     cep.partner_id.parent_id = cep.registration_id.partner_id
         return res
