@@ -81,7 +81,7 @@ class WebtourRegistration(models.Model):
                 dicto={}
                 dicto["recalctoneed"]=True
                 dicto["recalcfromneed"]=True
-                for par in self.participant_ids:
+                for par in reg.participant_ids:
                     par.write(dicto)  
             else:  
                 if  ('webtourgrouptocampdestination_id' in vals or 'group_entrypoint' in vals):
