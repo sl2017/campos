@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 02:00+0000\n"
-"PO-Revision-Date: 2017-04-28 02:00+0000\n"
+"POT-Creation-Date: 2017-05-01 02:00+0000\n"
+"PO-Revision-Date: 2017-05-01 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,7 @@ msgstr ""
 
 #. module: campos_fee
 #: view:campos.event.participant:campos_fee.campos_event_participant_form_view
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Camp Fee"
 msgstr ""
@@ -290,6 +291,16 @@ msgid "Ikast-Brande"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
+msgid "Invoice"
+msgstr ""
+
+#. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
+msgid "Invoices"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_142
 msgid "Ishøj"
 msgstr ""
@@ -415,6 +426,7 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: model:ir.ui.menu,name:campos_fee.campos_fee_ss_participant_menu
 msgid "Participants"
 msgstr ""
@@ -490,7 +502,13 @@ msgid "Slagelse"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
+msgid "Snapshot"
+msgstr ""
+
+#. module: campos_fee
 #: view:campos.event.participant:campos_fee.campos_event_participant_form_view
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: model:ir.ui.menu,name:campos_fee.campos_fee_snapshot_menu
 #: model:ir.ui.menu,name:campos_fee.campos_fee_snapshot_top_menu
