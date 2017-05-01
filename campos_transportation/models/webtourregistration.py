@@ -431,7 +431,7 @@ class WebtourRegistrationTravelNeed(models.Model):
     '''
     _description = 'Special Travel need on a registration'
     _name='event.registration.travelneed'
-    registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
     travelgroup = fields.Char('Travel Group')
     name = fields.Char('Name', required=True)
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
