@@ -176,6 +176,7 @@
 					<field name="tocamptravelgroup" string="To Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_to_camp', '!=', True),('groupisdanish', '=', True)]}" />
 					<field name="individualtocampfromdestination_id" string="To camp pick up location" attrs="{'invisible':[('transport_to_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 					<field name="specialtocampdate_id" string="To camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}"/>
+					<field name="tocampusneed_id" string="To camp Webtour usNeed" options="{'no_create': True, 'no_open': False}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}" readonly="1" groups="campos_event.group_campos_admin"/>					
 					<field name="tocamp_TripType_id" invisible="1"/>
 					<field name="groupisdanish" invisible="1"/>
 					<field name="group_country_code" invisible="1"/>
@@ -186,7 +187,8 @@
 					<field name="fromcamptravelgroup"  string="From Camp Travel Group" invisible="1" attrs="{'invisible':['|',('transport_from_camp', '!=', True),('groupisdanish', '=', True)]}" />	       		
 					<field name="individualfromcamptodestination_id" string="From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 					<field name="specialfromcampdate_id" string="From camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}"/>
-					<field name="fromcamp_TripType_id" invisible="1"/>
+					<field name="fromcampusneed_id" string="From camp Webtour usNeed" options="{'no_create': True, 'no_open': False}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}" readonly="1" groups="campos_event.group_campos_admin"/>
+        			<field name="fromcamp_TripType_id" invisible="1"/>
 					
 					<button name="action_webtour_jobber_findclosestlocations" string="Find Closest Pickup/dropoff Locations" type="object" class="oe_edit_only"/>
 					
@@ -205,7 +207,7 @@
 						</tree>
 					</field>
 					</group>
-						
+					<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object" />						
         		</xpath>
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
@@ -227,6 +229,7 @@
 					<field name="specialtocampdate_id" string="To camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_to_camp', '!=', True)]}"/>
 					<field name="tocamp_TripType_id" invisible="1"/>
 					<field name="groupisdanish" invisible="1"/>
+					<field name="is_groupisdanish_notadmin" invisible="1"/>
         		</xpath>
         		
         		<xpath expr="//field[@name='transport_from_camp']" position="after">
@@ -234,10 +237,11 @@
 					<field name="individualfromcamptodestination_id" string="From camp drop off location" attrs="{'invisible':[('transport_from_camp', '!=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 					<field name="specialfromcampdate_id" string="From camp travel date" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':['|',('transport_from_camp', '!=', True)]}"/>
 					<field name="fromcamp_TripType_id" invisible="1"/>
+					
 					<button name="action_webtour_jobber_findclosestlocations" string="Find Closest Pickup/dropoff Locations" type="object" class="oe_edit_only"/>
 					
 					<group colspan="2">
-					<field  name="webtourtravelneed_ids" widget="one2many_list" nolabel="1" attrs="{'invisible': [('groupisdanish', '=', True)]}"  string="-">
+					<field  name="webtourtravelneed_ids" widget="one2many_list" nolabel="1" attrs="{'invisible': [('is_groupisdanish_notadmin', '=', True)]}"  string="-">
 						<tree editable="bottom" default_order="traveldate" >
 							<field name="name" string="Name"/>
 							<field name="campos_TripType_id" string="Travel"/>
@@ -251,7 +255,7 @@
 						</tree>
 					</field>
 					</group>					
-					
+					<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object" attrs="{'invisible': [('is_groupisdanish_notadmin', '=', True)]}"/>
         		</xpath>
         		
         		<xpath expr="//field[@name='will_participate']" position="after">

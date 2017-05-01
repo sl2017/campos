@@ -202,43 +202,43 @@ class WebtourParticipant(models.Model):
         def _compute_tocampfromdestination_id():
             #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
             destination=False
-            if self.individualtocampfromdestination_id:
-                destination = self.individualtocampfromdestination_id
-            elif self.registration_id.webtourgrouptocampdestination_id:
-                destination = self.registration_id.webtourgrouptocampdestination_id
-            elif self.registration_id.group_entrypoint.defaultdestination_id:
-                destination = self.registration_id.group_entrypoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
+            if par.individualtocampfromdestination_id:
+                destination = par.individualtocampfromdestination_id
+            elif par.registration_id.webtourgrouptocampdestination_id:
+                destination = par.registration_id.webtourgrouptocampdestination_id
+            elif par.registration_id.group_entrypoint.defaultdestination_id:
+                destination = par.registration_id.group_entrypoint.defaultdestination_id
+            elif par.registration_id.webtourdefaulthomedestination:
+                destination = par.registration_id.webtourdefaulthomedestination
             
             if  destination == False:
-                _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", self.id)
+                _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", par.id)
                 pardic['tocampfromdestination_id'] = False
             else:
-                if self.tocampfromdestination_id != destination:
-                    _logger.info("%s _compute_tocampfromdestination_id Update %s %s",self.id,self.tocampfromdestination_id.id,destination.id)
+                if par.tocampfromdestination_id != destination:
+                    _logger.info("%s _compute_tocampfromdestination_id Update %s %s",par.id,par.tocampfromdestination_id.id,destination.id)
                     pardic['tocampfromdestination_id'] = destination.id
                     return False
             return True
 
         def _compute_fromcamptodestination_id():
             #_logger.info("_compute_fromcamptodestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
-            destination=self.fromcamptodestination_id
-            if self.individualfromcamptodestination_id:
-                destination = self.individualfromcamptodestination_id
-            elif self.registration_id.webtourgroupfromcampdestination_id:
-                destination = self.registration_id.webtourgroupfromcampdestination_id
-            elif self.registration_id.group_exitpoint.defaultdestination_id:
-                destination = self.registration_id.group_exitpoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
+            destination=par.fromcamptodestination_id
+            if par.individualfromcamptodestination_id:
+                destination = par.individualfromcamptodestination_id
+            elif par.registration_id.webtourgroupfromcampdestination_id:
+                destination = par.registration_id.webtourgroupfromcampdestination_id
+            elif par.registration_id.group_exitpoint.defaultdestination_id:
+                destination = par.registration_id.group_exitpoint.defaultdestination_id
+            elif par.registration_id.webtourdefaulthomedestination:
+                destination = par.registration_id.webtourdefaulthomedestination
     
             if  destination == False:
-                _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",self.id)
+                _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",par.id)
                 pardic['fromcamptodestination_id'] = False
             else:
-                if self.fromcamptodestination_id != destination:
-                    _logger.info("%s _compute_fromcamptodestination_id Update %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
+                if par.fromcamptodestination_id != destination:
+                    _logger.info("%s _compute_fromcamptodestination_id Update %s %s",par.id, par.fromcamptodestination_id.id,destination.id)
                     pardic['fromcamptodestination_id'] = destination.id
                     return False
             return True
@@ -247,10 +247,10 @@ class WebtourParticipant(models.Model):
         def _compute_tocampdate():        
             tocampdate = False
             dates = []
-            if self.specialtocampdate_id:
-                tocampdate = self.specialtocampdate_id.name
+            if par.specialtocampdate_id:
+                tocampdate = par.specialtocampdate_id.name
             else:
-                for d in self.camp_day_ids:
+                for d in par.camp_day_ids:
                     if d.will_participate:
                         dates.append(d.the_date)
         
@@ -260,8 +260,8 @@ class WebtourParticipant(models.Model):
                 else :
                     tocampdate = False
                     
-            if self.tocampdate != tocampdate:
-                _logger.info("%s _compute_tocampdate, Update %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)   
+            if par.tocampdate != tocampdate:
+                _logger.info("%s _compute_tocampdate, Update %s %s %s %s",par.id, par.specialtocampdate_id,dates,par.tocampdate,tocampdate)   
                 pardic['tocampdate'] = tocampdate
                 return False
             return True        
@@ -270,10 +270,10 @@ class WebtourParticipant(models.Model):
         def _compute_fromcampdate():
             dates = []
             fromcampdate = False           
-            if self.specialfromcampdate_id:
-                fromcampdate = self.specialfromcampdate_id.name
+            if par.specialfromcampdate_id:
+                fromcampdate = par.specialfromcampdate_id.name
             else:
-                for d in self.camp_day_ids:
+                for d in par.camp_day_ids:
                     if d.will_participate:
                         dates.append(d.the_date)
         
@@ -282,8 +282,8 @@ class WebtourParticipant(models.Model):
                     fromcampdate = dates[0]
                 else :
                     fromcampdate = False
-            if self.fromcampdate != fromcampdate:
-                _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
+            if par.fromcampdate != fromcampdate:
+                _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",par.id,par.specialfromcampdate_id,dates,par.fromcampdate,fromcampdate)
                 pardic['fromcampdate'] = fromcampdate
                 return False
             return True  
@@ -339,11 +339,11 @@ class WebtourParticipant(models.Model):
                 or 'donotparticipate' in vals
                 or 'webtourususeridno' in vals          
                 ):              
-                if not self.fromcampdate and 'fromcampdate' not in vals: 
+                if not par.fromcampdate and 'fromcampdate' not in vals: 
                     _compute_fromcampdate()                   
                     _logger.info("%s update_fromcampusneed fromcampdate %s", par.id, par.fromcampdate)
                     
-                if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
+                if not par.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
                     _compute_fromcamptodestination_id()                   
                     _logger.info("%s update_fromcampusneed fromcamptodestination_id %s", par.id, par.fromcamptodestination_id)
                     
@@ -547,6 +547,10 @@ class WebtourParticipant(models.Model):
                     else:
                         _logger.info("%s !!!!!!!!!!!! No Home Destination found",par.id,)    
 
+    @api.multi
+    def action_update_webtourtravelneed_ids(self):
+        for par in self:
+            par.registration_id.action_update_webtourtravelneed_ids()
 
     @api.one
     def clearusecamptransportjobber_nocampdays(self):

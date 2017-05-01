@@ -81,7 +81,7 @@ class WebtourRegistration(models.Model):
                 dicto={}
                 dicto["recalctoneed"]=True
                 dicto["recalcfromneed"]=True
-                for par in self.participant_ids:
+                for par in reg.participant_ids:
                     par.write(dicto)  
             else:  
                 if  ('webtourgrouptocampdestination_id' in vals or 'group_entrypoint' in vals):
@@ -431,7 +431,7 @@ class WebtourRegistrationTravelNeed(models.Model):
     '''
     _description = 'Special Travel need on a registration'
     _name='event.registration.travelneed'
-    registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
     travelgroup = fields.Char('Travel Group')
     name = fields.Char('Name', required=True)
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
