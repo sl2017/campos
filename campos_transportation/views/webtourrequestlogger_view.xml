@@ -25,7 +25,7 @@
 <field name="id"/>
 <field name="name"/>
 <field name="write_date"/>
-<field name="responce"/>
+<field name="responcexml"/>
 </group>
 </sheet>
 </form>
