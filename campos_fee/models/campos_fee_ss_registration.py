@@ -91,6 +91,7 @@ class CamposFeeSsRegistration(models.Model):
                         self.env['account.invoice.line'].create(vals)
                         ssreg.invoice_id.button_compute(set_total=True)
     
+    @api.multi
     def make_invoice_100(self):
         ''' To use from test button '''
         aio = self.env['account.invoice']
