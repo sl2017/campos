@@ -585,6 +585,26 @@ class WebtourNeedOverview(models.Model):
                     """
                     )
 
+class WebtourUsNeedTravelNeedPax(models.Model):
+    _name = 'campos.webtourusneed.travelneedpax'
+    _auto = False
+    _log_access = False
+  
+    pax = fields.Integer('TravelNeed PAX')
+
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_travelneedpax as
+                    SELECT  travelneed_id as id
+                    , count(id) as pax
+                    FROM campos_webtourusneed
+                    where campos_demandneeded
+                    group by travelneed_id          
+                    """
+                    )
+     
 class WebtourUsNeedChanges(models.Model):
     _name = 'campos.webtourusneed.changes'
     WebtourUsNeed_id = fields.Many2one('campos.webtourusneed','id', ondelete='set null')

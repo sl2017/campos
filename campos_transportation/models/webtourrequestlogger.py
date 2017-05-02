@@ -24,7 +24,16 @@ class WebtourRequestLogger(models.Model):
     _name = 'campos.webtour_req_logger'
     name = fields.Char('Request')
     responce = fields.Text('Responce')
-
+    responcexml = fields.Text('Responce xml', compute='_compute_xml')
+    
+    @api.one
+    @api.depends('responce')
+    def _compute_xml(self):
+        
+        try:
+            self.responcexml = minidom.parseString(self.responce.encode('utf-8')).toprettyxml(indent="   ")
+        except:
+            self.responcexml = 'Could not parce:' + self.responce
 
     @api.model
     def create(self, vals):
