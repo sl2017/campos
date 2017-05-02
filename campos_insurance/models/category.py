@@ -14,7 +14,13 @@ class Category(models.Model):
 	@api.one
 	@api.depends('cat_name')
 	def _compute_display_name(self):
-		return self.real_name()
+		self.cat_display_name = self.real_name()
+		#names = ["foo", "bar"]
+		#return names
+		
+		
+		#names = [self.parent_id.display_name, _compute_codename(self)]
+		#self.display_name = ' / '.join(filter(None, names))
 			
 	cat_display_name = fields.Char(
         string="Fulde navn",
@@ -32,7 +38,7 @@ class Category(models.Model):
 										
 	cat_desc = fields.Text('Beskrivelse', track_visibility='onchange')
 							
-							
+	
 	def real_name(self):
 		result = ""
 		if self.cat_parent_id == True:
