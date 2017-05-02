@@ -35,12 +35,12 @@ class Category(models.Model):
 							
 	def real_name(self):
 		result = ""
-		parent = ""
 		if self.cat_parent_id == True:
-			result += str(self.cat_parent_id.real_name()) + " / "
+			result += str(self.cat_parent_id.real_name())
 		if self.cat_name != False:
-			result += str(self.cat_name)
-		return str(self.cat_name) + " / " + parent
+			result += str(self.cat_name) + " / "
+		#return str(self.cat_name) + " / " + parent
+		return result
 		
 	
 	@api.multi
