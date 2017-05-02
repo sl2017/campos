@@ -466,7 +466,7 @@ class WebtourRegistrationTravelNeed(models.Model):
                                      ('23:00', '23:00')                                                                         
                                      ], default='Select', string='Time')
 
-    overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
+    overview = fields.One2many('campos.webtourusneed.travelneedpax','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
       
     
