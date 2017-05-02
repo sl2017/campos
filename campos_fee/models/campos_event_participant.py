@@ -39,10 +39,11 @@ class CamposEventParticipant(models.Model):
         for par in self:
             if par.state not in ['deregistered','rejected']:
                 camp_price = 0.0
-                if len(par.camp_day_ids.filtered('will_participate')) == 0:
+                days_ids = par.camp_day_ids.filtered(lambda r: r.will_participate and r.day_id.event_period == 'maincamp')
+                if len(days_ids) == 0:
                     nights = 8
                 else:
-                    nights = len(par.camp_day_ids.filtered('will_participate')) - 1
+                    nights = len(days_ids) - 1
                     if nights < 1:
                         nights = 1
                 pav_id = False
