@@ -253,10 +253,38 @@
 									<field name="gear_transport"/>
 								</page>
 								<page string="Green Transport">
+<!--				skal flyttes til deltagerview?!?
+									<group>
+										<field name="green_transport"/>
+										<field name="green_transport_origin" attrs="{'invisible': [('green_transport', '=', False)]}"/>
+										<field name="green_transport_means" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+										<field name="green_transport_borrow_bike" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+										<field name="green_transport_mail" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+									</group>
+-->						
 								</page>
 								<page string="GloFo">
+<!--
+									<group>
+										<field name="glofo_number_participants"/>
+										<field name="glofo_co2_amount"/>
+										<field name="glofo_co2_amount_total"/>
+									</group>
+									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
+									<field name="glofo_remarks"/>
+-->
 								</page>
 								<page string="Cars">
+<!--
+										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
+											<tree editable="bottom">
+												<field name="reg_number"/>
+												<field name="park_permit_start_date"/>
+												<field name="park_permit_end_date"/>
+												<field name="phone_number"/>
+											</tree>
+										</field>
+-->
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -497,8 +525,27 @@
 								<page string="Green Transport">
 								</page>
 								<page string="GloFo">
+<!--
+									<group>
+										<field name="glofo_number_participants"/>
+										<field name="glofo_co2_amount"/>
+										<field name="glofo_co2_amount_total"/>
+									</group>
+									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
+									<field name="glofo_remarks"/>
+-->
 								</page>
 								<page string="Cars">
+<!--
+										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
+											<tree editable="bottom">
+												<field name="reg_number"/>
+												<field name="park_permit_start_date"/>
+												<field name="park_permit_end_date"/>
+												<field name="phone_number"/>
+											</tree>
+										</field>
+-->
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -602,7 +649,12 @@
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="own_note" />
-						</group>
+<!--
+							<field name="passport_number" attrs="{'invisible': [('visa_required', '=', True/>
+							<field name="visa_required"/>
+							<field name="group_country_code"/>
+-->
+							</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
 								<group>
