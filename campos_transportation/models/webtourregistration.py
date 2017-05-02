@@ -64,6 +64,8 @@ class WebtourRegistration(models.Model):
     #webtourhasbeeninitialized = fields.Boolean('Webtour has been initialized')
     group_country_code2 = fields.Char(related='partner_id.country_id.code', string='Country Code2', readonly=True)
     org_country_code2 = fields.Char(related='organization_id.country_id.code', string='Org Country Code2', readonly=True)
+    org_name = fields.Char(related='organization_id.name', string='Org Name', readonly=True)
+    
     groupisdanish = fields.Boolean(compute='_compute_groupisdanish', string='groupisdanish', store = False)
     webtourgroup_entrypointname = fields.Char(related="group_entrypoint.defaultdestination_id.name")
     webtourgroup_exitpointname = fields.Char(related="group_exitpoint.defaultdestination_id.name")
@@ -91,10 +93,33 @@ class WebtourRegistration(models.Model):
                         par.recalcfromneed=True                               
         return ret
     
-    @api.depends('group_country_code2')
+    @api.depends('group_country_code2','org_name','org_country_code2')
     def _compute_groupisdanish(self):
         for record in self:
-            record.groupisdanish = record.group_country_code2 == 'DK' or record.organization_id.country_id.code == 'DK'
+                       
+            if record.org_name == 'Dansk Spejderkorps Sydslesvig':
+                record.groupisdanish = True
+            elif record.group_country_code2:
+                if (record.group_country_code2 == 'DK'):
+                    record.groupisdanish = True
+                else:
+                    if record.org_country_code2:
+                        if (record.group_country_code2 == 'DK'):
+                            record.groupisdanish = True
+                        elif len(record.group_country_code2) == 2 and record.group_country_code2 != '  ':
+                            record.groupisdanish = False
+                        else: 
+                            record.groupisdanish = True                           
+            else:
+                if record.org_country_code2:
+                    if (record.org_country_code2 == 'DK'):
+                        record.groupisdanish = True
+                    elif len(record.org_country_code2) == 2 and record.org_country_code2 != '  ':
+                        record.groupisdanish = False
+                    else: 
+                        record.groupisdanish = True    
+                else: 
+                    record.groupisdanish = True 
     
     @api.depends('prereg_participant_ids.participant_total','prereg_participant_ids.participant_own_transport_to_camp_total','prereg_participant_ids.participant_own_transport_from_camp_total')
     def _compute_webtourPreregBusToCamptotal(self):
@@ -406,7 +431,7 @@ class WebtourRegistrationTravelNeed(models.Model):
     '''
     _description = 'Special Travel need on a registration'
     _name='event.registration.travelneed'
-    registration_id  = fields.Many2one('event.registration', 'Registration', required=True)
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
     travelgroup = fields.Char('Travel Group')
     name = fields.Char('Name', required=True)
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
@@ -441,9 +466,9 @@ class WebtourRegistrationTravelNeed(models.Model):
                                      ('23:00', '23:00')                                                                         
                                      ], default='Select', string='Time')
 
-    overview = fields.One2many('campos.webtourusneed.overview','id',ondelete='set null')
+    overview = fields.One2many('campos.webtourusneed.travelneedpax','id',ondelete='set null')
     pax  = fields.Integer(related='overview.pax', string='PAX', readonly=True)
-    
+      
     
 class WebtourEntryExitPoint(models.Model):
     _inherit = 'event.registration.entryexitpoint'

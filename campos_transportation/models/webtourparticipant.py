@@ -60,11 +60,18 @@ class WebtourParticipant(models.Model):
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
     donotparticipate = fields.Boolean('Do not participate') 
+    group_country_code = fields.Char(related='registration_id.group_country_code2')
+    org_country_code  = fields.Char(related='registration_id.org_country_code2')
+    org_name = fields.Char(related='registration_id.org_name', string='Org Name', readonly=True)
+    
     
     is_admin = fields.Boolean('is admin', compute="_check_is_admin") 
     is_groupisdanish_notadmin = fields.Boolean('is Danish and Not admin', compute="_check_user_group")
     show_specialtocampdate = fields.Boolean('show special to campdate', compute="_compute_show_specialtocampdate")
     show_specialfromcampdate = fields.Boolean('show special from campdate', compute="_compute_show_specialfromcampdate")
+    
+    webtourtravelneed_ids = fields.One2many(related='registration_id.webtourtravelneed_ids', string = 'Special travel needs')
+    
     
     @api.one
     def _check_is_admin(self):
