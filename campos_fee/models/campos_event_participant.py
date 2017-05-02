@@ -39,9 +39,12 @@ class CamposEventParticipant(models.Model):
         for par in self:
             if par.state not in ['deregistered','rejected']:
                 camp_price = 0.0
-                nights = len(par.camp_day_ids.filtered('will_participate')) - 1
-                if nights < 1:
-                    nights = 1
+                if len(par.camp_day_ids.filtered('will_participate')) == 0:
+                    nights = 8
+                else:
+                    nights = len(par.camp_day_ids.filtered('will_participate')) - 1
+                    if nights < 1:
+                        nights = 1
                 pav_id = False
                 if self.env.uid == SUPERUSER_ID:
                     pav_id = self.env['product.attribute.value'].search([('attribute_id.name', '=', u'Døgn'),('name', '=', str(nights))])
