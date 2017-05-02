@@ -131,7 +131,7 @@ class CamposFeeSsRegistration(models.Model):
         for ssreg in self:
             
                 #1 Camp PArticipations
-                query = """  select camp_product_id, sum(transport_co) 
+                query = """  select camp_product_id, count(*) 
                              from campos_fee_ss_participant 
                              where ssreg_id in %s 
                              group by camp_product_id
@@ -151,7 +151,7 @@ class CamposFeeSsRegistration(models.Model):
                         ssreg.invoice_id.button_compute(set_total=True)
                 
                 #2 Transport
-                query = """  select transport_product_id, count(*) 
+                query = """  select transport_product_id, sum(transport_co) 
                              from campos_fee_ss_participant 
                              where ssreg_id in %s 
                              group by transport_product_id
