@@ -708,6 +708,7 @@
 				<tree  delete="0">
 					<field name="id" invisible="1"/>
 					<field name="name"/>
+					<field name="age"/>
 					<field name="dates_summery"/>
 					<field name="own_note"/>
 					<field name="transport_to_camp"/>
@@ -728,6 +729,7 @@
             		<field name="own_note"/>
             	</field>
             	<filter name="fGroup" position="after">
+            		<filter name="factive" string="Active" domain="[('state', 'not in', ['rejected','deregistered')]" />
             		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
             	</filter>
             </field>

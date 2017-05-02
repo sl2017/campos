@@ -45,8 +45,8 @@
 <group name="user_top">
 <group name="group_left">
 <field name="id"/>
-<field name="registration_id"/>
-<field name="participant_id"/>
+<field name="registration_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_gl'}"/>
+<field name="participant_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_participant'}"/>
 <field name="state"/>
 <field name="regstate"/>
 <field name="workas_jobber"/>
@@ -100,6 +100,11 @@
 			<filter string="Participant" name="fpartcipant" domain="[('scoutgroup','=',0)]" help="not scoutgroup"/>
 			<filter string="Participate" name="fparticipate" domain="[('state','!=','deregistered')]" help="not deregistered"/>
 			<filter string="Participate Participant" name="fparticipate" domain="[('state','!=','deregistered'),('scoutgroup','=',0)]" help="not deregistered not scoutgroup"/>
+			<group expand="0" string="Group By...">
+            <filter name="fregistration_id" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+            <filter name="ftocampdate" string="to campdate" icon="terp-personal" domain="[]" context="{'group_by':'tocampdate:day'}"/>
+            <filter name="ffromcampdate" string="from campdate" icon="terp-personal" domain="[]" context="{'group_by':'fromcampdate:day'}"/>
+			</group>
 		</search>
 	</field>
 </record>

@@ -5,7 +5,7 @@ from xml.dom import minidom
 
 import logging
 from math import sin, cos, sqrt, atan2, radians
-from operator import itemgetter
+from operator import itemgetter, is_
 import googlemaps
 
 _logger = logging.getLogger(__name__)
@@ -60,9 +60,35 @@ class WebtourParticipant(models.Model):
     
     groupisdanish = fields.Boolean(related='registration_id.groupisdanish')
     donotparticipate = fields.Boolean('Do not participate') 
+    group_country_code = fields.Char(related='registration_id.group_country_code2')
+    org_country_code  = fields.Char(related='registration_id.org_country_code2')
+    org_name = fields.Char(related='registration_id.org_name', string='Org Name', readonly=True)
     
-            
-              
+    
+    is_admin = fields.Boolean('is admin', compute="_check_is_admin") 
+    is_groupisdanish_notadmin = fields.Boolean('is Danish and Not admin', compute="_check_user_group")
+    show_specialtocampdate = fields.Boolean('show special to campdate', compute="_compute_show_specialtocampdate")
+    show_specialfromcampdate = fields.Boolean('show special from campdate', compute="_compute_show_specialfromcampdate")
+    
+    webtourtravelneed_ids = fields.One2many(related='registration_id.webtourtravelneed_ids', string = 'Special travel needs')
+    
+    
+    @api.one
+    def _check_is_admin(self):
+         self.is_admin = self.user_has_groups('campos_event.group_campos_admin')
+
+    @api.one
+    def _compute_show_specialtocampdate(self):
+         self.show_specialtocampdate = self.transport_to_camp and (self.is_admin or (not self.groupisdanish) or self.specialtocampdate_id)
+
+    @api.one
+    def _compute_show_specialfromcampdate(self):
+         self.show_specialfromcampdate = self.transport_from_camp and (self.is_admin or (not self.groupisdanish) or self.specialfromcampdate_id)
+
+    @api.one
+    def _check_user_group(self):
+         self.is_groupisdanish_notadmin = (not self.user_has_groups('campos_event.group_campos_admin')) and self.groupisdanish
+        
     @api.model
     def get_create_usgroupidno_tron(self):
         MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
@@ -176,43 +202,43 @@ class WebtourParticipant(models.Model):
         def _compute_tocampfromdestination_id():
             #_logger.info("_compute_tocampfromdestination_id %s %s %s %s %s %s %s", len(self), par.id, par.tocampfromdestination_id, par.individualtocampfromdestination_id,par.registration_id.webtourgrouptocampdestination_id,par.registration_id.group_entrypoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
             destination=False
-            if self.individualtocampfromdestination_id:
-                destination = self.individualtocampfromdestination_id
-            elif self.registration_id.webtourgrouptocampdestination_id:
-                destination = self.registration_id.webtourgrouptocampdestination_id
-            elif self.registration_id.group_entrypoint.defaultdestination_id:
-                destination = self.registration_id.group_entrypoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
+            if par.individualtocampfromdestination_id:
+                destination = par.individualtocampfromdestination_id
+            elif par.registration_id.webtourgrouptocampdestination_id:
+                destination = par.registration_id.webtourgrouptocampdestination_id
+            elif par.registration_id.group_entrypoint.defaultdestination_id:
+                destination = par.registration_id.group_entrypoint.defaultdestination_id
+            elif par.registration_id.webtourdefaulthomedestination:
+                destination = par.registration_id.webtourdefaulthomedestination
             
             if  destination == False:
-                _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", self.id)
+                _logger.info("%s _compute_tocampfromdestination_id No Destination known !!!!!!!", par.id)
                 pardic['tocampfromdestination_id'] = False
             else:
-                if self.tocampfromdestination_id != destination:
-                    _logger.info("%s _compute_tocampfromdestination_id Update %s %s",self.id,self.tocampfromdestination_id.id,destination.id)
+                if par.tocampfromdestination_id != destination:
+                    _logger.info("%s _compute_tocampfromdestination_id Update %s %s",par.id,par.tocampfromdestination_id.id,destination.id)
                     pardic['tocampfromdestination_id'] = destination.id
                     return False
             return True
 
         def _compute_fromcamptodestination_id():
             #_logger.info("_compute_fromcamptodestination_id %s %s %s %s %s %s %s", len(self), par.id, par.fromcamptodestination_id, par.individualfromcamptodestination_id,par.registration_id.webtourgroupfromcampdestination_id,par.registration_id.group_exitpoint.defaultdestination_id,par.registration_id.webtourdefaulthomedestination)
-            destination=self.fromcamptodestination_id
-            if self.individualfromcamptodestination_id:
-                destination = self.individualfromcamptodestination_id
-            elif self.registration_id.webtourgroupfromcampdestination_id:
-                destination = self.registration_id.webtourgroupfromcampdestination_id
-            elif self.registration_id.group_exitpoint.defaultdestination_id:
-                destination = self.registration_id.group_exitpoint.defaultdestination_id
-            elif self.registration_id.webtourdefaulthomedestination:
-                destination = self.registration_id.webtourdefaulthomedestination
+            destination=par.fromcamptodestination_id
+            if par.individualfromcamptodestination_id:
+                destination = par.individualfromcamptodestination_id
+            elif par.registration_id.webtourgroupfromcampdestination_id:
+                destination = par.registration_id.webtourgroupfromcampdestination_id
+            elif par.registration_id.group_exitpoint.defaultdestination_id:
+                destination = par.registration_id.group_exitpoint.defaultdestination_id
+            elif par.registration_id.webtourdefaulthomedestination:
+                destination = par.registration_id.webtourdefaulthomedestination
     
             if  destination == False:
-                _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",self.id)
+                _logger.info("%s _compute_fromcamptodestination_id No Destination known !!!!!!!",par.id)
                 pardic['fromcamptodestination_id'] = False
             else:
-                if self.fromcamptodestination_id != destination:
-                    _logger.info("%s _compute_fromcamptodestination_id Update %s %s",self.id, self.fromcamptodestination_id.id,destination.id)
+                if par.fromcamptodestination_id != destination:
+                    _logger.info("%s _compute_fromcamptodestination_id Update %s %s",par.id, par.fromcamptodestination_id.id,destination.id)
                     pardic['fromcamptodestination_id'] = destination.id
                     return False
             return True
@@ -221,10 +247,10 @@ class WebtourParticipant(models.Model):
         def _compute_tocampdate():        
             tocampdate = False
             dates = []
-            if self.specialtocampdate_id:
-                tocampdate = self.specialtocampdate_id.name
+            if par.specialtocampdate_id:
+                tocampdate = par.specialtocampdate_id.name
             else:
-                for d in self.camp_day_ids:
+                for d in par.camp_day_ids:
                     if d.will_participate:
                         dates.append(d.the_date)
         
@@ -234,8 +260,8 @@ class WebtourParticipant(models.Model):
                 else :
                     tocampdate = False
                     
-            if self.tocampdate != tocampdate:
-                _logger.info("%s _compute_tocampdate, Update %s %s %s %s",self.id, self.specialtocampdate_id,dates,self.tocampdate,tocampdate)   
+            if par.tocampdate != tocampdate:
+                _logger.info("%s _compute_tocampdate, Update %s %s %s %s",par.id, par.specialtocampdate_id,dates,par.tocampdate,tocampdate)   
                 pardic['tocampdate'] = tocampdate
                 return False
             return True        
@@ -244,10 +270,10 @@ class WebtourParticipant(models.Model):
         def _compute_fromcampdate():
             dates = []
             fromcampdate = False           
-            if self.specialfromcampdate_id:
-                fromcampdate = self.specialfromcampdate_id.name
+            if par.specialfromcampdate_id:
+                fromcampdate = par.specialfromcampdate_id.name
             else:
-                for d in self.camp_day_ids:
+                for d in par.camp_day_ids:
                     if d.will_participate:
                         dates.append(d.the_date)
         
@@ -256,8 +282,8 @@ class WebtourParticipant(models.Model):
                     fromcampdate = dates[0]
                 else :
                     fromcampdate = False
-            if self.fromcampdate != fromcampdate:
-                _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",self.id,self.specialfromcampdate_id,dates,self.fromcampdate,fromcampdate)
+            if par.fromcampdate != fromcampdate:
+                _logger.info("%s _compute_fromcampdate, Update %s %s %s %s",par.id,par.specialfromcampdate_id,dates,par.fromcampdate,fromcampdate)
                 pardic['fromcampdate'] = fromcampdate
                 return False
             return True  
@@ -290,6 +316,7 @@ class WebtourParticipant(models.Model):
                 or 'transport_to_camp' in vals               
                 or 'recalctoneed' in vals
                 or 'donotparticipate' in vals 
+                or 'webtourususeridno' in vals
                 ):
                 if not par.tocampdate and 'tocampdate' not in vals:
                     _compute_tocampdate()
@@ -309,13 +336,14 @@ class WebtourParticipant(models.Model):
                 or 'fromcampdate' in vals
                 or 'transport_from_camp' in vals
                 or 'recalcfromneed' in vals
-                or 'donotparticipate' in vals                
+                or 'donotparticipate' in vals
+                or 'webtourususeridno' in vals          
                 ):              
-                if not self.fromcampdate and 'fromcampdate' not in vals: 
+                if not par.fromcampdate and 'fromcampdate' not in vals: 
                     _compute_fromcampdate()                   
                     _logger.info("%s update_fromcampusneed fromcampdate %s", par.id, par.fromcampdate)
                     
-                if not self.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
+                if not par.fromcamptodestination_id and 'fromcamptodestination_id' not in vals:
                     _compute_fromcamptodestination_id()                   
                     _logger.info("%s update_fromcampusneed fromcamptodestination_id %s", par.id, par.fromcamptodestination_id)
                     
@@ -519,15 +547,19 @@ class WebtourParticipant(models.Model):
                     else:
                         _logger.info("%s !!!!!!!!!!!! No Home Destination found",par.id,)    
 
+    @api.multi
+    def action_update_webtourtravelneed_ids(self):
+        for par in self:
+            par.registration_id.action_update_webtourtravelneed_ids()
 
     @api.one
     def clearusecamptransportjobber_nocampdays(self):
-        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s", self.id,self.transport_to_camp,self.transport_from_camp)
+        _logger.info("%s action_clearusecamptransportjobber_nocampdays to camp %s %s %s", self.id,self.transport_to_camp,self.transport_from_camp,self.camp_day_ids)
         
-        if self.workas_jobber and not self.camp_day_ids and self.transport_to_camp:            
+        if self.staff and not self.camp_day_ids and self.transport_to_camp:            
             self.transport_to_camp = False
             
-        if self.workas_jobber and not self.camp_day_ids and self.transport_from_camp:   
+        if self.staff and not self.camp_day_ids and self.transport_from_camp:   
             self.transport_from_camp = False
         
         return
@@ -541,6 +573,82 @@ class WebtourParticipant(models.Model):
         #    rec.transport_from_camp = False   
         
         return True
+    
+    @api.multi
+    def webtourupdate(self):
+        _logger.info('webtourupdate Entered')
+                
+        for par in self:
+            webtoutexternalid_prefix = self.registration_id.event_id.webtourconfig_id.webtoutexternalid_prefix
+            
+            if par.webtourusgroupidno:
+                # Test if usGroup exist in Webtour
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+     # HUsk Check NAME       
+                if newidno == "0": #If not try to Create new usGroup
+                    _logger.info("%s webtourupdate Group Could not find usGroup in Webtour: %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                    
+                    newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                    
+                    if newidno <> "0": # usGroup created succesfully
+                        _logger.info("%s webtourupdate Recreate usGroup %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                        par.registration_id.webtourusgroupidno = newidno
+                    else:
+                        _logger.info("%s webtourupdate Could not Recreate usGroup %s %s",str(par.id), par.name, par.webtourusgroupidno) 
+                elif newidno <> par.webtourusgroupidno : #STRANGE got other usGroup Id
+                    _logger.info("%s webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                    par.registration_id.webtourusgroupidno = newidno
+    
+            else: #If not try to Create new usGroup
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                
+                if newidno <> "0": # usGroup created succesfully
+                    _logger.info("%s webtourupdate Created usGroup %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                    par.registration_id.webtourusgroupidno = newidno
+                else:
+                    _logger.info("%s webtourupdate Could not Create usGroup %s %s",str(par.id), par.name, par.webtourusgroupidno) 
+             
+            if par.webtourusgroupidno: # Check usUser
+                
+                #Get all usUserIDno's from webtour and conver to a simple list
+                response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/GroupIDno/?GroupIDno='+par.webtourusgroupidno}).responce.encode('utf-8'))                  
+                ususers = response_doc.getElementsByTagName("a:IDno")
+                ususerslist=[]
+                for u in ususers:
+                    ususerslist.append(str(u.firstChild.data))
+                
+                if par.webtourususeridno:
+                    if par.webtourususeridno not in ususerslist:
+                        req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                        newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+                        
+                        if newidno <> "0":
+                            _logger.info("%s webtourupdate Created usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                            par.webtourususeridno=newidno
+                        else:
+                            _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                            par.webtourususeridno=False                    
+                else:     
+                    req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                    newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+                    
+                    if newidno <> "0":
+                        _logger.info("%s webtourupdate Created usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                        par.webtourususeridno=newidno
+                    else:
+                        _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                        par.webtourususeridno=False                      
+                        
+                        
+                if par.webtourususeridno:
+                    _logger.info('%s webtourupdate %s %s',par.id,par.tocampusneed_id,par.fromcampusneed_id)
+                    if par.tocampusneed_id:
+                        par.tocampusneed_id.get_create_webtour_need()      
+                    
+                    if par.fromcampusneed_id:
+                        par.fromcampusneed_id.get_create_webtour_need()    
+                    
+
     
 class WebtourParticipantCampDay(models.Model):
     '''

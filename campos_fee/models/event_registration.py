@@ -46,15 +46,21 @@ class EventRegistration(models.Model):
     material_cost = fields.Float('Material orders', compute='_compute_fees')
     fee_total = fields.Float('Total Fee', compute='_compute_fees')
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Snapshot')
+    ssreginv_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Invoices', domain=[('invoice_id', '!=', False)])
 
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state')
     def _compute_fees(self):
-        for reg in self.sudo():
+        
+        for reg in self:
             fee_participants = 0.0
             fee_transport = 0.0
             number_participants = 0
-            for par in reg.participant_ids.filtered(lambda r: r.state not in ['cancel', 'deregistered']):
+            if self.env.uid == SUPERUSER_ID:
+                pars = reg.participant_ids.filtered(lambda r: r.state not in ['cancel', 'deregistered'])
+            else:
+                pars = reg.participant_ids.suspend_security().filtered(lambda r: r.state not in ['cancel', 'deregistered'])
+            for par in pars:
                 fee_participants += par.camp_price
                 fee_transport += par.transport_price_total
                 number_participants += 1
@@ -62,6 +68,7 @@ class EventRegistration(models.Model):
             reg.fee_transport = fee_transport
             reg.number_participants = number_participants
             reg.number_participants_stored = number_participants
+            _logger.info('Calc # %d %s', number_participants, reg.name)
             so_cost = 0.0
             if self.env.uid == SUPERUSER_ID:
                 for so in self.env['sale.order.line'].search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
