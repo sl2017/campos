@@ -33,9 +33,9 @@
 			<field name="model">campos.insurance.cat</field>
 			<field name="arch" type="xml">
 				<tree>
-					<!--<field name="id"/>-->
 					<field name="cat_name"/>
 					<field name="cat_desc"/>
+					<field name="cat_display_name"/>
 				</tree>
 			</field>
 		</record>
