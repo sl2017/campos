@@ -91,6 +91,19 @@ class CamposFeeSsRegistration(models.Model):
                         self.env['account.invoice.line'].create(vals)
                         ssreg.invoice_id.button_compute(set_total=True)
     
+    def make_invoice_100(self):
+        ''' To use from test button '''
+        aio = self.env['account.invoice']
+        for ssreg in self:
+            
+            # Sydslesvig
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=True)
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+    
     @api.multi            
     def make_invoice_100_dk(self):
         aio = self.env['account.invoice']
