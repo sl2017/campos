@@ -50,6 +50,8 @@
                 'disable_openerp_online',
                 'admin_technical_features',
                 'campos_event',
+                'campos_fee',
+                'campos_transportation',
                 ],
 
     # always loaded
