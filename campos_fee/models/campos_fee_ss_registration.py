@@ -91,6 +91,20 @@ class CamposFeeSsRegistration(models.Model):
                         self.env['account.invoice.line'].create(vals)
                         ssreg.invoice_id.button_compute(set_total=True)
     
+    @api.multi
+    def make_invoice_100(self):
+        ''' To use from test button '''
+        aio = self.env['account.invoice']
+        for ssreg in self:
+            
+            # Sydslesvig
+            if ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=True)
+            elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+    
     @api.multi            
     def make_invoice_100_dk(self):
         aio = self.env['account.invoice']
@@ -117,7 +131,7 @@ class CamposFeeSsRegistration(models.Model):
         for ssreg in self:
             
                 #1 Camp PArticipations
-                query = """  select camp_product_id, sum(transport_co) 
+                query = """  select camp_product_id, count(*) 
                              from campos_fee_ss_participant 
                              where ssreg_id in %s 
                              group by camp_product_id
@@ -137,7 +151,7 @@ class CamposFeeSsRegistration(models.Model):
                         ssreg.invoice_id.button_compute(set_total=True)
                 
                 #2 Transport
-                query = """  select transport_product_id, count(*) 
+                query = """  select transport_product_id, sum(transport_co) 
                              from campos_fee_ss_participant 
                              where ssreg_id in %s 
                              group by transport_product_id

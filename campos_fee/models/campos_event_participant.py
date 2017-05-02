@@ -39,10 +39,11 @@ class CamposEventParticipant(models.Model):
         for par in self:
             if par.state not in ['deregistered','rejected']:
                 camp_price = 0.0
-                if len(par.camp_day_ids.filtered('will_participate')) == 0:
+                days_ids = par.camp_day_ids.filtered(lambda r: r.will_participate and r.day_id.event_period == 'maincamp')
+                if len(days_ids) == 0:
                     nights = 8
                 else:
-                    nights = len(par.camp_day_ids.filtered('will_participate')) - 1
+                    nights = len(days_ids) - 1
                     if nights < 1:
                         nights = 1
                 pav_id = False
@@ -61,11 +62,13 @@ class CamposEventParticipant(models.Model):
                         camp_price = pp_id[0].lst_price
                 transport_co = 0
                 transport_price_total = 0.0
+
                 if par.fee_agegroup_id.transport_incl:
-                    if not par.transport_from_camp:
-                        transport_co += 1
-                    if not par.transport_to_camp:
-                        transport_co += 1
+                    if camp_price > 0.0:
+                        if not par.transport_from_camp:
+                            transport_co += 1
+                        if not par.transport_to_camp:
+                            transport_co += 1
                 else:
                     if par.transport_from_camp:
                         transport_co += 1
