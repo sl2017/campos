@@ -121,6 +121,21 @@ class CamposEventParticipant(models.Model):
                                                                   'transport_price_total': par.transport_price_total,
                                                                   'camp_price_total': par.camp_price_total,
                                                                   'dates_summery': par.dates_summery,
-                                                                  })
+                                                                  'payreq_state': par.payreq_state,
+                                                                  'payreq_approved_date': par.payreq_approved_date,
+                                                                  'payreq_approved_user_id': par.payreq_approved_user_id,
+                                                                  'participant': par.participant,
+                                                                  'staff': par.staff,
+                                                                  #'jobber_child': par.jobber_child,
+                                                                  # Transportaion fields
+                                                                  'webtourususeridno': par.webtourususeridno,
+                                                                  'webtourusgroupidno': par.webtourusgroupidno,                                
+                                                                  'tocampfromdestination_id': par.tocampfromdestination_id,
+                                                                  'fromcamptodestination_id': par.fromcamptodestination_id,
+                                                                  'tocampdate': par.tocampdate,
+                                                                  'fromcampdate': par.tocampdate,
+                                                                  'tocampusneed_id': par.tocampusneed_id,
+                                                                  'fromcampusneed_id': par.fromcampusneed_id,
+                                                                   })
             
 
