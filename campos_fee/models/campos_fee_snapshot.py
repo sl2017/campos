@@ -16,6 +16,7 @@ class CamposFeeSnapshot(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char()
+    code = fields.Char(size=16)
     state = fields.Selection([('draft', 'Draft'),
                               ('inprogress', 'In Progress'),
                               ('completed', 'Completed')], default='draft', string='State', track_visibility='onchange')

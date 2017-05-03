@@ -45,6 +45,7 @@ class CamposFeeSsRegistration(models.Model):
     invoice_line = fields.One2many(related='invoice_id.invoice_line', readonly=True)
     inv_date = fields.Date(related='invoice_id.date_invoice', readonly=True)
     audit = fields.Boolean('Audit')
+    cmp_currency_id = fields.Many2one(related='registration_id.event_id.company_id.currency_id', readonly=True)
 
 
     @api.multi

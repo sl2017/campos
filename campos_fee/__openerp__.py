@@ -14,6 +14,7 @@
         'campos_event',
         'campos_final_registration',
         'connector',
+        'campos_transportation',
     ],
     'data': [
         'security/campos_fee_snapshot.xml',

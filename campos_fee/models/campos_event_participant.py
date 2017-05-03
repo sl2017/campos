@@ -127,6 +127,15 @@ class CamposEventParticipant(models.Model):
                                                                   'participant': par.participant,
                                                                   'staff': par.staff,
                                                                   #'jobber_child': par.jobber_child,
-                                                                  })
+                                                                  # Transportaion fields
+                                                                  'webtourususeridno': par.webtourususeridno,
+                                                                  'webtourusgroupidno': par.webtourusgroupidno,                                
+                                                                  'tocampfromdestination_id': par.tocampfromdestination_id,
+                                                                  'fromcamptodestination_id': par.fromcamptodestination_id,
+                                                                  'tocampdate': par.tocampdate,
+                                                                  'fromcampdate': par.tocampdate,
+                                                                  'tocampusneed_id': par.tocampusneed_id,
+                                                                  'fromcampusneed_id': par.fromcampusneed_id,
+                                                                   })
             
 

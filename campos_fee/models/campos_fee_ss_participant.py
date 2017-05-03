@@ -46,4 +46,21 @@ class CamposFeeSsParticipant(models.Model):
     participant = fields.Boolean()
     staff = fields.Boolean(default=False)
     #jobber_child = fields.Boolean('Jobber Child')  -- TODO
+    
+    # Trasnport fields
+    webtourususeridno = fields.Char('webtour us User ID no')
+    webtourusgroupidno = fields.Char(string='webtour us Group ID no')                                
+    
+    tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
+                                            'To camp Pick up',
+                                            ondelete='set null') #, store=Truecompute='_compute_tocampfromdestination_id',
+ 
+    fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
+                                            'From camp Drop off',
+                                            ondelete='set null')#,compute='_compute_fromcamptodestination_id', store=True
+   
+    tocampdate = fields.Date(string='To Camp Date')
+    fromcampdate = fields.Date(string='From Camp Date')
+    tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
+    fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
   
