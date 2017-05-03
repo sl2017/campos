@@ -17,6 +17,7 @@
                 <sheet>
                     
                     <group>
+                    	<field name="code"/>
                         <field name="name"/>
                         <field name="execute_func"/>
                     </group>
@@ -31,6 +32,7 @@
         <field name="model">campos.fee.snapshot</field>
         <field name="arch" type="xml">
             <search>
+            	<field name="code"/>
                 <field name="name"/>
             </search>
         </field>
@@ -43,6 +45,7 @@
             <tree>
                 <!-- TODO -->
                 <field name="create_date"/>
+                <field name="code"/>
                 <field name="name"/>
                 <field name="state"/>
             </tree>
