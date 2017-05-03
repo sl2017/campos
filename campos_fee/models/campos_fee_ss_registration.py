@@ -145,7 +145,7 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_vals()
                             _logger.info("Create invoice: %s", vals)
                             ssreg.invoice_id = aio.create(vals)
-                        desc = product.name_get()[0][1]
+                        desc = product.name_get()[0][1] #product.display_name 
                         vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         self.env['account.invoice.line'].create(vals)
@@ -165,7 +165,7 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_vals()
                             _logger.info("Create invoice: %s", vals)
                             ssreg.invoice_id = aio.create(vals)
-                        desc = product.name_get()[0][1]
+                        desc = product.name_get()[0][1] # product.display_name 
                         vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         self.env['account.invoice.line'].create(vals)
