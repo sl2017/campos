@@ -235,12 +235,52 @@
 									</group>
 								</page>
 								<page string="Tents and other">
+									<group>
+										<field name="number_of_tents"/>
+										<field name="number_of_other_small_tents"/>
+									</group>
+									<p><b>Number of assembly and staff tents, more than 50 m2, incl. their sizes</b></p>
+									<field name="large_tents"/>
+									<p><b>Number of mast sails, incl. diameters, if they have sides and fraction of cercumfence with side</b></p>
+									<field name="mast_sails"/>
+									<group>
+										<field name="number_gas_burners"/>
+										<field name="pioneering_in_height"/>
+										<field name="pioneering_in_height_with_persons"/>
+										<field name="raised_sleeping"/>
+									</group>
+									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
+									<field name="gear_transport"/>
 								</page>
 								<page string="Green Transport">
+<!--				skal flyttes til deltagerview?!?
+									<group>
+										<field name="green_transport"/>
+										<field name="green_transport_origin" attrs="{'invisible': [('green_transport', '=', False)]}"/>
+										<field name="green_transport_means" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+										<field name="green_transport_borrow_bike" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+										<field name="green_transport_mail" attrs="{'invisible': [('green_transport', '=', False)]}"//>
+									</group>
+-->						
 								</page>
 								<page string="GloFo">
+									<group>
+										<field name="glofo_number_participants"/>
+										<field name="glofo_co2_amount"/>
+										<field name="glofo_co2_amount_total"/>
+									</group>
+									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
+									<field name="glofo_remarks"/>
 								</page>
 								<page string="Cars">
+										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
+											<tree editable="bottom">
+												<field name="reg_number"/>
+												<field name="park_permit_start_date"/>
+												<field name="park_permit_end_date"/>
+												<field name="phone_number"/>
+											</tree>
+										</field>
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -461,12 +501,43 @@
 									</group>
 								</page>
 								<page string="Tents and other">
+									<group>
+										<field name="number_of_tents"/>
+										<field name="number_of_other_small_tents"/>
+									</group>
+									<p><b>Number of assembly and staff tents, more than 50 m2, incl. their sizes</b></p>
+									<field name="large_tents"/>
+									<p><b>Number of mast sails, incl. diameters, if they have sides and fraction of cercumfence with side</b></p>
+									<field name="mast_sails"/>
+									<group>
+										<field name="number_gas_burners"/>
+										<field name="pioneering_in_height"/>
+										<field name="pioneering_in_height_with_persons"/>
+										<field name="raised_sleeping"/>
+									</group>
+									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
+									<field name="gear_transport"/>
 								</page>
 								<page string="Green Transport">
 								</page>
 								<page string="GloFo">
+									<group>
+										<field name="glofo_number_participants"/>
+										<field name="glofo_co2_amount"/>
+										<field name="glofo_co2_amount_total"/>
+									</group>
+									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
+									<field name="glofo_remarks"/>
 								</page>
 								<page string="Cars">
+										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
+											<tree editable="bottom">
+												<field name="reg_number"/>
+												<field name="park_permit_start_date"/>
+												<field name="park_permit_end_date"/>
+												<field name="phone_number"/>
+											</tree>
+										</field>
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -570,7 +641,9 @@
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="own_note" />
-						</group>
+							<field name="visa_required" invisible="1"/>
+							<field name="passport_number" attrs="{'invisible': [('visa_required', '=', False)]}"/>
+							</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
 								<group>
@@ -624,7 +697,6 @@
 				<tree  delete="0">
 					<field name="id" invisible="1"/>
 					<field name="name"/>
-					<field name="age"/>
 					<field name="dates_summery"/>
 					<field name="own_note"/>
 					<field name="transport_to_camp"/>
@@ -645,7 +717,6 @@
             		<field name="own_note"/>
             	</field>
             	<filter name="fGroup" position="after">
-            		<filter name="factive" string="Active" domain="[('state', 'not in', ['rejected','deregistered')]" />
             		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
             	</filter>
             </field>
