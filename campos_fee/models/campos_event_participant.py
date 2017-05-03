@@ -121,6 +121,12 @@ class CamposEventParticipant(models.Model):
                                                                   'transport_price_total': par.transport_price_total,
                                                                   'camp_price_total': par.camp_price_total,
                                                                   'dates_summery': par.dates_summery,
+                                                                  'payreq_state': par.payreq_state,
+                                                                  'payreq_approved_date': par.payreq_approved_date,
+                                                                  'payreq_approved_user_id': par.payreq_approved_user_id,
+                                                                  'participant': par.participant,
+                                                                  'staff': par.staff,
+                                                                  #'jobber_child': par.jobber_child,
                                                                   })
             
 

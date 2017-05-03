@@ -37,3 +37,13 @@ class CamposFeeSsParticipant(models.Model):
     transport_to_camp = fields.Boolean('Common transport to camp')
     transport_from_camp = fields.Boolean('Common transport from camp')
     dates_summery = fields.Char('Camp Days')
+    payreq_state=fields.Selection([('draft', 'In process'),
+                                   ('cancelled', 'Cancelled'),
+                                   ('approved', 'Approved'),
+                                   ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
+    payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
+    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    participant = fields.Boolean()
+    staff = fields.Boolean(default=False)
+    #jobber_child = fields.Boolean('Jobber Child')  -- TODO
+  

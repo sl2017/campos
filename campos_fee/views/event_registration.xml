@@ -98,7 +98,7 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
-            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
+            	<page string="Camp Fee" groups="campos_event.group_campos_info">
             		<group>
             			<field name="number_participants"/>
             			<field name="fee_participants"/>
@@ -109,7 +109,7 @@
             		</group>
 
             	</page>
-            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            	<page string="Snapshots" groups="campos_event.group_campos_info">
             		<group>
 						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
             		</group>
