@@ -48,8 +48,8 @@ class CamposFeeSsParticipant(models.Model):
     #jobber_child = fields.Boolean('Jobber Child')  -- TODO
     
     # Trasnport fields
-    webtourususeridno = fields.Char('webtour us User ID no', required=False)
-    webtourusgroupidno = fields.Char(string='webtour us Group ID no', related='registration_id.webtourusgroupidno')                                
+    webtourususeridno = fields.Char('webtour us User ID no')
+    webtourusgroupidno = fields.Char(string='webtour us Group ID no')                                
     
     tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
                                             'To camp Pick up',

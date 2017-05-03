@@ -47,6 +47,7 @@ class EventRegistration(models.Model):
     fee_total = fields.Float('Total Fee', compute='_compute_fees')
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Snapshot')
     ssreginv_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Invoices', domain=[('invoice_id', '!=', False)])
+    cmp_currency_id = fields.Many2one(related='event_id.company_id.currency_id', readonly=True)
 
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state')
