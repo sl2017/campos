@@ -264,7 +264,6 @@
 -->						
 								</page>
 								<page string="GloFo">
-<!--
 									<group>
 										<field name="glofo_number_participants"/>
 										<field name="glofo_co2_amount"/>
@@ -272,10 +271,8 @@
 									</group>
 									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
 									<field name="glofo_remarks"/>
--->
 								</page>
 								<page string="Cars">
-<!--
 										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
 											<tree editable="bottom">
 												<field name="reg_number"/>
@@ -284,7 +281,6 @@
 												<field name="phone_number"/>
 											</tree>
 										</field>
--->
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -525,7 +521,6 @@
 								<page string="Green Transport">
 								</page>
 								<page string="GloFo">
-<!--
 									<group>
 										<field name="glofo_number_participants"/>
 										<field name="glofo_co2_amount"/>
@@ -533,10 +528,8 @@
 									</group>
 									<p><b>Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc.</b></p>
 									<field name="glofo_remarks"/>
--->
 								</page>
 								<page string="Cars">
-<!--
 										<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars">
 											<tree editable="bottom">
 												<field name="reg_number"/>
@@ -545,7 +538,6 @@
 												<field name="phone_number"/>
 											</tree>
 										</field>
--->
 								</page>
 								<page name="pre_reg" string="Pre-registration">
 
@@ -649,11 +641,8 @@
 							<field name="name"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="own_note" />
-<!--
-							<field name="passport_number" attrs="{'invisible': [('visa_required', '=', True/>
-							<field name="visa_required"/>
-							<field name="group_country_code"/>
--->
+							<field name="visa_required" invisible="1"/>
+							<field name="passport_number" attrs="{'invisible': [('visa_required', '=', False)]}"/>
 							</group>
 						<notebook name="top">
 							<page name="contact" string="Contact info">
@@ -708,7 +697,6 @@
 				<tree  delete="0">
 					<field name="id" invisible="1"/>
 					<field name="name"/>
-					<field name="age"/>
 					<field name="dates_summery"/>
 					<field name="own_note"/>
 					<field name="transport_to_camp"/>
@@ -729,7 +717,6 @@
             		<field name="own_note"/>
             	</field>
             	<filter name="fGroup" position="after">
-            		<filter name="factive" string="Active" domain="[('state', 'not in', ['rejected','deregistered')]" />
             		<filter name="fnote" string="Own Note" icon="terp-personal" domain="[]" context="{'group_by':'own_note'}"/>
             	</filter>
             </field>
