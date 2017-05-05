@@ -18,6 +18,7 @@
                     <group>
                         <field name="name"/>
                         <field name="group_sel"/>
+                        <field name="camparea_sel"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
@@ -42,6 +43,7 @@
             <tree>
                 <field name="name"/>
                 <field name="group_sel"/>
+                <field name="camparea_sel"/>
             </tree>
         </field>
     </record>

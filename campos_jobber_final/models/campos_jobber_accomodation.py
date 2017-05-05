@@ -15,6 +15,11 @@ class CamposJobberAccomodation(models.Model):
     date_from = fields.Date('From date', required=True, default='2017-07-22')
     date_to = fields.Date('To date', required=True, default='2017-07-30')
     registration_id = fields.Many2one('event.registration', 'Group', domain=[('partner_id.scoutgroup', '=', True),('state', 'not in', ['cancel','deregistered'])])
+    camp_area_id = fields.Many2one(
+        'campos.camp.area',
+        'Camp Area',
+        select=True,
+        ondelete='set null')
     state = fields.Selection([('draft', 'Draft'),
                               ('cancelled', 'Cancelled'),
                               ('approved', 'Approved'),
@@ -23,6 +28,7 @@ class CamposJobberAccomodation(models.Model):
     approved_user_id = fields.Many2one('res.users', 'Approved By')
     accom_type_id = fields.Many2one('campos.jobber.accom.type', 'Accomondation Type')
     group_sel = fields.Boolean(related='accom_type_id.group_sel', readonly=True)
+    camparea_sel = fields.Boolean(related='accom_type_id.camparea_sel', readonly=True)
 
     @api.model
     def default_get(self, fields):
