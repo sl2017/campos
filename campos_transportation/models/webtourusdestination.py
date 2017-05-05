@@ -68,7 +68,12 @@ class WebtourUsDestination(models.Model):
             address = '' + get_tag_data("a:Address")
             webtour_dict["address"] = address
             crlf1 = address.find('\r')
-            crlf2 = address.find('\r',crlf1+1)          
+            crlf2 = address.find('\r',crlf1+1)
+            crlf3 = address.find('\r',crlf2+1)
+            if crlf3 > 0:
+               crlf1 = crlf2
+               crlf2 = crlf3 
+                
             if crlf1 > 0:
                 if crlf2 > 0:
                     webtour_dict["zip_city"] = address[crlf1+1:crlf2]
@@ -77,19 +82,8 @@ class WebtourUsDestination(models.Model):
 
             lat=get_tag_data("a:Latitude")
             lon=get_tag_data("a:Longitude")
-            #if len(lat) > 2: 
-            #    if lat[2] <>'.':
-            #        webtour_dict["latitude"] = lat[:2] + '.' + lat[2:]
-            #else: 
-            webtour_dict["latitude"] = lat
-                
-            #if len(lon) > 2:
-            #    if  lon[2] <>'.':
-            #        if (lon[0]=='1'):
-            #            webtour_dict["longitude"] = lon[:2] + '.' + lon[2:]
-            #   else:
-            #       webtour_dict["longitude"] = lon[:1] + '.' + lon[1:]
-            #else:     
+ 
+            webtour_dict["latitude"] = lat    
             webtour_dict["longitude"] = lon
                 
             webtour_dict["note"] = get_tag_data("a:Note")
