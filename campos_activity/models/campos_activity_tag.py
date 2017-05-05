@@ -10,4 +10,4 @@ class CamposActivityTag(models.Model):
     _name = 'campos.activity.tag'
     _description = 'Campos Activity Tag'  # TODO
 
-    name = fields.Char()
+    name = fields.Char(translate=True)

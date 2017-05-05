@@ -10,4 +10,4 @@ class CamposActivityPitag(models.Model):
     _name = 'campos.activity.pitag'
     _description = 'Campos Activity Pitag'  # TODO
 
-    name = fields.Char()
+    name = fields.Char(translate=True)

@@ -19,7 +19,7 @@
                         <field name="name"/>
                     </group>
                 </sheet>
-                <div class="oe_chatter"></div>
+                <!--  <div class="oe_chatter"></div>  -->
             </form>
         </field>
     </record>
@@ -54,10 +54,10 @@
     </record>
 
     <record model="ir.ui.menu" id="campos_activity_location_menu">
-        <field name="name">Campos Activity Location</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="name">Activity Locations</field>
+        <field name="parent_id" ref="submenu_campos_config"/>
         <field name="action" ref="campos_activity_location_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="10"/> 
     </record>
 
 </data>

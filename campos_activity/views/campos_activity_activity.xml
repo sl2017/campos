@@ -17,15 +17,18 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="code"/>
                         <field name="committee_id"/>
                         <field name="desc"/>
                         <field name="lang_ok" widget="many2many_checkboxes"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="pitag_ids" widget="many2many_tags"/>
                         <field name="age_from"/>
                         <field name="age_to"/>
                         <field name="audience"/>
-                        <field name="act_ins_ids"/>
+                        <field name="id" invisible="1"/>
+                        <field name="act_ins_ids" context="{'default_activity_id': id}"/>
                         </group>
-                    </group>
                 </sheet>
                 <div class="oe_chatter"></div>
             </form>
@@ -60,13 +63,31 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
+    
+    
+    <!-- Top menu item -->
+    <menuitem name="Activities"
+        id="menu_campos_activity"
+        groups="group_campos_activity"
+        sequence="46"/>
 
-    <record model="ir.ui.menu" id="campos_activity_activity_menu">
-        <field name="name">Campos Activity Activity</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+	<menuitem name="Activities"
+        id="submenu_campos_activity"
+        parent="menu_campos_activity"
+        sequence="10"/>
+        
+	<menuitem name="Configuration"
+        id="submenu_campos_config"
+        parent="menu_campos_activity"
+        sequence="50"/>
+	
+
+	<record model="ir.ui.menu" id="campos_activity_activity_menu">
+        <field name="name">Activity</field>
+        <field name="parent_id" ref="submenu_campos_activity"/>
         <field name="action" ref="campos_activity_activity_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="10"/>
     </record>
-
+	
 </data>
 </openerp>
