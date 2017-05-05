@@ -19,15 +19,6 @@ class webtourconfig(models.Model):
     webtoutexternalid_prefix = fields.Char('webtour ExternaiId prefix', default='0')
     
     @api.multi
-    def action_webtour_get_create_usneed_tron(self):
-        self.env['campos.webtourusneed'].get_create_usneed_tron()   
-    
-
-    @api.multi
-    def action_webtour_getcreate_usgroup_ususer(self):
-        self.env['campos.event.participant'].get_create_usgroupidno_tron()
-        
-    @api.multi
     def action_webtour_check_usgroup(self):
         self.ensure_one()
         _logger.info("action_webtour_check_usgroup Here we go.....")
@@ -94,10 +85,10 @@ class webtourconfig(models.Model):
         _logger.info("action_webtour_check_ususer Her we go !!")
         
         ususer_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/'}).responce.encode('utf-8'))
-        usgroup_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))
+        #usgroup_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))
 
         webtourusers = ususer_doc.getElementsByTagName("a:usUserMinimum")
-        webtourgroups = usgroup_doc.getElementsByTagName("a:usGroup")
+        #webtourgroups = usgroup_doc.getElementsByTagName("a:usGroup")
 
         ususeridlist=[]
         ususergroupidnolist=[]
@@ -107,65 +98,41 @@ class webtourconfig(models.Model):
             ususergroupidnolist.append(webtouruser.getElementsByTagName("a:GroupIDno")[0].firstChild.data)
             ususerexternalidlist.append(webtouruser.getElementsByTagName("a:ExternalID")[0].firstChild.data)
 
-        usgroupidlist=[]
-        usgroupnamelist=[]
-        for webtourgroup in webtourgroups:
-            usgroupidlist.append(webtourgroup.getElementsByTagName("a:IDno")[0].firstChild.data)
-            usgroupnamelist.append(webtourgroup.getElementsByTagName("a:Name")[0].firstChild.data)
-
-        pars=self.env['campos.event.participant'].search([('webtourusgroupidno', 'in', usgroupidlist),('webtourususeridno', '!=', False)])
-        _logger.info("action_webtour_check_ususer No rec %s",len(pars))
-        for par in pars:
-            try:               
-                i=ususeridlist.index(par.webtourususeridno)
-                #_logger.info("action_webtour_check_ususer %s, gr:%s, db:%s, wt:%s",i,par.id,par.webtourususeridno,ususeridlist[i])
-                if ususergroupidnolist[i] != par.webtourusgroupidno:
-                    _logger.info("action_webtour_check_ususer %s Not Matching Gr!!! webtour:%s, campos:%s, id:%s",par.webtourususeridno,ususergroupidnolist[i], par.webtourusgroupidno,par.id)
+        for reg in self.event_id.registration_ids:
+            for par in reg.participant_ids:
+                extid = self.webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                try:               
+                    i= ususerexternalidlist.index(extid)
+                except:
+                    i=False
+                    continue
+                if i:
+                    usg = ususergroupidnolist[i]
+                    usu = ususeridlist[i]
+                    if usu != par.webtourususeridno:
+                        s = 'reg:{0} par:{1} Ext: {2} usUser does not match {3} {4}'.format(reg.id, par.id,extid,usu, par.webtourususeridno)
+                        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 1','result':s})         
+                    elif usg != par.webtourusgroupidno:
+                        s = 'reg:{0} par:{1} Ext: {2} usGroup does not match {3} {4}'.format(reg.id, par.id,extid,usg, par.webtourusgroupidno)
+                        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 2','result':s})
+                    _logger.info("%s %s action_webtour_check_ususer",reg.id,par.id)  
                 else:
-                    if ususeridlist[i] != par.webtourususeridno:
-                        _logger.info("action_webtour_check_ususer Update gr:%s, db:%s, wt:%s",par.id,par.webtourususeridno,ususeridlist[i])
-                    else:
-                        _logger.info("action_webtour_check_ususer OK gr:%s, db:%s, wt:%s",par.id,par.webtourususeridno,ususeridlist[i])
-            except:
-                _logger.info("action_webtour_check_ususer not found id:%s, group:%s, ususer:%s",par.id,par.webtourusgroupidno,par.webtourususeridno)                      
-
+                    if par.webtourusgroupidno != False or par.webtourususeridno != False:
+                        s = 'reg:{0} par:{1} Ext: {2} Par not in found in WT {3} {4}'.format(reg.id, par.id,extid,par.webtourusgroupidno,par.webtourususeridno)
+                        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 3','result':s})                     
+                    
+                        
     @api.multi
     def action_webtour_check_usneed(self):
         self.ensure_one()
         _logger.info("action_webtour_check_usneed Her we go !!")
-
-        pars=self.env['campos.event.participant'].search([('webtourusgroupidno', '!=', False),('webtourususeridno', '!=', False)])
-        #_logger.info("action_webtour_check_usneed Step 1 No of Pars %s",len(pars))
-        for par in pars:
-            if par.tocampusneed_id:
-                updat = False
-                if par.tocampusneed_id.webtour_groupidno != par.webtourusgroupidno: 
-                    par.tocampusneed_id.webtour_groupidno = par.webtourusgroupidno
-                    updat = True
-                if par.tocampusneed_id.webtour_useridno != par.webtourususeridno:
-                    par.tocampusneed_id.webtour_useridno = par.webtourususeridno
-                    updat = True
-                                
-                if par.fromcampusneed_id:
-                    if par.fromcampusneed_id.webtour_groupidno != par.webtourusgroupidno: 
-                        par.fromcampusneed_id.webtour_groupidno = par.webtourusgroupidno
-                        updat = True
-                    if par.fromcampusneed_id.webtour_useridno != par.webtourususeridno:
-                        par.fromcampusneed_id.webtour_useridno = par.webtourususeridno
-                        updat = True
-                        
-                if updat:
-                    _logger.info("action_webtour_check_usneed Update !! id:%s, group:%s, user:%s", par.tocampusneed_id,par.webtourusgroupidno,par.webtourususeridno)
- 
-        _logger.info("action_webtour_check_usneed Step 2 Start to read usNeed from Webtour")
-        
+      
         usneed_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetAll/'}).responce.encode('utf-8'))
-        
         webtourneeds = usneed_doc.getElementsByTagName("a:usNeedMinimum")
 
         usneedidlist=[]
         usneedgroupidnolist=[]
-        ususeridnolist=[]        
+        ususeridnolist=[]    
         for webtourneed in webtourneeds:
             needno=webtourneed.getElementsByTagName("a:IDno")[0].firstChild.data
             groupno=webtourneed.getElementsByTagName("a:GroupIDno")[0].firstChild.data
@@ -173,20 +140,34 @@ class webtourconfig(models.Model):
             usneedidlist.append(needno)
             usneedgroupidnolist.append(groupno)
             ususeridnolist.append(userno)
-            needs=self.env['campos.webtourusneed'].search([('webtour_groupidno', '=', groupno),('webtour_useridno', '=', userno),('webtour_needidno', '=', False)])
+        
+        osneedlist=[]  
+        needs=self.env['campos.webtourusneed'].search([('webtour_needidno', '!=', False)])
+        
+        for need in needs:
+            osneedlist.append(need.webtour_needidno)
+            try:           
+                i= usneedidlist.index(need.webtour_needidno)
+            except:
+                i=False
+                continue
             
-            if len(needs)>0:
-                _logger.info("action_webtour_check_usneed found matching Needs gr:%s user:%s len:%s",groupno,userno,len(needs))
-                needs[0].webtour_needidno=needno
-            
-        for n in range(0, len(usneedidlist)-1):
-            #_logger.info("action_webtour_check_usgroup webtourusgroupidno name:%s usGr:%s",namelist[n],usgroupidlist[n])
-            if (usneedidlist[n][0:].isdigit()):
-                needs= self.env['campos.webtourusneed'].search([('webtour_needidno', '=', usneedidlist[n])])
-                #_logger.info("action_webtour_check_usneed %s %s",usneedidlist[n], len(needs))
-                for need in needs:
-                    if need.webtour_needidno != str(usneedgroupidnolist[n]):
-                        _logger.info("action_webtour_check_usneed webtourusgroupidno !! id:%s, par:%s, db:%s, wt:%s",need.id,need.participant_id ,need.webtour_groupidno,usneedgroupidnolist[n])
+            if i:    
+                usg = usneedgroupidnolist[i]
+                usu = ususeridnolist[i]
+                if need.webtour_groupidno != groupno or need.webtour_useridno !=userno:
+                    s = '{0} webtourusneed does not match Gr:{1} {2} U:{3} {4}'.format(need.id,need.webtour_needidno, need.webtour_groupidno,groupno, need.webtour_useridno,userno)
+                    log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s}) 
+            else:
+                s = '{0} webtourusneed not found in WT N:{1} G:{2} U:{3}'.format(need.id,need.webtour_needidno,need.webtour_groupidno,need.webtour_useridno)
+                log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 2','result':s})                
+        
+        n= len(set(usneedidlist) - set(osneedlist))
+        s = 'Number of webtour usNeed(s) not in Campos: {0}'.format(n)
+        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 3','result':s}) 
+        
+        #for n in list(set(usneedidlist) - set(osneedlist)):
+        #    _logger.info("webtour usNeed not in Campos %s",n)
         
     @api.model
     def action_clearusecamptransportjobber_nocampdays(self):
@@ -199,7 +180,12 @@ class webtourconfig(models.Model):
             
             if n > 0: n= n-1
             else: break
-                          
+
+class WebtourConfigChecklog(models.Model):
+    _description = 'Webtour check log'
+    _name = 'campos.webtourconfig.checklog'
+    name = fields.Char('Check', required=True)
+    result = fields.Char('Result', required=True)                    
                    
 class WebtourTripType(models.Model):
     _description = 'Webtour Trip Types'

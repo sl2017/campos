@@ -72,6 +72,8 @@ class WebtourParticipant(models.Model):
     
     webtourtravelneed_ids = fields.One2many(related='registration_id.webtourtravelneed_ids', string = 'Special travel needs')
     
+    webtour_externalid_suffix = fields.Char('External ID Postfix', default='')
+    
     
     @api.one
     def _check_is_admin(self):

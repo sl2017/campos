@@ -255,11 +255,11 @@ class WebtourRegistration(models.Model):
         
         if self.webtourusgroupidno:
             # Test if usGroup exist in Webtour
-            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
- # HUsk Check NAME       
+            newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+      
             if newidno == "0": #If not try to Create new usGroup
                 _logger.info("%s webtourupdate Group Could not find usGroup in Webtour: %s %s",str(self.id), self.name, self.webtourusgroupidno)
-                
+                '''
                 newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(self.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
                 
                 if newidno <> "0": # usGroup created succesfully
@@ -267,6 +267,7 @@ class WebtourRegistration(models.Model):
                     self.webtourusgroupidno = newidno
                 else:
                     _logger.info("%s webtourupdate Could not Recreate usGroup %s %s",str(self.id), self.name, self.webtourusgroupidno) 
+                '''   
             elif newidno <> self.webtourusgroupidno : #STRANGE got other usGroup Id
                 _logger.info("%s webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s",str(self.id), self.name, self.webtourusgroupidno, newidno)
                 self.webtourusgroupidno = newidno
