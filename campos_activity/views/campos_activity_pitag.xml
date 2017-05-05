@@ -19,7 +19,6 @@
                         <field name="name"/>
                     </group>
                 </sheet>
-                <div class="oe_chatter"></div>
             </form>
         </field>
     </record>
@@ -30,6 +29,7 @@
         <field name="arch" type="xml">
             <search>
                 <!-- TODO -->
+                <field name="name"/>
             </search>
         </field>
     </record>
@@ -46,18 +46,20 @@
     </record>
 
     <record model="ir.actions.act_window" id="campos_activity_pitag_act_window">
-        <field name="name">Campos Activity Pitag</field> <!-- TODO -->
+        <field name="name">PI Track</field> <!-- TODO -->
         <field name="res_model">campos.activity.pitag</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
+    
+        
 
     <record model="ir.ui.menu" id="campos_activity_pitag_menu">
-        <field name="name">Campos Activity Pitag</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="name">PI Track</field>
+        <field name="parent_id" ref="submenu_campos_activity"/>
         <field name="action" ref="campos_activity_pitag_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="30"/>
     </record>
 
 </data>

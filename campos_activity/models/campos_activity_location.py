@@ -11,3 +11,4 @@ class CamposActivityLocation(models.Model):
     _description = 'Campos Activity Location'  # TODO
 
     name = fields.Char()
+    

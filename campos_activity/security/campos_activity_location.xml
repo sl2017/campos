@@ -5,8 +5,8 @@
 <openerp>
 <data>
 
-    <record model="ir.model.access" id="campos_activity_location_access_name"> <!-- TODO acl id -->
-        <field name="name">campos.activity.location access name</field> <!-- TODO acl name -->
+    <record model="ir.model.access" id="campos_activity_location_access_user">
+        <field name="name">campos.activity.location access user</field>
         <field name="model_id" ref="model_campos_activity_location"/>
         <!-- TODO review and adapt -->
         <field name="group_id" ref="base.group_user"/>
@@ -16,5 +16,16 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
+	<record model="ir.model.access" id="campos_activity_location_access_admin">
+        <field name="name">campos.activity.location access admin</field>
+        <field name="model_id" ref="model_campos_activity_location"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="group_campos_activity"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+	
 </data>
 </openerp>
