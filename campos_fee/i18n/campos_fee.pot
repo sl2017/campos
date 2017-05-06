@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 02:00+0000\n"
-"PO-Revision-Date: 2017-05-01 02:00+0000\n"
+"POT-Creation-Date: 2017-05-06 02:00+0000\n"
+"PO-Revision-Date: 2017-05-06 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -291,11 +291,13 @@ msgid "Ikast-Brande"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Invoice"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Invoices"
 msgstr ""
@@ -421,11 +423,18 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
+msgid "Participant"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.actions.act_window,name:campos_fee.act_snapshot_list_participant
 #: model:ir.actions.act_window,name:campos_fee.campos_fee_ss_participant_act_window
 msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: model:ir.ui.menu,name:campos_fee.campos_fee_ss_participant_menu
 msgid "Participants"
@@ -439,6 +448,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_165
 msgid "Rebild"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
+msgid "Register with this event"
 msgstr ""
 
 #. module: campos_fee
@@ -502,6 +516,7 @@ msgid "Slagelse"
 msgstr ""
 
 #. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Snapshot"
 msgstr ""
@@ -563,6 +578,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_183
 msgid "Thisted"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.fee.ss.participant:campos_fee.campos_fee_ss_participant_tree_view
+msgid "Total"
 msgstr ""
 
 #. module: campos_fee
