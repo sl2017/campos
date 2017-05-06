@@ -155,7 +155,7 @@ class webtourconfig(models.Model):
             if i:    
                 usg = usneedgroupidnolist[i]
                 usu = ususeridnolist[i]
-                if need.webtour_groupidno != groupno or need.webtour_useridno !=userno:
+                if need.webtour_groupidno != usg or need.webtour_useridno !=usu:
                     s = '{0} webtourusneed does not match Gr:{1} {2} U:{3} {4}'.format(need.id,need.webtour_needidno, need.webtour_groupidno,groupno, need.webtour_useridno,userno)
                     log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s}) 
             else:
