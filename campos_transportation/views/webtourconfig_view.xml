@@ -25,6 +25,7 @@
 			<field name="tocamp_campos_TripType_id" string="To Camp TripType"/>
 			<field name="fromcamp_campos_TripType_id" string="From Camp TripType"/>
 			<field name="webtoutexternalid_prefix"/>
+			<field name="webtourcorrecterrorpassword"/>
 			<button name="action_webtour_check_usgroup" string="Check usGroups" type="object"/>
 			<button name="action_webtour_check_ususer" string="Check usUsers" type="object"/>
 			<button name="action_webtour_check_usneed" string="Check usNeeds" type="object"/>

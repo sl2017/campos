@@ -17,67 +17,56 @@ class webtourconfig(models.Model):
     tocamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','To Camp TripType', ondelete='set null')
     fromcamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','From Camp TripType', ondelete='set null')
     webtoutexternalid_prefix = fields.Char('webtour ExternaiId prefix', default='0')
+    webtourcorrecterrorpassword = fields.Char('webtour correct error password')
     
     @api.multi
     def action_webtour_check_usgroup(self):
         self.ensure_one()
         _logger.info("action_webtour_check_usgroup Here we go.....")
-        registrationidlist=[]
         usgroupidlist=[]
         namelist=[]
         
-        response_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))
-        _logger.info("action_webtour_check_usgroup Got usGroup/GetAll/")
-          
+        response_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))               
         webtourgroups = response_doc.getElementsByTagName("a:usGroup")
 
         for webtourgroup in webtourgroups:
             idno = webtourgroup.getElementsByTagName("a:IDno")[0].firstChild.data
             usgroupidlist.append(idno)
             aname = webtourgroup.getElementsByTagName("a:Name")[0].firstChild.data
-            if aname in namelist:
-                _logger.info("action_webtour_check_usgroup name doublet !!!!!!! %s %s",aname,idno)
             namelist.append(aname)
             
         _logger.info("action_webtour_check_usgroup Done check1 %s %s",len(namelist),len(usgroupidlist))
-               
-        for n in range(0, len(namelist)-1):
-            #_logger.info("action_webtour_check_usgroup webtourusgroupidno name:%s usGr:%s",namelist[n],usgroupidlist[n])
-            if (namelist[n][0:].isdigit()):
-                for reg in self.env['event.registration'].search([('id', '=', namelist[n])]):
-                    if reg.webtourusgroupidno != str(usgroupidlist[n]):
-                        _logger.info("action_webtour_check_usgroup Wrong webtourusgroupidno !!! id:%s, db:%s wt:%s",reg.id,reg.webtourusgroupidno,usgroupidlist[n])
-                        reg.webtourusgroupidno = usgroupidlist[n]
-                if len(reg) < 1:
-                    _logger.info("action_webtour_check_usgroup Not in Campos !!! usGroup: %s Name:%s",usgroupidlist[n],namelist[n])
-            else:
-                _logger.info("action_webtour_check_usgroup Not Int webtourusgroupidno !!!!!!! %s %s",namelist[n],usgroupidlist[n])    
-
-        _logger.info("action_webtour_check_usgroup Done check2")        
         
-        for reg in self.env['event.registration'].search([('webtourusgroupidno', 'in', usgroupidlist),('webtourusgroupidno', '!=', False)]):
-            try:
-                i = usgroupidlist.index(reg.webtourusgroupidno)
-                if namelist[i] != str(reg.id):
-                    _logger.info("action_webtour_check_usgroup Does not match  id:%s wt:%s Gr%s",reg.id,namelist[i],reg.webtourusgroupidno)
-                    reg.webtourusgroupidno = False
-      
+        for reg in self.event_id.registration_ids:              
+            try:               
+                i= namelist.index(str(reg.id))
             except:
-                _logger.info("action_webtour_check_usgroup Did not find id:%s db:%s",reg.id,reg.webtourusgroupidno)
+                i=False
+                continue
+            if i:
+                if reg.webtourusgroupidno != usgroupidlist[i]:
+                    s = 'reg:{0} usGroup does not match {1} {2}'.format(reg.id, usgroupidlist[i], reg.webtourusgroupidno)
+                    log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usgroup 1','result':s})
+                    if self.webtourcorrecterrorpassword == 'sl2017WebtourusGroup':
+                        if usgroupidlist[i]:
+                            reg.webtourusgroupidno = usgroupidlist[i]
+                            s = 'reg:{0} Assigned webtourusgroupidno {1}'.format(reg.id,usgroupidlist[i] )
+                            log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usgroup 1A','result':s})                     
+            else:
+                s = 'reg:{0} usGroup reg_id not found as name in WT'.format(reg.id)
+                log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usgroup 2','result':s})  
                 
-        for reg in self.env['event.registration'].search([('webtourusgroupidno', 'not in', usgroupidlist),('webtourusgroupidno', '!=', False)]):
-            _logger.info("action_webtour_check_usgroup Not Int Webtour !!!!!!! %s %s %s",reg.id,reg.webtourusgroupidno, reg.name)  
-        
-        _logger.info("action_webtour_check_usgroup Done check3")
-        
-        for n in range(0, len(namelist)-1):
-            if (namelist[n][0:].isdigit()):
-                for reg in self.env['event.registration'].search([('id', '=', namelist[n]),('webtourusgroupidno', '=', False)]):
-                    _logger.info("action_webtour_check_usgroup write new Gr id:%s Gr%s",reg.id,usgroupidlist[n])
-                    reg.webtourusgroupidno = usgroupidlist[n]
+                if reg.webtourusgroupidno:
+                    try:               
+                        ig= usgroupidlist.index(reg.webtourusgroupidno)
+                    except:
+                        ig=False
+                        continue
+                    if ig:
+                        s = 'reg:{0} webtourusgroupidno:{1} found on another name in WT: {2}'.format(reg.id,reg.webtourusgroupidno,namelist[ig])
+                        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usgroup 3','result':s})                          
+                   
 
-        _logger.info("action_webtour_check_usgroup Done check4")
-                
     @api.multi
     def action_webtour_check_ususer(self):
         self.ensure_one()
@@ -85,10 +74,7 @@ class webtourconfig(models.Model):
         _logger.info("action_webtour_check_ususer Her we go !!")
         
         ususer_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/'}).responce.encode('utf-8'))
-        #usgroup_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))
-
         webtourusers = ususer_doc.getElementsByTagName("a:usUserMinimum")
-        #webtourgroups = usgroup_doc.getElementsByTagName("a:usGroup")
 
         ususeridlist=[]
         ususergroupidnolist=[]
@@ -115,7 +101,16 @@ class webtourconfig(models.Model):
                     elif usg != par.webtourusgroupidno:
                         s = 'reg:{0} par:{1} Ext: {2} usGroup does not match {3} {4}'.format(reg.id, par.id,extid,usg, par.webtourusgroupidno)
                         log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 2','result':s})
-                    _logger.info("%s %s action_webtour_check_ususer",reg.id,par.id)  
+                        
+                        if self.webtourcorrecterrorpassword == 'sl2017WebtourusUser':
+                            if par.webtourusgroupidno and usg:
+                                par.webtour_externalid_suffix='A'
+                                s = 'reg:{0} par:{1} Assigned webtour_externalid_suffix {2}'.format(reg.id, par.id,par.webtour_externalid_suffix)
+                                log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 2A','result':s})
+                            elif par.webtourusgroupidno == False and usg:
+                                par.webtourusgroupidno = usg
+                                s = 'reg:{0} par:{1} Assigned webtourusgroupidno {2}'.format(reg.id, par.id,usg)
+                                log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_ususer 2B','result':s})                        
                 else:
                     if par.webtourusgroupidno != False or par.webtourususeridno != False:
                         s = 'reg:{0} par:{1} Ext: {2} Par not in found in WT {3} {4}'.format(reg.id, par.id,extid,par.webtourusgroupidno,par.webtourususeridno)
@@ -156,8 +151,13 @@ class webtourconfig(models.Model):
                 usg = usneedgroupidnolist[i]
                 usu = ususeridnolist[i]
                 if need.webtour_groupidno != usg or need.webtour_useridno !=usu:
-                    s = '{0} webtourusneed does not match Gr:{1} {2} U:{3} {4}'.format(need.id,need.webtour_needidno, need.webtour_groupidno,groupno, need.webtour_useridno,userno)
-                    log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s}) 
+                    s = '{0} webtourusneed does not match Gr:{1} {2} U:{3} {4}'.format(need.id,need.webtour_needidno, need.webtour_groupidno,usg, need.webtour_useridno,usu)
+                    log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s})
+                    if self.webtourcorrecterrorpassword == 'sl2017WebtourusNeed':
+                        if need.webtour_groupidno == usg and usu:
+                            need.webtour_useridno = usu
+                            s = 'need:{0} par:{1} reg:[2} Assigned webtour_useridno {3}'.format(need.id,need.participant_id,need.registration_id,usu)
+                            log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1A','result':s})                                          
             else:
                 s = '{0} webtourusneed not found in WT N:{1} G:{2} U:{3}'.format(need.id,need.webtour_needidno,need.webtour_groupidno,need.webtour_useridno)
                 log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 2','result':s})                
@@ -166,9 +166,7 @@ class webtourconfig(models.Model):
         s = 'Number of webtour usNeed(s) not in Campos: {0}'.format(n)
         log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 3','result':s}) 
         
-        #for n in list(set(usneedidlist) - set(osneedlist)):
-        #    _logger.info("webtour usNeed not in Campos %s",n)
-        
+                
     @api.model
     def action_clearusecamptransportjobber_nocampdays(self):
  
