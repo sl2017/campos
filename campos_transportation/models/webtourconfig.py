@@ -178,6 +178,50 @@ class webtourconfig(models.Model):
             
             if n > 0: n= n-1
             else: break
+            
+            
+    @api.multi
+    def action_Webtour_usneedminimum_get(self):
+        self.ensure_one() 
+        _logger.info("action_Webtour_usneedminimum_get here we go!!")
+        mo = self.env['campos.webtour.usneedminimum']
+        n=0
+        for rec in mo.search([('id', '!=', False)]):
+            rec.unlink()
+            n=n+1
+            if n> 2000:
+                _logger.info("action_Webtour_usneedminimum_get deleted %s records, concinueing",n)
+                n=0;
+        mo.getfromwebtour()   
+
+    @api.multi
+    def action_Webtour_ususerminimum_get(self):
+        self.ensure_one() 
+        _logger.info("action_Webtour_ususerminimum_get here we go!!")
+        mo = self.env['campos.webtour.ususerminimum']
+        n=0
+        for rec in mo.search([('id', '!=', False)]):
+            rec.unlink()
+            n=n+1
+            if n> 2000:
+                _logger.info("action_Webtour_ususerminimum_get deleted %s records, concinueing",n)
+                n=0;
+        mo.getfromwebtour()  
+
+    @api.multi
+    def action_Webtour_usgroup_get(self):
+        self.ensure_one() 
+        _logger.info("action_Webtour_usgroup_get here we go!!")
+        mo = self.env['campos.webtour.usgroup']
+        n=0
+        for rec in mo.search([('id', '!=', False)]):
+            rec.unlink()
+            n=n+1
+            if n> 500:
+                _logger.info("action_Webtour_usgroup_get deleted %s records, concinueing",n)
+                n=0;
+        mo.getfromwebtour()  
+
 
 class WebtourConfigChecklog(models.Model):
     _description = 'Webtour check log'
@@ -192,7 +236,6 @@ class WebtourTripType(models.Model):
     name = fields.Char('Webtour Trip Type', required=True)
     traveldate_ids = fields.One2many('campos.webtourconfig.triptype.date','campos_TripType_id','Travel Days')
     returnjourney = fields.Boolean('Return Journey')
-
 
 class WebtourTripTypeDate(models.Model):
     _description = 'Webtour Trip Types Date'

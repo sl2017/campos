@@ -703,3 +703,109 @@ class WebtourUsNeedChanges(models.Model):
         #_logger.info("sameasWebtourusneed %s %s %s %s %s",sdt , sdi , sn , edi , en)
         _logger.info("sameasWebtourusneed")
         return sdt and sdi and sn and edi and en
+    
+    
+    
+class Webtour_usNeedMinimum(models.Model):
+    _name = 'campos.webtour.usneedminimum'
+    idno = fields.Char('IDno')
+    groupidno = fields.Char('GroupIDno')
+    group_name = fields.Char('Group Name', compute='_compute_groupname')
+    touridno = fields.Char('TourIDno')
+    useridno = fields.Char('UserIDno')
+    user_externalid = fields.Char('User ExternalID', compute='_compute_userexternalid', store=True)
+    user_groupidno = fields.Char('User GroupIDno', compute='_compute_userexternalid', store=True)
+    user_groupissame = fields.Boolean('Need and User Group same', compute='_compute_userexternalid', store=True)
+    alias = fields.Char('Alias')
+    
+    
+    @api.depends('groupidno')
+    def _compute_groupname(self):
+        groups = self.env['campos.webtour.usgroup']
+        for rec in self:
+            group = groups.search([('idno','=',rec.groupidno)])
+            if len(group) > 0:
+                rec.group_name = group[0].name
+
+    @api.depends('useridno')
+    def _compute_userexternalid(self):
+        users = self.env['campos.webtour.ususerminimum']
+        for rec in self:
+            user = users.search([('idno','=',rec.useridno)])
+            if len(user) > 0:
+                rec.user_externalid = user[0].externalid
+                rec.user_groupidno = user[0].groupidno
+                rec.user_groupissame = rec.groupidno == user[0].groupidno
+
+  
+    @api.multi
+    def getfromwebtour(self):
+        usneed_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetAll/'}).responce.encode('utf-8'))
+        
+        alias=usneed_doc.getElementsByTagName("a:Alias")[0].firstChild.data        
+        webtourneeds = usneed_doc.getElementsByTagName("a:usNeedMinimum")
+   
+        for webtourneed in webtourneeds:
+            dicto = {}
+            dicto["idno"] = webtourneed.getElementsByTagName("a:IDno")[0].firstChild.data
+            dicto["groupidno"] = webtourneed.getElementsByTagName("a:GroupIDno")[0].firstChild.data
+            dicto["touridno"] = webtourneed.getElementsByTagName("a:TourIDno")[0].firstChild.data
+            dicto["useridno"] = webtourneed.getElementsByTagName("a:UserIDno")[0].firstChild.data
+            dicto["alias"] = alias
+            self.create(dicto)
+
+class Webtour_usNeedError(models.Model):
+    _name = 'campos.webtour.usneederror'
+    idno = fields.Char('IDno')        
+
+    @api.multi
+    def action_deleteinwebtour(self):
+        for rec in self:
+            _logger.info("action_deleteinwebtour Deleting %s",rec.idno)
+            self.env['campos.webtour_req_logger'].create({'name':'usNeed/Delete/?NeedIDno=' + rec.idno})
+
+class Webtour_usUserMinimum(models.Model):
+    _name = 'campos.webtour.ususerminimum'
+    idno = fields.Char('IDno')
+    groupidno = fields.Char('GroupIDno')
+    externalid = fields.Char('ExternalID')    
+    alias = fields.Char('Alias')
+    
+    @api.multi
+    def getfromwebtour(self):
+        responce_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/'}).responce.encode('utf-8'))
+        
+        alias=responce_doc.getElementsByTagName("a:Alias")[0].firstChild.data        
+        rs = responce_doc.getElementsByTagName("a:usUserMinimum")
+   
+        for rec in rs:
+            dicto = {}
+            dicto["idno"] = rec.getElementsByTagName("a:IDno")[0].firstChild.data
+            dicto["groupidno"] = rec.getElementsByTagName("a:GroupIDno")[0].firstChild.data
+            dicto["externalid"] = rec.getElementsByTagName("a:ExternalID")[0].firstChild.data
+            dicto["alias"] = alias
+            self.create(dicto)
+       
+
+class Webtour_usGroup(models.Model):
+    _name = 'campos.webtour.usgroup'
+    idno = fields.Char('IDno')
+    name = fields.Char('Name')
+    alias = fields.Char('Alias')
+
+    @api.multi
+    def getfromwebtour(self):
+        responce_doc=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetAll/'}).responce.encode('utf-8'))
+        
+        alias=responce_doc.getElementsByTagName("a:Alias")[0].firstChild.data        
+        rs = responce_doc.getElementsByTagName("a:usGroup")
+   
+        for rec in rs:
+            dicto = {}
+            dicto["idno"] = rec.getElementsByTagName("a:IDno")[0].firstChild.data
+            dicto["name"] = rec.getElementsByTagName("a:Name")[0].firstChild.data
+
+            dicto["alias"] = alias
+            self.create(dicto)
+
+    
