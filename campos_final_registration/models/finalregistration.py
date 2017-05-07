@@ -25,15 +25,15 @@ class FinalRegistration(models.Model):
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
     meatlist_ids = fields.One2many('event.registration.meatlist','registration_id','Meat Choices')
-    number_of_tents = fields.Integer('Number of patrol tents (for personal accommodation)',help='Oplysninger om telte vil ikke indgå i beregningen af areal til den enkelte gruppe. Dette vil ske ud fra deltagerantallet. Flere telte vil dermed ikke give en større lejrplads.')
+    number_of_tents = fields.Integer('Number of patrol tents (for personal accommodation)',help='Information about tents will not be used in the calculation of area for the individual group. This will be based on the number of participants. More tents will not give a bigger campsite.')
     number_of_other_small_tents = fields.Integer('Number of other tents, less than 50 m2')
     large_tents = fields.Text('Number of assembly and staff tents, more than 50 m2, incl. their sizes', help='If the tent is larger than 50m2, it must be approved by the authorities, via the camp''s emergency management. This also applies to mast sails if there are sides of more than half of the circumference.')
     mast_sails = fields.Text('Number of mast sails, incl. diameters, if they have sides and on how much of the cercumfence.', help='If the tent is larger than 50m2, it must be approved by the authorities, via the camp''s emergency management. This also applies to mast sails if there are sides of more than half of the circumference.')
     number_gas_burners = fields.Integer('Number of gas burners with tanks more than 2 kg', help='When using a gas blower, place the burner on non-combustible material in a size dimensioned according to the size of the gas flue. There may be only 1 gas bottle in connection with each gas blow. The gas bottle must not exceed 11 kg. There may be 1 extra gas bottle of max. 11 kg on each campsite. Excess gas bottles must be stored in another location, according to the instructions given by the emergency department.')
-    pioneering_in_height = fields.Boolean('Are you planning to construct pioneering more than 4 meters high?',help='Raftebyggerier over 4 meters højde skal godkendes af myndighederne, via lejrens beredskab (dette inkluderer ikke flagstænger og andre enkeltstående master).')
-    pioneering_in_height_with_persons = fields.Boolean('Are you planning to construct pioneering with persons staying above 2 meters?',help='Raftebyggerier med planlagt personophold i over 2 meters højde skal godkendes af myndighederne, via lejrens beredskab.')
-    raised_sleeping = fields.Boolean('Are you planning to have raised sleeping places?',help='Raftebyggerier med planlagt personophold i over 1 meters højde, hvor der skal overnattes, skal godkendes af myndighederne, via lejrens beredskab.')
-    gear_transport = fields.Text('How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)?',help='Lejrens beredskab anbefaler at grupperne benytter sig af muligheden for at aflevere udstyr på lejren inden klokken 06:00 den 22. juli, da det herefter ikke vil være muligt at køre ind på lejrområdet med køretøjer der ikke tilhører lejren, jf. lejrens trafikpolitik.')
+    pioneering_in_height = fields.Boolean('Are you planning to construct pioneering more than 4 meters high?',help='Pioneering constructions above 4 meters height must be approved by the authorities, through the camp''s emergency management (this does not include flagpoles and other single masts).')
+    pioneering_in_height_with_persons = fields.Boolean('Are you planning to construct pioneering with persons staying above 2 meters?',help='Pioneeing constructions planned for persons staying above 2 meters height must be approved by the authorities, through the camp''s emergency management.')
+    raised_sleeping = fields.Boolean('Are you planning to have raised sleeping places?',help='Pioneering constructions with planned accommodation at more than 1 meter height, must be approved by the authorities through the camp''s emergency management.')
+    gear_transport = fields.Text('How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)?',help='The emergency management of the camp recommends that the groups use the opportunity to deliver equipment at the camp before 06:00 on 22 July, as it will not be possible to enter the campsite with vehicles not belonging to the camp, cf. the camp''s traffic policy.')
     glofo_number_participants = fields.Integer('Number of participants in Grean Profile')
     glofo_co2_amount = fields.Integer('Grean Profile, amount of CO2 (in grams)')
     glofo_co2_amount_total = fields.Integer('Total amount of CO2 (in grams)')
@@ -133,6 +133,7 @@ class FinalRegistrationParticipant(models.Model):
     passport_number = fields.Integer('Passport number')
     visa_required = fields.Boolean(related='registration_id.partner_id.country_id.visa_req', string='Visa Required', readonly=True)
     group_country_code = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code', readonly=True)
+#    probably not used:
 #    green_transport = fields.Boolean('Whish to participate in Green Transport - CO2 neutral?', default=False)
 #    green_transport_origin = fields.Selection([('home', 'From home'),
 #                              ('border','From municipallty border')],
@@ -397,13 +398,13 @@ class RegistrationMeat(models.Model):
                                                                                      ('the_date','=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1)),
                                                                                      ('participant_id.state','!=','deregistered'),
                                                                                      ('participant_id.birthdate','<','2015-07-22')]).mapped('participant_id')
-#            jobbers_both_days_count =  self.env['campos.jobber.accomodation'].search_count([('registration_id', '=', self.registration_id.id),
-#                                                                                     ('state', '=', 'approved'),
-#                                                                                     ('date_from','=',self.event_date),
-#                                                                                     ('date_to','=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1))])
+            jobbers_both_days_count =  self.env['campos.jobber.accomodation'].search_count([('registration_id', '=', self.registration_id.id),
+                                                                                     ('state', '=', 'approved'),
+                                                                                     ('date_from','<=',self.event_date),
+                                                                                     ('date_to','>=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1))])
             participants_both_days = participants_this_day & participants_next_day
             self.day_participant_total = len(participants_both_days)
-#            self.day_participant_total = self.day_participant_total + jobbers_both_days_count
+            self.day_participant_total = self.day_participant_total + jobbers_both_days_count
         else:
             self.day_participant_total=0
 
@@ -412,7 +413,7 @@ class RegistrationMeat(models.Model):
     def _check_meat_count(self):
         for rec in self:
             if (rec.day_meat_total>rec.day_participant_total):
-                raise exceptions.ValidationError(_('Number of ordered meat potions (%d) exceeds the number of dinner participants (%d) on %s. ' % (rec.day_meat_total,rec.day_participant_total, rec.event_date)))
+                raise exceptions.ValidationError(_('Number of ordered meat portions (%d) exceeds the number of dinner participants (%d) on %s. ' % (rec.day_meat_total,rec.day_participant_total, rec.event_date)))
 
 class RegistrationCar(models.Model):
     '''

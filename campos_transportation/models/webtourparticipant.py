@@ -96,7 +96,9 @@ class WebtourParticipant(models.Model):
         MAX_LOOPS_usGroup = 100  #Max No of Groups pr Scheduled call
         MAX_LOOPS_usUser = 1000  #Max No of Users pr Scheduled call
         _logger.info("get_create_usgroupidno_tron: Here we go...")
-
+        
+        return True
+        
         # find participants having transort need but missing usGroupIDno
         rs_missingusGroupIDno= self.env['campos.event.participant'].search([('registration_id.event_id', '=', 1),('webtourusgroupidno', '=', False),('registration_id.scoutgroup', '=', True)
                                                                             ,'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
@@ -621,7 +623,8 @@ class WebtourParticipant(models.Model):
                 
                 if par.webtourususeridno:
                     if par.webtourususeridno not in ususerslist:
-                        req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                        extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                        req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + par.webtourusgroupidno
                         newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
                         
                         if newidno <> "0":
@@ -630,8 +633,9 @@ class WebtourParticipant(models.Model):
                         else:
                             _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
                             par.webtourususeridno=False                    
-                else:     
-                    req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                else:
+                    extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix    
+                    req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + par.webtourusgroupidno
                     newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
                     
                     if newidno <> "0":

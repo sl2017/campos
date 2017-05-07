@@ -294,7 +294,8 @@ class WebtourRegistration(models.Model):
             rs_missingususeridno= self.env['campos.event.participant'].search([('webtourusgroupidno', '=', self.webtourusgroupidno),('webtourususeridno', 'not in', ususerslist)
                                                                           ,'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])           
             for par in rs_missingususeridno:
-                req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + webtoutexternalid_prefix + str(par.id) + "&GroupIDno=" + par.webtourusgroupidno
+                extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + par.webtourusgroupidno
                 newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
                 
                 if newidno <> "0":

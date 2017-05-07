@@ -7,7 +7,7 @@
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
-<field name="status"/>
+<field name="webtourstatus"/>
 <field name="registration_id"/>
 <field name="participant_id"/>
 <field name="campos_TripType_id"/>
