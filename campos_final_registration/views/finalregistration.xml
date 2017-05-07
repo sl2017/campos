@@ -252,8 +252,8 @@
 									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
 									<field name="gear_transport"/>
 								</page>
+<!--				skal flyttes til deltagerview?!? 
 								<page string="Green Transport">
-<!--				skal flyttes til deltagerview?!?
 									<group>
 										<field name="green_transport"/>
 										<field name="green_transport_origin" attrs="{'invisible': [('green_transport', '=', False)]}"/>
@@ -261,8 +261,8 @@
 										<field name="green_transport_borrow_bike" attrs="{'invisible': [('green_transport', '=', False)]}"//>
 										<field name="green_transport_mail" attrs="{'invisible': [('green_transport', '=', False)]}"//>
 									</group>
--->						
 								</page>
+-->						
 								<page string="GloFo">
 									<group>
 										<field name="glofo_number_participants"/>
@@ -518,8 +518,10 @@
 									<p><b>How will get your gear to the camp (own trailer(s)/common transport with other groups like rented truck or carriage man)</b></p>
 									<field name="gear_transport"/>
 								</page>
+<!--
 								<page string="Green Transport">
 								</page>
+-->
 								<page string="GloFo">
 									<group>
 										<field name="glofo_number_participants"/>
