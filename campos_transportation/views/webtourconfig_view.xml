@@ -30,6 +30,9 @@
 			<button name="action_webtour_check_ususer" string="Check usUsers" type="object"/>
 			<button name="action_webtour_check_usneed" string="Check usNeeds" type="object"/>
 			<button name="action_clearusecamptransportjobber_nocampdays" string="clear jobber transport nocampdays" type="object"/>
+			<button name="action_Webtour_usneedminimum_get" string="Get usNeedminimum from WT" type="object"/>
+			<button name="action_Webtour_ususerminimum_get" string="Get usUserminimum from WT" type="object"/>
+			<button name="action_Webtour_usgroup_get" string="Get usGrop from WT" type="object"/>			
 		</group>
 </sheet>
 </form>
