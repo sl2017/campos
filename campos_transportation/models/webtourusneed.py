@@ -94,21 +94,30 @@ class WebtourUsNeed(models.Model):
     webtour_useridno = fields.Char('Webtour User ID', required=False)
     webtour_groupidno = fields.Char('Webtour Groupidno', required=False)
     webtour_deleted = fields.Boolean('Webtour Deleted', default=False)
+    
     webtour_startdatetime = fields.Char('Webtour StartDateTime', required=False)
     webtour_startdestinationidno = fields.Char('Webtour StartDestinationIdNo', required=False)
     webtour_startnote = fields.Char('Webtour StartNote', required=False)
     webtour_enddatetime = fields.Char('Webtour EndDateTime', required=False)
     webtour_enddestinationidno = fields.Char('Webtour EndDestinationIdNo', required=False)
     webtour_endnote = fields.Char('Webtour EndNote', required=False)
+
+    webtour_pending_startdatetime = fields.Char('Webtour Pending StartDateTime', required=False)
+    webtour_pending_startdestinationidno = fields.Char('Webtour Pending StartDestinationIdNo', required=False)
+    webtour_pending_startnote = fields.Char('Webtour Pending StartNote', required=False)
+    webtour_pending_enddatetime = fields.Char('Webtour Pending EndDateTime', required=False)
+    webtour_pending_enddestinationidno = fields.Char('Webtour Pending EndDestinationIdNo', required=False)
+    webtour_pending_endnote = fields.Char('Webtour Pending EndNote', required=False)
+    
     webtour_CurrentDateTime = fields.Char('CurrentDateTime', required=False)
     webtour_touridno = fields.Char('Webtour TourIDno', required=False)
 
     WebtourUsNeedChanges_ids= fields.One2many('campos.webtourusneed.changes','WebtourUsNeed_id',ondelete='set null')
-    status = fields.Selection([('1', 'Initiated'),
-                               ('2', 'In Planning'),
-                               ('3', 'Planned'),
-                               ('4', 'Change Pending'),
-                               ('5', 'Rejected')], default=False, string='Status')
+    webtourstatus = fields.Selection([('1', 'Pending Create'),
+                               ('2', 'Normal'),
+                               ('3', 'Pending Change'),
+                               ('4', 'Pending Delete'),
+                               ('5', 'Deleted')], default=False, string='Webtour Status')
     
     
     @api.multi
@@ -188,6 +197,69 @@ class WebtourUsNeed(models.Model):
                 tag_data = None
 
             return tag_data
+
+        def updatewebtourfields17():
+            dicto ={}
+            if get_tag_data("a:Deleted") =='true':
+                if self.webtourstatus != '5': dicto['webtourstatus'] != '5'
+                if self.webtour_needidno: dicto['webtour_needidno'] = False
+                if self.webtour_startdatetime: dicto['webtour_startdatetime'] = False
+                if self.webtour_startdestinationidno: dicto['webtour_startdestinationidno'] = False
+                if self.webtour_startnote: dicto['webtour_startnote'] = False
+                if self.webtour_enddatetime: dicto['webtour_enddatetime'] = False
+                if self.webtour_enddestinationidno : dicto['webtour_enddestinationidno'] = False
+                if self.webtour_endnote: dicto['webtour_endnote'] = False
+                if self.webtour_touridno: dicto['webtour_touridno'] = False
+                if self.webtour_CurrentDateTime != get_tag_data("CurrentDateTime"): dicto['webtour_CurrentDateTime'] = get_tag_data("CurrentDateTime")
+                if self.campos_transferedseq != self.campos_writeseq: dicto['campos_transferedseq'] = self.campos_writeseq
+            else:
+                try:
+                    pending_doc = response_doc.getElementsByTagName('a:pending')
+                except:
+                    pending_doc = False               
+                    #continue
+                
+                if pending_doc == False:
+                    if self.webtourstatus != '2': dicto['webtourstatus'] = '2'
+                else:                   
+                    pendingtype = get_tag_data_from_node(pending_doc,"a:PendingType")
+                    
+                    if pendingtype == 'CREATE':
+                        if self.webtourstatus != '1': dicto['webtourstatus'] = '1'
+                    elif pendingtype == 'UPDATE':
+                        if self.webtourstatus != '3': dicto['webtourstatus'] = '3'
+                    elif pendingtype == 'DELETE':
+                        if self.webtourstatus != '4': dicto['webtourstatus'] = '4'
+            
+                    if self.webtour_needidno != get_tag_data_from_node(pending_doc,"a:IDno"): 
+                        dicto['webtour_needidno'] = get_tag_data_from_node(pending_doc,"a:IDno")
+                    if self.webtour_pending_startdatetime != get_tag_data_from_node(pending_doc,"a:StartDateTime"):
+                        dicto['webtour_startdatetime'] = get_tag_data_from_node(pending_doc,"a:StartDateTime")
+                    if self.webtour_pending_startdestinationidno != get_tag_data_from_node(pending_doc,"a:StartDestinationIDno"):
+                        dicto['webtour_startdestinationidno'] = get_tag_data_from_node(pending_doc,"a:StartDestinationIDno")
+                    if self.webtour_pending_startnote != get_tag_data_from_node(pending_doc,"a:StartNote"):
+                        dicto['webtour_startnote'] = get_tag_data_from_node(pending_doc,"a:StartNote")
+                    if self.webtour_pending_enddatetime != get_tag_data_from_node(pending_doc,"a:EndDateTime"):
+                        dicto['webtour_enddatetime'] = get_tag_data_from_node(pending_doc,"a:EndDateTime")
+                    if self.webtour_pending_enddestinationidno != get_tag_data_from_node(pending_doc,"a:EndDestinationIDno"):
+                        dicto['webtour_enddestinationidno'] = get_tag_data_from_node(pending_doc,"a:EndDestinationIDno")
+                    if self.webtour_pending_endnote != get_tag_data_from_node(pending_doc,"a:EndNote"): 
+                        dicto['webtour_endnote'] = get_tag_data_from_node(pending_doc,"a:EndNote")
+                    if self.webtour_CurrentDateTime != get_tag_data_from_node(pending_doc,"CurrentDateTime"): 
+                        dicto['webtour_CurrentDateTime'] = get_tag_data_from_node(pending_doc,"CurrentDateTime")                    
+                          
+                if self.webtour_needidno != get_tag_data("a:IDno"): dicto['webtour_needidno'] = get_tag_data("a:IDno")
+                if self.webtour_startdatetime != get_tag_data("a:StartDateTime"): dicto['webtour_startdatetime'] = get_tag_data("a:StartDateTime")
+                if self.webtour_startdestinationidno != get_tag_data("a:StartDestinationIDno"): dicto['webtour_startdestinationidno'] = get_tag_data("a:StartDestinationIDno")
+                if self.webtour_startnote != get_tag_data("a:StartNote"): dicto['webtour_startnote'] = get_tag_data("a:StartNote")
+                if self.webtour_enddatetime != get_tag_data("a:EndDateTime"): dicto['webtour_enddatetime'] = get_tag_data("a:EndDateTime")
+                if self.webtour_enddestinationidno != get_tag_data("a:EndDestinationIDno"): dicto['webtour_enddestinationidno'] = get_tag_data("a:EndDestinationIDno")
+                if self.webtour_endnote != get_tag_data("a:EndNote"): dicto['webtour_endnote'] = get_tag_data("a:EndNote")
+                if self.webtour_touridno != get_tag_data("a:TourIDno"): dicto['webtour_touridno'] = get_tag_data("a:TourIDno")
+                if self.webtour_CurrentDateTime != get_tag_data("CurrentDateTime"): dicto['webtour_CurrentDateTime'] = get_tag_data("CurrentDateTime")
+                if self.campos_transferedseq != self.campos_writeseq: dicto['campos_transferedseq'] = self.campos_writeseq
+            if len(dicto) > 0:
+                self.write(dicto)
 
         def updatewebtourfields():
             dicto ={}
