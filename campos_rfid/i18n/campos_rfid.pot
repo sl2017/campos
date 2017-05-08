@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 02:00+0000\n"
-"PO-Revision-Date: 2017-04-28 02:00+0000\n"
+"POT-Creation-Date: 2017-05-08 14:39+0000\n"
+"PO-Revision-Date: 2017-05-08 14:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,137 @@ msgid "Campos Rfid Device"
 msgstr ""
 
 #. module: campos_rfid
+#: selection:campos.rfid.device,check_method:0
+msgid "Canteen Check In"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_rfid
 #: model:ir.ui.menu,name:campos_rfid.campos_rfid_device_menu
 msgid "Device"
 msgstr ""
 
 #. module: campos_rfid
+#: field:campos.rfid.device,device_macid:0
+msgid "Device ID"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,check_method:0
+msgid "Function"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,device_macid:0
+msgid "MAC id"
+msgstr ""
+
+#. module: campos_rfid
+#: selection:campos.rfid.device,check_method:0
+msgid "Meat Supply"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_rfid
 #: model:ir.ui.menu,name:campos_rfid.campos_rfid_top_menu
 msgid "Scanners"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: campos_rfid
+#: help:campos.rfid.device,website_message_ids:0
+msgid "Website communication history"
 msgstr ""
 
