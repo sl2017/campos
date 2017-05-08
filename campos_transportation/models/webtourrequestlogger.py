@@ -47,11 +47,19 @@ class WebtourRequestLogger(models.Model):
         
         return rec
 
-
-    
     @api.one
     def get_usdestination_getall(self):  #A small test function.
         response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usDestination/GetAll/'}).responce.encode('utf-8'))
         _logger.info("%s", response_doc.toprettyxml(indent="   "))
         
+
+class WebtourRequestCommands(models.Model):
+    _name = 'campos.webtour_req_commands'
+    name = fields.Char('Request')
     
+    
+    @api.multi    
+    def action_do_request(self):
+        for r in self:
+            self.env['campos.webtour_req_logger'].create({'name':r.name})
+
