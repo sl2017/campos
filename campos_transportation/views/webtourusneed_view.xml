@@ -1,13 +1,34 @@
 <?xml version="1.0"?>
 <openerp>
 <data>
+
+<!-- Server action and bindig to present iframe embed code -->
+<record id="action_delete_usneederrors" model="ir.actions.server">
+	<field name="name">Delete selected usNeed errors in Webtour</field>
+	<field name="condition">True</field>
+	<field name="type">ir.actions.server</field>
+	<field name="model_id" ref="model_campos_webtour_usneederror" />
+	<field name="state">code</field>
+	<field name="code">
+		self.action_deleteinwebtour(cr, uid, context.get('active_ids'), context)
+	</field>
+</record>
+
+<record id="ir_start_usneederrors_webtour_update" model="ir.values">
+	<field name="model">campos.webtour.usneederror</field>
+	<field name="name">Delete selected usNeed errors in Webtour</field>
+	<field name="key2">client_action_multi</field>
+	<field name="value"
+		eval="'ir.actions.server,%d'%action_delete_usneederrors" />
+</record>
+
 <record id="view_tree_webtourusneed" model="ir.ui.view">
 <field name="name">Webtour Us Need</field>
 <field name="model">campos.webtourusneed</field>
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
-<field name="status"/>
+<field name="webtourstatus"/>
 <field name="registration_id"/>
 <field name="participant_id"/>
 <field name="campos_TripType_id"/>
@@ -133,9 +154,6 @@
 	</field>
 </record>
 
-
-
-
 <record id="view_tree_WebtourTripOverview" model="ir.ui.view">
 	<field name="name">Webtour Trip Overview</field>
 	<field name="model">campos.webtourusneed.overview</field>
@@ -162,6 +180,61 @@
 	</field>
 </record> 
 
+<record id="view_tree_Webtourusneedminimum" model="ir.ui.view">
+	<field name="name">Webtour usneedminimum</field>
+	<field name="model">campos.webtour.usneedminimum</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="idno" />
+	    <field name="groupidno" />
+	    <field name="group_name" />
+	    <field name="useridno" />
+	    <field name="user_externalid"/>
+	    <field name="user_groupidno"/>
+	    <field name="user_groupissame"/>
+    	<field name="touridno" />
+	    <field name="alias" /> 
+		</tree>
+	</field>
+</record> 
+
+<record id="view_tree_Webtourusneederror" model="ir.ui.view">
+	<field name="name">Webtour usneederror</field>
+	<field name="model">campos.webtour.usneederror</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="idno" />
+		</tree>
+	</field>
+</record> 
+
+
+<record id="view_tree_Webtourususeerminimum" model="ir.ui.view">
+	<field name="name">Webtour ususerminimum</field>
+	<field name="model">campos.webtour.ususerminimum</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="idno" />
+	    <field name="groupidno" />
+	    <field name="externalid" /> 
+	    <field name="alias" /> 
+		</tree>
+	</field>
+</record>
+
+<record id="view_tree_Webtourusgroup" model="ir.ui.view">
+	<field name="name">Webtour usgroup</field>
+	<field name="model">campos.webtour.usgroup</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="idno" />
+	    <field name="name" />
+	    <field name="alias" /> 
+		</tree>
+	</field>
+</record>
+
+
 <!-- Action to open Webtour Us Need list -->
 <act_window id="action_webtourusneed"
 name="Camp OS Webtour Us Need"
@@ -173,9 +246,37 @@ name="Camp OS Webtour Trip Overview"
 res_model="campos.webtourusneed.overview"
 view_mode="tree,form" />
 
+<act_window id="action_Webtourusneedminimum"
+name="Camp OS Webtour usneedminimum"
+res_model="campos.webtour.usneedminimum"
+view_mode="tree" />
+
+<act_window id="action_Webtourusneederror"
+name="Camp OS Webtour usneederror"
+res_model="campos.webtour.usneederror"
+view_mode="tree,form" />
+
+
+<act_window id="action_Webtourususerminimum"
+name="Camp OS Webtour ususerminimum"
+res_model="campos.webtour.ususerminimum"
+view_mode="tree" />
+
+<act_window id="action_Webtourusgroup"
+name="Camp OS Webtour usgroup"
+res_model="campos.webtour.usgroup"
+view_mode="tree" />
+
+
+
 <!-- Menu item to open Campos Webtour usNeed list  -->
 <menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="10"/>
 <menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="Webtour Trip Type Overview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
+<menuitem id="menu_action_campos_Webtourusneedminimum" parent="menu_campos_transportation" name="Webtour usNeedminimum" action="action_Webtourusneedminimum" groups="campos_event.group_campos_admin" sequence="100"/>
+<menuitem id="menu_action_campos_Webtourususerminimum" parent="menu_campos_transportation" name="Webtour usUserminimum" action="action_Webtourususerminimum" groups="campos_event.group_campos_admin" sequence="101"/>
+<menuitem id="menu_action_campos_Webtourusgroup" parent="menu_campos_transportation" name="Webtour usGroup" action="action_Webtourusgroup" groups="campos_event.group_campos_admin" sequence="102"/>
+<menuitem id="menu_action_campos_Webtourusneederror" parent="menu_campos_transportation" name="Webtour usNeed Error" action="action_Webtourusneederror" groups="campos_event.group_campos_admin" sequence="102"/>
+
 
 </data>
 </openerp>
