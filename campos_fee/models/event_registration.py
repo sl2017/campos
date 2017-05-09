@@ -41,6 +41,7 @@ class EventRegistration(models.Model):
 
     number_participants = fields.Integer('Number of participants', compute='_compute_fees')
     number_participants_stored = fields.Integer('# of participants', compute='_compute_fees', store=True)
+    number_accomondations = fields.Integer('# accomdation', compute='_compute_fees', store=True)
     fee_participants = fields.Float('Participants Fees', compute='_compute_fees')
     fee_transport = fields.Float('Transport Fee/Refusion', compute='_compute_fees')
     material_cost = fields.Float('Material orders', compute='_compute_fees')
@@ -48,20 +49,25 @@ class EventRegistration(models.Model):
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Snapshot')
 
     @api.multi
-    @api.depends('participant_ids', 'participant_ids.state')
+    @api.depends('participant_ids', 'participant_ids.state', 'jobber_accommondation_ids')
     def _compute_fees(self):
         for reg in self.sudo():
             fee_participants = 0.0
             fee_transport = 0.0
             number_participants = 0
+            number_accomondations = 0
             for par in reg.participant_ids.filtered(lambda r: r.state not in ['cancel', 'deregistered']):
                 fee_participants += par.camp_price
                 fee_transport += par.transport_price_total
                 number_participants += 1
+                if not par.staff:
+                    number_accomondations += 1
+            number_accomondations += len(reg.jobber_accomodation_ids)
             reg.fee_participants = fee_participants
             reg.fee_transport = fee_transport
             reg.number_participants = number_participants
             reg.number_participants_stored = number_participants
+            reg.number_accomondations = number_accomondations
             so_cost = 0.0
             if self.env.uid == SUPERUSER_ID:
                 for so in self.env['sale.order.line'].search([('order_partner_id', '=', reg.partner_id.id),('order_id.state', '!=', 'cancel')]):
