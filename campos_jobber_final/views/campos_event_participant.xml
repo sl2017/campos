@@ -114,14 +114,30 @@
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										<field name="partner_id" invisible="1" />
-										<field name="paybygroup" />
+										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
 										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
 										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
-						      		</group>
+										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
+										
+										<field name="payforotherjobber" attrs="{'readonly': ['|',('paybyjobber', '=', True),('paybygroup', '=', True)]}"/>
+										<field name="pay_key_master" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+										<label string="Jobbers to pay for" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+            							<field name="jobber_pay_for_ids" readonly="1" attrs="{'invisible': [('payforotherjobber', '=', False)]}" nolabel="1" colspan="2">
+            								<tree>
+					            				<field name="name"/>
+					            				<field name="payreq_state"/>
+					            				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
+					            				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>	
+					            			
+					            			
+					            			</tree>
+					            		</field>
+								</group>
 						 </page>
 						 <page string="Children">
 						 	<field name="partner_id" invisible="1"/>
