@@ -1,6 +1,27 @@
 <?xml version="1.0"?>
 <openerp>
 <data>
+
+<!-- Server action and bindig to present iframe embed code -->
+<record id="action_do_request" model="ir.actions.server">
+	<field name="name">Do Request to Webtour</field>
+	<field name="condition">True</field>
+	<field name="type">ir.actions.server</field>
+	<field name="model_id" ref="model_campos_webtour_req_commands" />
+	<field name="state">code</field>
+	<field name="code">
+		self.action_do_request(cr, uid, context.get('active_ids'), context)
+	</field>
+</record>
+
+<record id="ir_webtourlogger_action_do_request" model="ir.values">
+	<field name="model">campos.webtour_req_commands</field>
+	<field name="name">Do Request in Webtour</field>
+	<field name="key2">client_action_multi</field>
+	<field name="value"
+		eval="'ir.actions.server,%d'%action_do_request" />
+</record>
+
 <record id="view_tree_webtourreqlog" model="ir.ui.view">
 <field name="name">Webtour Request Log</field>
 <field name="model">campos.webtour_req_logger</field>
@@ -32,12 +53,16 @@
 </field>
 </record>
 
-
-
-<!-- Action to open Webtour Config list -->
+<!-- Action to open Webtour Request Log -->
 <act_window id="action_webtourreqlog"
 name="Camp OS Webtour Request Log"
 res_model="campos.webtour_req_logger"
+view_mode="tree,form" />
+
+<!-- Action to open Webtour Request Commands -->
+<act_window id="action_webtourreqcommands"
+name="Camp OS Webtour Request Commands"
+res_model="campos.webtour_req_commands"
 view_mode="tree,form" />
 
 
@@ -47,6 +72,7 @@ view_mode="tree,form" />
 
 <!-- Menu item to open Campos Webtour Destination list  -->
 <menuitem id="menu_action_campos_webtour_reqlog" parent="menu_campos_transportation" name="Webtour Request log" action="action_webtourreqlog" groups="campos_event.group_campos_admin" sequence="90"/>
+<menuitem id="menu_action_campos_webtour_reqcommand" parent="menu_campos_transportation" name="Webtour Request Commands" action="action_webtourreqcommands" groups="campos_event.group_campos_admin" sequence="91"/>
 
 </data>
 </openerp>

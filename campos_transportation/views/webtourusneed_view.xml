@@ -64,6 +64,7 @@
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
 <field name="travelneed_id"/>
+<field name="webtourstatus"/>
 
 <group name="group_left">
 <field name="campos_demandneeded"/>
@@ -82,9 +83,9 @@
 <field name="campos_transfered_travelconnectiondetails"/>
 <field name="campos_transferedseq"/>
 <field name="webtour_deleted" readonly="0"/>
-<field name="webtour_needidno" readonly="1"/>
-<field name="webtour_useridno" readonly="1"/>
-<field name="webtour_groupidno" readonly="1"/>
+<field name="webtour_needidno" readonly="0"/> 
+<field name="webtour_useridno" readonly="0"/>
+<field name="webtour_groupidno" readonly="0"/>
 </group>
 <group name="group_left">
 <field name="campos_transfered_startdatetime"/>
@@ -103,21 +104,15 @@
 <field name="webtour_endnote" readonly="1"/>
 <field name="webtour_touridno" readonly="1"/>
 <field name="webtour_CurrentDateTime" readonly="1"/>
+<field name="webtour_pending_pendingtype" readonly="1"/>
+<field name="webtour_pending_startdatetime" readonly="1"/>
+<field name="webtour_pending_startdestinationidno" readonly="1"/>
+<field name="webtour_pending_startnote" readonly="1"/>
+<field name="webtour_pending_enddatetime" readonly="1"/>
+<field name="webtour_pending_enddestinationidno" readonly="1"/>
+<field name="webtour_pending_endnote" readonly="1"/>
 </group>
 </group>
-<field  name="WebtourUsNeedChanges_ids" widget="one2many_list" nolabel="0" string="Travel needs Changes">
-	<tree editable="bottom">
-    <field name="action" readonly="1"/>
-    <field name="actiondatetime" readonly="1"/>
-    <field name="touridno" readonly="1"/>
-    <field name="startdatetime" readonly="1"/>
-    <field name="startdestinationidno" readonly="1"/>
-    <field name="startnote" readonly="1"/>
-    <field name="enddatetime" readonly="1"/>
-    <field name="enddestinationidno" readonly="1"/>
-    <field name="endnote" readonly="1"/>
-	</tree>
-</field>
 </sheet>
 </form>
 </field>

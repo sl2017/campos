@@ -151,13 +151,24 @@ class webtourconfig(models.Model):
                 usg = usneedgroupidnolist[i]
                 usu = ususeridnolist[i]
                 if need.webtour_groupidno != usg or need.webtour_useridno !=usu:
-                    s = '{0} webtourusneed does not match Gr:{1} {2} U:{3} {4}'.format(need.id,need.webtour_needidno, need.webtour_groupidno,usg, need.webtour_useridno,usu)
-                    log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s})
+                    
                     if self.webtourcorrecterrorpassword == 'sl2017WebtourusNeed':
-                        if need.webtour_groupidno == usg and usu:
-                            need.webtour_useridno = usu
-                            s = 'need:{0} par:{1} reg:[2} Assigned webtour_useridno {3}'.format(need.id,need.participant_id,need.registration_id,usu)
-                            log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1A','result':s})                                          
+                        s = 'need:{0} {1} par:{2} reg:[3} webtour_useridno and groupidno update U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
+                        
+                        dicto = {}
+                        if usg and need.webtour_groupidno != usg:
+                            dicto['webtour_groupidno'] = usg
+                        if  usu and need.webtour_useridno != usu:
+                            dicto['webtour_useridno'] = usu
+                        
+                        if dicto:
+                            need.write(dicto)
+                            log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1A','result':s})
+                        else:
+                            log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1AA','result':s})
+                    else:
+                        s = 'need:{0} {1} par:{2} reg:[3} webtour_useridno and groupidno does not match U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
+                        log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s})                                     
             else:
                 s = '{0} webtourusneed not found in WT N:{1} G:{2} U:{3}'.format(need.id,need.webtour_needidno,need.webtour_groupidno,need.webtour_useridno)
                 log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 2','result':s})                
@@ -185,13 +196,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_usneedminimum_get here we go!!")
         mo = self.env['campos.webtour.usneedminimum']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 2000:
-                _logger.info("action_Webtour_usneedminimum_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 10000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_usneedminimum_get deleted records, Still %s records to do",n)
+
         mo.getfromwebtour()   
 
     @api.multi
@@ -199,13 +209,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_ususerminimum_get here we go!!")
         mo = self.env['campos.webtour.ususerminimum']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 2000:
-                _logger.info("action_Webtour_ususerminimum_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 10000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_ususerminimum_get deleted records, Still %s records to do",n)
+
         mo.getfromwebtour()  
 
     @api.multi
@@ -213,13 +222,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_usgroup_get here we go!!")
         mo = self.env['campos.webtour.usgroup']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 500:
-                _logger.info("action_Webtour_usgroup_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 1000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_usgroup_get deleted records, Still %s records to do",n)
+  
         mo.getfromwebtour()  
 
 
