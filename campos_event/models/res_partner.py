@@ -60,7 +60,7 @@ class ResPartner(models.Model):
         res = []
         for record in self.browse(cr, uid, ids, context=context):
             name = record.name
-            if record.parent_id and not record.is_company and not context.get('without_company'):
+            if record.parent_id and not record.is_company and (not context.get('without_company') or record.staff):
                 name =  "%s, %s" % (record.parent_id.name, name)
             if context.get('show_address'):
                 name = name + "\n" + self._display_address(cr, uid, record, without_company=True, context=context)

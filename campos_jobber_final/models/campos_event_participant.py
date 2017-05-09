@@ -24,6 +24,8 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    
+    
     paybygroup = fields.Boolean('Pay by Scout Group', help="Is only chosen if you have to pay through a group. See page 21 in the instructions.")
     payreq_state=fields.Selection([('draft', 'In process'),
                                    ('cancelled', 'Cancelled'),
@@ -31,6 +33,12 @@ class CamposEventParticipant(models.Model):
                                    ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
     payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    
+    paybyjobber = fields.Boolean('Pay by Other ITS', help="Is only chosen if you have to pay through another ITS. See page 21 in the instructions.")
+    pay_key_entered = fields.Char('Code from payer', help='Enter the code the payer has issued you with')
+    payforotherjobber = fields.Boolean('Want to pay for others', help="Is only chosen if you want to pay for a group of ITS. See page 21 in the instructions.")
+    pay_key_master = fields.Char('Payment Code', help='Enter a code and pass it on to the people ypu want to pay for')
+    jobber_pay_for_ids = fields.One2many(related='registration_id.jobber_pay_for_ids')
     exp_child_qu = fields.Integer("Expected number of children in 'Childrens Island'")
     
     ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
@@ -111,6 +119,14 @@ class CamposEventParticipant(models.Model):
         else:
             self.payreq_state = 'draft'
              
+    @api.onchange('pay_key_entered')
+    def onchange_pay_key_entered(self):
+        if self.paybyjobber and self.pay_key_entered:
+            payer = self.search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', self.pay_key_entered)])
+            if payer:
+                self.registration_id = payer.registration_id
+                self.payreq_state = 'draft'
+            
             
     @api.multi
     def check_all_precamp_days(self):
