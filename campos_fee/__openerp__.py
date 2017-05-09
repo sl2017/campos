@@ -13,7 +13,9 @@
     'depends': [
         'campos_event',
         'campos_final_registration',
+        'campos_jobber_final',
         'connector',
+        'account',
     ],
     'data': [
         'security/campos_fee_snapshot.xml',

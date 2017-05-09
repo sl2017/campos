@@ -49,7 +49,7 @@ class EventRegistration(models.Model):
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Snapshot')
 
     @api.multi
-    @api.depends('participant_ids', 'participant_ids.state', 'jobber_accommondation_ids')
+    @api.depends('participant_ids', 'participant_ids.state', 'jobber_accomodation_ids')
     def _compute_fees(self):
         for reg in self.sudo():
             fee_participants = 0.0
