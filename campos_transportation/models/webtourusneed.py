@@ -108,6 +108,7 @@ class WebtourUsNeed(models.Model):
     webtour_pending_enddatetime = fields.Char('Webtour Pending EndDateTime', required=False)
     webtour_pending_enddestinationidno = fields.Char('Webtour Pending EndDestinationIdNo', required=False)
     webtour_pending_endnote = fields.Char('Webtour Pending EndNote', required=False)
+    webtour_pending_pendingtype = fields.Char('Webtour Pending PendingType', required=False)
     
     webtour_CurrentDateTime = fields.Char('CurrentDateTime', required=False)
     webtour_touridno = fields.Char('Webtour TourIDno', required=False)
@@ -154,9 +155,7 @@ class WebtourUsNeed(models.Model):
         if self.campos_TripType_id.id and self.campos_startdestinationidno and self.campos_enddestinationidno:
             _logger.info("%s calc_travelneed_id Entered %s %s %s %s %s %s %s",self.id, self.travelneed_id.traveldate , len(rs_travelneed),self.participant_id.registration_id.id,self.campos_TripType_id.id,self.campos_startdestinationidno,self.campos_enddestinationidno,self.campos_traveldate)
             if rs_travelneed:
-                #_logger.info("WebtourUsNeed Write Change AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s %s",self.campos_traveldate,fields.Date.from_string(self.webtour_startdatetime))
-                if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]):
-                    #_logger.info("WebtourUsNeed Write Change BBBBBBBBBBBBBBBBBBBBBBBBBBB")  
+                if (self.travelneed_id == False) or (self.travelneed_id != rs_travelneed[0]): 
                     self.travelneed_id=rs_travelneed[0]     
             else:
                 dicto0 = {}
@@ -200,30 +199,23 @@ class WebtourUsNeed(models.Model):
 
         def updatewebtourfields17():
             dicto ={}
+
+            try: #Let's see if there is a Pending Section
+                pending_doc = response_doc.getElementsByTagName('a:Pending')
+                if len(pending_doc) == 0:
+                    pending_doc = False
+            except:
+                pending_doc = False             
+            
             if get_tag_data("a:Deleted") =='true':
+                if self.webtour_deleted != True : dicto['webtour_deleted'] = True
                 if self.webtourstatus != '5': dicto['webtourstatus'] != '5'
-                if self.webtour_needidno: dicto['webtour_needidno'] = False
-                if self.webtour_startdatetime: dicto['webtour_startdatetime'] = False
-                if self.webtour_startdestinationidno: dicto['webtour_startdestinationidno'] = False
-                if self.webtour_startnote: dicto['webtour_startnote'] = False
-                if self.webtour_enddatetime: dicto['webtour_enddatetime'] = False
-                if self.webtour_enddestinationidno : dicto['webtour_enddestinationidno'] = False
-                if self.webtour_endnote: dicto['webtour_endnote'] = False
-                if self.webtour_touridno: dicto['webtour_touridno'] = False
-                if self.webtour_CurrentDateTime != get_tag_data("CurrentDateTime"): dicto['webtour_CurrentDateTime'] = get_tag_data("CurrentDateTime")
-                if self.campos_transferedseq != self.campos_writeseq: dicto['campos_transferedseq'] = self.campos_writeseq
             else:
-                try:
-                    pending_doc = response_doc.getElementsByTagName('a:pending')
-                except:
-                    pending_doc = False               
-                    #continue
-                
+                if self.webtour_deleted != False : dicto['webtour_deleted'] = False
                 if pending_doc == False:
                     if self.webtourstatus != '2': dicto['webtourstatus'] = '2'
-                else:                   
-                    pendingtype = get_tag_data_from_node(pending_doc,"a:PendingType")
-                    
+                else:
+                    pendingtype = get_tag_data_from_node(pending_doc[0],"a:PendingType")
                     if pendingtype == 'CREATE':
                         if self.webtourstatus != '1': dicto['webtourstatus'] = '1'
                     elif pendingtype == 'UPDATE':
@@ -231,33 +223,43 @@ class WebtourUsNeed(models.Model):
                     elif pendingtype == 'DELETE':
                         if self.webtourstatus != '4': dicto['webtourstatus'] = '4'
             
-                    if self.webtour_needidno != get_tag_data_from_node(pending_doc,"a:IDno"): 
-                        dicto['webtour_needidno'] = get_tag_data_from_node(pending_doc,"a:IDno")
-                    if self.webtour_pending_startdatetime != get_tag_data_from_node(pending_doc,"a:StartDateTime"):
-                        dicto['webtour_startdatetime'] = get_tag_data_from_node(pending_doc,"a:StartDateTime")
-                    if self.webtour_pending_startdestinationidno != get_tag_data_from_node(pending_doc,"a:StartDestinationIDno"):
-                        dicto['webtour_startdestinationidno'] = get_tag_data_from_node(pending_doc,"a:StartDestinationIDno")
-                    if self.webtour_pending_startnote != get_tag_data_from_node(pending_doc,"a:StartNote"):
-                        dicto['webtour_startnote'] = get_tag_data_from_node(pending_doc,"a:StartNote")
-                    if self.webtour_pending_enddatetime != get_tag_data_from_node(pending_doc,"a:EndDateTime"):
-                        dicto['webtour_enddatetime'] = get_tag_data_from_node(pending_doc,"a:EndDateTime")
-                    if self.webtour_pending_enddestinationidno != get_tag_data_from_node(pending_doc,"a:EndDestinationIDno"):
-                        dicto['webtour_enddestinationidno'] = get_tag_data_from_node(pending_doc,"a:EndDestinationIDno")
-                    if self.webtour_pending_endnote != get_tag_data_from_node(pending_doc,"a:EndNote"): 
-                        dicto['webtour_endnote'] = get_tag_data_from_node(pending_doc,"a:EndNote")
-                    if self.webtour_CurrentDateTime != get_tag_data_from_node(pending_doc,"CurrentDateTime"): 
-                        dicto['webtour_CurrentDateTime'] = get_tag_data_from_node(pending_doc,"CurrentDateTime")                    
-                          
-                if self.webtour_needidno != get_tag_data("a:IDno"): dicto['webtour_needidno'] = get_tag_data("a:IDno")
-                if self.webtour_startdatetime != get_tag_data("a:StartDateTime"): dicto['webtour_startdatetime'] = get_tag_data("a:StartDateTime")
-                if self.webtour_startdestinationidno != get_tag_data("a:StartDestinationIDno"): dicto['webtour_startdestinationidno'] = get_tag_data("a:StartDestinationIDno")
-                if self.webtour_startnote != get_tag_data("a:StartNote"): dicto['webtour_startnote'] = get_tag_data("a:StartNote")
-                if self.webtour_enddatetime != get_tag_data("a:EndDateTime"): dicto['webtour_enddatetime'] = get_tag_data("a:EndDateTime")
-                if self.webtour_enddestinationidno != get_tag_data("a:EndDestinationIDno"): dicto['webtour_enddestinationidno'] = get_tag_data("a:EndDestinationIDno")
-                if self.webtour_endnote != get_tag_data("a:EndNote"): dicto['webtour_endnote'] = get_tag_data("a:EndNote")
-                if self.webtour_touridno != get_tag_data("a:TourIDno"): dicto['webtour_touridno'] = get_tag_data("a:TourIDno")
-                if self.webtour_CurrentDateTime != get_tag_data("CurrentDateTime"): dicto['webtour_CurrentDateTime'] = get_tag_data("CurrentDateTime")
-                if self.campos_transferedseq != self.campos_writeseq: dicto['campos_transferedseq'] = self.campos_writeseq
+            if pending_doc:
+                if self.webtour_pending_pendingtype != pendingtype: 
+                    dicto['webtour_pending_pendingtype'] = pendingtype               
+                if self.webtour_pending_startdatetime != get_tag_data_from_node(pending_doc[0],"a:StartDateTime"):
+                    dicto['webtour_pending_startdatetime'] = get_tag_data_from_node(pending_doc[0],"a:StartDateTime")
+                if self.webtour_pending_startdestinationidno != get_tag_data_from_node(pending_doc[0],"a:StartDestinationIDno"):
+                    dicto['webtour_pending_startdestinationidno'] = get_tag_data_from_node(pending_doc[0],"a:StartDestinationIDno")
+                if self.webtour_pending_startnote != get_tag_data_from_node(pending_doc[0],"a:StartNote"):
+                    dicto['webtour_pending_startnote'] = get_tag_data_from_node(pending_doc[0],"a:StartNote")
+                if self.webtour_pending_enddatetime != get_tag_data_from_node(pending_doc[0],"a:EndDateTime"):
+                    dicto['webtour_pending_enddatetime'] = get_tag_data_from_node(pending_doc[0],"a:EndDateTime")
+                if self.webtour_pending_enddestinationidno != get_tag_data_from_node(pending_doc[0],"a:EndDestinationIDno"):
+                    dicto['webtour_pending_enddestinationidno'] = get_tag_data_from_node(pending_doc[0],"a:EndDestinationIDno")
+                if self.webtour_pending_endnote != get_tag_data_from_node(pending_doc[0],"a:EndNote"): 
+                    dicto['webtour_pending_endnote'] = get_tag_data_from_node(pending_doc[0],"a:EndNote")
+                if self.webtour_CurrentDateTime != get_tag_data_from_node(pending_doc[0],"CurrentDateTime"): 
+                    dicto['webtour_CurrentDateTime'] = get_tag_data_from_node(pending_doc[0],"CurrentDateTime")                    
+            else:
+                if self.webtour_pending_pendingtype: dicto['webtour_pending_pendingtype'] = False               
+                if self.webtour_pending_startdatetime: dicto['webtour_pending_startdatetime'] = False
+                if self.webtour_pending_startdestinationidno: dicto['webtour_pending_startdestinationidno'] = False
+                if self.webtour_pending_startnote :dicto['webtour_pending_startnote'] = False
+                if self.webtour_pending_enddatetime:dicto['webtour_pending_enddatetime'] = False
+                if self.webtour_pending_enddestinationidno :dicto['webtour_pending_enddestinationidno'] = False
+                if self.webtour_pending_endnote: dicto['webtour_pending_endnote'] = False
+                
+            if self.webtour_needidno != get_tag_data("a:IDno"): dicto['webtour_needidno'] = get_tag_data("a:IDno")
+            if self.webtour_startdatetime != get_tag_data("a:StartDateTime"): dicto['webtour_startdatetime'] = get_tag_data("a:StartDateTime")
+            if self.webtour_startdestinationidno != get_tag_data("a:StartDestinationIDno"): dicto['webtour_startdestinationidno'] = get_tag_data("a:StartDestinationIDno")
+            if self.webtour_startnote != get_tag_data("a:StartNote"): dicto['webtour_startnote'] = get_tag_data("a:StartNote")
+            if self.webtour_enddatetime != get_tag_data("a:EndDateTime"): dicto['webtour_enddatetime'] = get_tag_data("a:EndDateTime")
+            if self.webtour_enddestinationidno != get_tag_data("a:EndDestinationIDno"): dicto['webtour_enddestinationidno'] = get_tag_data("a:EndDestinationIDno")
+            if self.webtour_endnote != get_tag_data("a:EndNote"): dicto['webtour_endnote'] = get_tag_data("a:EndNote")
+            if self.webtour_touridno != get_tag_data("a:TourIDno"): dicto['webtour_touridno'] = get_tag_data("a:TourIDno")
+            if self.webtour_CurrentDateTime != get_tag_data("CurrentDateTime"): dicto['webtour_CurrentDateTime'] = get_tag_data("CurrentDateTime")
+            if self.campos_transferedseq != self.campos_writeseq: dicto['campos_transferedseq'] = self.campos_writeseq
+            
             if len(dicto) > 0:
                 self.write(dicto)
 
@@ -299,7 +301,8 @@ class WebtourUsNeed(models.Model):
 
         needtransfered = False
         # check for changes in travel data
-        if ((self.campos_demandneeded != self.campos_transfered_demandneeded) 
+        if ((self.campos_demandneeded != self.campos_transfered_demandneeded)
+            or (self.campos_demandneeded == False and self.webtour_deleted == False and self.webtour_pending_pendingtype !="DELETE")
             or (self.travelneed_deadline != self.campos_transfered_deadline)
             or (self.travelneed_travelconnectiondetails != self.campos_transfered_travelconnectiondetails)
             or (self.campos_traveldate != self.campos_transfered_traveldate)
@@ -355,20 +358,18 @@ class WebtourUsNeed(models.Model):
                     request=request+"&EndNote="+endnote                        
                     
                     _logger.info("%s 3a. request %s",self.id,request)
-                    #response_doc=webtourinterface.usneed_create(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Create/?' + request}).responce.encode('utf-8'))
                     
                     idno = get_tag_data("a:IDno") #Let us check response
                                        
                     if (idno <> "0") and idno:
                         _logger.info("%s 4a. New usNeed Created",self.id)
-                        updatewebtourfields()
+                        updatewebtourfields17()
                         needtransfered = True
                     else: 
                         _logger.info("%s 4b.usNeed NOT created",self.id) 
                         if get_tag_data("a:Description") == "Need already exist" :
                             _logger.info("%s 5. Ohh usNeed already exist",self.id)
-                            #response_doc=webtourinterface.usneed_GetByGroupIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_groupidno)
                             response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByGroupIDno/?GroupIDno=' + self.webtour_groupidno}).responce.encode('utf-8'))
                             usNeeds=response_doc.getElementsByTagName('a:usNeed')
                             for node in usNeeds:
@@ -381,11 +382,10 @@ class WebtourUsNeed(models.Model):
                                         self.webtour_needidno = get_tag_data_from_node(node,"a:IDno") # save found usNeed IDno
                                         
                                         request="NeedIDno="+self.webtour_needidno + "&" + request
-                                        #response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
                                         response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Update/?' + request}).responce.encode('utf-8'))
                 
                                         if get_tag_data("a:IDno") <> "0": # Stil OK?
-                                            updatewebtourfields()
+                                            updatewebtourfields17()
                                             needtransfered = True
                                         else:
                                             _logger.info("%s 7. Still problem with the response %s %s",self.id, request,response_doc.toprettyxml(indent="   "))
@@ -398,99 +398,97 @@ class WebtourUsNeed(models.Model):
                             _logger.info("%s 8. Not possible to update usNeed!!!!!!!!!!!!! %s",self.id, response_doc.toprettyxml(indent="   ")) 
                 else: # There is a Need to try to update
                     request="NeedIDno="+self.webtour_needidno      
-                    request=request+"&UserIDno="+self.webtour_useridno
-                    request=request+"&GroupIDno="+self.webtour_groupidno
                     
                     if ((self.travelneed_deadline != self.campos_transfered_deadline)
-                        or (self.travelneed_travelconnectiondetails != self.campos_transfered_travelconnectiondetails)):
+                        or (self.travelneed_travelconnectiondetails != self.campos_transfered_travelconnectiondetails) or self.webtour_deleted or self.webtour_pending_pendingtype =="DELETE"):
                         if startnote == False: 
-                            request=request+"&StartNote= "
+                            request=request+"&StartNote="
                         else:
                             request=request+"&StartNote="+startnote
                         
                         if endnote == False:
-                            request=request+"&EndNote= "
+                            request=request+"&EndNote="
                         else:    
                             request=request+"&EndNote="+endnote
                         
                         request=request+"&StartDateTime="+startdatetime
                         request=request+"&EndDateTime="+enddatetime      
                     else:        
-                        if (self.campos_traveldate != self.campos_transfered_traveldate):
+                        if (self.campos_traveldate != self.campos_transfered_traveldate or self.webtour_deleted or self.webtour_pending_pendingtype =="DELETE"):
                             request=request+"&StartDateTime="+startdatetime
                             request=request+"&EndDateTime="+enddatetime                        
                         
-                    if (self.campos_startdestinationidno != self.campos_transfered_startdestinationidno):
+                    if (self.campos_startdestinationidno != self.campos_transfered_startdestinationidno or self.webtour_deleted or self.webtour_pending_pendingtype =="DELETE"):
                         request=request+"&StartDestinationIDno="+self.campos_startdestinationidno
                            
-                    if (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno):
+                    if (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno or self.webtour_deleted or self.webtour_pending_pendingtype =="DELETE"):
                         request=request+"&EndDestinationIDno="+self.campos_enddestinationidno                          
                     
-                    #response_doc=webtourinterface.usneed_update(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),request)
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Update/?' + request}).responce.encode('utf-8'))
                 
                     if get_tag_data("a:IDno") <> "0": # Stil OK?
-                        _logger.info("%s 9A. Need updated with the Request %s Response %s",self.id, request, response_doc) #.toprettyxml(indent="   ")
-                        updatewebtourfields()
+                        _logger.info("%s 9A. Need updated with the Request %s",self.id, request)
+                        updatewebtourfields17()
                         needtransfered = True
                     else:
                         _logger.info("%s 9B. Problem with the Request %s Response %s",self.id, request, response_doc.toprettyxml(indent="   "))
                         if get_tag_data("a:Description") == "NeedIDno not found" :
                             _logger.info("%s 15. webtour_needidno %s removed from usNeed %s",self.id, self.webtour_needidno, self.id)
                             self.webtour_needidno=False
-            
-                if (needtransfered): ## usNeed has been updated :-)
-                    dicto ={}
-                    if self.campos_transfered_demandneeded != True: dicto['campos_transfered_demandneeded']  = True
-                    if self.campos_transfered_deadline != self.travelneed_deadline: dicto['campos_transfered_deadline']  = self.travelneed_deadline
-                    if self.campos_transfered_travelconnectiondetails != self.travelneed_travelconnectiondetails: dicto['campos_transfered_travelconnectiondetails']  = self.travelneed_travelconnectiondetails
-                    if self.campos_transfered_traveldate != self.campos_traveldate:dicto['campos_transfered_traveldate']  = self.campos_traveldate
-                    if self.campos_transfered_startdatetime != startdatetime: dicto['campos_transfered_startdatetime']  = startdatetime
-                    if self.campos_transfered_enddatetime != enddatetime : dicto['campos_transfered_enddatetime']  = enddatetime
-                    if self.campos_transfered_startdestinationidno != self.campos_startdestinationidno: dicto['campos_transfered_startdestinationidno']  = self.campos_startdestinationidno
-                    if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: dicto['campos_transfered_enddestinationidno']  = self.campos_enddestinationidno
-                    if self.campos_transfered_startnote != startnote: dicto['campos_transfered_startnote']  = startnote
-                    if self.campos_transfered_endnote != endnote: dicto['campos_transfered_endnote']  = endnote
-                    if self.webtour_deleted: dicto['webtour_deleted']  = False # Clear Delete falg
-                    if len(dicto) > 0:
-                        self.write(dicto)
-                    self.get_webtour_need_change()
-                                                                            
+                                                                                        
             else: #No demand now        
                 _logger.info("%s 2B. No demand needed",self.id)
                 if not self.webtour_deleted:
                     _logger.info("%s 10. Deleting usNeed %s",self.id, self.webtour_needidno)
                     if self.webtour_needidno and (self.webtour_needidno <> '0'):
                         _logger.info("%s 11. There is usNeedID No - Try to delete",self.id)
-                        #response_doc=webtourinterface.usneed_delete(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)                         
                         response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/Delete/?NeedIDno=' + self.webtour_needidno}).responce.encode('utf-8'))
-
-                        updatewebtourfields()
-                        self.get_webtour_need_change()
-                        _logger.info("%s 12. Deleted responce %s",self.id, response_doc) #.toprettyxml(indent="   ")
-                    self.webtour_deleted = True
+                        updatewebtourfields17()
+                        _logger.info("%s 12. Deleted responce %s",self.id, response_doc)
+                        needtransfered = True
+                        #self.get_webtour_need_change()
+                        
         else: 
             _logger.info("%s 1B. No changes in travel data",self.id)
             if self.webtour_needidno and self.webtour_needidno <> '0' and self.webtour_deleted == False:
                 _logger.info("%s 13. There is usNeed IDno",self.id)
-                #response_doc=webtourinterface.usneed_getbyidno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
+                
                 response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))
                 
                 idno = get_tag_data("a:IDno")
                 if idno <> "0":
                     _logger.info("%s 14A. Got usNeed reponce",self.id)
-                    updatewebtourfields()
-                    self.get_webtour_need_change()
+                    updatewebtourfields17()
+                    #self.get_webtour_need_change()
                 else:
-                    _logger.info("%s 14B. Dit not Get usNeed reponce !!!!!!!!!!!!!!!!!!!!! %s %s",self.id,self.webtour_needidno, response_doc.toprettyxml(indent="   "))
-                  
+                    if get_tag_data("a:Description") == "NeedIDno not found" :
+                            _logger.info("%s 14B. webtour_needidno %s removed from usNeed %s",self.id, self.webtour_needidno, self.id)
+                            self.webtour_needidno=False
+                    else:
+                        _logger.info("%s 14C. Dit not Get usNeed reponce !!!!!!!!!!!!!!!!!!!!! %s %s",self.id,self.webtour_needidno, response_doc.toprettyxml(indent="   "))
+
+        if (needtransfered): ## usNeed has been updated :-)
+            dicto ={}
+            if self.campos_transfered_demandneeded != self.campos_demandneeded: dicto['campos_transfered_demandneeded']  = self.campos_demandneeded
+            if self.campos_transfered_deadline != self.travelneed_deadline: dicto['campos_transfered_deadline']  = self.travelneed_deadline
+            if self.campos_transfered_travelconnectiondetails != self.travelneed_travelconnectiondetails: dicto['campos_transfered_travelconnectiondetails']  = self.travelneed_travelconnectiondetails
+            if self.campos_transfered_traveldate != self.campos_traveldate:dicto['campos_transfered_traveldate']  = self.campos_traveldate
+            if self.campos_transfered_startdatetime != startdatetime: dicto['campos_transfered_startdatetime']  = startdatetime
+            if self.campos_transfered_enddatetime != enddatetime : dicto['campos_transfered_enddatetime']  = enddatetime
+            if self.campos_transfered_startdestinationidno != self.campos_startdestinationidno: dicto['campos_transfered_startdestinationidno']  = self.campos_startdestinationidno
+            if self.campos_transfered_enddestinationidno != self.campos_enddestinationidno: dicto['campos_transfered_enddestinationidno']  = self.campos_enddestinationidno
+            if self.campos_transfered_startnote != startnote: dicto['campos_transfered_startnote']  = startnote
+            if self.campos_transfered_endnote != endnote: dicto['campos_transfered_endnote']  = endnote
+            if len(dicto) > 0:
+                self.write(dicto)
+            #self.get_webtour_need_change()
+                                     
         self.env.cr.commit()                                                                
         return True
     
     @api.one
     def get_webtour_need_change(self):
          
-        #response_doc=webtourinterface.usneed_GetPending_ByIDno(self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url'),self.env['ir.config_parameter'].get_param('campos_transportation_webtour.url_loginpart'),self.webtour_needidno)
         response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetPending_ByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))
                     
         usContent = response_doc.getElementsByTagName("Content")
