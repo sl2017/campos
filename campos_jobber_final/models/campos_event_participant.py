@@ -122,7 +122,7 @@ class CamposEventParticipant(models.Model):
     @api.onchange('pay_key_entered')
     def onchange_pay_key_entered(self):
         if self.paybyjobber and self.pay_key_entered:
-            payer = self.search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', self.pay_key_entered)])
+            payer = self.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', self.pay_key_entered)])
             if payer:
                 self.registration_id = payer.registration_id
                 self.payreq_state = 'draft'
@@ -192,7 +192,7 @@ class CamposEventParticipant(models.Model):
         res = super(CamposEventParticipant, self).write(vals)
         for cep in self:
             if cep.staff:
-                if not cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.id:
+                if not cep.paybygroup and not cep.paybyjobber and cep.registration_id.partner_id.id != cep.partner_id.id:
                     event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
                     _logger.info('EVent: %s %s', event_id, self.partner_id.id)
                     if event_id:
@@ -203,4 +203,11 @@ class CamposEventParticipant(models.Model):
                             cep.payreq_state = 'approved'
                 elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id and cep.registration_id.partner_id.id != cep.partner_id.id:
                     cep.partner_id.parent_id = cep.registration_id.partner_id
+                elif cep.paybyjobber and cep.pay_key_entered and 'pay_key_entered' in vals:
+                    payer = cep.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', cep.pay_key_entered)])
+                    _logger.info('Payer? %s', payer )
+                    if payer and cep.registration_id != payer.registration_id:
+                        cep.suspend_security().write({'registration_id': payer.registration_id.id,
+                                                      'payreq_state': 'draft'})
+                    
         return res
