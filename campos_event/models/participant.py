@@ -450,6 +450,7 @@ class EventParticipant(geo_model.GeoModel):
                     new_user = self.env['res.users'].sudo().create({'login': par.email,
                                                              'partner_id': par.partner_id.id,
                                                              'participant_id' : par.id,
+                                                             'groups_id': [(4, self.env.ref('campos_event.group_campos_staff').id)],
                                                              # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
                                                              })
                 # new_user.with_context({'create_user': True}).action_reset_password()
