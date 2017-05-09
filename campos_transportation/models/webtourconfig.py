@@ -196,13 +196,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_usneedminimum_get here we go!!")
         mo = self.env['campos.webtour.usneedminimum']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 2000:
-                _logger.info("action_Webtour_usneedminimum_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 10000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_usneedminimum_get deleted records, Still %s records to do",n)
+
         mo.getfromwebtour()   
 
     @api.multi
@@ -210,13 +209,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_ususerminimum_get here we go!!")
         mo = self.env['campos.webtour.ususerminimum']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 2000:
-                _logger.info("action_Webtour_ususerminimum_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 10000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_ususerminimum_get deleted records, Still %s records to do",n)
+
         mo.getfromwebtour()  
 
     @api.multi
@@ -224,13 +222,12 @@ class webtourconfig(models.Model):
         self.ensure_one() 
         _logger.info("action_Webtour_usgroup_get here we go!!")
         mo = self.env['campos.webtour.usgroup']
-        n=0
-        for rec in mo.search([('id', '!=', False)]):
-            rec.unlink()
-            n=n+1
-            if n> 500:
-                _logger.info("action_Webtour_usgroup_get deleted %s records, concinueing",n)
-                n=0;
+        n=mo.search_count([])
+        while n > 0:
+            mo.search([], limit = 1000).unlink()
+            n=mo.search_count([])
+            _logger.info("action_Webtour_usgroup_get deleted records, Still %s records to do",n)
+  
         mo.getfromwebtour()  
 
 
