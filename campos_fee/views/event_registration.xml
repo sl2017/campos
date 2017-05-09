@@ -87,8 +87,10 @@
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_preregistration.view_tree_event_registration"/>
         <field name="arch" type="xml">
-            <field name="pre_reg_cnt" position="after">
+            <field name="pre_reg_cnt" position="replace">
+            	<field name="organization_id"/>
            		<field name="number_participants_stored"/>
+           		<field name="number_accommondations"/>
            </field>
         </field>
     </record>
