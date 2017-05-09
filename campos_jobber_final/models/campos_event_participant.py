@@ -137,7 +137,7 @@ class CamposEventParticipant(models.Model):
     @api.depends('staff','birthdate','ckr_ids','partner_id.country_id')
     def _compute_ckr_needed(self):
         #_logger.info('COMPUTE CKR NEEDED')
-        if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids:
+        if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.sudo().ckr_ids:
             self.ckr_needed = True
         else:
             self.ckr_needed = False
