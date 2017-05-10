@@ -66,6 +66,12 @@ class CamposFeeSsRegistration(models.Model):
                 func = getattr(ssreg, ssreg.snapshot_id.execute_func)
                 func()
 
+
+    @api.multi            
+    def assign_participant_number(self):
+        for ssreg in self:
+            ssreg.registration_id.participant_ids.filtered(lambda p: p.state in ['draft', 'standby', 'sent', 'inprogress', 'approved']).assign_participant_number()
+
     @api.multi            
     def make_invoice_50(self):
         aio = self.env['account.invoice']

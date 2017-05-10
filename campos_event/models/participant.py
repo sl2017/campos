@@ -178,7 +178,7 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
-    participant_number = fields.Char('Participant Number')
+    participant_number = fields.Char(related='partner_id.ref', string='Participant Number')
 
     
     @api.one
