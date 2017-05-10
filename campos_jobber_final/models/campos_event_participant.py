@@ -49,6 +49,10 @@ class CamposEventParticipant(models.Model):
     parent_jobber_id = fields.Many2one('campos.event.participant')
     jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
     
+    _sql_constraints = [
+                        ('pay_key_master_uniq', 'unique(pay_key_master)', 'Payment Code already in use. Choose another'),
+                        ]
+    
     @api.constrains('birthdate','jobber_child')
     def _check_jobber_child_age(self):
         if self.jobber_child and self.birthdate < '2002-07-21':
