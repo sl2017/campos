@@ -6,6 +6,39 @@ Created on 14. jan. 2017
 from openerp import models, fields, api
 from xml.dom import minidom
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_ususerminimum_get(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        rec.action_one_Webtour_ususerminimum_get()
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_usneedminimum_get(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        rec.action_one_Webtour_usneedminimum_get()
+
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -153,7 +186,7 @@ class webtourconfig(models.Model):
                 if need.webtour_groupidno != usg or need.webtour_useridno !=usu:
                     
                     if self.webtourcorrecterrorpassword == 'sl2017WebtourusNeed':
-                        s = 'need:{0} {1} par:{2} reg:[3} webtour_useridno and groupidno update U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
+                        s = 'need:{0} {1} par:{2} reg:{3} webtour_useridno and groupidno update U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
                         
                         dicto = {}
                         if usg and need.webtour_groupidno != usg:
@@ -167,7 +200,7 @@ class webtourconfig(models.Model):
                         else:
                             log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1AA','result':s})
                     else:
-                        s = 'need:{0} {1} par:{2} reg:[3} webtour_useridno and groupidno does not match U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
+                        s = 'need:{0} {1} par:{2} reg:{3} webtour_useridno and groupidno does not match U:{4} {5} G:{6} {7}'.format(need.id,need.webtour_needidno,need.participant_id,need.registration_id,need.webtour_useridno,usu,need.webtour_groupidno,usg)
                         log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 1','result':s})                                     
             else:
                 s = '{0} webtourusneed not found in WT N:{1} G:{2} U:{3}'.format(need.id,need.webtour_needidno,need.webtour_groupidno,need.webtour_useridno)
@@ -190,10 +223,15 @@ class webtourconfig(models.Model):
             if n > 0: n= n-1
             else: break
             
-            
     @api.multi
     def action_Webtour_usneedminimum_get(self):
-        self.ensure_one() 
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_usneedminimum_get.delay(session, 'campos.webtourconfig', rec.id)    
+
+            
+    @api.one
+    def action_one_Webtour_usneedminimum_get(self):
         _logger.info("action_Webtour_usneedminimum_get here we go!!")
         mo = self.env['campos.webtour.usneedminimum']
         n=mo.search_count([])
@@ -206,7 +244,12 @@ class webtourconfig(models.Model):
 
     @api.multi
     def action_Webtour_ususerminimum_get(self):
-        self.ensure_one() 
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_ususerminimum_get.delay(session, 'campos.webtourconfig', rec.id)    
+
+    @api.one
+    def action_one_Webtour_ususerminimum_get(self):
         _logger.info("action_Webtour_ususerminimum_get here we go!!")
         mo = self.env['campos.webtour.ususerminimum']
         n=mo.search_count([])

@@ -2,6 +2,7 @@
 from openerp import models, fields, api, tools
 #from ..interface import webtourinterface
 from xml.dom import minidom
+import xml.etree.ElementTree as ET
 
 import logging
 
@@ -452,9 +453,9 @@ class WebtourUsNeed(models.Model):
             _logger.info("%s 1B. No changes in travel data",self.id)
             if self.webtour_needidno and self.webtour_needidno <> '0' and self.webtour_deleted == False:
                 _logger.info("%s 13. There is usNeed IDno",self.id)
-                
+
                 response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))
-                
+               
                 idno = get_tag_data("a:IDno")
                 if idno <> "0":
                     _logger.info("%s 14A. Got usNeed reponce",self.id)
