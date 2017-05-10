@@ -22,7 +22,8 @@ class CamposFeeSnapshot(models.Model):
                               ('completed', 'Completed')], default='draft', string='State', track_visibility='onchange')
     execute_func = fields.Selection([('make_invoice_50', '1. rate 50%'), 
                                      ('make_invoice_100_dk', '2. rate 100% DK Groups'),
-                                     ('make_invoice_100_non_dk', 'Non DK Full Rate')], 'Excute')
+                                     ('make_invoice_100_non_dk', 'Non DK Full Rate'),
+                                     ('assign_participant_number', 'Assign Participant Numbers')], 'Execute')
     single_reg_id = fields.Many2one('event.registration', 'Single group')
     
     @api.multi
