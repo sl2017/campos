@@ -44,7 +44,7 @@ class CamposEventParticipant(models.Model):
     ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
     info_html = fields.Html(compute='_compute_info_html')
     
-    #JHandl e jobbers childs
+    # Handle jobbers childs
     jobber_child = fields.Boolean('Jobber Child')
     parent_jobber_id = fields.Many2one('campos.event.participant')
     jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
