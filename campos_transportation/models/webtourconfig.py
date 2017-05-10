@@ -6,6 +6,39 @@ Created on 14. jan. 2017
 from openerp import models, fields, api
 from xml.dom import minidom
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_ususerminimum_get(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        rec.action_one_Webtour_ususerminimum_get()
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_usneedminimum_get(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        rec.action_one_Webtour_usneedminimum_get()
+
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -190,10 +223,15 @@ class webtourconfig(models.Model):
             if n > 0: n= n-1
             else: break
             
-            
     @api.multi
     def action_Webtour_usneedminimum_get(self):
-        self.ensure_one() 
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_usneedminimum_get.delay(session, 'campos.webtourconfig', rec.id)    
+
+            
+    @api.one
+    def action_one_Webtour_usneedminimum_get(self):
         _logger.info("action_Webtour_usneedminimum_get here we go!!")
         mo = self.env['campos.webtour.usneedminimum']
         n=mo.search_count([])
@@ -206,7 +244,12 @@ class webtourconfig(models.Model):
 
     @api.multi
     def action_Webtour_ususerminimum_get(self):
-        self.ensure_one() 
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_ususerminimum_get.delay(session, 'campos.webtourconfig', rec.id)    
+
+    @api.one
+    def action_one_Webtour_ususerminimum_get(self):
         _logger.info("action_Webtour_ususerminimum_get here we go!!")
         mo = self.env['campos.webtour.ususerminimum']
         n=mo.search_count([])
