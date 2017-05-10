@@ -72,8 +72,10 @@
 									<field name="date_to"/>
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
+									<field name="camparea_sel" invisible="1" />
 									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																													 'show_organization': 1}"/>
+																																																																						 'show_organization': 1}"/>
+									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -84,9 +86,9 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									<!-- 
+									
 									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
-									 -->
+									
 									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
@@ -112,14 +114,51 @@
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										<field name="partner_id" invisible="1" />
-										<field name="paybygroup" />
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
+										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
+										
+										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
+										
+										<field name="payforotherjobber" attrs="{'readonly': ['|',('paybyjobber', '=', True),('paybygroup', '=', True)]}"/>
+										<field name="pay_key_master" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+										<label string="Jobbers to pay for" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+            							<field name="jobber_pay_for_ids" readonly="1" attrs="{'invisible': [('payforotherjobber', '=', False)]}" nolabel="1" colspan="2">
+            								<tree>
+					            				<field name="name"/>
+					            				<field name="payreq_state"/>
+					            				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
+					            				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>	
+					            			
+					            			
+					            			</tree>
+					            		</field>
+					            		<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
-										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
-										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
-										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
-						      		</group>
+										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" readonly="1"/>
+										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" readonly="1"/>
+										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" readonly="1"/>
+								</group>
+						 </page>
+						 <page string="Children">
+						 	<field name="partner_id" invisible="1"/>
+						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id, 'form_view_ref' : 'campos_final_registration.view_form_finalregistration_participant'}">
+						 		<tree>
+						 			<field name="registration_id" invisible="1"/>
+						 			<field name="name"/>
+						 			<field name="birthdate"/>
+						 			<field name="street"/>
+						 			<field name="zip"/>
+						 			<field name="city"/>
+						 			<field name="country_id"/>
+						 			<field name="parent_id" invisible="1"/>
+						 			<field name="jobber_child" invisible="1"/>
+						 		
+						 		
+						 		</tree>
+						 	
+						 	</field>
+						 
 						 </page>
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
@@ -162,6 +201,9 @@
         <field name="arch" type="xml">
         	
         	<field name="registration_id" position="replace"/>
+        	<field name="staff" position="after">
+        		<field name="jobber_child"/>
+        	</field>
             <page name="agreements" position="before">
             	<page name="finalreg" string="Final signup">
             		 
@@ -222,8 +264,10 @@
 									<field name="date_to"/>
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
+									<field name="camparea_sel" invisible="1" />
 									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																													 'show_organization': 1}"/>
+																																																																						 'show_organization': 1}"/>
+									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -234,10 +278,9 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									<!-- 
+									
 									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
-									 -->
-									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																		<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
 								</tree>
@@ -261,14 +304,51 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
-										<field name="paybygroup" />
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" context="{'search_default_organization_id': reg_organization_id,
-																																																	'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																	'show_organization': 1}"/>
+										<field name="partner_id" invisible="1" />
+										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
+																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
 										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
-						      		</group>
+										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
+										
+										<field name="payforotherjobber" attrs="{'readonly': ['|',('paybyjobber', '=', True),('paybygroup', '=', True)]}"/>
+										<field name="pay_key_master" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+										<label string="Jobbers to pay for" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
+            							<field name="jobber_pay_for_ids" readonly="1" attrs="{'invisible': [('payforotherjobber', '=', False)]}" nolabel="1" colspan="2">
+            								<tree>
+					            				<field name="name"/>
+					            				<field name="payreq_state"/>
+					            				<button name="action_approve_payreq" string="string" type="object" icon="STOCK_APPLY"/>
+					            				<button name="action_refuse_payreq" string="string" type="object" icon="STOCK_CANCEL"/>	
+					            			
+					            			
+					            			</tree>
+					            		</field>
+								</group>
+						 </page>
+						 <page string="Children">
+						 	<field name="partner_id" invisible="1"/>
+						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
+						 		<tree>
+						 			<field name="registration_id" invisible="1"/>
+						 			<field name="name"/>
+						 			<field name="birthdate"/>
+						 			<field name="street"/>
+						 			<field name="zip"/>
+						 			<field name="city"/>
+						 			<field name="country_id"/>
+						 			<field name="parent_id" invisible="1"/>
+						 			<field name="jobber_child" invisible="1"/>
+						 		
+						 		
+						 		</tree>
+						 	
+						 	</field>
+						 
 						 </page>
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>

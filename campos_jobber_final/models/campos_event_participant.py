@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -22,6 +24,8 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    
+    
     paybygroup = fields.Boolean('Pay by Scout Group', help="Is only chosen if you have to pay through a group. See page 21 in the instructions.")
     payreq_state=fields.Selection([('draft', 'In process'),
                                    ('cancelled', 'Cancelled'),
@@ -29,12 +33,31 @@ class CamposEventParticipant(models.Model):
                                    ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
     payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    
+    paybyjobber = fields.Boolean('Pay by Other ITS', help="Is only chosen if you have to pay through another ITS. See page 21 in the instructions.")
+    pay_key_entered = fields.Char('Code from payer', help='Enter the code the payer has issued you with')
+    payforotherjobber = fields.Boolean('Want to pay for others', help="Is only chosen if you want to pay for a group of ITS. See page 21 in the instructions.")
+    pay_key_master = fields.Char('Payment Code', help='Enter a code and pass it on to the people ypu want to pay for')
+    jobber_pay_for_ids = fields.One2many(related='registration_id.jobber_pay_for_ids')
     exp_child_qu = fields.Integer("Expected number of children in 'Childrens Island'")
     
     ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
     info_html = fields.Html(compute='_compute_info_html')
     
+    # Handle jobbers childs
+    jobber_child = fields.Boolean('Jobber Child')
+    parent_jobber_id = fields.Many2one('campos.event.participant')
+    jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
     
+    _sql_constraints = [
+                        ('pay_key_master_uniq', 'unique(pay_key_master)', 'Payment Code already in use. Choose another'),
+                        ]
+    
+    @api.constrains('birthdate','jobber_child')
+    def _check_jobber_child_age(self):
+        if self.jobber_child and self.birthdate < '2002-07-21':
+            raise ValidationError("Jobber children must be under 15 years")
+        
     @api.multi
     def action_approve_payreq(self):
         self.write({'payreq_state': 'approved'})
@@ -100,6 +123,14 @@ class CamposEventParticipant(models.Model):
         else:
             self.payreq_state = 'draft'
              
+    @api.onchange('pay_key_entered')
+    def onchange_pay_key_entered(self):
+        if self.paybyjobber and self.pay_key_entered:
+            payer = self.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', self.pay_key_entered)])
+            if payer:
+                self.registration_id = payer.registration_id
+                self.payreq_state = 'draft'
+            
             
     @api.multi
     def check_all_precamp_days(self):
@@ -126,7 +157,7 @@ class CamposEventParticipant(models.Model):
     @api.depends('staff','birthdate','ckr_ids','partner_id.country_id')
     def _compute_ckr_needed(self):
         #_logger.info('COMPUTE CKR NEEDED')
-        if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.ckr_ids:
+        if self.staff and self.birthdate and self.birthdate <= '2002-07-30' and self.partner_id.country_id.code == 'DK' and not self.sudo().ckr_ids:
             self.ckr_needed = True
         else:
             self.ckr_needed = False
@@ -165,7 +196,7 @@ class CamposEventParticipant(models.Model):
         res = super(CamposEventParticipant, self).write(vals)
         for cep in self:
             if cep.staff:
-                if not cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.id:
+                if not cep.paybygroup and not cep.paybyjobber and cep.registration_id.partner_id.id != cep.partner_id.id:
                     event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
                     _logger.info('EVent: %s %s', event_id, self.partner_id.id)
                     if event_id:
@@ -176,4 +207,11 @@ class CamposEventParticipant(models.Model):
                             cep.payreq_state = 'approved'
                 elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id and cep.registration_id.partner_id.id != cep.partner_id.id:
                     cep.partner_id.parent_id = cep.registration_id.partner_id
+                elif cep.paybyjobber and cep.pay_key_entered and 'pay_key_entered' in vals:
+                    payer = cep.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', cep.pay_key_entered)])
+                    _logger.info('Payer? %s', payer )
+                    if payer and cep.registration_id != payer.registration_id:
+                        cep.suspend_security().write({'registration_id': payer.registration_id.id,
+                                                      'payreq_state': 'draft'})
+                    
         return res
