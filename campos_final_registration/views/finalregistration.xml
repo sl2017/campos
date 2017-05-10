@@ -228,8 +228,8 @@
 											<tree editable="bottom">
 												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
 												<field name="meat_count"/>
-<!--												<field name="day_meat_total"/>
-												<field name="day_participant_total"/>-->
+												<field name="day_meat_total"/>
+												<field name="day_participant_total"/>
 											</tree>
 										</field>
 									</group>
@@ -496,6 +496,8 @@
 											<tree editable="bottom">
 												<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
 												<field name="meat_count"/>
+												<field name="day_meat_total"/>
+												<field name="day_participant_total"/>
 											</tree>
 										</field>
 									</group>

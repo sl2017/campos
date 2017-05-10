@@ -398,7 +398,7 @@ class RegistrationMeat(models.Model):
                                                                                      ('the_date','=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1)),
                                                                                      ('participant_id.state','!=','deregistered'),
                                                                                      ('participant_id.birthdate','<','2015-07-22')]).mapped('participant_id')
-            jobbers_both_days_count =  self.env['campos.jobber.accomodation'].search_count([('registration_id', '=', self.registration_id.id),
+            jobbers_both_days_count =  self.env['campos.jobber.canteen'].search_count([('registration_id', '=', self.registration_id.id),
                                                                                      ('state', '=', 'approved'),
                                                                                      ('date_from','<=',self.event_date),
                                                                                      ('date_to','>=',fields.Datetime.from_string(self.event_date).date() + datetime.timedelta(days=1))])
