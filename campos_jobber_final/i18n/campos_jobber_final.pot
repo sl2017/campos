@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-05-11 20:37+0000\n"
+"PO-Revision-Date: 2017-05-11 20:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,9 +60,9 @@ msgid "Associated jobbers"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:75
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:87
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:149
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:99
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:169
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
@@ -206,6 +206,11 @@ msgid "City"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,pay_key_entered:0
+msgid "Code from payer"
+msgstr ""
+
+#. module: campos_jobber_final
 #: model:ir.model,name:campos_jobber_final.model_campos_committee
 msgid "Committee"
 msgstr ""
@@ -259,6 +264,16 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.canteen,eat_at:0
 msgid "Eating"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,pay_key_master:0
+msgid "Enter a code and pass it on to the people ypu want to pay for"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,pay_key_entered:0
+msgid "Enter the code the payer has issued you with"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -343,6 +358,16 @@ msgid "Is only chosen if you have to pay through a group. See page 21 in the ins
 msgstr ""
 
 #. module: campos_jobber_final
+#: help:campos.event.participant,paybyjobber:0
+msgid "Is only chosen if you have to pay through another ITS. See page 21 in the instructions."
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,payforotherjobber:0
+msgid "Is only chosen if you want to pay for a group of ITS. See page 21 in the instructions."
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:event.registration,jobber_accomodation_ids:0
 msgid "Jobber Accomonodation"
 msgstr ""
@@ -378,8 +403,15 @@ msgid "Jobbers Catering"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,jobber_pay_for_ids:0
 #: field:event.registration,jobber_pay_for_ids:0
 msgid "Jobbers to Pay for"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
+msgid "Jobbers to pay for"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -471,6 +503,11 @@ msgid "Pay Req state"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,paybyjobber:0
+msgid "Pay by Other ITS"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.event.participant,paybygroup:0
 msgid "Pay by Scout Group"
 msgstr ""
@@ -479,6 +516,16 @@ msgstr ""
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Payment"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,pay_key_master:0
+msgid "Payment Code"
+msgstr ""
+
+#. module: campos_jobber_final
+#: sql_constraint:campos.event.participant:0
+msgid "Payment Code already in use. Choose another"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -511,7 +558,7 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:160
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:180
 #, python-format
 msgid "Request CKR"
 msgstr ""
@@ -575,6 +622,11 @@ msgid "Un-check all days"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,payforotherjobber:0
+msgid "Want to pay for others"
+msgstr ""
+
+#. module: campos_jobber_final
 #: selection:campos.jobber.canteen,eat_at:0
 msgid "With Scoutgroup"
 msgstr ""
@@ -604,6 +656,8 @@ msgid "dd/mm/åååå"
 msgstr ""
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "string"
 msgstr ""

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-05-11 20:37+0000\n"
+"PO-Revision-Date: 2017-05-11 20:37+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,6 +214,11 @@ msgid "Camp OS Webtour Registration"
 msgstr ""
 
 #. module: campos_transportation
+#: model:ir.actions.act_window,name:campos_transportation.action_webtourreqcommands
+msgid "Camp OS Webtour Request Commands"
+msgstr ""
+
+#. module: campos_transportation
 #: model:ir.actions.act_window,name:campos_transportation.action_webtourreqlog
 msgid "Camp OS Webtour Request Log"
 msgstr ""
@@ -377,6 +382,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,create_uid:0
 #: field:campos.webtour.usneedminimum,create_uid:0
 #: field:campos.webtour.ususerminimum,create_uid:0
+#: field:campos.webtour_req_commands,create_uid:0
 #: field:campos.webtour_req_logger,create_uid:0
 #: field:campos.webtourconfig,create_uid:0
 #: field:campos.webtourconfig.checklog,create_uid:0
@@ -394,6 +400,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,create_date:0
 #: field:campos.webtour.usneedminimum,create_date:0
 #: field:campos.webtour.ususerminimum,create_date:0
+#: field:campos.webtour_req_commands,create_date:0
 #: field:campos.webtour_req_logger,create_date:0
 #: field:campos.webtourconfig,create_date:0
 #: field:campos.webtourconfig.checklog,create_date:0
@@ -487,6 +494,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,display_name:0
 #: field:campos.webtour.usneedminimum,display_name:0
 #: field:campos.webtour.ususerminimum,display_name:0
+#: field:campos.webtour_req_commands,display_name:0
 #: field:campos.webtour_req_logger,display_name:0
 #: field:campos.webtourconfig,display_name:0
 #: field:campos.webtourconfig.checklog,display_name:0
@@ -502,6 +510,11 @@ msgstr ""
 #: field:campos.webtourusneed.travelneedpax,display_name:0
 #: field:event.registration.travelneed,display_name:0
 msgid "Display Name"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.server,name:campos_transportation.action_do_request
+msgid "Do Request to Webtour"
 msgstr ""
 
 #. module: campos_transportation
@@ -730,8 +743,8 @@ msgstr ""
 #: field:campos.webtour.usgroup,id:0 field:campos.webtour.usneederror,id:0
 #: field:campos.webtour.usneedminimum,id:0
 #: field:campos.webtour.ususerminimum,id:0
-#: field:campos.webtour_req_logger,id:0 field:campos.webtourconfig,id:0
-#: field:campos.webtourconfig.checklog,id:0
+#: field:campos.webtour_req_commands,id:0 field:campos.webtour_req_logger,id:0
+#: field:campos.webtourconfig,id:0 field:campos.webtourconfig.checklog,id:0
 #: field:campos.webtourconfig.triptype,id:0
 #: field:campos.webtourconfig.triptype.date,id:0
 #: field:campos.webtourparticipantoverview,id:0
@@ -787,6 +800,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,__last_update:0
 #: field:campos.webtour.usneedminimum,__last_update:0
 #: field:campos.webtour.ususerminimum,__last_update:0
+#: field:campos.webtour_req_commands,__last_update:0
 #: field:campos.webtour_req_logger,__last_update:0
 #: field:campos.webtourconfig,__last_update:0
 #: field:campos.webtourconfig.checklog,__last_update:0
@@ -809,6 +823,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,write_uid:0
 #: field:campos.webtour.usneedminimum,write_uid:0
 #: field:campos.webtour.ususerminimum,write_uid:0
+#: field:campos.webtour_req_commands,write_uid:0
 #: field:campos.webtour_req_logger,write_uid:0
 #: field:campos.webtourconfig,write_uid:0
 #: field:campos.webtourconfig.checklog,write_uid:0
@@ -826,6 +841,7 @@ msgstr ""
 #: field:campos.webtour.usneederror,write_date:0
 #: field:campos.webtour.usneedminimum,write_date:0
 #: field:campos.webtour.ususerminimum,write_date:0
+#: field:campos.webtour_req_commands,write_date:0
 #: field:campos.webtour_req_logger,write_date:0
 #: field:campos.webtourconfig,write_date:0
 #: field:campos.webtourconfig.checklog,write_date:0
@@ -1051,6 +1067,7 @@ msgid "Registration Partner ID"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtour_req_commands,name:0
 #: field:campos.webtour_req_logger,name:0
 msgid "Request"
 msgstr ""
@@ -1331,11 +1348,6 @@ msgid "Travel needs"
 msgstr ""
 
 #. module: campos_transportation
-#: view:campos.webtourusneed:campos_transportation.view_form_webtourusneed
-msgid "Travel needs Changes"
-msgstr ""
-
-#. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour_admin
 msgid "Travel needs2"
@@ -1462,6 +1474,11 @@ msgid "Webtour Pending EndNote"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtourusneed,webtour_pending_pendingtype:0
+msgid "Webtour Pending PendingType"
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.webtourusneed,webtour_pending_startdatetime:0
 msgid "Webtour Pending StartDateTime"
 msgstr ""
@@ -1493,6 +1510,11 @@ msgstr ""
 #. module: campos_transportation
 #: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_registration
 msgid "Webtour Registration"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.ui.menu,name:campos_transportation.menu_action_campos_webtour_reqcommand
+msgid "Webtour Request Commands"
 msgstr ""
 
 #. module: campos_transportation
