@@ -130,7 +130,7 @@ class FinalRegistrationParticipant(models.Model):
     access_token_id = fields.Char('Id of Access Token')
     dates_summery = fields.Char('Camp Days', compute='_compute_dates_summery', store=True)
     own_note = fields.Char('Own Note')
-    passport_number = fields.Integer('Passport number')
+    passport_number = fields.Char('Passport number')
     visa_required = fields.Boolean(related='registration_id.partner_id.country_id.visa_req', string='Visa Required', readonly=True)
     group_country_code = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code', readonly=True)
 #    probably not used:
