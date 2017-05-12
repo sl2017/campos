@@ -13,4 +13,7 @@ class CamposCanteen(models.Model):
     name = fields.Char()
     subcamp_id = fields.Many2one('campos.subcamp', 'Sub camp')
     committee_id = fields.Many2one('campos.committee',
-                                   'Committee')
+                                   'Canteen Committee', help="Committee operation this Canteen")
+    pre_camp = fields.Boolean('Pre Camp', help="This Canteen is open during Pre Camp")
+    post_camp = fields.Boolean('Post Camp', help="This Canteen is open during Post Camp")
+    max_cap = fields.Integer('Max Capacity pr Meal')

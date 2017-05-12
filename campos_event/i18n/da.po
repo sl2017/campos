@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 16:14+0000\n"
-"PO-Revision-Date: 2017-03-29 16:14+0000\n"
+"POT-Creation-Date: 2017-05-08 14:39+0000\n"
+"PO-Revision-Date: 2017-05-08 14:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,7 @@ msgstr "Ansøgere"
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: view:website:campos_event.event_meeting_proposal
 msgid "Application"
-msgstr "Ansøgning"
+msgstr "Ansøgning (Må kun bruges ved skift af udvalg, eller ønske om et udvalg mere)"
 
 #. module: campos_event
 #: field:campos.event.participant,state:0
@@ -1194,6 +1194,17 @@ msgstr "eksport"
 #: field:campos.event.participant,customer_type:0
 #: field:res.partner,customer_type:0 field:res.users,customer_type:0
 msgid "Export Type"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,fallback_contact:0
+#: field:event.registration,fallback_partner_id:0
+msgid "Fallback Contact"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,fallback_email:0
+msgid "Fallback Email"
 msgstr ""
 
 #. module: campos_event

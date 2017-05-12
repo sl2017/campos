@@ -5,6 +5,12 @@
 <openerp>
 <data>
 
+	<record id="group_campos_activity" model="res.groups">
+			<field name="name">Activity Mgr</field>
+			<field name="implied_ids" eval="[(4, ref('campos_event.group_campos_user'))]"/>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+
     <record model="ir.model.access" id="campos_activity_activity_access_name"> <!-- TODO acl id -->
         <field name="name">campos.activity.activity access name</field> <!-- TODO acl name -->
         <field name="model_id" ref="model_campos_activity_activity"/>
@@ -14,6 +20,17 @@
         <field name="perm_create" eval="0"/>
         <field name="perm_write" eval="0"/>
         <field name="perm_unlink" eval="0"/>
+    </record>
+    
+    <record model="ir.model.access" id="campos_activity_activity_access_actadmin">
+        <field name="name">campos.activity.activity access admin</field>
+        <field name="model_id" ref="model_campos_activity_activity"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="group_campos_activity"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
     </record>
 
 </data>

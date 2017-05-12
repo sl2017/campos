@@ -16,7 +16,20 @@
                 <sheet>
                     <!-- TODO -->
                     <group>
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
                         <field name="name"/>
+                                                 
+                         <field name="seats_max"/>
+                         <field name="seats_hard"/>
+                         <!-- 
+                         <field name="seats_used"/>
+                         <field name="seats_reserved"/>
+                          -->
+                         <field name="staff_ids" widget="many2many_tags"/>
+                         <!-- 
+                         <field name="ticket_ids"/>
+                          -->
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
@@ -54,10 +67,10 @@
     </record>
 
     <record model="ir.ui.menu" id="campos_activity_instanse_menu">
-        <field name="name">Campos Activity Instanse</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="name">Activity Instanse</field>
+        <field name="parent_id" ref="submenu_campos_activity"/>
         <field name="action" ref="campos_activity_instanse_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="20"/>
     </record>
 
 </data>

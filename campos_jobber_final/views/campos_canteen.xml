@@ -17,6 +17,11 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="subcamp_id"/>
+                		<field name="committee_id"/>
+                		<field name="max_cap"/>
+                		<field name="pre_camp"/>
+                		<field name="post_camp"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

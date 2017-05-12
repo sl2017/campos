@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -34,7 +36,16 @@ class CamposEventParticipant(models.Model):
     ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
     info_html = fields.Html(compute='_compute_info_html')
     
+    #JHandl e jobbers childs
+    jobber_child = fields.Boolean('Jobber Child')
+    parent_jobber_id = fields.Many2one('campos.event.participant')
+    jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
     
+    @api.constrains('birthdate','jobber_child')
+    def _check_jobber_child_age(self):
+        if self.jobber_child and self.birthdate < '2002-07-21':
+            raise ValidationError("Jobber children must be under 15 years")
+        
     @api.multi
     def action_approve_payreq(self):
         self.write({'payreq_state': 'approved'})
