@@ -94,6 +94,7 @@
 <field name="campos_transfered_enddatetime"/>
 <field name="campos_transfered_enddestinationidno" readonly="0"/>
 <field name="campos_transfered_endnote"/>
+<field name="webtour_transfererror" readonly="1"/>
 </group>
 <group name="group_right">
 <field name="webtour_startdatetime" readonly="1"/>
@@ -104,6 +105,18 @@
 <field name="webtour_endnote" readonly="1"/>
 <field name="webtour_touridno" readonly="1"/>
 <field name="webtour_CurrentDateTime" readonly="1"/>
+</group>
+<group name="group_left">
+<field name="webtour_rejected_rejecttype" readonly="1"/>
+<field name="webtour_rejected_startdatetime" readonly="1"/>
+<field name="webtour_rejected_startdestinationidno" readonly="1"/>
+<field name="webtour_rejected_startnote" readonly="1"/>
+<field name="webtour_rejected_enddatetime" readonly="1"/>
+<field name="webtour_rejected_enddestinationidno" readonly="1"/>
+<field name="webtour_rejected_endnote" readonly="1"/>
+<field name="webtour_rejected_rejectdatetime" readonly="1"/>
+</group>
+<group name="group_right">
 <field name="webtour_pending_pendingtype" readonly="1"/>
 <field name="webtour_pending_startdatetime" readonly="1"/>
 <field name="webtour_pending_startdestinationidno" readonly="1"/>

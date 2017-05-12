@@ -284,6 +284,31 @@ def usneed_getbyidno(_url,_key,request):
             repeat_read = repeat_read -1
     return doc
 
+def usneed_getbyidno1(_url,_key,request):
+    global cookie
+
+    def do_usneed_getbyidno():
+        do_url = _url + "usNeed/GetByIDno/?IDno=" + request
+
+        response = requests.get(do_url,data=None,cookies=cookie)
+
+        doc = response.content
+
+        return doc
+
+    repeat_read = MAXREPEATREAD
+
+    while repeat_read:
+        doc = do_usneed_getbyidno()
+
+        if is_authenticated(doc):
+            repeat_read = False
+        else:
+            login(_url,_key)
+            repeat_read = repeat_read -1
+    return doc
+
+
 def usneed_delete(_url,_key,request):
     global cookie
 
