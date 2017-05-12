@@ -1,0 +1,369 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_activity
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-08 14:39+0000\n"
+"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_activity
+#: model:ir.ui.menu,name:campos_activity.menu_campos_activity
+#: model:ir.ui.menu,name:campos_activity.submenu_campos_activity
+msgid "Activities"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,activity_id:0
+#: model:ir.ui.menu,name:campos_activity.campos_activity_activity_menu
+msgid "Activity"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.ui.menu,name:campos_activity.campos_activity_instanse_menu
+msgid "Activity Instanse"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.ui.menu,name:campos_activity.campos_activity_location_menu
+msgid "Activity Locations"
+msgstr ""
+
+#. module: campos_activity
+#: model:res.groups,name:campos_activity.group_campos_activity
+msgid "Activity Mgr"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,age_from:0
+msgid "Age from"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,age_to:0
+msgid "Age to"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,audience:0
+msgid "All"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,audience:0
+msgid "Audience"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking:0
+msgid "Booking"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Booking required"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.model,name:campos_activity.model_campos_activity_activity
+msgid "Campos Activity"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_activity_act_window
+msgid "Campos Activity Activity"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_instanse_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_instanse
+msgid "Campos Activity Instanse"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_location_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_location
+msgid "Campos Activity Location"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_period_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_period
+#: model:ir.ui.menu,name:campos_activity.campos_activity_period_menu
+msgid "Campos Activity Period"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.model,name:campos_activity.model_campos_activity_pitag
+msgid "Campos Activity Pitag"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_tag_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_tag
+#: model:ir.ui.menu,name:campos_activity.campos_activity_tag_menu
+msgid "Campos Activity Tag"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,code:0
+msgid "Code"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,committee_id:0
+msgid "Committee"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.ui.menu,name:campos_activity.submenu_campos_config
+msgid "Configuration"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,create_uid:0
+#: field:campos.activity.instanse,create_uid:0
+#: field:campos.activity.location,create_uid:0
+#: field:campos.activity.period,create_uid:0
+#: field:campos.activity.pitag,create_uid:0
+#: field:campos.activity.tag,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,create_date:0
+#: field:campos.activity.instanse,create_date:0
+#: field:campos.activity.location,create_date:0
+#: field:campos.activity.period,create_date:0
+#: field:campos.activity.pitag,create_date:0
+#: field:campos.activity.tag,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_last_post:0
+#: help:campos.activity.instanse,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,desc:0
+msgid "Description"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,display_name:0
+#: field:campos.activity.instanse,display_name:0
+#: field:campos.activity.location,display_name:0
+#: field:campos.activity.period,display_name:0
+#: field:campos.activity.pitag,display_name:0
+#: field:campos.activity.tag,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Drop In"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Drop In & Pre Booking"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.period,date_end:0
+msgid "End Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_follower_ids:0
+#: field:campos.activity.instanse,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_hard:0
+msgid "Hard limit"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_summary:0
+#: help:campos.activity.instanse,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,id:0 field:campos.activity.instanse,id:0
+#: field:campos.activity.location,id:0 field:campos.activity.period,id:0
+#: field:campos.activity.pitag,id:0 field:campos.activity.tag,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,audience:0
+msgid "ITS"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_unread:0
+#: help:campos.activity.instanse,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,act_ins_ids:0
+msgid "Instanses"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_is_follower:0
+#: field:campos.activity.instanse,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_last_post:0
+#: field:campos.activity.instanse,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,__last_update:0
+#: field:campos.activity.instanse,__last_update:0
+#: field:campos.activity.location,__last_update:0
+#: field:campos.activity.period,__last_update:0
+#: field:campos.activity.pitag,__last_update:0
+#: field:campos.activity.tag,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,write_uid:0
+#: field:campos.activity.instanse,write_uid:0
+#: field:campos.activity.location,write_uid:0
+#: field:campos.activity.period,write_uid:0
+#: field:campos.activity.pitag,write_uid:0
+#: field:campos.activity.tag,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,write_date:0
+#: field:campos.activity.instanse,write_date:0
+#: field:campos.activity.location,write_date:0
+#: field:campos.activity.period,write_date:0
+#: field:campos.activity.pitag,write_date:0
+#: field:campos.activity.tag,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_max:0
+msgid "Maximum Avalaible Seats"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_ids:0
+#: field:campos.activity.instanse,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_ids:0
+#: help:campos.activity.instanse,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,name:0 field:campos.activity.instanse,name:0
+#: field:campos.activity.location,name:0 field:campos.activity.period,name:0
+#: field:campos.activity.pitag,name:0 field:campos.activity.tag,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,pitag_ids:0
+msgid "PI Tags"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_pitag_act_window
+#: model:ir.ui.menu,name:campos_activity.campos_activity_pitag_menu
+msgid "PI Track"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,audience:0
+msgid "Participants"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,period_id:0
+msgid "Period"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Pre Camp Booking Required"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,staff_ids:0
+msgid "Staff"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,actins_date_begin:0
+#: field:campos.activity.period,date_begin:0
+msgid "Start Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_summary:0
+#: field:campos.activity.instanse,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,tag_ids:0
+msgid "Tags"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,lang_ok:0
+msgid "Translation status"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_unread:0
+#: field:campos.activity.instanse,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,website_message_ids:0
+#: field:campos.activity.instanse,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,website_message_ids:0
+#: help:campos.activity.instanse,website_message_ids:0
+msgid "Website communication history"
+msgstr ""
