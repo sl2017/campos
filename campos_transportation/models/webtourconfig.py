@@ -211,16 +211,16 @@ class webtourconfig(models.Model):
         log = self.env['campos.webtourconfig.checklog'].create({'name':'action_webtour_check_usneed 3','result':s}) 
         
                 
-    @api.model
+    @api.multi
     def action_clearusecamptransportjobber_nocampdays(self):
  
-        pars = self.env['campos.event.participant'].search([('staff', '=', True),('camp_day_ids', '=', False),'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
+        pars = self.env['campos.event.participant'].search([('staff', '=', True),('dates_summery', '=', False),'|',('transport_to_camp', '=', True),('transport_from_camp', '=', True)])
         _logger.info("action_clearusecamptransportjobber_nocampdays %s",len(pars))
-        n=100
+        n=200
         for par in pars:     
             par.clearusecamptransportjobber_nocampdays()
             
-            if n > 0: n= n-1
+            if n > 1: n = n-1
             else: break
             
     @api.multi
