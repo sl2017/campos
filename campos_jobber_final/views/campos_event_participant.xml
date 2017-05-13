@@ -157,6 +157,7 @@
 						 		</tree>
 						 	
 						 	</field>
+						 	<button name="action_add_jobber_child"  string="Add child" type="object"/>
 						 
 						 </page>
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
@@ -331,7 +332,7 @@
 						 </page>
 						 <page string="Children">
 						 	<field name="partner_id" invisible="1"/>
-						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
+						 	<field name="jobber_child_ids" create="0" context="{'form_view_ref': 'campos_jobber_final.campos_jobber_child_form_view'}">
 						 		<tree>
 						 			<field name="registration_id" invisible="1"/>
 						 			<field name="name"/>
@@ -379,5 +380,46 @@
     </record>
 
 
+	<record model="ir.ui.view" id="campos_jobber_child_form_view">
+        <field name="name">campos jobber Child (in campos_jobber_finale)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+        	<button name="check_all_maincamp_days" position="replace">
+        		<button name="check_all_precamp_days" 
+											type="object"    
+											icon="fa-check-square-o"
+											string="Check all Pre Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
+							<button name="check_precamp_wed_fri" 
+											type="object"
+											icon="fa-check-square-o"    
+											string="Pre Camp Wed-Friday" class = "oe_edit_only oe_inline oe_stat_button"/>
+            					<button name="check_all_maincamp_days" 
+											type="object"    
+											icon="fa-check-square-o"
+											string="Check all Main Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
+							 
+							<!-- 
+							<button name="check_all_second_half_days" 
+											type="object"
+											icon="fa-check-square-o"    
+											string="Wed- to Sunday" class = "oe_edit_only oe_inline oe_stat_button"/>
+							 -->				
+							<button name="check_all_postcamp_days" 
+											type="object"    
+											icon="fa-check-square-o"
+											string="Check all Post Camp" class = "oe_edit_only oe_inline oe_stat_button"/>
+            				<button name="uncheck_all_days" 
+											type="object"    
+											icon="fa-square-o"
+											string="Un-check all days" class = "oe_edit_only oe_inline oe_stat_button"/>
+        	</button>
+        	<button name="uncheck_all_days" position="replace"/>
+			<button name="check_all_first_half_days" position="replace"/> 
+			<button name="check_all_second_half_days" position="replace"/>
+        </field>
+       </record>
+        
 </data>
 </openerp>
