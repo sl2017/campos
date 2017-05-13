@@ -215,3 +215,36 @@ class CamposEventParticipant(models.Model):
                                                       'payreq_state': 'draft'})
                     
         return res
+    
+    @api.multi
+    def action_add_jobber_child(self):
+        self.ensure_one()
+        
+        days_ids = []
+        for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate':  False,
+                                       'the_date': day.event_date,
+                                      }))
+        return {
+            'name': _('New child for: %s') % self.name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_jobber_final.campos_jobber_child_form_view').id,
+            'res_model': 'campos.event.participant',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            #'target': 'new',
+            'context' : {'default_registration_id': self.registration_id.id, 
+                         'default_street': self.street, 
+                         'default_city': self.city, 
+                         'default_zip': self.zip, 
+                         'default_country_id': self.country_id.id, 
+                         'default_jobber_child': True, 
+                         'default_parent_id': self.partner_id.id,
+                         'default_transport_to_camp': self.transport_to_camp,
+                         'default_transport_from_camp': self.transport_from_camp,
+                         'defualt_camp_day_ids': days_ids,
+                         }
+            }
