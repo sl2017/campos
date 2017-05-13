@@ -28,6 +28,8 @@
 <field name="arch" type="xml">
 <tree>
 <field name="id"/>
+<field name="needstatus"/>
+<field name="needproblem"/>
 <field name="webtourstatus"/>
 <field name="registration_id"/>
 <field name="participant_id"/>
@@ -36,9 +38,6 @@
 <field name="campos_traveldate"/>
 <field name="campos_startdestinationidno"/>
 <field name="campos_enddestinationidno"/>
-<field name="campos_writeseq"/>
-<field name="campos_transferedseq"/>
-<field name="campos_transfered"/>
 <field name="campos_demandneeded"/>
 <field name="webtour_needidno"/>
 </tree>
@@ -65,6 +64,8 @@
 <field name="travelgroup"/>
 <field name="travelneed_id"/>
 <field name="webtourstatus"/>
+<field name="needstatus"/>
+<field name="needproblem"/>
 
 <group name="group_left">
 <field name="campos_demandneeded"/>
