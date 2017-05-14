@@ -3,6 +3,27 @@
 <data>
 
 <!-- Server action and bindig to present iframe embed code -->
+<record id="action_get_create_webtour_need_job" model="ir.actions.server">
+	<field name="name">Start job to Update usNeed in Webtour</field>
+	<field name="condition">True</field>
+	<field name="type">ir.actions.server</field>
+	<field name="model_id" ref="model_campos_webtourusneed" />
+	<field name="state">code</field>
+	<field name="code">
+		self.action_do_delayed_get_create_webtour_need_job(cr, uid, context.get('active_ids'), context)
+	</field>
+</record>
+
+<record id="ir_start_get_create_webtour_need_Job" model="ir.values">
+	<field name="model">campos.webtourusneed</field>
+	<field name="name">Start job to Update usNeed in Webtour</field>
+	<field name="key2">client_action_multi</field>
+	<field name="value"
+		eval="'ir.actions.server,%d'%action_get_create_webtour_need_job" />
+</record>
+
+
+<!-- Server action and bindig to present iframe embed code -->
 <record id="action_delete_usneederrors" model="ir.actions.server">
 	<field name="name">Delete selected usNeed errors in Webtour</field>
 	<field name="condition">True</field>
