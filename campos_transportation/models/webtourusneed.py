@@ -8,6 +8,33 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_get_create_webtour_need_job(session, model, rec_id):
+    rec = session.env['campos.webtourusneed'].browse(rec_id)
+    if rec.exists():
+        rec.get_create_webtour_need()
+        
+    
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
@@ -230,12 +257,16 @@ class WebtourUsNeed(models.Model):
                 if not same(need.campos_enddestinationidno, need.webtour_enddestinationidno):
                     problem = addseplist(problem,'End Dest')
                 if not same(need.campos_transfered_startnote,need.webtour_startnote) or not same(need.campos_transfered_endnote,need.webtour_endnote) :
-                    problem = addseplist(problem,'Details')                     
+                    problem = addseplist(problem,'Details')                   
                 if need.campos_triptype_returnjourney:
-                    if not same(need.campos_traveldate,need.webtour_enddatetime[:10]):
+                    s=need.webtour_enddatetime
+                    if s == False: s = ''
+                    if not same(need.campos_traveldate,s[:10]):
                         problem = addseplist(problem,'Date')
                 else:
-                    if not same(need.campos_traveldate,need.webtour_startdatetime[:10]):
+                    s=need.webtour_startdatetime
+                    if s == False: s = ''
+                    if not same(need.campos_traveldate,s[:10]):
                         problem = addseplist(problem,'Date') 
             
             if need.needproblem != problem: 
@@ -785,6 +816,13 @@ class WebtourUsNeed(models.Model):
                 need.get_create_webtour_need()
                 
         return True
+    
+    @api.multi
+    def action_do_delayed_get_create_webtour_need_job(self):
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_get_create_webtour_need_job.delay(session, 'campos.webtourusneed', rec.id)    
+
 
     @api.multi
     def updateusneedtriptypes(self):
