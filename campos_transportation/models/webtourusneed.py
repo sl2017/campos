@@ -8,6 +8,33 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+from openerp.addons.connector.queue.job import job, related_action
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.exception import FailedJobError
+
+
+def related_action_generic(session, job):
+            model = job.args[0]
+            res_id = job.args[1]
+            model_obj = session.env['ir.model'].search([('model', '=', model)])
+            action = {
+                'name': model_obj.name,
+                'type': 'ir.actions.act_window',
+                'res_model': model,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': res_id,
+            }
+            return action
+
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_get_create_webtour_need_job(session, model, rec_id):
+    rec = session.env['campos.webtourusneed'].browse(rec_id)
+    if rec.exists():
+        rec.get_create_webtour_need()
+        
+    
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
@@ -17,6 +44,7 @@ class WebtourUsNeed(models.Model):
     
     campos_demandneeded = fields.Boolean('CampOs Demand Needed', default=False)
     campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','Webtour_TripType', ondelete='set null')
+    campos_triptype_returnjourney = fields.Boolean('Return journey', related='campos_TripType_id.returnjourney')
     campos_traveldate = fields.Char('CampOs StartDateTime', required=False)
     campos_startdestinationidno = fields.Char('CampOs StartDestinationIdNo', required=False)
     campos_enddestinationidno = fields.Char('CampOs EndDestinationIdNo', required=False)
@@ -126,18 +154,91 @@ class WebtourUsNeed(models.Model):
 
     WebtourUsNeedChanges_ids= fields.One2many('campos.webtourusneed.changes','WebtourUsNeed_id',ondelete='set null')
     webtourstatus = fields.Selection([('1', 'Pending Create'),
-                               ('2', 'No Pending Change'),
-                               ('3', 'Pending Change'),
-                               ('4', 'Pending Delete'),
-                               ('5', 'Deleted')], default=False, string='Webtour Status')   
+                                      ('2', 'No Pending Change'),
+                                      ('3', 'Pending Change'),
+                                      ('4', 'Pending Delete'),
+                                      ('5', 'Deleted'),
+                                      ('6', 'Not Accepted'),
+                                      ('7', 'Not Deleted')], default=False, string='Webtour Status')  
+     
+    needstatus = fields.Selection([('0', 'No Demand'),
+                                   ('1', 'OK'),
+                                   ('2', 'In Planning'),
+                                   ('3', 'Pending Change'),
+                                   ('4', 'NOT AS DESIRED'),
+                                   ('5', 'CANNOT BE CANCELED'),
+                                   ('6', 'NO SEAT RESERVED'),
+                                   ('9', 'Error')], default=False, string='Need Status')#,compute='_computeneedstatus', readonly=True, store=True)
+
+    needproblem = fields.Char('Need Problem')
     
+    
+    @api.multi
+    @api.depends('webtour_CurrentDateTime','campos_demandneeded','campos_TripType_id','campos_traveldate','campos_startdestinationidno','campos_enddestinationidno','travelneed_id','travelneed_deadline','travelneed_travelconnectiondetails') 
+    def _computeneedstatus(self):
+                       
+            needstatus = False
+            if rec.campos_demandneeded == False:
+                if rec.webtour_deleted == True or rec.webtour_needidno == False or same(need.webtourstatus,'5') or same(need.webtourstatus,'6'):
+                    needstatus = '0'
+                elif rec.webtour_rejected_rejecttype == 'DELETE':
+                    needstatus = '5'
+                else:
+                    needstatus = '3'                    
+            elif rec.webtour_transfererror:
+                    needstatus = '9'
+            else: #There is a Need 
+                if ((rec.campos_demandneeded != rec.campos_transfered_demandneeded)
+                    or (rec.travelneed_deadline != rec.campos_transfered_deadline)
+                    or (rec.travelneed_travelconnectiondetails != rec.campos_transfered_travelconnectiondetails)
+                    or (rec.campos_traveldate != rec.campos_transfered_traveldate)
+                    or (rec.campos_startdestinationidno != rec.campos_transfered_startdestinationidno)
+                    or (rec.campos_enddestinationidno != rec.campos_transfered_enddestinationidno)       
+                    ): # check for changes in travel data
+                    needstatus = '3'
+                else:
+                    if rec.webtourstatus in ('1','3','4','5'):        
+                        needstatus = '3'
+                    elif rec.webtourstatus == '2':
+                        if (rec.webtour_rejected_rejecttype == 'DELETE') and problem:
+                            needstatus = '5'
+                        elif (rec.webtour_rejected_rejecttype == 'UPDATE') and problem:
+                            needstatus = '4'
+                        elif (rec.webtour_rejected_rejecttype == 'CREATE') and problem:
+                            needstatus = '6'
+                        elif rec.webtour_touridno == False or rec.webtour_touridno == '0':
+                            needstatus = '2'
+                        else:
+                            needstatus = '1'
+                    else:
+                        needstatus = False #STRANGE !!!
+                                               
+            rec.needstatus = needstatus   
+    
+                            
     @api.multi
     def write(self, vals):
         _logger.info("WebtourUsNeed Write Entered %s", vals.keys())
         ret = super(WebtourUsNeed, self).write(vals)
         
+        def same(a,b):
+            if a == False:
+                a=''
+            if b == False:
+                b=''
+            return a == b
+        
+        def addseplist(list,t):
+            if t:
+                if list:
+                    return list +', ' + t
+                else:
+                    return t
+            else:
+                return list  
+    
         for need in self:
-     
+            
             if  ('campos_TripType_id' in vals 
                 or 'travelgroup' in vals
                 or 'campos_traveldate' in vals
@@ -146,7 +247,76 @@ class WebtourUsNeed(models.Model):
                 ):
                 #_logger.info("WebtourUsNeed Write Change %s %s", need.campos_traveldate,fields.Date.from_string(need.campos_startdatetime))
                 need.calc_travelneed_id()
-             
+
+            problem = False
+            if need.campos_demandneeded == (need.webtour_deleted or same(need.webtourstatus,'5') or same(need.webtourstatus,'6')):
+                problem = 'Demand'
+            elif need.campos_demandneeded:
+                if not same(need.campos_startdestinationidno,need.webtour_startdestinationidno):
+                    problem = 'Start Dest'
+                if not same(need.campos_enddestinationidno, need.webtour_enddestinationidno):
+                    problem = addseplist(problem,'End Dest')
+                if not same(need.campos_transfered_startnote,need.webtour_startnote) or not same(need.campos_transfered_endnote,need.webtour_endnote) :
+                    problem = addseplist(problem,'Details')                   
+                if need.campos_triptype_returnjourney:
+                    s=need.webtour_enddatetime
+                    if s == False: s = ''
+                    if not same(need.campos_traveldate,s[:10]):
+                        problem = addseplist(problem,'Date')
+                else:
+                    s=need.webtour_startdatetime
+                    if s == False: s = ''
+                    if not same(need.campos_traveldate,s[:10]):
+                        problem = addseplist(problem,'Date') 
+            
+            if need.needproblem != problem: 
+                need.needproblem = problem 
+
+            ''' need.webtourstatus:
+                '1', 'Pending Create'
+                '2', 'No Pending Change'
+                '3', 'Pending Change'
+                '4', 'Pending Delete'
+                '5', 'Deleted'
+                '6', 'Not Accepted'
+                '7', 'Not Deleted'
+            '''  
+
+            ''' need.needstatus:
+                '0', 'No Demand'
+                '1', 'OK'
+                '2', 'In Planning'
+                '3', 'Pending Change'
+                '4', 'NOT AS DESIRED'
+                '5', 'CANNOT BE CANCELED'
+                '6', 'NO SEAT RESERVED'
+                '9', 'Error'
+            '''
+            needstatus = False
+            if need.campos_demandneeded == False:
+                if need.webtour_deleted == True or need.webtour_needidno == False or same(need.webtourstatus,'5') or same(need.webtourstatus,'6'):
+                    needstatus = '0'
+                elif same(need.webtourstatus,'7'):
+                    needstatus = '5'
+                else:
+                    needstatus = '3'                    
+            elif need.webtour_transfererror:
+                    needstatus = '9'
+            else: #There is a Need
+                if need.webtourstatus in ('1','3','4'):        
+                    needstatus = '3'
+                elif same(need.webtourstatus,'6'):
+                    needstatus = '6'
+                elif need.needproblem:
+                    needstatus = '4'
+                elif need.webtour_touridno == False or same(need.webtour_touridno,'0'):
+                    needstatus = '2'
+                else:
+                    needstatus = '1'
+                                               
+            if need.needstatus != needstatus:
+                need.needstatus = needstatus
+
         return ret
     
     @api.model
@@ -210,9 +380,18 @@ class WebtourUsNeed(models.Model):
                     return False
         
         def getidno(root):
-            content = root.find("i:Content",ns) #Let's find the contenr Section
-            pending = content.find("a:Pending",ns) #Let's see if there is a Pending Section
-            rejected = content.find("a:Rejected",ns) #Let's see if there is a Rejected Section
+            try:
+                content = root.find("i:Content",ns) #Let's find the contenr Section
+            except:
+                content = False
+            try:    
+                pending = content.find("a:Pending",ns) #Let's see if there is a Pending Section
+            except:
+                pending = False
+            try:    
+                rejected = content.find("a:Rejected",ns) #Let's see if there is a Rejected Section
+            except:
+                rejected = False
             
             idno = get_tag_data_from_node(content,"a:IDno")
             if (idno is False):
@@ -221,6 +400,7 @@ class WebtourUsNeed(models.Model):
                     idno = get_tag_data_from_node(rejected,"a:IDno")
             return idno
 
+                                     
         def updatewebtourfields17(root):         
             content = root.find("i:Content",ns) #Let's find the contenr Section
             pending = content.find("a:Pending",ns) #Let's see if there is a Pending Section
@@ -230,22 +410,39 @@ class WebtourUsNeed(models.Model):
             
             idno = getidno(root)
             if self.webtour_needidno != idno: dicto['webtour_needidno'] = idno
-                                    
+            
+            pendingtype = get_tag_data_from_node(pending,"a:PendingType")
+            rejecttype = get_tag_data_from_node(rejected,"a:RejectType")
+
+            ''' '1', 'Pending Create'
+                '2', 'No Pending Change'
+                '3', 'Pending Change'
+                '4', 'Pending Delete'
+                '5', 'Deleted'
+                '6', 'Not Accepted'
+                '7', 'Not Deleted'
+            '''                       
             if get_tag_data_from_node(content,"a:Deleted") =='true':
                 if self.webtour_deleted != True : dicto['webtour_deleted'] = True
-                if self.webtourstatus != '5': dicto['webtourstatus'] = '5'
+                if self.webtourstatus != '5': dicto['webtourstatus'] = '5'              
             else:
                 if self.webtour_deleted != False : dicto['webtour_deleted'] = False
-                if pending is None:
-                    if self.webtourstatus != '2': dicto['webtourstatus'] = '2'
+            
+                if (pendingtype == False):
+                    if (rejecttype == 'CREATE') and self.campos_demandneeded == True:
+                        if self.webtourstatus != '6': dicto['webtourstatus'] = '6' 
+                    elif (rejecttype == 'DELETE') and self.campos_demandneeded == False:
+                        if self.webtourstatus != '7': dicto['webtourstatus'] = '7'
+                    else:    
+                        if self.webtourstatus != '2': dicto['webtourstatus'] = '2'
                 else:
-                    pendingtype = get_tag_data_from_node(pending,"a:PendingType")
                     if pendingtype == 'CREATE':
                         if self.webtourstatus != '1': dicto['webtourstatus'] = '1'
                     elif pendingtype == 'UPDATE':
                         if self.webtourstatus != '3': dicto['webtourstatus'] = '3'
                     elif pendingtype == 'DELETE':
-                        if self.webtourstatus != '4': dicto['webtourstatus'] = '4'           
+                        if self.webtourstatus != '4': dicto['webtourstatus'] = '4'
+                    else: dicto['webtourstatus']  = False      
             
             if pending is not None:
                 if self.webtour_pending_pendingtype != pendingtype: 
@@ -328,7 +525,10 @@ class WebtourUsNeed(models.Model):
                         note = note + ', Connection: ' + self.travelneed_id.travelconnectiondetails 
                     else:
                         note = 'Connection: ' + self.travelneed_id.travelconnectiondetails 
-                             
+                
+                if note: # Limit to 80 Chars
+                    note = note[:79]
+                                 
                 if self.travelneed_id.campos_TripType_id.returnjourney: #Return jurney
                     startnote = False
                     endnote = note
@@ -377,12 +577,13 @@ class WebtourUsNeed(models.Model):
 
         # check for changes in travel data
         if ((self.campos_demandneeded != self.campos_transfered_demandneeded)
+            or (self.campos_demandneeded and self.webtour_needidno == False)
             or (self.campos_demandneeded == False and self.webtour_deleted == False and self.webtour_pending_pendingtype !="DELETE" and self.webtour_rejected_rejecttype !="DELETE")
             or (self.travelneed_deadline != self.campos_transfered_deadline)
             or (self.travelneed_travelconnectiondetails != self.campos_transfered_travelconnectiondetails)
             or (self.campos_traveldate != self.campos_transfered_traveldate)
             or (self.campos_startdestinationidno != self.campos_transfered_startdestinationidno)
-            or (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno)         
+            or (self.campos_enddestinationidno != self.campos_transfered_enddestinationidno)    
             ):
             _logger.info("%s 1A. Change in travel data",self.id)       
                  
@@ -396,6 +597,9 @@ class WebtourUsNeed(models.Model):
                     note = note + ', Connection: ' + self.travelneed_id.travelconnectiondetails 
                 else:
                     note = 'Connection: ' + self.travelneed_id.travelconnectiondetails 
+            
+            if note: # Limit to 80 Chars
+                note = note[:80]            
                          
             if self.travelneed_id.campos_TripType_id.returnjourney: #Return jurney
                 startnote = False
@@ -416,7 +620,13 @@ class WebtourUsNeed(models.Model):
             
             if (self.campos_demandneeded == True): # there is demand
                 _logger.info("%s 2A. demand needed",self.id)
-                if (self.webtour_needidno == False or self.webtour_needidno == "0"): #no need known, so try to create
+                
+                recreate = False
+                if (self.webtour_needidno != False and self.webtour_needidno != "0" and self.webtour_rejected_rejecttype =='CREATE'): #We can reuse a rejected Need
+                    _logger.info("%s 2AA. We cant reuse a rejected Usneed",self.id,self.webtour_needidno)
+                    recreate= True
+                
+                if (self.webtour_needidno == False or self.webtour_needidno == "0" or recreate): #no need known, so try to create
                     _logger.info("%s 3. No need - Try to create",self.id)
                     request="UserIDno=" + self.webtour_useridno
                     request=request+"&GroupIDno="+self.webtour_groupidno
@@ -518,7 +728,7 @@ class WebtourUsNeed(models.Model):
                             _logger.info("%s 12B. Dit not Get usNeed Delete responce",self.id)                        
         else: 
             _logger.info("%s 1B. No changes in travel data",self.id)
-            if self.webtour_needidno and self.webtour_needidno <> '0' and self.webtour_deleted == False:
+            if self.webtour_needidno and self.webtour_needidno <> '0':
                 _logger.info("%s 13. There is usNeed IDno",self.id)
 
                 responceroot = ET.fromstring(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))             
@@ -606,6 +816,13 @@ class WebtourUsNeed(models.Model):
                 need.get_create_webtour_need()
                 
         return True
+    
+    @api.multi
+    def action_do_delayed_get_create_webtour_need_job(self):
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_get_create_webtour_need_job.delay(session, 'campos.webtourusneed', rec.id)    
+
 
     @api.multi
     def updateusneedtriptypes(self):
