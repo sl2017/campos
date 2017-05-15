@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 18:10+0000\n"
-"PO-Revision-Date: 2017-05-12 18:10+0000\n"
+"POT-Creation-Date: 2017-05-11 20:37+0000\n"
+"PO-Revision-Date: 2017-05-11 20:37+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -941,7 +941,7 @@ msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
-msgid "No Pending Change"
+msgid "Normal"
 msgstr ""
 
 #. module: campos_transportation
@@ -1594,51 +1594,6 @@ msgstr ""
 #. module: campos_transportation
 #: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
 msgid "Webtour name"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_enddatetime:0
-msgid "Webtour rejected EndDateTime"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_enddestinationidno:0
-msgid "Webtour rejected EndDestinationIdNo"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_endnote:0
-msgid "Webtour rejected EndNote"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_rejectdatetime:0
-msgid "Webtour rejected RejectDateTime"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_rejecttype:0
-msgid "Webtour rejected RejectType"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_startdatetime:0
-msgid "Webtour rejected StartDateTime"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_startdestinationidno:0
-msgid "Webtour rejected StartDestinationIdNo"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_rejected_startnote:0
-msgid "Webtour rejected StartNote"
-msgstr ""
-
-#. module: campos_transportation
-#: field:campos.webtourusneed,webtour_transfererror:0
-msgid "Webtour transfer Error."
 msgstr ""
 
 #. module: campos_transportation
