@@ -31,6 +31,11 @@ class CamposActivityInstanse(models.Model):
                                 ('precamp', 'Pre Camp Booking Required'),
                                 ('prebook', 'Booking required')], 'Booking')
     
+    state = fields.Selection([('open', 'Open'),
+                                ('cancelled', 'Cancelled'),
+                                ('canc_weather', 'Cancelled due to weather'),
+                                ('canc_risk', 'At risk of cancellation due to weather conditions')], 'State', default='open')
+    
     
     @api.onchange('activity_id','period_id')
     def on_change_actper(self):

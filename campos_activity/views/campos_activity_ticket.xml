@@ -11,12 +11,31 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="campos_activity.group_campos_activity"/>
                 </header>
                 <sheet>
                     <!-- TODO -->
                     <group>
-                        <field name="name"/>
+                        <field name="act_ins_id"/>
+                            <field name="act_desc"/>
+                            <field name="reg_id"/>
+                            <field name="seats" options="{'reload_on_button': true}"/>
+                            <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
+                            
+                            <field name="id" invisible="1"/>
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            	<tree options="{'reload_on_button': true}">
+                            		<field name="name"/>
+ 									<field name="age"/>
+ 									<field name="dates_summery"/>
+ 									<!-- 
+ 									<button name="action_unlink_activityticket"  icon="STOCK_CLOSE" type="object" help="Remove Participant from Activity Booking"/>
+ 									 -->
+                            	</tree>
+                            	</field>
+                            <field name="name"/>
+                        
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
@@ -29,7 +48,9 @@
         <field name="model">campos.activity.ticket</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                <field name="reg_id"/>
+                <field name="par_ids"/>
+                <field name="act_ins_id"/>
             </search>
         </field>
     </record>
@@ -40,24 +61,39 @@
         <field name="arch" type="xml">
             <tree>
                 <!-- TODO -->
+                <field name="actins_date_begin"/>
                 <field name="name"/>
+                <field name="act_ins_id"/>
+                <field name="seats"/>
+                <field name="state"/>
             </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="campos_activity_ticket_calendar_view">
+        <field name="name">campos.activity.ticket.tree (in campos_activity)</field>
+        <field name="model">campos.activity.ticket</field>
+        <field name="arch" type="xml">
+            <calendar string="Tickets" date_start="actins_date_begin" date_stop="actins_date_end" color="activity_id">
+				<field name="activity_id"/>
+                <field name="seats"/>
+            </calendar>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="campos_activity_ticket_act_window">
-        <field name="name">Campos Activity Ticket</field> <!-- TODO -->
+        <field name="name">Activity Ticket</field> <!-- TODO -->
         <field name="res_model">campos.activity.ticket</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
 
     <record model="ir.ui.menu" id="campos_activity_ticket_menu">
-        <field name="name">Campos Activity Ticket</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="name">Activity Ticket</field>
+        <field name="parent_id" ref="submenu_campos_activity"/>
         <field name="action" ref="campos_activity_ticket_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="30"/>
     </record>
 
 </data>
