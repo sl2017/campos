@@ -42,7 +42,9 @@
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
+                        <field name="name"/>
             </search>
         </field>
     </record>
@@ -52,16 +54,27 @@
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
-                <field name="name"/>
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
+                        <field name="name"/>
             </tree>
         </field>
     </record>
 
+	 <record model="ir.ui.view" id="campos_activity_instanse_calendar_view">
+        <field name="name">campos.activity.instanse.tree (in campos_activity)</field>
+        <field name="model">campos.activity.instanse</field>
+        <field name="arch" type="xml">
+            <calendar string="Activities" date_start="actins_date_begin" date_stop="actins_date_end" color="period_id">
+				<field name="name"/>
+        </calendar>
+        </field>
+    </record>
+	
     <record model="ir.actions.act_window" id="campos_activity_instanse_act_window">
         <field name="name">Campos Activity Instanse</field> <!-- TODO -->
         <field name="res_model">campos.activity.instanse</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
