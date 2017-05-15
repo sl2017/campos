@@ -2,12 +2,15 @@
 # This file contains the translation of the following modules:
 # * campos_crewnet
 # 
+# Translators:
+# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-15 09:49+0000\n"
 "PO-Revision-Date: 2017-05-15 09:49+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,12 +23,12 @@ msgstr ""
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_search_view
 #: field:campos.event.participant,crewnet_ok:0
 msgid "Crewnet"
-msgstr ""
+msgstr "Crewnet"
 
 #. module: campos_crewnet
 #: model:ir.model,name:campos_crewnet.model_campos_event_participant
 msgid "Event Participant"
-msgstr ""
+msgstr "Lejr deltagere"
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
@@ -33,6 +36,8 @@ msgid ""
 "General terms for the further use of the information provided by Crewnet as "
 "a service can be found"
 msgstr ""
+"Generelle betingelser for den videre anvendelse af oplysningerne hos Crewnet"
+" som service, kan findes"
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
@@ -40,6 +45,8 @@ msgid ""
 "I hereby give consent to the use of my personal information by Crewnet I / "
 "S."
 msgstr ""
+"Jeg giver hermed samtykke til, at mine personoplysninger anvendes af Crewnet"
+" I/S."
 
 #. module: campos_crewnet
 #: field:campos.event.participant,last_import:0
@@ -73,6 +80,9 @@ msgid ""
 "jobber and jobs in the camp's \"job app\" made available by Crewnet I/S, in "
 "conjunction with Spejdernes Lejr 2017."
 msgstr ""
+"Videregivelsen af oplysninger er nødvendig for at simplificere "
+"organiseringen af jobbere og jobs, i lejrens \"jobber-app\", som stilles til"
+" rådighed af Crewnet I/S, i forbindelse med Spejdernes Lejr 2017."
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
@@ -80,6 +90,8 @@ msgid ""
 "There is no information about health, religion, ethnicity or political "
 "relationship."
 msgstr ""
+"Der videregives ingen oplysninger omkring helbred, religion, etnicitet eller"
+" politisk relation."
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
@@ -87,8 +99,10 @@ msgid ""
 "There is only information that can relate you to a committee and your jobs "
 "at the camp."
 msgstr ""
+"Der er udelukkende tale om oplysninger som kan relatere dig til et udvalg og"
+" dit/dine jobs på lejren."
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
 msgid "here."
-msgstr ""
+msgstr "her."
