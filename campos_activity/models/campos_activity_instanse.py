@@ -24,6 +24,7 @@ class CamposActivityInstanse(models.Model):
     staff_ids = fields.Many2many('campos.event.participant','campos_activity_staff_rel', 'act_ins_id','par_id','Staff', domain=[('staff', '=', True)])
     #ticket_ids = fields.One2many('campos.activity.ticket', 'act_ins_id', 'Tickets')
     actins_date_begin = fields.Datetime(related='period_id.date_begin', string='Start Date/Time', store=True)
+    actins_date_end = fields.Datetime(related='period_id.date_end', string='End Date/Time', store=True)
     location_id = fields.Many2one('campos.activity.location', 'Location')
     booking = fields.Selection([('dropin', 'Drop In'),
                                 ('dropin_prebook', 'Drop In & Pre Booking'),
