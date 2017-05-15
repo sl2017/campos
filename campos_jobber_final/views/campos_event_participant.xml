@@ -86,9 +86,9 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									
+									<!-- 
 									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
-									
+									 -->
 									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
@@ -263,10 +263,10 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									
+									<!-- 
 									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
 																		<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																								    'show_organization': 1}"/>
+									 -->																																															    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -298,6 +298,7 @@
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 						      		</group>
 						 </page>
+						 <!-- 
 						 <page string="Children">
 						 	<field name="partner_id" invisible="1"/>
 						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id, 'form_view_ref': 'campos_final_registration.view_form_finalregistration_participant'}">
@@ -318,6 +319,7 @@
 						 	</field>
 						 
 						 </page>
+						  -->
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
 						 		<field name="exp_child_qu" />
