@@ -11,7 +11,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="open,cancelled,canc_weather,canc_risk" statusbar_colors='{"open":"blue","cancelled":"red","canc_weather":"red","canc_risk":"red"}'/>
                 </header>
                 <sheet>
                     <!-- TODO -->
@@ -65,7 +66,7 @@
         <field name="name">campos.activity.instanse.tree (in campos_activity)</field>
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
-            <calendar string="Activities" date_start="actins_date_begin" date_stop="actins_date_end" color="period_id">
+            <calendar string="Activities" date_start="actins_date_begin" date_stop="actins_date_end" color="state">
 				<field name="name"/>
         </calendar>
         </field>
