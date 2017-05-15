@@ -43,6 +43,11 @@ file_filter = campos_fee/i18n/<lang>.po
 source_file = campos_fee/i18n/campos_fee.pot
 source_lang = en
 
+[campos.campos_crewnet]
+file_filter = campos_crewnet/i18n/<lang>.po
+source_file = campos_crewnet/i18n/campos_crewnet.pot
+source_lang = en
+
 [campos.campos_activity]
 file_filter = campos_activity/i18n/<lang>.po
 source_file = campos_activity/i18n/campos_activity.pot
