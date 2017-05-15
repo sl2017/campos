@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_crewnet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-15 09:49+0000\n"
+"PO-Revision-Date: 2017-05-15 09:49+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_search_view
+#: field:campos.event.participant,crewnet_ok:0
+msgid "Crewnet"
+msgstr ""
+
+#. module: campos_crewnet
+#: model:ir.model,name:campos_crewnet.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "General terms for the further use of the information provided by Crewnet as a service can be found"
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "I hereby give consent to the use of my personal information by Crewnet I / S."
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,last_import:0
+msgid "Last import"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_link_id:0
+msgid "Remote System link ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_ext_id:0
+msgid "Remote system external ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_system_id:0
+msgid "Remote system id"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_int_id:0
+msgid "Remote system internal ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "The disclosure of information is necessary to simplify the organization of jobber and jobs in the camp's \"job app\" made available by Crewnet I/S, in conjunction with Spejdernes Lejr 2017."
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "There is no information about health, religion, ethnicity or political relationship."
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "There is only information that can relate you to a committee and your jobs at the camp."
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "here."
+msgstr ""
+
