@@ -9,5 +9,5 @@ class CamposEventParticipant(models.Model):
 
     _inherit = 'campos.event.participant'
 
-    crewnet_ok = fields.Boolean('Crewnet')
+    crewnet_ok = fields.Boolean('Crewnet', track_visibility='onchange')
 
