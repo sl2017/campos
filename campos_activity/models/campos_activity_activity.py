@@ -14,11 +14,18 @@ class CamposActivityActivity(models.Model):
     
     name = fields.Char('Name', size=128, translate=True)
     code = fields.Char('Code', size=20)
+    activity_type_id = fields.Many2one('campos.activity.type', string='Type')
     committee_id = fields.Many2one('campos.committee', 'Committee')
-    desc = fields.Text('Description', translate=True)
+    teaser = fields.Text('Teaser', translate=True)
+    desc = fields.Html('Description', translate=True)
+    equipment = fields.Text('Equipment', translate=True)
+    leader_req = fields.Text('Leader req', translate=True)
+    special_req = fields.Html('Special Req.', translate=True)
+    duration = fields.Text('Duration', translate=True)
     age_from =  fields.Integer('Age from', default=0)
     age_to = fields.Integer('Age to', default=99)
     #    'points' : fields.integer('Points'),
+    
     audience = fields.Selection([('par','Participants'),
                                  ('staff','ITS'),
                                  ('all', 'All')], 'Audience', default='par')
