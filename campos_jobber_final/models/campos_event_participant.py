@@ -174,7 +174,7 @@ class CamposEventParticipant(models.Model):
     @api.multi
     def write(self, vals):
         res = super(CamposEventParticipant, self).write(vals)
-        for cep in self:
+        for cep in self.suspend_security():
             if cep.staff:
                 if not cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.id:
                     event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
