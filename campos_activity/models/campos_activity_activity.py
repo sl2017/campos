@@ -26,3 +26,8 @@ class CamposActivityActivity(models.Model):
     lang_ok = fields.Many2many('res.lang', string="Translation status")
     tag_ids = fields.Many2many('campos.activity.tag', relation='campos_act_tag', string='Tags')
     pitag_ids = fields.Many2many('campos.activity.pitag', relation='campos_act_pitag', string='PI Tags')
+    state = fields.Selection([('idea', 'Idea'),
+                              ('planning', 'Planning'),
+                              ('confirmed', 'Confirmed'),
+                              ('cancelled', 'Cancelled')], 'State', default='idea')
+    

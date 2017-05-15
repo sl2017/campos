@@ -11,7 +11,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="idea,planning,confirmed,cancelled" statusbar_colors='{"confirmed":"blue","cancelled":"red"}'/>
                 </header>
                 <sheet>
                     <!-- TODO -->
