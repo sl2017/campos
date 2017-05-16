@@ -593,52 +593,55 @@ class WebtourParticipant(models.Model):
             
             if par.webtourusgroupidno:
                 # Test if usGroup exist in Webtour
-                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
-     # HUsk Check NAME       
+                doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByIDno/?IDno='+str(par.webtourusgroupidno)}).responce.encode('utf-8'))
+                newidno = doc.getElementsByTagName("a:IDno")[0].firstChild.data
+                newname = doc.getElementsByTagName("a:Name")[0].firstChild.data
+        
                 if newidno == "0": #If not try to Create new usGroup
-                    _logger.info("%s webtourupdate Group Could not find usGroup in Webtour: %s %s",str(par.id), par.name, par.webtourusgroupidno)
+                    _logger.info("%s webtourupdate Group Could not find usGroup in Webtour: %s %s",str(par.id), par.registration_id, par.webtourusgroupidno)
                     
-                    newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                    # If we can find by Name
+                    newidno = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(par.registration_id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                    
+                    if newidno == "0":     
+                        newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.registration_id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
                     
                     if newidno <> "0": # usGroup created succesfully
-                        _logger.info("%s webtourupdate Recreate usGroup %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                        _logger.info("%s webtourupdate Recreate usGroup %s %s %s",str(par.registration_id), par.name, par.webtourusgroupidno, newidno)
                         par.registration_id.webtourusgroupidno = newidno
                     else:
                         _logger.info("%s webtourupdate Could not Recreate usGroup %s %s",str(par.id), par.name, par.webtourusgroupidno) 
-                elif newidno <> par.webtourusgroupidno : #STRANGE got other usGroup Id
-                    _logger.info("%s webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
+                elif newname <> par.registration_id : #STRANGE got other usGroup Id
+                    _logger.info("%s webtourupdate usGroup NOT SAME in WEBTOUR %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newname)
+  
+            else: #If notmaybe we can find by Name
+                newidno = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(par.registration_id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+  
+                if newidno <> "0": # Found it
+                    _logger.info("%s webtourupdate usGroup Found by Name %s %s %s",str(par.id), par.name, par.registration_id, newidno)
                     par.registration_id.webtourusgroupidno = newidno
-    
-            else: #If not try to Create new usGroup
-                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
+                else: #try to Create new usGroup
+                    newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name='+str(par.registration_id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data
                 
-                if newidno <> "0": # usGroup created succesfully
-                    _logger.info("%s webtourupdate Created usGroup %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
-                    par.registration_id.webtourusgroupidno = newidno
-                else:
-                    _logger.info("%s webtourupdate Could not Create usGroup %s %s",str(par.id), par.name, par.webtourusgroupidno) 
-             
+                    if newidno <> "0": # usGroup created succesfully
+                        _logger.info("%s webtourupdate Created usGroup %s %s %s",str(par.id), par.name, par.registration_id, newidno)
+                        par.registration_id.webtourusgroupidno = newidno
+                    else:
+                        _logger.info("%s webtourupdate Could not Create usGroup %s %s",str(par.id), par.name, par.webtourusgroupidno) 
+                 
             if par.webtourusgroupidno: # Check usUser
-                
-                #Get all usUserIDno's from webtour and conver to a simple list
-                response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/GetAll/GroupIDno/?GroupIDno='+par.webtourusgroupidno}).responce.encode('utf-8'))                  
-                ususers = response_doc.getElementsByTagName("a:IDno")
-                ususerslist=[]
-                for u in ususers:
-                    ususerslist.append(str(u.firstChild.data))
                 
                 if par.webtourususeridno:
                     if par.webtourususeridno not in ususerslist:
                         extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
-                        req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + par.webtourusgroupidno
-                        newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+                        response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8'))  
                         
-                        if newidno <> "0":
-                            _logger.info("%s webtourupdate Created usUser: %s %s %s",str(par.id), par.name, par.webtourusgroupidno, newidno)
-                            par.webtourususeridno=newidno
-                        else:
-                            _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
-                            par.webtourususeridno=False                    
+                        newidno = response_doc.getElementsByTagName("a:IDno")[0].firstChild.data
+                        newgroup = response_doc.getElementsByTagName("a:NGroupIDno")[0].firstChild.data
+                    
+                        if (par.webtourususeridno <> newidno) or (par.webtourusgroupidno <> newgroup) :
+                            _logger.info("%s %s webtourupdate STRANGE usUserIDno: G:%s %s U:%s %s",str(par.id), par.name, par.webtourusgroupidno, newgroup,par.webtourususeridno,newidno)
+                            par.webtourususeridno = False                 
                 else:
                     extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix    
                     req="usUser/Create/WithGroupIDno/?FirstName=" + str(par.id) + "&LastName=" + str(par.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + par.webtourusgroupidno
@@ -649,8 +652,6 @@ class WebtourParticipant(models.Model):
                         par.webtourususeridno=newidno
                     else:
                         _logger.info("%s webtourupdate Could not Create usUser: %s %s",str(par.id), par.name, par.webtourusgroupidno)
-                        par.webtourususeridno=False                      
-                        
                         
                 if par.webtourususeridno:
                     _logger.info('%s webtourupdate %s %s',par.id,par.tocampusneed_id,par.fromcampusneed_id)

@@ -256,14 +256,35 @@ class WebtourUsNeed(models.Model):
                     problem = 'Start Dest'
                 if not same(need.campos_enddestinationidno, need.webtour_enddestinationidno):
                     problem = addseplist(problem,'End Dest')
-                if not same(need.campos_transfered_startnote,need.webtour_startnote) or not same(need.campos_transfered_endnote,need.webtour_endnote) :
-                    problem = addseplist(problem,'Details')                   
+                    
+                #compose note (for non Danish groups)
+                note = False
+                if need.travelneed_id.deadline and (need.travelneed_id.deadline != 'Select'):
+                    note = 'Deadline: ' + need.travelneed_id.deadline
+                  
+                if need.travelneed_id.travelconnectiondetails:
+                    if note:
+                        note = note + ', Connection: ' + need.travelneed_id.travelconnectiondetails 
+                    else:
+                        note = 'Connection: ' + need.travelneed_id.travelconnectiondetails 
+                
+                if note == False:
+                    note =''
+                elif note: # Limit to 80 Chars
+                    note = note[:80]
+                                      
                 if need.campos_triptype_returnjourney:
+                    if not same('',need.webtour_startnote) or not same(note,need.webtour_endnote):
+                        problem = addseplist(problem,'Details')      
+                    
                     s=need.webtour_enddatetime
                     if s == False: s = ''
                     if not same(need.campos_traveldate,s[:10]):
                         problem = addseplist(problem,'Date')
-                else:
+                else:                    
+                    if not same(note,need.webtour_startnote) or not same('',need.webtour_endnote):
+                        problem = addseplist(problem,'Details')                        
+                    
                     s=need.webtour_startdatetime
                     if s == False: s = ''
                     if not same(need.campos_traveldate,s[:10]):
@@ -527,7 +548,7 @@ class WebtourUsNeed(models.Model):
                         note = 'Connection: ' + self.travelneed_id.travelconnectiondetails 
                 
                 if note: # Limit to 80 Chars
-                    note = note[:79]
+                    note = note[:80]
                                  
                 if self.travelneed_id.campos_TripType_id.returnjourney: #Return jurney
                     startnote = False
@@ -565,11 +586,32 @@ class WebtourUsNeed(models.Model):
                 
             return root    
                 
-        _logger.info("Here we go !!!!!!!!!!!")
+        _logger.info("Here we go !!!!!!!!!!! %s %s %s", self.webtour_useridno, self.webtour_groupidno, self.webtour_needidno)
         transfererror = False
         needtransfered = False
-                                  
-        if  self.webtour_groupidno == False or self.webtour_useridno == False or self.campos_startdestinationidno == False or self.campos_traveldate == False or self.campos_enddestinationidno == False:
+        
+        if (self.webtour_groupidno == False or self.webtour_useridno == False) and self.webtour_needidno : # Let us try to recover the missing info
+            _logger.info("%s get_create_usneed_tron: Try to recover missing ref's N: %s G:%s U:%s", self.id, self.webtour_needidno, self.webtour_groupidno,self.webtour_useridno)
+            root1 = ET.fromstring(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByIDno/?IDno=' + self.webtour_needidno}).responce.encode('utf-8'))             
+            idno = getidno(root1) #Let us check response
+            try:
+                content1 = root1.find("i:Content",ns) #Let's find the contenr Section
+            except:
+                content1 = False
+            
+            group1=get_tag_data_from_node(content1,'a:GroupIDno')
+            user1=get_tag_data_from_node(content1,'a:UserIDno')
+            
+            if group1 and user1:
+                dic = {};
+                if self.webtour_groupidno != group1: dic['webtour_groupidno'] = group1
+                if self.webtour_useridno != user1: dic['webtour_useridno'] = user1
+                _logger.info("%s get_create_usneed_tron: Updated group and user from need  %s G:%s %s U:%s %s", self.id, self.webtour_needidno, self.webtour_groupidno,group1,self.webtour_useridno, user1)
+                self.write(dic)
+                return True
+                
+        if  ((self.webtour_groupidno == False) or (self.webtour_useridno == False)
+              or (((self.campos_startdestinationidno == False) or (self.campos_traveldate == False) or (self.campos_enddestinationidno == False)) and (self.campos_demandneeded == True))):
             _logger.info("%s get_create_usneed_tron: Info missing %s %s %s %s %s", self.id, self.webtour_useridno,self.webtour_groupidno,self.campos_traveldate,self.campos_startdestinationidno,self.campos_enddestinationidno)
             transfererror = 'Info missing'
             if self.webtour_transfererror != transfererror : self.webtour_transfererror = transfererror
