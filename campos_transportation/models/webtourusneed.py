@@ -249,8 +249,8 @@ class WebtourUsNeed(models.Model):
                 need.calc_travelneed_id()
 
             problem = False
-            if need.campos_demandneeded == (need.webtour_deleted or same(need.webtourstatus,'5') or same(need.webtourstatus,'6')):
-                problem = 'Demand'
+            if need.campos_demandneeded == (need.webtour_deleted or same(need.webtourstatus,'5') or same(need.webtourstatus,'6') or (need.webtour_needidno == False)):
+                    problem = 'Demand'
             elif need.campos_demandneeded:
                 if not same(need.campos_startdestinationidno,need.webtour_startdestinationidno):
                     problem = 'Start Dest'
@@ -589,6 +589,7 @@ class WebtourUsNeed(models.Model):
         _logger.info("Here we go !!!!!!!!!!! %s %s %s", self.webtour_useridno, self.webtour_groupidno, self.webtour_needidno)
         transfererror = False
         needtransfered = False
+        dic = {};
         
         if (self.webtour_groupidno == False or self.webtour_useridno == False) and self.webtour_needidno : # Let us try to recover the missing info
             _logger.info("%s get_create_usneed_tron: Try to recover missing ref's N: %s G:%s U:%s", self.id, self.webtour_needidno, self.webtour_groupidno,self.webtour_useridno)
@@ -602,13 +603,50 @@ class WebtourUsNeed(models.Model):
             group1=get_tag_data_from_node(content1,'a:GroupIDno')
             user1=get_tag_data_from_node(content1,'a:UserIDno')
             
-            if group1 and user1:
-                dic = {};
+            if group1 and user1:              
                 if self.webtour_groupidno != group1: dic['webtour_groupidno'] = group1
                 if self.webtour_useridno != user1: dic['webtour_useridno'] = user1
                 _logger.info("%s get_create_usneed_tron: Updated group and user from need  %s G:%s %s U:%s %s", self.id, self.webtour_needidno, self.webtour_groupidno,group1,self.webtour_useridno, user1)
-                self.write(dic)
-                return True
+        
+        newgroup = self.webtour_groupidno
+        if (newgroup == False) or (newgroup == "0"): 
+            newgroup = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/GetByName/?Name='+str(self.registration_id.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data 
+            
+            if (newgroup <> "0") and newgroup:
+                dic['webtour_groupidno'] = newgroup
+                _logger.info("%s %s get_create_usneed_tron: Recovered usGroup by name:%s G:%s", self.id, self.webtour_needidno, self.registration_id.id,newgroup)
+            else: #Try to Create group
+                newgroup = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usGroup/Create/?Name=' + str(self.registration_id.id)}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data 
+           
+                if (newgroup <> "0") and newgroup:
+                    _logger.info("%s %s get_create_usneed_tron: Created usGroup by name:%s G:%s", self.id, self.webtour_needidno,self.registration_id.id,newgroup)
+                    self.registration_id.webtourusgroupidno = newgroup
+                    dic['webtour_groupidno'] = newgroup
+                else:
+                    _logger.info("%s %s get_create_usneed_tron: Coud not created usGroup by name:%s ", self.id, self.webtour_needidno,self.registration_id.id)
+    
+        if (newgroup <> "0") and newgroup and (self.webtour_useridno == False):
+            webtoutexternalid_prefix = self.registration_id.event_id.webtourconfig_id.webtoutexternalid_prefix
+            extid = webtoutexternalid_prefix+str(self.participant_id.id)+self.participant_id.webtour_externalid_suffix
+        
+            newidno = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data 
+            if (newidno != "0") and newidno:
+                _logger.info("%s %s get_create_usneed_tron: Recoved usUser P:%s G:%s E:%s U:%s", self.id, self.webtour_needidno,self.participant_id.id,newgroup,extid,newidno) 
+                dic['webtour_useridno'] = newidno 
+            else:    
+                req="usUser/Create/WithGroupIDno/?FirstName=" + str(self.participant_id.id) + "&LastName=" + str(self.registration_id.id) + "&ExternalID=" + extid + "&GroupIDno=" + newgroup
+                newidno=minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':req}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data            
+                  
+                if (newidno != "0") and newidno:
+                    _logger.info("%s %s get_create_usneed_tron: Created usUser P:%s G:%s E:%s U:%s", self.id, self.webtour_needidno,self.participant_id.id,newgroup,extid,newidno) 
+                    dic['webtour_useridno'] = newidno 
+                    
+                else:
+                    _logger.info("%s %s get_create_usneed_tron: Coud not created usUser P:%s G:%s E:%s", self.id, self.webtour_needidno,self.participant_id.id,newgroup,extid)  
+                        
+        if len(dic) > 0:    
+            self.write(dic)
+            return True                
                 
         if  ((self.webtour_groupidno == False) or (self.webtour_useridno == False)
               or (((self.campos_startdestinationidno == False) or (self.campos_traveldate == False) or (self.campos_enddestinationidno == False)) and (self.campos_demandneeded == True))):
