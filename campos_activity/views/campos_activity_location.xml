@@ -17,6 +17,9 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="code"/>
+                        <field name="latitude"/>
+                        <fidl name="longitude"/>
                     </group>
                 </sheet>
                 <!--  <div class="oe_chatter"></div>  -->
@@ -29,7 +32,8 @@
         <field name="model">campos.activity.location</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                <field name="name"/>
+                <field name="code"/>
             </search>
         </field>
     </record>
@@ -40,6 +44,7 @@
         <field name="arch" type="xml">
             <tree>
                 <!-- TODO -->
+                <field name="code"/>
                 <field name="name"/>
             </tree>
         </field>
