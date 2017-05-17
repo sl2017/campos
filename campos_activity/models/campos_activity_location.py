@@ -12,6 +12,6 @@ class CamposActivityLocation(models.Model):
 
     name = fields.Char(translate=True)
     code = fields.Char('Code', size=20)
-    latitude = fields.Float('Geo Latitude', digits=(16, 5)),
-    longitude =fields.Float('Geo Longitude', digits=(16, 5)),
+    latitude = fields.Float('Geo Latitude', digits=(16, 5))
+    longitude =fields.Float('Geo Longitude', digits=(16, 5))
 
