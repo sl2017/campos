@@ -6,3 +6,5 @@ from . import campos_activity_tag
 from . import campos_activity_location
 from . import campos_activity_pitag
 from . import campos_event_participant
+from . import campos_activity_type
+from . import campos_activity_audience

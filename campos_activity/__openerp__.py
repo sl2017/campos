@@ -15,6 +15,10 @@
                 'campos_final_registration',
     ],
     'data': [
+        'security/campos_activity_audience.xml',
+        'views/campos_activity_audience.xml',
+        'security/campos_activity_type.xml',
+        'views/campos_activity_type.xml',
         'views/campos_event_participant.xml',
         'security/campos_activity_activity.xml',
         'views/campos_activity_activity.xml',
