@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-05-18 13:41+0000\n"
+"PO-Revision-Date: 2017-05-18 13:41+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,6 +16,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_activity
+#: view:campos.activity.instanse:campos_activity.campos_activity_instanse_calendar_view
+#: view:campos.activity.period:campos_activity.campos_activity_period_calendar_view
+#: view:campos.event.participant:campos_activity.campos_event_participant_form_view
 #: model:ir.ui.menu,name:campos_activity.menu_campos_activity
 #: model:ir.ui.menu,name:campos_activity.submenu_campos_activity
 msgid "Activities"
@@ -23,6 +26,8 @@ msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.instanse,activity_id:0
+#: field:campos.activity.ticket,act_ins_id:0
+#: field:campos.activity.ticket,activity_id:0
 #: model:ir.ui.menu,name:campos_activity.campos_activity_activity_menu
 msgid "Activity"
 msgstr ""
@@ -43,6 +48,17 @@ msgid "Activity Mgr"
 msgstr ""
 
 #. module: campos_activity
+#: view:campos.activity.activity:campos_activity.campos_activity_activity_form_view
+msgid "Activity Name"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_ticket_act_window
+#: model:ir.ui.menu,name:campos_activity.campos_activity_ticket_menu
+msgid "Activity Ticket"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.activity,age_from:0
 msgid "Age from"
 msgstr ""
@@ -53,13 +69,18 @@ msgid "Age to"
 msgstr ""
 
 #. module: campos_activity
-#: selection:campos.activity.activity,audience:0
-msgid "All"
+#: selection:campos.activity.instanse,state:0
+msgid "At risk of cancellation due to weather conditions"
 msgstr ""
 
 #. module: campos_activity
-#: field:campos.activity.activity,audience:0
+#: field:campos.activity.activity,audience_ids:0
 msgid "Audience"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "Booked"
 msgstr ""
 
 #. module: campos_activity
@@ -80,6 +101,13 @@ msgstr ""
 #. module: campos_activity
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_activity_act_window
 msgid "Campos Activity Activity"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_audience_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_audience
+#: model:ir.ui.menu,name:campos_activity.campos_activity_audience_menu
+msgid "Campos Activity Audience"
 msgstr ""
 
 #. module: campos_activity
@@ -114,7 +142,30 @@ msgid "Campos Activity Tag"
 msgstr ""
 
 #. module: campos_activity
-#: field:campos.activity.activity,code:0
+#: model:ir.model,name:campos_activity.model_campos_activity_ticket
+msgid "Campos Activity Ticket"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_type_act_window
+#: model:ir.model,name:campos_activity.model_campos_activity_type
+#: model:ir.ui.menu,name:campos_activity.campos_activity_type_menu
+msgid "Campos Activity Type"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,state:0
+#: selection:campos.activity.instanse,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,state:0
+msgid "Cancelled due to weather"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,code:0 field:campos.activity.location,code:0
 msgid "Code"
 msgstr ""
 
@@ -129,22 +180,33 @@ msgid "Configuration"
 msgstr ""
 
 #. module: campos_activity
+#: selection:campos.activity.activity,state:0
+msgid "Confirmed"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.activity,create_uid:0
+#: field:campos.activity.audience,create_uid:0
 #: field:campos.activity.instanse,create_uid:0
 #: field:campos.activity.location,create_uid:0
 #: field:campos.activity.period,create_uid:0
 #: field:campos.activity.pitag,create_uid:0
 #: field:campos.activity.tag,create_uid:0
+#: field:campos.activity.ticket,create_uid:0
+#: field:campos.activity.type,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,create_date:0
+#: field:campos.activity.audience,create_date:0
 #: field:campos.activity.instanse,create_date:0
 #: field:campos.activity.location,create_date:0
 #: field:campos.activity.period,create_date:0
 #: field:campos.activity.pitag,create_date:0
 #: field:campos.activity.tag,create_date:0
+#: field:campos.activity.ticket,create_date:0
+#: field:campos.activity.type,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -156,16 +218,20 @@ msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,desc:0
+#: field:campos.activity.ticket,act_desc:0
 msgid "Description"
 msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,display_name:0
+#: field:campos.activity.audience,display_name:0
 #: field:campos.activity.instanse,display_name:0
 #: field:campos.activity.location,display_name:0
 #: field:campos.activity.period,display_name:0
 #: field:campos.activity.pitag,display_name:0
 #: field:campos.activity.tag,display_name:0
+#: field:campos.activity.ticket,display_name:0
+#: field:campos.activity.type,display_name:0
 msgid "Display Name"
 msgstr ""
 
@@ -180,14 +246,41 @@ msgid "Drop In & Pre Booking"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.activity,duration:0
+msgid "Duration"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,actins_date_end:0
 #: field:campos.activity.period,date_end:0
+#: field:campos.activity.ticket,actins_date_end:0
 msgid "End Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,equipment:0
+msgid "Equipment"
+msgstr ""
+
+#. module: campos_activity
+#: model:ir.model,name:campos_activity.model_campos_event_participant
+msgid "Event Participant"
 msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,message_follower_ids:0
 #: field:campos.activity.instanse,message_follower_ids:0
 msgid "Followers"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.location,latitude:0
+msgid "Geo Latitude"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.location,longitude:0
+msgid "Geo Longitude"
 msgstr ""
 
 #. module: campos_activity
@@ -204,15 +297,17 @@ msgid ""
 msgstr ""
 
 #. module: campos_activity
-#: field:campos.activity.activity,id:0 field:campos.activity.instanse,id:0
-#: field:campos.activity.location,id:0 field:campos.activity.period,id:0
-#: field:campos.activity.pitag,id:0 field:campos.activity.tag,id:0
+#: field:campos.activity.activity,id:0 field:campos.activity.audience,id:0
+#: field:campos.activity.instanse,id:0 field:campos.activity.location,id:0
+#: field:campos.activity.period,id:0 field:campos.activity.pitag,id:0
+#: field:campos.activity.tag,id:0 field:campos.activity.ticket,id:0
+#: field:campos.activity.type,id:0
 msgid "ID"
 msgstr ""
 
 #. module: campos_activity
-#: selection:campos.activity.activity,audience:0
-msgid "ITS"
+#: selection:campos.activity.activity,state:0
+msgid "Idea"
 msgstr ""
 
 #. module: campos_activity
@@ -222,8 +317,23 @@ msgid "If checked new messages require your attention."
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.activity,image:0
+msgid "Image"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_filename:0
+msgid "Image Filename"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.activity,act_ins_ids:0
 msgid "Instanses"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,comment:0
+msgid "Internal Note"
 msgstr ""
 
 #. module: campos_activity
@@ -240,32 +350,46 @@ msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,__last_update:0
+#: field:campos.activity.audience,__last_update:0
 #: field:campos.activity.instanse,__last_update:0
 #: field:campos.activity.location,__last_update:0
 #: field:campos.activity.period,__last_update:0
 #: field:campos.activity.pitag,__last_update:0
 #: field:campos.activity.tag,__last_update:0
+#: field:campos.activity.ticket,__last_update:0
+#: field:campos.activity.type,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,write_uid:0
+#: field:campos.activity.audience,write_uid:0
 #: field:campos.activity.instanse,write_uid:0
 #: field:campos.activity.location,write_uid:0
 #: field:campos.activity.period,write_uid:0
 #: field:campos.activity.pitag,write_uid:0
 #: field:campos.activity.tag,write_uid:0
+#: field:campos.activity.ticket,write_uid:0
+#: field:campos.activity.type,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.activity,write_date:0
+#: field:campos.activity.audience,write_date:0
 #: field:campos.activity.instanse,write_date:0
 #: field:campos.activity.location,write_date:0
 #: field:campos.activity.period,write_date:0
 #: field:campos.activity.pitag,write_date:0
 #: field:campos.activity.tag,write_date:0
+#: field:campos.activity.ticket,write_date:0
+#: field:campos.activity.type,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,leader_req:0
+msgid "Leader req"
 msgstr ""
 
 #. module: campos_activity
@@ -276,6 +400,19 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.instanse,seats_max:0
 msgid "Maximum Avalaible Seats"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_medium:0
+msgid "Medium-sized image"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,image_medium:0
+msgid ""
+"Medium-sized image of this activity. It is automatically resized as a "
+"128x128px image, with aspect ratio preserved. Use this field in form views "
+"or some kanban views."
 msgstr ""
 
 #. module: campos_activity
@@ -291,10 +428,21 @@ msgid "Messages and communication history"
 msgstr ""
 
 #. module: campos_activity
-#: field:campos.activity.activity,name:0 field:campos.activity.instanse,name:0
-#: field:campos.activity.location,name:0 field:campos.activity.period,name:0
-#: field:campos.activity.pitag,name:0 field:campos.activity.tag,name:0
+#: field:campos.activity.activity,name:0 field:campos.activity.audience,name:0
+#: field:campos.activity.instanse,name:0 field:campos.activity.location,name:0
+#: field:campos.activity.period,name:0 field:campos.activity.pitag,name:0
+#: field:campos.activity.tag,name:0 field:campos.activity.type,name:0
 msgid "Name"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,state:0
+msgid "Open"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,name:0
+msgid "Own Note"
 msgstr ""
 
 #. module: campos_activity
@@ -309,7 +457,7 @@ msgid "PI Track"
 msgstr ""
 
 #. module: campos_activity
-#: selection:campos.activity.activity,audience:0
+#: field:campos.activity.ticket,par_ids:0
 msgid "Participants"
 msgstr ""
 
@@ -319,8 +467,51 @@ msgid "Period"
 msgstr ""
 
 #. module: campos_activity
+#: selection:campos.activity.activity,state:0
+msgid "Planning"
+msgstr ""
+
+#. module: campos_activity
 #: selection:campos.activity.instanse,booking:0
 msgid "Pre Camp Booking Required"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "Reserved"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,reserved_time:0
+msgid "Reserved Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,reg_id:0
+msgid "Scout Group"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,seats:0
+msgid "Seats"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,image_small:0
+msgid ""
+"Small sized image of this activity. It is automatically resized as a 64x64px"
+" image, with aspect ratio preserved. Use this field in form views or some "
+"kanban views."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_small:0
+msgid "Small-sized image"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,special_req:0
+msgid "Special Req."
 msgstr ""
 
 #. module: campos_activity
@@ -331,7 +522,14 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.instanse,actins_date_begin:0
 #: field:campos.activity.period,date_begin:0
+#: field:campos.activity.ticket,actins_date_begin:0
 msgid "Start Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,state:0
+#: field:campos.activity.instanse,state:0
+msgid "State"
 msgstr ""
 
 #. module: campos_activity
@@ -346,8 +544,33 @@ msgid "Tags"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.activity,teaser:0
+msgid "Teaser"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,state:0
+msgid "Ticket State"
+msgstr ""
+
+#. module: campos_activity
+#: view:campos.activity.ticket:campos_activity.campos_activity_ticket_calendar_view
+msgid "Tickets"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "TimeOut"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.activity,lang_ok:0
 msgid "Translation status"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,activity_type_id:0
+msgid "Type"
 msgstr ""
 
 #. module: campos_activity
@@ -366,4 +589,11 @@ msgstr ""
 #: help:campos.activity.activity,website_message_ids:0
 #: help:campos.activity.instanse,website_message_ids:0
 msgid "Website communication history"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.ticket,name:0
+msgid ""
+"You can add a Note for own use. It will be shown on activity list etc. I "
+"will NOT be read/answered by the Staff."
 msgstr ""
