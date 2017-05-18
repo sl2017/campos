@@ -246,5 +246,6 @@ class CamposEventParticipant(models.Model):
                          'default_transport_to_camp': self.transport_to_camp,
                          'default_transport_from_camp': self.transport_from_camp,
                          'defualt_camp_day_ids': days_ids,
+                         'default_parent_jobber_id': self.id,
                          }
             }
