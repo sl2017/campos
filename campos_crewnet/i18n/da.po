@@ -21,7 +21,7 @@ msgstr ""
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
 msgid "(Only in Danish)"
-msgstr ""
+msgstr " "
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
