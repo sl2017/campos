@@ -19,6 +19,7 @@
                         <field name="name"/>
                         <field name="group_sel"/>
                         <field name="camparea_sel"/>
+                        <field name="accomgroup_sel"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
