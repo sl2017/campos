@@ -249,3 +249,23 @@ class CamposEventParticipant(models.Model):
                          'default_parent_jobber_id': self.id,
                          }
             }
+        
+        
+    @api.multi
+    def action_add_accom_group(self):
+        self.ensure_one()
+        _logger.info("ADD ACCOM")
+        
+        return {
+            'name': _('New Staff Accomodation Group'),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_jobber_final.campos_jobber_accom_group_form_view').id,
+            'res_model': 'campos.jobber.accom.group',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            #'target': 'new',
+            'context' : {
+                         'default_owner_id': self.id, 
+                         }
+            }    
