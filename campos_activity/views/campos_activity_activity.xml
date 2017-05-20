@@ -14,7 +14,6 @@
                     <!-- TODO -->
                 </header>
                 <sheet>
-                    <!-- TODO -->
                     <group>
                         <field name="name"/>
                         <field name="code"/>
@@ -40,7 +39,8 @@
         <field name="model">campos.activity.activity</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                <field name="code"/>
+                <field name="name"/>
             </search>
         </field>
     </record>
@@ -50,7 +50,7 @@
         <field name="model">campos.activity.activity</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
+                <field name="code"/>
                 <field name="name"/>
             </tree>
         </field>
