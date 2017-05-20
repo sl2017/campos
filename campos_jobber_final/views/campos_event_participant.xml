@@ -80,6 +80,7 @@
 									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_code" attrs="{'readonly': [('accomgroup_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_group_id" readonly="1" />
+									<button name="action_open_accom_group" type="object" icon="gtk-jump-to" />
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>

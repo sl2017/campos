@@ -84,7 +84,7 @@ class CamposJobberAccomodation(models.Model):
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
         if 'accom_code' in vals and vals['accom_code']:
-            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', self.accom_code)])
+            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', vals['accom_code'])])
             if accom_id:
                 vals['accom_group_id'] = accom_id.id
                 vals['state'] = 'draft'
@@ -96,7 +96,7 @@ class CamposJobberAccomodation(models.Model):
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
         if 'accom_code' in vals and vals['accom_code']:
-            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', self.accom_code)])
+            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', vals['accom_code'])])
             if accom_id:
                 vals['accom_group_id'] = accom_id.id
                 vals['state'] = 'draft'
@@ -119,5 +119,23 @@ class CamposJobberAccomodation(models.Model):
                 self.state = 'draft'
                 
     
-    
+    @api.multi
+    def action_open_accom_group(self):
+        self.ensure_one()
+
+        if self.accom_group_id:
+            return {
+                'name': self.accom_group_id.name,
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': self.env.ref('campos_jobber_final.campos_jobber_accom_group_form_view').id,
+                'res_model': 'campos.jobber.accom.group',
+                'res_id': self.accom_group_id.id,
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                #'target': 'new',
+                'context' : {
+                             'default_owner_id': self.id, 
+                             }
+                }    
             
