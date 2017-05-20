@@ -13,4 +13,11 @@ class CamposJobberAccomGroup(models.Model):
     name = fields.Char()
     code = fields.Char()
     owner_id = fields.Many2one('campos.event.participant', 'Owner')
-    accom_participants_ids = fields.One2many('campos.jobber.accomodation', 'accom_group_id', string='Participants')
+    accom_participant_ids = fields.One2many('campos.jobber.accomodation', 'accom_group_id', string='Participants')
+    number_participants = fields.Integer('# participants', compute='_compute_number_participants')
+
+    @api.depends('accom_participant_ids')
+    @api.multi
+    def _compute_number_participants(self):
+        for cjag in self:
+            cjag.number_participants = len(cjag.accom_participant_ids)

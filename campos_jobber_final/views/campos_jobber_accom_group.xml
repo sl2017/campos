@@ -18,6 +18,12 @@
                     <group>
                         <field name="name"/>
                         <field name="code"/>
+                        <field name="accom_participant_ids" readonly="1" nolabel="1" colspan="2">
+                        	<tree>
+                        		<field name="participant_id"/>
+                        	</tree>
+                        </field>
+                        <field name="number_participants"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
