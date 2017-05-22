@@ -117,7 +117,14 @@ class CamposJobberAccomodation(models.Model):
             if accom_id:
                 self.accom_group_id = accom_id
                 self.state = 'draft'
-                
+
+    @api.onchange('accom_type_id')
+    def onchange_accom_type_id(self):
+        if self.accom_type_id:
+            if not self.accom_type_id.group_sel:
+                self.registration_id = False
+            if not self.accomgroup_sel.group_sel:
+                self.accom_group_id = False    
     
     @api.multi
     def action_open_accom_group(self):
