@@ -45,6 +45,8 @@
                          <field name="seats_max"/>
                          <field name="seats_hard"/>
                          <field name="seats_available"/>
+                         <field name="booking_date_begin"/>
+                         <field name="booking_date_end"/>
                          <!-- 
                          <field name="seats_used"/>
                          <field name="seats_reserved"/>
