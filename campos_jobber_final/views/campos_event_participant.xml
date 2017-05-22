@@ -397,6 +397,7 @@
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
         <field name="mode">primary</field>
+        <field name="priority">17</field>
         <field name="arch" type="xml">
         	<button name="check_all_maincamp_days" position="replace">
         		<button name="check_all_precamp_days" 
