@@ -26,7 +26,6 @@
                             </div>
                     </div>    
                     <group col="4" colspan="2">
-                        <field name="name"/>
                         <field name="code"/>
                         <field name="activity_type_id"/>
                        </group>

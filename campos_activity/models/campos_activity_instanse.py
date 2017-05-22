@@ -48,22 +48,18 @@ class CamposActivityInstanse(models.Model):
     @api.multi
     def _compute_seats(self):
         res = {}
-        for a in self.ids:
-            res[a.id] = {'open': 0, 'done': 0}
-        tables, where_clause, where_params = self.env['campos.activity.ticket']._query_get()
-        where_params = [tuple(self.ids)] + where_params
-        if where_clause:
-            where_clause = 'AND ' + where_clause
+        for aid in self.ids:
+            res[aid] = {'open': 0, 'done': 0}
+        where_params = [tuple(self.ids)]
         self._cr.execute("""SELECT act_ins_id, state, SUM(seats)
                       FROM campos_activity_ticket
                       WHERE act_ins_id IN %s
-                      """ + where_clause + """
-                      GROUP BY act_ins_id, state,
+                      GROUP BY act_ins_id, state
                       """, where_params)
         for aid, state, val in self._cr.fetchall():
             res[aid][state] = val
         
-        for a in self.ids:    
+        for a in self:    
             a.seats_reserved = res[a.id]['open']
             a.seats_used = res[a.id]['done']
             a.seats_available = a.seats_max - \
