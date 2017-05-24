@@ -29,7 +29,7 @@ class CamposActivityInstanse(models.Model):
     actins_date_end = fields.Datetime(related='period_id.date_end', string='End Date/Time', store=True)
     location_id = fields.Many2one('campos.activity.location', 'Location')
     booking = fields.Selection([('dropin', 'Drop In'),
-                                ('dropin_prebook', 'Drop In & Pre Booking'),
+                                # ('dropin_prebook', 'Drop In & Pre Booking'),
                                 ('precamp', 'Pre Camp Booking Required'),
                                 ('prebook', 'Booking required')], 'Booking')
     booking_date_begin = fields.Datetime('Booking opens')
