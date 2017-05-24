@@ -4,7 +4,7 @@
 
 <openerp>
 <data>
-
+<!-- TODO
     <record model="ir.ui.view" id="campos_event_participant_form_view">
         <field name="name">campos.event.participant.form (in campos_activity)</field>
         <field name="model">campos.event.participant</field>
@@ -16,6 +16,7 @@
             </notebook>
         </field>
     </record>
+-->
 <!-- TODO 
     <record model="ir.ui.view" id="campos_event_participant_search_view">
         <field name="name">campos.event.participant.search (in campos_activity)</field>
