@@ -19,7 +19,7 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="latitude"/>
-                        <fidl name="longitude"/>
+                        <field name="longitude"/>
                     </group>
                 </sheet>
                 <!--  <div class="oe_chatter"></div>  -->

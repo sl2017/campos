@@ -42,6 +42,7 @@
                         <field name="period_id"/>
 						<field name="name"/>
                                                  
+                         <field name="booking"/>
                          <field name="seats_max"/>
                          <field name="seats_hard"/>
                          <field name="seats_available"/>
