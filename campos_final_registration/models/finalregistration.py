@@ -151,15 +151,15 @@ class FinalRegistrationParticipant(models.Model):
     def onchange_name(self):
         if not self.camp_day_ids:
             days_ids = []
-            if self.participant:
-                for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id),('event_period' ,'=','maincamp')]):
+            if self.staff or self.jobber_child:
+                for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
                     days_ids.append((0,0, {'participant_id': self.id,
                                            'day_id': day.id,
                                            'will_participate': True if day.event_period == 'maincamp' else False,
                                            'the_date': day.event_date,
                                            }))
-            if self.staff:
-                for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id),('event_period' ,'!=','maincamp')]):
+            elif self.participant:
+                for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id),('event_period' ,'=','maincamp')]):
                     days_ids.append((0,0, {'participant_id': self.id,
                                            'day_id': day.id,
                                            'will_participate': True if day.event_period == 'maincamp' else False,
@@ -177,7 +177,7 @@ class FinalRegistrationParticipant(models.Model):
                                                                           'day_id': day.id,
                                                                           'will_participate' : False
                                                                           })
-            if par.staff:
+            if par.staff or par.jobber_child:
                 for day in par.registration_id.event_id.event_day_ids:
                     new = par.env['campos.event.participant.day'].create({'participant_id': par.id,
                                                                           'day_id': day.id,
