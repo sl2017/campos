@@ -15,5 +15,4 @@ class CamposCommittee(models.Model):
         select=True,
         ondelete='set null')
     canteen_id = fields.Many2one('campos.canteen', 'Canteen')
-    
-    
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')

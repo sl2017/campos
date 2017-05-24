@@ -15,6 +15,7 @@ class CamposJobberAccomGroup(models.Model):
     owner_id = fields.Many2one('campos.event.participant', 'Owner')
     accom_participant_ids = fields.One2many('campos.jobber.accomodation', 'accom_group_id', string='Participants')
     number_participants = fields.Integer('# participants', compute='_compute_number_participants')
+    subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
 
     @api.depends('accom_participant_ids')
     @api.multi

@@ -18,6 +18,7 @@
                     <group>
                         <field name="name"/>
                         <field name="code"/>
+                        <field name="subcamp_id"/>
                         <field name="accom_participant_ids" readonly="1" nolabel="1" colspan="2">
                         	<tree>
                         		<field name="participant_id"/>
@@ -36,7 +37,9 @@
         <field name="model">campos.jobber.accom.group</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                <field name="name"/>
+                <field name="code"/>
+                <field name="subcamp_id"/>
             </search>
         </field>
     </record>
@@ -46,8 +49,8 @@
         <field name="model">campos.jobber.accom.group</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
                 <field name="name"/>
+                <field name="subcamp_id"/>
             </tree>
         </field>
     </record>

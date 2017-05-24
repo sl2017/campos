@@ -13,6 +13,7 @@
             <field name="par_contact_id" position="after">
             	<separator string="Jobber defaults" colspan="2"/>
             	<newline/>
+            	<field name="subcamp_id"/>
             	<field name="camp_area_id"/>
             	<field name="canteen_id"/>
             </field>
