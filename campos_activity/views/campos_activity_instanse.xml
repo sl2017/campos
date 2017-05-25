@@ -41,6 +41,7 @@
                     <group>
                         <field name="period_id"/>
 						<field name="name"/>
+						<field name="location_id"/>
                                                  
                          <field name="booking"/>
                          <field name="seats_max"/>
