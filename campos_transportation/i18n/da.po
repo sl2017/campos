@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017
+# christian Eggert Jørgensen <christian@eggert.dk>, 2017
 # Jesper Darum <jda@sl2017.dk>, 2017
 msgid ""
 msgstr ""
@@ -681,7 +682,7 @@ msgstr ""
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour_admin
 msgid "Group"
-msgstr "Rejsegruppe"
+msgstr "Spejdergruppe"
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0

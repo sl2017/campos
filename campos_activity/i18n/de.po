@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-18 13:41+0000\n"
-"PO-Revision-Date: 2017-05-18 13:41+0000\n"
+"POT-Creation-Date: 2017-05-26 15:12+0000\n"
+"PO-Revision-Date: 2017-05-26 15:12+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,13 +18,13 @@ msgstr ""
 #. module: campos_activity
 #: view:campos.activity.instanse:campos_activity.campos_activity_instanse_calendar_view
 #: view:campos.activity.period:campos_activity.campos_activity_period_calendar_view
-#: view:campos.event.participant:campos_activity.campos_event_participant_form_view
 #: model:ir.ui.menu,name:campos_activity.menu_campos_activity
 #: model:ir.ui.menu,name:campos_activity.submenu_campos_activity
 msgid "Activities"
 msgstr ""
 
 #. module: campos_activity
+#: view:campos.activity.instanse:campos_activity.campos_activity_instanse_form_view
 #: field:campos.activity.instanse,activity_id:0
 #: field:campos.activity.ticket,act_ins_id:0
 #: field:campos.activity.ticket,activity_id:0
@@ -54,6 +54,7 @@ msgstr ""
 
 #. module: campos_activity
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_ticket_act_window
+#: model:ir.actions.act_window,name:campos_activity.campos_activity_ticket_this_inst_window
 #: model:ir.ui.menu,name:campos_activity.campos_activity_ticket_menu
 msgid "Activity Ticket"
 msgstr ""
@@ -79,6 +80,16 @@ msgid "Audience"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.instanse,seats_available:0
+msgid "Available Seats"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking_date_end:0
+msgid "Boking closes"
+msgstr ""
+
+#. module: campos_activity
 #: selection:campos.activity.ticket,state:0
 msgid "Booked"
 msgstr ""
@@ -86,6 +97,11 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.instanse,booking:0
 msgid "Booking"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking_date_begin:0
+msgid "Booking opens"
 msgstr ""
 
 #. module: campos_activity
@@ -241,11 +257,6 @@ msgid "Drop In"
 msgstr ""
 
 #. module: campos_activity
-#: selection:campos.activity.instanse,booking:0
-msgid "Drop In & Pre Booking"
-msgstr ""
-
-#. module: campos_activity
 #: field:campos.activity.activity,duration:0
 msgid "Duration"
 msgstr ""
@@ -281,6 +292,11 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.location,longitude:0
 msgid "Geo Longitude"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,has_image:0
+msgid "Ha Image"
 msgstr ""
 
 #. module: campos_activity
@@ -436,6 +452,11 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.instanse,seats_used:0
+msgid "Number of Participations"
+msgstr ""
+
+#. module: campos_activity
 #: selection:campos.activity.instanse,state:0
 msgid "Open"
 msgstr ""
@@ -484,6 +505,11 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.ticket,reserved_time:0
 msgid "Reserved Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_reserved:0
+msgid "Reserved Seats"
 msgstr ""
 
 #. module: campos_activity
@@ -554,6 +580,8 @@ msgid "Ticket State"
 msgstr ""
 
 #. module: campos_activity
+#: view:campos.activity.instanse:campos_activity.campos_activity_instanse_form_view
+#: field:campos.activity.instanse,ticket_ids:0
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_calendar_view
 msgid "Tickets"
 msgstr ""
