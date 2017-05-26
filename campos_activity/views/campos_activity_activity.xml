@@ -11,26 +11,46 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="idea,planning,confirmed,cancelled" statusbar_colors='{"confirmed":"blue","cancelled":"red"}'/>
                 </header>
                 <sheet>
-                    <!-- TODO -->
-                    <group>
-                        <field name="name"/>
+                    <field name="id" invisible="True"/>
+                    <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
+                    </div>
+                    <div class="oe_left" style="width: 500px;" colspan="2">
+                    		<field name="image_filename" invisible="1"/>
+                            <field name="image_medium" widget="image" filename="image_filename" class="oe_avatar oe_left"/>
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="name" string="Activity Name"/>
+                                <h1><field name="name" class="oe_inline"/></h1>
+                            </div>
+                    </div>    
+                    <group col="4" colspan="2">
                         <field name="code"/>
+                        <field name="activity_type_id"/>
+                       </group>
+                       <group col="2" colspan="2">
                         <field name="committee_id"/>
+                        <field name="teaser"/>
                         <field name="desc"/>
                         <field name="lang_ok" widget="many2many_checkboxes"/>
+                        <field name="equipment"/>
+    					<field name="leader_req"/>
+    					<field name="special_req"/>
+    					<field name="duration"/>
                         <field name="tag_ids" widget="many2many_tags"/>
                         <field name="pitag_ids" widget="many2many_tags"/>
                         <field name="age_from"/>
                         <field name="age_to"/>
-                        <field name="audience"/>
-                        <field name="id" invisible="1"/>
+                        <field name="audience_ids" widget="many2many_checkboxes"/>
                         <field name="act_ins_ids" context="{'default_activity_id': id}"/>
                         </group>
                 </sheet>
-                <div class="oe_chatter"></div>
+                <div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
             </form>
         </field>
     </record>
@@ -40,7 +60,8 @@
         <field name="model">campos.activity.activity</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                <field name="code"/>
+                <field name="name"/>
             </search>
         </field>
     </record>
@@ -50,7 +71,7 @@
         <field name="model">campos.activity.activity</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
+                <field name="code"/>
                 <field name="name"/>
             </tree>
         </field>
