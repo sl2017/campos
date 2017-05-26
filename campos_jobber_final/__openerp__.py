@@ -25,6 +25,7 @@
         'security/campos_jobber_accomodation.xml',
         #'views/campos_jobber_accomodation.xml',
         'views/campos_event_participant.xml',
+        'security/campos_event_participant.xml',
     ],
     'demo': [
     ],

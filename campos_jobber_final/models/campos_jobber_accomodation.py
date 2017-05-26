@@ -123,7 +123,7 @@ class CamposJobberAccomodation(models.Model):
         if self.accom_type_id:
             if not self.accom_type_id.group_sel:
                 self.registration_id = False
-            if not self.accomgroup_sel.group_sel:
+            if not self.accom_type_id.accomgroup_sel:
                 self.accom_group_id = False    
     
     @api.multi
