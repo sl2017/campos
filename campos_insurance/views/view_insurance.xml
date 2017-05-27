@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_form_insurance_create" model="ir.ui.view">
+            <field name="name">Create new insurance</field>
+            <field name="model">campos.insurance</field>
+            <field name="arch" type="xml">
+                <form>
+					<header>
+						<button name="btn_insurance_order" type="object" string="Opret ansogning" attrs="{'invisible':[('insurance_state','==','state_ordered')]}" class="oe_highlight" />
+						<button name="btn_insurance_processing" type="object" string="Behandles" attrs="{'invisible':['|',('insurance_state','==','state_processing'),('insurance_state','==','state_draft')]}" class="oe_highlight" />
+						<button name="btn_insurance_confirm" type="object" string="Godkend ansogning" attrs="{'invisible':['|',('insurance_state','==','state_approved'),('insurance_state','==','state_draft')]}" class="oe_highlight" />
+						<button name="btn_insurance_reject" type="object" string="Afvis ansogning" attrs="{'invisible':['|',('insurance_state','==','state_rejected'),('insurance_state','==','state_draft')]}" class="oe_highlight" />
+						
+						<field name="insurance_state" widget="statusbar" statusbar_visible="state_ordered,state_processing,state_approved"/>
+					</header>
+                    <sheet>                        
+                        <h1 style="margin-top: 50px; margin-bottom: 20px;">Opret forsikring</h1>
+                        <group>
+                        	<field name="insurance_participant_id" context="{'res_id':active_id}" attrs="{'required':True,'readonly':True}" options="{'no_create': True}" />
+                        	<field name="insurance_committee_id" attrs="{'required':True}" options="{'no_create': True}" />
+							<field name="insurance_category_id" attrs="{'required':True}"/>
+						</group>                       
+                        
+						<h2 style="margin-top: 50px; margin-bottom: 20px;">Oplysninger om genstand</h2>
+						<group>
+                        	<field name="insurance_description" attrs="{'required':True}"/>
+                        	<field name="insurance_fabrikat" attrs="{'required':True}"/>
+							<field name="insurance_typebetegnelse" attrs="{'required':True}"/>
+                        	<field name="insurance_nummer"/>
+                        	<field name="insurance_anskaffelsesaar" attrs="{'required':True}"/>
+							<field name="insurance_anskaffelsespris" attrs="{'required':True}"/>
+						</group> 
+						
+						<h2 style="margin-top: 50px; margin-bottom: 20px;">Forsikringsperiode</h2>
+						<group>
+                        	<field name="insurance_date_start" attrs="{'required':True}"/>
+                        	<field name="insurance_date_end" attrs="{'required':True}"/>
+						</group> 
+						
+						<h2 style="margin-top: 50px; margin-bottom: 20px;">Diverse info</h2>
+						<group>
+                        	<field name="insurance_size"/>
+                        	<field name="insurance_udlejer"/>
+							<field name="insurance_daekningleje"/>
+                        	<field name="insurance_daekningsomfang"/>
+                        	<field name="insurance_lejekontrakt"/>
+						</group> 
+						
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_insurance_overview" model="ir.ui.view">
+			<field name="name">Insurance Tree view</field>
+			<field name="model">campos.insurance</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="insurance_committee_id"/>
+					<field name="insurance_category_id"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<!-- Action to open Activity list -->
+		<act_window id="action_insurance_create"
+			name="SL2017 Insurance overview"
+			res_model="campos.insurance"
+			view_mode="tree,form"
+			view_id="view_insurance_overview" />
+			
+			
+		<!-- Menu item to open Activity list -->
+		<menuitem id="menu_insurance_create"
+			name="Forsikring"
+			parent="campos_event.menu_campos_comittee"
+			sequence="20"
+			action="action_insurance_create" />
+			
+			
+			
+        
+    </data>
+</openerp>

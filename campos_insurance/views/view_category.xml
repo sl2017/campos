@@ -52,7 +52,7 @@
 		<!-- Menu item to open Activity list -->
 		<menuitem id="menu_insurance_category_create"
 			name="Forsikringskategorier"
-			parent="campos_event.menu_campos_comittee"
+			parent="menu_insurance_create"
 			sequence="20"
 			action="action_insurance_category_create" />
 			

@@ -5,9 +5,14 @@
 	'depends': [
 			'mail',
 			'base',
+			'campos_event'
 			],
 	'application': True,
 	'data': [
-		'views/view_category.xml'
+        'security/campos_insurance_security.xml',
+        'security/ir.model.access.csv',
+        'security/ir.rule.csv',
+		'views/view_category.xml',
+		'views/view_insurance.xml'
         ],
 }

@@ -15,17 +15,10 @@ class Category(models.Model):
 	@api.depends('cat_name')
 	def _compute_display_name(self):
 		self.cat_display_name = self.real_name()
-		#names = ["foo", "bar"]
-		#return names
-		
-		
-		#names = [self.parent_id.display_name, _compute_codename(self)]
-		#self.display_name = ' / '.join(filter(None, names))
 			
 	cat_display_name = fields.Char(
         string="Fulde navn",
         compute='_compute_display_name')
-        #store=True)
 	
 	#Parent and child categories
 	cat_parent_id = fields.Many2one('campos.insurance.cat', 
