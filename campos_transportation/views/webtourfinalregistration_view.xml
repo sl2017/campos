@@ -103,7 +103,20 @@
 						</field>
 						<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object"/>
 						<button name="action_update_webtourdefaulthomedestination" string="Update Default Home Destination" type="object"/>
-						<button name="webtourupdate" string="Update Webtour" type="object"/> 						
+						<button name="webtourupdate" string="Update Webtour" type="object"/> 		
+						<field  name="webtourusneedtickets_ids" widget="one2many_list" string="Bus Tickets" readonly="1">
+							<tree>
+								<field name="direction"/>
+							    <field name="startdatetime"/> 
+							    <field name="enddatetime"/> 		
+							    <field name="seats_confirmed"/> 
+							    <field name="seats_pending"/> 
+							   	<field name="seats_not_confirmed"/> 	  
+							    <field name="touridno"/>
+							    <field name="stop"/> 
+							    <field name="address"/> 																		
+							</tree>
+						</field>									
            			</page>
         		</xpath> 		        		  		
 			</field>	
