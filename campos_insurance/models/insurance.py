@@ -6,14 +6,19 @@ class InsuranceMain(models.Model):
 	_name = 'campos.insurance'
 	_inherit=['mail.thread', 'ir.needaction_mixin']
     
+	#Enables setting the participant id
+	@api.model
+	def default_get(self, fields):
+		result = super(InsuranceMain, self).default_get(fields)
+		result['insurance_participant_id'] = self.env.user.participant_id.id
+		return result
 	
-	insurance_state = fields.Selection([('state_draft',u'Kladde'),
-									('state_ordered',u'Bestilt'),
+	insurance_state = fields.Selection([('state_ordered',u'Bestilt'),
 									('state_processing',u'Behandles'),
 									('state_approved',u'Godkendt'),
 									('state_rejected',u'Afvist')],
 									track_visibility='onchange',
-									default='state_draft')
+									default='state_ordered')
 									
 	#Owner, committee and category
 	insurance_participant_id = fields.Many2one('campos.event.participant', 

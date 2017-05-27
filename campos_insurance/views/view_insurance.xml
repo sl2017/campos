@@ -18,9 +18,9 @@
                     <sheet>                        
                         <h1 style="margin-top: 50px; margin-bottom: 20px;">Opret forsikring</h1>
                         <group>
-                        	<field name="insurance_participant_id" context="{'res_id':active_id}" attrs="{'required':True,'readonly':True}" options="{'no_create': True}" />
+                        	<field name="insurance_participant_id" attrs="{'required':True,'readonly':True}" options="{'no_create': True}" />
                         	<field name="insurance_committee_id" attrs="{'required':True}" options="{'no_create': True}" />
-							<field name="insurance_category_id" attrs="{'required':True}"/>
+							<field name="insurance_category_id" attrs="{'required':True}" options="{'no_create': True}" />
 						</group>                       
                         
 						<h2 style="margin-top: 50px; margin-bottom: 20px;">Oplysninger om genstand</h2>
@@ -65,6 +65,10 @@
 				<tree>
 					<field name="insurance_committee_id"/>
 					<field name="insurance_category_id"/>
+					<field name="insurance_date_start"/>
+					<field name="insurance_date_end"/>
+					<field name="insurance_anskaffelsespris"/>
+					<field name="insurance_state"/>
 				</tree>
 			</field>
 		</record>

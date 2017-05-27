@@ -1,3 +1,4 @@
 "id","name","model_id/id","domain_force","groups/id","perm_read","perm_write","perm_create","perm_unlink"
-"campos_insurance_public_access","Alle brugeres rettigheder til forsikringsmodul","model_campos_insurance","[('sponsor_state','=','state_potentiel')]",,"False","True","True","False"
-"campos_insurance_udvalg_access","Rettigheder til forsikringsudvalg","model_campos_insurance","[(1,'=',1)]","campos_insurance.group_campos_forsikringsudvalg","False","True","True","True"
+"campos_insurance_public_access","Alle brugeres rettigheder til forsikringsmodul","model_campos_insurance","[(1,'=',1)]",,"False","True","True","False"
+"campos_insurance_cat_public_access","Alle brugeres rettigheder til forsikringsmodul kategorier","model_campos_insurance_cat","[(1,'=',1)]",,"True","False","False","False"
+"campos_insurance_udvalg_access","Rettigheder til forsikringsudvalg","model_campos_insurance","[(1,'=',1)]","campos_insurance.group_campos_forsikringsudvalg","True","True","True","True"
