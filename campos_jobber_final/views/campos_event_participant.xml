@@ -119,7 +119,7 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
-										<field name="partner_id" invisible="1" />
+										
 										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
 										
 										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
@@ -147,8 +147,7 @@
 								</group>
 						 </page>
 						 <page string="Children">
-						 	<field name="partner_id" invisible="1"/>
-						 	<field name="jobber_child_ids" context="{'default_registration_id': registration_id, 'default_street': street, 'default_city': city, 'default_zip': zip, 'default_country_id': country_id, 'default_jobber_child': True, 'default_parent_id': partner_id, 'form_view_ref' : 'campos_final_registration.view_form_finalregistration_participant'}">
+						 	<field name="jobber_child_ids" context="{'form_view_ref': 'campos_jobber_final.campos_jobber_child_form_view'}">
 						 		<tree create="false">
 						 			<field name="registration_id" invisible="1"/>
 						 			<field name="name"/>
@@ -316,7 +315,7 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
-										<field name="partner_id" invisible="1" />
+										
 										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
 										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
@@ -343,9 +342,8 @@
 								</group>
 						 </page>
 						 <page string="Children">
-						 	<field name="partner_id" invisible="1"/>
 						 	<field name="jobber_child_ids" create="false" context="{'form_view_ref': 'campos_jobber_final.campos_jobber_child_form_view'}">
-						 		<tree>
+						 		<tree create="false">
 						 			<field name="registration_id" invisible="1"/>
 						 			<field name="name"/>
 						 			<field name="birthdate"/>
