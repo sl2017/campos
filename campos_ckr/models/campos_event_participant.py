@@ -10,6 +10,22 @@ class CamposEventParticipant(models.Model):
     _inherit = 'campos.event.participant'
     
     ckr_ids = fields.One2many('campos.ckr.check', 'participant_id', string='CKR')
+    ckr_active_id = fields.Many2one('campos.ckr.check', 'CKR (Active)', compute = '_compute_ckr_active_id', store=True)
+    ckr_date_last_state_update = fields.Datetime('CKR Last State change', related='ckr_active_id.date_last_state_update', readonly=True)
+    ckr_state = fields.Selection(related='ckr_active_id.state', string='CKR State')
+    
+    @api.depends('ckr_ids.state', 'ckr_ids.write_date')
+    @api.multi
+    def _compute_ckr_active_id(self):
+        for par in self:
+            if par.ckr_ids:
+                approved_ids = par.ckr_ids.filtered('appr_date')
+                if approved_ids:
+                    par.ckr_active_id = approved_ids.sorted(key=lambda r: r.appr_date)[-1]
+                else:
+                    par.ckr_active_id = par.ckr_ids.sorted(key=lambda r: r.date_last_state_update)[-1]
+            else:
+                par.ckr_active_id = False
     
     @api.multi 
     def action_request_ckr(self):
