@@ -991,6 +991,49 @@ class WebtourUsNeedTravelNeedPax(models.Model):
                     group by travelneed_id          
                     """
                     )
+        
+class WebtourUsNeedTickets(models.Model):
+    _name = 'campos.webtourusneed.tickets'
+    _auto = False
+    _log_access = False
+  
+    registration_id = fields.Many2one('event.registration','Registration ID')
+    touridno = fields.Char('Tour IDno')
+    startdatetime = fields.Datetime('Start Date Time')
+    enddatetime = fields.Datetime('End Date Time')
+    direction = fields.Char('Direction')
+    stop = fields.Char('Stop')
+    address = fields.Char('Address')
+    seats_confirmed = fields.Integer('Seats confirmed')
+    seats_pending = fields.Integer('Seats pending')
+    seats_not_confirmed = fields.Integer('Seats not confirmed')
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_tickets as                  
+                    select min(n.id) as id 
+                    ,p.registration_id
+                    ,webtour_touridno as touridno
+                    ,replace(webtour_startdatetime,'T',' ') as startdatetime
+                    ,replace(webtour_enddatetime,'T',' ') as enddatetime
+                    ,tt.name as direction
+                    ,d.name as Stop
+                    ,replace(address,E'\nDK','') as address
+                    ,sum(case when needstatus in ('1','5') then 1 else 0 end) as seats_confirmed
+                    ,sum(case when needstatus in ('2','3','4') then 1 else 0 end) as seats_pending
+                    ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed 
+                    from campos_webtourusneed  n 
+                    inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
+                    left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
+                    inner join campos_event_participant p on p.id = n.participant_id 
+                    inner join event_registration r on r.id = p.registration_id 
+                    where needstatus <> '0' 
+                    group by p.registration_id,r.name,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address 
+                    order by 2,case when returnjourney then 2 else 1 end ,5         
+                    """
+                    )        
+        
      
 class WebtourUsNeedChanges(models.Model):
     _name = 'campos.webtourusneed.changes'
