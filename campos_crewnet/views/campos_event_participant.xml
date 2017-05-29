@@ -25,6 +25,29 @@ General terms for the further use of the information provided by Crewnet as a se
             </page>
         </field>
     </record>
+    
+    <record model="ir.ui.view" id="view_event_registration_participant_form">
+        <field name="name">campos.event.participant.form (in campos_crewnet)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.view_event_registration_participant_form"/>
+        <field name="arch" type="xml">
+            <page name="agreements" position="after">
+            	<page name="crewnet" string="Crewnet">
+            	<div>
+            		<field name="crewnet_ok"/>
+            		<label for="crewnet_ok" string="I hereby give consent to the use of my personal information by Crewnet I / S."/>
+            		<p>The disclosure of information is necessary to simplify the organization of jobber and jobs in the camp's "job app" made available by Crewnet I/S, in conjunction with Spejdernes Lejr 2017.<br/>
+There is no information about health, religion, ethnicity or political relationship.<br/>
+There is only information that can relate you to a committee and your jobs at the camp.<br/>
+General terms for the further use of the information provided by Crewnet as a service can be found <a href="https://crewnet.dk/terms/almindelige-betingelser-for-brug-af-crewnet" target="new">here.</a> (Only in Danish)
+            		</p>
+            	</div>
+            	</page>
+            </page>
+        </field>
+    </record>
+    
+    
 
     <record model="ir.ui.view" id="campos_event_participant_search_view">
         <field name="name">campos.event.participant.search (in campos_crewnet)</field>

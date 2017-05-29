@@ -12,6 +12,7 @@
     'website': 'www.steingabelgaard.dk',
     'depends': [
                 'campos_jobber_final',
+                'campos_ckr',
     ],
     'data': [
         'views/campos_event_participant.xml',
