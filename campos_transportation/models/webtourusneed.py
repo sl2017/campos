@@ -903,6 +903,36 @@ class WebtourUsNeed(models.Model):
             session = ConnectorSession.from_env(self.env)
             do_delayed_get_create_webtour_need_job.delay(session, 'campos.webtourusneed', rec.id)    
 
+    @api.multi
+    def action_do_delayed_get_create_webtour_need_job_changedsence(self,event_id):
+        ns = {'i': 'http://schemas.datacontract.org/2004/07/webTourManager',
+              'a': 'http://schemas.datacontract.org/2004/07/webTourManager.Classes'}
+        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', event_id)])
+        _logger.info("action_do_delayed_get_create_webtour_need_job_changedsence %s %s",event_id,webtourconfig.webtourusneedchangessince)  
+        
+        root = ET.fromstring(self.env['campos.webtour_req_logger'].create({'name':'usNeed/GetByLastUpdated/?LastUpdated=' + webtourconfig.webtourusneedchangessince}).responce.encode('utf-8'))
+        content = root.find("i:Content",ns) #Let's find the contet Section         
+        if content is not None:
+            array = content.find("i:Array",ns) 
+            if array is not None:
+                curentdaytime = root.find("i:CurrentDateTime",ns).text
+                for usneed in array.findall('a:usNeedMinimum',ns):
+                    tag = usneed.findall('a:IDno',ns)                            
+                    if tag is not None:
+                        try:
+                            idno = tag[0].text
+                        except:
+                            idno = False    
+                        
+                        if idno:
+                            needs=self.env['campos.webtourusneed'].search([('webtour_needidno', '=',idno)])
+                    
+                            for need in needs:
+                                session = ConnectorSession.from_env(self.env)
+                                do_delayed_get_create_webtour_need_job.delay(session, 'campos.webtourusneed', need.id)
+                
+                webtourconfig.webtourusneedchangessince = curentdaytime[:16]
+                        
 
     @api.multi
     def updateusneedtriptypes(self):

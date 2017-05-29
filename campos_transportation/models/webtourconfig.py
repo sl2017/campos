@@ -51,6 +51,7 @@ class webtourconfig(models.Model):
     fromcamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','From Camp TripType', ondelete='set null')
     webtoutexternalid_prefix = fields.Char('webtour ExternaiId prefix', default='0')
     webtourcorrecterrorpassword = fields.Char('webtour correct error password')
+    webtourusneedchangessince = fields.Char('Get changes usNeed sence yyyy-mm-ddThh:mm:ss')
     
     @api.multi
     def action_webtour_check_usgroup(self):
@@ -272,6 +273,15 @@ class webtourconfig(models.Model):
             _logger.info("action_Webtour_usgroup_get deleted records, Still %s records to do",n)
   
         mo.getfromwebtour()  
+
+    @api.multi
+    def action_Webtour_usneedchangedsence(self):
+        self.ensure_one() 
+        _logger.info("action_Webtour_usneedchangedsence here we go!!")
+        mo = self.env['campos.webtourusneed']
+        _logger.info("action_Webtour_usneedchangedsence %s",mo)
+        mo.action_do_delayed_get_create_webtour_need_job_changedsence(self.event_id.id)
+
 
 
 class WebtourConfigChecklog(models.Model):
