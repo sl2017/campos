@@ -197,6 +197,17 @@
 			</field>
 		</record>
 				
-
+		<record id="campos_committee_member_search" model="ir.ui.view">
+			<field name="name">Committee Func Search</field>
+			<field name="model">campos.committee.function</field>
+			<field name="inherit_id" ref="campos_event.campos_committee_member_search" />
+			<field name="arch" type="xml">
+				<search>
+					<filter name="fParticipant" position="after">
+						<filter name="fckr" string="CKR Missing" domain="[('participant_id.ckr_state', '!=', 'approved')]"/>
+					</filter>
+				</search>
+			</field>
+		</record>
 </data>
 </openerp>
