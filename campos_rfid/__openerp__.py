@@ -13,8 +13,17 @@
     'depends': ['mail', 'campos_jobber_final'
     ],
     'data': [
+        'security/campos_canteen_slot.xml',
+        'views/campos_canteen_slot.xml',
+        'security/campos_canteen_stat.xml',
+        'views/campos_canteen_stat.xml',
+        'security/campos_canteen_instanse.xml',
+        'views/campos_canteen_instanse.xml',
         'security/campos_rfid_device.xml',
         'views/campos_rfid_device.xml',
+        'security/campos_canteen_ticket.xml',
+        'views/campos_canteen_ticket.xml',
+        'data/campos.canteen.slot.csv',
     ],
     'demo': [
     ],

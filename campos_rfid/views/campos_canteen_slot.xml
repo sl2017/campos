@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_canteen_slot_form_view">
+        <field name="name">campos.canteen.slot.form (in campos_rfid)</field>
+        <field name="model">campos.canteen.slot</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                		<field name="code"/>
+                		<field name="meal"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_slot_search_view">
+        <field name="name">campos.canteen.slot.search (in campos_rfid)</field>
+        <field name="model">campos.canteen.slot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_slot_tree_view">
+        <field name="name">campos.canteen.slot.tree (in campos_rfid)</field>
+        <field name="model">campos.canteen.slot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_canteen_slot_act_window">
+        <field name="name">Campos Canteen Slot</field> <!-- TODO -->
+        <field name="res_model">campos.canteen.slot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_canteen_slot_menu">
+        <field name="name">Campos Canteen Slot</field>
+        <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
+        <field name="action" ref="campos_canteen_slot_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

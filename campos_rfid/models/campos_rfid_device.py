@@ -16,6 +16,10 @@ class CamposRfidDevice(models.Model):
     
     check_method = fields.Selection([('canteen', 'Canteen Check In'),
                                      ('meat', 'Meat Supply')], string='Function')
+    canteen_id = fields.Many2one('campos.canteen', 'Canteen')
+    meal = fields.Selection([('breakfast', 'Breakfast'),
+                             ('lunch', 'Lunch'),
+                             ('dinner', 'Dinner')], string='Meal') 
     
     
     def build_response(self, message, access):
@@ -37,13 +41,20 @@ class CamposRfidDevice(models.Model):
         
     
     def checkin_canteen(self, participant_number):
-        if participant_number == '1000':
-            return self.build_response(u'Godkendt\nVelbekommen', True)
-        if participant_number == '2000':
-            return self.build_response(u'Afvist\nGå til Øen', False)
-        if participant_number == '3000':
-            return self.build_response(u'Afvist\nAllerede scannet', False)
-        if participant_number == '4000':
+        tickets = self.env['campos.canteen.ticket'].search([('participant_id.participant_number', '=', participant_number), ('meal', '=', self.meal), ('date', '=', fields.Date.today())])
+        if tickets:
+            if tickets[0].attended_time:
+                return self.build_response(u'Afvist\nAllerede scannet', False) 
+            elif tickets[0].canteen_id == self.canteen_id:
+                att = fields.Datetime.now()
+                s1 = str((int(att[11:13]) + 2) % 24)
+                s2 = '30' if int(att[14:16]) >= 30 else '00'
+                tickets[0].write({'attended_time': att,
+                                  'attended_slot': '%s%s' % (s1,s2)})
+                return self.build_response(u'Godkendt\nVelbekommen', True)
+            else:
+                return self.build_response(u'Afvist\nGå til %s' % tickets[0].canteen_id.name, False)
+        else:
             return self.build_response(u'Afvist\nEj tilmeldt mad', False)
 
         return self.build_response(u'Ukendt deltager', False)

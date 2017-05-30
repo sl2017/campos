@@ -19,6 +19,8 @@
                         <field name="name"/>
                         <field name="device_macid"/>
                         <field name="check_method"/>
+                        <field name="canteen_id" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
+                        <field name="meal" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
