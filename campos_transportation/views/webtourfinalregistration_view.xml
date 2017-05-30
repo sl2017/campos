@@ -118,6 +118,19 @@
 							</tree>
 						</field>									
            			</page>
+           			<page string="Extra Transportation">
+						<field  name="webtourextrausneed_ids" widget="one2many_list" nolabel="0" string="Extra Travel needs" options="{'no_delete': True}">
+							<tree editable="bottom" default_order="traveldate" delete="false">
+								<field name="extra_registration_id" string="Reg Id" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+								<field name="extra_participant_id" string="Linked Participant" required="1" options="{'no_create': True, 'no_open': True}" domain="[('registration_id','=',parent.id)]"/>
+								<field name="extra_passengername" string="Passenger Name"/>
+								<field name="campos_TripType_id" string="Trip type" required="1" options="{'no_create': True, 'no_open': True}"/>
+								<field name="extra_traveldate_id" string="Traveldate" required="1" options="{'no_create': True, 'no_open': True}"/>								
+								<field name="extra_destination_id" string="Stop" required="1" options="{'no_create': True, 'no_open': True}"/>
+								<field name="campos_demandneeded" string="Needed"/>																
+							</tree>
+						</field>           			
+           			</page>
         		</xpath> 		        		  		
 			</field>	
 		</record>

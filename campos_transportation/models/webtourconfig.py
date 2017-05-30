@@ -121,6 +121,7 @@ class webtourconfig(models.Model):
         for reg in self.event_id.registration_ids:
             for par in reg.participant_ids:
                 extid = self.webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                
                 try:               
                     i= ususerexternalidlist.index(extid)
                 except:
