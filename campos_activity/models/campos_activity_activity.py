@@ -38,7 +38,7 @@ class CamposActivityActivity(models.Model):
                               ('cancelled', 'Cancelled')], 'State', default='idea', track_visibility='onchange')
     
     # image: all image fields are base64 encoded and PIL-supported
-    image = fields.Binary('Image', required=True)
+    image = fields.Binary('Image')
     image_filename = fields.Char("Image Filename")
 
     # Scaled Images
