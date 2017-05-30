@@ -12,6 +12,7 @@
     'website': 'www.steingabelgaard.dk',
     'depends': [ 'mail', 
                 'campos_event',
+                'campos_final_registration',
     ],
     'data': [
         'security/campos_activity_activity.xml',
@@ -22,13 +23,17 @@
         'views/campos_activity_location.xml',
         'security/campos_activity_tag.xml',
         'views/campos_activity_tag.xml',
-        #'security/campos_activity_ticket.xml',
-        #'views/campos_activity_ticket.xml',
+        'security/campos_activity_ticket.xml',
+        'views/campos_activity_ticket.xml',
         'security/campos_activity_instanse.xml',
         'views/campos_activity_instanse.xml',
         'security/campos_activity_period.xml',
         'views/campos_activity_period.xml',
-        
+        'security/campos_activity_audience.xml',
+        'views/campos_activity_audience.xml',
+        'security/campos_activity_type.xml',
+        'views/campos_activity_type.xml',
+        'views/campos_event_participant.xml',
     ],
     'demo': [
     ],

@@ -5,23 +5,50 @@
 <openerp>
 <data>
 
+	<record model="ir.actions.act_window" id="campos_activity_ticket_this_inst_window">
+        <field name="name">Activity Ticket</field> <!-- TODO -->
+        <field name="res_model">campos.activity.ticket</field>
+        <field name="view_mode">tree,calendar,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_act_ins_id': active_id}</field>
+    </record>
+	
+
     <record model="ir.ui.view" id="campos_activity_instanse_form_view">
         <field name="name">campos.activity.instanse.form (in campos_activity)</field>
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- TODO -->
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="open,cancelled,canc_weather,canc_risk" statusbar_colors='{"open":"blue","cancelled":"red","canc_weather":"red","canc_risk":"red"}'/>
                 </header>
                 <sheet>
                     <!-- TODO -->
+
+                    <field name="id" invisible="True"/>
+                    <div class="oe_right oe_button_box" style="width: 300px;" name="buttons">
+                    	<button  class="oe_inline oe_stat_button" type="action" name="%(campos_activity.campos_activity_ticket_this_inst_window)d" icon="fa-ticket">
+                    		<field string="Tickets" name="seats_used" widget="statinfo"/>
+                    	</button>     
+                    </div>
+                    <div class="oe_left" style="width: 500px;" colspan="2">
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="activity_id" string="Activity"/>
+                                <h1><field name="activity_id" class="oe_inline"/></h1>
+                            </div>
+                    </div>    
                     <group>
-                    	<field name="activity_id"/>
                         <field name="period_id"/>
-                        <field name="name"/>
+						<field name="name"/>
+						<field name="location_id"/>
                                                  
+                         <field name="booking"/>
                          <field name="seats_max"/>
                          <field name="seats_hard"/>
+                         <field name="seats_available"/>
+                         <field name="booking_date_begin"/>
+                         <field name="booking_date_end"/>
                          <!-- 
                          <field name="seats_used"/>
                          <field name="seats_reserved"/>
@@ -42,7 +69,9 @@
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
+                        <field name="name"/>
             </search>
         </field>
     </record>
@@ -52,16 +81,27 @@
         <field name="model">campos.activity.instanse</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
-                <field name="name"/>
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
+                        <field name="name"/>
             </tree>
         </field>
     </record>
 
+	 <record model="ir.ui.view" id="campos_activity_instanse_calendar_view">
+        <field name="name">campos.activity.instanse.tree (in campos_activity)</field>
+        <field name="model">campos.activity.instanse</field>
+        <field name="arch" type="xml">
+            <calendar string="Activities" date_start="actins_date_begin" date_stop="actins_date_end" color="state">
+				<field name="name"/>
+        </calendar>
+        </field>
+    </record>
+	
     <record model="ir.actions.act_window" id="campos_activity_instanse_act_window">
         <field name="name">Campos Activity Instanse</field> <!-- TODO -->
         <field name="res_model">campos.activity.instanse</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

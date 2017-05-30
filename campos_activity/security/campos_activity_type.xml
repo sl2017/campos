@@ -5,9 +5,9 @@
 <openerp>
 <data>
 
-    <record model="ir.model.access" id="campos_activity_tag_access_user">
-        <field name="name">campos.activity.tag access user</field>
-        <field name="model_id" ref="model_campos_activity_tag"/>
+    <record model="ir.model.access" id="campos_activity_type_access_name"> <!-- TODO acl id -->
+        <field name="name">campos.activity.type access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_activity_type"/>
         <!-- TODO review and adapt -->
         <field name="group_id" ref="base.group_user"/>
         <field name="perm_read" eval="1"/>
@@ -16,9 +16,9 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
-	<record model="ir.model.access" id="campos_activity_tag_access_admin">
-        <field name="name">campos.activity.tag access admin</field>
-        <field name="model_id" ref="model_campos_activity_tag"/>
+	<record model="ir.model.access" id="campos_activity_type_access_admin">
+        <field name="name">campos.activity.type access admin</field> 
+        <field name="model_id" ref="model_campos_activity_type"/>
         <!-- TODO review and adapt -->
         <field name="group_id" ref="group_campos_activity"/>
         <field name="perm_read" eval="1"/>
@@ -26,6 +26,5 @@
         <field name="perm_write" eval="1"/>
         <field name="perm_unlink" eval="1"/>
     </record>
-
 </data>
 </openerp>

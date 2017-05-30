@@ -51,7 +51,7 @@ class EventRegistration(models.Model):
     cmp_currency_id = fields.Many2one(related='event_id.company_id.currency_id', readonly=True)
 
     @api.multi
-    @api.depends('participant_ids', 'participant_ids.state', 'jobber_accomodation_ids')
+    @api.depends('participant_ids', 'participant_ids.state', 'participant_ids.staff', 'jobber_accomodation_ids')
     def _compute_fees(self):
         
         for reg in self:
