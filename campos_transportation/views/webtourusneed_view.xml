@@ -72,10 +72,7 @@
 <header>
   
 <button name="get_create_webtour_need" type="object" string="Update Webtour" class="oe_highlight" />
-<!--
-<button name="updatewebtourtofromusneeds" type="object" string="Update Webtour usNeed" class="oe_highlight" />
-<button name="updateusneedtriptypes" type="object" string="Set Trip Types on all usNeeds" class="oe_highlight" />
--->
+
 </header>
 <sheet>
 <group name="user_top">

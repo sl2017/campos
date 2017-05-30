@@ -38,6 +38,13 @@ def do_delayed_usneedminimum_get(session, model, rec_id):
     if rec.exists():
         rec.action_one_Webtour_usneedminimum_get()
 
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_usneedchangedsence(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        rec.action_one_Webtour_usneedchangedsence()
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -51,6 +58,7 @@ class webtourconfig(models.Model):
     fromcamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','From Camp TripType', ondelete='set null')
     webtoutexternalid_prefix = fields.Char('webtour ExternaiId prefix', default='0')
     webtourcorrecterrorpassword = fields.Char('webtour correct error password')
+    webtourusneedchangessince = fields.Char('Get changes usNeed sence yyyy-mm-ddThh:mm:ss')
     
     @api.multi
     def action_webtour_check_usgroup(self):
@@ -120,6 +128,7 @@ class webtourconfig(models.Model):
         for reg in self.event_id.registration_ids:
             for par in reg.participant_ids:
                 extid = self.webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                
                 try:               
                     i= ususerexternalidlist.index(extid)
                 except:
@@ -273,6 +282,20 @@ class webtourconfig(models.Model):
   
         mo.getfromwebtour()  
 
+    @api.multi
+    def action_Webtour_usneedchangedsence(self):
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_usneedchangedsence.delay(session, 'campos.webtourconfig', rec.id)         
+        
+    @api.one
+    def action_one_Webtour_usneedchangedsence(self):       
+        self.ensure_one() 
+        _logger.info("action_Webtour_usneedchangedsence here we go!!")
+        mo = self.env['campos.webtourusneed']
+        _logger.info("action_Webtour_usneedchangedsence %s",mo)
+        mo.action_do_delayed_get_create_webtour_need_job_changedsence(self.event_id.id)
+        
 
 class WebtourConfigChecklog(models.Model):
     _description = 'Webtour check log'

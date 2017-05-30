@@ -70,6 +70,7 @@ class WebtourRegistration(models.Model):
     webtourgroup_entrypointname = fields.Char(related="group_entrypoint.defaultdestination_id.name")
     webtourgroup_exitpointname = fields.Char(related="group_exitpoint.defaultdestination_id.name")
     webtourusneedtickets_ids = fields.One2many('campos.webtourusneed.tickets','registration_id','usNeed Tickets')
+    webtourextrausneed_ids = fields.One2many('campos.webtourusneed','extra_registration_id','Extra usNeed')
     
     @api.multi
     def write(self, vals):
