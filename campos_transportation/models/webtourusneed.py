@@ -39,7 +39,7 @@ class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
     registration_id = fields.Many2one('event.registration','Registration ID', ondelete='set null', related="participant_id.registration_id")
-    travelgroup = fields.Char('Travel Group')
+    travelgroup = fields.Char('Travel Group', default='1')
     campos_deleted = fields.Boolean('CampOs Deleted', default=False)
     
     campos_demandneeded = fields.Boolean('CampOs Demand Needed', default=False)
@@ -171,7 +171,11 @@ class WebtourUsNeed(models.Model):
                                    ('9', 'Error')], default=False, string='Need Status')#,compute='_computeneedstatus', readonly=True, store=True)
 
     needproblem = fields.Char('Need Problem')
-    
+    extra_registration_id = fields.Many2one('event.registration','Registration ID', ondelete='set null')
+    extra_traveldate_id = fields.Many2one('campos.webtourconfig.triptype.date', 'Travel Date', domain="[('campos_TripType_id','=',campos_TripType_id)]", ondelete='set null') 
+    extra_destination_id = fields.Many2one('campos.webtourusdestination','Destination ID', ondelete='set null')
+    extra_passengername = fields.Char('Passenger name')
+    extra_participant_id = fields.Many2one('campos.event.participant','Linked Participant', ondelete='set null') #, domain = "[('registration_id','=',extra_registration_id)]"
     
     @api.multi
     @api.depends('webtour_CurrentDateTime','campos_demandneeded','campos_TripType_id','campos_traveldate','campos_startdestinationidno','campos_enddestinationidno','travelneed_id','travelneed_deadline','travelneed_travelconnectiondetails') 
@@ -238,6 +242,33 @@ class WebtourUsNeed(models.Model):
                 return list  
     
         for need in self:
+            
+            if ('extra_traveldate_id' in vals
+                or 'extra_destination_id' in vals
+                or 'campos_TripType_id' in vals
+                or 'extra_participant_id' in vals):
+                dicto = {}
+                
+                if need.extra_traveldate_id:
+                    if need.campos_traveldate != need.extra_traveldate_id.name : dicto['campos_traveldate'] = need.extra_traveldate_id.name
+                
+                if need.extra_registration_id:
+                    webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', need.extra_registration_id.event_id.id)])
+                    campdestination = webtourconfig.campdestinationid.destinationidno
+                    
+                    if need.campos_TripType_id:
+                        if need.campos_TripType_id.returnjourney:
+                            if need.campos_startdestinationidno != campdestination: dicto['campos_startdestinationidno'] = campdestination
+                            if need.campos_enddestinationidno != need.extra_destination_id.destinationidno: dicto['campos_enddestinationidno'] = need.extra_destination_id.destinationidno
+                        else:
+                            if need.campos_startdestinationidno != need.extra_destination_id.destinationidno: dicto['campos_startdestinationidno'] = need.extra_destination_id.destinationidno
+                            if need.campos_enddestinationidno != campdestination: dicto['campos_enddestinationidno'] = campdestination
+
+                if need.extra_participant_id:                            
+                    if need.participant_id.id != need.extra_participant_id.id: dicto['participant_id'] = need.extra_participant_id.id
+                
+                if len(dicto) > 0:
+                    need.write(dicto)
             
             if  ('campos_TripType_id' in vals 
                 or 'travelgroup' in vals
@@ -344,6 +375,26 @@ class WebtourUsNeed(models.Model):
     def create(self, vals):
         _logger.info("WebtourUsNeed Create Entered %s", vals.keys())
         rec = super(WebtourUsNeed, self).create(vals)
+        
+        if rec.extra_traveldate_id:
+            rec.campos_traveldate=rec.extra_traveldate_id.name
+        
+        if rec.extra_registration_id:         
+            webtourconfig= rec.env['campos.webtourconfig'].search([('event_id', '=', rec.extra_registration_id.event_id.id)])
+            campdestination = webtourconfig.campdestinationid.destinationidno
+            
+            if rec.campos_TripType_id and rec.extra_destination_id:
+                
+                if rec.campos_TripType_id.returnjourney:
+                    rec.campos_startdestinationidno = campdestination
+                    rec.campos_enddestinationidno =  rec.extra_destination_id.destinationidno
+                else:
+                    rec.campos_startdestinationidno = rec.extra_destination_id.destinationidno
+                    rec.campos_enddestinationidno  = campdestination
+                    
+        if rec.extra_participant_id: 
+            rec.participant_id = rec.extra_participant_id.id        
+        
         rec.calc_travelneed_id()       
         return rec
     
@@ -628,6 +679,8 @@ class WebtourUsNeed(models.Model):
         if (newgroup <> "0") and newgroup and (self.webtour_useridno == False):
             webtoutexternalid_prefix = self.registration_id.event_id.webtourconfig_id.webtoutexternalid_prefix
             extid = webtoutexternalid_prefix+str(self.participant_id.id)+self.participant_id.webtour_externalid_suffix
+            if self.extra_destination_id  or self.extra_participant_id or self.extra_passengername or self.extra_registration_id or self.extra_traveldate_id:
+                extid = extid + str(self.id)
         
             newidno = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8')).getElementsByTagName("a:IDno")[0].firstChild.data 
             if (newidno != "0") and newidno:
@@ -865,39 +918,6 @@ class WebtourUsNeed(models.Model):
                 break
     
     @api.multi
-    def updatewebtourtofromusneeds(self):
-        # needs = self.env['campos.webtourusneed'].search([('participant_id','<>',False)])
-        
-        _logger.info("updatewebtourtofromusneeds: Here we go...%s",len(self))
-        for need in self: # (change to needs to update all needs)
-            if need.participant_id <> False:
-                webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)])
-                
-                if need.campos_TripType_id==webtourconfig.tocamp_campos_TripType_id:
-                    need.campos_demandneeded = need.participant_id.transport_to_camp
-                    need.campos_startdatetime = need.participant_id.tocampdate
-                    need.campos_enddatetime = need.participant_id.tocampdate
-                    need.participant_id.tocampfromdestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
-                    need.campos_startdestinationidno = need.participant_id.tocampfromdestination_id.destinationidno                    
-                    need.webtour_useridno = need.participant_id.webtourususeridno
-                    need.webtour_groupidno = need.participant_id.webtourusgroupidno
-                    need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
-                
-                if need.campos_TripType_id==webtourconfig.fromcamp_campos_TripType_id :
-                    need.campos_demandneeded = need.participant_id.transport_from_camp
-                    need.campos_startdatetime = need.participant_id.fromcampdate
-                    need.campos_enddatetime = need.participant_id.fromcampdate
-                    need.participant_id.fromcamptodestination_id = need.participant_id.registration_id.webtourdefaulthomedestination
-                    need.campos_enddestinationidno = need.participant_id.fromcamptodestination_id.destinationidno
-                    need.webtour_useridno = need.participant_id.webtourususeridno
-                    need.webtour_groupidno = need.participant_id.webtourusgroupidno                     
-                    need.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')
-                    
-                need.get_create_webtour_need()
-                
-        return True
-    
-    @api.multi
     def action_do_delayed_get_create_webtour_need_job(self):
         for rec in self:
             session = ConnectorSession.from_env(self.env)
@@ -932,25 +952,7 @@ class WebtourUsNeed(models.Model):
                                 do_delayed_get_create_webtour_need_job.delay(session, 'campos.webtourusneed', need.id)
                 
                 webtourconfig.webtourusneedchangessince = curentdaytime[:16]
-                        
-
-    @api.multi
-    def updateusneedtriptypes(self):
-        pars = self.env['campos.event.participant'].search([('registration_id.event_id.id','=',self.participant_id.registration_id.event_id.id)])
-        webtourconfig= self.env['campos.webtourconfig'].search([('event_id', '=', self.participant_id.registration_id.event_id.id)])
-        for par in pars:
-
-            if (par.tocampusneed_id.id <> False):
-                _logger.info("updateusneedtriptypes To Camp %s, %s, %s",par.id,par.name,par.registration_id.id)
-                par.tocampusneed_id.campos_TripType_id=webtourconfig.tocamp_campos_TripType_id.id
-                par.tocampusneed_id.campos_enddestinationidno=webtourconfig.campdestinationid.destinationidno
-                par.tocampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
-                
-            if (par.fromcampusneed_id.id <> False): 
-                _logger.info("updateusneedtriptypes From Camp %s, %s, %s",par.id,par.name,par.registration_id.id)                              
-                par.fromcampusneed_id.campos_TripType_id=webtourconfig.fromcamp_campos_TripType_id.id
-                par.fromcampusneed_id.campos_startdestinationidno=webtourconfig.campdestinationid.destinationidno
-                par.fromcampusneed_id.campos_writeseq = self.env['ir.sequence'].get('webtour.transaction')  
+                         
     
 class WebtourNeedOverview(models.Model):
     _name = 'campos.webtourusneed.overview'

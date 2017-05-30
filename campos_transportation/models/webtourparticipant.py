@@ -632,7 +632,8 @@ class WebtourParticipant(models.Model):
             if par.webtourusgroupidno: # Check usUser
                 
                 if par.webtourususeridno:
-                    extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix
+                    extid = webtoutexternalid_prefix+str(par.id)+par.webtour_externalid_suffix                 
+                    
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8'))  
                     
                     newidno = response_doc.getElementsByTagName("a:IDno")[0].firstChild.data
