@@ -20,6 +20,11 @@ class CamposJobberAccomodation(models.Model):
         'Camp Area',
         select=True,
         ondelete='set null')
+    subcamp_id = fields.Many2one(
+        'campos.subcamp',
+        'Sub Camp',
+        select=True,
+        ondelete='set null')
     accom_group_id = fields.Many2one(
         'campos.jobber.accom.group',
         'Accomodation Group',
@@ -35,6 +40,7 @@ class CamposJobberAccomodation(models.Model):
     accom_type_id = fields.Many2one('campos.jobber.accom.type', 'Accomondation Type')
     group_sel = fields.Boolean(related='accom_type_id.group_sel', readonly=True)
     camparea_sel = fields.Boolean(related='accom_type_id.camparea_sel', readonly=True)
+    subcamp_sel = fields.Boolean(related='accom_type_id.subcamp_sel', readonly=True)
     accomgroup_sel = fields.Boolean(related='accom_type_id.accomgroup_sel', readonly=True)
 
     @api.model
@@ -124,7 +130,11 @@ class CamposJobberAccomodation(models.Model):
             if not self.accom_type_id.group_sel:
                 self.registration_id = False
             if not self.accom_type_id.accomgroup_sel:
-                self.accom_group_id = False    
+                self.accom_group_id = False
+            if not self.accom_type_id.subcamp_sel:
+                self.subcamp_id = False
+            else:
+                self.subcamp_id = self.participant_id.primary_committee_id.subcamp_id  
     
     @api.multi
     def action_open_accom_group(self):

@@ -73,11 +73,13 @@
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
 									<field name="camparea_sel" invisible="1" />
+									<field name="subcamp_sel" invisible="1" />
 									<field name="accomgroup_sel" invisible="1" />
 									
 									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																																						 'show_organization': 1}"/>
 									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="subcamp_id" attrs="{'readonly': [('subcamp_sel', '=', False)], 'required': [('subcamp_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_code" attrs="{'readonly': [('accomgroup_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_group_id" readonly="1" />
 									<button name="action_open_accom_group" type="object" icon="gtk-jump-to" />
@@ -271,11 +273,13 @@
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
 									<field name="camparea_sel" invisible="1" />
+									<field name="subcamp_sel" invisible="1" />
 									<field name="accomgroup_sel" invisible="1" />
 									
 									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																																						 'show_organization': 1}"/>
 									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="subcamp_id" attrs="{'readonly': [('subcamp_sel', '=', False)], 'required': [('subcamp_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_code" attrs="{'readonly': [('accomgroup_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_group_id" readonly="1" />
 									<field name="state" readonly="1"/>
@@ -440,11 +444,13 @@
 									<field name="accom_type_id" options="{'no_create': True, 'no_open': True}"/>
 									<field name="group_sel" invisible="1" />
 									<field name="camparea_sel" invisible="1" />
+									<field name="subcamp_sel" invisible="1" />
 									<field name="accomgroup_sel" invisible="1" />
 									
 									<field name="registration_id" string="Group" attrs="{'readonly': [('group_sel', '=', False)], 'required': [('group_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																																						 'show_organization': 1}"/>
 									<field name="camp_area_id" attrs="{'readonly': [('camparea_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="subcamp_id" attrs="{'readonly': [('subcamp_sel', '=', False)], 'required': [('subcamp_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_code" attrs="{'readonly': [('accomgroup_sel', '=', False)], 'required': [('camparea_sel', '=', True)]}" options="{'no_create': True, 'no_open': True}"/>
 									<field name="accom_group_id" readonly="1" />
 									<field name="state" readonly="1"/>
