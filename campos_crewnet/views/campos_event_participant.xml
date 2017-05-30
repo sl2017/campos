@@ -14,7 +14,7 @@
             	<page name="crewnet" string="Crewnet">
             	<div>
             		<field name="crewnet_ok"/>
-            		<label for="crewnet_ok" string="I hereby give consent to the use of my personal information by Crewnet I / S."/>
+            		<label for="crewnet_ok" string="I hereby give consent to the use of my personal information by Crewnet IvS."/>
             		<p>The disclosure of information is necessary to simplify the organization of jobber and jobs in the camp's "job app" made available by Crewnet I/S, in conjunction with Spejdernes Lejr 2017.<br/>
 There is no information about health, religion, ethnicity or political relationship.<br/>
 There is only information that can relate you to a committee and your jobs at the camp.<br/>
