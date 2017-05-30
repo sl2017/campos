@@ -36,7 +36,7 @@ class ResUsers(models.Model):
         
         partner_id = False
         if new_email:
-            partner_ids = self.pool['res.partner'].search(cr, uid, [('email', '=', new_email)])
+            partner_ids = self.pool['res.partner'].search(cr, uid, [('email', '=', new_email), ('is_company', '=', False)])
             if partner_ids:
                 partner_id = partner_ids[0]
             else:

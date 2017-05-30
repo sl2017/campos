@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017
+# christian Eggert Jørgensen <christian@eggert.dk>, 2017
 # Jesper Darum <jda@sl2017.dk>, 2017
 msgid ""
 msgstr ""
@@ -681,7 +682,7 @@ msgstr ""
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour_admin
 msgid "Group"
-msgstr "Rejsegruppe"
+msgstr "Spejdergruppe"
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0
@@ -777,6 +778,11 @@ msgstr "ID"
 #: field:campos.webtour.usneedminimum,idno:0
 #: field:campos.webtour.ususerminimum,idno:0
 msgid "IDno"
+msgstr ""
+
+#. module: campos_transportation
+#: selection:campos.webtourusneed,needstatus:0
+msgid "In Planning"
 msgstr ""
 
 #. module: campos_transportation

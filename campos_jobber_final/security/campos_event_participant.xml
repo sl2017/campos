@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+ 		<record model="ir.rule" id="campos_participant_own_child">
+            <field name="name">Own Child Participants</field>
+            <field name="model_id" ref="model_campos_event_participant"/>
+            <field name="domain_force">['|','|','|',('registration_id.partner_id.id','=', user.commercial_partner_id.id),('accomodation_ids.registration_id.partner_id', '=', user.commercial_partner_id.id), ('canteen_ids.registration_id.partner_id', '=', user.commercial_partner_id.id),('parent_jobber_id.partner_id.id','=', user.commercial_partner_id.id)]</field>
+            <field name="groups" eval="[(4,ref('campos_event.group_campos_staff'))]"/>
+        </record>
+</data>
+</openerp>

@@ -24,6 +24,8 @@ class CamposEventParticipant(models.Model):
     other_need = fields.Boolean('Other special need(s)')
     other_need_description = fields.Text('Other Need description')
     other_need_update_date = fields.Date('Need updated')
+    
+    
     paybygroup = fields.Boolean('Pay by Scout Group', help="Is only chosen if you have to pay through a group. See page 21 in the instructions.")
     payreq_state=fields.Selection([('draft', 'In process'),
                                    ('cancelled', 'Cancelled'),
@@ -31,15 +33,25 @@ class CamposEventParticipant(models.Model):
                                    ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
     payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
     payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    
+    paybyjobber = fields.Boolean('Pay by Other ITS', help="Is only chosen if you have to pay through another ITS. See page 21 in the instructions.")
+    pay_key_entered = fields.Char('Code from payer', help='Enter the code the payer has issued you with')
+    payforotherjobber = fields.Boolean('Want to pay for others', help="Is only chosen if you want to pay for a group of ITS. See page 21 in the instructions.")
+    pay_key_master = fields.Char('Payment Code', help='Enter a code and pass it on to the people ypu want to pay for')
+    jobber_pay_for_ids = fields.One2many(related='registration_id.jobber_pay_for_ids')
     exp_child_qu = fields.Integer("Expected number of children in 'Childrens Island'")
     
     ckr_needed = fields.Boolean('CKR Needed',compute='_compute_ckr_needed')
     info_html = fields.Html(compute='_compute_info_html')
     
-    #JHandl e jobbers childs
+    # Handle jobbers childs
     jobber_child = fields.Boolean('Jobber Child')
     parent_jobber_id = fields.Many2one('campos.event.participant')
     jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
+    
+    _sql_constraints = [
+                        ('pay_key_master_uniq', 'unique(pay_key_master)', 'Payment Code already in use. Choose another'),
+                        ]
     
     @api.constrains('birthdate','jobber_child')
     def _check_jobber_child_age(self):
@@ -111,6 +123,14 @@ class CamposEventParticipant(models.Model):
         else:
             self.payreq_state = 'draft'
              
+    @api.onchange('pay_key_entered')
+    def onchange_pay_key_entered(self):
+        if self.paybyjobber and self.pay_key_entered:
+            payer = self.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', self.pay_key_entered)])
+            if payer:
+                self.registration_id = payer.registration_id
+                self.payreq_state = 'draft'
+            
             
     @api.multi
     def check_all_precamp_days(self):
@@ -176,7 +196,7 @@ class CamposEventParticipant(models.Model):
         res = super(CamposEventParticipant, self).write(vals)
         for cep in self.suspend_security():
             if cep.staff:
-                if not cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.id:
+                if not cep.paybygroup and not cep.paybyjobber and cep.registration_id.partner_id.id != cep.partner_id.id:
                     event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
                     _logger.info('EVent: %s %s', event_id, self.partner_id.id)
                     if event_id:
@@ -187,4 +207,65 @@ class CamposEventParticipant(models.Model):
                             cep.payreq_state = 'approved'
                 elif cep.paybygroup and cep.registration_id.partner_id.id != cep.partner_id.parent_id.id and cep.registration_id.partner_id.id != cep.partner_id.id:
                     cep.partner_id.parent_id = cep.registration_id.partner_id
+                elif cep.paybyjobber and cep.pay_key_entered and 'pay_key_entered' in vals:
+                    payer = cep.suspend_security().search([('staff', '=', True), ('payforotherjobber', '=', True),('pay_key_master', '=', cep.pay_key_entered)])
+                    _logger.info('Payer? %s', payer )
+                    if payer and cep.registration_id != payer.registration_id:
+                        cep.suspend_security().write({'registration_id': payer.registration_id.id,
+                                                      'payreq_state': 'draft'})
+                    
         return res
+    
+    @api.multi
+    def action_add_jobber_child(self):
+        self.ensure_one()
+        
+        days_ids = []
+        for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
+                days_ids.append((0,0, {'participant_id': self.id,
+                                       'day_id': day.id,
+                                       'will_participate':  False,
+                                       'the_date': day.event_date,
+                                      }))
+        return {
+            'name': _('New child for: %s') % self.name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_jobber_final.campos_jobber_child_form_view').id,
+            'res_model': 'campos.event.participant',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            #'target': 'new',
+            'context' : {'default_registration_id': self.registration_id.id, 
+                         'default_street': self.street, 
+                         'default_city': self.city, 
+                         'default_zip': self.zip, 
+                         'default_country_id': self.country_id.id, 
+                         'default_jobber_child': True, 
+                         'default_parent_id': self.partner_id.id,
+                         'default_transport_to_camp': self.transport_to_camp,
+                         'default_transport_from_camp': self.transport_from_camp,
+                         'defualt_camp_day_ids': days_ids,
+                         'default_parent_jobber_id': self.id,
+                         }
+            }
+        
+        
+    @api.multi
+    def action_add_accom_group(self):
+        self.ensure_one()
+        _logger.info("ADD ACCOM")
+        
+        return {
+            'name': _('New Staff Accomodation Group'),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_jobber_final.campos_jobber_accom_group_form_view').id,
+            'res_model': 'campos.jobber.accom.group',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            #'target': 'new',
+            'context' : {
+                         'default_owner_id': self.id, 
+                         }
+            }    

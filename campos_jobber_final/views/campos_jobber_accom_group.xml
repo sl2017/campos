@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_jobber_accom_group_form_view">
+        <field name="name">campos.jobber.accom.group.form (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.accom.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="subcamp_id"/>
+                        <field name="accom_participant_ids" readonly="1" nolabel="1" colspan="2">
+                        	<tree>
+                        		<field name="participant_id"/>
+                        	</tree>
+                        </field>
+                        <field name="number_participants"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_jobber_accom_group_search_view">
+        <field name="name">campos.jobber.accom.group.search (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.accom.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="subcamp_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_jobber_accom_group_tree_view">
+        <field name="name">campos.jobber.accom.group.tree (in campos_jobber_final)</field>
+        <field name="model">campos.jobber.accom.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="subcamp_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_jobber_accom_group_act_window">
+        <field name="name">Campos Jobber Accom Group</field> <!-- TODO -->
+        <field name="res_model">campos.jobber.accom.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_jobber_accom_group_menu">
+        <field name="name">Campos Jobber Accom Group</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config"/>
+        <field name="action" ref="campos_jobber_accom_group_act_window"/>
+        <field name="sequence" eval="60"/>
+    </record>
+
+</data>
+</openerp>

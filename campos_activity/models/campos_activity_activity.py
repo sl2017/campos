@@ -57,7 +57,7 @@ class CamposActivityActivity(models.Model):
                                 help="Small sized image of this activity. It is automatically " \
                                      "resized as a 64x64px image, with aspect ratio preserved. " \
                                      "Use this field in form views or some kanban views.")
-    has_image =fields.Boolean('Ha Image', compute='_compute_has_image')
+    has_image = fields.Boolean('Ha Image', compute='_compute_has_image')
     
     @api.multi
     def _compute_has_image(self):

@@ -20,6 +20,12 @@ class CamposJobberAccomodation(models.Model):
         'Camp Area',
         select=True,
         ondelete='set null')
+    accom_group_id = fields.Many2one(
+        'campos.jobber.accom.group',
+        'Accomodation Group',
+        select=True,
+        ondelete='set null')
+    accom_code = fields.Char('Accomodation Code')
     state = fields.Selection([('draft', 'Draft'),
                               ('cancelled', 'Cancelled'),
                               ('approved', 'Approved'),
@@ -29,6 +35,7 @@ class CamposJobberAccomodation(models.Model):
     accom_type_id = fields.Many2one('campos.jobber.accom.type', 'Accomondation Type')
     group_sel = fields.Boolean(related='accom_type_id.group_sel', readonly=True)
     camparea_sel = fields.Boolean(related='accom_type_id.camparea_sel', readonly=True)
+    accomgroup_sel = fields.Boolean(related='accom_type_id.accomgroup_sel', readonly=True)
 
     @api.model
     def default_get(self, fields):
@@ -76,6 +83,11 @@ class CamposJobberAccomodation(models.Model):
         if 'state' in vals and vals['state'] == 'approved':
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
+        if 'accom_code' in vals and vals['accom_code']:
+            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', vals['accom_code'])])
+            if accom_id:
+                vals['accom_group_id'] = accom_id.id
+                vals['state'] = 'draft'
         return super(CamposJobberAccomodation,self).create(vals)
     
     @api.multi
@@ -83,6 +95,11 @@ class CamposJobberAccomodation(models.Model):
         if 'state' in vals and vals['state'] == 'approved':
             vals['approved_date'] = fields.Datetime.now()
             vals['spproved_user_id'] = self.env.uid
+        if 'accom_code' in vals and vals['accom_code']:
+            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', vals['accom_code'])])
+            if accom_id:
+                vals['accom_group_id'] = accom_id.id
+                vals['state'] = 'draft'
         return super(CamposJobberAccomodation, self).write(vals)
     
     @api.multi
@@ -92,3 +109,40 @@ class CamposJobberAccomodation(models.Model):
     @api.multi
     def action_refuse(self):
         self.write({'state': 'refused'})
+        
+    @api.onchange('accom_code')
+    def onchange_accom_code(self):
+        if self.accom_code:
+            accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', self.accom_code)])
+            if accom_id:
+                self.accom_group_id = accom_id
+                self.state = 'draft'
+
+    @api.onchange('accom_type_id')
+    def onchange_accom_type_id(self):
+        if self.accom_type_id:
+            if not self.accom_type_id.group_sel:
+                self.registration_id = False
+            if not self.accom_type_id.accomgroup_sel:
+                self.accom_group_id = False    
+    
+    @api.multi
+    def action_open_accom_group(self):
+        self.ensure_one()
+
+        if self.accom_group_id:
+            return {
+                'name': self.accom_group_id.name,
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': self.env.ref('campos_jobber_final.campos_jobber_accom_group_form_view').id,
+                'res_model': 'campos.jobber.accom.group',
+                'res_id': self.accom_group_id.id,
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                #'target': 'new',
+                'context' : {
+                             'default_owner_id': self.id, 
+                             }
+                }    
+            

@@ -38,6 +38,21 @@ source_file = campos_ckr/i18n/campos_ckr.pot
 source_lang = en
 type = PO
 
+[campos.campos_fee]
+file_filter = campos_fee/i18n/<lang>.po
+source_file = campos_fee/i18n/campos_fee.pot
+source_lang = en
+
+[campos.campos_crewnet]
+file_filter = campos_crewnet/i18n/<lang>.po
+source_file = campos_crewnet/i18n/campos_crewnet.pot
+source_lang = en
+
+[campos.campos_activity]
+file_filter = campos_activity/i18n/<lang>.po
+source_file = campos_activity/i18n/campos_activity.pot
+source_lang = en
+
 [campos.campos_preregistration]
 file_filter = campos_preregistration/i18n/<lang>.po
 source_file = campos_preregistration/i18n/campos_preregistration.pot

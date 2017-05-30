@@ -244,6 +244,7 @@ class EventParticipant(geo_model.GeoModel):
             # par.staff = True
         if par.state == 'draft':
             par.check_duplicate()
+        par.assign_participant_number()
         return par
 
     @api.multi
