@@ -136,6 +136,7 @@
 						    <field name="staff" invisible="1"/>
 							<field name="event_id" string="Event"  options="{'no_create': True}"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"/>
+							<field name="tag_ids" widget="many2many_tags"/>
 							<field name="organization_id" options="{'no_create': True}"/>
 							<field name="group_entrypoint" options="{'no_create': True}"/>
 							<field name="group_exitpoint" options="{'no_create': True}"/>
@@ -643,6 +644,7 @@
 							<field name="parent_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
 							<field name="name"/>
+							<field name="tag_ids" widget="many2many_tags"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
 							<field name="own_note" />
 							<field name="visa_required" invisible="1"/>

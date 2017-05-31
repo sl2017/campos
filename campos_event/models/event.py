@@ -277,6 +277,8 @@ class EventRegistration(models.Model):
     part_function_view_ids = fields.One2many(related='camp_area_id.committee_id.part_function_view_ids', string='Coordinators')
     reg_view_ids = fields.One2many(related='camp_area_id.reg_view_ids', string='Troops')
 
+    tag_ids = fields.Many2many('campos.reg.tag', string='Tags', groups='campos_event.group_campos_admin')
+    
     @api.multi
     def _compute_fallback(self):
         for reg in self:
