@@ -71,7 +71,11 @@ class WebtourRegistration(models.Model):
     webtourgroup_exitpointname = fields.Char(related="group_exitpoint.defaultdestination_id.name")
     webtourusneedtickets_ids = fields.One2many('campos.webtourusneed.tickets','registration_id','usNeed Tickets')
     webtourextrausneed_ids = fields.One2many('campos.webtourusneed','extra_registration_id','Extra usNeed')
-    
+    webtourusneed_seats_reg_id = fields.One2many('campos.webtourusneed.seats','id',ondelete='set null')
+    webtourusneed_seats_confirmed = fields.Integer(string = 'Webtour Seats confirmed', related='webtourusneed_seats_reg_id.seats_confirmed',ondelete='set null') 
+    webtourusneed_seats_pending = fields.Integer(string = 'Webtour Seats pending', related='webtourusneed_seats_reg_id.seats_pending',ondelete='set null') 
+    webtourusneed_seats_not_confirmed = fields.Integer(string = 'Webtour Seats not confirmed', related='webtourusneed_seats_reg_id.seats_not_confirmed',ondelete='set null') 
+
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
