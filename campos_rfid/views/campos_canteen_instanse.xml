@@ -30,7 +30,7 @@
                         <field name="ticket_used"/>
                         
                         </group>
-                        <field name="stat_ids" widget="x2many_graph" field_x="attended_slot_name" nolabel="1" field_label_x="Visitors" colspan="2">
+                        <field name="stat_ids" widget="x2many_barchart" field_x="attended_slot_name" nolabel="1" field_label_x="Visitors" colspan="2">
                         	<graph >
             					<field name="attended_slot_name"/> <!-- default name for field_x -->
              						<!-- The rest of fields will be taken as Y -->
