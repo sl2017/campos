@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_reg_tag_form_view">
+        <field name="name">campos.reg.tag.form (in campos_event)</field>
+        <field name="model">campos.reg.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_reg_tag_search_view">
+        <field name="name">campos.reg.tag.search (in campos_event)</field>
+        <field name="model">campos.reg.tag</field>
+        <field name="arch" type="xml">
+            <search>
+ 				<field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_reg_tag_tree_view">
+        <field name="name">campos.reg.tag.tree (in campos_event)</field>
+        <field name="model">campos.reg.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_reg_tag_act_window">
+        <field name="name">Registration Tags</field>
+        <field name="res_model">campos.reg.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_reg_tag_menu">
+        <field name="name">Registration Tags</field>
+        <field name="parent_id" ref="menu_campos_config"/>
+        <field name="action" ref="campos_reg_tag_act_window"/>
+        <field name="sequence" eval="200"/> 
+    </record>
+
+</data>
+</openerp>

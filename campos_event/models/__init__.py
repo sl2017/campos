@@ -21,3 +21,5 @@ from . import product_template
 from . import campos_registration_view
 from . import campos_function_view
 from . import res_country
+from . import campos_reg_tag
+from . import campos_par_tag

@@ -22,6 +22,9 @@
 					</div>
 				</xpath>
 				<xpath expr="/form/sheet/group" position="after">
+				<field name="name" position="after">
+					<field name="tag_ids" widget="many2many_tags"/>
+				</field>
 				<notebook>
 				<page string="Camp Info">
 				 <group>
@@ -74,6 +77,18 @@
 			<field name="domain">[('staff','=',True)]</field>
 		</record>
 		
+		<record id="view_registration_search" model="ir.ui.view">
+			<field name="name">event.event.campos.reg.inherit1</field>
+			<field name="model">event.registration</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="event.view_registration_search" />
+			<field name="arch" type="xml">
+				<field name="partner_id" position="after">
+					<field name="contact_partner_id"/>
+					<field name="tag_ids"/>
+				</field>
+			</field>
+		</record>
 		
 	</data>
 </openerp>
