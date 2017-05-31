@@ -64,6 +64,7 @@
 
     # always loaded
     'data': [
+       
         'views/res_country.xml',
         'views/product_template.xml',
         
@@ -105,6 +106,10 @@
         'views/campos_camp_area.xml',
         'data/camp_area_committee.xml',
         'data/participant_number.xml',
+        'security/campos_par_tag.xml',
+        'views/campos_par_tag.xml',
+        'security/campos_reg_tag.xml',
+        'views/campos_reg_tag.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

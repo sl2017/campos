@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_par_tag_form_view">
+        <field name="name">campos.par.tag.form (in campos_event)</field>
+        <field name="model">campos.par.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_par_tag_search_view">
+        <field name="name">campos.par.tag.search (in campos_event)</field>
+        <field name="model">campos.par.tag</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_par_tag_tree_view">
+        <field name="name">campos.par.tag.tree (in campos_event)</field>
+        <field name="model">campos.par.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_par_tag_act_window">
+        <field name="name">Campos Par Tag</field> <!-- TODO -->
+        <field name="res_model">campos.par.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_par_tag_menu">
+        <field name="name">Participant Tags</field>
+        <field name="parent_id" ref="menu_campos_config"/>
+        <field name="action" ref="campos_par_tag_act_window"/>
+        <field name="sequence" eval="210"/>
+    </record>
+
+</data>
+</openerp>
