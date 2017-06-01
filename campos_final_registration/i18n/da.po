@@ -877,7 +877,7 @@ msgstr "Sub Camp Responsible"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Tents and other"
-msgstr "Telte og byggeri"
+msgstr "Telte/byggeri og grej"
 
 #. module: campos_final_registration
 #: help:campos.event.participant,group_country_code:0
