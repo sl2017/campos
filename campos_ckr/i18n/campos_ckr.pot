@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-06-01 21:02+0000\n"
+"PO-Revision-Date: 2017-06-01 21:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -104,6 +104,11 @@ msgid "CKR"
 msgstr ""
 
 #. module: campos_ckr
+#: field:campos.event.participant,ckr_active_id:0
+msgid "CKR (Active)"
+msgstr ""
+
+#. module: campos_ckr
 #: model:res.groups,name:campos_ckr.group_campos_ckr_admin
 msgid "CKR Admin"
 msgstr ""
@@ -135,9 +140,25 @@ msgid "CKR Attest required. CPR number required."
 msgstr ""
 
 #. module: campos_ckr
+#: field:campos.event.participant,ckr_date_last_state_update:0
+msgid "CKR Last State change"
+msgstr ""
+
+#. module: campos_ckr
+#: view:campos.committee.function:campos_ckr.campos_committee_member_search
+#: view:campos.event.participant:campos_ckr.campos_event_participant_search_view
+msgid "CKR Missing"
+msgstr ""
+
+#. module: campos_ckr
 #: view:campos.event.participant:campos_ckr.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_ckr.view_event_registration_participant_form
 msgid "CKR Request"
+msgstr ""
+
+#. module: campos_ckr
+#: field:campos.event.participant,ckr_state:0
+msgid "CKR State"
 msgstr ""
 
 #. module: campos_ckr
@@ -401,7 +422,7 @@ msgid "Request"
 msgstr ""
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_event_participant.py:33
+#: code:addons/campos_ckr/models/campos_event_participant.py:49
 #: view:campos.event.participant:campos_ckr.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_ckr.view_event_registration_participant_form
 #, python-format

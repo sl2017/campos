@@ -1052,7 +1052,7 @@ class WebtourUsNeedTickets(models.Model):
                     ,left(replace(webtour_startdatetime,'T',' '),16) as startdatetime
                     ,left(replace(webtour_enddatetime,'T',' '),16)  as enddatetime
                     ,left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,10) as busterminaldate
-                    ,right(left(replace(webtour_enddatetime,'T',' '),14),3) || right('0'|| right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,16),2)::int/15*15,2) as busterminaltime            
+                    ,right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,14),3) || right('0'|| right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,16),2)::int/15*15,2) as busterminaltime            
                     ,tt.name as direction
                     ,d.name as Stop
                     ,replace(address,E'\nDK','') as address

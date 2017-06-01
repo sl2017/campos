@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-18 13:41+0000\n"
-"PO-Revision-Date: 2017-05-18 13:41+0000\n"
+"POT-Creation-Date: 2017-06-01 21:02+0000\n"
+"PO-Revision-Date: 2017-06-01 21:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,14 +17,27 @@ msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "(Only in Danish)"
+msgstr ""
+
+#. module: campos_crewnet
+#: model:ir.model,name:campos_crewnet.model_campos_ckr_check
+msgid "Campos Ckr Check"
 msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_search_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 #: field:campos.event.participant,crewnet_ok:0
 msgid "Crewnet"
+msgstr ""
+
+#. module: campos_crewnet
+#: code:addons/campos_crewnet/models/campos_ckr_check.py:16
+#, python-format
+msgid "Crewnet auto accepted on CKR approval."
 msgstr ""
 
 #. module: campos_crewnet
@@ -34,12 +47,18 @@ msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "General terms for the further use of the information provided by Crewnet as a service can be found"
 msgstr ""
 
 #. module: campos_crewnet
-#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "I hereby give consent to the use of my personal information by Crewnet I / S."
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid "I hereby give consent to the use of my personal information by Crewnet IvS."
 msgstr ""
 
 #. module: campos_crewnet
@@ -69,21 +88,25 @@ msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "The disclosure of information is necessary to simplify the organization of jobber and jobs in the camp's \"job app\" made available by Crewnet I/S, in conjunction with Spejdernes Lejr 2017."
 msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "There is no information about health, religion, ethnicity or political relationship."
 msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "There is only information that can relate you to a committee and your jobs at the camp."
 msgstr ""
 
 #. module: campos_crewnet
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 msgid "here."
 msgstr ""
 
