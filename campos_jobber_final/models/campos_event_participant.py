@@ -198,7 +198,7 @@ class CamposEventParticipant(models.Model):
             if cep.staff:
                 if not cep.paybygroup and not cep.paybyjobber and cep.registration_id.partner_id.id != cep.partner_id.id:
                     event_id = self.env['ir.config_parameter'].get_param('campos_welcome.event_id')
-                    _logger.info('EVent: %s %s', event_id, self.partner_id.id)
+                    _logger.info('EVent: %s %s', event_id, cep.partner_id.id)
                     if event_id:
                         event_id = int(event_id)
                         reg_id = self.env['event.registration'].suspend_security().search([('partner_id', '=', cep.partner_id.id), ('event_id', '=', event_id)])
