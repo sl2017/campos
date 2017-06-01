@@ -64,6 +64,7 @@
 </tree>
 </field>
 </record>
+
 <record id="view_form_webtourusneed" model="ir.ui.view">
 <field name="name">Webtour Us Need</field>
 <field name="model">campos.webtourusneed</field>
@@ -199,6 +200,35 @@
 		</tree>
 	</field>
 </record>
+
+<record id="view_search_webtourusneed_tickets" model="ir.ui.view">
+	<field name="name">webtourusneed.tickets</field>
+	<field name="model">campos.webtourusneed.tickets</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="registration_id"/>		
+			<field name="direction"/>
+			<field name="startdatetime"/>
+			<field name="enddatetime"/>
+			<field name="touridno"/>   
+			<field name="stop"/>
+			<field name="address"/>
+			
+			<filter string="Pending Seats" name="fseats_pending" domain="[('seats_pending','>',0)]" help="Pending Seats > 0"/>
+			<filter string="Not Confirmed" name="fseats_not_confirmed" domain="[('seats_not_confirmed','>',)]" help="Not Confirmed > 0"/>
+			<filter string="To Camp" name="ftocamp" domain="[('direction','=','To Camp')]" help="Direction To Camp"/>
+			<filter string="From Camp" name="ftocamp" domain="[('direction','=','From Camp')]" help="Direction From Camp"/>
+		
+			<group expand="0" string="Group By...">
+            <filter name="fdirection" string="Direction" icon="terp-personal" domain="[]" context="{'group_by':'direction'}"/> 
+            <filter name="fregistration_id" string="webtour_groupidno" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+            <filter name="fstop" string="webtour_touridno" icon="terp-personal" domain="[]" context="{'group_by':'stop'}"/>  
+            <filter name="ftouridno" string="touridno" icon="terp-personal" domain="[]" context="{'group_by':'touridno'}"/>          
+			</group>
+		</search>
+	</field>
+</record>
+
 
 <record id="view_tree_WebtourTripOverview" model="ir.ui.view">
 	<field name="name">Webtour Trip Overview</field>
