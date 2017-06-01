@@ -1031,8 +1031,10 @@ class WebtourUsNeedTickets(models.Model):
   
     registration_id = fields.Many2one('event.registration','Registration ID')
     touridno = fields.Char('Tour IDno')
-    startdatetime = fields.Datetime('Start Date Time')
-    enddatetime = fields.Datetime('End Date Time')  
+    startdatetime = fields.Char('Start Date Time')
+    enddatetime = fields.Char('End Date Time')  
+    busterminaldate = fields.Char('Busterminal Date')
+    busterminaltime = fields.Char('Busterminal Time') 
     direction = fields.Char('Direction')
     stop = fields.Char('Stop')
     address = fields.Char('Address')
@@ -1047,8 +1049,10 @@ class WebtourUsNeedTickets(models.Model):
                     select min(n.id) as id 
                     ,p.registration_id
                     ,webtour_touridno as touridno
-                    ,replace(webtour_startdatetime,'T',' ') as startdatetime
-                    ,replace(webtour_enddatetime,'T',' ') as enddatetime                    
+                    ,left(replace(webtour_startdatetime,'T',' '),16) as startdatetime
+                    ,left(replace(webtour_enddatetime,'T',' '),16)  as enddatetime
+                    ,left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,10) as busterminaldate
+                    ,right(left(replace(webtour_enddatetime,'T',' '),14),3) || right('0'|| right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,16),2)::int/15*15,2) as busterminaltime            
                     ,tt.name as direction
                     ,d.name as Stop
                     ,replace(address,E'\nDK','') as address
@@ -1061,7 +1065,7 @@ class WebtourUsNeedTickets(models.Model):
                     inner join campos_event_participant p on p.id = n.participant_id 
                     inner join event_registration r on r.id = p.registration_id 
                     where needstatus <> '0' 
-                    group by p.registration_id,r.name,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address 
+                    group by p.registration_id,r.name,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address,tt.returnjourney
                     order by 2,case when returnjourney then 2 else 1 end ,5         
                     """
                     )        

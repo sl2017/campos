@@ -190,7 +190,9 @@
 		<field name="registration_id" />
 		<field name="direction" />
 	    <field name="startdatetime" /> 
-	    <field name="enddatetime" /> 		
+	    <field name="enddatetime" /> 
+	    <field name="busterminaldate" /> 
+	    <field name="busterminaltime" /> 	
 	    <field name="seats_confirmed" /> 
 	    <field name="seats_pending" /> 
 	   	<field name="seats_not_confirmed" /> 	  
@@ -220,8 +222,10 @@
 			<filter string="From Camp" name="ftocamp" domain="[('direction','=','From Camp')]" help="Direction From Camp"/>
 		
 			<group expand="0" string="Group By...">
-            <filter name="fdirection" string="Direction" icon="terp-personal" domain="[]" context="{'group_by':'direction'}"/> 
+            <filter name="fdirection" string="Direction" icon="terp-personal" domain="[]" context="{'group_by':'direction'}"/>
             <filter name="fregistration_id" string="webtour_groupidno" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+            <filter name="fbusterminaldate" string="busterminaldate" icon="terp-personal" domain="[]" context="{'group_by':'busterminaldate'}"/> 
+            <filter name="fbusterminaltime" string="busterminaltime" icon="terp-personal" domain="[]" context="{'group_by':'busterminaltime'}"/>             
             <filter name="fstop" string="webtour_touridno" icon="terp-personal" domain="[]" context="{'group_by':'stop'}"/>  
             <filter name="ftouridno" string="touridno" icon="terp-personal" domain="[]" context="{'group_by':'touridno'}"/>          
 			</group>
