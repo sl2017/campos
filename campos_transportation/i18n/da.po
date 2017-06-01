@@ -525,7 +525,7 @@ msgstr "Stoppested"
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
 #: field:campos.webtourusneed.tickets,direction:0
 msgid "Direction"
-msgstr ""
+msgstr "Retning"
 
 #. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
@@ -575,7 +575,7 @@ msgstr "Deltager ikke"
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,enddatetime:0
 msgid "End Date Time"
-msgstr ""
+msgstr "Ankomst dag og tid"
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,enddatetime:0
@@ -1188,7 +1188,7 @@ msgstr ""
 #. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
 msgid "Pending Seats"
-msgstr ""
+msgstr "Pladser under behandling"
 
 #. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
@@ -1283,19 +1283,19 @@ msgstr ""
 #: field:campos.webtourusneed.seats,seats_confirmed:0
 #: field:campos.webtourusneed.tickets,seats_confirmed:0
 msgid "Seats confirmed"
-msgstr ""
+msgstr "Bekræftede pladser"
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_not_confirmed:0
 #: field:campos.webtourusneed.tickets,seats_not_confirmed:0
 msgid "Seats not confirmed"
-msgstr ""
+msgstr "Afvise pladser"
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_pending:0
 #: field:campos.webtourusneed.tickets,seats_pending:0
 msgid "Seats pending"
-msgstr ""
+msgstr "Ændringer under behandling"
 
 #. module: campos_transportation
 #: field:event.registration.entryexitpoint,defaultdestination_id:0
@@ -1341,7 +1341,7 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,startdatetime:0
 msgid "Start Date Time"
-msgstr ""
+msgstr "Afgangs dato og tid"
 
 #. module: campos_transportation
 #: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
@@ -1382,7 +1382,7 @@ msgstr "Start Note"
 #: field:campos.webtourusneed.tickets,stop:0
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour_admin
 msgid "Stop"
-msgstr ""
+msgstr "Stoppested"
 
 #. module: campos_transportation
 #: help:campos.event.participant,org_country_code:0
@@ -1472,7 +1472,7 @@ msgstr "Udrejsedato"
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,touridno:0
 msgid "Tour IDno"
-msgstr ""
+msgstr "Tur ID"
 
 #. module: campos_transportation
 #: field:campos.webtour.usneedminimum,touridno:0
