@@ -37,6 +37,7 @@ def do_delayed_get_create_webtour_need_job(session, model, rec_id):
     
 class WebtourUsNeed(models.Model):
     _name = 'campos.webtourusneed'
+    _description = 'Campos Webtour usneed'
     participant_id = fields.Many2one('campos.event.participant','Participant ID', ondelete='set null')
     registration_id = fields.Many2one('event.registration','Registration ID', ondelete='set null', related="participant_id.registration_id")
     travelgroup = fields.Char('Travel Group', default='1')
@@ -168,7 +169,7 @@ class WebtourUsNeed(models.Model):
                                    ('4', 'NOT AS DESIRED'),
                                    ('5', 'CANNOT BE CANCELED'),
                                    ('6', 'NO SEAT RESERVED'),
-                                   ('9', 'Error')], default=False, string='Need Status')#,compute='_computeneedstatus', readonly=True, store=True)
+                                   ('9', 'Error')], default=False, string='Need Status')
 
     needproblem = fields.Char('Need Problem')
     extra_registration_id = fields.Many2one('event.registration','Registration ID', ondelete='set null')
@@ -956,6 +957,7 @@ class WebtourUsNeed(models.Model):
     
 class WebtourNeedOverview(models.Model):
     _name = 'campos.webtourusneed.overview'
+    _description = 'Campos Webtour usneed Overview'
     _auto = False
     _log_access = False
 
@@ -1006,6 +1008,7 @@ class WebtourNeedOverview(models.Model):
 
 class WebtourUsNeedTravelNeedPax(models.Model):
     _name = 'campos.webtourusneed.travelneedpax'
+    _description = 'Campos Webtour usneed Travelneed pax'
     _auto = False
     _log_access = False
   
@@ -1025,6 +1028,7 @@ class WebtourUsNeedTravelNeedPax(models.Model):
                     )
         
 class WebtourUsNeedTickets(models.Model):
+    _description = 'campos webtour usNeed Tickets'
     _name = 'campos.webtourusneed.tickets'
     _auto = False
     _log_access = False
@@ -1070,8 +1074,56 @@ class WebtourUsNeedTickets(models.Model):
                     """
                     )        
 
+class WebtourUsNeedTicketsParticipant(models.Model):
+    _name = 'campos.webtourusneed.ticketsparticipant'
+    _description = 'campos webtour usNeed Tickets Participant'
+    _auto = False
+    _log_access = False
+  
+    participant_id = fields.Many2one('campos.event.participant','Participant ID')
+    touridno = fields.Char('Tour IDno')
+    startdatetime = fields.Char('Start Date Time')
+    enddatetime = fields.Char('End Date Time')  
+    busterminaldate = fields.Char('Busterminal Date')
+    busterminaltime = fields.Char('Busterminal Time') 
+    direction = fields.Char('Direction')
+    stop = fields.Char('Stop')
+    address = fields.Char('Address')
+    seats_confirmed = fields.Integer('Seats confirmed')
+    seats_pending = fields.Integer('Seats pending')
+    seats_not_confirmed = fields.Integer('Seats not confirmed')
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_ticketsparticipant as                  
+                    select min(n.id) as id 
+                    ,n.participant_id 
+                    ,webtour_touridno as touridno
+                    ,left(replace(webtour_startdatetime,'T',' '),16) as startdatetime
+                    ,left(replace(webtour_enddatetime,'T',' '),16)  as enddatetime
+                    ,left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,10) as busterminaldate
+                    ,right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,14),3) || right('0'|| right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,16),2)::int/15*15,2) as busterminaltime            
+                    ,tt.name as direction
+                    ,d.name as Stop
+                    ,replace(address,E'\nDK','') as address
+                    ,sum(case when needstatus in ('1','5') then 1 else 0 end) as seats_confirmed
+                    ,sum(case when needstatus in ('2','3','4') then 1 else 0 end) as seats_pending
+                    ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed 
+                    from campos_webtourusneed  n 
+                    inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
+                    left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
+                    inner join campos_event_participant p on p.id = n.participant_id 
+                    where needstatus <> '0' 
+                    group by n.participant_id ,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address,tt.returnjourney
+                    order by 2,case when returnjourney then 2 else 1 end ,5         
+                    """
+                    )  
+
+
 class WebtourUsNeedSeats(models.Model):
     _name = 'campos.webtourusneed.seats'
+    _description = 'campos webtour usneed seats'
     _auto = False
     _log_access = False
   
@@ -1098,10 +1150,38 @@ class WebtourUsNeedSeats(models.Model):
                     order by 1       
                     """
                     )
+
+class WebtourUsNeedSeatsParticipant(models.Model):
+    _name = 'campos.webtourusneed.seatsparticipant'
+    _description = 'campos webtour usneed seats participant'
+    _auto = False
+    _log_access = False
+  
+    participant_id = fields.Many2one('campos.event.participant','Participant ID')
+    seats_confirmed = fields.Integer('Seats confirmed')
+    seats_pending = fields.Integer('Seats pending')
+    seats_not_confirmed = fields.Integer('Seats not confirmed')
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_seatsparticipant as                  
+                    select participant_id as id 
+                    ,sum(case when needstatus in ('1','5') then 1 else 0 end) as seats_confirmed
+                    ,sum(case when needstatus in ('2','3','4') then 1 else 0 end) as seats_pending
+                    ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed 
+                    from campos_webtourusneed  n 
+                    inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
+                    left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
+                    where needstatus <> '0' 
+                    group by participant_id     
+                    """
+                    )
         
      
 class WebtourUsNeedChanges(models.Model):
     _name = 'campos.webtourusneed.changes'
+    _description = 'Campos Webtour usNeed Changes'
     WebtourUsNeed_id = fields.Many2one('campos.webtourusneed','id', ondelete='set null')
     idno = fields.Char('webtour_needidno')
     touridno = fields.Char('TourIDno', required=False)
@@ -1131,6 +1211,7 @@ class WebtourUsNeedChanges(models.Model):
     
 class Webtour_usNeedMinimum(models.Model):
     _name = 'campos.webtour.usneedminimum'
+    _description = 'Campos Webtour usNeedminimum'
     idno = fields.Char('IDno')
     groupidno = fields.Char('GroupIDno')
     group_name = fields.Char('Group Name', compute='_compute_groupname')
@@ -1179,6 +1260,7 @@ class Webtour_usNeedMinimum(models.Model):
 
 class Webtour_usNeedError(models.Model):
     _name = 'campos.webtour.usneederror'
+    _description = 'Campos Webtour usNeed error'
     idno = fields.Char('IDno')        
 
     @api.multi
@@ -1189,6 +1271,7 @@ class Webtour_usNeedError(models.Model):
 
 class Webtour_usUserMinimum(models.Model):
     _name = 'campos.webtour.ususerminimum'
+    _description = 'Campos Webtour usUserminimum'
     idno = fields.Char('IDno')
     groupidno = fields.Char('GroupIDno')
     externalid = fields.Char('ExternalID')    
@@ -1212,6 +1295,7 @@ class Webtour_usUserMinimum(models.Model):
 
 class Webtour_usGroup(models.Model):
     _name = 'campos.webtour.usgroup'
+    _description = 'Campos Webtour usGroup'
     idno = fields.Char('IDno')
     name = fields.Char('Name')
     alias = fields.Char('Alias')
