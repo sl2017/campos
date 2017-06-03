@@ -12,6 +12,7 @@ _logger = logging.getLogger(__name__)
        
 class WebtourParticipantOverview(models.Model):
     _name = 'campos.webtourparticipantoverview'
+    _description = 'Campos Webtour Participant Overview'
     _auto = False
     _log_access = False
     
