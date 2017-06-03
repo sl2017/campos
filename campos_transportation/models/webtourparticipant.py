@@ -73,7 +73,31 @@ class WebtourParticipant(models.Model):
     webtourtravelneed_ids = fields.One2many(related='registration_id.webtourtravelneed_ids', string = 'Special travel needs')
     
     webtour_externalid_suffix = fields.Char('External ID Postfix', default='')
+    webtourusneedtickets_ids = fields.One2many('campos.webtourusneed.ticketsparticipant','participant_id','usNeed Tickets')
     
+    webtourusneed_seats_reg_id = fields.One2many('campos.webtourusneed.seatsparticipant','id',ondelete='set null')
+    webtourusneed_seats_confirmed = fields.Integer(string = 'Webtour Seats confirmed', related='webtourusneed_seats_reg_id.seats_confirmed',ondelete='set null') 
+    webtourusneed_seats_pending = fields.Integer(string = 'Webtour Seats pending', related='webtourusneed_seats_reg_id.seats_pending',ondelete='set null') 
+    webtourusneed_seats_not_confirmed = fields.Integer(string = 'Webtour Seats not confirmed', related='webtourusneed_seats_reg_id.seats_not_confirmed',ondelete='set null') 
+    
+    
+    tocampusneed_status = fields.Selection([('0', 'No Demand'),
+                                            ('1', 'OK'),
+                                            ('2', 'In Planning'),
+                                            ('3', 'Pending Change'),
+                                            ('4', 'Request changed, waiting to be processed'),
+                                            ('5', 'CANNOT BE CANCELED'),
+                                            ('6', 'NO SEAT RESERVED'),
+                                            ('9', 'Error')], string='Ticket Status to Camp',related='tocampusneed_id.needstatus')
+
+    fromcampusneed_status = fields.Selection([('0', 'No Demand'),
+                                              ('1', 'OK'),
+                                              ('2', 'In Planning'),
+                                              ('3', 'Pending Change'),
+                                              ('4', 'Request changed, waiting to be processed'),
+                                              ('5', 'CANNOT BE CANCELED'),
+                                              ('6', 'NO SEAT RESERVED'),
+                                              ('9', 'Error')], string='Ticket Status from Camp',related='fromcampusneed_id.needstatus')
     
     @api.one
     def _check_is_admin(self):
@@ -669,6 +693,26 @@ class WebtourParticipantCampDay(models.Model):
     '''
     _inherit = 'campos.event.participant.day'
     webtourcamptransportation = fields.Char('Camp transportation',compute='_compute_webtourcamptransportation')
+    webtourticketstatus = fields.Selection([('0', 'No Demand'),
+                                            ('1', 'OK'),
+                                            ('2', 'In Planning'),
+                                            ('3', 'Pending Change'),
+                                            ('4', 'Request changed, waiting to be processed'),
+                                            ('5', 'CANNOT BE CANCELED'),
+                                            ('6', 'NO SEAT RESERVED'),
+                                            ('9', 'Error')], string='Ticket Status',compute='_compute_webtourticketstatus')     
+    
+    @api.one
+    def _compute_webtourticketstatus(self):
+        if self.the_date == self.participant_id.tocampdate and (self.participant_id.transport_to_camp or self.participant_id.tocampusneed_status != '1') :
+            self.webtourticketstatus = self.participant_id.tocampusneed_status
+                           
+        elif self.the_date == self.participant_id.fromcampdate and (self.participant_id.transport_from_camp or self.participant_id.fromcampusneed_status != '1'):
+            self.webtourticketstatus = self.participant_id.fromcampusneed_status        
+        else:
+            self.webtourticketstatus = ''
+
+
 
     @api.one
     def _compute_webtourcamptransportation(self):
@@ -701,7 +745,6 @@ class WebtourParticipantCampDay(models.Model):
         else:
                 self.webtourcamptransportation = ''
 
-             
 
                 
         

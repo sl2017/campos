@@ -51,7 +51,7 @@ _logger = logging.getLogger(__name__)
 
 class webtourconfig(models.Model):
     _name = 'campos.webtourconfig'
-
+    _description = 'Campos Webtour Config'
     event_id = fields.Many2one('event.event', 'id')
     campdestinationid = fields.Many2one('campos.webtourusdestination', 'id',ondelete='set null')
     tocamp_campos_TripType_id = fields.Many2one('campos.webtourconfig.triptype','To Camp TripType', ondelete='set null')
