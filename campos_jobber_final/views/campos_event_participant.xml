@@ -296,7 +296,7 @@
 									<field name="date_to"/>
 									<field name="eat_at"/>
 								
-									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')]" options="{'no_create': True, 'no_open': True}"/>
+									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
 								
 											
 									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
