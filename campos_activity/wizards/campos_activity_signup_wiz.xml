@@ -15,7 +15,7 @@
                 	<field name="state" invisible="1"/>
                 	<field name="id" invisible="1"/>
                 	<field name="reg_id" invisible="1"/>
-                	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}"/>
+                	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}" options="{'no_create': True, 'no_open': True}"/>
                 	<field name="teaser" nolabel="1" colspan="2"/>
                 	<newline/>
                 	<field name="audience_ids" widget="many2many_checkboxes"/>
@@ -24,11 +24,11 @@
                 	<field name="age_from"/>
                 	<field name="age_to"/>
                 	</group>
-                	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"  domain="[('activity_id', '=', act_id), ('seats_available', '>', 0)]"/>
+                	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"  domain="[('activity_id', '=', act_id), ('seats_available', '>', 0)]" options="{'no_create': True, 'no_open': True}"/>
                 	<field name="seats"/>
                     <field name="par_signup_ids" states="step2" domain="[('wiz_id', '=', id)]"/>
                     <field name="name"/>
-                    <field name="ticket_id"/>
+                    <field name="ticket_id" invisible="1"/>
                     
                 </group>
                 <footer>
