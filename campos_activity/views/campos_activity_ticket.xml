@@ -43,6 +43,44 @@
         </field>
     </record>
 
+	<record model="ir.ui.view" id="campos_activity_ticket_booking_view">
+        <field name="name">campos.activity.ticket.booking (in campos_activity)</field>
+        <field name="model">campos.activity.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" clickable="True" 
+                    			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="campos_activity.group_campos_activity"/>
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="act_ins_id"/>
+                            <field name="act_desc"/>
+                            <field name="reg_id"/>
+                            <field name="seats" options="{'reload_on_button': true}"/>
+                            <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
+                            
+                            <field name="id" invisible="1"/>
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            	<tree options="{'reload_on_button': true}">
+                            		<field name="name"/>
+ 									<field name="age"/>
+ 									<field name="dates_summery"/>
+ 									<!-- 
+ 									<button name="action_unlink_activityticket"  icon="STOCK_CLOSE" type="object" help="Remove Participant from Activity Booking"/>
+ 									 -->
+                            	</tree>
+                            	</field>
+                            <field name="name"/>
+                        
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+	
     <record model="ir.ui.view" id="campos_activity_ticket_search_view">
         <field name="name">campos.activity.ticket.search (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
