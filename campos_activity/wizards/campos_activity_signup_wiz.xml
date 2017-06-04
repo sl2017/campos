@@ -12,8 +12,8 @@
             <form string="Campos Activity Signup Wiz">
                 <!-- TODO -->
                 <group>
-                	<field name="state" invisible="0"/>
-                	<field name="id" invisible="0"/>
+                	<field name="state" invisible="1"/>
+                	<field name="id" invisible="1"/>
                 	<field name="reg_id" invisible="1"/>
                 	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}"/>
                 	<field name="teaser" nolabel="1" colspan="2"/>
