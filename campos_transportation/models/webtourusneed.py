@@ -1026,6 +1026,27 @@ class WebtourUsNeedTravelNeedPax(models.Model):
                     group by travelneed_id          
                     """
                     )
+
+
+class WebtourUsNeedTicketsSent(models.Model):
+    _name = 'campos.webtourusneed.tickets.sent'
+    _description = 'campos webtour usNeed Tickets Sent'
+  
+    ticket_id = fields.Integer('Tickets Id')
+    sentdatetime = fields.Datetime('sent datetime')
+    registration_id = fields.Many2one('event.registration','Registration ID')
+    touridno = fields.Char('Tour IDno')
+    startdatetime = fields.Char('Start Date Time')
+    enddatetime = fields.Char('End Date Time')  
+    busterminaldate = fields.Char('Busterminal Date')
+    busterminaltime = fields.Char('Busterminal Time') 
+    direction = fields.Char('Direction')
+    stop = fields.Char('Stop')
+    address = fields.Char('Address')
+    seats_confirmed = fields.Integer('Seats confirmed')
+    seats_pending = fields.Integer('Seats pending')
+    seats_not_confirmed = fields.Integer('Seats not confirmed')
+
         
 class WebtourUsNeedTickets(models.Model):
     _description = 'campos webtour usNeed Tickets'
@@ -1045,32 +1066,53 @@ class WebtourUsNeedTickets(models.Model):
     seats_confirmed = fields.Integer('Seats confirmed')
     seats_pending = fields.Integer('Seats pending')
     seats_not_confirmed = fields.Integer('Seats not confirmed')
+    create_date = fields.Datetime('Create_date')
+    create_uid = fields.One2many('res.users','id')
+    write_date = fields.Datetime('write_date')
+    write_uid = fields.One2many('res.users','id')
+    write_uid = fields.One2many('res.users','id')
+    sameaslastmail = fields.Boolean('Same as last mail')
+    lastmaildatetime = fields.Datetime('last mail datetime')
+    lastmailtxt = fields.Char('last mail')
     
     def init(self, cr, context=None):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
-                    create or replace view campos_webtourusneed_tickets as                  
+                    create or replace view campos_webtourusneed_tickets as      
+                    select t.*, ((COALESCE(t.startdatetime,'-') = COALESCE(s.startdatetime,'-')) and (COALESCE(t.enddatetime,'-') = COALESCE(s.enddatetime,'-')) and 
+                                (COALESCE('' || t.touridno,'-2') = COALESCE('' || s.touridno,'-2')) and 
+                                (COALESCE(t.direction,'-') = COALESCE(s.direction,'-')) and 
+                                (COALESCE(t.stop,'-') = COALESCE(s.stop,'-')) and (COALESCE(t.address,'-') = COALESCE(s.address,'-')) and 
+                                (COALESCE(t.seats_confirmed,-1) = COALESCE(s.seats_confirmed,-1))) as sameaslastmail
+                    ,s.sentdatetime as lastmaildatetime 
+                    ,COALESCE(s.direction,'-') || ','  || COALESCE(s.startdatetime,'-') || ',' || COALESCE(s.enddatetime,'-') || ',' || COALESCE(s.stop,'-') || ',' || COALESCE('' || s.seats_confirmed,'-') || ',' || COALESCE('' || s.seats_pending,'-')  || ',' || COALESCE('' || s.seats_not_confirmed,'-') || ',' || COALESCE('' || s.touridno,'-') || ',' || COALESCE(s.address,'-') as lastmailtxt from (            
                     select min(n.id) as id 
                     ,p.registration_id
-                    ,webtour_touridno as touridno
+                    ,n.webtour_touridno as touridno
                     ,left(replace(webtour_startdatetime,'T',' '),16) as startdatetime
                     ,left(replace(webtour_enddatetime,'T',' '),16)  as enddatetime
                     ,left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,10) as busterminaldate
                     ,right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,14),3) || right('0'|| right(left(case when tt.returnjourney then webtour_startdatetime else webtour_enddatetime end,16),2)::int/15*15,2) as busterminaltime            
                     ,tt.name as direction
                     ,d.name as Stop
-                    ,replace(address,E'\nDK','') as address
+                    ,replace(d.address,E'\nDK','') as address
                     ,sum(case when needstatus in ('1','5') then 1 else 0 end) as seats_confirmed
                     ,sum(case when needstatus in ('2','3','4') then 1 else 0 end) as seats_pending
-                    ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed 
+                    ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed
+                    ,min(n.create_date) as create_date 
+                    ,min(n.create_uid) as  create_uid
+                    ,max(n.write_date) as write_date
+                    ,min(n.write_uid) as write_uid
                     from campos_webtourusneed  n 
                     inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
                     left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
                     inner join campos_event_participant p on p.id = n.participant_id 
-                    inner join event_registration r on r.id = p.registration_id 
+                    inner join event_registration r on r.id = p.registration_id
                     where needstatus <> '0' 
-                    group by p.registration_id,r.name,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address,tt.returnjourney
-                    order by 2,case when returnjourney then 2 else 1 end ,5         
+                    group by p.registration_id,r.name,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,d.address,tt.returnjourney 
+                    order by 2,case when returnjourney then 2 else 1 end ,5   ) t 
+                    left outer join (select ts.ticket_id, max(ts.id) as lastid from campos_webtourusneed_tickets_sent ts group by ts.ticket_id) lastsent on lastsent.ticket_id = t.id
+                    left outer join campos_webtourusneed_tickets_sent as s on s.id  = lastsent.lastid
                     """
                     )        
 
@@ -1092,6 +1134,10 @@ class WebtourUsNeedTicketsParticipant(models.Model):
     seats_confirmed = fields.Integer('Seats confirmed')
     seats_pending = fields.Integer('Seats pending')
     seats_not_confirmed = fields.Integer('Seats not confirmed')
+    create_date = fields.Datetime('Create_date')
+    create_uid = fields.One2many('res.users','id')
+    write_date = fields.Datetime('write_date')
+    write_uid = fields.One2many('res.users','id')    
     
     def init(self, cr, context=None):
         tools.sql.drop_view_if_exists(cr, self._table)
@@ -1110,6 +1156,10 @@ class WebtourUsNeedTicketsParticipant(models.Model):
                     ,sum(case when needstatus in ('1','5') then 1 else 0 end) as seats_confirmed
                     ,sum(case when needstatus in ('2','3','4') then 1 else 0 end) as seats_pending
                     ,sum(case when needstatus in ('6','7') then 1 else 0 end) as seats_not_confirmed 
+                    ,min(n.create_date) as create_date 
+                    ,min(n.create_uid) as  create_uid
+                    ,max(n.write_date) as write_date
+                    ,min(n.write_uid) as write_uid                    
                     from campos_webtourusneed  n 
                     inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
                     left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
