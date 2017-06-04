@@ -76,9 +76,9 @@
 
 </header>
 <sheet>
-<group name="user_top">
-<field name="participant_id" readonly="0"/>
-<field name="registration_id" readonly="0"/>
+<group name="user_top">  
+<field name="participant_id" readonly="0" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_participant'}"/>
+<field name="registration_id" readonly="0" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_gl'}" />
 <field name="campos_TripType_id"/>
 <field name="travelgroup"/>
 <field name="travelneed_id"/>

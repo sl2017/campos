@@ -22,6 +22,7 @@ _logger = logging.getLogger(__name__)
 
 class WebtourRequestLogger(models.Model):
     _name = 'campos.webtour_req_logger'
+    _description = 'Campos Webtour Req Log'
     name = fields.Char('Request')
     responce = fields.Text('Responce')
     responcexml = fields.Text('Responce xml', compute='_compute_xml')
@@ -54,6 +55,7 @@ class WebtourRequestLogger(models.Model):
 
 class WebtourRequestCommands(models.Model):
     _name = 'campos.webtour_req_commands'
+    _description = 'Campos Webtour Req Commands'
     name = fields.Char('Request')
     
     
