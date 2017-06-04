@@ -8,3 +8,4 @@ from . import campos_activity_pitag
 from . import campos_event_participant
 from . import campos_activity_type
 from . import campos_activity_audience
+from . import event_registration

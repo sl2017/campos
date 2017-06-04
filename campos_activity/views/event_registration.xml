@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="event_registration_form_view">
+        <field name="name">event.registration.form (in campos_activity)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
+        <field name="arch" type="xml">
+            <page name="pre_reg" position="before">
+            	<page name="activity" string="Activities">
+					
+					<button name="action_add_activity" string="Add Activity" type="object"/>
+					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
+					<field name="ticket_ids"/>
+					           	
+            		
+            	
+            	</page>
+            </page>
+        </field>
+    </record>
+
+<!-- TODO 
+    <record model="ir.ui.view" id="event_registration_search_view">
+        <field name="name">event.registration.search (in campos_activity)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="arch" type="xml">
+            
+        </field>
+    </record>
+-->
+
+<!-- TODO
+    <record model="ir.ui.view" id="event_registration_tree_view">
+        <field name="name">event.registration.tree (in campos_activity)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+        <field name="arch" type="xml">
+
+        </field>
+    </record>
+ -->
+
+</data>
+</openerp>

@@ -12,7 +12,7 @@ class CamposActivityTicket(models.Model):
 
     name = fields.Char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.')
     seats = fields.Integer('Seats')
-    reserved_time = fields.Datetime('Reserved Date/Time')
+    reserved_time = fields.Datetime('Reserved Date/Time', default=fields.Datetime.now)
     state = fields.Selection([('open', 'Reserved'),
                               ('done', 'Booked'),
                               ('timeout', 'TimeOut'),
