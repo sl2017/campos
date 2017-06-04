@@ -12,15 +12,24 @@
             <form string="Campos Activity Signup Wiz">
                 <!-- TODO -->
                 <group>
-                	<field name="state"/>
+                	<field name="state" invisible="0"/>
+                	<field name="id" invisible="0"/>
+                	<field name="reg_id" invisible="1"/>
                 	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}"/>
-                	<field name="teaser" nolabel="1" />
+                	<field name="teaser" nolabel="1" colspan="2"/>
+                	<newline/>
                 	<field name="audience_ids" widget="many2many_checkboxes"/>
+                	<newline/>
+                	<group col="4" colspan="2">
                 	<field name="age_from"/>
                 	<field name="age_to"/>
+                	</group>
                 	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"/>
+                	<field name="seats"/>
+                    <field name="par_signup_ids" states="step2" domain="[('wiz_id', '=', id)]"/>
                     <field name="name"/>
-                    <field name="members" states="step2"
+                    <field name="ticket_id"/>
+                    
                 </group>
                 <footer>
                     <button name='doit_step1'
@@ -49,12 +58,24 @@
         <field name="context">{}</field>
         <field name="target">new</field>
     </record>
+    
+    <record model="ir.ui.view" id="campos_activity_signup_wiz_member_view">
+        <field name="name">campos.activity.signup.members tree (in campos_activity)</field>
+        <field name="model">campos.activity.signup.members</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+            	<field name="camp_age"/>
+            	<field name="own_note"/>	
+            </tree>
+    	</field>
+    </record>
 <!-- 
     <record model="ir.values" id="campos_activity_signup_wiz_act_multi">
-        <field name="name">Campos Activity Signup Wiz</field><!-- TODO -->
+        <field name="name">Campos Activity Signup Wiz</field>
         <field name="key2">client_action_multi</field>
         <field name="value" eval="'ir.actions.act_window,' +str(ref('campos_activity_signup_wiz_act_window'))" />
-        <field name="model">source.model</field><!-- TODO -->
+        <field name="model">source.model</field>
     </record>
  -->
 

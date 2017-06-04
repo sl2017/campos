@@ -109,6 +109,17 @@
     </record>
     
     <record model="ir.ui.view" id="campos_activity_ticket_calendar_view">
+        <field name="name">campos.activity.calendar.tree (in campos_activity)</field>
+        <field name="model">campos.activity.ticket</field>
+        <field name="arch" type="xml">
+		    <calendar string="Tickets" date_start="actins_date_begin" date_stop="actins_date_end" color="activity_id" day_length="12">
+				<field name="act_ins_id"/>
+				<field name="seats"/>
+				<field name="name"/>
+			</calendar>
+		</field>
+	</record>    
+    <record model="ir.ui.view" id="campos_activity_ticket_calendar_view">
         <field name="name">campos.activity.ticket.tree (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
         <field name="arch" type="xml">

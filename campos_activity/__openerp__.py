@@ -15,6 +15,7 @@
                 'campos_final_registration',
     ],
     'data': [
+        'views/event_registration.xml',
         'wizards/campos_activity_signup_wiz.xml',
         'security/campos_activity_activity.xml',
         'views/campos_activity_activity.xml',
