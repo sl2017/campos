@@ -300,6 +300,7 @@
 											<field name="participant_own_transport_type"  options="{'no_create': True}" attrs="{'readonly': [('participant_own_transport_to_camp_total', '=', 0),('participant_own_transport_from_camp_total', '=', 0)]}"/>
 										</tree>
 									</field>
+									<button name="action_open_groupparticipants" string="Add/Edit Participants" type="object"/>
 								</page>
 								<page string="Pioneering Poles">
 									<field colspan="2" name="pioneeringpole_ids" widget="one2many_list" nolabel="1" readonly="1">
@@ -350,6 +351,7 @@
 						<group name="sheet" colspan="2">
 							<field name="event_id" string="Event"  options="{'no_create': True}" invisible="1"/>
 							<field name="partner_id" string="Scout group"  options="{'no_create': True}"  readonly="1"/>
+							<field name="tag_ids"/>
 							<field name="organization_id" options="{'no_create': True}" readonly="1"/>
 							<field name="group_entrypoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
 							<field name="group_exitpoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
