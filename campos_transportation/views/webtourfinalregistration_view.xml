@@ -181,9 +181,7 @@
 				eval="'ir.actions.server,%d'%action_start_webtour_update_par" />
 		</record>
 
-
-	
-		<!-- Add to Finalregistration Particpant view --> 
+		<!-- Add to Finalregistration Particpant form view --> 
 		<record id="view_form_finalregistration_participant_webtour" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form Webtour</field>
 			<field name="model">campos.event.participant</field>
@@ -211,7 +209,28 @@
         		</xpath>
         		
         		<xpath expr="/form/sheet/group/field/tree/field[@name='will_participate']" position="after">
-					<field name="webtourcamptransportation" string="Camp transportation" />        		
+					<field name="webtourcamptransportation" string="Camp transportation" />
+					<field name="webtourticketstatus" string="Ticket status" />
+	        	</xpath>
+
+			</field>	
+		</record>		
+
+
+	
+		<!-- Add to Finalregistration Particpant tree view --> 
+		<record id="view_tree_finalregistration_participant_webtour" model="ir.ui.view">
+			<field name="name">Final Registration Participant Tree Webtour</field>
+			<field name="model">campos.event.participant</field>
+			<field name="type">tree</field>
+			<field name="inherit_id" ref="campos_final_registration.view_tree_finalregistration_participant" />
+			<field name="arch" type="xml">       		
+        		<xpath expr="//field[@name='transport_to_camp']" position="after">
+					<field name="tocampusneed_status" string="Ticket Status to Camp" attrs="{'invisible':[('transport_to_camp', '==', False),('tocampusneed_status', '==', '1')]}" />        		
+	        	</xpath>
+        		
+        		<xpath expr="//field[@name='transport_from_camp']" position="after">
+					<field name="fromcampusneed_status" string="Ticket Status from Camp" attrs="{'invisible':[('transport_from_camp', '==', False),('fromcampusneed_status', '==', '1')]}" />        		
 	        	</xpath>
 			</field>	
 		</record>		
@@ -259,11 +278,27 @@
 						</tree>
 					</field>
 					</group>
-					<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object" />						
+					<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object" />
+					<group colspan="2" string="Bus Tickets">					
+						<field  name="webtourusneedtickets_ids" widget="one2many_list" nolabel="1" string="Bus Tickets" readonly="1">
+							<tree>
+								<field name="direction"/>
+							    <field name="startdatetime"/> 
+							    <field name="enddatetime"/> 		
+							    <field name="seats_confirmed"/> 
+							    <field name="seats_pending"/> 
+							   	<field name="seats_not_confirmed"/> 	  
+							    <field name="touridno"/>
+							    <field name="stop"/> 
+							    <field name="address"/> 																		
+							</tree>
+						</field>		
+					</group>														
         		</xpath>
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
-					<field name="webtourcamptransportation" string="Camp transportation" />        		
+					<field name="webtourcamptransportation" string="Camp transportation" /> 
+					<field name="webtourticketstatus" string="Ticket status" />
 	        	</xpath>        	
 			</field>	
 		</record>	
@@ -308,10 +343,26 @@
 					</field>
 					</group>					
 					<button name="action_update_webtourtravelneed_ids" string="Update Travel Needs" type="object" attrs="{'invisible': [('is_groupisdanish_notadmin', '=', True)]}"/>
+					<group colspan="2" string="Bus Tickets">
+						<field  name="webtourusneedtickets_ids" widget="one2many_list" nolabel="1" string="Bus Tickets" readonly="1">
+							<tree>
+								<field name="direction"/>
+							    <field name="startdatetime"/> 
+							    <field name="enddatetime"/> 		
+							    <field name="seats_confirmed"/> 
+							    <field name="seats_pending"/> 
+							   	<field name="seats_not_confirmed"/> 	  
+							    <field name="touridno"/>
+							    <field name="stop"/> 
+							    <field name="address"/> 																		
+							</tree>
+						</field>
+					</group>			
         		</xpath>
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
-					<field name="webtourcamptransportation" string="Camp transportation" />        		
+					<field name="webtourcamptransportation" string="Camp transportation" />     
+					<field name="webtourticketstatus" string="Ticket status" />
 	        	</xpath>     	
 			</field>	
 		</record>	

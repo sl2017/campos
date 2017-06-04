@@ -56,8 +56,8 @@
 <sheet>
 <group name="user_top">
 <field name="id"/>
-<field name="registration_id"/>
-<field name="participant_id"/>
+<field name="registration_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_gl'}" />
+<field name="participant_id" context="{'form_view_ref':'campos_final_registration.view_form_finalregistration_participant'}"/>
 <field name="state"/>
 <field name="RegState"/>
 <field name="workas_jobber"/>

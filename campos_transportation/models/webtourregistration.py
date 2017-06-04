@@ -437,7 +437,7 @@ class WebtourRegistrationTravelNeed(models.Model):
     '''
     Special Travel need on a registration
     '''
-    _description = 'Special Travel need on a registration'
+    _description = 'Webtour Special Travel need on a registration'
     _name='event.registration.travelneed'
     registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
     travelgroup = fields.Char('Travel Group')

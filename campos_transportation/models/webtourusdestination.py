@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class WebtourUsDestination(models.Model):
     _name = 'campos.webtourusdestination'
+    _description = 'campos webtour usDestination'
     destinationidno = fields.Char('Destination ID', required=True)
     name = fields.Char(compute='_compute_name', string='Name', store=True ,translate=True)
     webtourname = fields.Char('WebTour Name', required=False ,translate=True)
@@ -101,6 +102,7 @@ class WebtourUsDestination(models.Model):
     
 class WebtourUsDestinationView(models.Model):
     _name = 'campos.webtourusdestination.view'
+    _description = 'Campos Webtour usdestination View'
     _auto = False
     _log_access = False
 
