@@ -199,6 +199,31 @@
 	    <field name="touridno" />
 	    <field name="stop" /> 
 	    <field name="address" /> 
+	    <field name="lastmaildatetime" />
+	   	<field name="sameaslastmail" /> 
+		</tree>
+	</field>
+</record>
+
+<record id="view_tree_Webtourusneed_tickets_sent" model="ir.ui.view">
+	<field name="name">Webtour usNeed Tickets Sent</field>
+	<field name="model">campos.webtourusneed.tickets.sent</field>
+	<field name="arch" type="xml">
+		<tree>
+		<field name="ticket_id" />
+		<field name="sentdatetime" />		
+		<field name="registration_id" />
+		<field name="direction" />
+	    <field name="startdatetime" /> 
+	    <field name="enddatetime" /> 
+	    <field name="busterminaldate" /> 
+	    <field name="busterminaltime" /> 	
+	    <field name="seats_confirmed" /> 
+	    <field name="seats_pending" /> 
+	   	<field name="seats_not_confirmed" /> 	  
+	    <field name="touridno" />
+	    <field name="stop" /> 
+	    <field name="address" /> 
 		</tree>
 	</field>
 </record>
@@ -331,6 +356,11 @@ name="Camp OS Webtour usNeed Tickets"
 res_model="campos.webtourusneed.tickets"
 view_mode="tree,form" />
 
+<act_window id="action_WebtourTicketsSent"
+name="Camp OS Webtour usNeed Tickets Sent"
+res_model="campos.webtourusneed.tickets.sent"
+view_mode="tree,form" />
+
 <act_window id="action_Webtourusneedminimum"
 name="Camp OS Webtour usneedminimum"
 res_model="campos.webtour.usneedminimum"
@@ -357,6 +387,7 @@ view_mode="tree" />
 <!-- Menu item to open Campos Webtour usNeed list  -->
 <menuitem id="menu_action_campos_transportation_usneed" parent="menu_campos_transportation" name="Webtour usNeed" action="action_webtourusneed" groups="campos_event.group_campos_admin" sequence="10"/>
 <menuitem id="menu_action_campos_transportation_usneed Tickets" parent="menu_campos_transportation" name="Webtour usNeed Tickets" action="action_WebtourTickets" groups="campos_event.group_campos_admin" sequence="11"/>
+<menuitem id="menu_action_campos_transportation_usneed Tickets Sent" parent="menu_campos_transportation" name="Webtour usNeed Tickets Sent" action="action_WebtourTicketsSent" groups="campos_event.group_campos_admin" sequence="12"/>
 <menuitem id="menu_action_campos_WebtourOverview" parent="menu_campos_transportation" name="Webtour Trip Type Overview" action="action_WebtourOverview" groups="campos_event.group_campos_admin" sequence="57"/>
 <menuitem id="menu_action_campos_Webtourusneedminimum" parent="menu_campos_transportation" name="Webtour usNeedminimum" action="action_Webtourusneedminimum" groups="campos_event.group_campos_admin" sequence="100"/>
 <menuitem id="menu_action_campos_Webtourususerminimum" parent="menu_campos_transportation" name="Webtour usUserminimum" action="action_Webtourususerminimum" groups="campos_event.group_campos_admin" sequence="101"/>
