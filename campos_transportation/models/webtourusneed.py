@@ -1079,13 +1079,14 @@ class WebtourUsNeedTickets(models.Model):
         tools.sql.drop_view_if_exists(cr, self._table)
         cr.execute("""
                     create or replace view campos_webtourusneed_tickets as      
-                    select t.*, ((COALESCE(t.startdatetime,'-') = COALESCE(s.startdatetime,'-')) and (COALESCE(t.enddatetime,'-') = COALESCE(s.enddatetime,'-')) and 
-                                (COALESCE('' || t.touridno,'-2') = COALESCE('' || s.touridno,'-2')) and 
-                                (COALESCE(t.direction,'-') = COALESCE(s.direction,'-')) and 
-                                (COALESCE(t.stop,'-') = COALESCE(s.stop,'-')) and (COALESCE(t.address,'-') = COALESCE(s.address,'-')) and 
-                                (COALESCE(t.seats_confirmed,-1) = COALESCE(s.seats_confirmed,-1))) as sameaslastmail
-                    ,s.sentdatetime as lastmaildatetime 
-                    ,COALESCE(s.direction,'-') || ','  || COALESCE(s.startdatetime,'-') || ',' || COALESCE(s.enddatetime,'-') || ',' || COALESCE(s.stop,'-') || ',' || COALESCE('' || s.seats_confirmed,'-') || ',' || COALESCE('' || s.seats_pending,'-')  || ',' || COALESCE('' || s.seats_not_confirmed,'-') || ',' || COALESCE('' || s.touridno,'-') || ',' || COALESCE(s.address,'-') as lastmailtxt from (            
+                    select t.*, ((COALESCE(t.startdatetime,'-') = COALESCE(s.startdatetime,'-')) and 
+                    (COALESCE(t.enddatetime,'-') = COALESCE(s.enddatetime,'-')) and 
+                    (COALESCE('' || t.touridno,'-2') = COALESCE('' || s.touridno,'-2')) and
+                    (COALESCE(t.direction,'-') = COALESCE(s.direction,'-')) and
+                    (COALESCE(t.stop,'-') = COALESCE(s.stop,'-')) and 
+                    (replace(replace(replace(trim(COALESCE(t.address,'-')),' '||chr(10),''),chr(10),''),chr(13),'')= replace(replace(replace(trim(COALESCE(s.address,'-')),' '||chr(10),''),chr(10),''),chr(13),''))) as sameaslastmail,
+                    s.sentdatetime as lastmaildatetime,
+                    COALESCE(s.direction,'-') || ', '  || COALESCE(s.startdatetime,'-') || ', ' || COALESCE(s.enddatetime,'-') || ', ' || COALESCE(s.stop,'-') || ', ' || COALESCE('' || s.seats_confirmed,'-') || ', ' || COALESCE('' || s.seats_pending,'-')  || ', ' || COALESCE('' || s.seats_not_confirmed,'-') || ', ' || COALESCE('' || s.touridno,'-') || ', ' || COALESCE(s.address,'-') as lastmailtxt from (            
                     select min(n.id) as id 
                     ,p.registration_id
                     ,n.webtour_touridno as touridno
