@@ -661,7 +661,7 @@ class WebtourParticipant(models.Model):
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8'))  
                     
                     newidno = response_doc.getElementsByTagName("a:IDno")[0].firstChild.data
-                    newgroup = response_doc.getElementsByTagName("a:NGroupIDno")[0].firstChild.data
+                    newgroup = response_doc.getElementsByTagName("a:GroupIDno")[0].firstChild.data
                 
                     if (par.webtourususeridno <> newidno) or (par.webtourusgroupidno <> newgroup) :
                         _logger.info("%s %s webtourupdate STRANGE usUserIDno: G:%s %s U:%s %s",str(par.id), par.name, par.webtourusgroupidno, newgroup,par.webtourususeridno,newidno)
