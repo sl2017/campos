@@ -232,31 +232,31 @@ class CamposFeeSsRegistration(models.Model):
                 if ssreg.ref_ssreg_id and ssreg.ref_ssreg_id.invoice_id:
                     charged_fee_par = ssreg.ref_ssreg_id.charged_fee_participants if ssreg.ref_ssreg_id.charged_fee_participants else ssreg.ref_ssreg_id.fee_participants
                     charged_fee_tran = ssreg.ref_ssreg_id.charged_fee_transport if ssreg.ref_ssreg_id.charged_fee_transport else ssreg.ref_ssreg_id.fee_transport
-                    if charged_fee_par > ssreg.fee_participants:
-                            product = self.env['product.product'].search([('default_code', '=', 'LK')])
-                            #1. Prev camp fee
-                            desc = _('Participant fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
-                            vals = self._prepare_create_invoice_line_vals(-charged_fee_par, 1, type='out_invoice', description=desc, product=product)
-                            vals['invoice_id'] = ssreg.invoice_id.id
-                            self.env['account.invoice.line'].create(vals)
+                    product = self.env['product.product'].search([('default_code', '=', 'LK')])
+                    #1. Prev camp fee
+                    desc = _('Participant fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                    vals = self._prepare_create_invoice_line_vals(-charged_fee_par, 1, type='out_invoice', description=desc, product=product)
+                    vals['invoice_id'] = ssreg.invoice_id.id
+                    self.env['account.invoice.line'].create(vals)
                             
-                            if ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
-                            #2. 50 % refusions
-                                desc = _('Only  50% refusion after may 1: DKK %.2f - %.2f') % (charged_fee_par, ssreg.fee_participants) 
-                                vals = self._prepare_create_invoice_line_vals((charged_fee_par - ssreg.fee_participants) / 2, 1, type='out_invoice', description=desc, product=product)
-                                #vals['amount'] = -ssreg1.invoice_id.amount_total
-                                vals['invoice_id'] = ssreg.invoice_id.id
-                                self.env['account.invoice.line'].create(vals)
-                                ssreg.charged_fee_participants = ssreg.fee_participants + (charged_fee_par - ssreg.fee_participants / 2)
-                                ssreg.audit = True
+                    if charged_fee_par > ssreg.fee_participants and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
+                        #2. 50 % refusions
+                        desc = _('Only  50%% refusion after may 1: DKK %.2f - %.2f') % (charged_fee_par, ssreg.fee_participants) 
+                        vals = self._prepare_create_invoice_line_vals((charged_fee_par - ssreg.fee_participants) / 2, 1, type='out_invoice', description=desc, product=product)
+                        #vals['amount'] = -ssreg1.invoice_id.amount_total
+                        vals['invoice_id'] = ssreg.invoice_id.id
+                        self.env['account.invoice.line'].create(vals)
+                        ssreg.charged_fee_participants = ssreg.fee_participants + (charged_fee_par - ssreg.fee_participants / 2)
+                        ssreg.audit = True
+                    product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
+                    #1. Prev camp fee
+                    desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                    vals = self._prepare_create_invoice_line_vals(-charged_fee_tran, 1, type='out_invoice', description=desc, product=product)
+                    vals['invoice_id'] = ssreg.invoice_id.id
+                    self.env['account.invoice.line'].create(vals)
+                    
+                    
                     if charged_fee_tran > ssreg.fee_transport:
-                            product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
-                            #1. Prev camp fee
-                            desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
-                            vals = self._prepare_create_invoice_line_vals(-charged_fee_tran, 1, type='out_invoice', description=desc, product=product)
-                            vals['invoice_id'] = ssreg.invoice_id.id
-                            self.env['account.invoice.line'].create(vals)
-                            
                             #2. No refusions
                             desc = _('No refusion after may 1: DKK %.2f - %.2f') % (charged_fee_tran, ssreg.fee_transport) 
                             vals = self._prepare_create_invoice_line_vals((charged_fee_tran - ssreg.fee_transport), 1, type='out_invoice', description=desc, product=product)
