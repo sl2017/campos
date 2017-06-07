@@ -37,6 +37,8 @@ class CamposFeeSsRegistration(models.Model):
     number_participants = fields.Integer('Number of participants')
     fee_participants = fields.Float('Participants Fees')
     fee_transport = fields.Float('Transport Fee/Refusion')
+    charged_fee_participants = fields.Float('Participants Fees')
+    charged_fee_transport = fields.Float('Transport Fee/Refusion')
     material_cost = fields.Float('Material orders')
     fee_total = fields.Float('Total Fee')
     invoice_id = fields.Many2one('account.invoice', 'Invoice')
@@ -46,6 +48,7 @@ class CamposFeeSsRegistration(models.Model):
     inv_date = fields.Date(related='invoice_id.date_invoice', readonly=True)
     audit = fields.Boolean('Audit')
     cmp_currency_id = fields.Many2one(related='registration_id.event_id.company_id.currency_id', readonly=True)
+    ref_ssreg_id = fields.Many2one('campos.fee.ss.registration', 'Ref Snapshot')
 
 
     @api.multi
@@ -62,6 +65,8 @@ class CamposFeeSsRegistration(models.Model):
                          'fee_total': ssreg.registration_id.fee_total,
                          'state': ssreg.registration_id.state,
                          'name': ssreg.registration_id.name})
+            if ssreg.snapshot_id.ref_snapshot_id:
+                ssreg.ref_ssreg_id = ssreg.search([('snapshot_id', '=', ssreg.snapshot_id.ref_snapshot_id.id), ('registration_id', '=', ssreg.registration_id.id)])
             if ssreg.snapshot_id.execute_func:
                 func = getattr(ssreg, ssreg.snapshot_id.execute_func)
                 func()
@@ -111,7 +116,19 @@ class CamposFeeSsRegistration(models.Model):
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=True)
             elif ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-    
+                
+    @api.multi
+    def make_invoice_group(self):
+        for ssreg in self:
+            if ssreg.snapshot_id.segment == 'ss_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+            elif ssreg.snapshot_id.segment == 'dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+            elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+            elif ssreg.snapshot_id.segment == 'jobber' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff:
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
+                
     @api.multi            
     def make_invoice_100_dk(self):
         aio = self.env['account.invoice']
@@ -211,14 +228,55 @@ class CamposFeeSsRegistration(models.Model):
                 
                     if ssreg.number_participants < ssreg1.number_participants:
                         ssreg.audit = True
+                        
+                if ssreg.ref_ssreg_id and ssreg.ref_ssreg_id.invoice_id:
+                    charged_fee_par = ssreg.ref_ssreg_id.charged_fee_participants if ssreg.ref_ssreg_id.charged_fee_participants else ssreg.ref_ssreg_id.fee_participants
+                    charged_fee_tran = ssreg.ref_ssreg_id.charged_fee_transport if ssreg.ref_ssreg_id.charged_fee_transport else ssreg.ref_ssreg_id.fee_transport
+                    if charged_fee_par > ssreg.fee_participants:
+                            product = self.env['product.product'].search([('default_code', '=', 'LK')])
+                            #1. Prev camp fee
+                            desc = _('Participant fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                            vals = self._prepare_create_invoice_line_vals(-charged_fee_par, 1, type='out_invoice', description=desc, product=product)
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            
+                            if ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
+                            #2. 50 % refusions
+                                desc = _('Only  50% refusion after may 1: DKK %.2f - %.2f') % (charged_fee_par, ssreg.fee_participants) 
+                                vals = self._prepare_create_invoice_line_vals((charged_fee_par - ssreg.fee_participants) / 2, 1, type='out_invoice', description=desc, product=product)
+                                #vals['amount'] = -ssreg1.invoice_id.amount_total
+                                vals['invoice_id'] = ssreg.invoice_id.id
+                                self.env['account.invoice.line'].create(vals)
+                                ssreg.charged_fee_participants = ssreg.fee_participants + (charged_fee_par - ssreg.fee_participants / 2)
+                                ssreg.audit = True
+                    if charged_fee_tran > ssreg.fee_transport:
+                            product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
+                            #1. Prev camp fee
+                            desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                            vals = self._prepare_create_invoice_line_vals(-charged_fee_tran, 1, type='out_invoice', description=desc, product=product)
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            
+                            #2. No refusions
+                            desc = _('No refusion after may 1: DKK %.2f - %.2f') % (charged_fee_tran, ssreg.fee_transport) 
+                            vals = self._prepare_create_invoice_line_vals((charged_fee_tran - ssreg.fee_transport), 1, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            ssreg.charged_fee_transport = ssreg.fee_transport + charged_fee_tran - ssreg.fee_transport
+                            ssreg.audit = True
                 
                 ssreg.invoice_id.button_compute(set_total=True)
+                if ssreg.invoice_id.amount_total < 0:
+                    #Change to Credit Nota
+                    ssreg.invoice_id.type = 'out_refund'
+                    for line in ssreg.invoice_id.invoice_line:
+                        line.price_unit = - line.price_unit
+                    ssreg.invoice_id.button_compute(set_total=True)
+                    ssreg.audit = True
                 if not ssreg.audit:
                     ssreg.invoice_id.signal_workflow('invoice_open')
-                                
-                        
-                
-                        
+
     def _prepare_create_invoice_line_vals(self, amount, quantity, type='out_invoice', description=False, product=False):
         '''
         Returns a "Vals" dict ready to create a invoice line.
