@@ -338,8 +338,44 @@ class WebtourRegistration(models.Model):
     def action_webtourupdate(self):
         for reg in self:
             session = ConnectorSession.from_env(self.env)
-            do_delayed_webtourupdate.delay(session, 'event.registration', reg.id)                   
-
+            do_delayed_webtourupdate.delay(session, 'event.registration', reg.id)
+            
+     
+    @api.multi
+    def action_send_traveltimeemail(self):
+        sentdatetime = fields.Datetime.now()[:17] + '00'
+        for reg in self:
+            _logger.info('action_send_traveltimeemail entered')
+            template = self.env.ref('campos_transportation.webtour_ticket_mail_group')
+            assert template._name == 'email.template'
+            sent = False
+            _logger.info('%s action_send_traveltimeemail try to send', reg.id)
+            try:
+                template.send_mail(reg.id)
+                sent = True
+            except:
+                pass               
+            
+            if sent:
+                for ticket in reg.webtourusneedtickets_ids:
+                    dic = {}
+                    dic['ticket_id'] = ticket.id
+                    dic['sentdatetime'] = sentdatetime 
+                    dic['registration_id'] = ticket.registration_id.id
+                    dic['touridno'] = ticket.touridno 
+                    dic['startdatetime'] = ticket.startdatetime 
+                    dic['enddatetime'] = ticket.enddatetime
+                    dic['busterminaldate'] = ticket.busterminaldate
+                    dic['busterminaltime'] = ticket.busterminaltime 
+                    dic['direction'] = ticket.direction 
+                    dic['stop'] = ticket.stop
+                    dic['address'] = ticket.address
+                    dic['seats_confirmed'] = ticket.seats_confirmed
+                    dic['seats_pending'] = ticket.seats_pending
+                    dic['seats_not_confirmed'] = ticket.seats_not_confirmed
+                    self.env['campos.webtourusneed.tickets.sent'].create(dic)
+                    _logger.info('%s action_send_traveltimeemail sent %s', reg.id,dic)
+                                        
 '''
     @api.one
     def createTestParticipants(self):

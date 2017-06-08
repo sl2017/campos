@@ -661,7 +661,7 @@ class WebtourParticipant(models.Model):
                     response_doc = minidom.parseString(self.env['campos.webtour_req_logger'].create({'name':'usUser/Get/ExternalID/?ExternalID='+extid}).responce.encode('utf-8'))  
                     
                     newidno = response_doc.getElementsByTagName("a:IDno")[0].firstChild.data
-                    newgroup = response_doc.getElementsByTagName("a:NGroupIDno")[0].firstChild.data
+                    newgroup = response_doc.getElementsByTagName("a:GroupIDno")[0].firstChild.data
                 
                     if (par.webtourususeridno <> newidno) or (par.webtourusgroupidno <> newgroup) :
                         _logger.info("%s %s webtourupdate STRANGE usUserIDno: G:%s %s U:%s %s",str(par.id), par.name, par.webtourusgroupidno, newgroup,par.webtourususeridno,newidno)
@@ -685,6 +685,41 @@ class WebtourParticipant(models.Model):
                     if par.fromcampusneed_id:
                         par.fromcampusneed_id.get_create_webtour_need()    
                     
+    @api.multi
+    def action_send_traveltimeemail(self):
+        sentdatetime = fields.Datetime.now()[:17] + '00'
+        for par in self:
+            _logger.info('action_send_traveltimeemail entered')
+            template = self.env.ref('campos_transportation.webtour_ticket_mail_staff')
+            assert template._name == 'email.template'
+            sent = False
+            _logger.info('%s action_send_traveltimeemail try to send', par.id)
+            try:
+                template.send_mail(par.id)
+                sent = True
+            except:
+                pass               
+            
+            if sent:
+                for ticket in par.webtourusneedtickets_ids:
+                    dic = {}
+                    dic['ticket_id'] = ticket.id
+                    dic['sentdatetime'] = sentdatetime 
+                    dic['registration_id'] = ticket.participant_id.registration_id.id
+                    dic['touridno'] = ticket.touridno 
+                    dic['startdatetime'] = ticket.startdatetime 
+                    dic['enddatetime'] = ticket.enddatetime
+                    dic['busterminaldate'] = ticket.busterminaldate
+                    dic['busterminaltime'] = ticket.busterminaltime 
+                    dic['direction'] = ticket.direction 
+                    dic['stop'] = ticket.stop
+                    dic['address'] = ticket.address
+                    dic['seats_confirmed'] = ticket.seats_confirmed
+                    dic['seats_pending'] = ticket.seats_pending
+                    dic['seats_not_confirmed'] = ticket.seats_not_confirmed
+                    self.env['campos.webtourusneed.tickets.sent'].create(dic)
+                    _logger.info('%s action_send_traveltimeemail sent %s', par.id,dic)
+
 
     
 class WebtourParticipantCampDay(models.Model):

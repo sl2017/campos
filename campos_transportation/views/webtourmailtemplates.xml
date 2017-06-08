@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data noupdate="1">
+
+		<!-- Email template for Tickets Group -->
+        <record id="webtour_ticket_mail_group" model="email.template">
+            <field name="name">Webtour Ticket Mail Group</field>
+            <field name="model_id" ref="model_event_registration"/>
+            <field name="email_from"><![CDATA[transport@sl2017.dk]]></field>
+            <field name="partner_to"></field>
+            <field name="subject"><![CDATA[SL2017 Information om rejsetider for ${object.partner_id.name} ]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej 
+                    </p>
+
+                   ]]>
+            </field>
+        </record>
+	
+		<!-- Email template for Tickets Jobber -->
+        <record id="webtour_ticket_mail_staff" model="email.template">
+            <field name="name">Webtour Ticket Mail Staff</field>
+            <field name="model_id" ref="model_event_registration"/>
+            <field name="email_from"><![CDATA[transport@sl2017.dk]]></field>
+            <field name="partner_to"></field>
+            <field name="subject"><![CDATA[SL2017 Information om rejsetider for ${object.partner_id.name} ]]></field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hej 
+                    </p>
+
+                   ]]>
+            </field>
+        </record>
+	
+	
+	</data>
+</openerp>        
