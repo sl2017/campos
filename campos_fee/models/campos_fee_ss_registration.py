@@ -274,7 +274,9 @@ class CamposFeeSsRegistration(models.Model):
                         line.price_unit = - line.price_unit
                     ssreg.invoice_id.button_compute(set_total=True)
                     ssreg.audit = True
-                if not ssreg.audit:
+                if ssreg.invoice_id.amount_total == 0.0:
+                    ssreg.invoice_id.unlink()
+                elif not ssreg.audit:
                     ssreg.invoice_id.signal_workflow('invoice_open')
 
     def _prepare_create_invoice_line_vals(self, amount, quantity, type='out_invoice', description=False, product=False):
