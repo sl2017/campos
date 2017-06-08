@@ -142,8 +142,9 @@
 							    <field name="stop"/> 
 							    <field name="address"/> 																		
 							</tree>
-						</field>									
-           			</page>
+						</field>
+						<button name="action_send_traveltimeemail" string="Send Traveltime email" type="object" groups="campos_event.group_campos_admin"/>
+					</page>
            			<page string="Extra Transportation">
 						<field  name="webtourextrausneed_ids" widget="one2many_list" nolabel="0" string="Extra Travel needs" options="{'no_delete': True}">
 							<tree editable="bottom" default_order="traveldate" delete="false">
@@ -292,8 +293,9 @@
 							    <field name="stop"/> 
 							    <field name="address"/> 																		
 							</tree>
-						</field>		
-					</group>														
+						</field>
+					</group>	
+					<button name="action_send_traveltimeemail" string="Send Traveltime email" type="object" groups="campos_event.group_campos_admin"/>														
         		</xpath>
         		
         		<xpath expr="//field[@name='will_participate']" position="after">
