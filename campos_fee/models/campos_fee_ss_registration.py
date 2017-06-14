@@ -24,7 +24,8 @@ class CamposFeeSsRegistration(models.Model):
     
     snapshot_id = fields.Many2one('campos.fee.snapshot', 'Snapshot')
     registration_id = fields.Many2one('event.registration', 'Registration')
-    sspar_ids = fields.One2many('campos.fee.ss.participant', 'ssreg_id', 'Snapshot')
+    sspar_ids = fields.One2many('campos.fee.ss.participant', 'ssreg_id', 'Participants')
+    ssmeat_ids = fields.One2many('campos.fee.ss.reg.meat', 'ssreg_id', 'Meat')
     
     #Mirrored from the Group Registration
     state = fields.Selection([
@@ -57,6 +58,11 @@ class CamposFeeSsRegistration(models.Model):
         
             for par in ssreg.registration_id.participant_ids:
                 par.do_snapshot(ssreg)
+                
+            for meat in ssreg.registration_id.meatlist_ids:
+                self.env['campos.fee.ss.reg.meat'].create({'ssreg_id': ssreg.id,
+                                                           'event_day_meat_id': meat.event_day_meat_id.id,
+                                                           'meat_count': meat.meat_count})
             
             ssreg.write({'number_participants': ssreg.registration_id.number_participants,
                          'fee_participants': ssreg.registration_id.fee_participants,
@@ -284,13 +290,16 @@ class CamposFeeSsRegistration(models.Model):
                 
                 ssreg.invoice_id.button_compute(set_total=True)
                 if ssreg.invoice_id.amount_total < 0:
-                    #Change to Credit Nota
-                    ssreg.invoice_id.type = 'out_refund'
-                    for line in ssreg.invoice_id.invoice_line:
-                        line.price_unit = - line.price_unit
-                    ssreg.invoice_id.button_compute(set_total=True)
-                    ssreg.audit = True
-                if ssreg.invoice_id.amount_total == 0.0:
+                    #Change to Credit Nota or drop?
+                    if ssreg.snapshot_id.make_creditnota:
+                        ssreg.invoice_id.type = 'out_refund'
+                        for line in ssreg.invoice_id.invoice_line:
+                            line.price_unit = - line.price_unit
+                        ssreg.invoice_id.button_compute(set_total=True)
+                        ssreg.audit = True
+                    else:
+                        ssreg.invoice_id.unlink()
+                elif ssreg.invoice_id.amount_total == 0.0:
                     ssreg.invoice_id.unlink()
                 elif not ssreg.audit:
                     ssreg.invoice_id.signal_workflow('invoice_open')

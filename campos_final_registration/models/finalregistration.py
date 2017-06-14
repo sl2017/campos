@@ -275,7 +275,7 @@ class ParticipantCampDay(models.Model):
     
     _sql_constraints = [
         ('name_unique',
-         'unique(participan_id,day_id)',
+         'unique(participant_id,day_id)',
          'The tag name has to be unique!')
     ]
 
