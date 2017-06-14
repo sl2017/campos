@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models, _
-
+from openerp.exceptions import Warning
 
 class CamposActivityInstanse(models.Model):
 
@@ -38,7 +38,23 @@ class CamposActivityInstanse(models.Model):
     state = fields.Selection([('open', 'Open'),
                                 ('cancelled', 'Cancelled'),
                                 ('canc_weather', 'Cancelled due to weather'),
-                                ('canc_risk', 'At risk of cancellation due to weather conditions')], 'State', default='open')
+                                ('canc_risk', 'At risk of cancellation due to weather conditions')], 'State', default='open', track_visibility='onchange')
+    
+    @api.multi
+    def unlink(self):
+        if any(act.ticket_ids for act in self):
+            raise Warning(_('You can only delete unused instanse! You need to Cancel it.'))
+        
+    @api.multi
+    def write(self, vals):
+        cancel = False
+        if 'state' in vals and vals['state'] in ['cancelled', 'canc_weather']:
+            cancel = True
+        ret = super(CamposActivityInstanse, self).write(vals)
+        for ai in self:
+            ai.ticket_ids.write({'state': 'cancelled'})
+        
+        return ret
     
     
     @api.onchange('activity_id','period_id')

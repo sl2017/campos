@@ -28,7 +28,7 @@ class CamposActivitySignupWiz(models.TransientModel):
     state = fields.Selection([('step1', 'Select Activity'),
                               ('step2', 'Select Participants')], 'State', default='step1')
     reg_id = fields.Many2one('event.registration', 'Scout Group')
-    act_id = fields.Many2one('campos.activity.activity', '1. Select Activity', required=True, select=True, ondelete='cascade')
+    act_id = fields.Many2one('campos.activity.activity', '1. Select Activity', required=True, select=True, ondelete='cascade', domain=[('state', 'in', ['confirmed'])])
     teaser = fields.Text(related='act_id.teaser', readonly=True)
     audience_ids = fields.Many2many(related='act_id.audience_ids', readonly=True)
     age_from =  fields.Integer(related='act_id.age_from', readonly=True)
