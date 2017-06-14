@@ -24,7 +24,8 @@ class CamposFeeSsRegistration(models.Model):
     
     snapshot_id = fields.Many2one('campos.fee.snapshot', 'Snapshot')
     registration_id = fields.Many2one('event.registration', 'Registration')
-    sspar_ids = fields.One2many('campos.fee.ss.participant', 'ssreg_id', 'Snapshot')
+    sspar_ids = fields.One2many('campos.fee.ss.participant', 'ssreg_id', 'Participants')
+    ssmeat_ids = fields.One2many('campos.fee.ss.reg.meat', 'ssreg_id', 'Meat')
     
     #Mirrored from the Group Registration
     state = fields.Selection([
@@ -57,6 +58,11 @@ class CamposFeeSsRegistration(models.Model):
         
             for par in ssreg.registration_id.participant_ids:
                 par.do_snapshot(ssreg)
+                
+            for meat in ssreg.registration_id.meatlist_ids:
+                self.env['campos.fee.ss.reg.meat'].create({'ssreg_id': ssreg.id,
+                                                           'event_day_meat_id': meat.event_day_meat_id.id,
+                                                           'meat_count': meat.meat_count})
             
             ssreg.write({'number_participants': ssreg.registration_id.number_participants,
                          'fee_participants': ssreg.registration_id.fee_participants,

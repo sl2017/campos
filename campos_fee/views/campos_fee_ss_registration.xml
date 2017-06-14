@@ -43,7 +43,16 @@
             			<field name="state"/>
             			<field name="invoice_id"/>
             			<field name="audit"/>
-            			<field name="sspar_ids" nolabel="1" colspan="2"/>
+            			<notebook>
+            				<page string="Participants">
+            					<field name="sspar_ids" nolabel="1" colspan="2"/>
+            				</page>
+            				<page string="Meat">
+            					<field name="sspar_ids" nolabel="1" colspan="2"/>
+            				</page>
+            				
+            			</notebook>
+            			
                     </group>
                 </sheet>
                 
