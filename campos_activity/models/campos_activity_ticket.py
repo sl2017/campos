@@ -8,7 +8,8 @@ from openerp import api, fields, models, _
 class CamposActivityTicket(models.Model):
 
     _name = 'campos.activity.ticket'
-    _description = 'Campos Activity Ticket'  # TODO
+    _description = 'Campos Activity Ticket'
+    _inherit = 'mail.thread'
 
     name = fields.Char('Own Note', size=128, help='You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff.')
     seats = fields.Integer('Seats')
@@ -16,7 +17,8 @@ class CamposActivityTicket(models.Model):
     state = fields.Selection([('open', 'Reserved'),
                               ('done', 'Booked'),
                               ('timeout', 'TimeOut'),
-                             ], 'Ticket State'
+                              ('cancelled', 'Cancelled')
+                             ], 'Ticket State', track_visibility='onchange'
                             )
     act_ins_id = fields.Many2one('campos.activity.instanse', 'Activity')
     reg_id = fields.Many2one('event.registration', 'Scout Group')
