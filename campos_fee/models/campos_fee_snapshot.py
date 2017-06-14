@@ -32,6 +32,7 @@ class CamposFeeSnapshot(models.Model):
                                 ('non_dk_groups', 'Foreign groups'),
                                 ('jobber', 'Jobbers')], string='Segments')
     ref_snapshot_id = fields.Many2one('campos.fee.snapshot', 'Prev invoice snapshot')
+    make_creditnota = fields.Boolean('Create CreditNotas?')
     
     @api.multi
     def action_do_snapshot(self):

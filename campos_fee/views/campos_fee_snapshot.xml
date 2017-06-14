@@ -22,6 +22,7 @@
                         <field name="execute_func"/>
                         <field name="segment"/>
                         <field name="ref_snapshot_id"/>
+                        <fiedl name="make_creditnota"/>
                         <field name="single_reg_id"/>
                     </group>
                 </sheet>

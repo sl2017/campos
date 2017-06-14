@@ -290,13 +290,16 @@ class CamposFeeSsRegistration(models.Model):
                 
                 ssreg.invoice_id.button_compute(set_total=True)
                 if ssreg.invoice_id.amount_total < 0:
-                    #Change to Credit Nota
-                    ssreg.invoice_id.type = 'out_refund'
-                    for line in ssreg.invoice_id.invoice_line:
-                        line.price_unit = - line.price_unit
-                    ssreg.invoice_id.button_compute(set_total=True)
-                    ssreg.audit = True
-                if ssreg.invoice_id.amount_total == 0.0:
+                    #Change to Credit Nota or drop?
+                    if ssreg.snapshot_id.make_creditnota:
+                        ssreg.invoice_id.type = 'out_refund'
+                        for line in ssreg.invoice_id.invoice_line:
+                            line.price_unit = - line.price_unit
+                        ssreg.invoice_id.button_compute(set_total=True)
+                        ssreg.audit = True
+                    else:
+                        ssreg.invoice_id.unlink()
+                elif ssreg.invoice_id.amount_total == 0.0:
                     ssreg.invoice_id.unlink()
                 elif not ssreg.audit:
                     ssreg.invoice_id.signal_workflow('invoice_open')
