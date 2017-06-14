@@ -276,7 +276,7 @@ class CamposFeeSsRegistration(models.Model):
                     if charged_fee_tran > ssreg.fee_transport:
                             #2. No refusions
                             charged_fee_tran_val = charged_fee_tran
-                            fee_par_val = ssreg.fee_transport
+                            fee_tran_val = ssreg.fee_transport
                             if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                                 charged_tran_par_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
                                 fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
