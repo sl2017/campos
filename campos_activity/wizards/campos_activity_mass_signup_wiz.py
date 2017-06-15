@@ -30,7 +30,7 @@ class CamposActivityMassSignupWiz(models.TransientModel):
     def doit(self):
         for wizard in self:
             for reg in wizard.reg_ids:
-                par_ids = reg.participant_ids.filtered(lambda p: p.camp_age >= wizard.age_from and p.camp_age <= wizard.age_to)
+                par_ids = reg.participant_ids.filtered(lambda p: p.camp_age >= wizard.age_from and p.camp_age <= wizard.age_to and p.state not in ['reg', 'duplicate', 'deregistered'])
                 if par_ids:
                     ticket = self.env['campos.activity.ticket'].create({'act_ins_id': wizard.act_ins_id.id,
                                                                         'state': 'done',
