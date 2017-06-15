@@ -21,7 +21,26 @@
 				eval="'ir.actions.server,%d'%action_start_webtour_update" />
 		</record>
 
-	
+		<!-- Server action and bindig to present iframe embed code -->
+		<record id="action_send_ticket_mail" model="ir.actions.server">
+			<field name="name">Send Webtour Ticket mail</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="event.model_event_registration" />
+			<field name="state">code</field>
+			<field name="code">
+				self.action_send_traveltimeemail(cr, uid, context.get('active_ids'), context)
+			</field>
+		</record>
+		
+		<record id="ir_start_webtour_update" model="ir.values">
+			<field name="model">event.registration</field>
+			<field name="name">Send Webtour Ticket mail</field>
+			<field name="key2">client_action_multi</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_send_ticket_mail" />
+		</record>
+
 		<!-- Add to Finalregistration  GL view -->
 		<record id="view_form_finalregistration_webtour" model="ir.ui.view">
 			<field name="name">event.event.campos.reg.inherit3</field>
@@ -180,6 +199,26 @@
 			<field name="key2">client_action_multi</field>
 			<field name="value"
 				eval="'ir.actions.server,%d'%action_start_webtour_update_par" />
+		</record>
+
+		<!-- Server action and bindig to present iframe embed code -->
+		<record id="action_send_ticket_mail_par" model="ir.actions.server">
+			<field name="name">Send Webtour Ticket mail</field>
+			<field name="condition">True</field>
+			<field name="type">ir.actions.server</field>
+			<field name="model_id" ref="campos_event.model_campos_event_participant" />
+			<field name="state">code</field>
+			<field name="code">
+				self.action_send_traveltimeemail(cr, uid, context.get('active_ids'), context)
+			</field>
+		</record>
+		
+		<record id="ir_start_webtour_update_par" model="ir.values">
+			<field name="model">campos.event.participant</field>
+			<field name="name">Send Webtour Ticket mail</field>
+			<field name="key2">client_action_multi</field>
+			<field name="value"
+				eval="'ir.actions.server,%d'%action_send_ticket_mail_par" />
 		</record>
 
 		<!-- Add to Finalregistration Particpant form view --> 
