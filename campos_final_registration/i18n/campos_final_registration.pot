@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-06-15 14:57+0000\n"
+"PO-Revision-Date: 2017-06-15 14:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,7 @@ msgid "Access Token Id"
 msgstr ""
 
 #. module: campos_final_registration
+#: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Add/Edit Participants"
 msgstr ""
@@ -237,7 +238,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:333
+#: code:addons/campos_final_registration/models/finalregistration.py:339
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -362,7 +363,7 @@ msgstr ""
 
 #. module: campos_final_registration
 #: field:event.registration,glofo_co2_amount:0
-msgid "Grean Profile, amount of CO2 (in grams)"
+msgid "Green Profile, amount of CO2 (in grams)"
 msgstr ""
 
 #. module: campos_final_registration
@@ -576,7 +577,7 @@ msgid "Number of mast sails, incl. diameters, if they have sides and on how much
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:416
+#: code:addons/campos_final_registration/models/finalregistration.py:422
 #, python-format
 msgid "Number of ordered meat portions (%d) exceeds the number of dinner participants (%d) on %s. "
 msgstr ""
@@ -588,7 +589,7 @@ msgstr ""
 
 #. module: campos_final_registration
 #: field:event.registration,glofo_number_participants:0
-msgid "Number of participants in Grean Profile"
+msgid "Number of participants in Green Profile"
 msgstr ""
 
 #. module: campos_final_registration
@@ -804,7 +805,7 @@ msgid "Special needs"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:433
+#: code:addons/campos_final_registration/models/finalregistration.py:439
 #, python-format
 msgid "Start data cannot be after end date"
 msgstr ""
@@ -840,6 +841,11 @@ msgstr ""
 #. module: campos_final_registration
 #: help:event.registration,gear_transport:0
 msgid "The emergency management of the camp recommends that the groups use the opportunity to deliver equipment at the camp before 06:00 on 22 July, as it will not be possible to enter the campsite with vehicles not belonging to the camp, cf. the camps traffic policy."
+msgstr ""
+
+#. module: campos_final_registration
+#: sql_constraint:campos.event.participant.day:0
+msgid "The tag name has to be unique!"
 msgstr ""
 
 #. module: campos_final_registration

@@ -2,12 +2,15 @@
 # This file contains the translation of the following modules:
 # * campos_fee
 # 
+# Translators:
+# christian Eggert Jørgensen <christian@eggert.dk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 20:37+0000\n"
-"PO-Revision-Date: 2017-05-11 20:37+0000\n"
+"POT-Creation-Date: 2017-06-15 14:57+0000\n"
+"PO-Revision-Date: 2017-06-15 14:57+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,12 +21,12 @@ msgstr ""
 #. module: campos_fee
 #: field:event.registration,number_accomondations:0
 msgid "# accomdation"
-msgstr ""
+msgstr "# overnattende spejdere"
 
 #. module: campos_fee
 #: field:event.registration,number_participants_stored:0
 msgid "# of participants"
-msgstr ""
+msgstr "# Antal betalende deltagere"
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0
@@ -142,7 +145,7 @@ msgstr ""
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 msgid "Camp Fee"
-msgstr ""
+msgstr "Lejr faktura mm"
 
 #. module: campos_fee
 #: field:campos.event.participant,camp_product_id:0
@@ -173,6 +176,12 @@ msgstr ""
 #. module: campos_fee
 #: model:ir.model,name:campos_fee.model_campos_fee_ss_participant
 msgid "Campos Fee Ss Participant"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.actions.act_window,name:campos_fee.campos_fee_ss_reg_meat_act_window
+#: model:ir.model,name:campos_fee.model_campos_fee_ss_reg_meat
+msgid "Campos Fee Ss Reg Meat"
 msgstr ""
 
 #. module: campos_fee
@@ -212,9 +221,20 @@ msgid "Confirmed"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.ss.reg.meat,meat_count:0
+msgid "Count"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.snapshot,make_creditnota:0
+msgid "Create CreditNotas?"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.agegroup,create_uid:0
 #: field:campos.fee.snapshot,create_uid:0
 #: field:campos.fee.ss.participant,create_uid:0
+#: field:campos.fee.ss.reg.meat,create_uid:0
 #: field:campos.fee.ss.registration,create_uid:0
 msgid "Created by"
 msgstr ""
@@ -223,6 +243,7 @@ msgstr ""
 #: field:campos.fee.agegroup,create_date:0
 #: field:campos.fee.snapshot,create_date:0
 #: field:campos.fee.ss.participant,create_date:0
+#: field:campos.fee.ss.reg.meat,create_date:0
 #: field:campos.fee.ss.registration,create_date:0
 msgid "Created on"
 msgstr ""
@@ -232,6 +253,11 @@ msgstr ""
 #: field:campos.fee.ss.registration,inv_currency_id:0
 #: field:event.registration,cmp_currency_id:0
 msgid "Currency"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.snapshot,segment:0
+msgid "DK Groups"
 msgstr ""
 
 #. module: campos_fee
@@ -259,6 +285,7 @@ msgstr ""
 #: field:campos.fee.agegroup,display_name:0
 #: field:campos.fee.snapshot,display_name:0
 #: field:campos.fee.ss.participant,display_name:0
+#: field:campos.fee.ss.reg.meat,display_name:0
 #: field:campos.fee.ss.registration,display_name:0
 msgid "Display Name"
 msgstr ""
@@ -333,6 +360,11 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.snapshot,message_follower_ids:0
 msgid "Followers"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.snapshot,segment:0
+msgid "Foreign groups"
 msgstr ""
 
 #. module: campos_fee
@@ -489,7 +521,8 @@ msgstr ""
 
 #. module: campos_fee
 #: field:campos.fee.agegroup,id:0 field:campos.fee.snapshot,id:0
-#: field:campos.fee.ss.participant,id:0 field:campos.fee.ss.registration,id:0
+#: field:campos.fee.ss.participant,id:0 field:campos.fee.ss.reg.meat,id:0
+#: field:campos.fee.ss.registration,id:0
 msgid "ID"
 msgstr ""
 
@@ -553,6 +586,11 @@ msgid "Jammerbugt"
 msgstr ""
 
 #. module: campos_fee
+#: selection:campos.fee.snapshot,segment:0
+msgid "Jobbers"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_144
 msgid "Kalundborg"
 msgstr ""
@@ -601,6 +639,7 @@ msgstr ""
 #: field:campos.fee.agegroup,__last_update:0
 #: field:campos.fee.snapshot,__last_update:0
 #: field:campos.fee.ss.participant,__last_update:0
+#: field:campos.fee.ss.reg.meat,__last_update:0
 #: field:campos.fee.ss.registration,__last_update:0
 msgid "Last Modified on"
 msgstr ""
@@ -608,6 +647,7 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.agegroup,write_uid:0 field:campos.fee.snapshot,write_uid:0
 #: field:campos.fee.ss.participant,write_uid:0
+#: field:campos.fee.ss.reg.meat,write_uid:0
 #: field:campos.fee.ss.registration,write_uid:0
 msgid "Last Updated by"
 msgstr ""
@@ -616,6 +656,7 @@ msgstr ""
 #: field:campos.fee.agegroup,write_date:0
 #: field:campos.fee.snapshot,write_date:0
 #: field:campos.fee.ss.participant,write_date:0
+#: field:campos.fee.ss.reg.meat,write_date:0
 #: field:campos.fee.ss.registration,write_date:0
 msgid "Last Updated on"
 msgstr ""
@@ -657,6 +698,17 @@ msgid "Material orders"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
+#: field:campos.fee.ss.registration,ssmeat_ids:0
+msgid "Meat"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.ss.reg.meat,event_day_meat_id:0
+msgid "Meat type choice"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.snapshot,message_ids:0
 msgid "Messages"
 msgstr ""
@@ -684,9 +736,20 @@ msgid "Name"
 msgstr ""
 
 #. module: campos_fee
+#: selection:campos.fee.snapshot,execute_func:0
+msgid "Next rate selected segment"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.event.participant,nights:0
 #: field:campos.fee.ss.participant,nights:0
 msgid "Nights"
+msgstr ""
+
+#. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:283
+#, python-format
+msgid "No refusion after may 1: DKK %.2f - %.2f"
 msgstr ""
 
 #. module: campos_fee
@@ -736,6 +799,12 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:261
+#, python-format
+msgid "Only  50%% refusion after may 1: %s %.2f - %.2f"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.ss.participant,participant:0
 #: field:campos.fee.ss.participant,participant_id:0
 #: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
@@ -749,6 +818,14 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:243
+#, python-format
+msgid "Participant fee charged on invoice %s:"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
+#: field:campos.fee.ss.registration,sspar_ids:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: model:ir.ui.menu,name:campos_fee.campos_fee_ss_participant_menu
@@ -756,6 +833,7 @@ msgid "Participants"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.ss.registration,charged_fee_participants:0
 #: field:campos.fee.ss.registration,fee_participants:0
 #: field:event.registration,fee_participants:0
 msgid "Participants Fees"
@@ -777,6 +855,11 @@ msgid "Pay Req state"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.snapshot,ref_snapshot_id:0
+msgid "Prev invoice snapshot"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.municipality,product_attribute_id:0
 msgid "Product attribute id"
 msgstr ""
@@ -794,6 +877,11 @@ msgstr ""
 #. module: campos_fee
 #: selection:campos.fee.ss.participant,state:0
 msgid "Received"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.ss.registration,ref_ssreg_id:0
+msgid "Ref Snapshot"
 msgstr ""
 
 #. module: campos_fee
@@ -857,8 +945,18 @@ msgid "Rødovre"
 msgstr ""
 
 #. module: campos_fee
+#: model:ir.ui.menu,name:campos_fee.campos_fee_ss_reg_meat_menu
+msgid "SS Reg Meat"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_171
 msgid "Samsø"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.snapshot,segment:0
+msgid "Segments"
 msgstr ""
 
 #. module: campos_fee
@@ -894,7 +992,6 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.event.participant,sspar_ids:0
 #: field:campos.fee.ss.registration,snapshot_id:0
-#: field:campos.fee.ss.registration,sspar_ids:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: field:event.registration,ssreg_ids:0
@@ -903,6 +1000,7 @@ msgstr ""
 
 #. module: campos_fee
 #: field:campos.fee.ss.participant,ssreg_id:0
+#: field:campos.fee.ss.reg.meat,ssreg_id:0
 msgid "Snapshot Reg"
 msgstr ""
 
@@ -963,6 +1061,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_180
 msgid "Svendborg"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.snapshot,segment:0
+msgid "SydSlesvig"
 msgstr ""
 
 #. module: campos_fee
@@ -1030,6 +1133,7 @@ msgid "Transport Fee Product"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.ss.registration,charged_fee_transport:0
 #: field:campos.fee.ss.registration,fee_transport:0
 #: field:event.registration,fee_transport:0
 msgid "Transport Fee/Refusion"
@@ -1044,6 +1148,12 @@ msgstr ""
 #: field:campos.event.participant,transport_price_total:0
 #: field:campos.fee.ss.participant,transport_price_total:0
 msgid "Transport Total"
+msgstr ""
+
+#. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:270
+#, python-format
+msgid "Transport fee charged on invoice %s"
 msgstr ""
 
 #. module: campos_fee
