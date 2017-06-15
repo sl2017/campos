@@ -84,6 +84,12 @@ class CamposFeeSsRegistration(models.Model):
             ssreg.registration_id.participant_ids.filtered(lambda p: p.state in ['draft', 'standby', 'sent', 'inprogress', 'approved']).assign_participant_number()
 
     @api.multi            
+    def sync_participant(self):
+        for ssreg in self:
+            for p in ssreg.registration_id.participant_ids:
+                if p.partner_id.remote_system_id and p.camp_age > 15:
+                    p.partner_id.remote_system_id.syncPartner(partner=p.partner_id, is_company=False)
+    @api.multi            
     def make_invoice_50(self):
         aio = self.env['account.invoice']
         for ssreg in self:

@@ -25,7 +25,8 @@ class CamposFeeSnapshot(models.Model):
                                      ('make_invoice_100_dk', '2. rate 100% DK Groups'),
                                      ('make_invoice_100_non_dk', 'Non DK Full Rate'),
                                      ('make_invoice_group', 'Next rate selected segment'),
-                                     ('assign_participant_number', 'Assign Participant Numbers')], 'Execute')
+                                     ('assign_participant_number', 'Assign Participant Numbers'),
+                                     ('sync_participant','Sync from MS')], 'Execute')
     single_reg_id = fields.Many2one('event.registration', 'Single group')
     segment = fields.Selection([('dk_groups', 'DK Groups'),
                                 ('ss_groups', 'SydSlesvig'),
