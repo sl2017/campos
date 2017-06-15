@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-15 14:57+0000\n"
-"PO-Revision-Date: 2017-06-15 14:57+0000\n"
+"POT-Creation-Date: 2017-06-15 20:59+0000\n"
+"PO-Revision-Date: 2017-06-15 20:59+0000\n"
 "Last-Translator: Jesper Darum <jda@sl2017.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,20 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_transportation
+#: model:email.template,body_html:campos_transportation.webtour_ticket_mail_group
+#: model:email.template,body_html:campos_transportation.webtour_ticket_mail_staff
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej \n"
+"                    </p>\n"
+"\n"
+"                   \n"
+"            "
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,campos_transfered_deadline:0
@@ -495,12 +509,14 @@ msgstr "(fly) forbindelse"
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,create_uid:0
+#: field:campos.webtourusneed.tickets.overview,create_uid:0
 #: field:campos.webtourusneed.ticketsparticipant,create_uid:0
 msgid "Create uid"
 msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,create_date:0
+#: field:campos.webtourusneed.tickets.overview,create_date:0
 #: field:campos.webtourusneed.ticketsparticipant,create_date:0
 msgid "Create_date"
 msgstr ""
@@ -659,6 +675,7 @@ msgstr "Til Lejren"
 #: field:campos.webtourusneed.seats,display_name:0
 #: field:campos.webtourusneed.seatsparticipant,display_name:0
 #: field:campos.webtourusneed.tickets,display_name:0
+#: field:campos.webtourusneed.tickets.overview,display_name:0
 #: field:campos.webtourusneed.tickets.sent,display_name:0
 #: field:campos.webtourusneed.ticketsparticipant,display_name:0
 #: field:campos.webtourusneed.travelneedpax,display_name:0
@@ -947,6 +964,7 @@ msgstr ""
 #: field:campos.webtourusneed.seats,id:0
 #: field:campos.webtourusneed.seatsparticipant,id:0
 #: field:campos.webtourusneed.tickets,id:0
+#: field:campos.webtourusneed.tickets.overview,id:0
 #: field:campos.webtourusneed.tickets.sent,id:0
 #: field:campos.webtourusneed.ticketsparticipant,id:0
 #: field:campos.webtourusneed.travelneedpax,id:0
@@ -1018,6 +1036,7 @@ msgstr "Individuel opsamlingssted på udrejse"
 #: field:campos.webtourusneed.seats,__last_update:0
 #: field:campos.webtourusneed.seatsparticipant,__last_update:0
 #: field:campos.webtourusneed.tickets,__last_update:0
+#: field:campos.webtourusneed.tickets.overview,__last_update:0
 #: field:campos.webtourusneed.tickets.sent,__last_update:0
 #: field:campos.webtourusneed.ticketsparticipant,__last_update:0
 #: field:campos.webtourusneed.travelneedpax,__last_update:0
@@ -1414,7 +1433,14 @@ msgid "Return journey"
 msgstr "Returrejse"
 
 #. module: campos_transportation
+#: model:email.template,subject:campos_transportation.webtour_ticket_mail_group
+#: model:email.template,subject:campos_transportation.webtour_ticket_mail_staff
+msgid "SL2017 Information om rejsetider for ${object.partner_id.name} "
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.webtourusneed.tickets,sameaslastmail:0
+#: field:campos.webtourusneed.tickets.overview,sameaslastmail:0
 msgid "Same as last mail"
 msgstr ""
 
@@ -1464,6 +1490,12 @@ msgstr "Valgt opsamlingssted til lejren"
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour_admin
 msgid "Send Traveltime email"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.actions.server,name:campos_transportation.action_send_ticket_mail
+#: model:ir.actions.server,name:campos_transportation.action_send_ticket_mail_par
+msgid "Send Webtour Ticket mail"
 msgstr ""
 
 #. module: campos_transportation
@@ -1573,8 +1605,18 @@ msgid "Ticket status"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtourusneed.tickets.overview,ticketscnt:0
+msgid "Tickets Cnt"
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.webtourusneed.tickets.sent,ticket_id:0
 msgid "Tickets Id"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtourusneed.tickets.overview,ticketsentcnt:0
+msgid "Tickets sent Cnt"
 msgstr ""
 
 #. module: campos_transportation
@@ -2117,15 +2159,30 @@ msgid "Webtour usNeed Error"
 msgstr ""
 
 #. module: campos_transportation
+#: field:event.registration,webtourusneed_sameaslastmail:0
+msgid "Webtour usNeed Same as last mail"
+msgstr ""
+
+#. module: campos_transportation
 #: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_usneed
 #: Tickets
 msgid "Webtour usNeed Tickets"
 msgstr ""
 
 #. module: campos_transportation
+#: field:event.registration,webtourusneed_ticketscnt:0
+msgid "Webtour usNeed Tickets Cnt"
+msgstr ""
+
+#. module: campos_transportation
 #: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_usneed
 #: Tickets Sent
 msgid "Webtour usNeed Tickets Sent"
+msgstr ""
+
+#. module: campos_transportation
+#: field:event.registration,webtourusneed_ticketsentcnt:0
+msgid "Webtour usNeed Tickets sent Cnt"
 msgstr ""
 
 #. module: campos_transportation
@@ -2152,12 +2209,18 @@ msgid "Webtourusneed seats reg id"
 msgstr ""
 
 #. module: campos_transportation
+#: field:event.registration,webtourusneed_ticket_overview_reg_id:0
+msgid "Webtourusneed ticket overview reg id"
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.webtourusneed,WebtourUsNeedChanges_ids:0
 msgid "Webtourusneedchanges ids"
 msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,write_uid:0
+#: field:campos.webtourusneed.tickets.overview,write_uid:0
 #: field:campos.webtourusneed.ticketsparticipant,write_uid:0
 msgid "Write uid"
 msgstr ""
@@ -2208,6 +2271,11 @@ msgstr ""
 #. module: campos_transportation
 #: model:ir.model,name:campos_transportation.model_campos_webtourusneed_tickets_sent
 msgid "campos webtour usNeed Tickets Sent"
+msgstr ""
+
+#. module: campos_transportation
+#: model:ir.model,name:campos_transportation.model_campos_webtourusneed_tickets_overview
+msgid "campos webtour usNeed Tickets overview"
 msgstr ""
 
 #. module: campos_transportation
@@ -2525,6 +2593,7 @@ msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,write_date:0
+#: field:campos.webtourusneed.tickets.overview,write_date:0
 #: field:campos.webtourusneed.ticketsparticipant,write_date:0
 msgid "write_date"
 msgstr ""
