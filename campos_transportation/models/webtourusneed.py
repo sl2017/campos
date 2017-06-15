@@ -1027,7 +1027,37 @@ class WebtourUsNeedTravelNeedPax(models.Model):
                     """
                     )
 
+class WebtourUsNeedTicketsOverview(models.Model):
+    _name = 'campos.webtourusneed.tickets.overview'
+    _description = 'campos webtour usNeed Tickets overview'
+    _auto = False
+    _log_access = False
 
+    ticketscnt =  fields.Integer('Tickets Cnt')
+    ticketsentcnt = fields.Integer('Tickets sent Cnt')
+    sameaslastmail = fields.Integer('Same as last mail')
+    create_date = fields.Datetime('Create_date')
+    create_uid = fields.One2many('res.users','id')
+    write_date = fields.Datetime('write_date')
+    write_uid = fields.One2many('res.users','id')  
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_tickets_overview as      
+                    select registration_id as id
+                    ,count(registration_id) as ticketscnt
+                    ,sum( case when lastmaildatetime is not null then 1 else 0 end)  as ticketsentcnt
+                    ,min(case when sameaslastmail then 1 else 0 end) as sameaslastmail 
+                    ,min(create_date) as create_date 
+                    ,min(create_uid) as  create_uid
+                    ,max(write_date) as write_date
+                    ,min(write_uid) as write_uid
+                    from campos_webtourusneed_tickets
+                    group by registration_id
+                    """
+                    )    
+    
 class WebtourUsNeedTicketsSent(models.Model):
     _name = 'campos.webtourusneed.tickets.sent'
     _description = 'campos webtour usNeed Tickets Sent'
