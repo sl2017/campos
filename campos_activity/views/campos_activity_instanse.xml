@@ -72,6 +72,7 @@
                     	<field name="activity_id"/>
                         <field name="period_id"/>
                         <field name="name"/>
+                        <field name="state"/>
             </search>
         </field>
     </record>
@@ -84,6 +85,7 @@
                     	<field name="activity_id"/>
                         <field name="period_id"/>
                         <field name="name"/>
+                        <field name="state"/>
             </tree>
         </field>
     </record>

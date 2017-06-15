@@ -272,6 +272,12 @@ class ParticipantCampDay(models.Model):
     day_id = fields.Many2one('event.day', 'Event day')
     the_date = fields.Date(related='day_id.event_date', String='Event date', readonly=True, store=True)
     will_participate = fields.Boolean('Will participate this day?')
+    
+    _sql_constraints = [
+        ('name_unique',
+         'unique(participant_id,day_id)',
+         'The tag name has to be unique!')
+    ]
 
 class EventDay(models.Model):
     '''
@@ -375,8 +381,8 @@ class RegistrationMeat(models.Model):
     meat_count = fields.Integer('Count', required=True)
     event_day_id = fields.Many2one(related='event_day_meat_id.event_day_id')
     event_date = fields.Date(related='event_day_id.event_date')
-    day_meat_total = fields.Integer('Day meat total', compute='_compute_meat_day_total')
-    day_participant_total = fields.Integer('Day part. total', compute='_compute_participant_day_total')
+    day_meat_total = fields.Integer('Day meat total', compute='_compute_meat_day_total', store=True)
+    day_participant_total = fields.Integer('Day part. total', compute='_compute_participant_day_total', store=True)
 #TODO   _sql_constraints = [('meat_unique_per_registration_camp_day', 'unique(registration_id,event_day_meat_id)', _('Each meat type can only be chosen once per day'))]
     
     @api.one

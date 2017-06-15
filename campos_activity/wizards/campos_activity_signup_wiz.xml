@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_activity_signup_wiz_form_view">
+        <field name="name">campos.activity.signup.wiz.form (in campos_activity)</field>
+        <field name="model">campos.activity.signup.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Campos Activity Signup Wiz">
+                <!-- TODO -->
+                <group>
+                	<field name="state" invisible="1"/>
+                	<field name="id" invisible="1"/>
+                	<field name="reg_id" invisible="1"/>
+                	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}" options="{'no_create': True, 'no_open': True}"/>
+                	<field name="teaser" nolabel="1" colspan="2"/>
+                	<newline/>
+                	<field name="audience_ids" widget="many2many_checkboxes"/>
+                	<newline/>
+                	<group col="4" colspan="2">
+                	<field name="age_from"/>
+                	<field name="age_to"/>
+                	</group>
+                	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"  domain="[('activity_id', '=', act_id), ('seats_available', '>', 0), ('booking_date_begin', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),  ('booking_date_end', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),('state', 'in', ['open','canc_risk'])]" options="{'no_create': True, 'no_open': True}"/>
+                	<field name="seats"/>
+                    <field name="par_signup_ids" states="step2" domain="[('wiz_id', '=', id)]"/>
+                    <field name="name"/>
+                    <field name="ticket_id" invisible="1"/>
+                    
+                </group>
+                <footer>
+                    <button name='doit_step1'
+                        string='OK'
+                        class='btn-primary oe_highlight'
+                        type='object'
+                        states="step1" />
+                    <button name='doit_step2'
+                        string='OK'
+                        class='btn-primary oe_highlight'
+                        type='object'
+                        states="step2" />
+                    or
+                    <button string='Cancel'
+                        class='btn-default oe_link'
+                        special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_activity_signup_wiz_act_window">
+        <field name="name">Campos Activity Signup Wiz</field> <!-- TODO -->
+        <field name="res_model">campos.activity.signup.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+    
+    <record model="ir.ui.view" id="campos_activity_signup_wiz_member_view">
+        <field name="name">campos.activity.signup.members tree (in campos_activity)</field>
+        <field name="model">campos.activity.signup.members</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+            	<field name="camp_age"/>
+            	<field name="own_note"/>	
+            </tree>
+    	</field>
+    </record>
+<!-- 
+    <record model="ir.values" id="campos_activity_signup_wiz_act_multi">
+        <field name="name">Campos Activity Signup Wiz</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('campos_activity_signup_wiz_act_window'))" />
+        <field name="model">source.model</field>
+    </record>
+ -->
+
+</data>
+</openerp>

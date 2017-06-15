@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import tools, api, fields, models, _
-
+from openerp.exceptions import Warning
 
 class CamposActivityActivity(models.Model):
 
@@ -58,6 +58,12 @@ class CamposActivityActivity(models.Model):
                                      "resized as a 64x64px image, with aspect ratio preserved. " \
                                      "Use this field in form views or some kanban views.")
     has_image = fields.Boolean('Ha Image', compute='_compute_has_image')
+    
+    @api.multi
+    def unlink(self):
+        if any(act.act_ins_ids for act in self):
+            raise Warning(_('You can only delete unused activities!'))
+    
     
     @api.multi
     def _compute_has_image(self):

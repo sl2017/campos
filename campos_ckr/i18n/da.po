@@ -399,7 +399,7 @@ msgstr ""
 #. module: campos_ckr
 #: field:campos.ckr.fetch.wiz,participant_id:0
 msgid "Participant id"
-msgstr ""
+msgstr "Skejser nummer"
 
 #. module: campos_ckr
 #: selection:campos.ckr.check,state:0

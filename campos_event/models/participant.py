@@ -101,6 +101,7 @@ class EventParticipant(geo_model.GeoModel):
     birthdate = fields.Date('Date of birth')
     birthdate_short = fields.Char(compute='_compute_birthdate_short')
     age = fields.Integer('Age', compute='_compute_age', store=True)
+    camp_age = fields.Integer('Age (On Camp)', compute='_compute_camp_age', store=True)
     context_age = fields.Integer('Age', compute='_compute_context_age')
 
     # Jobber fields
@@ -215,6 +216,12 @@ class EventParticipant(geo_model.GeoModel):
     def _compute_age(self):
         for part in self:
             part.age = relativedelta(date.today(), fields.Date.from_string(part.birthdate)).years if part.birthdate else False
+
+    @api.multi
+    @api.depends('birthdate')
+    def _compute_camp_age(self):
+        for part in self:
+            part.camp_age = relativedelta(date(2017,7,22), fields.Date.from_string(part.birthdate)).years if part.birthdate else False
 
     @api.multi
     @api.depends('birthdate')
