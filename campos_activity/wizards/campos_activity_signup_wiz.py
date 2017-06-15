@@ -65,10 +65,10 @@ class CamposActivitySignupWiz(models.TransientModel):
                     _logger.info('Evaluating %s %s %s', par.name, dt, par.tocampdate)
                     if dt < par.tocampdate or dt > par.fromcampdate:
                         continue
-                    # Test alderskrav        
-                    _logger.info('Evaluating age %s %s', par.name, par.camp_age)
-                    if par.camp_age < wiz.act_ins_id.activity_id.age_from or par.camp_age > wiz.act_ins_id.activity_id.age_to:
-                        continue
+                    # Test alderskrav - Alderskrav bortfaldet        
+                    #_logger.info('Evaluating age %s %s', par.name, par.camp_age)
+                    #if par.camp_age < wiz.act_ins_id.activity_id.age_from or par.camp_age > wiz.act_ins_id.activity_id.age_to:
+                    #    continue
                     # Test mod andre bookinger    
                     period_ok = True
                     if par.ticket_ids:
