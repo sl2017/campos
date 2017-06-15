@@ -33,7 +33,7 @@ class CamposActivityInstanse(models.Model):
                                 ('precamp', 'Pre Camp Booking Required'),
                                 ('prebook', 'Booking required')], 'Booking')
     booking_date_begin = fields.Datetime('Booking opens')
-    booking_date_end = fields.Datetime('Boking closes')
+    booking_date_end = fields.Datetime('Booking closes')
     
     state = fields.Selection([('open', 'Open'),
                                 ('cancelled', 'Cancelled'),
