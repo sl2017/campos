@@ -100,7 +100,7 @@
             <tree>
                 <!-- TODO -->
                 <field name="actins_date_begin"/>
-                <field name="name"/>
+                <field name="reg_id"/>
                 <field name="act_ins_id"/>
                 <field name="seats"/>
                 <field name="state"/>
