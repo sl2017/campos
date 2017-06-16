@@ -122,11 +122,12 @@
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										
-										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True)]}"/>
 										
-										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True)]}"/>
 										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
 										
+										<!-- 
 										<field name="payforotherjobber" attrs="{'readonly': ['|',('paybyjobber', '=', True),('paybygroup', '=', True)]}"/>
 										<field name="pay_key_master" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
 										<label string="Jobbers to pay for" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
@@ -140,6 +141,7 @@
 					            			
 					            			</tree>
 					            		</field>
+					            		 -->
 					            		<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
