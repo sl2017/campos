@@ -179,7 +179,7 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
-    participant_number = fields.Char(related='partner_id.ref', string='Participant Number')
+    participant_number = fields.Char(related='partner_id.ref', string='Skejser ID')
     tag_ids = fields.Many2many('campos.par.tag', string='Tags', groups='campos_event.group_campos_admin')
 
     
