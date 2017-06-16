@@ -103,7 +103,8 @@ class CamposEventParticipant(models.Model):
                 par.transport_co
                 par.transport_product_id = False
                 par.camp_price_total = 0
-    
+                
+        
     @api.multi
     def do_snapshot(self, ssreg):
         for par in self:

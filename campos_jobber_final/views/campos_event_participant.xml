@@ -94,9 +94,9 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									
-									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
-									
+ 
+									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
+
 									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
@@ -150,6 +150,7 @@
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" readonly="1"/>
 								</group>
 						 </page>
+				
 						 <page string="Children">
 						 	<field name="jobber_child_ids" context="{'form_view_ref': 'campos_jobber_final.campos_jobber_child_form_view'}">
 						 		<tree create="false">
@@ -170,6 +171,7 @@
 						 	<button name="action_add_jobber_child"  string="Add child" type="object"/>
 						 
 						 </page>
+
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
 						 		<field name="exp_child_qu" />
@@ -305,10 +307,12 @@
 									<field name="date_from"/>
 									<field name="date_to"/>
 									<field name="eat_at"/>
-									
-									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
-																		<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																								    'show_organization': 1}"/>
+								
+									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
+								
+											
+									<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
+									 																																															    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>
 								</tree>
 							</field>
@@ -331,11 +335,8 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
-										
-										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
-										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
-																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
-																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
+										<field name="paybygroup"/>
+										<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False)]}" context="{'search_default_organization_id': reg_organization_id,                                                  'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',                                                  'show_organization': 1}"/>
 										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_date" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
 										<field name="payreq_approved_user_id" attrs="{'invisible': [('paybygroup', '=', False)]}" readonly="1"/>
@@ -357,6 +358,7 @@
 					            		</field>
 								</group>
 						 </page>
+
 						 <page string="Children">
 						 	<field name="jobber_child_ids" create="false" context="{'form_view_ref': 'campos_jobber_final.campos_jobber_child_form_view'}">
 						 		<tree create="false">
@@ -376,6 +378,7 @@
 						 	</field>
 						 
 						 </page>
+
 						 <page string="Children Island" attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
 						 	<group>
 						 		<field name="exp_child_qu" />
@@ -477,7 +480,7 @@
 									<field name="date_to"/>
 									<field name="eat_at"/>
 									
-									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')], 'required': [('eat_at', '=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
+									<field name="canteen_id" attrs="{'readonly': [('eat_at', '!=', 'canteen')]}" options="{'no_create': True, 'no_open': True}"/>
 																		<field name="registration_id" string="Group" attrs="{'readonly': [('eat_at', '!=', 'group')], 'required': [('eat_at', '=', 'group')]}" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																								    'show_organization': 1}"/>
 									<field name="state" readonly="1"/>

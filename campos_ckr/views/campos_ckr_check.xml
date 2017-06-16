@@ -203,9 +203,9 @@
 			<field name="inherit_id" ref="campos_event.campos_committee_member_search" />
 			<field name="arch" type="xml">
 				<search>
-					<filter name="fParticipant" position="after">
+					<field name="email" position="after">
 						<filter name="fckr" string="CKR Missing" domain="[('participant_id.ckr_state', '!=', 'approved')]"/>
-					</filter>
+					</field>
 				</search>
 			</field>
 		</record>

@@ -986,6 +986,11 @@ msgid "In Planning"
 msgstr "Under planlægning"
 
 #. module: campos_transportation
+#: selection:campos.webtourusneed,needstatus:0
+msgid "In Planning"
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.event.participant,individualfromcamptodestination_id:0
 msgid "Individual From camp Drop off"
 msgstr "Individuel afsætningssted på hjemrejse"
