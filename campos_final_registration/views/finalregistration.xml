@@ -408,14 +408,14 @@
 								</page>
 								<page string="Special needs">
 									<group>
-										<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs">
+										<field colspan="2" name="need_ids" widget="one2many_list" nolabel="0" string="Special needs" readonly="1">
 											<tree editable="bottom">
 												<field name="need_id"  options="{'no_create': True, 'no_open': True}" string="Need" domain="[('for_group', '=', True)]"/>
 												<field name="need_count"/>
 											</tree>
 										</field>
-										<field name="other_need"/>
-										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}"/>
+										<field name="other_need" readonly="1"/>
+										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}" readonly="1"/>
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 								</page>
