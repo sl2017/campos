@@ -38,6 +38,8 @@
                         <field name="number_participants"/>
             			<field name="fee_participants"/>
             			<field name="fee_transport"/>
+            			<field name="count_transport_to"/>
+            			<field name="count_transport_from"/>
             			<field name="material_cost"/>
             			<field name="fee_total"/>
             			<field name="state"/>
