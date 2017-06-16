@@ -48,6 +48,7 @@ class CamposEventParticipant(models.Model):
     jobber_child = fields.Boolean('Jobber Child')
     parent_jobber_id = fields.Many2one('campos.event.participant')
     jobber_child_ids = fields.One2many('campos.event.participant', 'parent_jobber_id')
+    car_ids = fields.One2many('campos.event.car','participant_id','Cars')
     
     _sql_constraints = [
                         ('pay_key_master_uniq', 'unique(pay_key_master)', 'Payment Code already in use. Choose another'),
