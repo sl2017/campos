@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
             	<page name="activity" string="Activities">
-					<!-- 
+					
 					<button name="action_add_activity" string="Add Activity" type="object"/>
 					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
 					<field name="ticket_ids" readonly="1">
