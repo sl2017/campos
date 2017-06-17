@@ -38,6 +38,8 @@
                         <field name="number_participants"/>
             			<field name="fee_participants"/>
             			<field name="fee_transport"/>
+            			<field name="count_transport_to"/>
+            			<field name="count_transport_from"/>
             			<field name="material_cost"/>
             			<field name="fee_total"/>
             			<field name="state"/>
@@ -48,7 +50,7 @@
             					<field name="sspar_ids" nolabel="1" colspan="2"/>
             				</page>
             				<page string="Meat">
-            					<field name="sspar_ids" nolabel="1" colspan="2"/>
+            					<field name="ssmeat_ids" nolabel="1" colspan="2"/>
             				</page>
             				
             			</notebook>

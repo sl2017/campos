@@ -15,11 +15,15 @@
 					<!-- 
 					<button name="action_add_activity" string="Add Activity" type="object"/>
 					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
-					 -->
-					<field name="ticket_ids"/>
-					           	
-            		
-            	
+					<field name="ticket_ids" readonly="1">
+						<tree>
+							<field name="actins_date_begin"/>
+                			<field name="name"/>
+                			<field name="act_ins_id"/>
+                			<field name="seats"/>
+                			<field name="state"/>
+						</tree>
+					</field>   	
             	</page>
             </page>
         </field>

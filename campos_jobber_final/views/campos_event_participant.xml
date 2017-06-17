@@ -113,20 +113,21 @@
             			</page>
 						<page string="Special needs" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}" >
 									<group>
-										<field name="need_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('for_staff', '=', True)]"/>
-										<field name="other_need"/>
-										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}"/>
+										<field name="need_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('for_staff', '=', True)]" readonly="1"/>
+										<field name="other_need" readonly="1"/>
+										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}" readonly="1"/>
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
 										
-										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True)]}"/>
 										
-										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True),('payforotherjobber', '=', True)]}"/>
+										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True)]}"/>
 										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
 										
+										<!-- 
 										<field name="payforotherjobber" attrs="{'readonly': ['|',('paybyjobber', '=', True),('paybygroup', '=', True)]}"/>
 										<field name="pay_key_master" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
 										<label string="Jobbers to pay for" attrs="{'invisible': [('payforotherjobber', '=', False)]}"/>
@@ -140,6 +141,7 @@
 					            			
 					            			</tree>
 					            		</field>
+					            		 -->
 					            		<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
@@ -175,6 +177,16 @@
 						 		<field name="exp_child_qu" />
 						 	</group>
 						 </page>
+						 <page string="Car">
+							<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars" context="{'default_phone_number': mobile}">
+								<tree editable="bottom">
+									<field name="reg_number"/>
+									<field name="park_permit_start_date"/>
+									<field name="park_permit_end_date"/>
+									<field name="phone_number"/>
+								</tree>
+							</field>
+						</page>
             		</notebook>		
             	</page>
             </page>

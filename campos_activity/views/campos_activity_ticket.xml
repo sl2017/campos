@@ -5,9 +5,11 @@
 <openerp>
 <data>
 
+	<!--  Administrator views -->
     <record model="ir.ui.view" id="campos_activity_ticket_form_view">
         <field name="name">campos.activity.ticket.form (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
+        <field name="groups_id" eval="[(4, ref('campos_activity.group_campos_activity'))]"/>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -43,6 +45,46 @@
         </field>
     </record>
 
+	<!--  Scout group view  -->
+	<record model="ir.ui.view" id="campos_activity_ticket_form_view2">
+        <field name="name">campos.activity.ticket.form (in campos_activity)</field>
+        <field name="model">campos.activity.ticket</field>
+        <field name="priority">17</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" 
+                    			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="campos_activity.group_campos_activity"/>
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="act_ins_id" options="{'no_open': True}"/>
+                            <field name="act_desc"/>
+                            <field name="reg_id" options="{'no_open': True}"/>
+                            <field name="seats" options="{'reload_on_button': true}"/>
+                            <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
+                            
+                            <field name="id" invisible="1"/>
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            	<tree options="{'reload_on_button': true}">
+                            		<field name="name"/>
+ 									<field name="age"/>
+ 									<field name="dates_summery"/>
+ 									<!-- 
+ 									<button name="action_unlink_activityticket"  icon="STOCK_CLOSE" type="object" help="Remove Participant from Activity Booking"/>
+ 									 -->
+                            	</tree>
+                            	</field>
+                            <field name="name"/>
+                        
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+	
 	<record model="ir.ui.view" id="campos_activity_ticket_booking_view">
         <field name="name">campos.activity.ticket.booking (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
@@ -100,7 +142,7 @@
             <tree>
                 <!-- TODO -->
                 <field name="actins_date_begin"/>
-                <field name="name"/>
+                <field name="reg_id"/>
                 <field name="act_ins_id"/>
                 <field name="seats"/>
                 <field name="state"/>

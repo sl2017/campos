@@ -50,6 +50,14 @@ class CamposFeeSsRegistration(models.Model):
     audit = fields.Boolean('Audit')
     cmp_currency_id = fields.Many2one(related='registration_id.event_id.company_id.currency_id', readonly=True)
     ref_ssreg_id = fields.Many2one('campos.fee.ss.registration', 'Ref Snapshot')
+    count_transport_to = fields.Integer('# Transport to Camp', compute='_compute_count_transport', compute_sudo=True)
+    count_transport_from = fields.Integer('# Transport from Camp', compute='_compute_count_transport', compute_sudo=True)
+    
+    @api.multi
+    def _compute_count_transport(self):
+        for ssreg in self:
+            ssreg.count_transport_to = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_to_camp', '=', True)])
+            ssreg.count_transport_from = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_from_camp', '=', True)])
 
 
     @api.multi
@@ -279,14 +287,14 @@ class CamposFeeSsRegistration(models.Model):
                     self.env['account.invoice.line'].create(vals)
                     
                     
-                    if charged_fee_tran > ssreg.fee_transport:
+                    if charged_fee_tran > ssreg.fee_transport and (ssreg.count_transport_from + ssreg.count_transport_to) <  (ssreg.ref_ssreg_id.count_transport_from + ssreg.ref_ssreg_id.count_transport_to):
                             #2. No refusions
                             charged_fee_tran_val = charged_fee_tran
                             fee_tran_val = ssreg.fee_transport
                             if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                                 charged_tran_par_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
                                 fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                            desc = _('No refusion after may 1: DKK %.2f - %.2f') % (charged_fee_tran_val, fee_tran_val) 
+                            desc = _('No refusion after may 1: %s %.2f - %.2f') % (ssreg.ref_ssreg_id.invoice_id.currency_id.name,charged_fee_tran_val, fee_tran_val) 
                             vals = self._prepare_create_invoice_line_vals((charged_fee_tran_val - fee_tran_val), 1, type='out_invoice', description=desc, product=product)
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
                             vals['invoice_id'] = ssreg.invoice_id.id
