@@ -254,7 +254,7 @@ msgstr "Aktivitetstype"
 #: view:campos.activity.mass.signup.wiz:campos_activity.campos_activity_mass_signup_wiz_form_view
 #: view:campos.activity.signup.wiz:campos_activity.campos_activity_signup_wiz_form_view
 msgid "Cancel"
-msgstr "Aflys"
+msgstr "Annuller"
 
 #. module: campos_activity
 #: selection:campos.activity.activity,state:0

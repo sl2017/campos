@@ -986,11 +986,6 @@ msgid "In Planning"
 msgstr "Under planlægning"
 
 #. module: campos_transportation
-#: selection:campos.webtourusneed,needstatus:0
-msgid "In Planning"
-msgstr ""
-
-#. module: campos_transportation
 #: field:campos.event.participant,individualfromcamptodestination_id:0
 msgid "Individual From camp Drop off"
 msgstr "Individuel afsætningssted på hjemrejse"
@@ -1110,7 +1105,7 @@ msgstr "Længdegrad"
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "NO SEAT RESERVED"
-msgstr "NGEN PLADS RESERVERET"
+msgstr "INGEN PLADS RESERVERET"
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,needstatus:0
@@ -1409,7 +1404,7 @@ msgstr "Request"
 #. module: campos_transportation
 #: selection:campos.event.participant.day,webtourticketstatus:0
 msgid "Request changed, waiting to be processed"
-msgstr ""
+msgstr "Behov ændret, venter på behandling"
 
 #. module: campos_transportation
 #: field:campos.webtour_req_logger,responce:0
@@ -1447,7 +1442,7 @@ msgstr ""
 #: field:campos.webtourusneed.tickets,sameaslastmail:0
 #: field:campos.webtourusneed.tickets.overview,sameaslastmail:0
 msgid "Same as last mail"
-msgstr ""
+msgstr "Mail som sidst"
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_confirmed:0
@@ -1511,7 +1506,7 @@ msgstr "Særlig hjemrejsetidspunkt"
 #. module: campos_transportation
 #: field:campos.event.participant,specialtocampdate_id:0
 msgid "Special To Camp Date"
-msgstr "Særlig hjemrejse dato"
+msgstr "Særlig udrejse dato"
 
 #. module: campos_transportation
 #: field:campos.event.participant,webtourtravelneed_ids:0
