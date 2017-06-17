@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-01 21:02+0000\n"
-"PO-Revision-Date: 2017-06-01 21:02+0000\n"
+"POT-Creation-Date: 2017-06-17 04:36+0000\n"
+"PO-Revision-Date: 2017-06-17 04:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.accom.group,number_participants:0
 msgid "# participants"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_campos_event_car
+msgid "A car for parking at the camp"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -87,9 +92,9 @@ msgid "Associated jobbers"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:87
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:99
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:169
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:88
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:100
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:170
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
@@ -121,6 +126,11 @@ msgstr ""
 #: model:ir.model,name:campos_jobber_final.model_campos_canteen
 #: model:ir.ui.menu,name:campos_jobber_final.campos_canteen_menu
 msgid "Campos Canteen"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_event_car_act_window
+msgid "Campos Event Car"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -166,6 +176,18 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.canteen,committee_id:0
 msgid "Canteen Committee"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Car"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: field:campos.event.participant,car_ids:0
+#: model:ir.ui.menu,name:campos_jobber_final.campos_event_car_menu
+msgid "Cars"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -457,7 +479,6 @@ msgid "Jobbers to Pay for"
 msgstr ""
 
 #. module: campos_jobber_final
-#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Jobbers to pay for"
 msgstr ""
@@ -509,13 +530,13 @@ msgid "Need updated"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:260
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:261
 #, python-format
 msgid "New Staff Accomodation Group"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:231
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:232
 #, python-format
 msgid "New child for: %s"
 msgstr ""
@@ -523,6 +544,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: selection:campos.event.participant,signup_state:0
 msgid "Not signed up"
+msgstr ""
+
+#. module: campos_jobber_final
+#: sql_constraint:campos.event.car:0
+msgid "Only ONE Car Ticket pr person."
 msgstr ""
 
 #. module: campos_jobber_final
@@ -551,6 +577,7 @@ msgid "Parent jobber id"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.car,participant_id:0
 #: field:campos.jobber.accomodation,participant_id:0
 #: field:campos.jobber.canteen,participant_id:0
 msgid "Participant"
@@ -633,7 +660,7 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:180
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:181
 #, python-format
 msgid "Request CKR"
 msgstr ""
@@ -751,7 +778,6 @@ msgid "dd/mm/åååå"
 msgstr ""
 
 #. module: campos_jobber_final
-#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "string"
