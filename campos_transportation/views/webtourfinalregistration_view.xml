@@ -22,7 +22,7 @@
 		</record>
 
 		<!-- Server action and bindig to present iframe embed code -->
-		<record id="action_send_ticket_mail" model="ir.actions.server">
+		<record id="action_send_ticket_mail"  model="ir.actions.server" >
 			<field name="name">Send Webtour Ticket mail</field>
 			<field name="condition">True</field>
 			<field name="type">ir.actions.server</field>
@@ -33,7 +33,7 @@
 			</field>
 		</record>
 		
-		<record id="ir_start_webtour_update" model="ir.values">
+		<record id="ir_send_ticket_mail" model="ir.values">
 			<field name="model">event.registration</field>
 			<field name="name">Send Webtour Ticket mail</field>
 			<field name="key2">client_action_multi</field>
@@ -213,7 +213,7 @@
 			</field>
 		</record>
 		
-		<record id="ir_start_webtour_update_par" model="ir.values">
+		<record id="ir_send_ticket_mail_par" model="ir.values">
 			<field name="model">campos.event.participant</field>
 			<field name="name">Send Webtour Ticket mail</field>
 			<field name="key2">client_action_multi</field>
