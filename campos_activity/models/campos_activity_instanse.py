@@ -51,8 +51,9 @@ class CamposActivityInstanse(models.Model):
         if 'state' in vals and vals['state'] in ['cancelled', 'canc_weather']:
             cancel = True
         ret = super(CamposActivityInstanse, self).write(vals)
-        for ai in self:
-            ai.ticket_ids.write({'state': 'cancelled'})
+        if cancel:
+            for ai in self:
+                ai.ticket_ids.write({'state': 'cancelled'})
         
         return ret
     
