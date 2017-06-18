@@ -19,14 +19,14 @@
                 <sheet>
                     <!-- TODO -->
                     <group>
-                        <field name="act_ins_id"/>
+                        <field name="act_ins_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="act_desc"/>
-                            <field name="reg_id"/>
-                            <field name="seats" options="{'reload_on_button': true}"/>
+                            <field name="reg_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="seats" options="{'reload_on_button': true}" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
                             
                             <field name="id" invisible="1"/>
-                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}" attrs="{'readonly': [('state', '=', 'done')]}">
                             	<tree options="{'reload_on_button': true}">
                             		<field name="name"/>
  									<field name="age"/>
@@ -66,7 +66,7 @@
                             <field name="reserved_time" groups="dds_camp.group_dds_camp_activity"/>
                             
                             <field name="id" invisible="1"/>
-                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}">
+                            <field name="par_ids" domain="[('registration_id','=',reg_id)]" context="{'ticket_id': id}" options="{'reload_on_button': true}" attrs="{'readonly': [('state', '=', 'done')]}">
                             	<tree options="{'reload_on_button': true}">
                             		<field name="name"/>
  									<field name="age"/>

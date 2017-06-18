@@ -18,7 +18,7 @@ class CamposActivityTicket(models.Model):
                               ('done', 'Booked'),
                               ('timeout', 'TimeOut'),
                               ('cancelled', 'Cancelled')
-                             ], 'Ticket State', track_visibility='onchange'
+                             ], 'Ticket State', track_visibility='onchange', default='open'
                             )
     act_ins_id = fields.Many2one('campos.activity.instanse', 'Activity')
     reg_id = fields.Many2one('event.registration', 'Scout Group')
@@ -31,3 +31,17 @@ class CamposActivityTicket(models.Model):
     @api.multi
     def action_unlink_ticket(self):
         self.suspend_security().unlink()
+
+    @api.multi
+    def write(self, vals):
+        seats_update = False
+        if 'state' in vals and vals['state'] in ['done']:
+            seats_update = True
+        ret = super(CamposActivityTicket, self).write(vals)
+        if seats_update:
+            for t in self:
+                t.seats = len(t.par_ids)
+                
+        return ret
+    
+    
