@@ -84,7 +84,7 @@
             </form>
         </field>
     </record>
-	
+	<!-- 
 	<record model="ir.ui.view" id="campos_activity_ticket_booking_view">
         <field name="name">campos.activity.ticket.booking (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
@@ -96,7 +96,7 @@
                     			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="campos_activity.group_campos_activity"/>
                 </header>
                 <sheet>
-                    <!-- TODO -->
+                    
                     <group>
                         <field name="act_ins_id"/>
                             <field name="act_desc"/>
@@ -110,9 +110,7 @@
                             		<field name="name"/>
  									<field name="camp_age"/>
  									<field name="dates_summery"/>
- 									<!-- 
- 									<button name="action_unlink_activityticket"  icon="STOCK_CLOSE" type="object" help="Remove Participant from Activity Booking"/>
- 									 -->
+ 									
                             	</tree>
                             	</field>
                             <field name="name"/>
@@ -123,7 +121,7 @@
             </form>
         </field>
     </record>
-	
+	 -->
     <record model="ir.ui.view" id="campos_activity_ticket_search_view">
         <field name="name">campos.activity.ticket.search (in campos_activity)</field>
         <field name="model">campos.activity.ticket</field>
