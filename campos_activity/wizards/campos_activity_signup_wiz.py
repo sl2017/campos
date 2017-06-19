@@ -124,4 +124,53 @@ class CamposActivitySignupWiz(models.TransientModel):
                 
         
         
-    
+    @api.multi
+    def prepare_step2(self):
+        _logger.info('prepare_step2')
+        self.ensure_one()
+        for wiz in self:
+            dt = wiz.act_ins_id.period_id.date_begin[0:10]
+            mbr_obj = self.env['campos.activity.signup.members']
+            if wiz.reg_id.participant_ids:
+                for par in wiz.reg_id.participant_ids:
+                    if par.state in ['reg', 'duplicate', 'deregistered']:
+                        continue
+                    #Test aktivitetsdato mod deltagerdage
+                    _logger.info('Evaluating %s %s %s', par.name, dt, par.tocampdate)
+                    if dt < par.tocampdate or dt > par.fromcampdate:
+                        continue
+                    # Test alderskrav - Alderskrav bortfaldet        
+                    #_logger.info('Evaluating age %s %s', par.name, par.camp_age)
+                    #if par.camp_age < wiz.act_ins_id.activity_id.age_from or par.camp_age > wiz.act_ins_id.activity_id.age_to:
+                    #    continue
+                    # Test mod andre bookinger    
+                    period_ok = True
+                    if par.ticket_ids:
+                        for tck in par.ticket_ids:
+                            if tck.act_ins_id.period_id.date_begin <= wiz.act_ins_id.period_id.date_end and tck.act_ins_id.period_id.date_end >= wiz.act_ins_id.period_id.date_begin and tck.id != wiz.ticket_id.id:
+                                period_ok = False
+                                break
+                    if not period_ok:
+                        continue
+                    _logger.info('Adding %s', par.name)
+                    mbr_id = mbr_obj.create({'wiz_id' : wiz.id,
+                                             'par_id' : par.id,
+                                             'name'   : par.name,
+                                             'reg_id' : wiz.reg_id.id})
+                    if self.ticket_id.id in par.ticket_ids.ids:
+                        self.par_signup_ids += mbr_id
+ 
+        return {
+            'name': _('Edit participants'),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_activity.campos_activity_signup_wiz_form_view').id,
+            'res_model': 'campos.activity.signup.wiz',
+            'type': 'ir.actions.act_window',
+            #'nodestroy': True,
+            'target': 'new',
+            'context' : {
+                         'default_reg_id': self.id, 
+                         },
+            'res_id': self.id,
+            }

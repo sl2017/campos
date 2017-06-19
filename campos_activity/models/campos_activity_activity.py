@@ -63,6 +63,7 @@ class CamposActivityActivity(models.Model):
     def unlink(self):
         if any(act.act_ins_ids for act in self):
             raise Warning(_('You can only delete unused activities!'))
+        return super(CamposActivityActivity, self).unlink()
     
     
     @api.multi

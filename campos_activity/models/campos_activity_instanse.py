@@ -44,6 +44,7 @@ class CamposActivityInstanse(models.Model):
     def unlink(self):
         if any(act.ticket_ids for act in self):
             raise Warning(_('You can only delete unused instanse! You need to Cancel it.'))
+        return super(CamposActivityInstanse, self).unlink()
         
     @api.multi
     def write(self, vals):
