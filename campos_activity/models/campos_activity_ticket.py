@@ -27,6 +27,7 @@ class CamposActivityTicket(models.Model):
     actins_date_end = fields.Datetime(related='act_ins_id.period_id.date_end', string='End Date/Time', store=True, readonly=True)
     act_desc = fields.Html(related='act_ins_id.activity_id.desc', string='Description', readonly=True)
     activity_id = fields.Many2one(related='act_ins_id.activity_id', string='Activity')
+    allow_edit = fields.Boolean('Allow edit', compute='_compute_allow_edit')
 
     @api.multi
     def action_unlink_ticket(self):
@@ -43,5 +44,30 @@ class CamposActivityTicket(models.Model):
                 t.seats = len(t.par_ids)
                 
         return ret
+    
+    @api.multi
+    def _compute_allow_edit(self):
+        for t in self:
+            if t.act_ins_id.booking_date_begin <= fields.Datetime.now() and t.act_ins_id.booking_date_end >= fields.Datetime.now():
+                t.allow_edit = True
+            else:
+                t.allow_edit = False 
+    
+    @api.multi
+    def action_cancel_ticket(self):
+        self.suspend_security().write({'state': 'cancelled'})
+        
+    @api.multi
+    def action_edit_ticket(self):
+        self.ensure_one()
+        
+        wiz = self.env['campos.activity.signup.wiz'].create({'name': self.name,
+                                                             'ticket_id': self.id,
+                                                             'act_id': self.activity_id.id,
+                                                             'act_ins_id': self.act_ins_id.id,
+                                                             'reg_id': self.reg_id.id,
+                                                             'seats': self.seats,
+                                                             'state': 'step2'})
+        return wiz.prepare_step2()
     
     

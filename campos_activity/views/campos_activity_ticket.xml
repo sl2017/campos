@@ -53,6 +53,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                	<field name="allow_edit" invisible="0"/>
+                	<button name="action_edit_ticket" string="Edit ticket" type="object" attrs="{'invisible': [('allow_edit', '=', False)]}"/>
+                	<button name="action_cancel_ticket" string="Cancel ticket" type="object" attrs="{'invisible': [('allow_edit', '=', False)]}"/>
                     <field name="state" widget="statusbar" 
                     			statusbar_visible="open,done" statusbar_colors='{"open":"blue","done":"blue","timeout":"red"}' groups="campos_activity.group_campos_activity"/>
                 </header>
