@@ -280,20 +280,21 @@ class CamposFeeSsRegistration(models.Model):
                         ssreg.charged_fee_participants = ssreg.fee_participants + (charged_fee_par - ssreg.fee_participants / 2)
                         ssreg.audit = True
                     product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
-                    #1. Prev camp fee
+                    #1. Prev transport fee
+                    charged_fee_tran_val = charged_fee_tran
+                    fee_tran_val = ssreg.fee_transport
+                    if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
+                        charged_fee_tran_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
+                        fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                     desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
-                    vals = self._prepare_create_invoice_line_vals(-charged_fee_tran, 1, type='out_invoice', description=desc, product=product)
+                    vals = self._prepare_create_invoice_line_vals(-charged_fee_tran_val, 1, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
                     self.env['account.invoice.line'].create(vals)
                     
                     
                     if charged_fee_tran > ssreg.fee_transport and (ssreg.count_transport_from + ssreg.count_transport_to) <  (ssreg.ref_ssreg_id.count_transport_from + ssreg.ref_ssreg_id.count_transport_to):
                             #2. No refusions
-                            charged_fee_tran_val = charged_fee_tran
-                            fee_tran_val = ssreg.fee_transport
-                            if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
-                                charged_fee_tran_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                                fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
+                            product = self.env['product.product'].search([('default_code', '=', 'TRREF')])
                             desc = _('No refusion after may 1: %s %.2f - %.2f') % (ssreg.ref_ssreg_id.invoice_id.currency_id.name,charged_fee_tran_val, fee_tran_val) 
                             vals = self._prepare_create_invoice_line_vals((charged_fee_tran_val - fee_tran_val), 1, type='out_invoice', description=desc, product=product)
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
