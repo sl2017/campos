@@ -292,7 +292,7 @@ class CamposFeeSsRegistration(models.Model):
                             charged_fee_tran_val = charged_fee_tran
                             fee_tran_val = ssreg.fee_transport
                             if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
-                                charged_tran_par_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
+                                charged_fee_tran_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                                 fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                             desc = _('No refusion after may 1: %s %.2f - %.2f') % (ssreg.ref_ssreg_id.invoice_id.currency_id.name,charged_fee_tran_val, fee_tran_val) 
                             vals = self._prepare_create_invoice_line_vals((charged_fee_tran_val - fee_tran_val), 1, type='out_invoice', description=desc, product=product)
