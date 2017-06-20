@@ -309,18 +309,14 @@ class WebtourUsNeed(models.Model):
                     if not same('',need.webtour_startnote) or not same(note,need.webtour_endnote):
                         problem = addseplist(problem,'Details')      
                     
-                    s=need.webtour_enddatetime
-                    if s == False: s = ''
-                    if not same(need.campos_traveldate,s[:10]):
-                        problem = addseplist(problem,'Date')
                 else:                    
                     if not same(note,need.webtour_startnote) or not same('',need.webtour_endnote):
                         problem = addseplist(problem,'Details')                        
                     
-                    s=need.webtour_startdatetime
-                    if s == False: s = ''
-                    if not same(need.campos_traveldate,s[:10]):
-                        problem = addseplist(problem,'Date') 
+                s=need.webtour_startdatetime
+                if s == False: s = ''
+                if not same(need.campos_traveldate,s[:10]):
+                    problem = addseplist(problem,'Date') 
             
             if need.needproblem != problem: 
                 need.needproblem = problem 
@@ -1148,6 +1144,9 @@ class WebtourUsNeedTicketsOverview(models.Model):
                         (COALESCE(t.enddatetime,'-') = COALESCE(s.enddatetime,'-')) and 
                         (COALESCE('' || t.touridno,'-2') = COALESCE('' || s.touridno,'-2')) and
                         (COALESCE(t.direction,'-') = COALESCE(s.direction,'-')) and
+                        (COALESCE(t.seats_confirmed,0) = COALESCE(s.seats_confirmed,0)) and 
+                        (COALESCE(t.seats_pending,0) = COALESCE(s.seats_pending,0)) and 
+                        (COALESCE(t.seats_not_confirmed,0) = COALESCE(s.seats_not_confirmed,0)) and 
                         (COALESCE(t.stop,'-') = COALESCE(s.stop,'-')) and 
                         (replace(replace(replace(trim(COALESCE(t.address,'-')),' '||chr(10),''),chr(10),''),chr(13),'')= replace(replace(replace(trim(COALESCE(s.address,'-')),' '||chr(10),''),chr(10),''),chr(13),''))) as sameaslastmail,
                         s.sentdatetime as lastmaildatetime,
