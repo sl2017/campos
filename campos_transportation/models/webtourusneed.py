@@ -309,18 +309,14 @@ class WebtourUsNeed(models.Model):
                     if not same('',need.webtour_startnote) or not same(note,need.webtour_endnote):
                         problem = addseplist(problem,'Details')      
                     
-                    s=need.webtour_enddatetime
-                    if s == False: s = ''
-                    if not same(need.campos_traveldate,s[:10]):
-                        problem = addseplist(problem,'Date')
                 else:                    
                     if not same(note,need.webtour_startnote) or not same('',need.webtour_endnote):
                         problem = addseplist(problem,'Details')                        
                     
-                    s=need.webtour_startdatetime
-                    if s == False: s = ''
-                    if not same(need.campos_traveldate,s[:10]):
-                        problem = addseplist(problem,'Date') 
+                s=need.webtour_startdatetime
+                if s == False: s = ''
+                if not same(need.campos_traveldate,s[:10]):
+                    problem = addseplist(problem,'Date') 
             
             if need.needproblem != problem: 
                 need.needproblem = problem 
