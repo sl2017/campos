@@ -1211,7 +1211,7 @@ class WebtourUsNeedTicketsParticipant(models.Model):
         cr.execute("""
                     create or replace view campos_webtourusneed_ticketsparticipant as                  
                     select min(n.id) as id 
-                    ,COALESCE(parent_jobber_id , n.participant_id )  as participant_id
+                    ,COALESCE(p.parent_jobber_id , n.participant_id )  as participant_id
                     ,webtour_touridno as touridno
                     ,left(replace(webtour_startdatetime,'T',' '),16) as startdatetime
                     ,left(replace(webtour_enddatetime,'T',' '),16)  as enddatetime
@@ -1232,7 +1232,7 @@ class WebtourUsNeedTicketsParticipant(models.Model):
                     left outer join campos_webtourusdestination d on d.destinationidno = case when returnjourney then campos_enddestinationidno else campos_startdestinationidno end 
                     inner join campos_event_participant p on p.id = n.participant_id 
                     where needstatus <> '0' 
-                    group by COALESCE(parent_jobber_id , n.participant_id ) ,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address,tt.returnjourney
+                    group by COALESCE(p.parent_jobber_id , n.participant_id ) ,webtour_touridno,tt.name,returnjourney,webtour_startdatetime, webtour_enddatetime,d.name,address,tt.returnjourney
                     order by 2,case when returnjourney then 2 else 1 end ,5       
                     """
                     )  
