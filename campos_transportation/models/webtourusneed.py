@@ -1144,6 +1144,9 @@ class WebtourUsNeedTicketsOverview(models.Model):
                         (COALESCE(t.enddatetime,'-') = COALESCE(s.enddatetime,'-')) and 
                         (COALESCE('' || t.touridno,'-2') = COALESCE('' || s.touridno,'-2')) and
                         (COALESCE(t.direction,'-') = COALESCE(s.direction,'-')) and
+                        (COALESCE(t.seats_confirmed,0) = COALESCE(s.seats_confirmed,0)) and 
+                        (COALESCE(t.seats_pending,0) = COALESCE(s.seats_pending,0)) and 
+                        (COALESCE(t.seats_not_confirmed,0) = COALESCE(s.seats_not_confirmed,0)) and 
                         (COALESCE(t.stop,'-') = COALESCE(s.stop,'-')) and 
                         (replace(replace(replace(trim(COALESCE(t.address,'-')),' '||chr(10),''),chr(10),''),chr(13),'')= replace(replace(replace(trim(COALESCE(s.address,'-')),' '||chr(10),''),chr(10),''),chr(13),''))) as sameaslastmail,
                         s.sentdatetime as lastmaildatetime,
