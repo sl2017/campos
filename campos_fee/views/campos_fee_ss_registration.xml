@@ -5,16 +5,32 @@
 <openerp>
 <data>
 
+	 <record model="ir.actions.act_window" id="act_snapshot_list_participant">
+        <field name="name">Participant Snapshot</field> <!-- TODO -->
+        <field name="res_model">campos.fee.ss.participant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_ssreg_id': active_id}</field>
+    </record>
+	
+
     <record model="ir.ui.view" id="campos_fee_ss_registration_form_view">
         <field name="name">campos.fee.ss.registration.form (in campos_fee)</field>
         <field name="model">campos.fee.ss.registration</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="make_invoice_50" string="Test invoice" type="object" />
+                    <button name="make_invoice_100" string="Test invoice" type="object" groups="base.group_no_one"/>
                 </header>
                 <sheet>
-                    <!-- TODO -->
+                     <div class="oe_right oe_button_box" groups="base.group_user">
+                            <button name="%(campos_fee.act_snapshot_list_participant)d" 
+                                type="action" 
+                                class="oe_stat_button oe_inline" 
+                                icon="fa-github" 
+                                help="Register with this event"
+                                string="Participant"/>
+                        </div>
                     <group>
                     	<field name="snapshot_id"/>
                     	<field name="registration_id"/>
@@ -22,11 +38,23 @@
                         <field name="number_participants"/>
             			<field name="fee_participants"/>
             			<field name="fee_transport"/>
+            			<field name="count_transport_to"/>
+            			<field name="count_transport_from"/>
             			<field name="material_cost"/>
             			<field name="fee_total"/>
             			<field name="state"/>
             			<field name="invoice_id"/>
-            			<field name="sspar_ids" nolabel="1" colspan="2"/>
+            			<field name="audit"/>
+            			<notebook>
+            				<page string="Participants">
+            					<field name="sspar_ids" nolabel="1" colspan="2"/>
+            				</page>
+            				<page string="Meat">
+            					<field name="ssmeat_ids" nolabel="1" colspan="2"/>
+            				</page>
+            				
+            			</notebook>
+            			
                     </group>
                 </sheet>
                 
@@ -41,6 +69,7 @@
             <search>
                 <field name="snapshot_id"/>
                	<field name="registration_id"/>
+               	<field name="audit"/>
             </search>
         </field>
     </record>

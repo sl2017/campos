@@ -28,7 +28,23 @@
 						<field name="transport_price"/>
 						<field name="transport_price_total"/>
 						<field name="camp_price_total"/>
-						<filed name="state"/>
+						<field name="state"/>
+						
+						<field name="payreq_state"/>
+                        <field name="payreq_approved_date"/>
+                        <field name="payreq_approved_user_id"/>
+                        <field name="participant"/>
+                        <field name="staff"/>
+                                     
+                        <field name="webtourususeridno"/>
+                        <field name="webtourusgroupidno"/>                                
+                        <field name="tocampfromdestination_id"/>
+                        <field name="fromcamptodestination_id"/>
+                        <field name="tocampdate"/>
+                        <field name="fromcampdate"/>
+                        <field name="tocampusneed_id"/>
+                        <field name="fromcampusneed_id"/>
+						
                     </group>
                 </sheet>
                 
@@ -36,17 +52,18 @@
         </field>
     </record>
 
-<!-- 
+
     <record model="ir.ui.view" id="campos_fee_ss_participant_search_view">
         <field name="name">campos.fee.ss.participant.search (in campos_fee)</field>
         <field name="model">campos.fee.ss.participant</field>
         <field name="arch" type="xml">
             <search>
-    
+    			<field name="ssreg_id"/>
+                <field name="name"/>
             </search>
         </field>
     </record>
- -->
+ 
  
     <record model="ir.ui.view" id="campos_fee_ss_participant_tree_view">
         <field name="name">campos.fee.ss.participant.tree (in campos_fee)</field>
@@ -56,8 +73,9 @@
                 <field name="ssreg_id"/>
                 <field name="name"/>
                 <field name="dates_summery"/>
-                <field name="transport_co"/>
-				<field name="camp_price_total"/>
+                <field name="transport_co" sum="Total"/>
+                <field name="fee_agegroup_id"/>
+				<field name="camp_price_total" sum="Total"/>
 				<field name="state"/>
             </tree>
         </field>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_event_participant_form_view">
+        <field name="name">campos.event.participant.form (in campos_activity)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+            	<page name="activities" string="Activities">
+            		<field name="ticket_ids" readonly="1">
+            			<tree>
+            				<field name="actins_date_begin"/>
+            				<field name="act_ins_id"/>
+            			</tree>
+            		</field>
+            	</page>
+            </notebook>
+        </field>
+    </record>
+ <!-- 
+    <record model="ir.ui.view" id="campos_event_participant_search_view">
+        <field name="name">campos.event.participant.search (in campos_activity)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_final_registration.campos_event_participant_search"/>
+        <field name="arch" type="xml">
+            
+        </field>
+    </record>
+ -->
+
+
+</data>
+</openerp>

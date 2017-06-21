@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_activity_audience_form_view">
+        <field name="name">campos.activity.audience.form (in campos_activity)</field>
+        <field name="model">campos.activity.audience</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_activity_audience_search_view">
+        <field name="name">campos.activity.audience.search (in campos_activity)</field>
+        <field name="model">campos.activity.audience</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_activity_audience_tree_view">
+        <field name="name">campos.activity.audience.tree (in campos_activity)</field>
+        <field name="model">campos.activity.audience</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_activity_audience_act_window">
+        <field name="name">Campos Activity Audience</field> <!-- TODO -->
+        <field name="res_model">campos.activity.audience</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_activity_audience_menu">
+        <field name="name">Campos Activity Audience</field>
+        <field name="parent_id" ref="submenu_campos_config"/>
+        <field name="action" ref="campos_activity_audience_act_window"/>
+        <field name="sequence" eval="50"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

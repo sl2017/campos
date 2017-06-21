@@ -13,7 +13,10 @@
     'depends': [
         'campos_event',
         'campos_final_registration',
+        'campos_jobber_final',
         'connector',
+        'campos_transportation',
+        'account',
     ],
     'data': [
         'security/campos_fee_snapshot.xml',
@@ -27,6 +30,8 @@
         'views/campos_fee_agegroup.xml',
         'views/event_registration.xml',
         'views/campos_event_participant.xml',
+        'security/campos_fee_ss_reg_meat.xml',
+        'views/campos_fee_ss_reg_meat.xml',
         'data/product.attribute.csv',
         'data/product.attribute.value.csv',
         'data/campos.municipality.csv',

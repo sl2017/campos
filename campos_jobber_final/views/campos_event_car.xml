@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_event_car_form_view">
+        <field name="name">campos.event.car.form (in campos_jobber_final)</field>
+        <field name="model">campos.event.car</field>
+        <field name="arch" type="xml">
+        	<form>
+        		<sheet>
+        			<group>
+			            <field name="reg_number"/>
+			            <field name="registration_id"/>
+			            <field name="participant_id"/>
+			            <field name="park_permit_start_date"/>
+			            <field name="park_permit_end_date"/>
+			            <field name="phone_number"/>
+            		</group>
+            	</sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_event_car_search_view">
+        <field name="name">campos.event.car.search (in campos_jobber_final)</field>
+        <field name="model">campos.event.car</field>
+        <field name="arch" type="xml">
+        	<search>
+	            <field name="reg_number"/>
+	            <field name="registration_id"/>
+	            <field name="participant_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_event_car_tree_view">
+        <field name="name">campos.event.car.tree (in campos_jobber_final)</field>
+        <field name="model">campos.event.car</field>
+        <field name="arch" type="xml">
+        	<tree>
+	            <field name="reg_number"/>
+	            <field name="registration_id"/>
+	            <field name="participant_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_event_car_act_window">
+        <field name="name">Campos Event Car</field> <!-- TODO -->
+        <field name="res_model">campos.event.car</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_event_car_menu">
+        <field name="name">Cars</field>
+        <field name="parent_id" ref="campos_event.menu_campos_config"/> <!-- TODO -->
+        <field name="action" ref="campos_event_car_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

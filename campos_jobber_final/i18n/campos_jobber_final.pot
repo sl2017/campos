@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-04 20:32+0000\n"
-"PO-Revision-Date: 2017-04-04 20:32+0000\n"
+"POT-Creation-Date: 2017-06-17 04:36+0000\n"
+"PO-Revision-Date: 2017-06-17 04:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,20 +16,41 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: campos_jobber_final
+#: field:campos.jobber.accom.group,number_participants:0
+msgid "# participants"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_campos_event_car
+msgid "A car for parking at the camp"
+msgstr ""
+
+#. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.event.participant,accomodation_ids:0
 msgid "Accomodation"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:60
+#: field:campos.jobber.accomodation,accom_code:0
+msgid "Accomodation Code"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.jobber.accomodation,accom_group_id:0
+msgid "Accomodation Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:79
 #, python-format
 msgid "Accomodation dates must be in Main Camp Period"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:64
+#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:83
 #, python-format
 msgid "Accomodation dates must not be overlapping"
 msgstr ""
@@ -37,6 +58,17 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.accomodation,accom_type_id:0
 msgid "Accomondation Type"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
+msgid "Add Accomodation Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Add child"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -60,9 +92,9 @@ msgid "Associated jobbers"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:64
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:76
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:138
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:88
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:100
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:170
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr ""
@@ -70,6 +102,12 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.event.participant,ckr_needed:0
 msgid "CKR Needed"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.committee,camp_area_id:0
+#: field:campos.jobber.accomodation,camp_area_id:0
+msgid "Camp Area"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -88,6 +126,18 @@ msgstr ""
 #: model:ir.model,name:campos_jobber_final.model_campos_canteen
 #: model:ir.ui.menu,name:campos_jobber_final.campos_canteen_menu
 msgid "Campos Canteen"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_event_car_act_window
+msgid "Campos Event Car"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.act_window,name:campos_jobber_final.campos_jobber_accom_group_act_window
+#: model:ir.model,name:campos_jobber_final.model_campos_jobber_accom_group
+#: model:ir.ui.menu,name:campos_jobber_final.campos_jobber_accom_group_menu
+msgid "Campos Jobber Accom Group"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -117,13 +167,32 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.committee,canteen_id:0
 #: field:campos.jobber.canteen,canteen_id:0
 #: selection:campos.jobber.canteen,eat_at:0
 msgid "Canteen"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.canteen,committee_id:0
+msgid "Canteen Committee"
+msgstr ""
+
+#. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+msgid "Car"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: field:campos.event.participant,car_ids:0
+#: model:ir.ui.menu,name:campos_jobber_final.campos_event_car_menu
+msgid "Cars"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.event.participant,canteen_ids:0
 #: view:event.registration:campos_jobber_final.event_registration_form_view
@@ -144,20 +213,29 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Main Camp"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Post Camp"
 msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Check all Pre Camp"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
+msgid "Children"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -188,8 +266,23 @@ msgid "City"
 msgstr ""
 
 #. module: campos_jobber_final
-#: field:campos.canteen,committee_id:0
+#: field:campos.jobber.accom.group,code:0
+msgid "Code"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,pay_key_entered:0
+msgid "Code from payer"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.model,name:campos_jobber_final.model_campos_committee
 msgid "Committee"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.canteen,committee_id:0
+msgid "Committee operation this Canteen"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -200,6 +293,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,create_uid:0
+#: field:campos.jobber.accom.group,create_uid:0
 #: field:campos.jobber.accom.type,create_uid:0
 #: field:campos.jobber.accomodation,create_uid:0
 #: field:campos.jobber.canteen,create_uid:0
@@ -208,6 +302,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,create_date:0
+#: field:campos.jobber.accom.group,create_date:0
 #: field:campos.jobber.accom.type,create_date:0
 #: field:campos.jobber.accomodation,create_date:0
 #: field:campos.jobber.canteen,create_date:0
@@ -221,6 +316,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,display_name:0
+#: field:campos.jobber.accom.group,display_name:0
 #: field:campos.jobber.accom.type,display_name:0
 #: field:campos.jobber.accomodation,display_name:0
 #: field:campos.jobber.canteen,display_name:0
@@ -236,6 +332,16 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.canteen,eat_at:0
 msgid "Eating"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,pay_key_master:0
+msgid "Enter a code and pass it on to the people ypu want to pay for"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,pay_key_entered:0
+msgid "Enter the code the payer has issued you with"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -271,7 +377,7 @@ msgid "From date"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:58
+#: code:addons/campos_jobber_final/models/campos_jobber_accomodation.py:77
 #: code:addons/campos_jobber_final/models/campos_jobber_canteen.py:65
 #, python-format
 msgid "From date must be before To date"
@@ -285,6 +391,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: field:campos.jobber.accomodation,registration_id:0
 #: field:campos.jobber.canteen,registration_id:0
@@ -293,6 +400,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,id:0
+#: field:campos.jobber.accom.group,id:0
 #: field:campos.jobber.accom.type,id:0
 #: field:campos.jobber.accomodation,id:0
 #: field:campos.jobber.canteen,id:0
@@ -320,8 +428,33 @@ msgid "Is only chosen if you have to pay through a group. See page 21 in the ins
 msgstr ""
 
 #. module: campos_jobber_final
+#: help:campos.event.participant,paybyjobber:0
+msgid "Is only chosen if you have to pay through another ITS. See page 21 in the instructions."
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.event.participant,payforotherjobber:0
+msgid "Is only chosen if you want to pay for a group of ITS. See page 21 in the instructions."
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:event.registration,jobber_accomodation_ids:0
 msgid "Jobber Accomonodation"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,jobber_child:0
+msgid "Jobber Child"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,jobber_child_ids:0
+msgid "Jobber child ids"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.committee:campos_jobber_final.campos_committee_form_view
+msgid "Jobber defaults"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -336,12 +469,23 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:event.registration,jobber_catering_ids:0
+msgid "Jobbers Catering"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,jobber_pay_for_ids:0
 #: field:event.registration,jobber_pay_for_ids:0
 msgid "Jobbers to Pay for"
 msgstr ""
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
+msgid "Jobbers to pay for"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.canteen,__last_update:0
+#: field:campos.jobber.accom.group,__last_update:0
 #: field:campos.jobber.accom.type,__last_update:0
 #: field:campos.jobber.accomodation,__last_update:0
 #: field:campos.jobber.canteen,__last_update:0
@@ -350,6 +494,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,write_uid:0
+#: field:campos.jobber.accom.group,write_uid:0
 #: field:campos.jobber.accom.type,write_uid:0
 #: field:campos.jobber.accomodation,write_uid:0
 #: field:campos.jobber.canteen,write_uid:0
@@ -358,6 +503,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.canteen,write_date:0
+#: field:campos.jobber.accom.group,write_date:0
 #: field:campos.jobber.accom.type,write_date:0
 #: field:campos.jobber.accomodation,write_date:0
 #: field:campos.jobber.canteen,write_date:0
@@ -365,7 +511,13 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.canteen,max_cap:0
+msgid "Max Capacity pr Meal"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.canteen,name:0
+#: field:campos.jobber.accom.group,name:0
 #: field:campos.jobber.accom.type,name:0
 #: field:campos.jobber.accomodation,name:0
 #: field:campos.jobber.canteen,name:0
@@ -378,8 +530,25 @@ msgid "Need updated"
 msgstr ""
 
 #. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:261
+#, python-format
+msgid "New Staff Accomodation Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:232
+#, python-format
+msgid "New child for: %s"
+msgstr ""
+
+#. module: campos_jobber_final
 #: selection:campos.event.participant,signup_state:0
 msgid "Not signed up"
+msgstr ""
+
+#. module: campos_jobber_final
+#: sql_constraint:campos.event.car:0
+msgid "Only ONE Car Ticket pr person."
 msgstr ""
 
 #. module: campos_jobber_final
@@ -398,9 +567,25 @@ msgid "Own jobber camp"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.jobber.accom.group,owner_id:0
+msgid "Owner"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,parent_jobber_id:0
+msgid "Parent jobber id"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.car,participant_id:0
 #: field:campos.jobber.accomodation,participant_id:0
 #: field:campos.jobber.canteen,participant_id:0
 msgid "Participant"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.jobber.accom.group,accom_participant_ids:0
+msgid "Participants"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -419,6 +604,11 @@ msgid "Pay Req state"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,paybyjobber:0
+msgid "Pay by Other ITS"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.event.participant,paybygroup:0
 msgid "Pay by Scout Group"
 msgstr ""
@@ -430,7 +620,28 @@ msgid "Payment"
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.event.participant,pay_key_master:0
+msgid "Payment Code"
+msgstr ""
+
+#. module: campos_jobber_final
+#: sql_constraint:campos.event.participant:0
+msgid "Payment Code already in use. Choose another"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.canteen,post_camp:0
+msgid "Post Camp"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.canteen,pre_camp:0
+msgid "Pre Camp"
+msgstr ""
+
+#. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Pre Camp Wed-Friday"
 msgstr ""
@@ -449,9 +660,27 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:149
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:181
 #, python-format
 msgid "Request CKR"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.jobber.accom.type,accomgroup_sel:0
+#: field:campos.jobber.accomodation,accomgroup_sel:0
+msgid "Select Accomodation Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.jobber.accom.type,camparea_sel:0
+#: field:campos.jobber.accomodation,camparea_sel:0
+msgid "Select Camp Area"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.jobber.accom.type,subcamp_sel:0
+#: field:campos.jobber.accomodation,subcamp_sel:0
+msgid "Select Sub Camp"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -474,8 +703,25 @@ msgid "Street..."
 msgstr ""
 
 #. module: campos_jobber_final
+#: field:campos.committee,subcamp_id:0
+#: field:campos.jobber.accom.group,subcamp_id:0
+#: field:campos.jobber.accomodation,subcamp_id:0
+msgid "Sub Camp"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.canteen,subcamp_id:0
 msgid "Sub camp"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.canteen,post_camp:0
+msgid "This Canteen is open during Post Camp"
+msgstr ""
+
+#. module: campos_jobber_final
+#: help:campos.canteen,pre_camp:0
+msgid "This Canteen is open during Pre Camp"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -492,8 +738,14 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Un-check all days"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,payforotherjobber:0
+msgid "Want to pay for others"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -526,6 +778,7 @@ msgid "dd/mm/åååå"
 msgstr ""
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "string"
 msgstr ""

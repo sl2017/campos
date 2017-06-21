@@ -17,8 +17,13 @@
                 <sheet>
                     
                     <group>
+                    	<field name="code"/>
                         <field name="name"/>
                         <field name="execute_func"/>
+                        <field name="segment"/>
+                        <field name="ref_snapshot_id"/>
+                        <field name="make_creditnota"/>
+                        <field name="single_reg_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
@@ -31,6 +36,7 @@
         <field name="model">campos.fee.snapshot</field>
         <field name="arch" type="xml">
             <search>
+            	<field name="code"/>
                 <field name="name"/>
             </search>
         </field>
@@ -43,6 +49,7 @@
             <tree>
                 <!-- TODO -->
                 <field name="create_date"/>
+                <field name="code"/>
                 <field name="name"/>
                 <field name="state"/>
             </tree>

@@ -258,7 +258,11 @@ class EventRegistration(models.Model):
             'done': [
                 ('readonly', True)]})
     econ_email = fields.Char(string='Email', related='econ_partner_id.email')
-
+    
+    fallback_email = fields.Char(string='Fallback Email', compute='_compute_fallback')
+    fallback_contact = fields.Char(string='Fallback Contact', compute='_compute_fallback')
+    fallback_partner_id = fields.Many2one('res.partner', string='Fallback Contact', compute='_compute_fallback')
+    
     reg_survey_input_id = fields.Many2one('survey.user_input', 'Registration survay')
     reg_user_input_line_ids = fields.One2many(related='reg_survey_input_id.user_input_line_ids')
 
@@ -273,6 +277,32 @@ class EventRegistration(models.Model):
     part_function_view_ids = fields.One2many(related='camp_area_id.committee_id.part_function_view_ids', string='Coordinators')
     reg_view_ids = fields.One2many(related='camp_area_id.reg_view_ids', string='Troops')
 
+    tag_ids = fields.Many2many('campos.reg.tag', string='Tags', groups='campos_event.group_campos_admin')
+    
+    @api.multi
+    def _compute_fallback(self):
+        for reg in self:
+            if reg.econ_email:
+                reg.fallback_email = reg.econ_email
+            elif reg.contact_email:
+                reg.fallback_email = reg.contact_email
+            elif reg.partner_id.email:
+                reg.fallback_email = reg.partner_id.email
+            else:
+                reg.fallback_email = reg.email
+            
+            if reg.econ_partner_id:
+                reg.fallback_contact = reg.econ_partner_id.name
+                reg.fallback_partner_id = reg.econ_partner_id
+            elif reg.contact_partner_id:
+                reg.fallback_contact = reg.contact_partner_id.name
+                reg.fallback_partner_id = reg.contact_partner_id
+            elif reg.partner_id:
+                reg.fallback_contact = reg.partner_id.name
+                reg.fallback_partner_id = reg.partner_id
+            else:
+                reg.fallback_contact = reg.name
+                  
     @api.multi
     def action_edit_survey_response(self):
         fields = []

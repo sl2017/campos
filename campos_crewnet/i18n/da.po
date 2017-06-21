@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_crewnet
+# 
+# Translators:
+# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017
+# christian Eggert Jørgensen <christian@eggert.dk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-01 21:02+0000\n"
+"PO-Revision-Date: 2017-06-01 21:02+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
+"Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid "(Only in Danish)"
+msgstr " "
+
+#. module: campos_crewnet
+#: model:ir.model,name:campos_crewnet.model_campos_ckr_check
+msgid "Campos Ckr Check"
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_search_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+#: field:campos.event.participant,crewnet_ok:0
+msgid "Crewnet"
+msgstr "Crewnet"
+
+#. module: campos_crewnet
+#: code:addons/campos_crewnet/models/campos_ckr_check.py:16
+#, python-format
+msgid "Crewnet auto accepted on CKR approval."
+msgstr ""
+
+#. module: campos_crewnet
+#: model:ir.model,name:campos_crewnet.model_campos_event_participant
+msgid "Event Participant"
+msgstr "Lejr deltagere"
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid ""
+"General terms for the further use of the information provided by Crewnet as "
+"a service can be found"
+msgstr ""
+"Generelle betingelser for den videre anvendelse af oplysningerne hos Crewnet"
+" som service, kan findes"
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid ""
+"I hereby give consent to the use of my personal information by Crewnet I / "
+"S."
+msgstr ""
+"Jeg giver hermed samtykke til, at mine personoplysninger anvendes af Crewnet"
+" IvS."
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+msgid ""
+"I hereby give consent to the use of my personal information by Crewnet IvS."
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,last_import:0
+msgid "Last import"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_link_id:0
+msgid "Remote System link ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_ext_id:0
+msgid "Remote system external ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_system_id:0
+msgid "Remote system id"
+msgstr ""
+
+#. module: campos_crewnet
+#: field:campos.event.participant,remote_int_id:0
+msgid "Remote system internal ID"
+msgstr ""
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid ""
+"The disclosure of information is necessary to simplify the organization of "
+"jobber and jobs in the camp's \"job app\" made available by Crewnet I/S, in "
+"conjunction with Spejdernes Lejr 2017."
+msgstr ""
+"Videregivelsen af oplysninger er nødvendig for at simplificere "
+"organiseringen af jobbere og jobs, i lejrens \"jobber-app\", som stilles til"
+" rådighed af Crewnet I/S, i forbindelse med Spejdernes Lejr 2017."
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid ""
+"There is no information about health, religion, ethnicity or political "
+"relationship."
+msgstr ""
+"Der videregives ingen oplysninger omkring helbred, religion, etnicitet eller"
+" politisk relation."
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid ""
+"There is only information that can relate you to a committee and your jobs "
+"at the camp."
+msgstr ""
+"Der er udelukkende tale om oplysninger som kan relatere dig til et udvalg og"
+" dit/dine jobs på lejren."
+
+#. module: campos_crewnet
+#: view:campos.event.participant:campos_crewnet.campos_event_participant_form_view
+#: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
+msgid "here."
+msgstr "her."

@@ -11,16 +11,67 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
-            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
+            	<page string="Camp Fee">
             		<group>
+            			<field name="number_participants_stored" invisible="1"/>
             			<field name="number_participants"/>
-            			<field name="fee_participants"/>
-            			<field name="fee_transport"/>
-            			<field name="material_cost"/>
-            			<field name="fee_total"/>
-            		
             		</group>
-
+            		<group groups="campos_event.group_campos_admin">
+            		<field name="fee_participants" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+         			<field name="fee_transport" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+           			<field name="material_cost" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+           			<field name="fee_total" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+           			<field name="cmp_currency_id" invisible="1"/>
+            		</group>
+            		<seperator string="Invoices" />
+            			<field name="ssreginv_ids" readonly="1" nolabel="1">
+            				<tree>
+            					<field name="create_date" string="Snapshot"/>
+            					<field name="invoice_id" options="{'no_open': True}"/>
+            					<field name="inv_currency_id"/>
+            					<field name="inv_amount_total"/>
+            				</tree>
+            				<form>
+            					<group>
+            						<field name="create_date"/>
+			                    	<field name="name"/>
+			                        <field name="number_participants"/>
+			            			<field name="fee_participants" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="fee_transport" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="material_cost" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="fee_total" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="cmp_currency_id" invisible="1"/>
+								</group>
+								<notebook>
+									<page string="Participants">
+										<field name="sspar_ids" nolabel="1" colspan="2"/>	
+									
+									</page>
+									<page string="Invoice">
+										<group>
+											<field name="invoice_id" options="{'no_create': True, 'no_open': True}"/>
+											<field name="inv_date"/>
+										</group>
+										<field name="invoice_line"  nolabel="1" widget="one2many_list">
+											<tree>
+												<field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+												<field name="name"/>
+												<field name="quantity"/>
+												<field name="price_unit"/>
+												<field name="price_subtotal"/>
+											</tree>
+										</field>
+										 <group class="oe_subtotal_footer oe_right">
+											<field name="inv_amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'inv_currency_id'}"/>
+											<field name="inv_currency_id" invisible="1"/>
+										</group>
+									</page>
+								</notebook>
+		            			
+		            			
+		            				
+            				</form>
+						</field>
             	</page>
             	<page string="Snapshots" groups="campos_event.group_campos_admin">
             		<group>
@@ -36,32 +87,85 @@
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_preregistration.view_tree_event_registration"/>
         <field name="arch" type="xml">
-            <field name="pre_reg_cnt" position="after">
+            <field name="pre_reg_cnt" position="replace">
+            	<field name="organization_id"/>
            		<field name="number_participants_stored"/>
+           		<field name="number_accomondations"/>
            </field>
         </field>
     </record>
 	    
     
 
-	<record model="ir.ui.view" id="view_form_finalregistration_gl">
+	<record model="ir.ui.view" id="view_form_finalregistration_admin">
         <field name="name">event.registration.form (in campos_fee)</field>
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
-            	<page string="Camp Fee" groups="campos_event.group_campos_admin">
+            	<page string="Camp Fee">
             		<group>
+            			<field name="number_participants_stored" invisible="1"/>
             			<field name="number_participants"/>
-            			<field name="fee_participants"/>
-            			<field name="fee_transport"/>
-            			<field name="material_cost"/>
-            			<field name="fee_total"/>
-            		
             		</group>
-
+            		<group groups="campos_event.group_campos_admin">
+            			<field name="fee_participants" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+            			<field name="fee_transport" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+            			<field name="material_cost" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+            			<field name="fee_total" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+            			<field name="cmp_currency_id" invisible="1"/>
+            		</group>
+            		<seperator string="Invoices" />
+            			<field name="ssreginv_ids" readonly="1" nolabel="1">
+            				<tree>
+            					<field name="create_date" string="Snapshot"/>
+            					<field name="invoice_id" options="{'no_open': True}"/>
+            					<field name="inv_currency_id"/>
+            					<field name="inv_amount_total"/>
+            				</tree>
+            				<form>
+            					<group>
+            						<field name="create_date"/>
+			                    	<field name="name"/>
+			                        <field name="number_participants"/>
+			            			<field name="fee_participants" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="fee_transport" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="material_cost" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="fee_total" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
+			            			<field name="cmp_currency_id" invisible="1"/>
+								</group>
+								<notebook>
+									<page string="Participants">
+										<field name="sspar_ids" nolabel="1" colspan="2"/>	
+									
+									</page>
+									<page string="Invoice">
+										<group>
+											<field name="invoice_id" options="{'no_create': True, 'no_open': True}"/>
+											<field name="inv_date"/>
+										</group>
+										<field name="invoice_line"  nolabel="1" widget="one2many_list">
+											<tree>
+												<field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+												<field name="name"/>
+												<field name="quantity"/>
+												<field name="price_unit"/>
+												<field name="price_subtotal"/>
+											</tree>
+										</field>
+										 <group class="oe_subtotal_footer oe_right">
+											<field name="inv_amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'inv_currency_id'}"/>
+											<field name="inv_currency_id" invisible="1"/>
+										</group>
+									</page>
+								</notebook>
+		            			
+		            			
+		            				
+            				</form>
+						</field>
             	</page>
-            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            	<page string="Snapshots" groups="campos_event.group_campos_info">
             		<group>
 						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
             		</group>

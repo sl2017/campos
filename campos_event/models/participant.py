@@ -101,6 +101,7 @@ class EventParticipant(geo_model.GeoModel):
     birthdate = fields.Date('Date of birth')
     birthdate_short = fields.Char(compute='_compute_birthdate_short')
     age = fields.Integer('Age', compute='_compute_age', store=True)
+    camp_age = fields.Integer('Age (On Camp)', compute='_compute_camp_age', store=True)
     context_age = fields.Integer('Age', compute='_compute_context_age')
 
     # Jobber fields
@@ -178,7 +179,8 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
-    participant_number = fields.Char('Participant Number')
+    participant_number = fields.Char(related='partner_id.ref', string='Skejser ID')
+    tag_ids = fields.Many2many('campos.par.tag', string='Tags', groups='campos_event.group_campos_admin')
 
     
     @api.one
@@ -217,6 +219,12 @@ class EventParticipant(geo_model.GeoModel):
 
     @api.multi
     @api.depends('birthdate')
+    def _compute_camp_age(self):
+        for part in self:
+            part.camp_age = relativedelta(date(2017,7,22), fields.Date.from_string(part.birthdate)).years if part.birthdate else False
+
+    @api.multi
+    @api.depends('birthdate')
     def _compute_context_age(self):
         for part in self:
             part.context_age = part.age_on_date(self.env.context.get('context_age_date')) if part.birthdate else False
@@ -244,6 +252,7 @@ class EventParticipant(geo_model.GeoModel):
             # par.staff = True
         if par.state == 'draft':
             par.check_duplicate()
+        par.assign_participant_number()
         return par
 
     @api.multi
@@ -450,6 +459,7 @@ class EventParticipant(geo_model.GeoModel):
                     new_user = self.env['res.users'].sudo().create({'login': par.email,
                                                              'partner_id': par.partner_id.id,
                                                              'participant_id' : par.id,
+                                                             'groups_id': [(4, self.env.ref('campos_event.group_campos_staff').id)],
                                                              # 'groups_id': [(4, self.env.ref('base.group_portal').id)]
                                                              })
                 # new_user.with_context({'create_user': True}).action_reset_password()

@@ -17,9 +17,11 @@
                     <!-- TODO -->
                     <group>
                         <field name="name"/>
+                        <field name="date_begin"/>
+                        <field name="date_end"/>
                     </group>
                 </sheet>
-                <div class="oe_chatter"></div>
+                
             </form>
         </field>
     </record>
@@ -39,25 +41,37 @@
         <field name="model">campos.activity.period</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
+                <field name="date_begin"/>
+                <field name="date_end"/>
                 <field name="name"/>
             </tree>
         </field>
     </record>
-
+    
+    
+    <record model="ir.ui.view" id="campos_activity_period_calendar_view">
+        <field name="name">campos.activity.period.calendar (in campos_activity)</field>
+        <field name="model">campos.activity.period</field>
+        <field name="arch" type="xml">
+            <calendar string="Activities" date_start="date_begin" date_stop="date_end" color="id">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+    
     <record model="ir.actions.act_window" id="campos_activity_period_act_window">
         <field name="name">Campos Activity Period</field> <!-- TODO -->
         <field name="res_model">campos.activity.period</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
 
     <record model="ir.ui.menu" id="campos_activity_period_menu">
         <field name="name">Campos Activity Period</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="parent_id" ref="submenu_campos_config"/>
         <field name="action" ref="campos_activity_period_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="5"/>
     </record>
 
 </data>

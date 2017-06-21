@@ -37,3 +37,30 @@ class CamposFeeSsParticipant(models.Model):
     transport_to_camp = fields.Boolean('Common transport to camp')
     transport_from_camp = fields.Boolean('Common transport from camp')
     dates_summery = fields.Char('Camp Days')
+    payreq_state=fields.Selection([('draft', 'In process'),
+                                   ('cancelled', 'Cancelled'),
+                                   ('approved', 'Approved'),
+                                   ('refused', 'Refused')], default='draft', string='Pay Req state', track_visibility='onchange')
+    payreq_approved_date = fields.Datetime('Pay Req Approved', track_visibility='onchange')
+    payreq_approved_user_id = fields.Many2one('res.users', 'Pay Req Approved By', track_visibility='onchange')
+    participant = fields.Boolean()
+    staff = fields.Boolean(default=False)
+    #jobber_child = fields.Boolean('Jobber Child')  -- TODO
+    
+    # Trasnport fields
+    webtourususeridno = fields.Char('webtour us User ID no')
+    webtourusgroupidno = fields.Char(string='webtour us Group ID no')                                
+    
+    tocampfromdestination_id = fields.Many2one('campos.webtourusdestination',
+                                            'To camp Pick up',
+                                            ondelete='set null') #, store=Truecompute='_compute_tocampfromdestination_id',
+ 
+    fromcamptodestination_id = fields.Many2one('campos.webtourusdestination',
+                                            'From camp Drop off',
+                                            ondelete='set null')#,compute='_compute_fromcamptodestination_id', store=True
+   
+    tocampdate = fields.Date(string='To Camp Date')
+    fromcampdate = fields.Date(string='From Camp Date')
+    tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
+    fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
+  

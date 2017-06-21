@@ -12,3 +12,7 @@ class CamposJobberAccomType(models.Model):
 
     name = fields.Char()
     group_sel = fields.Boolean('Req. group selection and approval')
+    camparea_sel = fields.Boolean('Select Camp Area')
+    subcamp_sel = fields.Boolean('Select Sub Camp')
+    accomgroup_sel = fields.Boolean('Select Accomodation Group')
+    

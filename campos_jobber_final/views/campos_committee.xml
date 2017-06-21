@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_committee_form_view">
+        <field name="name">campos.committee.form (in campos_jobber_final)</field>
+        <field name="model">campos.committee</field>
+        <field name="inherit_id" ref="campos_event.campos_committee_form"/>
+        <field name="arch" type="xml">
+            <field name="par_contact_id" position="after">
+            	<separator string="Jobber defaults" colspan="2"/>
+            	<newline/>
+            	<field name="subcamp_id"/>
+            	<field name="camp_area_id"/>
+            	<field name="canteen_id"/>
+            </field>
+        </field>
+    </record>
+
+<!-- TODO 
+    <record model="ir.ui.view" id="campos_committee_search_view">
+        <field name="name">campos.committee.search (in campos_jobber_final)</field>
+        <field name="model">campos.committee</field>
+        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="arch" type="xml">
+            
+        </field>
+    </record>
+-->
+
+
+</data>
+</openerp>

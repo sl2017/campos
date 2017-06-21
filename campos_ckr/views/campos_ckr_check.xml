@@ -68,6 +68,18 @@
             </form>
         </field>
     </record>
+    
+    <record model="ir.ui.view" id="campos_event_participant_search_view">
+        <field name="name">campos.event.participant.search (in campos_ckr)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.campos_event_participant_search"/>
+        <field name="arch" type="xml">
+        	<field name="state" position="after">
+        		<field name="ckr_state"/>
+            	<filter name="fckr" string="CKR Missing" domain="[('ckr_state', '!=', 'approved')]"/>
+            </field>
+        </field>
+    </record>
 
     <record model="ir.ui.view" id="campos_ckr_check_search_view">
         <field name="name">campos.ckr.check.search (in campos_ckr)</field>
@@ -143,14 +155,18 @@
 			<field name="inherit_id" ref="campos_event.view_event_registration_participant_form" />
 			<field name="arch" type="xml">
 				<page name="agreements" position="after">
-					<page name="ckr" string="CKR Request" groups="campos_ckr.group_campos_ckr_admin">
-						<field name="ckr_ids" options="{'reload_on_button': true}">
+					<page name="ckr" string="CKR Request" >
+						<field name="ckr_ids" options="{'reload_on_button': true}" groups="campos_ckr.group_campos_ckr_admin">
 							<tree colors="gray:state=='draft';blue:state=='sentin';green:state=='ckr_req,ckr_re_req';red:state=='rejected'" create="0">
 								<field name="create_date" />
 								<field name="state" />
 								<field name="appr_date" />
 							</tree>
 						</field>
+						<group col="4">
+						<field name="ckr_state"/>
+						<field name="ckr_date_last_state_update"/>
+						</group>
 						<button name="action_request_ckr" type="object" string="Request CKR" />
 					</page>
 				</page>
@@ -171,12 +187,27 @@
 								<field name="appr_date" />
 							</tree>
 						</field>
+						<group col="4">
+						<field name="ckr_state"/>
+						<field name="ckr_date_last_state_update"/>
+						</group>
 						<button name="%(campos_ckr.campos_ckr_fetch_wiz_act_window)d" type="action" string="Request CKR" />
 					</page>
 				</page>
 			</field>
 		</record>
 				
-
+		<record id="campos_committee_member_search" model="ir.ui.view">
+			<field name="name">Committee Func Search</field>
+			<field name="model">campos.committee.function</field>
+			<field name="inherit_id" ref="campos_event.campos_committee_member_search" />
+			<field name="arch" type="xml">
+				<search>
+					<field name="email" position="after">
+						<filter name="fckr" string="CKR Missing" domain="[('participant_id.ckr_state', '!=', 'approved')]"/>
+					</field>
+				</search>
+			</field>
+		</record>
 </data>
 </openerp>

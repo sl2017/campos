@@ -86,6 +86,11 @@ class PreregistrationTransportType(models.Model):
 class PreregistrationEntryExitPoint(models.Model):
     _name = 'event.registration.entryexitpoint'
     name = fields.Char('Entry/exit Point Name', required=True, translate=True)
+    municipality_id = fields.Many2one(
+        'campos.municipality',
+        'Municipality',
+        select=True,
+        ondelete='set null')
 
 class PreregistrationParticipants(models.Model):
     _description = 'Preregistration Participants'

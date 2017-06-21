@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+
+    <record model="ir.ui.view" id="campos_fee_ss_reg_meat_search_view">
+        <field name="name">campos.fee.ss.reg.meat.search (in campos_fee)</field>
+        <field name="model">campos.fee.ss.reg.meat</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ssreg_id"/>
+                <field name="event_day_meat_id"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_fee_ss_reg_meat_tree_view">
+        <field name="name">campos.fee.ss.reg.meat.tree (in campos_fee)</field>
+        <field name="model">campos.fee.ss.reg.meat</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ssreg_id"/>
+                <field name="event_day_meat_id"/>
+                <field name="meat_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_fee_ss_reg_meat_act_window">
+        <field name="name">Campos Fee Ss Reg Meat</field> <!-- TODO -->
+        <field name="res_model">campos.fee.ss.reg.meat</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_fee_ss_reg_meat_menu">
+        <field name="name">SS Reg Meat</field>
+        <field name="parent_id" ref="campos_fee_snapshot_top_menu"/>
+        <field name="action" ref="campos_fee_ss_reg_meat_act_window"/>
+        <field name="sequence" eval="70"/> 
+    </record>
+
+</data>
+</openerp>

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 16:14+0000\n"
-"PO-Revision-Date: 2017-03-29 16:14+0000\n"
+"POT-Creation-Date: 2017-06-15 14:57+0000\n"
+"PO-Revision-Date: 2017-06-15 14:57+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -349,6 +349,11 @@ msgid "Age"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,camp_age:0
+msgid "Age (On Camp)"
+msgstr ""
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: field:campos.event.participant,my_comm_contact:0
 msgid "Aggreement with"
@@ -403,7 +408,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:396
+#: code:addons/campos_event/models/participant.py:405
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -536,6 +541,17 @@ msgstr ""
 #. module: campos_event
 #: model:ir.model,name:campos_event.model_campos_function_view
 msgid "Campos Function View"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.campos_par_tag_act_window
+#: model:ir.model,name:campos_event.model_campos_par_tag
+msgid "Campos Par Tag"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.model,name:campos_event.model_campos_reg_tag
+msgid "Campos Reg Tag"
 msgstr ""
 
 #. module: campos_event
@@ -787,8 +803,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:343
-#: code:addons/campos_event/models/participant.py:370
+#: code:addons/campos_event/models/participant.py:352
+#: code:addons/campos_event/models/participant.py:379
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -919,7 +935,8 @@ msgstr ""
 #: field:campos.event.par.reject,create_uid:0
 #: field:campos.event.participant,create_uid:0 field:campos.job,create_uid:0
 #: field:campos.job.tag,create_uid:0 field:campos.job.when,create_uid:0
-#: field:campos.municipality,create_uid:0 field:campos.scout.org,create_uid:0
+#: field:campos.municipality,create_uid:0 field:campos.par.tag,create_uid:0
+#: field:campos.reg.tag,create_uid:0 field:campos.scout.org,create_uid:0
 #: field:campos.staff.del.prod,create_uid:0 field:campos.subcamp,create_uid:0
 #: field:campos.subcamp.exception,create_uid:0
 msgid "Created by"
@@ -934,8 +951,8 @@ msgstr ""
 #: field:campos.event.par.reject,create_date:0
 #: field:campos.event.participant,create_date:0 field:campos.job,create_date:0
 #: field:campos.job.tag,create_date:0 field:campos.job.when,create_date:0
-#: field:campos.municipality,create_date:0
-#: field:campos.scout.org,create_date:0
+#: field:campos.municipality,create_date:0 field:campos.par.tag,create_date:0
+#: field:campos.reg.tag,create_date:0 field:campos.scout.org,create_date:0
 #: field:campos.staff.del.prod,create_date:0
 #: field:campos.subcamp,create_date:0
 #: field:campos.subcamp.exception,create_date:0
@@ -1069,6 +1086,7 @@ msgstr ""
 #: field:campos.function.view,display_name:0 field:campos.job,display_name:0
 #: field:campos.job.tag,display_name:0 field:campos.job.when,display_name:0
 #: field:campos.municipality,display_name:0
+#: field:campos.par.tag,display_name:0 field:campos.reg.tag,display_name:0
 #: field:campos.registration.view,display_name:0
 #: field:campos.scout.org,display_name:0
 #: field:campos.staff.del.prod,display_name:0
@@ -1191,6 +1209,17 @@ msgstr ""
 #: field:campos.event.participant,customer_type:0
 #: field:res.partner,customer_type:0 field:res.users,customer_type:0
 msgid "Export Type"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,fallback_contact:0
+#: field:event.registration,fallback_partner_id:0
+msgid "Fallback Contact"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,fallback_email:0
+msgid "Fallback Email"
 msgstr ""
 
 #. module: campos_event
@@ -1385,7 +1414,8 @@ msgstr ""
 #: field:campos.event.par.reject,id:0 field:campos.event.participant,id:0
 #: field:campos.function.view,id:0 field:campos.job,id:0
 #: field:campos.job.tag,id:0 field:campos.job.when,id:0
-#: field:campos.municipality,id:0 field:campos.registration.view,id:0
+#: field:campos.municipality,id:0 field:campos.par.tag,id:0
+#: field:campos.reg.tag,id:0 field:campos.registration.view,id:0
 #: field:campos.scout.org,id:0 field:campos.staff.del.prod,id:0
 #: field:campos.subcamp,id:0 field:campos.subcamp.exception,id:0
 msgid "ID"
@@ -1659,6 +1689,7 @@ msgstr ""
 #: field:campos.function.view,__last_update:0 field:campos.job,__last_update:0
 #: field:campos.job.tag,__last_update:0 field:campos.job.when,__last_update:0
 #: field:campos.municipality,__last_update:0
+#: field:campos.par.tag,__last_update:0 field:campos.reg.tag,__last_update:0
 #: field:campos.registration.view,__last_update:0
 #: field:campos.scout.org,__last_update:0
 #: field:campos.staff.del.prod,__last_update:0
@@ -1676,7 +1707,8 @@ msgstr ""
 #: field:campos.event.par.reject,write_uid:0
 #: field:campos.event.participant,write_uid:0 field:campos.job,write_uid:0
 #: field:campos.job.tag,write_uid:0 field:campos.job.when,write_uid:0
-#: field:campos.municipality,write_uid:0 field:campos.scout.org,write_uid:0
+#: field:campos.municipality,write_uid:0 field:campos.par.tag,write_uid:0
+#: field:campos.reg.tag,write_uid:0 field:campos.scout.org,write_uid:0
 #: field:campos.staff.del.prod,write_uid:0 field:campos.subcamp,write_uid:0
 #: field:campos.subcamp.exception,write_uid:0
 msgid "Last Updated by"
@@ -1691,7 +1723,8 @@ msgstr ""
 #: field:campos.event.par.reject,write_date:0
 #: field:campos.event.participant,write_date:0 field:campos.job,write_date:0
 #: field:campos.job.tag,write_date:0 field:campos.job.when,write_date:0
-#: field:campos.municipality,write_date:0 field:campos.scout.org,write_date:0
+#: field:campos.municipality,write_date:0 field:campos.par.tag,write_date:0
+#: field:campos.reg.tag,write_date:0 field:campos.scout.org,write_date:0
 #: field:campos.staff.del.prod,write_date:0 field:campos.subcamp,write_date:0
 #: field:campos.subcamp.exception,write_date:0
 msgid "Last Updated on"
@@ -1897,7 +1930,8 @@ msgstr ""
 #: field:campos.event.participant,name:0 field:campos.function.view,name:0
 #: view:campos.job:campos_event.campos_job_form field:campos.job,name:0
 #: field:campos.job.tag,name:0 field:campos.job.when,name:0
-#: field:campos.municipality,name:0 field:campos.registration.view,name:0
+#: field:campos.municipality,name:0 field:campos.par.tag,name:0
+#: field:campos.reg.tag,name:0 field:campos.registration.view,name:0
 #: field:campos.scout.org,name:0
 #: view:campos.subcamp:campos_event.campos_subcamp_form_view
 #: field:campos.subcamp,name:0
@@ -2055,7 +2089,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:538
+#: code:addons/campos_event/models/participant.py:548
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2075,6 +2109,11 @@ msgstr ""
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 msgid "Participant Registration"
+msgstr ""
+
+#. module: campos_event
+#: model:ir.ui.menu,name:campos_event.campos_par_tag_menu
+msgid "Participant Tags"
 msgstr ""
 
 #. module: campos_event
@@ -2162,6 +2201,11 @@ msgstr ""
 #: code:addons/campos_event/controllers/website_event.py:280
 #, python-format
 msgid "Preregistration for Danish Groups"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.campos_event_participant_search
+msgid "Primary Committee"
 msgstr ""
 
 #. module: campos_event
@@ -2300,6 +2344,12 @@ msgid "Registration Survey"
 msgstr ""
 
 #. module: campos_event
+#: model:ir.actions.act_window,name:campos_event.campos_reg_tag_act_window
+#: model:ir.ui.menu,name:campos_event.campos_reg_tag_menu
+msgid "Registration Tags"
+msgstr ""
+
+#. module: campos_event
 #: code:addons/campos_event/controllers/website_event.py:389
 #, python-format
 msgid "Registration for International Groups"
@@ -2326,7 +2376,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:418
+#: code:addons/campos_event/models/participant.py:427
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2532,7 +2582,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:315
+#: code:addons/campos_event/models/participant.py:324
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2836,7 +2886,9 @@ msgid "Taglist"
 msgstr ""
 
 #. module: campos_event
-#: field:campos.event.participant,category_id:0 field:campos.job,tag_ids:0
+#: field:campos.event.participant,category_id:0
+#: field:campos.event.participant,tag_ids:0 field:campos.job,tag_ids:0
+#: field:event.registration,tag_ids:0
 #: view:website:campos_event.jobber_job_view
 #: view:website:campos_event.jobber_latest_jobs
 msgid "Tags"

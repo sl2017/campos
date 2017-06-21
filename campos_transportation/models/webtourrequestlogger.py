@@ -13,7 +13,6 @@ When the record is saved will the request be executed
 
 @author: jda.dk
 '''
-
 from openerp import models, fields, api, tools
 from ..interface import webtourinterface
 from xml.dom import minidom

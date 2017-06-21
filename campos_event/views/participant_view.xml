@@ -118,6 +118,7 @@
                             <field name="is_company" attrs="{'invisible': True}"/>
                         	 
                         	 <field name="parent_id" placeholder="Scout Group" domain="[('is_company', '=', True)]" context="{'default_is_company': True}" invisible="1"/>
+                        	 <field name="tag_ids" widget="many2many_tags"/>
                         	</div> 
                         	
                         	<newline/>
@@ -161,7 +162,7 @@
                             <field name="scoutorg_id"/>
                             <field name="participant" groups="campos_event.group_campos_admin"/>
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
-				 		    <field name="participant_number" groups="campos_event.group_campos_admin" />
+				 		    <field name="participant_number" readonly="1" />
 							<!--
 				 		    <field name="staff_qty_pre_reg"/>
 				 		    -->
@@ -328,6 +329,7 @@
 							<group>
 							<field name="state" invisible="1"/>
 							<field name="registration_id" invisible="1"/>
+							<field name="participant_number" readonly="1"/>
 							
                         	  <label for="street" string="Address"/>
                             <div>
@@ -472,6 +474,9 @@
                  	<field name="registration_id"/>
                  	<field name="city"/>
                  	<field name="state" />
+                 	<field name="tag_ids"/>
+                 	<field name="participant_number"/>
+                 	<field name="primary_committee_id"/>
                  	<!-- 
                  	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
                  	<filter icon="terp-personal" string="Troops" help="Scout Groups" domain="[('event_id','=',1)]"/>
@@ -480,6 +485,7 @@
                  	<group expand="0" string="Group By...">
                  	<filter name="fEvent" string="Event" icon="terp-personal" domain="[]" context="{'group_by':'event_id'}"/>
                     <filter name="fGroup" string="Group" icon="terp-personal" domain="[]" context="{'group_by':'registration_id'}"/>
+                    <filter name="Pri_comm" string="Primary Committee" icon="terp-personal" domain="[]" context="{'group_by':'primary_committee_id'}"/>
                  	<!-- 
                  	<filter name="fAge" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age_group'}"/>
                  	 -->
