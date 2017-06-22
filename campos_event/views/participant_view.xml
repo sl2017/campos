@@ -163,6 +163,7 @@
                             <field name="participant" groups="campos_event.group_campos_admin"/>
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
 				 		    <field name="participant_number" readonly="1" />
+				 		    <field name="wristband_date"/>
 							<!--
 				 		    <field name="staff_qty_pre_reg"/>
 				 		    -->
@@ -330,7 +331,7 @@
 							<field name="state" invisible="1"/>
 							<field name="registration_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
-							
+							<field name="wristband_date"/>
                         	  <label for="street" string="Address"/>
                             <div>
                                 <div class="oe_edit_only">

@@ -645,6 +645,7 @@
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
+							<field name="wristband_date"/>
 							<field name="name"/>
 							<field name="tag_ids" widget="many2many_tags"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
