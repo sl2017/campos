@@ -114,8 +114,8 @@
 						<page string="Special needs" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}" >
 									<group>
 										<field name="need_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('for_staff', '=', True)]" />
-										<field name="other_need" readonly="1"/>
-										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}" readonly="1"/>
+										<field name="other_need" />
+										<field name="other_need_description" attrs="{'invisible': [('other_need', '=', False)]}" />
 										<field name="other_need_update_date" invisible="1"/>
 									</group>
 						</page>
