@@ -12,7 +12,6 @@
         <field name="arch" type="xml">
             <page name="pre_reg" position="before">
             	<page name="activity" string="Activities">
-					<p>Aktivitetstilmeldingen åbner mandag d. 19. juni kl 20:00</p>					
 					<button name="action_add_activity" string="Add Activity" type="object"/>
 					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
 					<field name="ticket_ids" readonly="1" context="{'form_view_ref': 'campos_activity.campos_activity_ticket_form_view2'}">
