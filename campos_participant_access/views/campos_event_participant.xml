@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+	<!--  Admin view -->
+	
+	<record id="view_form_finalregistration_participant" model="ir.ui.view">
+			<field name="name">Final Registration Participant Form</field>
+			<field name="model">campos.event.participant</field>
+			 <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_participant"/>
+			<field name="arch" type="xml">
+				<field name="state" position="before">
+					<field name="clc_user_needed" invisible="1"/>
+					<button name="action_create_clc_user" attrs="{'invisible': [('clc_user_needed', '=', False)]}" string="Create CLC User" type="object"/>	
+				</field>
+			</field>
+	</record>			
+
+	<!--  Participants own view -->
+    <record model="ir.ui.view" id="campos_event_participant_form_own_view">
+        <field name="name">campos.event.participant.form (in campos_participant_access)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+        	<form>
+        		<sheet>
+					<group name="sheet2">
+						<p>For changes contact your own scout master</p>
+						<p>For access to the CLC course: <a href="https://clc.sl2017.dk">Click here</a></p>
+						<field name="staff" invisible="1"/>
+						<field name="registration_id" invisible="1"/>
+						<field name="participant" invisible="1"/>
+						<field name="parent_id" invisible="1"/>
+						<field name="participant_number" readonly="1"/>
+						<field name="name"/>
+						<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
+						<field name="visa_required" invisible="1"/>
+						<field name="passport_number" attrs="{'invisible': [('visa_required', '=', False)]}"/>
+						</group>
+					<notebook name="top">
+						<page name="contact" string="Contact info">
+							<group>
+								<field name="email"/>
+								<field name="mobile"/>
+								<field name="street"/>
+								<field name="street2"/>
+								<field name="zip"/>
+								<field name="city"/>
+								<field name="country_id"/>
+								<field name="access_token_id" invisible="1"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="campos_event_participant_own_tree_view">
+        <field name="name">campos.event.participant.tree (in campos_participant_access)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+            	<field name="registration_id"/>
+            </tree>
+        </field>
+    </record>
+    
+     <record model="ir.ui.view" id="campos_event_participant_search_view">
+        <field name="name">campos.event.participant.search (in campos_participant_access)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.campos_event_participant_search"/>
+        <field name="arch" type="xml">
+            <field name="primary_committee_id" position="after">
+            	<filter name="clc_cand" string="18+ foreigner" domain="[('camp_age','&gt;=',18), ('registration_id.group_country_code2', '!=', 'DK')]"/>
+        	</field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_event_participant_act_window">
+        <field name="name">Campos Event Participant</field> <!-- TODO -->
+        <field name="res_model">campos.event.participant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    
+    <record model="ir.actions.act_window.view"
+        id="campos_event_participant_act_window_tree">
+	  <field name="sequence" eval="1"/>
+	  <field name="view_mode">tree</field>
+	  <field name="view_id" ref="campos_event_participant_own_tree_view"/>
+	  <field name="act_window_id" ref="campos_event_participant_act_window"/>
+	</record>
+
+	<record model="ir.actions.act_window.view"
+	        id="campos_event_participant_act_window_form">
+	  <field name="sequence" eval="2"/>
+	  <field name="view_mode">form</field>
+	  <field name="view_id" ref="campos_event_participant_form_own_view"/>
+	  <field name="act_window_id" ref="campos_event_participant_act_window"/>
+	</record>	
+    
+
+	<menuitem name="My Signup"
+        id="campos_event_participant_top_menu"
+        groups="group_campos_participant"
+        sequence="0"/>
+
+	<record model="ir.ui.menu" id="campos_event_participant_sub_menu">
+        <field name="name">My Signup</field>
+        <field name="parent_id" ref="campos_event_participant_top_menu"/>
+        
+        <field name="sequence" eval="16"/>
+    </record>
+		
+    <record model="ir.ui.menu" id="campos_event_participant_menu">
+        <field name="name">My Signup</field>
+        <field name="parent_id" ref="campos_event_participant_sub_menu"/>
+        <field name="action" ref="campos_event_participant_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</data>
+</openerp>
