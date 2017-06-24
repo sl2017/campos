@@ -125,6 +125,7 @@
 						<group>
 							<field name="desc" />
 							<field name="website_published"/>
+							<field name="extpartner"/>
 							<field name="approvers_ids" options="{'no_create': True}" widget="many2many_tags" domain="[('state', '=', 'approved')]"/>
 							<field name="template_id" />
 							<field name="parent_id" />

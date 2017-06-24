@@ -155,9 +155,11 @@ class FinalRegistrationParticipant(models.Model):
                 for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id)]):
                     days_ids.append((0,0, {'participant_id': self.id,
                                            'day_id': day.id,
-                                           'will_participate': True if day.event_period == 'maincamp' else False,
+                                           'will_participate': False,
                                            'the_date': day.event_date,
                                            }))
+                self.transport_to_camp = False
+                self.transport_from_camp = False
             elif self.participant:
                 for day in self.env['event.day'].search([('event_id', '=', self.registration_id.event_id.id),('event_period' ,'=','maincamp')]):
                     days_ids.append((0,0, {'participant_id': self.id,
