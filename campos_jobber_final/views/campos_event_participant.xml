@@ -23,7 +23,10 @@
             			<p>You need to request a CKR Attest to get access to the final camp signup</p>
             			
             			</div>
-            			<field name="signup_state" attrs="{'invisible': ['|',('ckr_needed', '=', True),('birthdate','=', False)]}"/>
+            			<group col="4">
+             				<field name="signup_state" attrs="{'invisible': ['|',('ckr_needed', '=', True),('birthdate','=', False)]}"/>
+             				<field name="no_camp_participation" attrs="{'invisible': [('signup_state', 'in', ['oncamp','dayjobber'])]}"/>
+             			</group>
             		</group>
             		<notebook attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
             			<page string="Camp Days">
@@ -237,7 +240,10 @@
             			<p>You need to request a CKR Attest to get access to the final camp signup</p>
             			
             			</div>
-            			<field name="signup_state" attrs="{'invisible': ['|',('ckr_needed', '=', True),('birthdate','=', False)]}"/>
+            			<group col="4">
+             				<field name="signup_state" attrs="{'invisible': ['|',('ckr_needed', '=', True),('birthdate','=', False)]}"/>
+             				<field name="no_camp_participation" attrs="{'invisible': [('signup_state', 'in', ['oncamp','dayjobber'])]}"/>
+             			</group>
             		</group>
             		<notebook attrs="{'invisible': [('signup_state', 'not in', ['oncamp','dayjobber'])]}">
             			<page string="Camp Days">
@@ -494,6 +500,17 @@
 			
         </field>
        </record>
+        
+        <record model="ir.ui.view" id="campos_event_participant_form2">
+        <field name="name">campos.event.participant.tree (in campos_jobber_final)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.campos_event_participant_form2"/>
+        <field name="arch" type="xml">
+        	<field name="state" position="after">
+        		<field name="signup_state"/>
+        	</field>
+        </field>
+        </record>
         
 </data>
 </openerp>

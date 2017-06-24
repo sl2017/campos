@@ -16,7 +16,9 @@ class CamposEventParticipant(models.Model):
 
     signup_state = fields.Selection([('draft', 'Not signed up'),
                                      ('oncamp', 'Camp Jobber'),
-                                     ('dayjobber', 'Day Jobber')], default='draft', string='Final registration', track_visibility='onchange', help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+                                     ('dayjobber', 'Day Jobber'),
+                                     ('nocamp', 'No camp participation')], default='draft', string='Final registration', track_visibility='onchange', help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+    no_camp_participation = fields.Boolean('No camp participation')
     accomodation_ids = fields.One2many('campos.jobber.accomodation', 'participant_id', 'Accomodation', help=u'Chose where you would like to stay at the campsite. You may chose between several different locations - but only within the jamboree site. During the pre/post camp everybody is accommodated in Øen.')
     # AS on registration
     canteen_ids = fields.One2many('campos.jobber.canteen', 'participant_id', 'Catering', help=u"Chose where you would like to eat at the campsite. You may chose between several different locations - but only within the jamboree site. During the pre/post camp everybody is catered in Øen.")
@@ -89,7 +91,18 @@ class CamposEventParticipant(models.Model):
         else:
             self.ckr_needed = False
             self.info_html = False
+        if self.signup_state != 'nocamp':
+            self.no_camp_participation = False
+        if self.signup_state == 'nocamp':
+            self.no_camp_participation = True
         
+    @api.onchange('no_camp_participation')
+    def onchange_no_camp_participation(self):
+        if self.no_camp_participation:
+            self.signup_state = 'nocamp'
+        else:
+            if self.signup_state == 'nocamp':
+                self.signup_state = 'draft'
             
     @api.onchange('staff','birthdate','ckr_ids', 'country_id')
     def onchange_recalc_ckr_needed(self):
@@ -194,6 +207,8 @@ class CamposEventParticipant(models.Model):
     
     @api.multi
     def write(self, vals):
+        if 'no_camp_participation' in vals and vals['no_camp_participation']:
+            vals['signup_state'] = 'nocamp'
         res = super(CamposEventParticipant, self).write(vals)
         for cep in self.suspend_security():
             if cep.staff:
@@ -214,6 +229,7 @@ class CamposEventParticipant(models.Model):
                     if payer and cep.registration_id != payer.registration_id:
                         cep.suspend_security().write({'registration_id': payer.registration_id.id,
                                                       'payreq_state': 'draft'})
+                
                     
         return res
     
