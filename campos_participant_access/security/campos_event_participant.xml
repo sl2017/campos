@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+	<record id="group_campos_participant" model="res.groups">
+			<field name="name">Participant</field>
+			<field name="implied_ids" eval="[(4, ref('campos_event.group_campos_user'))]"/>
+			<field name="category_id" ref="campos_event.module_campos_category" />
+		</record>
+
+	<!-- TODO acl id -->
+    <record model="ir.model.access" id="campos_event_participant_access_name"> 
+        <field name="name">campos.event.participant access name</field>
+        <field name="model_id" ref="model_campos_event_participant"/>
+        
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+    -->
+
+</data>
+</openerp>

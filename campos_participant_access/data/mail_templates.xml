@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data noupdate="1">
+
+		<!-- Email template for new CLC Participant signup -->
+        <record id="clc_signup_email" model="email.template">
+            <field name="name">SL2017 Signup confirmation</field>
+            <field name="model_id" ref="campos_event.model_campos_event_participant"/>
+            <field name="email_from"><![CDATA[info@sl2017.dk]]></field>
+            <field name="partner_to">${partner_id}</field>
+            <field name="subject">SL2017 Signup confirmation</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>
+                        Hi ${name},
+                    </p>
+<p>
+                        To complete the signup, click on the following link:
+                    </p>
+                    <ul>
+                        <li><a href="${object.signup_url}">Accept invitation to "${object.company_id.name}"</a></li>
+                    </ul>
+                    <p>
+                        Thanks,
+                    </p>
+                    <pre>
+--
+${object.company_id.name or ''}
+${object.company_id.email or ''}
+${object.company_id.phone or ''}
+                    </pre>
+                ]]>                           
+            </field>
+        </record>
+        
+        
+        
+    </data>
+</openerp>
