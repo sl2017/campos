@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-15 17:37+0000\n"
-"PO-Revision-Date: 2017-06-15 17:37+0000\n"
+"POT-Creation-Date: 2017-06-24 10:21+0000\n"
+"PO-Revision-Date: 2017-06-24 10:21+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -137,6 +137,11 @@ msgid "Age to"
 msgstr "Alder til"
 
 #. module: campos_activity
+#: field:campos.activity.ticket,allow_edit:0
+msgid "Allow edit"
+msgstr ""
+
+#. module: campos_activity
 #: selection:campos.activity.instanse,state:0
 msgid "At risk of cancellation due to weather conditions"
 msgstr "I fare for aflysning grundet vejret"
@@ -257,6 +262,11 @@ msgid "Cancel"
 msgstr "Annuller"
 
 #. module: campos_activity
+#: view:campos.activity.ticket:campos_activity.campos_activity_ticket_form_view2
+msgid "Cancel ticket"
+msgstr ""
+
+#. module: campos_activity
 #: selection:campos.activity.activity,state:0
 #: selection:campos.activity.instanse,state:0
 #: selection:campos.activity.ticket,state:0
@@ -358,6 +368,17 @@ msgstr ""
 #: field:campos.activity.activity,duration:0
 msgid "Duration"
 msgstr "Varighed"
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:164
+#, python-format
+msgid "Edit participants"
+msgstr ""
+
+#. module: campos_activity
+#: view:campos.activity.ticket:campos_activity.campos_activity_ticket_form_view2
+msgid "Edit ticket"
+msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.instanse,actins_date_end:0
@@ -757,6 +778,11 @@ msgstr ""
 #. module: campos_activity
 #: selection:campos.activity.ticket,state:0
 msgid "TimeOut"
+msgstr ""
+
+#. module: campos_activity
+#: view:campos.activity.ticket:campos_activity.campos_activity_ticket_tree_view
+msgid "Total"
 msgstr ""
 
 #. module: campos_activity
