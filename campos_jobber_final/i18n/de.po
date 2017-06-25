@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 04:36+0000\n"
-"PO-Revision-Date: 2017-06-17 04:36+0000\n"
+"POT-Creation-Date: 2017-06-24 10:21+0000\n"
+"PO-Revision-Date: 2017-06-24 10:21+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -96,9 +96,9 @@ msgid "Associated jobbers"
 msgstr "zugehörige Jobber/Jobberinnen"
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:88
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:100
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:170
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:90
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:113
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:183
 #, python-format
 msgid "CKR Attest Needed. Please Request one"
 msgstr " Erweiterte Führungszeugnis ist erfordert. Bitte ein ersuchen."
@@ -558,15 +558,21 @@ msgid "Need updated"
 msgstr "Bedarf aufdatiert"
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:261
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:277
 #, python-format
 msgid "New Staff Accomodation Group"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:232
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:248
 #, python-format
 msgid "New child for: %s"
+msgstr ""
+
+#. module: campos_jobber_final
+#: field:campos.event.participant,no_camp_participation:0
+#: selection:campos.event.participant,signup_state:0
+msgid "No camp participation"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -688,7 +694,7 @@ msgid "Req. group selection and approval"
 msgstr ""
 
 #. module: campos_jobber_final
-#: code:addons/campos_jobber_final/models/campos_event_participant.py:181
+#: code:addons/campos_jobber_final/models/campos_event_participant.py:194
 #, python-format
 msgid "Request CKR"
 msgstr "Erweiterte Führungszeugnis ersuchen. "

@@ -110,7 +110,36 @@
 								<field name="campos_demandneeded" string="Needed"/>																
 							</tree>
 						</field>           			
-           			</page>           			
+           			</page>
+           			<page string="Own Transportation">
+						<button name="action_owntransport_paxs" string="Fill in arival and departures" type="object"/>           			
+						<field  name="arrival_ids" widget="one2many_list" nolabel="0" string="Arrival">
+							<tree editable="bottom" default_order="traveldate" >
+								<field name="traveldate" string="Arrival Date"/>
+								<field name="pax" string="No of participants"/>
+								<field name="eta" string="Estimated hour of arrival"/>
+								<field name="cars" string="No of Cars"/>
+								<field name="trailes" string="No of Trailers"/>								
+								<field name="coaches" string="No of Coaches"/>
+								<field name="bikes" string="On Bike"/>	
+								<field name="onfoot" string="On foot"/>	
+								<field name="bytrain" string="By train"/>																							
+							</tree>
+						</field> 
+						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure">
+							<tree editable="bottom" default_order="traveldate" >
+								<field name="traveldate" string="Departure Date"/>
+								<field name="pax" string="No of participants"/>
+								<field name="eta" string="Planned hour of departure"/>								
+								<field name="cars" string="No of Cars"/>
+								<field name="trailes" string="No of Trailers"/>								
+								<field name="coaches" string="No of Coaches"/>
+								<field name="bikes" string="On Bike"/>	
+								<field name="onfoot" string="On foot"/>	
+								<field name="bytrain" string="By train"/>																							
+							</tree>
+						</field> 						
+           			</page>            			           			
         		</xpath>        		  		
 			</field>	
 		</record>
@@ -176,8 +205,37 @@
 								<field name="campos_demandneeded" string="Needed"/>																
 							</tree>
 						</field>           			
-           			</page>
-        		</xpath> 		        		  		
+           			</page> 
+           			<page string="Own Transportation">
+						<button name="action_owntransport_paxs" string="Fill in arival and departures" type="object"/>           			
+						<field  name="arrival_ids" widget="one2many_list" nolabel="0" string="Arrival">
+							<tree editable="bottom" default_order="traveldate" >
+								<field name="traveldate" string="Arrival Date"/>
+								<field name="pax" string="No of participants"/>
+								<field name="eta" string="Estimated hour of arrival"/>
+								<field name="cars" string="No of Cars"/>
+								<field name="trailes" string="No of Trailers"/>								
+								<field name="coaches" string="No of Coaches"/>
+								<field name="bikes" string="On Bike"/>	
+								<field name="onfoot" string="On foot"/>	
+								<field name="bytrain" string="By train"/>																							
+							</tree>
+						</field> 
+						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure">
+							<tree editable="bottom" default_order="traveldate" >
+								<field name="traveldate" string="Departure Date"/>
+								<field name="pax" string="No of participants"/>
+								<field name="eta" string="Planned hour of departure"/>								
+								<field name="cars" string="No of Cars"/>
+								<field name="trailes" string="No of Trailers"/>								
+								<field name="coaches" string="No of Coaches"/>
+								<field name="bikes" string="On Bike"/>	
+								<field name="onfoot" string="On foot"/>	
+								<field name="bytrain" string="By train"/>																							
+							</tree>
+						</field> 						
+           			</page> 						
+           		</xpath> 		        		  		
 			</field>	
 		</record>
 

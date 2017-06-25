@@ -91,6 +91,8 @@ class CampCommittee(models.Model):
         string="Approver list",
         compute='_compute_partner_list')
     
+    extpartner = fields.Boolean('External Partner Jobber Signup')
+    
     @api.one
     @api.depends('name', 'code', 'parent_id.name', 'parent_id.display_name', 'parent_id.code')
     def _compute_display_name(self):

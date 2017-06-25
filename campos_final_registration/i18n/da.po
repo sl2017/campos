@@ -105,7 +105,7 @@ msgstr "Cancel Registration"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 #: field:event.registration,car_ids:0
 msgid "Cars"
-msgstr "Privatbiler"
+msgstr "Biler der skal parkeres på lejren"
 
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
@@ -616,7 +616,7 @@ msgstr "Antal andre telte, under 50 m2"
 #. module: campos_final_registration
 #: field:event.registration,glofo_number_participants:0
 msgid "Number of participants in Green Profile"
-msgstr ""
+msgstr "Antal af deltager i grøn profil"
 
 #. module: campos_final_registration
 #: field:event.registration,number_of_tents:0

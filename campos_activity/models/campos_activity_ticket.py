@@ -3,7 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models, _
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
+import datetime
 
 class CamposActivityTicket(models.Model):
 
@@ -16,7 +18,7 @@ class CamposActivityTicket(models.Model):
     reserved_time = fields.Datetime('Reserved Date/Time', default=fields.Datetime.now)
     state = fields.Selection([('open', 'Reserved'),
                               ('done', 'Booked'),
-                              ('timeout', 'TimeOut'),
+                              ('timeout', 'Reservation Expired'),
                               ('cancelled', 'Cancelled')
                              ], 'Ticket State', track_visibility='onchange', default='open'
                             )
@@ -67,7 +69,13 @@ class CamposActivityTicket(models.Model):
                                                              'act_ins_id': self.act_ins_id.id,
                                                              'reg_id': self.reg_id.id,
                                                              'seats': self.seats,
+                                                             'seats_reserved': self.seats,
                                                              'state': 'step2'})
         return wiz.prepare_step2()
     
-    
+    @api.model
+    def cancel_expired_reservations(self):
+        expired = (datetime.datetime.now() - datetime.timedelta(minutes=30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        tickets = self.search([('state', '=', 'open'), ('reserved_time', '<', expired)])
+        tickets.write({'state': 'expired'})
+

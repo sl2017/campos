@@ -110,6 +110,7 @@
         'views/campos_par_tag.xml',
         'security/campos_reg_tag.xml',
         'views/campos_reg_tag.xml',
+        'views/extern_jobber_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

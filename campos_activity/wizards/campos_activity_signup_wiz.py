@@ -36,6 +36,7 @@ class CamposActivitySignupWiz(models.TransientModel):
     
     act_ins_id = fields.Many2one('campos.activity.instanse', '2. Select Period', required=True, select=True, ondelete='cascade')
     seats = fields.Integer('3. Reserve Seats', required=True)
+    seats_reserved = fields.Integer('Reserved Seats')
     ticket_id = fields.Many2one('campos.activity.ticket', 'Ticket', ondelete='set null')
     seats_available = fields.Integer(related='act_ins_id.seats_available', readonly=True)
     par_signup_ids = fields.Many2many('campos.activity.signup.members', relation="rel_act_signup_wiz", string='4. Signup participants')
@@ -44,17 +45,31 @@ class CamposActivitySignupWiz(models.TransientModel):
     @api.constrains('seats', 'act_ins_id')
     def _check_seats(self):
         if self.seats <= 0:
-            raise exceptions.ValidationError("Reserved seats should be positive")
+            raise exceptions.ValidationError(_("Reserved seats should be positive"))
         if self.act_ins_id.seats_hard and not self.ticket_id:
-            if self.seats > self.act_ins_id.seats_available:
-                raise exceptions.ValidationError("Sorry! Only %d seats available" % self.act_ins_id.seats_available)
+            if self.seats > self.act_ins_id.seats_available and self.act_ins_id.seats_available > 0:
+                raise exceptions.ValidationError(_("Sorry! Only %d seats available") % self.act_ins_id.seats_available)
+            else:
+                raise exceptions.ValidationError(_("Sorry! No seats available"))
+        if self.act_ins_id.seats_hard and self.ticket_id and self.seats > self.seats_reserved:
+             raise exceptions.ValidationError(_("Sorry! You can't increase the number of reserved seats. Only %d reserved") % (self.seats_reserved))
+        if self.act_ins_id.seats_available <= 0 and not self.ticket_id:
+                raise exceptions.ValidationError(_("Sorry! No seats available"))
         return True
     
+    @api.onchange('act_ins_id')
+    def _onchange_act_ins_id(self):
+        if self.act_ins_id and self.act_ins_id.seats_available <= 0:
+            return {
+                    'warning': {'title': _("Warning"), 'message': _("No seats available for selected period!")},
+                    }
+            
     @api.multi
     def doit_step1(self):
         _logger.info('doit_step1')
         self.ensure_one()
         for wiz in self:
+            wiz.seats_reserved = wiz.seats
             dt = wiz.act_ins_id.period_id.date_begin[0:10]
             mbr_obj = self.env['campos.activity.signup.members']
             if wiz.reg_id.participant_ids:

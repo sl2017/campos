@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-15 14:57+0000\n"
-"PO-Revision-Date: 2017-06-15 14:57+0000\n"
-"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
+"POT-Creation-Date: 2017-06-24 10:22+0000\n"
+"PO-Revision-Date: 2017-06-25 16:11+0000\n"
+"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,6 +260,8 @@ msgid "&nbsp;"
 msgstr "&nbsp;"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
 msgid "&times;"
@@ -386,6 +388,11 @@ msgid "Allocated"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+msgid "Andet"
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,reg_user_input_line_ids:0
 msgid "Answers"
 msgstr ""
@@ -411,7 +418,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:405
+#: code:addons/campos_event/models/participant.py:406
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -494,12 +501,18 @@ msgstr "Fødselsdag dd/mm/åååå"
 #. module: campos_event
 #: field:campos.event.participant,birthdate_short:0
 msgid "Birthdate short"
-msgstr ""
+msgstr "Fødselsdag kort"
 
 #. module: campos_event
 #: selection:event.track,kanban_state:0
 msgid "Blocked"
 msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
+msgid "CPR Number (ddmmåå-xxxx)"
+msgstr "CPR nummer (ddmmåå-xxxx)"
 
 #. module: campos_event
 #: view:website:campos_event.event_meeting_proposal
@@ -523,6 +536,12 @@ msgstr ""
 #: model:ir.ui.menu,name:campos_event.campos_camp_area_menu
 msgid "Camp Areas"
 msgstr "Kvarterer"
+
+#. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
+msgid "Camp Days"
+msgstr "Lejrdage"
 
 #. module: campos_event
 #: view:event.registration:campos_event.view_dds_camp_reg_info_form1
@@ -600,9 +619,15 @@ msgid "Cannot send email: user has no email address."
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
+msgid "Car Registration number for parking permit"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee.function.type,chairman:0
 msgid "Chairman"
-msgstr ""
+msgstr "Formand"
 
 #. module: campos_event
 #: help:campos.event.participant,is_company:0
@@ -648,6 +673,8 @@ msgstr ""
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: field:campos.event.participant,city:0
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
@@ -705,6 +732,7 @@ msgstr ""
 #: field:campos.function.view,committee_id:0 field:campos.job,committee_id:0
 #: field:campos.subcamp,committee_id:0
 #: model:ir.model,name:campos_event.model_campos_committee
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
 msgid "Committee"
 msgstr "Udvalg"
@@ -806,8 +834,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:352
-#: code:addons/campos_event/models/participant.py:379
+#: code:addons/campos_event/models/participant.py:353
+#: code:addons/campos_event/models/participant.py:380
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -884,6 +912,7 @@ msgid "Contacts"
 msgstr "Kontakter"
 
 #. module: campos_event
+#: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_job_ask_thankyou
 #: view:website:campos_event.jobber_thankyou
 #: view:website:campos_event.participant updated
@@ -1212,6 +1241,11 @@ msgstr "eksport"
 #: field:campos.event.participant,customer_type:0
 #: field:res.partner,customer_type:0 field:res.users,customer_type:0
 msgid "Export Type"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.committee,extpartner:0
+msgid "External Partner Jobber Signup"
 msgstr ""
 
 #. module: campos_event
@@ -1606,6 +1640,8 @@ msgid "Jobber"
 msgstr "Jobber"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
 msgid "Jobber Signup"
 msgstr "Jobber tilmelding"
@@ -1755,6 +1791,11 @@ msgid "Left parent"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_local
+msgid "Local Jobber Signup Form"
+msgstr ""
+
+#. module: campos_event
 #: view:website:campos_event.zx_confirm_prompt
 msgid "Login mail:"
 msgstr "Login mail"
@@ -1872,6 +1913,8 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee.function,mobile:0
 #: field:campos.event.participant,mobile:0 field:campos.function.view,mobile:0
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.partner_register_form
 msgid "Mobile"
@@ -2092,7 +2135,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:548
+#: code:addons/campos_event/models/participant.py:549
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2102,11 +2145,6 @@ msgstr ""
 #, python-format
 msgid "Participant"
 msgstr "Deltager"
-
-#. module: campos_event
-#: field:campos.event.participant,participant_number:0
-msgid "Participant Number"
-msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.staff_event_registration_participant_form
@@ -2156,6 +2194,11 @@ msgstr "Deltagere"
 #: model:ir.model,name:campos_event.model_res_partner
 msgid "Partner"
 msgstr "Partner"
+
+#. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+msgid "Partner Jobber Signup Form"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,partner_id:0
@@ -2379,7 +2422,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:427
+#: code:addons/campos_event/models/participant.py:428
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2585,7 +2628,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:324
+#: code:addons/campos_event/models/participant.py:325
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -2680,6 +2723,11 @@ msgstr ""
 #. module: campos_event
 #: field:event.event,survey_id:0
 msgid "Signup survey"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,participant_number:0
+msgid "Skejser ID"
 msgstr ""
 
 #. module: campos_event
@@ -2843,6 +2891,8 @@ msgid "Subcommittees"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.sp_confirm_prompt
@@ -2931,6 +2981,7 @@ msgid "Thank you for your meeting proposal."
 msgstr "Tak for dit mødeforslag"
 
 #. module: campos_event
+#: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_job_ask_thankyou
 #: view:website:campos_event.jobber_thankyou
 #: view:website:campos_event.participant updated
@@ -3268,6 +3319,11 @@ msgid "Where"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+msgid "Work for"
+msgstr "Arbejder for"
+
+#. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form
 #: selection:campos.event.participant,state:0
 msgid "Work in Progress"
@@ -3286,6 +3342,8 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
@@ -3305,6 +3363,8 @@ msgid "Your Contact Details"
 msgstr "Dine kontaktoplysninger"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
 msgid "Your Email"
@@ -3312,6 +3372,8 @@ msgstr "Din mailadresse"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_job_ask
@@ -3321,6 +3383,8 @@ msgid "Your Name"
 msgstr "Navn"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
 msgid "Your Phone"
 msgstr "Fastnet telefon"
@@ -3347,6 +3411,7 @@ msgid ""
 msgstr "Din job forespørgsel er blevet bekræftet succesfuldt, vi vender tilbage hurtigst muligt"
 
 #. module: campos_event
+#: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_thankyou
 msgid ""
 "Your job application has been successfully registered, we will get back to "
@@ -3389,6 +3454,8 @@ msgid "Zip"
 msgstr "Postnr"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"
@@ -3442,6 +3509,11 @@ msgstr "er vellykket. Du vil meget hurtigt modtage en mail, som du skal bruge fo
 #: field:campos.event.participant,self:0 field:res.users,self:0
 msgid "unknown"
 msgstr "Ukendt"
+
+#. module: campos_event
+#: field:campos.event.participant,wristband_date:0
+msgid "wristband issued"
+msgstr ""
 
 #. module: campos_event
 #: view:campos.event.participant:campos_event.view_event_registration_participant_form

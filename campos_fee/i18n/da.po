@@ -21,12 +21,12 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.ss.registration,count_transport_from:0
 msgid "# Transport from Camp"
-msgstr ""
+msgstr "# Transport til lejren"
 
 #. module: campos_fee
 #: field:campos.fee.ss.registration,count_transport_to:0
 msgid "# Transport to Camp"
-msgstr ""
+msgstr "# Transport fra lejren"
 
 #. module: campos_fee
 #: field:event.registration,number_accomondations:0
@@ -41,12 +41,12 @@ msgstr "# Antal betalende deltagere"
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0
 msgid "1. rate 50%"
-msgstr ""
+msgstr "1. rate 50%"
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0
 msgid "2. rate 100% DK Groups"
-msgstr ""
+msgstr "2. rate 100% Danske grupper"
 
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_194

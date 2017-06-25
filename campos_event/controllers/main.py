@@ -33,7 +33,7 @@ from openerp.addons.web.http import request
 from openerp.addons.website.controllers.main import Website as controllers
 from openerp.addons.website.models.website import slug
 from openerp.tools.translate import _
-
+import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -313,3 +313,128 @@ class CampOsEvent(http.Controller):
         return request.render("campos_event.jobber_job_ask", {'error': error,
                                                               'default': default,
                                                               'job': job,})
+
+# External Jobbers: Partners and Local peaple
+
+    @http.route(
+        ['/campos/extern/signup/<string:jobbertype>',
+         ],
+        type='http', auth="public", website=True)
+    def extern_signup(self, jobbertype=None, **kwargs):
+        error = {}
+        default = {'staff_qty_pre_reg': '1'}
+        comm_id = False
+        scoutorg_id = False
+        
+        
+        committee = request.registry['campos.committee']
+        if jobbertype == 'extpartner':
+            committee_ids = committee.search(
+                request.cr,
+                SUPERUSER_ID,
+                [('extpartner', '=', True)],
+                context=request.context)
+            committees = committee.browse(
+                request.cr,
+                SUPERUSER_ID,
+                committee_ids,
+                context=request.context)
+
+        env = request.env(user=SUPERUSER_ID)
+        days = env['event.day'].search([])
+        
+        if 'website_campos_jobber_signup_error' in request.session:
+            error = request.session.pop('website_campos_jobber_signup_error')
+            default = request.session.pop(
+                'website_campos_jobber_signup_default')
+
+        return request.render("campos_event.extern_signup_%s" % (jobbertype), {
+            'committees': committees,
+            'error': error,
+            'default': default,
+            'type': jobbertype,
+            'days': days,
+        })
+
+    @http.route('/campos/extern/thankyou',
+                methods=['POST'], type='http', auth="public", website=True)
+    def extern_thankyou(self, **post):
+        error = {}
+        _logger.info('MyPOST %s', post)
+        for field_name in ["name", "email", "street", "zip", "city"]:
+            if not post.get(field_name):
+                error[field_name] = 'Missing %s' % field_name
+        if not (post.get('phone') or post.get('mobile')):
+                error['phone'] = 'Missing phone or mobile number'
+                error['mobile'] = 'At least one of phone or mobile is neesed '
+        birthdate = False
+        cpr = False
+        try:
+            birthdate = datetime.datetime.strptime(post.get('cpr_number')[:6], '%d%m%y')
+            cpr = post.get('cpr_number')[-4:]
+        except:
+            error['cpr_number'] = 'Invalid date in CPR number'
+            
+        if error:
+            request.session['website_campos_jobber_signup_error'] = error
+
+            request.session['website_campos_jobber_signup_default'] = post
+            return request.redirect('/campos/extern/signup/%s' % post.get('type'))
+
+        # public user can't create applicants (duh)
+        env = request.env(user=SUPERUSER_ID)
+        value = {
+            'staff': True,
+            'scoutgroup': False,
+            'participant': False,
+        }
+        for f in ['email', 'name', 'phone', 'street', 'zip', 'city', 'mobile','skype']:
+            value[f] = post.get(f)
+        partner_id = env['res.partner'].create(value).id
+
+        value = {
+            'event_id': 1,
+            'partner_id': partner_id,
+            'contact_partner_id': partner_id,
+            'econ_partner_id': partner_id,
+        }
+        for f in ['name', 'staff_qty_pre_reg']:
+            value[f] = post.get(f)
+        reg_id = env['event.registration'].create(value).id
+
+        value = {
+            'partner_id': partner_id,
+            'registration_id': reg_id,
+            'birthdate': birthdate,
+            'state': 'approved',
+            'signup_state' : 'dayjobber',
+            'primary_committee_id': post.get('committee_id')
+        }
+        for f in ['committee_id', 'qualifications']:
+            value[f] = post.get(f)
+        
+        part = env['campos.event.participant'].create(value)
+        
+        ckr = env['campos.ckr.check'].create({'participant_id': part.id,
+                                              'cpr': cpr,
+                                              'state': 'sentin'})
+        for d in part.camp_day_ids:
+            d.will_participate = post.get('day_%d' % (d.day_id.id), False)
+            
+        active_days = part.camp_day_ids.filtered('will_participate').sorted(key=lambda r: r.the_date)
+        if post.get('car_reg_number', False):
+            car = env['campos.event.car'].create({'participant_id': part.id,
+                                                  'reg_number': post.get('car_reg_number', False),
+                                                  'park_permit_start_date': active_days[0].the_date,
+                                                  'park_permit_end_date': active_days[-1].the_date,
+                                                  'phone_number': part.mobile,
+                                                  })
+        template = part.env.ref('campos_event.request_signupconfirm')
+        assert template._name == 'email.template'
+        try:
+            template.send_mail(part.id)
+        except:
+            pass
+
+        return request.render("campos_event.jobber_thankyou", {'par': part})
+
