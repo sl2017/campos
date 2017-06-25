@@ -396,27 +396,27 @@ class WebtourRegistration(models.Model):
             
             _logger.info('%s action_owntransport_paxs %s %s', self.id,arivalday,departday)
             
-            usneedto =   self.env['campos_webtourusneed_travelneedpax_day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
-            usneedfrom = self.env['campos_webtourusneed_travelneedpax_day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
+            usneedto =   self.env['campos.webtourusneed.travelneedpax.day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
+            usneedfrom = self.env['campos.webtourusneed.travelneedpax.day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
             
             topax = 0
             frompax = 0            
             if day.arrivalpax > usneedto.pax:
                 topax= day.arrivalpax - usneedto.pax
             
-            if day.arrivalpax > usneedto.pax:
+            if day.departpax > usneedfrom.pax:
                 frompax= day.departpax - usneedfrom.pax                          
                         
             if arivalday:
                 arivalday.pax=topax
             else:
-                if day.arrivalpax:
+                if topax:
                     self.env['event.registration.campos.arrivaldeparture'].create({'registration_id':self.id,'traveldate':day.traveldate,'fromcamp':False,'pax':topax})
                     
             if departday:
-                departday.pax=day.frompax
+                departday.pax=frompax
             else:
-                if day.departpax:
+                if frompax:
                     self.env['event.registration.campos.arrivaldeparture'].create({'registration_id':self.id,'traveldate':day.traveldate,'fromcamp':True,'pax':frompax})
 
 '''
