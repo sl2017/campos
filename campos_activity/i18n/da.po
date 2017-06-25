@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 10:21+0000\n"
-"PO-Revision-Date: 2017-06-24 10:21+0000\n"
+"POT-Creation-Date: 2017-06-25 16:39+0000\n"
+"PO-Revision-Date: 2017-06-25 16:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgid "Add Activity"
 msgstr "Tilføj aktivitet"
 
 #. module: campos_activity
-#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:97
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:112
 #, python-format
 msgid "Add participants"
 msgstr "Tilføj deltager"
@@ -370,7 +370,7 @@ msgid "Duration"
 msgstr "Varighed"
 
 #. module: campos_activity
-#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:164
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:179
 #, python-format
 msgid "Edit participants"
 msgstr ""
@@ -489,6 +489,11 @@ msgid "Is a Follower"
 msgstr ""
 
 #. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Joint arrangement"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.activity,message_last_post:0
 #: field:campos.activity.instanse,message_last_post:0
 #: field:campos.activity.ticket,message_last_post:0
@@ -601,6 +606,12 @@ msgid "New activity signup for: %s"
 msgstr ""
 
 #. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:64
+#, python-format
+msgid "No seats available for selected period!"
+msgstr ""
+
+#. module: campos_activity
 #: field:campos.activity.instanse,seats_used:0
 msgid "Number of Participations"
 msgstr "Antal deltagere"
@@ -664,6 +675,11 @@ msgstr ""
 
 #. module: campos_activity
 #: selection:campos.activity.ticket,state:0
+msgid "Reservation Expired"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
 msgid "Reserved"
 msgstr "Reserveret"
 
@@ -674,7 +690,21 @@ msgstr ""
 
 #. module: campos_activity
 #: field:campos.activity.instanse,seats_reserved:0
+#: field:campos.activity.signup.wiz,seats_reserved:0
 msgid "Reserved Seats"
+msgstr ""
+
+#. module: campos_activity
+#: view:campos.activity.signup.wiz:campos_activity.campos_activity_signup_wiz_form_view
+msgid ""
+"Reserved seats not completed as a real registration will be removed after 30"
+" minutes."
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:48
+#, python-format
+msgid "Reserved seats should be positive"
 msgstr ""
 
 #. module: campos_activity
@@ -714,6 +744,26 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.activity,image_small:0
 msgid "Small-sized image"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:53
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:57
+#, python-format
+msgid "Sorry! No seats available"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:51
+#, python-format
+msgid "Sorry! Only %d seats available"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:55
+#, python-format
+msgid ""
+"Sorry! You can't increase the number of reserved seats. Only %d reserved"
 msgstr ""
 
 #. module: campos_activity
@@ -776,11 +826,6 @@ msgid "Tickets"
 msgstr ""
 
 #. module: campos_activity
-#: selection:campos.activity.ticket,state:0
-msgid "TimeOut"
-msgstr ""
-
-#. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_tree_view
 msgid "Total"
 msgstr ""
@@ -800,6 +845,12 @@ msgstr ""
 #: field:campos.activity.instanse,message_unread:0
 #: field:campos.activity.ticket,message_unread:0
 msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:64
+#, python-format
+msgid "Warning"
 msgstr ""
 
 #. module: campos_activity
@@ -835,7 +886,7 @@ msgid "You can only delete unused activities!"
 msgstr ""
 
 #. module: campos_activity
-#: code:addons/campos_activity/models/campos_activity_instanse.py:46
+#: code:addons/campos_activity/models/campos_activity_instanse.py:47
 #, python-format
 msgid "You can only delete unused instanse! You need to Cancel it."
 msgstr ""

@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_participant_access
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-25 16:39+0000\n"
+"PO-Revision-Date: 2017-06-25 16:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_participant_access
+#: model:email.template,body_html:campos_participant_access.clc_signup_email
+msgid "\n"
+"                \n"
+"                    <p>\n"
+"                        Hi ${name},\n"
+"                    </p>\n"
+"<p>\n"
+"                        To complete the signup, click on the following link:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li><a href=\"${object.signup_url}\">Accept invitation to \"${object.company_id.name}\"</a></li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                        Thanks,\n"
+"                    </p>\n"
+"                    <pre>\n"
+"--\n"
+"${object.company_id.name or ''}\n"
+"${object.company_id.email or ''}\n"
+"${object.company_id.phone or ''}\n"
+"                    </pre>\n"
+"                                           \n"
+"            "
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_search_view
+msgid "18+ foreigner"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.event.participant,clc_user_needed:0
+msgid "CLC User needed"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.actions.act_window,name:campos_participant_access.campos_event_participant_act_window
+msgid "Campos Event Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "Click here"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "Contact info"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
+msgid "Create CLC User"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:31
+#, python-format
+msgid "Email adress missing for %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.model,name:campos_participant_access.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "For access to the CLC course:"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "For changes contact your own scout master"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_menu
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_sub_menu
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_top_menu
+msgid "My Signup"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:res.groups,name:campos_participant_access.group_campos_participant
+msgid "Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:email.template,subject:campos_participant_access.clc_signup_email
+msgid "SL2017 Signup confirmation"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:35
+#, python-format
+msgid "User already created for %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:39
+#, python-format
+msgid "User already created for this email %s"
+msgstr ""
+

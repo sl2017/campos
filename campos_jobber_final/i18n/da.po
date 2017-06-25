@@ -27,7 +27,7 @@ msgstr "# deltagere"
 #. module: campos_jobber_final
 #: model:ir.model,name:campos_jobber_final.model_campos_event_car
 msgid "A car for parking at the camp"
-msgstr ""
+msgstr "En bil til parkering på lejren"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -185,14 +185,14 @@ msgstr "Udvalgs kantine"
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Car"
-msgstr ""
+msgstr "Bestilling af parkeringsbillet"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 #: field:campos.event.participant,car_ids:0
 #: model:ir.ui.menu,name:campos_jobber_final.campos_event_car_menu
 msgid "Cars"
-msgstr ""
+msgstr "Parkeringsbillet for bil"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -576,7 +576,7 @@ msgstr "Nyt barn hos: %s"
 #: field:campos.event.participant,no_camp_participation:0
 #: selection:campos.event.participant,signup_state:0
 msgid "No camp participation"
-msgstr ""
+msgstr "Deltager ikke på lejren"
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,signup_state:0
@@ -586,7 +586,7 @@ msgstr ""
 #. module: campos_jobber_final
 #: sql_constraint:campos.event.car:0
 msgid "Only ONE Car Ticket pr person."
-msgstr ""
+msgstr "Kun en parkeringbillet pr. deltager"
 
 #. module: campos_jobber_final
 #: field:campos.event.participant,other_need_description:0
