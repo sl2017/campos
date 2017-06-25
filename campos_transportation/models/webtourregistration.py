@@ -48,6 +48,13 @@ def do_delayed_webtourupdate(session, model, reg_id):
     if reg.exists():
         reg.webtourupdate()               
 
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_owntransport_paxs(session, model, reg_id):
+    reg = session.env['event.registration'].browse(reg_id)
+    if reg.exists():
+        reg.action_owntransport_paxs()    
+
 class WebtourRegistration(models.Model):
     _inherit = 'event.registration'
     webtourusgroupidno = fields.Char('Webtour us Group ID no', required=False, Default='')
@@ -349,8 +356,20 @@ class WebtourRegistration(models.Model):
         for reg in self:
             session = ConnectorSession.from_env(self.env)
             do_delayed_webtourupdate.delay(session, 'event.registration', reg.id)
-            
-     
+ 
+    @api.multi
+    def action_makejob_owntransport_paxs(self,event_id):
+        _logger.info("action_makejob_owntransport_paxs %s %s %s",self,len(self), event_id)
+        
+        regs = self.search([('event_id','=',event_id),('partner_id.scoutgroup','=',True),('state','!=','cancel')])
+        _logger.info("action_makejob_owntransport_paxs regd %s",len(regs))
+        
+        for reg in regs:
+            #_logger.info("action_makejob_owntransport_paxs %s",reg.id) 
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_owntransport_paxs.delay(session, 'event.registration', reg.id)            
+
+    
     @api.multi
     def action_send_traveltimeemail(self):
         sentdatetime = fields.Datetime.now()[:17] + '00'
@@ -388,13 +407,13 @@ class WebtourRegistration(models.Model):
 
     @api.one
     def action_owntransport_paxs(self):
-        _logger.info('%s action_owntransport_pax here we go')
+        _logger.info('%s action_owntransport_pax here we go',self.id)
         for day in self.env['event.registration.campos.arrivaldeparture.pax'].search([('registration_id','=',self.id)]):
-            _logger.info('%s action_owntransport_paxs %s', day)
+            #_logger.info('%s action_owntransport_paxs %s', day)
             arivalday = self.env['event.registration.campos.arrivaldeparture'].search([('registration_id','=',self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
             departday = self.env['event.registration.campos.arrivaldeparture'].search([('registration_id','=',self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
             
-            _logger.info('%s action_owntransport_paxs %s %s', self.id,arivalday,departday)
+            #_logger.info('%s action_owntransport_paxs %s %s', self.id,arivalday,departday)
             
             usneedto =   self.env['campos.webtourusneed.travelneedpax.day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
             usneedfrom = self.env['campos.webtourusneed.travelneedpax.day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
