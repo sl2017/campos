@@ -31,7 +31,8 @@ class CamposActivityInstanse(models.Model):
     booking = fields.Selection([('dropin', 'Drop In'),
                                 # ('dropin_prebook', 'Drop In & Pre Booking'),
                                 ('precamp', 'Pre Camp Booking Required'),
-                                ('prebook', 'Booking required')], 'Booking')
+                                ('prebook', 'Booking required'),
+                                ('joint', 'Joint arrangement')], 'Booking')
     booking_date_begin = fields.Datetime('Booking opens')
     booking_date_end = fields.Datetime('Booking closes')
     
@@ -68,8 +69,10 @@ class CamposActivityInstanse(models.Model):
     @api.multi
     def _compute_seats(self):
         res = {}
-        for aid in self.ids:
-            res[aid] = {'open': 0, 'done': 0}
+        state_field = {
+                'open':'seats_reserved',
+                'done': 'seats_used',
+            }
         where_params = [tuple(self.ids)]
         self._cr.execute("""SELECT act_ins_id, state, SUM(seats)
                       FROM campos_activity_ticket
@@ -77,13 +80,21 @@ class CamposActivityInstanse(models.Model):
                       GROUP BY act_ins_id, state
                       """, where_params)
         for aid, state, val in self._cr.fetchall():
-            res[aid][state] = val
+            ai = self.browse(aid)
+            ai[state_field[state]] = val
         
         for a in self:    
-            a.seats_reserved = res[a.id]['open']
-            a.seats_used = res[a.id]['done']
-            a.seats_available = a.seats_max - \
-                (res[a.id]['open'] + res[a.id]['done']) \
-                if a.seats_max > 0 else None
+            a.seats_available = a.seats_max - (a.seats_used + a.seats_reserved) if a.seats_max > 0 else None
+                
+    @api.multi
+    @api.depends('name', 'seats_available')
+    def name_get(self):
+        result = []
+        for ai in self:
+            if ai.seats_available <= 0:
+                result.append((ai.id, '%s - No available seats' % (ai.name)))
+            else:
+                result.append((ai.id, '%s - Available seats: %d' % (ai.name, ai.seats_available)))
+        return result
     
     

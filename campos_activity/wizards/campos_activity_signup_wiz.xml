@@ -24,7 +24,7 @@
                 	<field name="age_from"/>
                 	<field name="age_to"/>
                 	</group>
-                	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"  domain="[('activity_id', '=', act_id), ('seats_available', '>', 0), ('booking_date_begin', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),  ('booking_date_end', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),('state', 'in', ['open','canc_risk'])]" options="{'no_create': True, 'no_open': True}"/>
+                	<field name="act_ins_id" attrs="{'readonly': [('state', '=', 'step2')]}"  domain="[('activity_id', '=', act_id), ('seats_available', '>', 0), ('booking_date_begin', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),  ('booking_date_end', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')),('state', 'in', ['open','canc_risk'])]" options="{'no_create': True, 'no_open': True}" context="{'tree_view_ref':'campos_activity.campos_activity_instanse_tree_view_seats'}"/>
                 	<field name="seats"/>
                     <field name="par_signup_ids" states="step2" domain="[('wiz_id', '=', id)]"/>
                     <field name="name"/>

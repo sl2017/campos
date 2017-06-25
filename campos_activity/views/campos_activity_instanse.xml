@@ -90,6 +90,20 @@
         </field>
     </record>
 
+	<record model="ir.ui.view" id="campos_activity_instanse_tree_view_seats">
+        <field name="name">campos.activity.instanse.tree (in campos_activity)</field>
+        <field name="model">campos.activity.instanse</field>
+        <field name="priority">17</field>
+        <field name="arch" type="xml">
+            <tree colors="red:seats_available&lt;=0">>
+                    	<field name="activity_id"/>
+                        <field name="period_id"/>
+                        <field name="seats_available"/>
+                        
+            </tree>
+        </field>
+    </record>
+	
 	 <record model="ir.ui.view" id="campos_activity_instanse_calendar_view">
         <field name="name">campos.activity.instanse.tree (in campos_activity)</field>
         <field name="model">campos.activity.instanse</field>
