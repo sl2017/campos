@@ -45,7 +45,18 @@ def do_delayed_usneedchangedsence(session, model, rec_id):
     if rec.exists():
         rec.action_one_Webtour_usneedchangedsence()
 
-
+@job(default_channel='root.webtour')
+@related_action(action=related_action_generic)
+def do_delayed_owntransport_paxs(session, model, rec_id):
+    rec = session.env['campos.webtourconfig'].browse(rec_id)
+    if rec.exists():
+        _logger.info("action_one_initialize_owntransport_paxs here we go!!")
+        mo = rec.env['event.registration']
+        _logger.info("action_one_initialize_owntransport_paxs %s",mo) 
+        for reg in mo.search([('event_id','=',rec.event_id.id)]):
+            _logger.info("do_delayed_owntransport_paxs do Reg %s",rec.id)
+            reg.action_owntransport_paxs()
+        
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -295,6 +306,12 @@ class webtourconfig(models.Model):
         mo = self.env['campos.webtourusneed']
         _logger.info("action_Webtour_usneedchangedsence %s",mo)
         mo.action_do_delayed_get_create_webtour_need_job_changedsence(self.event_id.id)
+
+    @api.multi
+    def action_initialize_owntransport_paxs(self):
+        for rec in self:
+            session = ConnectorSession.from_env(self.env)
+            do_delayed_owntransport_paxs.delay(session, 'campos.webtourconfig', rec.id)  
         
 
 class WebtourConfigChecklog(models.Model):
