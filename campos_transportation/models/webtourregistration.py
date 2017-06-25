@@ -7,7 +7,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-from openerp import models, fields, api
+from openerp import models, fields, api, tools
 #from ..interface import webtourinterface
 from math import sin, cos, sqrt, atan2, radians
 from operator import itemgetter
@@ -79,8 +79,13 @@ class WebtourRegistration(models.Model):
     webtourusneed_ticket_overview_reg_id = fields.One2many('campos.webtourusneed.tickets.overview','id',ondelete='set null') 
     webtourusneed_ticketscnt =  fields.Integer(string = 'Webtour usNeed Tickets Cnt', related='webtourusneed_ticket_overview_reg_id.ticketscnt',ondelete='set null') 
     webtourusneed_ticketsentcnt = fields.Integer(string = 'Webtour usNeed Tickets sent Cnt', related='webtourusneed_ticket_overview_reg_id.ticketsentcnt',ondelete='set null') 
-    webtourusneed_sameaslastmail = fields.Integer(string = 'Webtour usNeed Same as last mail', related='webtourusneed_ticket_overview_reg_id.sameaslastmail',ondelete='set null') 
-
+    webtourusneed_sameaslastmail = fields.Integer(string = 'Webtour usNeed Same as last mail', related='webtourusneed_ticket_overview_reg_id.sameaslastmail',ondelete='set null')
+    
+    arrival_ids   = fields.One2many('event.registration.campos.arrivaldeparture','registration_id','Arrivals', domain=[('fromcamp', '=', False)])  
+    departure_ids = fields.One2many('event.registration.campos.arrivaldeparture','registration_id','Departures', domain=[('fromcamp', '=', True)])  
+    
+    
+    
     @api.multi
     def write(self, vals):
         _logger.info("Write Entered %s", vals.keys())
@@ -380,7 +385,40 @@ class WebtourRegistration(models.Model):
                     dic['seats_not_confirmed'] = ticket.seats_not_confirmed
                     self.env['campos.webtourusneed.tickets.sent'].create(dic)
                     _logger.info('%s action_send_traveltimeemail sent %s', reg.id,dic)
-                                        
+
+    @api.one
+    def action_owntransport_paxs(self):
+        _logger.info('%s action_owntransport_pax here we go')
+        for day in self.env['event.registration.campos.arrivaldeparture.pax'].search([('registration_id','=',self.id)]):
+            _logger.info('%s action_owntransport_paxs %s', day)
+            arivalday = self.env['event.registration.campos.arrivaldeparture'].search([('registration_id','=',self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
+            departday = self.env['event.registration.campos.arrivaldeparture'].search([('registration_id','=',self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
+            
+            _logger.info('%s action_owntransport_paxs %s %s', self.id,arivalday,departday)
+            
+            usneedto =   self.env['campos_webtourusneed_travelneedpax_day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',False)])
+            usneedfrom = self.env['campos_webtourusneed_travelneedpax_day'].search([('registration_id', '=', self.id),('traveldate','=',day.traveldate),('fromcamp','=',True)])
+            
+            topax = 0
+            frompax = 0            
+            if day.arrivalpax > usneedto.pax:
+                topax= day.arrivalpax - usneedto.pax
+            
+            if day.arrivalpax > usneedto.pax:
+                frompax= day.departpax - usneedfrom.pax                          
+                        
+            if arivalday:
+                arivalday.pax=topax
+            else:
+                if day.arrivalpax:
+                    self.env['event.registration.campos.arrivaldeparture'].create({'registration_id':self.id,'traveldate':day.traveldate,'fromcamp':False,'pax':topax})
+                    
+            if departday:
+                departday.pax=day.frompax
+            else:
+                if day.departpax:
+                    self.env['event.registration.campos.arrivaldeparture'].create({'registration_id':self.id,'traveldate':day.traveldate,'fromcamp':True,'pax':frompax})
+
 '''
     @api.one
     def createTestParticipants(self):
@@ -550,4 +588,74 @@ class WebtourEntryExitPoint(models.Model):
                     
         return ret
 
-                
+class CamposArrivalDeparture(models.Model):
+    '''
+    Arrival and Departure details (non Camp Transportation)
+    '''
+    _description = 'Arrival and Departure details (non Camp Transportation)'
+    _name='event.registration.campos.arrivaldeparture'
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
+    traveldate = fields.Date('Date', required=True) 
+    fromcamp = fields.Boolean('From Camp', required=True)
+    eta = fields.Selection([('Select', 'Please Select'),
+                            ('00:00', '00:00 - 00:59'),
+                            ('01:00', '01:00 - 01:59'),
+                            ('02:00', '02:00 - 02:59'),
+                            ('03:00', '03:00 - 03:59'),
+                            ('04:00', '04:00 - 04:59'),
+                            ('05:00', '05:00 - 05:59'),                                    
+                            ('06:00', '06:00 - 06:59'),
+                            ('07:00', '07:00 - 07:59'),
+                            ('08:00', '08:00 - 08:59'),
+                            ('09:00', '09:00 - 09:59'),                                     
+                            ('10:00', '10:00 - 10:59'),                                     
+                            ('11:00', '11:00 - 11:59'),
+                            ('12:00', '12:00 - 12:59'),
+                            ('13:00', '13:00 - 13:59'),
+                            ('14:00', '14:00 - 14:59'),
+                            ('15:00', '15:00 - 15:59'),                                    
+                            ('16:00', '16:00 - 16:59'),
+                            ('17:00', '17:00 - 17:59'),
+                            ('18:00', '18:00 - 18:59'),
+                            ('19:00', '19:00 - 19:59'),                                     
+                            ('20:00', '20:00 - 20:59'),                                     
+                            ('21:00', '21:00 - 21:59'),
+                            ('22:00', '22:00 - 22:59'),
+                            ('23:00', '23:00 - 23:59')                                                                         
+                             ], default='Select', string='Time')
+    pax = fields.Integer('pax')
+    cars = fields.Integer('No of Cars')
+    trailes = fields.Integer('No of Trailes')
+    coaches = fields.Integer('No of Coaches')
+    bikes = fields.Integer('pax on Bikes')
+    onfoot = fields.Integer('pax on foot')
+    bytrain = fields.Integer('pax bytrain')
+    
+class CamposArrivalDeparturePax(models.Model):
+    '''
+    Arrival and Departure PAX
+    '''
+    _description = 'Arrival and Departure participant Registrations pax'
+    _name='event.registration.campos.arrivaldeparture.pax'
+    _auto = False
+    _log_access = False
+    
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
+    traveldate = fields.Date('Date', required=True) 
+    arrivalpax = fields.Integer('Arrival pax') 
+    departpax = fields.Integer('Depature pax')
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view event_registration_campos_arrivaldeparture_pax as      
+                    SELECT min(d1.id) as id, d1.registration_id_stored as registration_id,  d1.the_date as traveldate, sum(case when not COALESCE(d2.will_participate,not d1.will_participate) then 1 else 0 end) as arrivalpax , sum(case when not COALESCE(d3.will_participate,not d1.will_participate) then 1 else 0 end) as departpax FROM campos_event_participant_day d1
+                    left outer join campos_event_participant_day d2 on d2.participant_id = d1.participant_id and d2.the_date = d1.the_date -1
+                    left outer join campos_event_participant_day d3 on d3.participant_id = d1.participant_id and d3.the_date = d1.the_date +1 
+                    inner join campos_event_participant p on p.id = d1.participant_id and p.state != 'deregistered'
+                    where d1.will_participate and ((not COALESCE(d2.will_participate,not d1.will_participate)) or (not COALESCE(d3.will_participate,not d1.will_participate)))
+                    group by d1.registration_id_stored, d1.the_date
+                    """
+                    )        
+    
+    
