@@ -52,7 +52,7 @@ msgstr "Aktiviteter"
 #: code:addons/campos_activity/models/event_registration.py:36
 #, python-format
 msgid "Activities for %s"
-msgstr ""
+msgstr "Aktiviteter for %s"
 
 #. module: campos_activity
 #: view:campos.activity.instanse:campos_activity.campos_activity_instanse_form_view
@@ -139,7 +139,7 @@ msgstr "Alder til"
 #. module: campos_activity
 #: field:campos.activity.ticket,allow_edit:0
 msgid "Allow edit"
-msgstr ""
+msgstr "Tillad redigering"
 
 #. module: campos_activity
 #: selection:campos.activity.instanse,state:0
@@ -166,12 +166,12 @@ msgstr "Tilmeldt"
 #. module: campos_activity
 #: field:campos.activity.instanse,booking:0
 msgid "Booking"
-msgstr ""
+msgstr "Tilmeldingsform"
 
 #. module: campos_activity
 #: field:campos.activity.instanse,booking_date_end:0
 msgid "Booking closes"
-msgstr ""
+msgstr "Tilmelding lukker"
 
 #. module: campos_activity
 #: field:campos.activity.instanse,booking_date_begin:0
@@ -198,7 +198,7 @@ msgstr "Aktivitet"
 #: model:ir.model,name:campos_activity.model_campos_activity_audience
 #: model:ir.ui.menu,name:campos_activity.campos_activity_audience_menu
 msgid "Campos Activity Audience"
-msgstr ""
+msgstr "Målgruppe"
 
 #. module: campos_activity
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_instanse_act_window
@@ -216,7 +216,7 @@ msgstr "Aktivitetslokation"
 #: view:campos.activity.mass.signup.wiz:campos_activity.campos_activity_mass_signup_wiz_form_view
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_mass_signup_wiz_act_window
 msgid "Campos Activity Mass Signup Wiz"
-msgstr ""
+msgstr "Masse tilmeldings wizard"
 
 #. module: campos_activity
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_period_act_window
@@ -264,14 +264,14 @@ msgstr "Annuller"
 #. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_form_view2
 msgid "Cancel ticket"
-msgstr ""
+msgstr "Annuller tilmelding"
 
 #. module: campos_activity
 #: selection:campos.activity.activity,state:0
 #: selection:campos.activity.instanse,state:0
 #: selection:campos.activity.ticket,state:0
 msgid "Cancelled"
-msgstr "Aflyst"
+msgstr "Annulleret"
 
 #. module: campos_activity
 #: selection:campos.activity.instanse,state:0
@@ -296,7 +296,7 @@ msgstr "Konfiguration"
 #. module: campos_activity
 #: selection:campos.activity.activity,state:0
 msgid "Confirmed"
-msgstr ""
+msgstr "Bekræfted"
 
 #. module: campos_activity
 #: field:campos.activity.activity,create_uid:0
@@ -373,12 +373,12 @@ msgstr "Varighed"
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:179
 #, python-format
 msgid "Edit participants"
-msgstr ""
+msgstr "Ret deltagere"
 
 #. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_form_view2
 msgid "Edit ticket"
-msgstr ""
+msgstr "Ret tilmelding"
 
 #. module: campos_activity
 #: field:campos.activity.instanse,actins_date_end:0
@@ -407,7 +407,7 @@ msgstr "Gruppe tilmelding"
 #: field:campos.activity.instanse,message_follower_ids:0
 #: field:campos.activity.ticket,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Følgere"
 
 #. module: campos_activity
 #: field:campos.activity.location,latitude:0
@@ -491,7 +491,7 @@ msgstr ""
 #. module: campos_activity
 #: selection:campos.activity.instanse,booking:0
 msgid "Joint arrangement"
-msgstr ""
+msgstr "Fællesarrangement"
 
 #. module: campos_activity
 #: field:campos.activity.activity,message_last_post:0
@@ -603,13 +603,13 @@ msgstr "Navn"
 #: code:addons/campos_activity/models/event_registration.py:19
 #, python-format
 msgid "New activity signup for: %s"
-msgstr ""
+msgstr "Ny aktivitetstilmelding for %s"
 
 #. module: campos_activity
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:64
 #, python-format
 msgid "No seats available for selected period!"
-msgstr ""
+msgstr "Ingen ledige pladser i valgte periode!"
 
 #. module: campos_activity
 #: field:campos.activity.instanse,seats_used:0
@@ -676,7 +676,7 @@ msgstr ""
 #. module: campos_activity
 #: selection:campos.activity.ticket,state:0
 msgid "Reservation Expired"
-msgstr ""
+msgstr "Reservation udløbet"
 
 #. module: campos_activity
 #: selection:campos.activity.ticket,state:0
@@ -700,12 +700,14 @@ msgid ""
 "Reserved seats not completed as a real registration will be removed after 30"
 " minutes."
 msgstr ""
+"Reserverede pladser der ikke færdigøres som en egentlig tilmelding fjernes "
+"efter 30. minutter."
 
 #. module: campos_activity
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:48
 #, python-format
 msgid "Reserved seats should be positive"
-msgstr ""
+msgstr "Reserveret antal skal være positivt"
 
 #. module: campos_activity
 #: field:campos.activity.signup.wiz,reg_id:0
@@ -751,13 +753,13 @@ msgstr ""
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:57
 #, python-format
 msgid "Sorry! No seats available"
-msgstr ""
+msgstr "Beklager! Ingen ledige pladser"
 
 #. module: campos_activity
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:51
 #, python-format
 msgid "Sorry! Only %d seats available"
-msgstr ""
+msgstr "Beklager! Kun %dledige pladser"
 
 #. module: campos_activity
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:55
@@ -765,6 +767,8 @@ msgstr ""
 msgid ""
 "Sorry! You can't increase the number of reserved seats. Only %d reserved"
 msgstr ""
+"Beklager! Du kan ikke øge antallet af reserverede pladser. Kun %d "
+"reserverede."
 
 #. module: campos_activity
 #: field:campos.activity.activity,special_req:0
@@ -811,7 +815,7 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.signup.wiz,ticket_id:0
 msgid "Ticket"
-msgstr ""
+msgstr "Billet"
 
 #. module: campos_activity
 #: field:campos.activity.ticket,state:0
@@ -823,7 +827,7 @@ msgstr ""
 #: field:campos.activity.instanse,ticket_ids:0
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_calendar_view
 msgid "Tickets"
-msgstr ""
+msgstr "Billeter"
 
 #. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_tree_view
@@ -833,7 +837,7 @@ msgstr ""
 #. module: campos_activity
 #: field:campos.activity.activity,lang_ok:0
 msgid "Translation status"
-msgstr ""
+msgstr "Oversættelsesstatus"
 
 #. module: campos_activity
 #: field:campos.activity.activity,activity_type_id:0
@@ -851,7 +855,7 @@ msgstr ""
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:64
 #, python-format
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #. module: campos_activity
 #: field:campos.activity.activity,website_message_ids:0
