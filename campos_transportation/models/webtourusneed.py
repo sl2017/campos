@@ -1023,6 +1023,35 @@ class WebtourUsNeedTravelNeedPax(models.Model):
                     """
                     )
  
+class WebtourUsNeedTravelNeedPaxDay(models.Model):
+    _name = 'campos.webtourusneed.travelneedpax.day'
+    _description = 'Campos Webtour usneed Travelneed pax pr day'
+    _auto = False
+    _log_access = False
+    
+    registration_id  = fields.Many2one('event.registration', 'Registration', ondelete='set null')
+    traveldate = fields.Date('Date', required=True) 
+    fromcamp = fields.Boolean('From Camp', required=True)  
+    pax = fields.Integer('TravelNeed PAX')
+
+    
+    def init(self, cr, context=None):
+        tools.sql.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+                    create or replace view campos_webtourusneed_travelneedpax_day as
+                    SELECT  min(n.id) as id
+                    ,registration_id
+                    ,campos_traveldate as traveldate
+                    ,tt.returnjourney as fromcamp
+                    , count(n.id) as pax
+                    FROM campos_webtourusneed n
+                    inner join campos_event_participant on campos_event_participant.id = participant_id
+                    inner join campos_webtourconfig_triptype tt on tt.id = "campos_TripType_id"
+                    where campos_demandneeded
+                    group by registration_id,campos_traveldate,tt.returnjourney      
+                    """
+                    )
+ 
     
 class WebtourUsNeedTicketsSent(models.Model):
     _name = 'campos.webtourusneed.tickets.sent'
