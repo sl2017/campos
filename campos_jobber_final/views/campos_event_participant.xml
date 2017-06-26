@@ -180,7 +180,7 @@
 						 		<field name="exp_child_qu" />
 						 	</group>
 						 </page>
-						 <page string="Car">
+						 <page name="car" string="Car">
 							<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars" context="{'default_phone_number': mobile}">
 								<tree editable="bottom">
 									<field name="reg_number"/>
@@ -390,7 +390,7 @@
 						 		<field name="exp_child_qu" />
 						 	</group>
 						 </page>
-						 <page string="Car">
+						 <page name="car" string="Car">
 							<field colspan="2" name="car_ids" widget="one2many_list" nolabel="0" string="Cars" context="{'default_phone_number': mobile}">
 								<tree editable="bottom">
 									<field name="reg_number"/>

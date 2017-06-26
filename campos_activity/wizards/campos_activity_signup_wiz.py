@@ -47,10 +47,11 @@ class CamposActivitySignupWiz(models.TransientModel):
         if self.seats <= 0:
             raise exceptions.ValidationError(_("Reserved seats should be positive"))
         if self.act_ins_id.seats_hard and not self.ticket_id:
-            if self.seats > self.act_ins_id.seats_available and self.act_ins_id.seats_available > 0:
-                raise exceptions.ValidationError(_("Sorry! Only %d seats available") % self.act_ins_id.seats_available)
-            else:
-                raise exceptions.ValidationError(_("Sorry! No seats available"))
+            if self.seats > self.act_ins_id.seats_available:
+                if self.act_ins_id.seats_available > 0:
+                    raise exceptions.ValidationError(_("Sorry! Only %d seats available") % self.act_ins_id.seats_available)
+                else:
+                    raise exceptions.ValidationError(_("Sorry! No seats available"))
         if self.act_ins_id.seats_hard and self.ticket_id and self.seats > self.seats_reserved:
              raise exceptions.ValidationError(_("Sorry! You can't increase the number of reserved seats. Only %d reserved") % (self.seats_reserved))
         if self.act_ins_id.seats_available <= 0 and not self.ticket_id:
