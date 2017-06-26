@@ -22,6 +22,7 @@ class CamposEventParticipant(models.Model):
     transport_price_total = fields.Float("Transport Total", compute='_compute_nights_product' )
     camp_price_total = fields.Float("Camp Total", compute='_compute_nights_product')
     sspar_ids = fields.One2many('campos.fee.ss.participant', 'participant_id', 'Snapshot')
+    no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
     
     @api.multi
     @api.depends('birthdate')
@@ -137,6 +138,8 @@ class CamposEventParticipant(models.Model):
                                                                   'fromcampdate': par.tocampdate,
                                                                   'tocampusneed_id': par.tocampusneed_id.id,
                                                                   'fromcampusneed_id': par.fromcampusneed_id.id,
+                                                                  'signup_state': par.signup_state,
+                                                                  'no_invoicing': par.no_invoicing,
                                                                    })
             
 

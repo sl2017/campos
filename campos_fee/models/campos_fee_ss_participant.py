@@ -63,4 +63,9 @@ class CamposFeeSsParticipant(models.Model):
     fromcampdate = fields.Date(string='From Camp Date')
     tocampusneed_id = fields.Many2one('campos.webtourusneed','To Camp Need ID',ondelete='set null')
     fromcampusneed_id = fields.Many2one('campos.webtourusneed','From Camp Need ID',ondelete='set null')
-  
+    signup_state = fields.Selection([('draft', 'Not signed up'),
+                                     ('oncamp', 'Camp Jobber'),
+                                     ('dayjobber', 'Day Jobber'),
+                                     ('nocamp', 'No camp participation')], default='draft', string='Final registration',  help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+    no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
+    
