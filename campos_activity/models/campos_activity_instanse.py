@@ -80,8 +80,9 @@ class CamposActivityInstanse(models.Model):
                       GROUP BY act_ins_id, state
                       """, where_params)
         for aid, state, val in self._cr.fetchall():
-            ai = self.browse(aid)
-            ai[state_field[state]] = val
+            if state in state_field.keys():
+                ai = self.browse(aid)
+                ai[state_field[state]] = val
         
         for a in self:    
             a.seats_available = a.seats_max - (a.seats_used + a.seats_reserved) if a.seats_max > 0 else None
