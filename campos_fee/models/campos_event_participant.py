@@ -109,6 +109,8 @@ class CamposEventParticipant(models.Model):
     @api.multi
     def do_snapshot(self, ssreg):
         for par in self:
+            if par.jobber_child:
+                par.signup_state = par.parent_jobber_id.signup_state
             sspar = self.env['campos.fee.ss.participant'].create({'ssreg_id': ssreg.id,
                                                                   'participant_id': par.id,
                                                                   'state': par.state,
