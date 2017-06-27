@@ -166,6 +166,7 @@
 						 			<field name="country_id"/>
 						 			<field name="parent_id" invisible="1"/>
 						 			<field name="jobber_child" invisible="1"/>
+						 			<field name="state"/>
 						 		
 						 		
 						 		</tree>
@@ -377,6 +378,7 @@
 						 			<field name="country_id"/>
 						 			<field name="parent_id" invisible="1"/>
 						 			<field name="jobber_child" invisible="1"/>
+						 			<field name="state"/>
 						 		
 						 		
 						 		</tree>

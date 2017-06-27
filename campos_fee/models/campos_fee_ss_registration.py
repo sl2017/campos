@@ -294,7 +294,7 @@ class CamposFeeSsRegistration(models.Model):
                     
                     if charged_fee_tran > ssreg.fee_transport and (ssreg.count_transport_from + ssreg.count_transport_to) <  (ssreg.ref_ssreg_id.count_transport_from + ssreg.ref_ssreg_id.count_transport_to):
                             #2. No refusions
-                            product = self.env['product.product'].search([('default_code', '=', 'TRREF')])
+                            product = self.env['product.product'].search([('default_code', '=', 'TREF')])
                             desc = _('No refusion after may 1: %s %.2f - %.2f') % (ssreg.ref_ssreg_id.invoice_id.currency_id.name,charged_fee_tran_val, fee_tran_val) 
                             vals = self._prepare_create_invoice_line_vals((charged_fee_tran_val - fee_tran_val), 1, type='out_invoice', description=desc, product=product)
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
