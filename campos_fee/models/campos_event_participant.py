@@ -43,7 +43,7 @@ class CamposEventParticipant(models.Model):
                 days_ids = par.camp_day_ids.filtered(lambda r: r.will_participate and r.day_id.event_period == 'maincamp')
                 if len(days_ids) == 0:
                     nights = 8
-                    if par.staff or par.jobber:
+                    if par.staff or par.jobber_child:
                         nights = 0
                 else:
                     nights = len(days_ids) - 1
