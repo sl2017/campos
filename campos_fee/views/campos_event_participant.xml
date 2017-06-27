@@ -33,6 +33,34 @@
         </field>
     </record>
 
+ 	<record model="ir.ui.view" id="view_event_registration_participant_form">
+        <field name="name">campos.event.participant.form (in campos_fee)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
+        <field name="arch" type="xml">
+            <page name="car" position="after">
+            	<page name="camp_fee" string="Camp Fee" groups="campos_event.group_campos_admin">
+            		<group>
+            			<field name="no_invoicing"/>
+		            	<field name="fee_agegroup_id" options="{'no_open': True}" readonly="1"/>
+		            	<field name="nights" readonly="1"/>
+		            	<field name="camp_product_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+		            	<field name="camp_price" nolabel="1"/>
+		            	<field name="transport_co" readonly="1"/>
+		            	<field name="transport_product_id" nolabel="1" readonly="1" options="{'no_open': True}"/>
+		            	<field name="transport_price" nolabel="1"/>
+		            	<field name="transport_price_total"/>
+		            	<field name="camp_price_total"/>
+	            	</group>
+            	</page>
+            	<page string="Snapshots" groups="campos_event.group_campos_admin">
+            		<group>
+						<field name="sspar_ids" readonly="1" nolabel="1"/>            		
+            		</group>
+            	</page>
+            </page>
+        </field>
+    </record>
 <!-- 
     <record model="ir.ui.view" id="campos_event_participant_search_view">
         <field name="name">campos.event.participant.search (in campos_fee)</field>

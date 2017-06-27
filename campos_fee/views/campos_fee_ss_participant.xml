@@ -35,6 +35,7 @@
                         <field name="payreq_approved_user_id"/>
                         <field name="participant"/>
                         <field name="staff"/>
+                        <field name="no_invoicing"/>
                                      
                         <field name="webtourususeridno"/>
                         <field name="webtourusgroupidno"/>                                
