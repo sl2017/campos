@@ -17,7 +17,8 @@ class CamposEventParticipant(models.Model):
     signup_state = fields.Selection([('draft', 'Not signed up'),
                                      ('oncamp', 'Camp Jobber'),
                                      ('dayjobber', 'Day Jobber'),
-                                     ('nocamp', 'No camp participation')], default='draft', string='Final registration', track_visibility='onchange', help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+                                     ('nocamp', 'No camp participation'),
+                                     ('groupsignup', 'Signed up via a scout group')], default='draft', string='Final registration', track_visibility='onchange', help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
     no_camp_participation = fields.Boolean('No camp participation')
     accomodation_ids = fields.One2many('campos.jobber.accomodation', 'participant_id', 'Accomodation', help=u'Chose where you would like to stay at the campsite. You may chose between several different locations - but only within the jamboree site. During the pre/post camp everybody is accommodated in Øen.')
     # AS on registration

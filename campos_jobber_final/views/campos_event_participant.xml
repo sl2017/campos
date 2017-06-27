@@ -166,6 +166,7 @@
 						 			<field name="country_id"/>
 						 			<field name="parent_id" invisible="1"/>
 						 			<field name="jobber_child" invisible="1"/>
+						 			<field name="state"/>
 						 		
 						 		
 						 		</tree>
@@ -377,6 +378,7 @@
 						 			<field name="country_id"/>
 						 			<field name="parent_id" invisible="1"/>
 						 			<field name="jobber_child" invisible="1"/>
+						 			<field name="state"/>
 						 		
 						 		
 						 		</tree>
@@ -460,7 +462,7 @@
 											type="object"    
 											icon="fa-square-o"
 											string="Un-check all days" class = "oe_edit_only oe_inline oe_stat_button"/>
-        	<field name="parent_jobber_id" invisible="1"/>
+        	<field name="parent_jobber_id" invisible="0"/>
         	<field name="jobber_child" invisible="1"/>
         	</button>
         	<button name="uncheck_all_days" position="replace"/>
