@@ -43,11 +43,12 @@ class ResPartner(geo_model.GeoModel):
         see http://dawa.aws.dk/
         """
         params = {
-                  'q': ','.join(filter(None, [self.street, self.zip, self.city]))
+                  'q': ','.join(filter(None, [self.street, self.zip, self.city])),
+                  
                   }
         for key in params:
             params[key] = params[key].encode('utf-8')
-        url = 'http://dawa.aws.dk/adresser/autocomplete?%s' % urlencode(params)
+        url = 'http://dawa.aws.dk/adresser/autocomplete?%s&fuzzy' % urlencode(params)
         try:
             aws_json = json.load(urlopen(url))
             aws = aws_json[0]
