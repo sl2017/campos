@@ -759,7 +759,7 @@ msgstr "Beklager! Ingen ledige pladser"
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:51
 #, python-format
 msgid "Sorry! Only %d seats available"
-msgstr "Beklager! Kun %dledige pladser"
+msgstr "Beklager! Kun %d ledige pladser"
 
 #. module: campos_activity
 #: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:55
