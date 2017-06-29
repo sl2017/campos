@@ -34,6 +34,7 @@ import werkzeug
 from openerp.addons.base_geoengine import geo_model
 from openerp import models, fields, api
 from openerp.tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 import base64
 try:
@@ -328,4 +329,20 @@ class EventRegistration(models.Model):
             else:
                 result.append((reg.id, reg.name)) 
         return result
+    
+    @api.multi
+    def action_create_group_participant(self):
+        for reg in self:
+            bdate = date(1990, 1, 1) + timedelta(days=(int(reg.partner_id.ref) - 100000))
+            part = reg.env['campos.event.participant'].create({'registration_id': reg.id,
+                                                               'state': 'deregistered',
+                                                               'staff': False,
+                                                               'participant': False,
+                                                               'jobber_child': False,
+                                                               'transport_to_camp': False,
+                                                               'transport_from_camp': False,
+                                                               'camp_day_ids': False,
+                                                               'partner_id': reg.partner_id.id,
+                                                               'birthdate': bdate.strftime(DEFAULT_SERVER_DATE_FORMAT)})
+            part.registration_id = False
 
