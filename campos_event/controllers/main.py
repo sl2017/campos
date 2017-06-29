@@ -429,12 +429,15 @@ class CampOsEvent(http.Controller):
                                                   'park_permit_end_date': active_days[-1].the_date,
                                                   'phone_number': part.mobile,
                                                   })
-        template = part.env.ref('campos_event.request_signupconfirm')
+        env['campos.committee.function'].create({'participant_id': part.id,
+                                                 'committee_id': part.primary_committee_id.id,
+                                                 'function_type_id': 37})
+        
+        template = part.primary_committee_id.template_id
         assert template._name == 'email.template'
         try:
             template.send_mail(part.id)
         except:
-            pass
-
-        return request.render("campos_event.jobber_thankyou", {'par': part})
+            _logger.info("New External partner jobber mail %s %s FAILED", part.primary_committee_id.name, part.name)
+        return request.render("campos_event.extern_thankyou", {'par': part})
 
