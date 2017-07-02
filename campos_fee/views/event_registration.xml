@@ -78,6 +78,12 @@
 						<field name="ssreg_ids" readonly="1" nolabel="1"/>            		
             		</group>
             	</page>
+            	<page string ="Skejser Card">
+            		<group>
+            			<field name="skejser_nr"/>
+            			<field name="control_date"/>
+            		</group>
+            	</page>
             </page>
         </field>
     </record>
