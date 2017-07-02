@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 10:22+0000\n"
-"PO-Revision-Date: 2017-06-25 16:11+0000\n"
-"Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>\n"
+"POT-Creation-Date: 2017-07-02 19:46+0000\n"
+"PO-Revision-Date: 2017-07-02 19:47+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2726,8 +2726,19 @@ msgid "Signup survey"
 msgstr ""
 
 #. module: campos_event
+#: field:event.registration,control_date:0
+msgid "Skejser Control Date"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.event.participant,participant_number:0
+#: field:event.registration,skejser_nr:0
 msgid "Skejser ID"
+msgstr ""
+
+#. module: campos_event
+#: field:event.registration,skejser_id:0
+msgid "Skejser Link"
 msgstr ""
 
 #. module: campos_event
@@ -3460,6 +3471,11 @@ msgstr "Postnr"
 #: view:website:campos_event.jobber_signup
 msgid "Zipcode"
 msgstr "Postnr."
+
+#. module: campos_event
+#: view:event.registration:campos_event.view_dds_camp_reg_info_form1
+msgid "action_create_group_participant"
+msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.partner_register_form

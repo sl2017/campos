@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 06:59+0000\n"
-"PO-Revision-Date: 2017-06-28 06:59+0000\n"
+"POT-Creation-Date: 2017-07-02 19:46+0000\n"
+"PO-Revision-Date: 2017-07-02 19:46+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -1011,6 +1011,11 @@ msgid "Sent to committee"
 msgstr ""
 
 #. module: campos_fee
+#: selection:campos.fee.ss.participant,signup_state:0
+msgid "Signed up via a scout group"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_172
 msgid "Silkeborg"
 msgstr ""
@@ -1023,6 +1028,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_173
 msgid "Skanderborg"
+msgstr ""
+
+#. module: campos_fee
+#: view:event.registration:campos_fee.view_form_finalregistration_gl
+msgid "Skejser Card"
 msgstr ""
 
 #. module: campos_fee
