@@ -35,7 +35,7 @@ class CamposActivityMassSignupWiz(models.TransientModel):
                     ticket = self.env['campos.activity.ticket'].search([('act_ins_id', '=', wizard.act_ins_id.id), ('state', '=', 'done'), ('reg_id', '=', reg.id)])
                     if ticket:                                                    
                         ticket.par_ids += par_ids
-                        ticket.seats = len(ticket.par_ids)
+                        ticket.seats = len(set(ticket.par_ids.ids))
                     else:
                         ticket = self.env['campos.activity.ticket'].create({'act_ins_id': wizard.act_ins_id.id,
                                                                             'state': 'done',

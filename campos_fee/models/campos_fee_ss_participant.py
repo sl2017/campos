@@ -66,6 +66,7 @@ class CamposFeeSsParticipant(models.Model):
     signup_state = fields.Selection([('draft', 'Not signed up'),
                                      ('oncamp', 'Camp Jobber'),
                                      ('dayjobber', 'Day Jobber'),
-                                     ('nocamp', 'No camp participation')], default='draft', string='Final registration',  help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
+                                     ('nocamp', 'No camp participation'),
+                                     ('groupsignup', 'Signed up via a scout group')], default='draft', string='Final registration',  help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
     no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
     

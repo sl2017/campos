@@ -6,7 +6,7 @@
 <data>
 
     <record model="ir.ui.view" id="campos_event_participant_staff_form_view">
-        <field name="name">campos.event.participant.form (in campos_jobber_final)</field>
+        <field name="name">campos.event.participant.form Staff (in campos_jobber_final)</field>
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_event.staff_event_registration_participant_form"/>
         <field name="arch" type="xml">
@@ -124,10 +124,14 @@
 						</page>
 						<page string="Payment" attrs="{'invisible': [('signup_state', '!=', 'oncamp')]}">
 									<group>
+										<field name="paybygroup" readonly="1"/>
 										
+										<field name="paybyjobber" readonly="1"/>
+										<!-- 
 										<field name="paybygroup" attrs="{'readonly': ['|',('paybyjobber', '=', True)]}"/>
 										
 										<field name="paybyjobber" attrs="{'readonly': ['|',('paybygroup', '=', True)]}"/>
+										 -->
 										<field name="pay_key_entered" attrs="{'invisible': [('paybyjobber', '=', False)]}"/>
 										
 										<!-- 
@@ -145,7 +149,7 @@
 					            			</tree>
 					            		</field>
 					            		 -->
-					            		<field name="registration_id" string="Group" attrs="{'readonly': [('payreq_state', '=', 'approved')], 'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
+					            		<field name="registration_id" string="Group" attrs="{'readonly': True, 'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" options="{'no_open': True, 'no_create': True}" context="{'search_default_organization_id': reg_organization_id,
 																																																												   'tree_view_ref': 'campos_jobber_final.registration_search_tree_view',
 																																																												   'show_organization': 1}" domain="[('state', 'not in', ['cancel','deregistered'])]"/>
 										<field name="payreq_state" attrs="{'invisible': [('paybygroup', '=', False),('paybyjobber', '=', False)]}" readonly="1"/>
@@ -221,7 +225,7 @@
 	
 	
 	<record model="ir.ui.view" id="view_event_registration_participant_form">
-        <field name="name">campos.event.participant.form (in campos_jobber_final)</field>
+        <field name="name">campos.event.participant.form Admin (in campos_jobber_final)</field>
         <field name="model">campos.event.participant</field>
         <field name="inherit_id" ref="campos_event.view_event_registration_participant_form"/>
         <field name="arch" type="xml">

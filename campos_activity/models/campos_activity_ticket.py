@@ -77,5 +77,5 @@ class CamposActivityTicket(models.Model):
     def cancel_expired_reservations(self):
         expired = (datetime.datetime.now() - datetime.timedelta(minutes=30)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         tickets = self.search([('state', '=', 'open'), ('reserved_time', '<', expired)])
-        tickets.write({'state': 'expired'})
+        tickets.write({'state': 'timeout'})
 
