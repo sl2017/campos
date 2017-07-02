@@ -126,8 +126,9 @@
 								<field name="bytrain" string="By train"/>																							
 							</tree>
 						</field> 
-						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure">
+						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure" context="{'default_fromcamp': True}">
 							<tree editable="bottom" default_order="traveldate" >
+								<field name="fromcamp" invisible="1" string="fromcamp" />
 								<field name="traveldate" string="Departure Date"/>
 								<field name="pax" string="No of participants"/>
 								<field name="eta" string="Planned hour of departure"/>								
@@ -221,8 +222,9 @@
 								<field name="bytrain" string="By train"/>																							
 							</tree>
 						</field> 
-						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure">
+						<field  name="departure_ids" widget="one2many_list" nolabel="0" string="Departure" context="{'default_fromcamp': True}">
 							<tree editable="bottom" default_order="traveldate" >
+								<field name="fromcamp" invisible="1" string="fromcamp" />							
 								<field name="traveldate" string="Departure Date"/>
 								<field name="pax" string="No of participants"/>
 								<field name="eta" string="Planned hour of departure"/>								
