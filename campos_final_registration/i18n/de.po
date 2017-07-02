@@ -21,7 +21,7 @@ msgstr ""
 #. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_campos_event_car
 msgid "A car for parking at the camp"
-msgstr ""
+msgstr "Ein Auto für parkieren beim Lager"
 
 #. module: campos_final_registration
 #: code:addons/campos_final_registration/models/finalregistration.py:105
