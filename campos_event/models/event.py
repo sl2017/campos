@@ -280,6 +280,10 @@ class EventRegistration(models.Model):
 
     tag_ids = fields.Many2many('campos.reg.tag', string='Tags', groups='campos_event.group_campos_admin')
     
+    skejser_id = fields.Many2one('campos.event.participant', 'Skejser Link')
+    control_date = fields.Date('Skejser Control Date', related='skejser_id.birthdate')
+    skejser_nr = fields.Char('Skejser ID', related='partner_id.ref')
+    
     @api.multi
     def _compute_fallback(self):
         for reg in self:
@@ -333,16 +337,18 @@ class EventRegistration(models.Model):
     @api.multi
     def action_create_group_participant(self):
         for reg in self:
-            bdate = date(1990, 1, 1) + timedelta(days=(int(reg.partner_id.ref) - 100000))
-            part = reg.env['campos.event.participant'].create({'registration_id': reg.id,
-                                                               'state': 'deregistered',
-                                                               'staff': False,
-                                                               'participant': False,
-                                                               'jobber_child': False,
-                                                               'transport_to_camp': False,
-                                                               'transport_from_camp': False,
-                                                               'camp_day_ids': False,
-                                                               'partner_id': reg.partner_id.id,
-                                                               'birthdate': bdate.strftime(DEFAULT_SERVER_DATE_FORMAT)})
-            part.registration_id = False
+            if not reg.skejser_id:
+                bdate = date(1990, 1, 1) + timedelta(days=(int(reg.partner_id.ref) - 100000))
+                part = reg.env['campos.event.participant'].create({'registration_id': reg.id,
+                                                                   'state': 'deregistered',
+                                                                   'staff': False,
+                                                                   'participant': False,
+                                                                   'jobber_child': False,
+                                                                   'transport_to_camp': False,
+                                                                   'transport_from_camp': False,
+                                                                   'camp_day_ids': False,
+                                                                   'partner_id': reg.partner_id.id,
+                                                                   'birthdate': bdate.strftime(DEFAULT_SERVER_DATE_FORMAT)})
+                part.registration_id = False
+                reg.skejser_id = part
 
