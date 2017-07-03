@@ -287,3 +287,27 @@ class CamposEventParticipant(models.Model):
                          'default_owner_id': self.id, 
                          }
             }    
+        
+    @api.multi
+    def action_open_camp_participant(self):
+        self.ensure_one()
+        
+        if self.staff:
+            view_ref = 'campos_event.view_event_registration_participant_form'
+        elif self.participant:
+            view_ref = 'campos_final_registration.view_form_finalregistration_participant'
+        elif self.jobber_child:
+            view_ref = 'campos_jobber_final.campos_jobber_child_form_view'
+        
+        if view_ref:
+            return {
+                    'name': self.name,
+                    'view_mode': 'form',
+                    'view_type': 'form',
+                    'view_id': self.env.ref(view_ref).id,
+                    'res_model': 'campos.event.participant',
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': True,
+                    'res_id': self.id,
+                    }
+            
