@@ -528,5 +528,53 @@
         </field>
         </record>
         
+        
+        <record model="ir.ui.view" id="campos_event_all_participant_tree">
+        <field name="name">campos.event.participant.tree_all (in campos_jobber_final)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+        	<tree>
+        		<field name="name"/>
+        		<field name="registration_id"/>
+        		             
+        		<field name="state"/>
+        		<field name="signup_state"/>
+        		<field name="staff"/>
+        		<field name="participant"/>
+        		<field name="jobber_child"/>
+        		<button name="action_open_camp_participant" string="Open" type="object" />
+        	</tree>
+        </field>
+        </record>
+        
+        
+        <record id="action_campos_event_all_participant_tree" model="ir.actions.act_window">
+			<field name="name">Participants</field>
+			<field name="res_model">campos.event.participant</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="campos_event_all_participant_tree"/>
+		</record>
+        
+        <menuitem action="action_campos_event_all_participant_tree" id="campos_event_all_participant_tree_menu"
+				name="All participants" sequence="60" parent="campos_event.menu_campos_signup"
+				groups="campos_event.group_campos_admin" />
+				
+		<!-- server action retrieves ir.actions.act_window to open row specific popup -->
+		<record model="ir.actions.server" id="campos_event_all_participant_tree_open">
+		    <field name="name">campos_event_all_participant_tree_open</field>
+		    <field name="model_id" ref="model_campos_event_participant"/>
+		    <field name="code">action = object.action_open_camp_participant()</field>
+		</record>
+		
+		<!-- tree_but_open key  delegates to a server action to execute on row clicked -->
+		<record id="participant_list_view_open" model="ir.values">
+		    <field name="model">campos.event.participant</field>
+		    <field name="key2">tree_but_open</field>
+		    <field name="name">participant_list_view</field>
+		    <field eval="'ir.actions.server,%d'%campos_event_all_participant_tree_open" name="value"/>
+		    <field name="res_id" eval="0"/>
+</record>
 </data>
 </openerp>
