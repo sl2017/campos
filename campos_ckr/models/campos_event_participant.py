@@ -10,9 +10,9 @@ class CamposEventParticipant(models.Model):
     _inherit = 'campos.event.participant'
     
     ckr_ids = fields.One2many('campos.ckr.check', 'participant_id', string='CKR')
-    ckr_active_id = fields.Many2one('campos.ckr.check', 'CKR (Active)', compute = '_compute_ckr_active_id', store=True)
+    ckr_active_id = fields.Many2one('campos.ckr.check', 'CKR (Active)', compute = '_compute_ckr_active_id', store=True, compute_sudo=True)
     ckr_date_last_state_update = fields.Datetime('CKR Last State change', related='ckr_active_id.date_last_state_update', readonly=True)
-    ckr_state = fields.Selection(related='ckr_active_id.state', string='CKR State')
+    ckr_state = fields.Selection(related='ckr_active_id.state', string='CKR State', readonly=True)
     
     @api.depends('ckr_ids.state', 'ckr_ids.write_date')
     @api.multi

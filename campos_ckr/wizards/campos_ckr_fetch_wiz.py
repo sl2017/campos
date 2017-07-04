@@ -12,7 +12,8 @@ class CamposCkrFetchWiz(models.TransientModel):
     @api.model
     def default_get(self, fields):
         result = super(CamposCkrFetchWiz, self).default_get(fields)
-        result['participant_id'] = self.env.user.participant_id.id
+        if 'participant_id' not in result.keys():
+            result['participant_id'] = self.env.user.participant_id.id
 
         ckr_ids = self.env['campos.ckr.check'].search([('participant_id', '=', self.env.user.participant_id.id),('state', '=', 'draft')])
         if ckr_ids:
