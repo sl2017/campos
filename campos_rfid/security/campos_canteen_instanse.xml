@@ -5,15 +5,9 @@
 <openerp>
 <data>
 
-	<record id="group_campos_catering" model="res.groups">
-			<field name="name">Catering</field>
-			<field name="implied_ids" eval="[(4, ref('campos_event.group_campos_user'))]"/>
-			<field name="category_id" ref="campos_event.module_campos_category" />
-		</record>
-		
-    <record model="ir.model.access" id="campos_rfid_device_access_name"> <!-- TODO acl id -->
-        <field name="name">campos.rfid.device access name</field> <!-- TODO acl name -->
-        <field name="model_id" ref="model_campos_rfid_device"/>
+    <record model="ir.model.access" id="campos_canteen_instanse_access_name"> <!-- TODO acl id -->
+        <field name="name">campos.canteen.instanse access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_canteen_instanse"/>
         <!-- TODO review and adapt -->
         <field name="group_id" ref="base.group_user"/>
         <field name="perm_read" eval="1"/>
@@ -22,9 +16,9 @@
         <field name="perm_unlink" eval="0"/>
     </record>
     
-    <record model="ir.model.access" id="campos_rfid_device_access_admin"> <!-- TODO acl id -->
-        <field name="name">campos.rfid.device access name</field> <!-- TODO acl name -->
-        <field name="model_id" ref="model_campos_rfid_device"/>
+    <record model="ir.model.access" id="campos_canteen_instanse_access_mgr"> <!-- TODO acl id -->
+        <field name="name">campos.canteen.instanse access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_canteen_instanse"/>
         <!-- TODO review and adapt -->
         <field name="group_id" ref="group_campos_catering"/>
         <field name="perm_read" eval="1"/>
@@ -32,6 +26,7 @@
         <field name="perm_write" eval="1"/>
         <field name="perm_unlink" eval="1"/>
     </record>
+    
 
 </data>
 </openerp>

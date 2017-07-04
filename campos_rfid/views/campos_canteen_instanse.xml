@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_canteen_instanse_form_view">
+        <field name="name">campos.canteen.instanse.form (in campos_rfid)</field>
+        <field name="model">campos.canteen.instanse</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <div class="oe_left" style="width: 500px;" colspan="2">
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="canteen_id" string="Canteen"/>
+                                <h2><field name="canteen_id" class="oe_inline"/></h2>
+                                <label class="oe_edit_only" for="meal" string="Meal"/>
+                                <h1><field name="meal" class="oe_inline"/></h1>
+                            </div>
+                    </div>
+                    <group>
+                        
+                        <field name="date"/>
+                        <field name="ticket_no"/>
+                        <field name="ticket_used"/>
+                        
+                        </group>
+                        <field name="stat_ids" widget="x2many_barchart" field_x="attended_slot_name" nolabel="1" field_label_x="Visitors" colspan="2">
+                        	<graph >
+            					<field name="attended_slot_name"/> <!-- default name for field_x -->
+             						<!-- The rest of fields will be taken as Y -->
+            						<field name="attended"/>
+            				</graph>
+            			</field>	
+                    
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_instanse_search_view">
+        <field name="name">campos.canteen.instanse.search (in campos_rfid)</field>
+        <field name="model">campos.canteen.instanse</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_instanse_tree_view">
+        <field name="name">campos.canteen.instanse.tree (in campos_rfid)</field>
+        <field name="model">campos.canteen.instanse</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="canteen_id"/>
+                <field name="date"/>
+                <field name="meal"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_canteen_instanse_act_window">
+        <field name="name">Campos Canteen Instanse</field> <!-- TODO -->
+        <field name="res_model">campos.canteen.instanse</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_canteen_instanse_act_form">
+        <field name="name">Campos Canteen Instanse Form</field> <!-- TODO -->
+        <field name="res_model">campos.canteen.instanse</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="campos_canteen_instanse_form_view"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+	<record model="ir.ui.menu" id="menu_campos_catering_canteen">
+        <field name="name">Canteen</field>
+        <field name="parent_id" ref="menu_campos_catering"/>
+        <field name="sequence" eval="100"/>
+    </record>
+    
+    <record model="ir.ui.menu" id="campos_canteen_instanse_menu">
+        <field name="name">Canteen Instanse</field>
+        <field name="parent_id" ref="menu_campos_catering_canteen"/> <!-- TODO -->
+        <field name="action" ref="campos_canteen_instanse_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>

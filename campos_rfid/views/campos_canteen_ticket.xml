@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_canteen_ticket_form_view">
+        <field name="name">campos.canteen.ticket.form (in campos_rfid)</field>
+        <field name="model">campos.canteen.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                    	<field name="canteen_inst_id" />
+                        <field name="participant_id"/>
+                        <field name="canteen_id"/>
+                        <field name="date"/>
+                        <field name="meal"/>
+                        <field name="attended_time"/>
+                        <field name="attended_slot"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_ticket_search_view">
+        <field name="name">campos.canteen.ticket.search (in campos_rfid)</field>
+        <field name="model">campos.canteen.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="participant_id"/>
+                <field name="canteen_id"/>
+                <field name="date"/>
+                <field name="meal"/>
+                <filter name="fattended" string="Attended" domain="[('attended_time', '!=', False)]"/>
+                <filter name="fbreakfast" string="Breakfast" domain="[('meal', '=', 'breakfast')]"/>
+                <filter name="flunch" string="Lunch" domain="[('meal', '=', 'lunch')]"/>
+                <filter name="fdinner" string="Dinner" domain="[('meal', '=', 'dinner')]"/>
+                <filter name="ftoday" string="Today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="fyesterday" string="Yesterday" domain="[('date', '=', (context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_canteen_ticket_tree_view">
+        <field name="name">campos.canteen.ticket.tree (in campos_rfid)</field>
+        <field name="model">campos.canteen.ticket</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="participant_id"/>
+                <field name="canteen_id"/>
+                <field name="date"/>
+                <field name="meal"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="campos_canteen_ticket_tree_graph">
+        <field name="name">campos.canteen.ticket.tree (in campos_rfid)</field>
+        <field name="model">campos.canteen.ticket</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                
+                
+                <field name="canteen_id"/>
+                <field name="date" interval="day"/>
+                <field name="meal"/>
+                <field name="attended_slot" type="col"/>
+            </graph>
+        </field>
+    </record>
+    
+
+    <record model="ir.actions.act_window" id="campos_canteen_ticket_act_window">
+        <field name="name">Campos Canteen Ticket</field> <!-- TODO -->
+        <field name="res_model">campos.canteen.ticket</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_canteen_ticket_menu">
+        <field name="name">Canteen Ticket</field>
+        <field name="parent_id" ref="menu_campos_catering_canteen"/>
+        <field name="action" ref="campos_canteen_ticket_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>
