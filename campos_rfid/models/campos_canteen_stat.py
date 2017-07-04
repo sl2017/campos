@@ -14,7 +14,7 @@ class CamposCanteenStat(models.Model):
     _log_access = False
     _order = 'attended_slot_name'
     
-    canteen_inst_id = fields.Many2one('campos.canteen.instance', 'Canteen Instanse')
+    canteen_inst_id = fields.Many2one('campos.canteen.instanse', 'Canteen Instanse')
     attended_slot_name = fields.Char()
     attended = fields.Integer('Attended')
 

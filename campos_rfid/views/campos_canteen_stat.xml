@@ -16,6 +16,7 @@
                 <sheet>
                     <!-- TODO -->
                     <group>
+                    	<field name="canteen_inst_id"/>
                         <field name="attended_slot_name"/>
                 		<field name="attended"/>
                     </group>
@@ -30,6 +31,7 @@
         <field name="model">campos.canteen.stat</field>
         <field name="arch" type="xml">
             <search>
+            	<field name="canteen_inst_id"/>
                 <field name="attended_slot_name"/>
                 <field name="canteen_inst_id"/>
             </search>
@@ -41,7 +43,7 @@
         <field name="model">campos.canteen.stat</field>
         <field name="arch" type="xml">
             <tree>
-                <!-- TODO -->
+                <field name="canteen_inst_id"/>
                 <field name="attended_slot_name"/>
                 <field name="attended"/>
             </tree>

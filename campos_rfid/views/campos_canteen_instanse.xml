@@ -60,7 +60,9 @@
         <field name="arch" type="xml">
             <tree>
                 <!-- TODO -->
-                <field name="name"/>
+                <field name="canteen_id"/>
+                <field name="date"/>
+                <field name="meal"/>
             </tree>
         </field>
     </record>
@@ -73,9 +75,24 @@
         <field name="context">{}</field>
     </record>
 
+    <record model="ir.actions.act_window" id="campos_canteen_instanse_act_form">
+        <field name="name">Campos Canteen Instanse Form</field> <!-- TODO -->
+        <field name="res_model">campos.canteen.instanse</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="campos_canteen_instanse_form_view"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+	<record model="ir.ui.menu" id="menu_campos_catering_canteen">
+        <field name="name">Canteen</field>
+        <field name="parent_id" ref="menu_campos_catering"/>
+        <field name="sequence" eval="100"/>
+    </record>
+    
     <record model="ir.ui.menu" id="campos_canteen_instanse_menu">
-        <field name="name">Campos Canteen Instanse</field>
-        <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
+        <field name="name">Canteen Instanse</field>
+        <field name="parent_id" ref="menu_campos_catering_canteen"/> <!-- TODO -->
         <field name="action" ref="campos_canteen_instanse_act_window"/>
         <field name="sequence" eval="16"/> <!-- TODO -->
     </record>

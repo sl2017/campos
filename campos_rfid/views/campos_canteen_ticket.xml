@@ -88,8 +88,8 @@
     </record>
 
     <record model="ir.ui.menu" id="campos_canteen_ticket_menu">
-        <field name="name">Campos Canteen Ticket</field>
-        <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
+        <field name="name">Canteen Ticket</field>
+        <field name="parent_id" ref="menu_campos_catering_canteen"/>
         <field name="action" ref="campos_canteen_ticket_act_window"/>
         <field name="sequence" eval="16"/> <!-- TODO -->
     </record>
