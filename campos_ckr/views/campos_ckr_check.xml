@@ -168,6 +168,7 @@
 						<field name="ckr_date_last_state_update"/>
 						</group>
 						<button name="action_request_ckr" type="object" string="Request CKR" />
+						<button name="%(campos_ckr.campos_ckr_fetch_wiz_act_window)d" type="action" string="Request CKR/ Enter CPR" context="{'default_participant_id': id}"/>
 					</page>
 				</page>
 			</field>
