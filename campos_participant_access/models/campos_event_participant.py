@@ -37,7 +37,7 @@ class CamposEventParticipant(models.Model):
             if silent:
                 return
             raise exceptions.Warning(_('User already created for this email %s') % (self.email))
-
+        self.email = self.email.lower()
         self.partner_id.lang='en_US'
         self.env['res.users'].sudo().with_context(template_ref='campos_participant_access.clc_signup_email').create({'login': self.email,
                                                             'partner_id': self.partner_id.id,
