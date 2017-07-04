@@ -19,6 +19,10 @@
                         <field name="name"/>
                         <field name="device_macid"/>
                         <field name="check_method"/>
+                        <field name="canteen_id" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
+                        <field name="meal" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
+                        <field name="action"/>
+                        <field name="user"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
@@ -57,9 +61,16 @@
         <field name="context">{}</field>
     </record>
 
+	 <!-- Top menu item -->
+    <menuitem name="Catering"
+        id="menu_campos_catering"
+        groups="group_campos_catering"
+        sequence="46"/>
+	
+	
 	<record model="ir.ui.menu" id="campos_rfid_top_menu">
         <field name="name">Scanners</field>
-        <field name="parent_id" ref="campos_event.menu_campos"/>
+        <field name="parent_id" ref="menu_campos_catering"/>
         <field name="sequence" eval="300"/>
     </record>
     
