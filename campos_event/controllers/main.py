@@ -581,11 +581,17 @@ class CampOsEvent(http.Controller):
                                                      'committee_id': part.primary_committee_id.id,
                                                      'function_type_id': 37})
         
-        template = part.primary_committee_id.template_id
-        assert template._name == 'email.template'
-        try:
-            template.send_mail(part.id)
-        except:
-            _logger.info("New External partner jobber mail %s %s FAILED", part.primary_committee_id.name, part.name)
+        template = False    
+        if part.primary_committee_id and part.primary_committee_id.template_id:
+            template = part.primary_committee_id.template_id
+        else:
+            template = env.ref('campos_event.default_extern_jobber_mail') 
+        
+        if template:
+            assert template._name == 'email.template'
+            try:
+                template.send_mail(part.id)
+            except:
+                _logger.info("New External partner jobber mail %s %s FAILED", part.primary_committee_id.name, part.name)
         return request.render("campos_event.extern_thankyou", {'par': part})
 
