@@ -13,8 +13,8 @@ class CamposActivityInstanse(models.Model):
     _inherit = 'mail.thread'
     
     name = fields.Char('Name', size=128, translate=True)
-    seats_max = fields.Integer('Maximum Avalaible Seats')
-    seats_hard = fields.Boolean('Hard limit')
+    seats_max = fields.Integer('Maximum Avalaible Seats', track_visibility='onchange')
+    seats_hard = fields.Boolean('Hard limit', track_visibility='onchange')
     seats_reserved = fields.Integer('Reserved Seats', compute='_compute_seats')
     seats_available = fields.Integer('Available Seats', compute='_compute_seats')
     seats_used = fields.Integer('Number of Participations', compute='_compute_seats')
@@ -33,8 +33,8 @@ class CamposActivityInstanse(models.Model):
                                 ('precamp', 'Pre Camp Booking Required'),
                                 ('prebook', 'Booking required'),
                                 ('joint', 'Joint arrangement')], 'Booking')
-    booking_date_begin = fields.Datetime('Booking opens')
-    booking_date_end = fields.Datetime('Booking closes')
+    booking_date_begin = fields.Datetime('Booking opens', track_visibility='onchange')
+    booking_date_end = fields.Datetime('Booking closes', track_visibility='onchange')
     
     state = fields.Selection([('open', 'Open'),
                                 ('cancelled', 'Cancelled'),
