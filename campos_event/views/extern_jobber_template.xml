@@ -17,7 +17,7 @@
 							
 							<section id="forms">
 								<!-- TODO Multilingual form action support ? -->
-								<form class="form-horizontal mt32" action="/campos/jobber/thankyou"
+								<form class="form-horizontal mt32" action="/campos/extern/thankyou"
 									method="post" enctype="multipart/form-data">
 									<t t-if="error">
 										<div class="alert alert-danger">
@@ -79,22 +79,32 @@
 									</div>
 									
 									<div class="form-group">
-										<label class="col-md-3 col-sm-4 control-label" for="committee_id">Committee</label>
+										<label class="col-md-3 col-sm-4 control-label" for="job_id">Work with</label>
 										<div class="col-md-7 col-sm-8">
-											<select class="form-control" name="committee_id">
-												<t t-foreach="committees or []" t-as="committee">
-													<option t-att-value="committee.id" t-att-selected="committee.id == comm_id">
-														<t t-esc="committee.display_name" />
+											<select class="form-control" name="job_id" required="True">
+												<t t-foreach="jobs or []" t-as="job">
+													<option t-att-value="job.id" t-att-selected="job.id == job_id">
+														<t t-esc="job.display_name" />
 													</option>
 												</t>
 											</select>
 										</div>
 									</div>
-									<div t-attf-class="form-group #{error.get('cpr_number') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="cpr_number">CPR Number (ddmmåå-xxxx)</label>
+									
+									<div t-attf-class="form-group #{error.get('qualifications') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="qualifications">Andet</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" t-att-value="default.get('cpr_number')"
+											<input type="text" t-att-value="default.get('qualifications')"
+												class="form-control" name="qualifications" />
+										</div>
+									</div>
+									
+									<div t-attf-class="form-group #{error.get('cpr_number') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="cpr_number">CPR Number (ddmmåå-xxxx)<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('cpr_number')" required="True"
 												class="form-control" name="cpr_number" />
+											<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
 										</div>
 									</div>
 									
@@ -106,15 +116,12 @@
 										</div>
 									</div>
 									
-									<h3>Camp Days</h3>
-									
-									<t t-foreach="days or []" t-as="day">
-
-														
-													
+																		
 									<div t-attf-class="form-group #{error.get('days') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="days" />
-										<div class="col-md-7 col-sm-8">
+										<label class="col-md-3 col-sm-4 control-label" for="days">Camp Days</label>
+											<div class="col-md-7 col-sm-8">
+									<t t-foreach="days or []" t-as="day">
+									
 											<div class="checkbox">
 												<label class="checkbox">
 													<input type="checkbox" t-attf-id="id_day_{{ day.id }}"
@@ -122,9 +129,10 @@
 													<t t-esc="day.display_name" />
 												</label>
 											</div>
-										</div>
-									</div>
+										
 									</t>
+									</div>
+									</div>
 									
 									<div class="form-group">
 										<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
@@ -240,10 +248,11 @@
 									</div>
 									
 									<div t-attf-class="form-group #{error.get('cpr_number') and 'has-error' or ''}">
-										<label class="col-md-3 col-sm-4 control-label" for="cpr_number">CPR Number (ddmmåå-xxxx)</label>
+										<label class="col-md-3 col-sm-4 control-label" for="cpr_number">CPR Number (ddmmåå-xxxx)<span class="text-danger">*</span></label>
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('cpr_number')" required="True"
 												class="form-control" name="cpr_number" />
+												<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
 										</div>
 									</div>
 									
@@ -291,6 +300,140 @@
 
 
 		<template id="extern_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1>Thank you!</h1>
+							<p>Your job application has been successfully registered, we will get back to you soon.</p>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		<!--  Job pulje signup  -->
+		
+		<template id="jobpulje_signup">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Jobber Signup</t>
+				<div id="wrap">
+					<div class="oe_structure" />
+					<div class="container">
+						<h1 class="text-center">
+							Partner Jobber Signup Form
+						</h1>
+
+						<div class="row">
+							
+							<section id="forms">
+								<!-- TODO Multilingual form action support ? -->
+								<form class="form-horizontal mt32" action="/campos/jobpulje/thankyou"
+									method="post" enctype="multipart/form-data">
+									<t t-if="error">
+										<div class="alert alert-danger">
+			  								<a href="#" class="close" data-dismiss="alert" aria-label="close">&amp;times;</a>
+			  								<ul t-foreach="error" t-as="e">
+			  									<li t-esc="error.get(e)" />
+			  								</ul>
+										</div>
+									</t>
+
+									<div t-attf-class="form-group #{error.get('participant_number') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="participant_number">Skejser ID</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('participant_number')"
+												class="form-control" name="participant_number"/>
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('name') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="name">Your Name<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('name')"
+												class="form-control" name="name" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('email') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="email">Your Email<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="email" t-att-value="default.get('email')"
+												class="form-control" name="email" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('phone') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="phone">Your Phone</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('phone')"
+												class="form-control" name="phone" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('mobile') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="mobile">Mobile</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('mobile')"
+												class="form-control" name="mobile" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('street') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="street">Your Address<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('street')"
+												class="form-control" name="street" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('zip') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="zip">Zipcode<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('zip')"
+												class="form-control" name="zip" required="True" />
+										</div>
+									</div>
+									<div t-attf-class="form-group #{error.get('city') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="city">City<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('city')"
+												class="form-control" name="city" required="True" />
+										</div>
+									</div>
+									
+									
+									<div t-attf-class="form-group #{error.get('cpr_number') and 'has-error' or ''}">
+										<label class="col-md-3 col-sm-4 control-label" for="cpr_number">CPR Number (ddmmåå-xxxx)<span class="text-danger">*</span></label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" t-att-value="default.get('cpr_number')" required="True"
+												class="form-control" name="cpr_number" />
+											<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
+										</div>
+									</div>
+									
+																		
+									
+									<div class="form-group">
+										<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+									
+								</form>
+							</section>
+						</div>
+					</div>
+					<div class="oe_structure" />
+				</div>
+			</t>
+		</template>
+
+
+		<template id="jobpulje_thankyou">
 			<t t-call="website.layout">
 				<div id="wrap">
 					<div class="oe_structure">

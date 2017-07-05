@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 06:59+0000\n"
-"PO-Revision-Date: 2017-06-28 06:59+0000\n"
+"POT-Creation-Date: 2017-07-05 11:54+0000\n"
+"PO-Revision-Date: 2017-07-05 11:54+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -75,6 +75,11 @@ msgstr "Opret overnatningsklynge"
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
 msgid "Add child"
 msgstr "Tilføj barn"
+
+#. module: campos_jobber_final
+#: model:ir.ui.menu,name:campos_jobber_final.campos_event_all_participant_tree_menu
+msgid "All participants"
+msgstr ""
 
 #. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
@@ -592,6 +597,11 @@ msgid "Only ONE Car Ticket pr person."
 msgstr "Kun en parkeringbillet pr. deltager"
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_all_participant_tree
+msgid "Open"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.event.participant,other_need_description:0
 msgid "Other Need description"
 msgstr "Beskrivelse af yderligere behov"
@@ -625,6 +635,7 @@ msgstr "Deltager"
 
 #. module: campos_jobber_final
 #: field:campos.jobber.accom.group,accom_participant_ids:0
+#: model:ir.actions.act_window,name:campos_jobber_final.action_campos_event_all_participant_tree
 msgid "Participants"
 msgstr "Deltagere"
 
@@ -820,6 +831,11 @@ msgstr ""
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "ZIP"
 msgstr "Postnummer"
+
+#. module: campos_jobber_final
+#: model:ir.actions.server,name:campos_jobber_final.campos_event_all_participant_tree_open
+msgid "campos_event_all_participant_tree_open"
+msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view

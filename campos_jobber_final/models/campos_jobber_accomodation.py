@@ -121,7 +121,7 @@ class CamposJobberAccomodation(models.Model):
         if self.accom_code:
             accom_id = self.env['campos.jobber.accom.group'].suspend_security().search([('code', '=', self.accom_code)])
             if accom_id:
-                self.accom_group_id = accom_id
+                self.accom_group_id = accom_id[0]
                 self.state = 'draft'
 
     @api.onchange('accom_type_id')

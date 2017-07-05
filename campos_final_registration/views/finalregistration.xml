@@ -666,6 +666,12 @@
 									<field name="access_token_id" invisible="1"/>
 								</group>
 							</page>
+							<page string="Doublet" groups="campos_event.group_campos_admin">
+                    			 	<group>
+                    			 		<field name="doublet_id" context="{'with_reg': 1,  'tree_view_ref': 'campos_jobber_final.campos_event_all_participant_tree'}" options="{'no_create': True}" domain="[('id', '!=', id)]"/>
+                    			 		<field name="reverse_doublet_id" context="{'with_reg': 1,}"/>
+                    			 	</group>
+                    			 </page>	
 						</notebook>
 						<group>
 							<separator string="Transport" colspan="2"/>
