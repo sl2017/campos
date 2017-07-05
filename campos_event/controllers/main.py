@@ -474,9 +474,13 @@ class CampOsEvent(http.Controller):
                 SUPERUSER_ID,
                 committee_ids,
                 context=request.context)
+        else:
+            committees = False
 
         env = request.env(user=SUPERUSER_ID)
         days = env['event.day'].search([])
+        
+        jobs = request.env['campos.job'].search([('active','=', True),('publish_local', '=', True)])
         
         if 'website_campos_jobber_signup_error' in request.session:
             error = request.session.pop('website_campos_jobber_signup_error')
@@ -485,6 +489,7 @@ class CampOsEvent(http.Controller):
 
         return request.render("campos_event.extern_signup_%s" % (jobbertype), {
             'committees': committees,
+            'jobs': jobs,
             'error': error,
             'default': default,
             'type': jobbertype,
@@ -549,6 +554,7 @@ class CampOsEvent(http.Controller):
             'birthdate': birthdate,
             'state': 'approved',
             'signup_state' : 'dayjobber',
+            'job_id': post.get('job_id'),
             'primary_committee_id': post.get('committee_id')
         }
         for f in ['committee_id', 'qualifications']:
@@ -570,9 +576,10 @@ class CampOsEvent(http.Controller):
                                                   'park_permit_end_date': active_days[-1].the_date,
                                                   'phone_number': part.mobile,
                                                   })
-        env['campos.committee.function'].create({'participant_id': part.id,
-                                                 'committee_id': part.primary_committee_id.id,
-                                                 'function_type_id': 37})
+        if post.get('type') =='extpartner':
+            env['campos.committee.function'].create({'participant_id': part.id,
+                                                     'committee_id': part.primary_committee_id.id,
+                                                     'function_type_id': 37})
         
         template = part.primary_committee_id.template_id
         assert template._name == 'email.template'

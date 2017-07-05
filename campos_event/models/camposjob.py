@@ -101,6 +101,7 @@ class CamposJob(models.Model):
     openjob = fields.Boolean('Open', compute='_compute_applicants')
     par_contact_id = fields.Many2one('campos.event.participant', string='Contact', ondelete='restrict') # Relation to inherited res.partner
     publish_international = fields.Boolean('Publish International')
+    publish_local = fields.Boolean('Publish As Local Job')
     
     @api.one
     @api.depends('date_public','date_closing','min_qty_jobbere','wanted_qty_jobbere','max_qty_jobbere')
