@@ -182,7 +182,23 @@ class EventParticipant(geo_model.GeoModel):
     participant_number = fields.Char(related='partner_id.ref', string='Skejser ID')
     wristband_date = fields.Date('wristband issued', groups='campos_event.group_campos_info', track_visibility='onchange')
     tag_ids = fields.Many2many('campos.par.tag', string='Tags', groups='campos_event.group_campos_admin')
+    
+    # Doublet mamagement
+    doublet_id = fields.Many2one('campos.event.participant', 'Doublet')
+    reverse_doublet_id = fields.Many2one('campos.event.participant', 'Reverse doublet', compute='_compute_reverse_doublet_id', compute_sudo=True)
+    
 
+    api.multi
+    def _compute_reverse_doublet_id(self):
+        where_params = [tuple(self.ids)]
+        self._cr.execute("""SELECT doublet_id as our_id, id as reverse_id
+                      FROM campos_event_participant
+                      WHERE doublet_id IN %s
+                      """, where_params)
+        for id, reverse_id in self._cr.fetchall():
+            par = self.browse(id)
+            par.reverse_doublet_id = reverse_id
+            
     
     @api.one
     def _compute_meeting_registration(self):
