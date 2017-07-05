@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-01 21:02+0000\n"
-"PO-Revision-Date: 2017-06-01 21:02+0000\n"
+"POT-Creation-Date: 2017-07-05 11:54+0000\n"
+"PO-Revision-Date: 2017-07-05 11:54+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -437,6 +437,11 @@ msgid "Request CKR"
 msgstr "Anmodning om børneattest"
 
 #. module: campos_ckr
+#: view:campos.event.participant:campos_ckr.view_event_registration_participant_form
+msgid "Request CKR/ Enter CPR"
+msgstr ""
+
+#. module: campos_ckr
 #: code:addons/campos_ckr/models/campos_ckr_check.py:106
 #, python-format
 msgid "Request action from Main Committee"
@@ -489,7 +494,7 @@ msgid "Summary"
 msgstr ""
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:50
+#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:51
 #, python-format
 msgid "Thank you"
 msgstr ""
@@ -550,7 +555,7 @@ msgstr ""
 "børneattest anmodningen"
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:50
+#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:51
 #, python-format
 msgid ""
 "Your CKR request will be processed and you can expect a message in E-Boks "

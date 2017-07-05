@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 19:46+0000\n"
-"PO-Revision-Date: 2017-07-02 19:47+0000\n"
+"POT-Creation-Date: 2017-07-05 11:54+0000\n"
+"PO-Revision-Date: 2017-07-05 11:54+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -264,6 +264,7 @@ msgstr "&nbsp;"
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "&times;"
 msgstr "&times;"
 
@@ -287,6 +288,12 @@ msgstr "30 minutter"
 #: view:website:campos_event.event_meeting_proposal
 msgid "45 minutes"
 msgstr "45 minutter"
+
+#. module: campos_event
+#: code:addons/campos_event/controllers/main.py:437
+#, python-format
+msgid "<span>Jobberpulje Signup</span>"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.committee,account:0
@@ -389,6 +396,7 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
 msgid "Andet"
 msgstr ""
 
@@ -511,6 +519,7 @@ msgstr ""
 #. module: campos_event
 #: view:website:campos_event.extern_signup_extpartner
 #: view:website:campos_event.extern_signup_local
+#: view:website:campos_event.jobpulje_signup
 msgid "CPR Number (ddmmåå-xxxx)"
 msgstr "CPR nummer (ddmmåå-xxxx)"
 
@@ -622,7 +631,7 @@ msgstr ""
 #: view:website:campos_event.extern_signup_extpartner
 #: view:website:campos_event.extern_signup_local
 msgid "Car Registration number for parking permit"
-msgstr ""
+msgstr "Registreringsnummer til bil der skal parkere gratis i parkeringsområdet"
 
 #. module: campos_event
 #: field:campos.committee.function.type,chairman:0
@@ -678,6 +687,7 @@ msgstr ""
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "City"
 msgstr "By"
 
@@ -732,7 +742,6 @@ msgstr ""
 #: field:campos.function.view,committee_id:0 field:campos.job,committee_id:0
 #: field:campos.subcamp,committee_id:0
 #: model:ir.model,name:campos_event.model_campos_committee
-#: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
 msgid "Committee"
 msgstr "Udvalg"
@@ -915,6 +924,7 @@ msgstr "Kontakter"
 #: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_job_ask_thankyou
 #: view:website:campos_event.jobber_thankyou
+#: view:website:campos_event.jobpulje_thankyou
 #: view:website:campos_event.participant updated
 #: view:website:campos_event.reg_confirmed
 #: view:website:campos_event.unknown_token
@@ -1643,6 +1653,7 @@ msgstr "Jobber"
 #: view:website:campos_event.extern_signup_extpartner
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "Jobber Signup"
 msgstr "Jobber tilmelding"
 
@@ -1665,13 +1676,13 @@ msgid "Jobs"
 msgstr "Job"
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:187
+#: code:addons/campos_event/controllers/main.py:189
 #, python-format
 msgid "Jobs for: "
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:184
+#: code:addons/campos_event/controllers/main.py:186
 #, python-format
 msgid "Jobs tagged: "
 msgstr ""
@@ -1780,7 +1791,7 @@ msgid "Leder godkendt"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:194
+#: code:addons/campos_event/controllers/main.py:196
 #, python-format
 msgid "Ledige job"
 msgstr ""
@@ -1916,6 +1927,7 @@ msgstr ""
 #: view:website:campos_event.extern_signup_extpartner
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 #: view:website:campos_event.partner_register_form
 msgid "Mobile"
 msgstr "Mobiltelefon"
@@ -2197,6 +2209,7 @@ msgstr "Partner"
 
 #. module: campos_event
 #: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.jobpulje_signup
 msgid "Partner Jobber Signup Form"
 msgstr ""
 
@@ -2291,6 +2304,11 @@ msgid "Publish"
 msgstr "Publiceret"
 
 #. module: campos_event
+#: field:campos.job,publish_local:0
+msgid "Publish As Local Job"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.job,publish_international:0
 msgid "Publish International"
 msgstr ""
@@ -2312,7 +2330,7 @@ msgid "Questions"
 msgstr "Spørgsmål"
 
 #. module: campos_event
-#: code:addons/campos_event/models/camposjob.py:128
+#: code:addons/campos_event/models/camposjob.py:129
 #, python-format
 msgid "Questions re %s"
 msgstr ""
@@ -2567,7 +2585,7 @@ msgid "Search"
 msgstr "Søg"
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:190
+#: code:addons/campos_event/controllers/main.py:192
 #, python-format
 msgid "Search Result"
 msgstr ""
@@ -2733,6 +2751,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.event.participant,participant_number:0
 #: field:event.registration,skejser_nr:0
+#: view:website:campos_event.jobpulje_signup
 msgid "Skejser ID"
 msgstr ""
 
@@ -2906,6 +2925,7 @@ msgstr ""
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 #: view:website:campos_event.sp_confirm_prompt
 #: view:website:campos_event.zx_confirm_prompt
 msgid "Submit"
@@ -2995,6 +3015,7 @@ msgstr "Tak for dit mødeforslag"
 #: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_job_ask_thankyou
 #: view:website:campos_event.jobber_thankyou
+#: view:website:campos_event.jobpulje_thankyou
 #: view:website:campos_event.participant updated
 msgid "Thank you!"
 msgstr "Mange tak"
@@ -3341,6 +3362,11 @@ msgid "Work in Progress"
 msgstr "Under behandling"
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_local
+msgid "Work with"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.scout.org,worldorg:0
 msgid "World Organization"
 msgstr ""
@@ -3358,6 +3384,7 @@ msgstr ""
 #: view:website:campos_event.int2_groups_register_form
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "Your Address"
 msgstr "Adresse"
 
@@ -3378,6 +3405,7 @@ msgstr "Dine kontaktoplysninger"
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "Your Email"
 msgstr "Din mailadresse"
 
@@ -3389,6 +3417,7 @@ msgstr "Din mailadresse"
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_job_ask
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 #: view:website:campos_event.partner_register_form
 msgid "Your Name"
 msgstr "Navn"
@@ -3397,6 +3426,7 @@ msgstr "Navn"
 #: view:website:campos_event.extern_signup_extpartner
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "Your Phone"
 msgstr "Fastnet telefon"
 
@@ -3424,6 +3454,7 @@ msgstr "Din job forespørgsel er blevet bekræftet succesfuldt, vi vender tilbag
 #. module: campos_event
 #: view:website:campos_event.extern_thankyou
 #: view:website:campos_event.jobber_thankyou
+#: view:website:campos_event.jobpulje_thankyou
 msgid ""
 "Your job application has been successfully registered, we will get back to "
 "you soon."
@@ -3469,6 +3500,7 @@ msgstr "Postnr"
 #: view:website:campos_event.extern_signup_local
 #: view:website:campos_event.intl_groups_register_form
 #: view:website:campos_event.jobber_signup
+#: view:website:campos_event.jobpulje_signup
 msgid "Zipcode"
 msgstr "Postnr."
 
