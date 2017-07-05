@@ -292,6 +292,7 @@ class CamposEventParticipant(models.Model):
     def action_open_camp_participant(self):
         self.ensure_one()
         
+        view_ref = False
         if self.staff:
             view_ref = 'campos_event.view_event_registration_participant_form'
         elif self.participant:

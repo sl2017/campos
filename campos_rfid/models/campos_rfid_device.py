@@ -47,16 +47,22 @@ class CamposRfidDevice(models.Model):
         if not device:
             return self.build_response(u'Unknown Scanner\n%s' % device_macid, False)
         
+        part = self.env['campos.event.participant'].search([('participant_number' ,'=', participant_number)])
+        part_ids = [part.id]
+        if part.doublet_id:
+            part_ids.append(part.doublet_id.id)
+        if part.reverse_doublet_id:
+            part_ids.append(part.reverse_doublet_id.id)
         if device.check_method == 'canteen':
-            return device.checkin_canteen(participant_number)
+            return device.checkin_canteen(participant_number, part_ids)
         elif device.check_method == 'meat':
-            return self.checkin_meat(participant_number)
+            return self.checkin_meat(participant_number, part_ids)
         else:
             return self.build_response(u'Device not configured', False)
         
     
-    def checkin_canteen(self, participant_number):
-        tickets = self.env['campos.canteen.ticket'].search([('participant_id.participant_number', '=', participant_number), ('meal', '=', self.meal), ('date', '=', fields.Date.today())])
+    def checkin_canteen(self, participant_number, part_ids):
+        tickets = self.env['campos.canteen.ticket'].search([('participant_id', 'in', part_ids), ('meal', '=', self.meal), ('date', '=', fields.Date.today())])
         if tickets:
             if tickets[0].attended_time:
                 return self.build_response(u'Afvist\nAllerede scannet', False) 
@@ -74,7 +80,7 @@ class CamposRfidDevice(models.Model):
 
         return self.build_response(u'Ukendt deltager', False)
                                    
-    def checkin_meat(self, participant_number):
+    def checkin_meat(self, participant_number, part_ids):
         if participant_number == '100':
             return self.build_response(u' 3 Kylling\n 3 Oksekød', True)
         if participant_number == '200':
