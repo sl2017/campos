@@ -104,6 +104,7 @@
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('cpr_number')" required="True"
 												class="form-control" name="cpr_number" />
+											<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
 										</div>
 									</div>
 									
@@ -251,6 +252,7 @@
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('cpr_number')" required="True"
 												class="form-control" name="cpr_number" />
+												<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
 										</div>
 									</div>
 									
@@ -409,6 +411,7 @@
 										<div class="col-md-7 col-sm-8">
 											<input type="text" t-att-value="default.get('cpr_number')" required="True"
 												class="form-control" name="cpr_number" />
+											<p>Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et samtykke, som skal godkendes med dit nemID.</p>
 										</div>
 									</div>
 									

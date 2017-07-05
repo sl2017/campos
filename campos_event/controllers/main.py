@@ -552,7 +552,7 @@ class CampOsEvent(http.Controller):
             'partner_id': partner_id,
             'registration_id': reg_id,
             'birthdate': birthdate,
-            'state': 'approved',
+            'state': 'approved' if post.get('type') =='extpartner' else 'draft',
             'signup_state' : 'dayjobber',
             'job_id': post.get('job_id'),
             'primary_committee_id': post.get('committee_id')
