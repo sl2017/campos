@@ -65,7 +65,7 @@ class CamposActivityInstanse(models.Model):
         if self.activity_id and self.period_id:
             self.name = '%s - %s' % (self.activity_id.display_name, self.period_id.display_name)
 
-    @api.depends('ticket_ids')
+    @api.depends('ticket_ids','ticket_ids.state','ticket_ids.seats')
     @api.multi
     def _compute_seats(self):
         res = {}

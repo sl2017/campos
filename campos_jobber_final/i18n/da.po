@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 11:54+0000\n"
-"PO-Revision-Date: 2017-07-05 11:54+0000\n"
+"POT-Creation-Date: 2017-07-06 20:39+0000\n"
+"PO-Revision-Date: 2017-07-06 20:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -170,6 +170,11 @@ msgid "Campos Jobber Canteen"
 msgstr "Jobber kantiner"
 
 #. module: campos_jobber_final
+#: field:campos.canteen,is_open:0
+msgid "Can be selected"
+msgstr ""
+
+#. module: campos_jobber_final
 #: selection:campos.event.participant,payreq_state:0
 #: selection:campos.jobber.accomodation,state:0
 #: selection:campos.jobber.canteen,state:0
@@ -294,6 +299,11 @@ msgstr "By"
 #: field:campos.jobber.accom.group,code:0
 msgid "Code"
 msgstr "Kode"
+
+#. module: campos_jobber_final
+#: sql_constraint:campos.jobber.accom.group:0
+msgid "Code already in use. Choose another"
+msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.event.participant,pay_key_entered:0
@@ -564,6 +574,11 @@ msgid "Name"
 msgstr "Navn"
 
 #. module: campos_jobber_final
+#: sql_constraint:campos.jobber.accom.group:0
+msgid "Name already in use. Choose another"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.event.participant,other_need_update_date:0
 msgid "Need updated"
 msgstr "Skal opdateres"
@@ -770,6 +785,11 @@ msgstr "Underlejr"
 #: field:campos.canteen,subcamp_id:0
 msgid "Sub camp"
 msgstr "Underlejr"
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_jobber_child_form_view
+msgid "Sync with Parent"
+msgstr ""
 
 #. module: campos_jobber_final
 #: help:campos.canteen,post_camp:0

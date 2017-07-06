@@ -22,6 +22,7 @@
                 		<field name="max_cap"/>
                 		<field name="pre_camp"/>
                 		<field name="post_camp"/>
+                		<field name="is_open"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>
