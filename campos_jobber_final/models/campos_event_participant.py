@@ -311,4 +311,36 @@ class CamposEventParticipant(models.Model):
                     'nodestroy': True,
                     'res_id': self.id,
                     }
+        if not self.registration_id:
+            # Group registration
+            return {
+                    'name': self.name,
+                    'view_mode': 'form',
+                    'view_type': 'form',
+                    'view_id': self.env.ref('campos_final_registration.view_form_finalregistration_admin').id,
+                    'res_model': 'event.registration',
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': True,
+                    'res_id': self.partner_id.primary_reg_id.id,
+                    }
+            
+    @api.multi
+    def sync_jobber_children(self):
+        for c in self:
+            if c.jobber_child and c.parent_jobber_id:
+                main_camp_days = c.camp_day_ids.filtered(lambda d: d.the_date > '2017-07-22' and d.the_date < '2017-07-30')
+                if not main_camp_days:
+                    c.no_invoicing = True
+                else:
+                    if c.accomodation_ids:
+                        c.accomodation_ids.unlink()
+                    for a in c.parent_jobber_id.accomodation_ids:
+                        a.copy(default={'participant_id': c.id})
+                    if c.canteen_ids:
+                        c.canteen_ids.unlink()
+                    for a in c.parent_jobber_id.canteen_ids:
+                        a.copy(default={'participant_id': c.id})
+                    
+                
+        
             
