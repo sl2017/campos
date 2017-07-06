@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 11:54+0000\n"
-"PO-Revision-Date: 2017-07-05 11:54+0000\n"
+"POT-Creation-Date: 2017-07-06 20:39+0000\n"
+"PO-Revision-Date: 2017-07-06 20:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -192,6 +192,22 @@ msgid ""
 msgstr "\n\n<p>Hej ${object.name},</p>\n\n\n<p>Du har lavet en tilmelding til Spejdernes Lejr 2017</p>\n\n\n<p>For at v&#230;re sikker p&#229;, at det ikke er en robot, der har sendt tilmeldingen, vil vi gerne have dig til at bekr&#230;fte, at du har fremsendt en tilmelding, og din mailadresse virker.</p>\n\n\n<p>Bekr&#230;ft &#160;din tilmelding som jobber ved at klikke p&#229; dette link: ${object.reg_confirm_url}</p>\n\n\n<p><span style=\"line-height: 1.42857;\">Vi er rigtig glade for, at du gerne vil v&#230;re med og ser frem til samarbejdet</span></p>\n\n\n<p>Spejderhilsen</p>\n\n\n<p>ITL IT og Logistik</p>\n\n\n<p><img src=\"http://test.sl17dev.steingabelgaard.dk/website/image/ir.attachment/225_9487439/datas\"></p>\n            "
 
 #. module: campos_event
+#: model:email.template,body_html:campos_event.default_extern_jobber_mail
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name},\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        Du er nu signed op til SL2017\n"
+"                    </p>\n"
+"                    \n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
 #: model:email.template,body_html:campos_event.deregister_sharepoint
 msgid ""
 "\n"
@@ -293,7 +309,7 @@ msgstr "45 minutter"
 #: code:addons/campos_event/controllers/main.py:437
 #, python-format
 msgid "<span>Jobberpulje Signup</span>"
-msgstr ""
+msgstr "Tilmelding som  ad hoc jobbere\nKan kun bruges af lejrdeltagere der skal hjælpe lejren som jobber på lejren og har brug for ne børneattest"
 
 #. module: campos_event
 #: field:campos.committee,account:0
@@ -426,7 +442,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:406
+#: code:addons/campos_event/models/participant.py:422
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -843,8 +859,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:353
-#: code:addons/campos_event/models/participant.py:380
+#: code:addons/campos_event/models/participant.py:369
+#: code:addons/campos_event/models/participant.py:396
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1138,8 +1154,26 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
+#: view:website:campos_event.jobpulje_signup
+msgid ""
+"Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at "
+"arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens "
+"sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få "
+"dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et "
+"samtykke, som skal godkendes med dit nemID."
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,scout_division:0
 msgid "Division/District"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: field:campos.event.participant,doublet_id:0
+msgid "Doublet"
 msgstr ""
 
 #. module: campos_event
@@ -2147,7 +2181,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:549
+#: code:addons/campos_event/models/participant.py:565
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2440,7 +2474,7 @@ msgid "Reject"
 msgstr "Afvisning"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:428
+#: code:addons/campos_event/models/participant.py:444
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2474,6 +2508,11 @@ msgstr "Anmod om mere information"
 #. module: campos_event
 #: field:event.track,user_status:0
 msgid "Resp. Status"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,reverse_doublet_id:0
+msgid "Reverse doublet"
 msgstr ""
 
 #. module: campos_event
@@ -2646,7 +2685,7 @@ msgid "Set standby"
 msgstr "Sæt på Standby"
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:325
+#: code:addons/campos_event/models/participant.py:341
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -3209,6 +3248,7 @@ msgid "VAT Legal Statement"
 msgstr ""
 
 #. module: campos_event
+#: model:email.template,subject:campos_event.default_extern_jobber_mail
 #: model:email.template,subject:campos_event.request_signupconfirm
 msgid "Velkommen til SL2017"
 msgstr "Velkommen til SL2017"
@@ -3428,7 +3468,7 @@ msgstr "Navn"
 #: view:website:campos_event.jobber_signup
 #: view:website:campos_event.jobpulje_signup
 msgid "Your Phone"
-msgstr "Fastnet telefon"
+msgstr "Fastnettelefon"
 
 #. module: campos_event
 #: view:website:campos_event.dk_groups_register_form

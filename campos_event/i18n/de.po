@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 11:54+0000\n"
-"PO-Revision-Date: 2017-07-05 11:54+0000\n"
+"POT-Creation-Date: 2017-07-06 20:39+0000\n"
+"PO-Revision-Date: 2017-07-06 20:39+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -182,6 +182,22 @@ msgid ""
 "                    </p>    \n"
 "\t\t\t\t\t<p>\t                        \n"
 "                        Bekræft venligst din tilmelding som jobber ved at klikke på dette link: ${object.reg_confirm_url}\n"
+"                    </p>\n"
+"                    \n"
+"                    \n"
+"            "
+msgstr ""
+
+#. module: campos_event
+#: model:email.template,body_html:campos_event.default_extern_jobber_mail
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hej ${object.name},\n"
+"                    </p>    \n"
+"\t\t\t\t\t<p>\t                        \n"
+"                        Du er nu signed op til SL2017\n"
 "                    </p>\n"
 "                    \n"
 "                    \n"
@@ -423,7 +439,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:406
+#: code:addons/campos_event/models/participant.py:422
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -840,8 +856,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:353
-#: code:addons/campos_event/models/participant.py:380
+#: code:addons/campos_event/models/participant.py:369
+#: code:addons/campos_event/models/participant.py:396
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1135,8 +1151,26 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.extern_signup_extpartner
+#: view:website:campos_event.extern_signup_local
+#: view:website:campos_event.jobpulje_signup
+msgid ""
+"Dit CPR-nummer bruges til at indhente en børneattest. Det er krav for at "
+"arbejde frivilligt på Spejdernes Lejr. Det behandles fortroligt ved lejrens "
+"sekretariat og slettes når din børneattest er godkendt. Du vil indenfor få "
+"dage modtage et brev i din eboks fra Rigspolitiet. Brevet indeholder et "
+"samtykke, som skal godkendes med dit nemID."
+msgstr ""
+
+#. module: campos_event
 #: field:event.registration,scout_division:0
 msgid "Division/District"
+msgstr ""
+
+#. module: campos_event
+#: view:campos.event.participant:campos_event.view_event_registration_participant_form
+#: field:campos.event.participant,doublet_id:0
+msgid "Doublet"
 msgstr ""
 
 #. module: campos_event
@@ -2144,7 +2178,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:549
+#: code:addons/campos_event/models/participant.py:565
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2437,7 +2471,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:428
+#: code:addons/campos_event/models/participant.py:444
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2471,6 +2505,11 @@ msgstr ""
 #. module: campos_event
 #: field:event.track,user_status:0
 msgid "Resp. Status"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,reverse_doublet_id:0
+msgid "Reverse doublet"
 msgstr ""
 
 #. module: campos_event
@@ -2643,7 +2682,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:325
+#: code:addons/campos_event/models/participant.py:341
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -3206,6 +3245,7 @@ msgid "VAT Legal Statement"
 msgstr ""
 
 #. module: campos_event
+#: model:email.template,subject:campos_event.default_extern_jobber_mail
 #: model:email.template,subject:campos_event.request_signupconfirm
 msgid "Velkommen til SL2017"
 msgstr ""
