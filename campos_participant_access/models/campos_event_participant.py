@@ -16,7 +16,7 @@ class CamposEventParticipant(models.Model):
         for p in self:
             p.clc_user_needed = False
             if p.camp_age >= 18 and p.registration_id.group_country_code2 != "DK":
-                if not self.env['res.users'].search(['|',('partner_id', '=', self.partner_id.id),('login', '=', self.email)]):
+                if not self.env['res.users'].search(['|',('partner_id', '=', p.partner_id.id),('login', '=', p.email)]):
                     p.clc_user_needed = True
 
     @api.multi

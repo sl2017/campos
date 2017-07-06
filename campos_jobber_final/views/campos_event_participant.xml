@@ -474,6 +474,7 @@
 			<button name="check_all_second_half_days" position="replace"/>
 			<notebook position="inside">
             	<page string="Accomodation">
+            				<button name="sync_jobber_children" string="Sync with Parent" type="object" />
 							<field name="accomodation_ids" context="{'default_participant_id': id}">
 								<tree editable="bottom">
 									<field name="date_from"/>
