@@ -17,3 +17,4 @@ class CamposCanteen(models.Model):
     pre_camp = fields.Boolean('Pre Camp', help="This Canteen is open during Pre Camp")
     post_camp = fields.Boolean('Post Camp', help="This Canteen is open during Post Camp")
     max_cap = fields.Integer('Max Capacity pr Meal')
+    is_open = fields.Boolean('Can be selected', default=True)
