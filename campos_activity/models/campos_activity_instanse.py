@@ -22,6 +22,7 @@ class CamposActivityInstanse(models.Model):
     
     #'complete_name': fields.function(_name_get_fnc, type="char", string='Full Name', multi='seats_reserved'),
     activity_id = fields.Many2one('campos.activity.activity', 'Activity')
+    act_code = fields.Char(related='activity_id.code', readonly=True)
     period_id = fields.Many2one('campos.activity.period', 'Period')
     staff_ids = fields.Many2many('campos.event.participant','campos_activity_staff_rel', 'act_ins_id','par_id','Staff', domain=[('staff', '=', True)])
     #ticket_ids = fields.One2many('campos.activity.ticket', 'act_ins_id', 'Tickets')
@@ -30,6 +31,7 @@ class CamposActivityInstanse(models.Model):
     location_id = fields.Many2one('campos.activity.location', 'Location')
     booking = fields.Selection([('dropin', 'Drop In'),
                                 # ('dropin_prebook', 'Drop In & Pre Booking'),
+                                ('dropin_at_time', 'Dropin at time'),
                                 ('precamp', 'Pre Camp Booking Required'),
                                 ('prebook', 'Booking required'),
                                 ('joint', 'Joint arrangement')], 'Booking')
