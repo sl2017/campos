@@ -28,6 +28,7 @@ class CamposActivitySignupWiz(models.TransientModel):
     state = fields.Selection([('step1', 'Select Activity'),
                               ('step2', 'Select Participants')], 'State', default='step1')
     reg_id = fields.Many2one('event.registration', 'Scout Group')
+    par_id = fields.Many2one('campos.event.participant', 'Single signup')
     act_id = fields.Many2one('campos.activity.activity', '1. Select Activity', required=True, select=True, ondelete='cascade', domain=[('state', 'in', ['confirmed'])])
     teaser = fields.Text(related='act_id.teaser', readonly=True)
     audience_ids = fields.Many2many(related='act_id.audience_ids', readonly=True)
@@ -64,12 +65,25 @@ class CamposActivitySignupWiz(models.TransientModel):
             return {
                     'warning': {'title': _("Warning"), 'message': _("No seats available for selected period!")},
                     }
-            
+        if self.par_id:
+            period_ok = True
+            if self.par_id.ticket_ids:
+                for tck in self.par_id.ticket_ids:
+                    if tck.act_ins_id.period_id.date_begin <= self.act_ins_id.period_id.date_end and tck.act_ins_id.period_id.date_end >= self.act_ins_id.period_id.date_begin:
+                        period_ok = False
+                        booked = tck.act_ins_id.display_name
+                        break
+            if not period_ok:
+                return {
+                    'warning': {'title': _("Warning"), 'message': _("You are already booked in that period for:\n%s") % (booked)},
+                    }
+                
     @api.multi
     def doit_step1(self):
         _logger.info('doit_step1')
         self.ensure_one()
         for wiz in self:
+            got_par = False
             wiz.seats_reserved = wiz.seats
             dt = wiz.act_ins_id.period_id.date_begin[0:10]
             mbr_obj = self.env['campos.activity.signup.members']
@@ -95,11 +109,14 @@ class CamposActivitySignupWiz(models.TransientModel):
                     if not period_ok:
                         continue
                     _logger.info('Adding %s', par.name)
-                    mbr_obj.create({'wiz_id' : wiz.id,
-                                    'par_id' : par.id,
-                                    'name'   : par.name,
-                                    'reg_id' : wiz.reg_id.id})
- 
+                    
+                    mbr_id = mbr_obj.create({'wiz_id' : wiz.id,
+                                             'par_id' : par.id,
+                                             'name'   : par.name,
+                                             'reg_id' : wiz.reg_id.id})
+                    if wiz.par_id and wiz.par_id.id == par.id:
+                        got_par = True
+                        wiz.par_signup_ids += mbr_id
             
             self.state = 'step2'
             self.ticket_id = self.env['campos.activity.ticket'].suspend_security().create({'reg_id': wiz.reg_id.id,

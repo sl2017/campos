@@ -15,7 +15,8 @@
                 	<field name="state" invisible="1"/>
                 	<field name="id" invisible="1"/>
                 	<field name="reg_id" invisible="1"/>
-                	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}" options="{'no_create': True, 'no_open': True}"/>
+                	<field name="par_id" invisible="1"/>
+                	<field name="act_id" attrs="{'readonly': [('state', '=', 'step2')]}" options="{'no_create': True, 'no_open': True}" domain="[('act_ins_ids.booking_date_begin', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')), '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))]"/>
                 	<field name="teaser" nolabel="1" colspan="2"/>
                 	<newline/>
                 	<field name="audience_ids" widget="many2many_checkboxes"/>
