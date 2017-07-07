@@ -18,3 +18,36 @@ class CamposEventParticipant(models.Model):
         if dt < self.tocampdate or dt > self.fromcampdate:
             return False
         return True
+
+    @api.multi
+    def action_add_activity(self):
+        self.ensure_one()
+
+        return {
+            'name': _('New activity signup for: %s') % self.name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('campos_activity.campos_activity_signup_wiz_form_view').id,
+            'res_model': 'campos.activity.signup.wiz',
+            'type': 'ir.actions.act_window',
+            #'nodestroy': True,
+            'target': 'new',
+            'context' : {
+                         'default_reg_id': self.registration_id.id,
+                         'default_par_id': self.id, 
+                         'default_seats': 1,
+                         },
+            }
+        
+    @api.multi
+    def action_activity_calendar(self):
+        self.ensure_one()
+        return {
+                'name': _("Activities for %s" % self.name),
+                'view_mode': 'calendar,tree,form',
+                'view_type': 'form',
+                'res_model': 'campos.activity.ticket',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'domain': [('par_ids', 'in', [self.id])],
+            }

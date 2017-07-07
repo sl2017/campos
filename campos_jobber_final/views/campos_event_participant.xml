@@ -5,6 +5,8 @@
 <openerp>
 <data>
 
+	<!--  Jobber Own view -->
+
     <record model="ir.ui.view" id="campos_event_participant_staff_form_view">
         <field name="name">campos.event.participant.form Staff (in campos_jobber_final)</field>
         <field name="model">campos.event.participant</field>
