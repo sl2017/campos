@@ -31,7 +31,8 @@ class CamposFeeSnapshot(models.Model):
     segment = fields.Selection([('dk_groups', 'DK Groups'),
                                 ('ss_groups', 'SydSlesvig'),
                                 ('non_dk_groups', 'Foreign groups'),
-                                ('jobber', 'Jobbers')], string='Segments')
+                                ('jobber', 'Jobbers DK'),
+                                ('jobber_non_dk', 'Foreign Jobbers')], string='Segments')
     ref_snapshot_id = fields.Many2one('campos.fee.snapshot', 'Prev invoice snapshot')
     make_creditnota = fields.Boolean('Create CreditNotas?')
     
