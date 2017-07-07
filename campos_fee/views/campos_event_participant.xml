@@ -31,6 +31,11 @@
             		</group>
             	</page>
             </page>
+            <field name="transport_to_camp" position="before">
+            	<field name="group_country_code2" invisible="1"/>
+            	<field name="group_entrypoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+				<field name="group_exitpoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+            </field>
         </field>
     </record>
 
@@ -60,6 +65,11 @@
             		</group>
             	</page>
             </page>
+            <field name="transport_to_camp" position="before">
+            	<field name="group_country_code2" invisible="1"/>
+            	<field name="group_entrypoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+				<field name="group_exitpoint" options="{'no_create': True}" attrs="{'invisible': [('group_country_code2', '=', 'DK')]}"/>
+            </field>
         </field>
     </record>
 <!-- 

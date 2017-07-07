@@ -24,6 +24,11 @@ class CamposEventParticipant(models.Model):
     sspar_ids = fields.One2many('campos.fee.ss.participant', 'participant_id', 'Snapshot')
     no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
     
+    # Handle Tranport refusion calculations for fereign jobbers
+    group_entrypoint = fields.Many2one(related='registration_id.group_entrypoint')
+    group_exitpoint = fields.Many2one(related='registration_id.group_exitpoint')
+    group_country_code2 = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code2', readonly=True)
+    
     @api.multi
     @api.depends('birthdate')
     def _compute_fee_agegroup(self):
