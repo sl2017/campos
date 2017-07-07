@@ -106,3 +106,5 @@ class CamposEventParticipant(models.Model):
                                                             'partner_id': self.partner_id.id,
                                                             'groups_id': [(4, self.env.ref('campos_participant_access.group_campos_participant').id)],
                                                          })
+        if not self.clc_state:
+            self.clc_state = 'required'
