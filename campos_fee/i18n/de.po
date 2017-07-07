@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 19:46+0000\n"
-"PO-Revision-Date: 2017-07-02 19:46+0000\n"
+"POT-Creation-Date: 2017-07-07 09:21+0000\n"
+"PO-Revision-Date: 2017-07-07 09:21+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -243,6 +243,11 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.ss.reg.meat,meat_count:0
 msgid "Count"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,group_country_code2:0
+msgid "Country Code2"
 msgstr ""
 
 #. module: campos_fee
@@ -898,6 +903,16 @@ msgid "Pay Req state"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.event.participant,group_entrypoint:0
+msgid "Point of entry into Denmark"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,group_exitpoint:0
+msgid "Point of exit from Denmark"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.snapshot,ref_snapshot_id:0
 msgid "Prev invoice snapshot"
 msgstr ""
@@ -1151,6 +1166,13 @@ msgstr ""
 #. module: campos_fee
 #: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
 msgid "Test invoice"
+msgstr ""
+
+#. module: campos_fee
+#: help:campos.event.participant,group_country_code2:0
+msgid ""
+"The ISO country code in two chars.\n"
+"You can use this field for quick search."
 msgstr ""
 
 #. module: campos_fee

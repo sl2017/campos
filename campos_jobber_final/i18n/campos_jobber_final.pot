@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 20:39+0000\n"
-"PO-Revision-Date: 2017-07-06 20:39+0000\n"
+"POT-Creation-Date: 2017-07-07 09:21+0000\n"
+"PO-Revision-Date: 2017-07-07 09:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.accomodation,accom_type_id:0
 msgid "Accomondation Type"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Active"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -455,6 +460,11 @@ msgid "Is only chosen if you want to pay for a group of ITS. See page 21 in the 
 msgstr ""
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Jobber"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:event.registration,jobber_accomodation_ids:0
 msgid "Jobber Accomonodation"
 msgstr ""
@@ -482,6 +492,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "Jobber to pay for with the Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Jobberchild"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -611,6 +626,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.event.car,participant_id:0
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
 #: field:campos.jobber.accomodation,participant_id:0
 #: field:campos.jobber.canteen,participant_id:0
 msgid "Participant"
@@ -697,6 +713,11 @@ msgstr ""
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:195
 #, python-format
 msgid "Request CKR"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Scoutgroup"
 msgstr ""
 
 #. module: campos_jobber_final
