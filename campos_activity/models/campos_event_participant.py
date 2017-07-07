@@ -34,7 +34,8 @@ class CamposEventParticipant(models.Model):
             'target': 'new',
             'context' : {
                          'default_reg_id': self.registration_id.id,
-                         'default_par_id': self.id 
+                         'default_par_id': self.id, 
+                         'default_seats': 1,
                          },
             }
         
