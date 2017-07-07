@@ -15,9 +15,39 @@
 					<field name="clc_user_needed" invisible="1"/>
 					<button name="action_create_clc_user" attrs="{'invisible': [('clc_user_needed', '=', False)]}" string="Create CLC User" type="object"/>	
 				</field>
+				<page name="contact" position="after">
+					<page name="clc" string="CLC" attrs="{'invisible': [('clc_state', '=', False)]}">
+						<group>
+							<field name="clc_state" readonly='1'/>
+							<field name="clc_grade" readonly='1'/>
+							<field name="clc_userid" readonly='1' groups="campos_event.group_campos_admin"/>
+						
+						</group>
+					</page>
+				
+				</page>
 			</field>
 	</record>			
-
+	
+	<!--  Jobber admin view -->
+	<record model="ir.ui.view" id="view_event_registration_participant_form">
+        <field name="name">campos.event.participant.form (in campos_fee)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
+        <field name="arch" type="xml">
+            <page name="car" position="after">
+				<page name="clc" string="CLC" attrs="{'invisible': [('clc_state', '=', False)]}">
+						<group>
+							<field name="clc_state" readonly='1'/>
+							<field name="clc_grade" readonly='1'/>
+							<field name="clc_userid" readonly='1' groups="campos_event.group_campos_admin"/>
+						
+						</group>
+					</page>
+				
+				</page>
+			</field>
+	</record>		
 	<!--  Participants own view -->
     <record model="ir.ui.view" id="campos_event_participant_form_own_view">
         <field name="name">campos.event.participant.form (in campos_participant_access)</field>
@@ -78,7 +108,12 @@
         <field name="arch" type="xml">
             <field name="primary_committee_id" position="after">
             	<filter name="clc_cand" string="18+ foreigner" domain="[('camp_age','&gt;=',18), ('registration_id.group_country_code2', '!=', 'DK')]"/>
+            	<filter name="fclc_req" string="CLC Req" domain="[('clc_state', '!=', False)]"/>
+            	
         	</field>
+        	<filter name="fGroup" position="after">
+            		<filter name="gclc_state" string="CLC State" icon="terp-personal" domain="[]" context="{'group_by':'clc_state'}"/>
+            	</filter>
         </field>
     </record>
 

@@ -146,7 +146,9 @@ class CamposFeeSsRegistration(models.Model):
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
             elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-            elif ssreg.snapshot_id.segment == 'jobber' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff:
+            elif ssreg.snapshot_id.segment == 'jobber' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff and ssreg.registration_id.partner_id.country_id.code == 'DK':
+                ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_jobber(subtract1=False)
+            elif ssreg.snapshot_id.segment == 'jobber_non_dk' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff and ssreg.registration_id.partner_id.country_id.code != 'DK':
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_jobber(subtract1=False)
                 
     @api.multi            
