@@ -15,6 +15,17 @@
         <field name="perm_write" eval="0"/>
         <field name="perm_unlink" eval="0"/>
     </record>
+    
+    <record model="ir.model.access" id="campos_fee_ss_reg_meat_access_admin"> <!-- TODO acl id -->
+        <field name="name">campos.fee.ss.reg.meat access admin</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_campos_fee_ss_reg_meat"/>
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="campos_event.group_campos_admin"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
 
 </data>
 </openerp>

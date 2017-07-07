@@ -13,6 +13,7 @@
     'depends': [ 'mail', 
                 'campos_event',
                 'campos_final_registration',
+                'campos_jobber_final',
     ],
     'data': [
         'wizards/campos_activity_mass_signup_wiz.xml',

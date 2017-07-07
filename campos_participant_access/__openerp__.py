@@ -15,6 +15,9 @@
                 'campos_final_registration',
     ],
     'data': [
+        'views/event_registration.xml',
+        'security/campos_clc_stat.xml',
+        'views/campos_clc_stat.xml',
         'security/campos_event_participant.xml',
         'views/campos_event_participant.xml',
         'data/mail_templates.xml',

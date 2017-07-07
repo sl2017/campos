@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 19:46+0000\n"
-"PO-Revision-Date: 2017-07-02 19:46+0000\n"
+"POT-Creation-Date: 2017-07-07 19:37+0000\n"
+"PO-Revision-Date: 2017-07-07 19:37+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,6 +246,11 @@ msgid "Count"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.event.participant,group_country_code2:0
+msgid "Country Code2"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.snapshot,make_creditnota:0
 msgid "Create CreditNotas?"
 msgstr ""
@@ -390,6 +395,11 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.snapshot,message_follower_ids:0
 msgid "Followers"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.snapshot,segment:0
+msgid "Foreign Jobbers"
 msgstr ""
 
 #. module: campos_fee
@@ -617,7 +627,7 @@ msgstr ""
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,segment:0
-msgid "Jobbers"
+msgid "Jobbers DK"
 msgstr ""
 
 #. module: campos_fee
@@ -782,8 +792,8 @@ msgid "No camp participation"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:298
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:448
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:300
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:450
 #, python-format
 msgid "No refusion after may 1: %s %.2f - %.2f"
 msgstr ""
@@ -840,8 +850,8 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:275
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:425
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:277
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:427
 #, python-format
 msgid "Only  50%% refusion after may 1: %s %.2f - %.2f"
 msgstr ""
@@ -860,8 +870,8 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:257
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:407
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:259
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:409
 #, python-format
 msgid "Participant fee charged on invoice %s:"
 msgstr ""
@@ -895,6 +905,16 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.ss.participant,payreq_state:0
 msgid "Pay Req state"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,group_entrypoint:0
+msgid "Point of entry into Denmark"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,group_exitpoint:0
+msgid "Point of exit from Denmark"
 msgstr ""
 
 #. module: campos_fee
@@ -1154,6 +1174,13 @@ msgid "Test invoice"
 msgstr ""
 
 #. module: campos_fee
+#: help:campos.event.participant,group_country_code2:0
+msgid ""
+"The ISO country code in two chars.\n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_183
 msgid "Thisted"
 msgstr ""
@@ -1216,8 +1243,8 @@ msgid "Transport Total"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:289
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:439
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:291
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:441
 #, python-format
 msgid "Transport fee charged on invoice %s"
 msgstr ""

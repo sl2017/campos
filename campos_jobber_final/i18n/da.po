@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 20:39+0000\n"
-"PO-Revision-Date: 2017-07-06 20:39+0000\n"
+"POT-Creation-Date: 2017-07-07 09:21+0000\n"
+"PO-Revision-Date: 2017-07-07 09:21+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -64,6 +64,11 @@ msgstr "Datoer for overnatning må ikke overlappe hinanden"
 #: field:campos.jobber.accomodation,accom_type_id:0
 msgid "Accomondation Type"
 msgstr "Overnatnings type"
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Active"
+msgstr ""
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
@@ -489,6 +494,11 @@ msgstr ""
 "vejledningen"
 
 #. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Jobber"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:event.registration,jobber_accomodation_ids:0
 msgid "Jobber Accomonodation"
 msgstr "Jobber overnatning"
@@ -517,6 +527,11 @@ msgstr "Jobbere som ønsker at overnatte med gruppen"
 #: view:event.registration:campos_jobber_final.event_registration_form_view
 msgid "Jobber to pay for with the Group"
 msgstr "Ønsker gruppen til at betale faktura"
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Jobberchild"
+msgstr ""
 
 #. module: campos_jobber_final
 #: field:event.registration,jobber_catering_ids:0
@@ -643,6 +658,7 @@ msgstr ""
 
 #. module: campos_jobber_final
 #: field:campos.event.car,participant_id:0
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
 #: field:campos.jobber.accomodation,participant_id:0
 #: field:campos.jobber.canteen,participant_id:0
 msgid "Participant"
@@ -729,6 +745,11 @@ msgstr "Ønskede gruppe og godkendelse"
 #: code:addons/campos_jobber_final/models/campos_event_participant.py:195
 #, python-format
 msgid "Request CKR"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:campos.event.participant:campos_jobber_final.campos_event_participant_search_view
+msgid "Scoutgroup"
 msgstr ""
 
 #. module: campos_jobber_final

@@ -12,6 +12,8 @@
         <field name="arch" type="xml">
             <notebook position="inside">
             	<page name="activities" string="Activities">
+            		<button name="action_add_activity" string="Add Activity" type="object"/>
+					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
             		<field name="ticket_ids" readonly="1">
             			<tree>
             				<field name="actins_date_begin"/>
@@ -22,6 +24,50 @@
             </notebook>
         </field>
     </record>
+    
+    
+    <!--  Jobber admin view -->
+    <record model="ir.ui.view" id="view_event_registration_participant_form">
+        <field name="name">campos.event.participant.jobber.admin.form (in campos_activity)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
+        <field name="arch" type="xml">
+            <page name="car" position="after">
+            	<page name="activities" string="Activities">
+            		<button name="action_add_activity" string="Add Activity" type="object"/>
+					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
+            		<field name="ticket_ids" readonly="1">
+            			<tree>
+            				<field name="actins_date_begin"/>
+            				<field name="act_ins_id"/>
+            			</tree>
+            		</field>
+            	</page>
+            </page>
+       </field>
+   </record>
+   
+   <!--  Jobber own view -->
+    <record model="ir.ui.view" id="campos_event_participant_staff_form_view">
+        <field name="name">campos.event.participant.jobber.form (in campos_activity)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.campos_event_participant_staff_form_view"/>
+        <field name="arch" type="xml">
+            <page name="car" position="after">
+            	<page name="activities" string="Activities">
+            		<button name="action_add_activity" string="Add Activity" type="object"/>
+					<button name="action_activity_calendar" string="Show in Calendar" type="object"/>
+            		<field name="ticket_ids" readonly="1">
+            			<tree>
+            				<field name="actins_date_begin"/>
+            				<field name="act_ins_id"/>
+            			</tree>
+            		</field>
+            	</page>
+            </page>
+       </field>
+   </record>
+   
  <!-- 
     <record model="ir.ui.view" id="campos_event_participant_search_view">
         <field name="name">campos.event.participant.search (in campos_activity)</field>

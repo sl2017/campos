@@ -5,6 +5,8 @@
 <openerp>
 <data>
 
+	<!--  Jobber Own view -->
+
     <record model="ir.ui.view" id="campos_event_participant_staff_form_view">
         <field name="name">campos.event.participant.form Staff (in campos_jobber_final)</field>
         <field name="model">campos.event.participant</field>
@@ -558,6 +560,21 @@
 			<field name="view_id" ref="campos_event_all_participant_tree"/>
 		</record>
         
+        <record model="ir.ui.view" id="campos_event_participant_search_view">
+        <field name="name">campos.event.participant.search (in campos_participant_access)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.campos_event_participant_search"/>
+        <field name="arch" type="xml">
+            <field name="primary_committee_id" position="after">
+            	<field name="signup_state"/>
+            	<filter name="factive" string="Active" domain="[('state','!=', 'deregistered')]"/>
+            	<filter name="fstaff" string="Jobber" domain="[('staff','=', True)]"/>
+            	<filter name="fparticipant" string="Participant" domain="[('participant','=', True)]"/>
+            	<filter name="fjobberchild" string="Jobberchild" domain="[('jobber_child','=', True)]"/>
+            	<filter name="fscoutgroup" string="Scoutgroup" domain="[('registration_id','=', False)]"/>
+        	</field>
+        </field>
+    </record>
         <menuitem action="action_campos_event_all_participant_tree" id="campos_event_all_participant_tree_menu"
 				name="All participants" sequence="60" parent="campos_event.menu_campos_signup"
 				groups="campos_event.group_campos_admin" />
