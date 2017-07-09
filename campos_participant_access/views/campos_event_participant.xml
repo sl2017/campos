@@ -121,6 +121,7 @@
         <field name="inherit_id" ref="campos_event.campos_event_participant_search"/>
         <field name="arch" type="xml">
             <field name="primary_committee_id" position="after">
+            	<field name="clc_state"/>
             	<filter name="clc_cand" string="18+ foreigner" domain="[('camp_age','&gt;=',18), ('registration_id.group_country_code2', '!=', 'DK')]"/>
             	<filter name="fclc_req" string="CLC Req" domain="[('clc_state', '!=', False)]"/>
             	
