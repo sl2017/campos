@@ -33,3 +33,28 @@ class CamposClcStat(models.Model):
                     group by registration_id, clc_state;
                     """)
         
+        
+    @api.multi
+    def action_open_clc_participants(self):
+        self.ensure_one()
+        
+        view = self.env.ref('campos_final_registration.view_form_finalregistration_participant')
+        treeview = self.env.ref('campos_final_registration.view_tree_finalregistration_participant')
+        
+        return {
+                'name': _("Participants from %s" % self.registration_id.name),
+                'view_mode': 'tree,form',
+                'view_type': 'form',
+                'views': [(treeview.id, 'tree'), (view.id, 'form')],
+                'res_model': 'campos.event.participant',
+                'type': 'ir.actions.act_window',
+                'nodestroy': True,
+                'domain': [('registration_id', '=', self.registration_id.id)],
+                'context': {
+                            'default_registration_id': self.registration_id.id,
+                            'default_participant': True,
+                            'default_parent_id': self.registration_id.partner_id.id,
+                            'search_default_clc_state': self.clc_state,
+                            }
+            }
+        

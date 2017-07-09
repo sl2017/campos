@@ -482,6 +482,10 @@ class EventParticipant(geo_model.GeoModel):
                 # new_user.with_context({'create_user': True}).action_reset_password()
 
             else:
+                old_user.write({'participant_id' : par.id,
+                                'groups_id': [(4, self.env.ref('campos_event.group_campos_staff').id)],
+                                })
+                par.partner_id = old_user.partner_id
                 old_user.action_reset_password()
 
     @api.multi
