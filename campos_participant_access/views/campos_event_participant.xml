@@ -4,7 +4,7 @@
 
 <openerp>
 <data>
-	<!--  Admin view -->
+	<!--  Admin view and Group view -->
 	
 	<record id="view_form_finalregistration_participant" model="ir.ui.view">
 			<field name="name">Final Registration Participant Form</field>
@@ -20,6 +20,7 @@
 						<group>
 							<field name="clc_state" readonly='1'/>
 							<field name="clc_grade" readonly='1'/>
+							<p colspan="2">400 points is required to complete the course.</p>
 							<field name="clc_userid" readonly='1' groups="campos_event.group_campos_admin"/>
 						
 						</group>
@@ -40,6 +41,7 @@
 						<group>
 							<field name="clc_state" readonly='1'/>
 							<field name="clc_grade" readonly='1'/>
+							<p colspan="2">400 points is required to complete the course.</p>
 							<field name="clc_userid" readonly='1' groups="campos_event.group_campos_admin"/>
 						
 						</group>
@@ -47,7 +49,10 @@
 				
 				</page>
 			</field>
-	</record>		
+	</record>
+	
+	
+	
 	<!--  Participants own view -->
     <record model="ir.ui.view" id="campos_event_participant_form_own_view">
         <field name="name">campos.event.participant.form (in campos_participant_access)</field>
@@ -82,6 +87,15 @@
 								<field name="access_token_id" invisible="1"/>
 							</group>
 						</page>
+						<page name="clc" string="CLC" attrs="{'invisible': [('clc_state', '=', False)]}">
+						<group>
+							<field name="clc_state" readonly='1'/>
+							<field name="clc_grade" readonly='1'/>
+							<p colspan="2">400 points is required to complete the course.</p>
+							<field name="clc_userid" readonly='1' groups="campos_event.group_campos_admin"/>
+						
+						</group>
+					</page>
 					</notebook>
 				</sheet>
 			</form>
