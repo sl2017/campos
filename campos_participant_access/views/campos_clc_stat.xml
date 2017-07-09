@@ -23,6 +23,13 @@
             <tree>
    	            <field name="clc_state"/>
                 <field name="par_count"/>
+                <button type="object" 
+                        id="participant_by_clc"
+                        string="View participants"
+                        name="action_open_clc_participants"
+                         
+                        context="{'search_default_clc_state': clc_state}"/>
+                        
             </tree>
         </field>
     </record>

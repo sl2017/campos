@@ -12,9 +12,9 @@ class CamposEventParticipant(models.Model):
     _inherit = 'campos.event.participant'
 
     clc_user_needed = fields.Boolean('CLC User needed', compute='_compute_clc_user_needed')
-    clc_state = fields.Selection([('required', 'Required'),
-                                  ('enrolled', 'Enrolled'),
-                                  ('passed', 'Passed')], string='CLC state')
+    clc_state = fields.Selection([('required', 'Not started'),
+                                  ('enrolled', 'Started'),
+                                  ('passed', 'Completed')], string='CLC state')
     clc_userid = fields.Integer('Moodle Internal User ID')
     clc_grade = fields.Char('CLC Total Grade')
     

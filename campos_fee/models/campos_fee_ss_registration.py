@@ -349,7 +349,7 @@ class CamposFeeSsRegistration(models.Model):
                 #2 Transport
                 query = """  select transport_product_id, sum(transport_co) 
                              from campos_fee_ss_participant 
-                             where ssreg_id in %s 
+                             where ssreg_id in %s and signup_state = 'oncamp' and no_invoicing = 'f' 
                              group by transport_product_id
                         """
                 self._cr.execute(query, (tuple([ssreg.id]), ))

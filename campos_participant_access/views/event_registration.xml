@@ -5,6 +5,7 @@
 <openerp>
 <data>
 
+	<!-- Admin view -->
     <record model="ir.ui.view" id="event_registration_form_view">
         <field name="name">event.registration.form (in campos_participant_access)</field>
         <field name="model">event.registration</field>
@@ -19,6 +20,19 @@
     </record>
 
 
+	<!-- GL view -->
+    <record model="ir.ui.view" id="view_form_finalregistration_gl">
+        <field name="name">event.registration.form (in campos_participant_access)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_gl"/>
+        <field name="arch" type="xml">
+            <page name="pre_reg" position="before">
+            	<page string="CLC">
+            		<field name="clc_stat_ids" nolabel="1"/>
+            	</page>
+            </page>
+        </field>
+    </record>
 
 
 </data>
