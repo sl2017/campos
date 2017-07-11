@@ -65,7 +65,8 @@ class CamposEventParticipant(models.Model):
     @api.multi
     #@api.depends()
     def _compute_checkin_subcamp_id(self):
-                
+        pass
+            
     @api.multi
     def action_checkin(self):
         self.ensure_one()
