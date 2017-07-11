@@ -433,6 +433,10 @@ class CampOsEvent(http.Controller):
                                               'cpr': cpr,
                                               'state': 'sentin'})
         
+        env['campos.committee.function'].create({'participant_id': part.id,
+                                                 'committee_id': part.primary_committee_id.id,
+                                                 'function_type_id': 39})
+        
 
         message = _('<span>Jobberpulje Signup</span>')
         for f in ["participant_number", "name", "email", "street", "zip", "city", "phone", "mobile"]:
