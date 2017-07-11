@@ -124,7 +124,9 @@ class EventParticipant(geo_model.GeoModel):
                               ('inprogress', 'Work in Progress'),
                               ('approved', 'Approved by the committee'),
                               ('rejected', 'Rejected'),
-                              ('deregistered', 'Deregistered')],
+                              ('deregistered', 'Deregistered'),
+                              ('arrived', 'Arrived'),
+                              ('checkin', 'Check In Completed')],
                              'Approval Procedure',
                              track_visibility='onchange', default='draft')
 
@@ -179,8 +181,13 @@ class EventParticipant(geo_model.GeoModel):
                                            track_visibility='onchange',
                                            ondelete='set null')
 
+    # Pay4it fields
     participant_number = fields.Char(related='partner_id.ref', string='Skejser ID')
     wristband_date = fields.Date('wristband issued', groups='campos_event.group_campos_info', track_visibility='onchange')
+    pay4it_created = fields.Boolean('Created on skejser.dk')
+    pay4it_cardactive = fields.Boolean('Card/Wristband attached')
+    pay4it_cardnumber = fields.Char('Wristbans number', groups='campos_event.group_campos_admin')
+    
     tag_ids = fields.Many2many('campos.par.tag', string='Tags', groups='campos_event.group_campos_admin')
     
     # Doublet mamagement
