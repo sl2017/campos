@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="webtour_departure" name="webtour Departure">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Sæt spor som Bus på Spejdernes Lejr</t>
+				<div id="wrap" style="margin-bottom:100px;">
+					<div class="oe_structure"/>
+					<div class="container">
+					
+						<h1 class="text-center">
+							Sæt spor som Bus på Spejdernes Lejr
+						</h1>
+						
+						<div class="row">
+							<section id="forms">
+								<form class="form-horizontal mt32" action="/page/campos-departure-thankyou" method="post" enctype="multipart/form-data">
+														
+									<!--Virksomhedsnavn-->
+									
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="bsidno">Webtour Tur Nummer</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="bsidno" required="True"/>
+										</div>
+									</div>
+																		
+									<div t-attf-class="form-group">
+										<label class="col-md-3 col-sm-4 control-label" for="pax">Evt. CVR</label>
+										<div class="col-md-7 col-sm-8">
+											<input type="text" class="form-control" name="pax" required="True"/>
+										</div>
+									</div>
+																												
+									<div class="col-md-12 text-center mt16 mb16">
+										<button type="submit" class="btn btn-primary btn-lg">Indsend</button>
+									</div>
+								
+								</form>
+							</section>											
+						</div>							
+					</div>
+					<div class="oe_structure"/>
+				</div>
+						
+			</t>
+		
+		</template>
+		
+		
+		
+		
+		
+		<template id="partners_thankyou">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<div class="container">
+							<h1 class="text-center">Tak!</h1>
+							<h4 class="text-center">Din ansøgning om partnerskab er registreret! Vi vender tilbage til dig hurtigst muligt.</h4>
+						</div>
+						<section data-snippet-id="cta" class="oe_dark">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 text-center mt16 mb16">
+										<a href="/" class="btn btn-primary btn-lg">Fortsæt til vores hjemmeside</a>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</t>
+		</template>
+		
+		
+		
+		
+		
+		<template id="layout" inherit_id="website.layout">
+			<xpath expr="//body" position="inside">
+				<script>
+					if ($('[type="date"]').prop('type') != 'date') {
+	    				$('[type="date"]').datepicker({dateFormat: 'yy-mm-dd'});
+					}
+				</script>
+			</xpath>
+		
+		</template>
+	</data>
+</openerp>

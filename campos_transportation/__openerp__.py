@@ -13,6 +13,7 @@
          'views/webtourparticipantoverview_view.xml',
          'views/webtourregistrationoverview_view.xml', 
          'views/webtourmailtemplates.xml',                                               
+         'views/webtour_template.xml',
          'data/webtourusdestination_scheduler.xml',
          'data/webtourusneed_scheduler.xml',
          'data/webtour_config_parameter.xml',

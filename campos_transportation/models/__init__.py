@@ -11,3 +11,4 @@ from . import webtourregistration
 from . import webtourusneed
 from . import webtourparticipantoverview
 from . import webtourregistrationoverview
+from . import webtourdeparture
