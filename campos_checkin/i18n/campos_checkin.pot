@@ -1,0 +1,238 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* campos_checkin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 15:31+0000\n"
+"PO-Revision-Date: 2017-07-11 15:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: campos_checkin
+#: field:campos.event.participant,arrive_time:0
+msgid "Arrival"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:33
+#, python-format
+msgid "CKR not yet approved!"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:30
+#, python-format
+msgid "CLC not passed!"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+#: model:ir.actions.act_window,name:campos_checkin.campos_checkin_wiz_act_window
+msgid "Campos Checkin Wiz"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.actions.act_window,name:campos_checkin.campos_event_participant_act_window
+msgid "Campos Event Participant"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.event.participant:campos_checkin.campos_event_participant_form_view
+#: model:ir.ui.menu,name:campos_checkin.menu_campos_checkin
+#: model:ir.ui.menu,name:campos_checkin.submenu_campos_checkin
+msgid "Check In"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+msgid "Check In Completed"
+msgstr ""
+
+#. module: campos_checkin
+#: model:res.groups,name:campos_checkin.group_campos_checkin_crew
+msgid "Check In Crew"
+msgstr ""
+
+#. module: campos_checkin
+#: model:res.groups,name:campos_checkin.group_campos_checkin_mgr
+msgid "Check In Manager"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,checkin_info_html:0
+#: field:campos.event.participant,checkin_info_html:0
+msgid "Check In Notes"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.event.participant,checkin_completed:0
+msgid "Check In Time"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,checkin_ok:0
+#: field:campos.event.participant,checkin_ok:0
+msgid "Check In possible"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:48
+#, python-format
+msgid "Check accomodation"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:54
+#, python-format
+msgid "Check catering"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:73
+#, python-format
+msgid "Checkin"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:76
+#, python-format
+msgid "Checkin for %s"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:73
+#, python-format
+msgid "Checkin for %s is not possible here\n"
+"Go to Løkkegård for Checkin.\n"
+"\n"
+"Please show the location on the map for the ITS"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.model,name:campos_checkin.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.event.participant:campos_checkin.campos_event_participant_tree_view
+msgid "Exp. arrival"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.event.participant:campos_checkin.campos_event_participant_search_view
+msgid "Expected Today"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,hand_out:0
+msgid "Hand out"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,participant_id:0
+msgid "Jobber"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.ui.menu,name:campos_checkin.campos_event_participant_menu
+msgid "Jobber Check In"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.wiz,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:51
+#, python-format
+msgid "No Catering specified"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:45
+#, python-format
+msgid "No accomonodation specified"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:37
+#, python-format
+msgid "Paid by: %s"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:42
+#, python-format
+msgid "Payment recived"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+msgid "Register arrival"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:58
+#, python-format
+msgid "Skejser armbånd er udsendt/uddelt"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.event.participant,checkin_subcamp_id:0
+msgid "Sub Camp"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:39
+#, python-format
+msgid "Unpaid invoices. Total due: DKK %.2f"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+msgid "or"
+msgstr ""
+

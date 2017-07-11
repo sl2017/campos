@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 20:39+0000\n"
-"PO-Revision-Date: 2017-07-06 20:39+0000\n"
+"POT-Creation-Date: 2017-07-11 15:31+0000\n"
+"PO-Revision-Date: 2017-07-11 15:31+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -303,7 +303,7 @@ msgid "45 minutes"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:437
+#: code:addons/campos_event/controllers/main.py:441
 #, python-format
 msgid "<span>Jobberpulje Signup</span>"
 msgstr ""
@@ -439,7 +439,7 @@ msgid "Approval Procedure"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:422
+#: code:addons/campos_event/models/participant.py:429
 #, python-format
 msgid "Approval of %s"
 msgstr ""
@@ -467,6 +467,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee,approvers_ids:0
 msgid "Approvers"
+msgstr ""
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Arrived"
 msgstr ""
 
 #. module: campos_event
@@ -647,8 +652,18 @@ msgid "Car Registration number for parking permit"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.event.participant,pay4it_cardactive:0
+msgid "Card/Wristband attached"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.committee.function.type,chairman:0
 msgid "Chairman"
+msgstr ""
+
+#. module: campos_event
+#: selection:campos.event.participant,state:0
+msgid "Check In Completed"
 msgstr ""
 
 #. module: campos_event
@@ -856,8 +871,8 @@ msgid "Complete Address"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:369
-#: code:addons/campos_event/models/participant.py:396
+#: code:addons/campos_event/models/participant.py:376
+#: code:addons/campos_event/models/participant.py:403
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -1012,6 +1027,11 @@ msgstr ""
 #: field:campos.subcamp,create_date:0
 #: field:campos.subcamp.exception,create_date:0
 msgid "Created on"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,pay4it_created:0
+msgid "Created on skejser.dk"
 msgstr ""
 
 #. module: campos_event
@@ -2178,7 +2198,7 @@ msgid "Paricipant"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:565
+#: code:addons/campos_event/models/participant.py:576
 #: view:campos.committee.function:campos_event.campos_committee_member_search
 #: field:campos.committee.function,participant_id:0
 #: field:campos.event.participant,participant:0
@@ -2471,7 +2491,7 @@ msgid "Reject"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:444
+#: code:addons/campos_event/models/participant.py:451
 #, python-format
 msgid "Reject %s"
 msgstr ""
@@ -2682,7 +2702,7 @@ msgid "Set standby"
 msgstr ""
 
 #. module: campos_event
-#: code:addons/campos_event/models/participant.py:341
+#: code:addons/campos_event/models/participant.py:348
 #, python-format
 msgid "Set to standby: %s"
 msgstr ""
@@ -3406,6 +3426,11 @@ msgstr ""
 #. module: campos_event
 #: field:campos.scout.org,worldorg:0
 msgid "World Organization"
+msgstr ""
+
+#. module: campos_event
+#: field:campos.event.participant,pay4it_cardnumber:0
+msgid "Wristbans number"
 msgstr ""
 
 #. module: campos_event

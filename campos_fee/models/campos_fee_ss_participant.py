@@ -69,4 +69,5 @@ class CamposFeeSsParticipant(models.Model):
                                      ('nocamp', 'No camp participation'),
                                      ('groupsignup', 'Signed up via a scout group')], default='draft', string='Final registration',  help='Chose weather you are going to stay at the campsite or not. Must be filled in.')
     no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
+    no_cancel_fee = fields.Boolean('No cancel fee', groups='campos_event.group_campos_admin')
     

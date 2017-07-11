@@ -14,6 +14,7 @@
             	<page name="camp_fee" string="Camp Fee" groups="campos_event.group_campos_admin">
             		<group>
             			<field name="no_invoicing"/>
+            			<field name="no_cancel_fee"/>
 		            	<field name="fee_agegroup_id" options="{'no_open': True}" readonly="1"/>
 		            	<field name="nights" readonly="1"/>
 		            	<field name="camp_product_id" readonly="1" nolabel="1" options="{'no_open': True}"/>

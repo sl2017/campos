@@ -24,7 +24,8 @@
     'depends': ['campos_preregistration', 'campos_event'],
 
     # always loaded
-    'data': ['views/finalregistration.xml',
+    'data': [
+        'views/campos_camp_area.xml','views/finalregistration.xml',
              'security/ir.model.access.csv',
              'security/ir.rule.csv',
              ],

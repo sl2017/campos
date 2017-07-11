@@ -316,6 +316,7 @@ class PioneeringPoleDepot(models.Model):
     '''
     _description = 'Pioneering Pole Depot'
     _name='event.registration.pioneeringpoledepot'
+    code = fields.Char('Code', size=4)
     name = fields.Char('Depot Name', required=True, translate=True)
 
     

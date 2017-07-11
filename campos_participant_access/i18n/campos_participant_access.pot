@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 19:37+0000\n"
-"PO-Revision-Date: 2017-07-07 19:37+0000\n"
+"POT-Creation-Date: 2017-07-11 15:31+0000\n"
+"PO-Revision-Date: 2017-07-11 15:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,18 @@ msgid "18+ foreigner"
 msgstr ""
 
 #. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+#: view:campos.event.participant:campos_participant_access.view_event_registration_participant_form
+#: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
+msgid "400 points is required to complete the course."
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
 #: view:campos.event.participant:campos_participant_access.view_event_registration_participant_form
 #: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
 #: view:event.registration:campos_participant_access.event_registration_form_view
+#: view:event.registration:campos_participant_access.view_form_finalregistration_gl
 msgid "CLC"
 msgstr ""
 
@@ -96,6 +105,12 @@ msgid "Click here"
 msgstr ""
 
 #. module: campos_participant_access
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Completed"
+msgstr ""
+
+#. module: campos_participant_access
 #: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
 msgid "Contact info"
 msgstr ""
@@ -111,15 +126,9 @@ msgid "Display Name"
 msgstr ""
 
 #. module: campos_participant_access
-#: code:addons/campos_participant_access/models/campos_event_participant.py:94
+#: code:addons/campos_participant_access/models/campos_event_participant.py:97
 #, python-format
 msgid "Email adress missing for %s"
-msgstr ""
-
-#. module: campos_participant_access
-#: selection:campos.clc.stat,clc_state:0
-#: selection:campos.event.participant,clc_state:0
-msgid "Enrolled"
 msgstr ""
 
 #. module: campos_participant_access
@@ -165,6 +174,12 @@ msgid "My Signup"
 msgstr ""
 
 #. module: campos_participant_access
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Not started"
+msgstr ""
+
+#. module: campos_participant_access
 #: model:res.groups,name:campos_participant_access.group_campos_participant
 msgid "Participant"
 msgstr ""
@@ -175,9 +190,9 @@ msgid "Participants"
 msgstr ""
 
 #. module: campos_participant_access
-#: selection:campos.clc.stat,clc_state:0
-#: selection:campos.event.participant,clc_state:0
-msgid "Passed"
+#: code:addons/campos_participant_access/models/campos_clc_stat.py:45
+#, python-format
+msgid "Participants from %s"
 msgstr ""
 
 #. module: campos_participant_access
@@ -186,25 +201,30 @@ msgid "Registration"
 msgstr ""
 
 #. module: campos_participant_access
-#: selection:campos.clc.stat,clc_state:0
-#: selection:campos.event.participant,clc_state:0
-msgid "Required"
-msgstr ""
-
-#. module: campos_participant_access
 #: model:email.template,subject:campos_participant_access.clc_signup_email
 msgid "SL2017 Signup confirmation"
 msgstr ""
 
 #. module: campos_participant_access
-#: code:addons/campos_participant_access/models/campos_event_participant.py:98
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Started"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:101
 #, python-format
 msgid "User already created for %s"
 msgstr ""
 
 #. module: campos_participant_access
-#: code:addons/campos_participant_access/models/campos_event_participant.py:102
+#: code:addons/campos_participant_access/models/campos_event_participant.py:105
 #, python-format
 msgid "User already created for this email %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.clc.stat:campos_participant_access.campos_clc_stat_tree_view
+msgid "View participants"
 msgstr ""
 
