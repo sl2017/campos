@@ -14,9 +14,9 @@ class CamposClcStat(models.Model):
     _log_access = False
     
     registration_id = fields.Many2one('event.registration', 'Registration')
-    clc_state = fields.Selection([('required', 'Required'),
-                                  ('enrolled', 'Enrolled'),
-                                  ('passed', 'Passed')], string='CLC state')
+    clc_state = fields.Selection([('required', 'Not started'),
+                                  ('enrolled', 'Started'),
+                                  ('passed', 'Completed')], string='CLC state')
     par_count = fields.Integer('Participants')
 
     def init(self, cr, context=None):

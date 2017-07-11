@@ -164,6 +164,9 @@
 				 		    <field name="staff" groups="campos_event.group_campos_admin" />
 				 		    <field name="participant_number" readonly="1" />
 				 		    <field name="wristband_date"/>
+				 		    <field name="pay4it_created"/>
+				 		    <field name="pay4it_cardactive"/>
+				 		    <field name="pay4it_cardnumber"/>
 							<!--
 				 		    <field name="staff_qty_pre_reg"/>
 				 		    -->
@@ -338,6 +341,9 @@
 							<field name="registration_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
 							<field name="wristband_date"/>
+							<field name="pay4it_created"/>
+				 		    <field name="pay4it_cardactive"/>
+				 		    <field name="pay4it_cardnumber"/>
                         	  <label for="street" string="Address"/>
                             <div>
                                 <div class="oe_edit_only">
@@ -483,6 +489,7 @@
                  	<field name="state" />
                  	<field name="tag_ids"/>
                  	<field name="participant_number"/>
+                 	<field name="pay4it_cardnumber"/>
                  	<field name="primary_committee_id"/>
                  	<!-- 
                  	<filter icon="terp-personal" string="Leaders" help="Scout Leaders" domain="[('leader','=',True)]"/>
