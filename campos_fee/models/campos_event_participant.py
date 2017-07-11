@@ -23,6 +23,7 @@ class CamposEventParticipant(models.Model):
     camp_price_total = fields.Float("Camp Total", compute='_compute_nights_product')
     sspar_ids = fields.One2many('campos.fee.ss.participant', 'participant_id', 'Snapshot')
     no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
+    no_cancel_fee = fields.Boolean('No cancel fee', groups='campos_event.group_campos_admin')
     
     # Handle Tranport refusion calculations for fereign jobbers
     group_entrypoint = fields.Many2one(related='registration_id.group_entrypoint')
