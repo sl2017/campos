@@ -57,6 +57,7 @@ class CampCommitteeFunction(geo_model.GeoModel):
     mobile = fields.Char('Mobile', related='participant_id.partner_id.mobile')
     geo_point = geo_fields.GeoPoint('Addresses coordinate', related='participant_id.partner_id.geo_point')
     com_contact = fields.Text(string='Contact', related='committee_id.par_contact_id.complete_contact')
+    contact_status = fields.Selection(related='committee_id.par_contact_id.state')
     active = fields.Boolean(default=True)
     job_title_id = fields.Many2one('campos.committee.job.title',
                          'Job Title',

@@ -13,6 +13,7 @@
     'depends': [
         'campos_jobber_final',
         'campos_transportation',
+        #'web_tree_dynamic_colored_field',
     ],
     'data': [
         'wizards/campos_checkin_wiz.xml',
