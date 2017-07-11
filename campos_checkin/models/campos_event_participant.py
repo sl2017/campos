@@ -15,9 +15,8 @@ class CamposEventParticipant(models.Model):
     checkin_ok = fields.Boolean('Check In possible', compute='compute_checkin')
     arrive_time = fields.Datetime('Arrival')
     checkin_completed = fields.Datetime('Check In Time')
-    checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp')
-    
-    
+    checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id')
+
     @api.multi
     #@api.depends()
     def compute_checkin(self):
@@ -35,7 +34,7 @@ class CamposEventParticipant(models.Model):
             #Economy
             if par.registration_id.partner_id != par.partner_id:
                 infotext.append(_('Paid by: %s') % (par.registration_id.partner_id.name))
-            if par.registration_id.partner_id.credit > 0:
+            elif par.registration_id.partner_id.credit > 0:
                 infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (par.registration_id.partner_id.credit))
                 checkin_ok = False
             else:
@@ -62,6 +61,11 @@ class CamposEventParticipant(models.Model):
             else:
                 par.checkin_info_html = '<div class="campos_warning_box">%s</div>' % '<br />'.join(infotext) if infotext else False
             par.checkin_ok = checkin_ok
+    
+    @api.multi
+    #@api.depends()
+    def _compute_checkin_subcamp_id(self):
+        pass
             
     @api.multi
     def action_checkin(self):

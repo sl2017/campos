@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_camp_area_form_view">
+        <field name="name">campos.camp.area.form (in campos_final_registration)</field>
+        <field name="model">campos.camp.area</field>
+        <field name="inherit_id" ref="campos_event.campos_camp_area_form_view"/>
+        <field name="arch" type="xml">
+             <field name="committee_id" position="after">
+             	<field name="pole_depot_id"/>
+             </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_camp_area_search_view">
+        <field name="name">campos.camp.area.search (in campos_final_registration)</field>
+        <field name="model">campos.camp.area</field>
+        <field name="inherit_id" ref="campos_event.campos_camp_area_search_view"/>
+        <field name="arch" type="xml">
+            <field name="event_id" position="after">
+             	<field name="pole_depot_id"/>
+             </field>
+        </field>
+    </record>
+
+
+
+</data>
+</openerp>

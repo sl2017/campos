@@ -36,6 +36,7 @@
                         <field name="participant"/>
                         <field name="staff"/>
                         <field name="no_invoicing"/>
+                        <field name="no_cancel_fee"/>
                                      
                         <field name="webtourususeridno"/>
                         <field name="webtourusgroupidno"/>                                

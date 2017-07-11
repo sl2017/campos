@@ -3,3 +3,4 @@
 ..  automodule:: package
 """
 from . import finalregistration
+from . import campos_camp_area
