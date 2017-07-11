@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+	<!--  Jobber Checkin view -->
+
+    <record model="ir.ui.view" id="campos_event_participant_form_view">
+        <field name="name">campos.event.participant.form (in campos_checkin)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
+        <field name="mode">primary</field>
+        <field name="priority">22</field>
+        <field name="arch" type="xml">
+        	<button name="action_deregister_participant" position="after">
+        		<button name="action_checkin" type="object" string="Check In" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/> 
+        	</button>
+        		
+            <field name="image" position="before">
+            	<field name="checkin_info_html"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_event_participant_search_view">
+        <field name="name">campos.event.participant.search (in campos_checkin)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_event.campos_event_participant_search"/>
+        <field name="arch" type="xml">
+            <field name="primary_committee_id" position="after">
+            	<field name="mobile_clean"/>
+            	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d'))]"/>
+            </field>	
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_event_participant_tree_view">
+        <field name="name">campos.event.participant.tree (in campos_checkin)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="priority">22</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+            	<field name="city"/>
+            	<field name="primary_committee_id"/>
+            	<field name="tocampdate" string="Exp. arrival"/>
+            
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_event_participant_act_window">
+        <field name="name">Campos Event Participant</field> <!-- TODO -->
+        <field name="res_model">campos.event.participant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('staff', '=', True)]</field>
+        <field name="context">{'search_default_factive': 1, 'search_default_ftoday': 1}</field>
+    </record>
+    
+    <record model="ir.actions.act_window.view"
+        id="campos_event_participant_act_window_tree">
+	  <field name="sequence" eval="1"/>
+	  <field name="view_mode">tree</field>
+	  <field name="view_id" ref="campos_event_participant_tree_view"/>
+	  <field name="act_window_id" ref="campos_event_participant_act_window"/>
+	</record>
+
+	<record model="ir.actions.act_window.view"
+	        id="campos_event_participant_act_window_form">
+	  <field name="sequence" eval="2"/>
+	  <field name="view_mode">form</field>
+	  <field name="view_id" ref="campos_event_participant_form_view"/>
+	  <field name="act_window_id" ref="campos_event_participant_act_window"/>
+	</record>	
+    
+	<!-- Top menu item -->
+    <menuitem name="Check In"
+        id="menu_campos_checkin"
+        groups="campos_checkin.group_campos_checkin_crew"
+        sequence="47"/>
+
+	<menuitem name="Check In"
+        id="submenu_campos_checkin"
+        parent="menu_campos_checkin"
+        sequence="10"/>
+
+    <record model="ir.ui.menu" id="campos_event_participant_menu">
+        <field name="name">Jobber Check In</field>
+        <field name="parent_id" ref="submenu_campos_checkin"/>
+        <field name="action" ref="campos_event_participant_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+	<template id="checkin_assets_backend" name="Campos Check IN assets" inherit_id="web.assets_backend">
+	           <xpath expr="." position="inside">
+	           	<link rel="stylesheet" href="/campos_checkin/static/src/css/checkin.css"/>
+	           </xpath>
+	       </template>
+</data>
+</openerp>

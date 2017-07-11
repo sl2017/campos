@@ -1,0 +1,13 @@
+.campos_info_box {
+	border: 1px solid #999;
+	margin-bottom: 5px;
+	padding: 10px 10px 10px 10px;
+	background-color: #FFF1C7;
+}
+
+.campos_warning_box {
+	border: 1px solid #999;
+	margin-bottom: 5px;
+	padding: 10px 10px 10px 10px;
+	background-color: #FFC7C7;
+}

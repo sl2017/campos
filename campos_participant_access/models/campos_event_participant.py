@@ -63,12 +63,15 @@ class CamposEventParticipant(models.Model):
                 if moodle_id and moodle_username:
                     usr = self.env['res.users'].search([('login', '=', moodle_username)])
                     if usr:
+                        part = False
                         if not usr.participant_id:
                             part = self.env['campos.event.participant'].search([('partner_id', '=', usr.partner_id.id)])
                             if part:
                                 usr.participant_id = part
                         else:
                             part = usr.participant_id
+                        if not part:
+                            part = self.env['campos.event.participant'].search([('email', '=', moodle_username)])
                         if part and not part.clc_userid:
                             part.clc_userid = moodle_id
                             part.clc_state = 'enrolled'
