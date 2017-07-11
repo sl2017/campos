@@ -21,6 +21,11 @@
             <field name="image" position="before">
             	<field name="checkin_info_html"/>
             </field>
+            
+            <field name="com_contact" position="replace">
+            	<field name="contact_status"/>
+            	<field name="com_contact" bg_color="lightgreen:contact_status in ['arrived','checkin'];"/>
+            </field>
         </field>
     </record>
 
