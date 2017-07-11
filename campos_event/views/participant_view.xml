@@ -102,7 +102,7 @@
              	 <button name="action_create_user" string="Create User" type="object" groups="campos_event.group_campos_manager"/>
              	 <button name="action_deregister_participant" string="Deregister Participant" type="object" groups="campos_event.group_campos_manager,campos_event.group_campos_committee" confirm="Deregister participant and revoke access?"/>
              	 
-				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red'}"/>
+				 <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved" statusbar_colors="{'rejected':'red','approved':'blue', 'cancelled': 'red', 'arrived': '#90EE90', 'checkin': '#008000'}"/>
 				</header>
 					<sheet>
 							 <field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
