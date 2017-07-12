@@ -5,6 +5,7 @@
 <openerp>
 <data>
 
+	<!-- participant view -->
     <record model="ir.ui.view" id="campos_event_participant_form_view">
         <field name="name">campos.event.participant.form (in campos_fee)</field>
         <field name="model">campos.event.participant</field>
@@ -40,6 +41,7 @@
         </field>
     </record>
 
+	<!--  Jobber admin view -->
  	<record model="ir.ui.view" id="view_event_registration_participant_form">
         <field name="name">campos.event.participant.form (in campos_fee)</field>
         <field name="model">campos.event.participant</field>
