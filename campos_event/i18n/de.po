@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 20:08+0000\n"
-"PO-Revision-Date: 2017-07-12 20:09+0000\n"
+"POT-Creation-Date: 2017-07-12 20:42+0000\n"
+"PO-Revision-Date: 2017-07-12 20:42+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -333,6 +333,11 @@ msgstr ""
 #. module: campos_event
 #: model:res.groups,name:campos_event.group_campos_activity
 msgid "Activity Coordinator"
+msgstr ""
+
+#. module: campos_event
+#: view:website:campos_event.jobpulje_signup
+msgid "Ad-hoc Jobber Signup Form"
 msgstr ""
 
 #. module: campos_event
@@ -2261,7 +2266,6 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.extern_signup_extpartner
-#: view:website:campos_event.jobpulje_signup
 msgid "Partner Jobber Signup Form"
 msgstr ""
 
