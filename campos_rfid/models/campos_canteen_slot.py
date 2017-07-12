@@ -12,6 +12,6 @@ class CamposCanteenSlot(models.Model):
 
     name = fields.Char()
     code = fields.Char()
-    meal = fields.Selection([('breakfast', 'Breakfast'),
-                             ('lunch', 'Lunch'),
-                             ('dinner', 'Dinner')], string='Meal')
+    meal = fields.Selection([('1breakfast', 'Breakfast'),
+                             ('2lunch', 'Lunch'),
+                             ('3dinner', 'Dinner')], string='Meal')
