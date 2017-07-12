@@ -38,20 +38,41 @@ source_file = campos_ckr/i18n/campos_ckr.pot
 source_lang = en
 type = PO
 
+[campos.campos_rfid]
+file_filter = campos_rfid/i18n/<lang>.po
+source_file = campos_rfid/i18n/campos_rfid.pot
+source_lang = en
+type = PO
+
+[campos.campos_checkin]
+file_filter = campos_checkin/i18n/<lang>.po
+source_file = campos_checkin/i18n/campos_checkin.pot
+source_lang = en
+type = PO
+
+[campos.campos_participant_access]
+file_filter = campos_participant_access/i18n/<lang>.po
+source_file = campos_participant_access/i18n/campos_participant_access.pot
+source_lang = en
+type = PO
+
 [campos.campos_fee]
 file_filter = campos_fee/i18n/<lang>.po
 source_file = campos_fee/i18n/campos_fee.pot
 source_lang = en
+type = PO
 
 [campos.campos_crewnet]
 file_filter = campos_crewnet/i18n/<lang>.po
 source_file = campos_crewnet/i18n/campos_crewnet.pot
 source_lang = en
+type = PO
 
 [campos.campos_activity]
 file_filter = campos_activity/i18n/<lang>.po
 source_file = campos_activity/i18n/campos_activity.pot
 source_lang = en
+type = PO
 
 [campos.campos_preregistration]
 file_filter = campos_preregistration/i18n/<lang>.po

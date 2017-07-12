@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 15:31+0000\n"
-"PO-Revision-Date: 2017-07-11 15:31+0000\n"
+"POT-Creation-Date: 2017-07-12 20:08+0000\n"
+"PO-Revision-Date: 2017-07-12 20:09+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: German (http://www.transifex.com/sl2017/campos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -434,6 +434,7 @@ msgid "Application"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee.function,contact_status:0
 #: field:campos.event.participant,state:0
 msgid "Approval Procedure"
 msgstr ""
@@ -3430,7 +3431,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,pay4it_cardnumber:0
-msgid "Wristbans number"
+msgid "Wristband number"
 msgstr ""
 
 #. module: campos_event
