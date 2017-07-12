@@ -20,9 +20,9 @@ class CamposRfidDevice(models.Model):
     check_method = fields.Selection([('canteen', 'Canteen Check In'),
                                      ('meat', 'Meat Supply')], string='Function')
     canteen_id = fields.Many2one('campos.canteen', 'Canteen')
-    meal = fields.Selection([('breakfast', 'Breakfast'),
-                             ('lunch', 'Lunch'),
-                             ('dinner', 'Dinner')], string='Meal') 
+    meal = fields.Selection([('1breakfast', 'Breakfast'),
+                             ('2lunch', 'Lunch'),
+                             ('3dinner', 'Dinner')], string='Meal') 
     
     action = fields.Many2one('ir.actions.act_window')
     user = fields.Many2one('res.users')

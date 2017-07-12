@@ -16,6 +16,12 @@ class CamposCanteenTicket(models.Model):
             slots.append((s.replace(':', ''), s))
 
         return slots
+    
+    _sql_con_sql_constraints = [
+        ('ticket_unique',
+         'unique(participant_id,date,meal)',
+         'The ticket needs to be unique')
+    ]
 
     name = fields.Char()
     canteen_inst_id = fields.Many2one('campos.canteen.instanse', 'Canteen Instanse')
