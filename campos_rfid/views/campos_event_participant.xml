@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+
+	<!--  Jobber admin view -->
+ 	<record model="ir.ui.view" id="view_event_registration_participant_form">
+        <field name="name">campos.event.participant.form (in campos_rfid)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
+        <field name="arch" type="xml">
+        	<field name="canteen_ids" position="after">
+        		<field name="canteen_ticket_ids" nolabel="1" colspan="2">
+        			<tree default_order='date,meal'>
+						<field name="date"/>
+						<field name="meal"/>
+						<field name="canteen_id"/>        			
+        			</tree>
+        		</field>
+        		<button name="generate_canteen_tickets" string="Generate tickets" type="object" groups="campos_event.group_campos_admin"/>
+        	</field>
+        </field>
+    </record>
+    
+
+    <record model="ir.ui.view" id="campos_event_participant_staff_form_view">
+        <field name="name">campos.event.participant.form Staff (in campos_rfid)</field>
+        <field name="model">campos.event.participant</field>
+        <field name="inherit_id" ref="campos_jobber_final.campos_event_participant_staff_form_view"/>
+        <field name="arch" type="xml">
+        	<field name="canteen_ids" position="after">
+        		<field name="canteen_ticket_ids" nolabel="1" colspan="2">
+        			<tree default_order='date,meal'>
+						<field name="date"/>
+						<field name="meal"/>
+						<field name="canteen_id"/>        			
+        			</tree>
+        		</field>
+        	</field>
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>

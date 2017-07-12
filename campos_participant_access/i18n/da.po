@@ -1,0 +1,230 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * campos_participant_access
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-11 15:31+0000\n"
+"PO-Revision-Date: 2017-07-11 15:31+0000\n"
+"Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: campos_participant_access
+#: model:email.template,body_html:campos_participant_access.clc_signup_email
+msgid ""
+"\n"
+"                \n"
+"                    <p>\n"
+"                        Hi ${name},\n"
+"                    </p>\n"
+"<p>\n"
+"                        To complete the signup, click on the following link:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li><a href=\"${object.signup_url}\">Accept invitation to \"${object.company_id.name}\"</a></li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                        Thanks,\n"
+"                    </p>\n"
+"                    <pre>\n"
+"--\n"
+"${object.company_id.name or ''}\n"
+"${object.company_id.email or ''}\n"
+"${object.company_id.phone or ''}\n"
+"                    </pre>\n"
+"                                           \n"
+"            "
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_search_view
+msgid "18+ foreigner"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+#: view:campos.event.participant:campos_participant_access.view_event_registration_participant_form
+#: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
+msgid "400 points is required to complete the course."
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+#: view:campos.event.participant:campos_participant_access.view_event_registration_participant_form
+#: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
+#: view:event.registration:campos_participant_access.event_registration_form_view
+#: view:event.registration:campos_participant_access.view_form_finalregistration_gl
+msgid "CLC"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_search_view
+msgid "CLC Req"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_search_view
+#: field:event.registration,clc_stat_ids:0
+msgid "CLC State"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.event.participant,clc_grade:0
+msgid "CLC Total Grade"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.event.participant,clc_user_needed:0
+msgid "CLC User needed"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,clc_state:0
+#: field:campos.event.participant,clc_state:0
+msgid "CLC state"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.model,name:campos_participant_access.model_campos_clc_stat
+msgid "Campos Clc Stat"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.actions.act_window,name:campos_participant_access.campos_event_participant_act_window
+msgid "Campos Event Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "Click here"
+msgstr ""
+
+#. module: campos_participant_access
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Completed"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "Contact info"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.view_form_finalregistration_participant
+msgid "Create CLC User"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:97
+#, python-format
+msgid "Email adress missing for %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.model,name:campos_participant_access.model_campos_event_participant
+msgid "Event Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.model,name:campos_participant_access.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "For access to the CLC course:"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.event.participant:campos_participant_access.campos_event_participant_form_own_view
+msgid "For changes contact your own scout master"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.event.participant,clc_userid:0
+msgid "Moodle Internal User ID"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_menu
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_sub_menu
+#: model:ir.ui.menu,name:campos_participant_access.campos_event_participant_top_menu
+msgid "My Signup"
+msgstr ""
+
+#. module: campos_participant_access
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Not started"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:res.groups,name:campos_participant_access.group_campos_participant
+msgid "Participant"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,par_count:0
+msgid "Participants"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_clc_stat.py:45
+#, python-format
+msgid "Participants from %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: field:campos.clc.stat,registration_id:0
+msgid "Registration"
+msgstr ""
+
+#. module: campos_participant_access
+#: model:email.template,subject:campos_participant_access.clc_signup_email
+msgid "SL2017 Signup confirmation"
+msgstr ""
+
+#. module: campos_participant_access
+#: selection:campos.clc.stat,clc_state:0
+#: selection:campos.event.participant,clc_state:0
+msgid "Started"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:101
+#, python-format
+msgid "User already created for %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: code:addons/campos_participant_access/models/campos_event_participant.py:105
+#, python-format
+msgid "User already created for this email %s"
+msgstr ""
+
+#. module: campos_participant_access
+#: view:campos.clc.stat:campos_participant_access.campos_clc_stat_tree_view
+msgid "View participants"
+msgstr ""

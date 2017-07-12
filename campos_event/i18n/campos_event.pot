@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 15:31+0000\n"
-"PO-Revision-Date: 2017-07-11 15:31+0000\n"
+"POT-Creation-Date: 2017-07-12 20:42+0000\n"
+"PO-Revision-Date: 2017-07-12 20:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -323,6 +323,11 @@ msgid "Activity Coordinator"
 msgstr ""
 
 #. module: campos_event
+#: view:website:campos_event.jobpulje_signup
+msgid "Ad-hoc Jobber Signup Form"
+msgstr ""
+
+#. module: campos_event
 #: field:campos.camp.area,addreg_id:0
 msgid "Add Registration"
 msgstr ""
@@ -421,6 +426,7 @@ msgid "Application"
 msgstr ""
 
 #. module: campos_event
+#: field:campos.committee.function,contact_status:0
 #: field:campos.event.participant,state:0
 msgid "Approval Procedure"
 msgstr ""
@@ -2280,7 +2286,6 @@ msgstr ""
 
 #. module: campos_event
 #: view:website:campos_event.extern_signup_extpartner
-#: view:website:campos_event.jobpulje_signup
 msgid "Partner Jobber Signup Form"
 msgstr ""
 
@@ -3435,7 +3440,7 @@ msgstr ""
 
 #. module: campos_event
 #: field:campos.event.participant,pay4it_cardnumber:0
-msgid "Wristbans number"
+msgid "Wristband number"
 msgstr ""
 
 #. module: campos_event

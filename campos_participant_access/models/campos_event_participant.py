@@ -29,7 +29,6 @@ class CamposEventParticipant(models.Model):
         rows = ET.ElementTree(ET.fromstring(grades))
         for row in rows.getroot():
             for key0 in row:
-                print key0
                 if key0.tag == 'KEY' and key0.attrib.get('name') == 'grades':
                     for multiple in key0:
                         for single in multiple:
@@ -72,7 +71,8 @@ class CamposEventParticipant(models.Model):
                             part = usr.participant_id
                         if not part:
                             part = self.env['campos.event.participant'].search([('email', '=', moodle_username)])
-                        if part and not part.clc_userid:
+                            
+                        if part and len(part) == 1 and not part.clc_userid:
                             part.clc_userid = moodle_id
                             part.clc_state = 'enrolled'
                         part.moodle_get_grade()

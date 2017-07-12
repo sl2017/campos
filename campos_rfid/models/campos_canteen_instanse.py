@@ -13,9 +13,9 @@ class CamposCanteenInstanse(models.Model):
     name = fields.Char()
     canteen_id = fields.Many2one('campos.canteen', 'Canteen')
     date = fields.Date('Date')
-    meal = fields.Selection([('breakfast', 'Breakfast'),
-                             ('lunch', 'Lunch'),
-                             ('dinner', 'Dinner')], string='Meal')
+    meal = fields.Selection([('1breakfast', 'Breakfast'),
+                             ('2lunch', 'Lunch'),
+                             ('3dinner', 'Dinner')], string='Meal')
     ticket_ids = fields.One2many('campos.canteen.ticket', 'canteen_inst_id', 'Tickets')
     stat_ids = fields.One2many('campos.canteen.stat', 'canteen_inst_id', 'Stats')
     
@@ -46,7 +46,7 @@ class CamposCanteenInstanse(models.Model):
                 domain = [('post_camp', '=', True)]
 
             for c in self.env['campos.canteen'].search(domain):
-                for meal in ['breakfast', 'lunch', 'dinner']:
+                for meal in ['1breakfast', '2lunch', '3dinner']:
                     self.env['campos.canteen.instanse'].create({'canteen_id': c.id,
                                                                 'date': day.event_date,
                                                                 'meal': meal,

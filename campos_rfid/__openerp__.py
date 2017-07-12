@@ -13,6 +13,7 @@
     'depends': ['mail', 'campos_jobber_final'
     ],
     'data': [
+        'views/campos_event_participant.xml',
         'security/campos_rfid_device.xml',
         'views/campos_rfid_device.xml',
         'security/campos_canteen_slot.xml',

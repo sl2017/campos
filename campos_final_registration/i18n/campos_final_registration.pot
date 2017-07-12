@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 20:39+0000\n"
-"PO-Revision-Date: 2017-07-06 20:39+0000\n"
+"POT-Creation-Date: 2017-07-12 20:08+0000\n"
+"PO-Revision-Date: 2017-07-12 20:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -73,6 +73,11 @@ msgid "Available meat types per event day"
 msgstr ""
 
 #. module: campos_final_registration
+#: model:ir.model,name:campos_final_registration.model_campos_camp_area
+msgid "Camp Area"
+msgstr ""
+
+#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Camp Area Coordinators"
 msgstr ""
@@ -118,6 +123,11 @@ msgstr ""
 #. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_event_registration_meatlist
 msgid "Chosen meat on a registration"
+msgstr ""
+
+#. module: campos_final_registration
+#: field:event.registration.pioneeringpoledepot,code:0
+msgid "Code"
 msgstr ""
 
 #. module: campos_final_registration
@@ -243,7 +253,7 @@ msgid "Doublet"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:341
+#: code:addons/campos_final_registration/models/finalregistration.py:342
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -582,7 +592,7 @@ msgid "Number of mast sails, incl. diameters, if they have sides and on how much
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:424
+#: code:addons/campos_final_registration/models/finalregistration.py:425
 #, python-format
 msgid "Number of ordered meat portions (%d) exceeds the number of dinner participants (%d) on %s. "
 msgstr ""
@@ -700,6 +710,11 @@ msgid "Pioneering constructions with planned accommodation at more than 1 meter 
 msgstr ""
 
 #. module: campos_final_registration
+#: field:campos.camp.area,pole_depot_id:0
+msgid "Pole depot"
+msgstr ""
+
+#. module: campos_final_registration
 #: selection:event.day,event_period:0
 msgid "Post Camp"
 msgstr ""
@@ -810,7 +825,7 @@ msgid "Special needs"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:441
+#: code:addons/campos_final_registration/models/finalregistration.py:442
 #, python-format
 msgid "Start data cannot be after end date"
 msgstr ""
