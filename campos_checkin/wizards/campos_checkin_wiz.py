@@ -46,5 +46,5 @@ class CamposCheckinWiz(models.TransientModel):
             wizard.participant_id.checkin_completed = fields.Datetime.now()
             if not wizard.participant_id.wristband_date:
                 wizard.participant_id.wristband_date = fields.Date.today()
-            wizard.participant_id.generate_canteen_tickets()
+            wizard.participant_id.suspend_security().generate_canteen_tickets()
     
