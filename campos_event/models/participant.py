@@ -186,7 +186,7 @@ class EventParticipant(geo_model.GeoModel):
     wristband_date = fields.Date('wristband issued', groups='campos_event.group_campos_info', track_visibility='onchange')
     pay4it_created = fields.Boolean('Created on skejser.dk')
     pay4it_cardactive = fields.Boolean('Card/Wristband attached')
-    pay4it_cardnumber = fields.Char('Wristbans number', groups='campos_event.group_campos_admin')
+    pay4it_cardnumber = fields.Char('Wristband number', groups='campos_event.group_campos_admin')
     
     tag_ids = fields.Many2many('campos.par.tag', string='Tags', groups='campos_event.group_campos_admin')
     
