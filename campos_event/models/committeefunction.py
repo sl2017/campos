@@ -62,17 +62,33 @@ class CampCommitteeFunction(geo_model.GeoModel):
     job_title_id = fields.Many2one('campos.committee.job.title',
                          'Job Title',
                          ondelete='set null')
-    
+
     sharepoint_mail = fields.Selection([('yes', 'Yes'),('no', 'No')], string='Sharepoint mail wanted')
     sharepoint_mailaddress = fields.Char('Sharepoint mail address', related='participant_id.sharepoint_mailaddress')
     zexpense_access_wanted = fields.Selection([('yes', 'Yes'),('no', 'No')], string='zExpense access wanted')
-    
 
-        
+    @api.multi
+    def add_access_grp(self):
+        for cf in self:
+            group_ids = False
+            if cf.function_type_id.chairman and cf.committee_id.access_grp_mgr_ids:
+                group_ids = cf.committee_id.access_grp_mgr_ids
+            elif not cf.function_type_id.chairman and cf.committee_id.access_grp_staff_ids:
+                group_ids = cf.committee_id.access_grp_staff_ids
+            if group_ids:
+                usr = self.env['res.users'].sudo().search([('participant_id', '=', cf.participant_id.id)])
+                usr.groups_id += group_ids
+
+    @api.model
+    def create(self, vals):
+        cf = super(CampCommitteeFunction, self).create(vals)
+        cf.add_access_grp()
+        return cf
+
     @api.multi
     def write(self, vals):
         _logger.info("New func Write Entered %s", vals.keys())
-        ret =  super(CampCommitteeFunction, self).write(vals)
+        ret = super(CampCommitteeFunction, self).write(vals)
         for app in self:
             if vals.has_key('new_func'):
                 if app.sharepoint_mail:
@@ -123,7 +139,7 @@ class CampCommitteeFunction(geo_model.GeoModel):
                 if not app.participant_id.primary_committee_id:
                     parvals['primary_committee_id'] = app.committee_id.id
                 app.participant_id.write(parvals)
-
+        self.add_access_grp()
         return ret
     
     @api.multi

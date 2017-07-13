@@ -194,7 +194,7 @@
 							<field name="primary_committee_id" groups="campos_event.group_campos_manager"/>
 							</group>
 							<notebook colspan="4" col="4">
-							<page string="Sharepoint">
+							<page name="sharepoint" string="Sharepoint">
 								 <group>
 								  
 								 	<field name="sharepoint_mail"/>
@@ -204,7 +204,7 @@
 								 	<field name="private_mailaddress"/>
 								 </group>
 								 </page>
-								 <page string="zExpense">
+								 <page name="zexpense" string="zExpense">
 								 <group>
 								  
 								 	<field name="zexpense_access_wanted"/>
@@ -228,13 +228,13 @@
 										<field name="agreements" nolabel="1"/>	
 								 	</group>	
 								 </page>
-								 <page string="Internal Note" groups="campos_event.group_campos_manager,campos_event.group_campos_committee">
+								 <page name="int_note" string="Internal Note" groups="campos_event.group_campos_manager,campos_event.group_campos_committee">
 								 	<group>
 										<field name="internal_note" nolabel="1"/>	
 											
 								 	</group>	
 								 </page>
-								 <page string="Meetings" groups="campos_event.group_campos_manager">
+								 <page name="meetings" string="Meetings" groups="campos_event.group_campos_manager">
 								 	<group>
 								 		<field name="meeting_registration_ids" nolabel="1">
 								 			<tree create="false">
@@ -250,10 +250,10 @@
 								 	</group>
 								 
 								 </page>
-								 <page string="Map">
+								 <page name="map" string="Map">
                         			<field name="geo_point" widget="geo_edit_map"/>
                     			 </page>
-                    			 <page string="Handed out items">
+                    			 <page name="handout" string="Handed out items">
                     			 	<group>
 								 		<field name="staff_del_prod_ids" nolabel="1">
 								 			<tree editable="top">

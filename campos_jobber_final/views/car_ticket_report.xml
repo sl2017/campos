@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report id="report_car_ticket_action" string="Parking Ticket"
+			model="campos.event.car" report_type="qweb-pdf"
+			name="campos_jobber_final.report_car_ticket_template" />
+
+		<template id="report_car_ticket_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="report.internal_layout">
+						<div class="page">
+							<table>
+							<tr><td>
+							<img 
+t-att-src="'data:image/png;base64,%s' % res_company.logo"
+style="max-height: 200px;" />
+							</td>
+							<td>
+							<h1 style="font-size:100px"><b>&amp;nbsp;PARKERINGS<br/>&amp;nbsp;TILLADELSE</b></h1>
+							</td>
+							</tr>
+							</table>
+							<br/><br/> 
+							<h1 class="text-center" style="font-size:100px"><b><span t-field="o.reg_number"/></b></h1>
+							<br/><br/> 
+							<h2 class="text-center">Gyldig: <span t-field="o.park_permit_start_date"/> - <span t-field="o.park_permit_end_date"/></h2>
+							<h2 class="text-center">Kontaktnr: <span t-field="o.phone_number"/></h2>
+							<br/><br/> 
+							<hr/>
+							<br/><br/> 
+							<br/><br/>
+							<br/><br/>
+							<br/><br/>
+							<br/><br/>
+							<br/><br/>
+							<br/><br/> 
+							<h2 class="text-center">Fold denne A4 og læg den synligt i forruden</h2>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</openerp>

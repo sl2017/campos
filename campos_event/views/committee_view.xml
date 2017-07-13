@@ -136,6 +136,8 @@
 							<field name="account" groups="campos_event.group_campos_office"/>
 							<field name="par_contact_id" context="{'show_address' : True, 'without_company':True, 'add_email': True}" 
 										options='{"always_reload": True, "highlight_first_line": True}' domain="[('state', '=', 'approved')]"/>
+							<field name="access_grp_staff_ids" options="{'no_create': True}" widget="many2many_tags"/>
+							<field name="access_grp_mgr_ids" options="{'no_create': True}" widget="many2many_tags"/>
 						</group>
 					</sheet>
 					<div class="oe_chatter">
