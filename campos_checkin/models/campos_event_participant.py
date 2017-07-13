@@ -90,3 +90,42 @@ class CamposEventParticipant(models.Model):
         }
         _logger.info('ACTION: %s', action)
         return action
+
+    @api.multi
+    def action_cancel_checkin(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window.message',
+            'title': _('Cancel Checkin'),
+            'message': _("Change to 'Arrived' or 'Not yet arrived'"),
+            'buttons': [
+                {
+                    'type': 'method',
+                    'name': _('Arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'arrived'},
+                },
+                {
+                    'type': 'method',
+                    'name': _('Not yet arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'approved'},
+                }
+            ]
+        }
+        
+    @api.multi
+    def action_execute_cancel_checkin(self, force_state=None):
+        self.ensure_one()
+        if force_state:
+            self.state = force_state
+            if force_state == 'approved':
+                self.arrive_time = False
