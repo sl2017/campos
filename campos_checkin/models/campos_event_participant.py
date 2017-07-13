@@ -25,10 +25,10 @@ class CamposEventParticipant(models.Model):
             checkin_ok = True
             infotext = []
             if par.clc_state:
-                if par.clc_state != 'passed':
+                if par.clc_state != 'passed' and par.camp_age >= 18:
                     infotext.append(_('CLC not passed!'))
                     checkin_ok = False
-            elif par.ckr_state != 'approved':
+            elif par.ckr_state != 'approved' and par.camp_age >= 15:
                 infotext.append(_('CKR not yet approved!'))
                 checkin_ok = False
             #Economy
@@ -39,7 +39,12 @@ class CamposEventParticipant(models.Model):
                 checkin_ok = False
             else:
                 infotext.append(_('Payment recived'))
-            
+            if len(par.jobber_pay_for_ids) > 1:
+                infotext.append(_('Paying for: %s' % ', '.join(par.jobber_pay_for_ids.mapped('name'))))
+
+            if len(par.jobber_child_ids) > 1:
+                infotext.append(_('Children: %s' % ', '.join(par.jobber_child_ids.mapped('name'))))
+
             if not par.accomodation_ids:
                 infotext.append(_('No accomonodation specified'))
                 checkin_ok = False
@@ -90,3 +95,42 @@ class CamposEventParticipant(models.Model):
         }
         _logger.info('ACTION: %s', action)
         return action
+
+    @api.multi
+    def action_cancel_checkin(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window.message',
+            'title': _('Cancel Checkin'),
+            'message': _("Change to 'Arrived' or 'Not yet arrived'"),
+            'buttons': [
+                {
+                    'type': 'method',
+                    'name': _('Arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'arrived'},
+                },
+                {
+                    'type': 'method',
+                    'name': _('Not yet arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'approved'},
+                }
+            ]
+        }
+        
+    @api.multi
+    def action_execute_cancel_checkin(self, force_state=None):
+        self.ensure_one()
+        if force_state:
+            self.state = force_state
+            if force_state == 'approved':
+                self.arrive_time = False

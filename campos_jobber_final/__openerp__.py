@@ -29,6 +29,7 @@
         'security/campos_event_participant.xml',
         'security/campos_event_car.xml',
         'views/campos_event_car.xml',
+        'views/car_ticket_report.xml',
     ],
     'demo': [
     ],

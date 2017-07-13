@@ -15,7 +15,8 @@
         <field name="priority">22</field>
         <field name="arch" type="xml">
         	<button name="action_deregister_participant" position="after">
-        		<button name="action_checkin" type="object" string="Check In" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/> 
+        		<button name="action_checkin" type="object" states="approved,arrived" string="Check In" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/>
+        		<button name="action_cancel_checkin" type="object" states="arrived,checkin" string="Cancel Check In" groups="campos_checkin.group_campos_checkin_mgr"/> 
         	</button>
         		
             <field name="image" position="before">
@@ -26,6 +27,25 @@
             	<field name="contact_status"/>
             	<field name="com_contact" bg_color="lightgreen:contact_status in ['arrived','checkin'];"/>
             </field>
+            
+             <page name="sharepoint" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
+             <page name="zexpense" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
+             <page name="meetings" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
+             <page name="map" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
+             <page name="int_note" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
+             <page name="crewnet" position="attributes">
+               	<attribute name="invisible">1</attribute>
+             </page>
         </field>
     </record>
 
@@ -36,7 +56,8 @@
         <field name="arch" type="xml">
             <field name="primary_committee_id" position="after">
             	<field name="mobile_clean"/>
-            	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d'))]"/>
+            	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d')),('state', 'in', ['approved','arrived'])]"/>
+            	
             </field>	
         </field>
     </record>
@@ -51,6 +72,7 @@
             	<field name="city"/>
             	<field name="primary_committee_id"/>
             	<field name="tocampdate" string="Exp. arrival"/>
+            	<field name="state"/>
             
             </tree>
         </field>
