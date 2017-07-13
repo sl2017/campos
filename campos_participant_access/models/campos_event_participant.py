@@ -61,6 +61,7 @@ class CamposEventParticipant(models.Model):
                         moodle_username = val['VALUE']
                 if moodle_id and moodle_username:
                     usr = self.env['res.users'].search([('login', '=', moodle_username)])
+                    part = False 
                     if usr:
                         part = False
                         if not usr.participant_id:
@@ -69,13 +70,14 @@ class CamposEventParticipant(models.Model):
                                 usr.participant_id = part
                         else:
                             part = usr.participant_id
-                        if not part:
-                            part = self.env['campos.event.participant'].search([('email', '=', moodle_username)])
+                    if not part:
+                         part = self.env['campos.event.participant'].search([('email', '=', moodle_username)])
                             
-                        if part and len(part) == 1 and not part.clc_userid:
+                    if part and len(part) == 1 and not part.clc_userid:
                             part.clc_userid = moodle_id
                             part.clc_state = 'enrolled'
-                        part.moodle_get_grade()
+                    if part and len(part) == 1:
+                            part.moodle_get_grade()
     
     @api.multi
     def _compute_clc_user_needed(self):
