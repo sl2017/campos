@@ -4,17 +4,20 @@
 		<report id="report_car_ticket_action" string="Parking Ticket"
 			model="campos.event.car" report_type="qweb-pdf"
 			name="campos_jobber_final.report_car_ticket_template" />
-
-		<template id="report_car_ticket_template">
-			<t t-call="report.html_container">
-				<t t-foreach="docs" t-as="o">
-					<t t-call="report.internal_layout">
-						<div class="page">
+		<report id="report_car_ticket_job_action" string="Parking Ticket"
+			model="campos.event.participant" report_type="qweb-pdf"
+			name="campos_jobber_final.report_car_ticket_job_template" />
+		<report id="report_car_ticket_grp_action" string="Parking Ticket"
+			model="event.registration" report_type="qweb-pdf"
+			name="campos_jobber_final.report_car_ticket_grp_template" />
+		
+		 <template id="report_car_ticket_page">
+		 	<div class="page">
 							<table>
 							<tr><td>
 							<img 
-t-att-src="'data:image/png;base64,%s' % res_company.logo"
-style="max-height: 200px;" />
+								t-att-src="'data:image/png;base64,%s' % res_company.logo"
+								style="max-height: 200px;" />
 							</td>
 							<td>
 							<h1 style="font-size:100px"><b>&amp;nbsp;PARKERINGS<br/>&amp;nbsp;TILLADELSE</b></h1>
@@ -37,6 +40,37 @@ style="max-height: 200px;" />
 							<br/><br/> 
 							<h2 class="text-center">Fold denne A4 og læg den synligt i forruden</h2>
 						</div>
+		 
+		 
+		 </template>
+		
+		<template id="report_car_ticket_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="campos_jobber_final.report_car_ticket_page">
+					</t>
+				</t>
+			</t>
+		</template>
+		
+		<template id="report_car_ticket_job_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="job">
+					<t t-foreach="job.car_ids" t-as="o">
+						<t t-call="campos_jobber_final.report_car_ticket_page">
+						</t>
+					</t>
+				</t>
+			</t>
+		</template>
+		
+		
+		<template id="report_car_ticket_grp_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="grp">
+					<t t-foreach="grp.car_ids" t-as="o">
+						<t t-call="campos_jobber_final.report_car_ticket_page">
+						</t>
 					</t>
 				</t>
 			</t>
