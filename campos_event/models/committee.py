@@ -61,6 +61,8 @@ class CampCommittee(models.Model):
     parent_id = fields.Many2one('campos.committee', 'Parent Committee', ondelete='restrict')
     main_comm_id = fields.Many2one('campos.committee', 'Main Committee', ondelete='restrict', compute='_compute_main_comm_id')
     committee_type_id = fields.Many2one('campos.committee.type', 'Type')
+    access_grp_staff_ids = fields.Many2many('res.groups', string='Staff Access Groups', groups='campos_event.group_campos_admin')
+    access_grp_mgr_ids = fields.Many2many('res.groups', string='Mgr Access Groups', groups='campos_event.group_campos_admin')
     
     child_ids = fields.One2many(
         'campos.committee',
