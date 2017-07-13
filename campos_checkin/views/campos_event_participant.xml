@@ -56,8 +56,8 @@
         <field name="arch" type="xml">
             <field name="primary_committee_id" position="after">
             	<field name="mobile_clean"/>
-            	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d'))]"/>
-            	<filter name="fexpected" string="Expected/In Checkin" domain="[('state', 'in', ['approved','arrived'])]"/>
+            	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d')),('state', 'in', ['approved','arrived'])]"/>
+            	
             </field>	
         </field>
     </record>
@@ -83,7 +83,7 @@
         <field name="res_model">campos.event.participant</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('staff', '=', True)]</field>
-        <field name="context">{'search_default_factive': 1, 'search_default_ftoday': 1, 'search_default_fexpected': 1}</field>
+        <field name="context">{'search_default_factive': 1, 'search_default_ftoday': 1}</field>
     </record>
     
     <record model="ir.actions.act_window.view"

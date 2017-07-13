@@ -25,10 +25,10 @@ class CamposEventParticipant(models.Model):
             checkin_ok = True
             infotext = []
             if par.clc_state:
-                if par.clc_state != 'passed':
+                if par.clc_state != 'passed' and par.camp_age >= 18:
                     infotext.append(_('CLC not passed!'))
                     checkin_ok = False
-            elif par.ckr_state != 'approved':
+            elif par.ckr_state != 'approved' and par.camp_age >= 15:
                 infotext.append(_('CKR not yet approved!'))
                 checkin_ok = False
             #Economy
@@ -39,7 +39,12 @@ class CamposEventParticipant(models.Model):
                 checkin_ok = False
             else:
                 infotext.append(_('Payment recived'))
-            
+            if len(par.jobber_pay_for_ids) > 1:
+                infotext.append(_('Paying for: %s' % ', '.join(par.jobber_pay_for_ids.mapped('name'))))
+
+            if len(par.jobber_child_ids) > 1:
+                infotext.append(_('Children: %s' % ', '.join(par.jobber_child_ids.mapped('name'))))
+
             if not par.accomodation_ids:
                 infotext.append(_('No accomonodation specified'))
                 checkin_ok = False
