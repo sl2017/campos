@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 09:21+0000\n"
-"PO-Revision-Date: 2017-07-07 09:21+0000\n"
+"POT-Creation-Date: 2017-07-13 15:40+0000\n"
+"PO-Revision-Date: 2017-07-13 15:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,16 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.jobber.accom.group,number_participants:0
 msgid "# participants"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:website:campos_jobber_final.report_car_ticket_template
+msgid "&nbsp;PARKERINGS"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:website:campos_jobber_final.report_car_ticket_template
+msgid "&nbsp;TILLADELSE"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -393,6 +403,11 @@ msgid "Final signup"
 msgstr ""
 
 #. module: campos_jobber_final
+#: view:website:campos_jobber_final.report_car_ticket_template
+msgid "Fold denne A4 og læg den synligt i forruden"
+msgstr ""
+
+#. module: campos_jobber_final
 #: field:campos.jobber.accomodation,date_from:0
 #: field:campos.jobber.canteen,date_from:0
 msgid "From date"
@@ -418,6 +433,11 @@ msgstr ""
 #: field:campos.jobber.accomodation,registration_id:0
 #: field:campos.jobber.canteen,registration_id:0
 msgid "Group"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:website:campos_jobber_final.report_car_ticket_template
+msgid "Gyldig:"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -513,6 +533,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Jobbers to pay for"
+msgstr ""
+
+#. module: campos_jobber_final
+#: view:website:campos_jobber_final.report_car_ticket_template
+msgid "Kontaktnr:"
 msgstr ""
 
 #. module: campos_jobber_final
@@ -622,6 +647,11 @@ msgstr ""
 #. module: campos_jobber_final
 #: field:campos.event.participant,parent_jobber_id:0
 msgid "Parent jobber id"
+msgstr ""
+
+#. module: campos_jobber_final
+#: model:ir.actions.report.xml,name:campos_jobber_final.report_car_ticket_action
+msgid "Parking Ticket"
 msgstr ""
 
 #. module: campos_jobber_final
