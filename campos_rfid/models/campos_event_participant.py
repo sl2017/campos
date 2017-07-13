@@ -13,9 +13,9 @@ class CamposEventParticipant(models.Model):
     
     def add_update_canteen_ticket(self, day, canteen_id):
         for ci in self.env['campos.canteen.instanse'].search([('date', '=', day.the_date), ('canteen_id', '=', canteen_id.id)]):
-            if ci.date == self.tocampdate and ci.meal == 'breakfast':
+            if ci.date == self.tocampdate and ci.meal == '1breakfast':
                 continue # No breakfast on arrival date
-            if ci.date == self.fromcampdate and ci.meal == 'dinner':
+            if ci.date == self.fromcampdate and ci.meal == '3dinner':
                 continue # No dinner on departure date
             tck = self.env['campos.canteen.ticket'].search([('participant_id', '=', self.id), ('date', '=', ci.date), ('meal', '=', ci.meal)])
             if tck:
