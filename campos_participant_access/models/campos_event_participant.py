@@ -70,7 +70,7 @@ class CamposEventParticipant(models.Model):
                         else:
                             part = usr.participant_id
                         if not part:
-                            part = self.env['campos.event.participant'].search([('email', '=', moodle_username)])
+                            part = self.env['campos.event.participant'].search([('email', '=', moodle_username),('state', '!=', 'deregistered'), ('camp_age', '>=', 18)])
                             
                         if part and len(part) == 1 and not part.clc_userid:
                             part.clc_userid = moodle_id
