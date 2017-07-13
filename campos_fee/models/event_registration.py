@@ -64,8 +64,9 @@ class EventRegistration(models.Model):
             else:
                 pars = reg.participant_ids.suspend_security().filtered(lambda r: r.state not in ['cancel', 'deregistered'])
             for par in pars:
-                fee_participants += par.camp_price
-                fee_transport += par.transport_price_total
+                if not par.no_invoicing:
+                    fee_participants += par.camp_price
+                    fee_transport += par.transport_price_total
                 number_participants += 1
                 if not par.staff:
                     number_accomondations += 1
