@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-13 23:30+0000\n"
-"PO-Revision-Date: 2017-07-13 23:30+0000\n"
+"POT-Creation-Date: 2017-07-14 21:22+0000\n"
+"PO-Revision-Date: 2017-07-14 21:22+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -830,6 +830,7 @@ msgstr "Gade"
 #. module: campos_jobber_final
 #: field:campos.committee,subcamp_id:0
 #: field:campos.jobber.accom.group,subcamp_id:0
+#: field:campos.jobber.accom.type,subcamp_id:0
 #: field:campos.jobber.accomodation,subcamp_id:0
 msgid "Sub Camp"
 msgstr "Underlejr"
