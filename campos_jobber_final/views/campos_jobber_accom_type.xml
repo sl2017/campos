@@ -21,6 +21,7 @@
                         <field name="camparea_sel"/>
                         <field name="accomgroup_sel"/>
                         <field name="subcamp_sel"/>
+                        <field name="subcamp_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

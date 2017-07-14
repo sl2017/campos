@@ -17,7 +17,7 @@
                     <field name="checkin_info_html" nolabel="1" colspan="2"/>
                     
                     <field  name="hand_out"  colspan="2" readonly="1"/>
-                    <field name="children_ids">
+                    <field name="children_ids" attrs="{'invisible':[('children_ids', '=', False)]}">
                     	<tree create="0" delete="0">
                     		<field name="name"/>
                     		<field name="note"/>

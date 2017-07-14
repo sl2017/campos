@@ -15,4 +15,9 @@ class CamposJobberAccomType(models.Model):
     camparea_sel = fields.Boolean('Select Camp Area')
     subcamp_sel = fields.Boolean('Select Sub Camp')
     accomgroup_sel = fields.Boolean('Select Accomodation Group')
+    subcamp_id = fields.Many2one(
+        'campos.subcamp',
+        'Sub Camp',
+        select=True,
+        ondelete='set null')
     

@@ -14,8 +14,8 @@
             <page name="contact" position="after">
             	<page name="camp_fee" string="Camp Fee" groups="campos_event.group_campos_admin">
             		<group>
-            			<field name="no_invoicing"/>
-            			<field name="no_cancel_fee"/>
+            			<field name="no_invoicing" groups="campos_event.group_campos_admin"/>
+            			<field name="no_cancel_fee" groups="campos_event.group_campos_admin"/>
 		            	<field name="fee_agegroup_id" options="{'no_open': True}" readonly="1"/>
 		            	<field name="nights" readonly="1"/>
 		            	<field name="camp_product_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
@@ -48,8 +48,8 @@
         <field name="inherit_id" ref="campos_jobber_final.view_event_registration_participant_form"/>
         <field name="arch" type="xml">
         	<field name="staff" position="after">
-        		<field name="no_invoicing"/>
-        		<field name="no_cancel_fee"/>
+        		<field name="no_invoicing" groups="campos_event.group_campos_admin"/>
+        		<field name="no_cancel_fee" groups="campos_event.group_campos_admin"/>
         	</field>
             <page name="car" position="after">
             	<page name="camp_fee" string="Camp Fee" groups="campos_event.group_campos_admin">

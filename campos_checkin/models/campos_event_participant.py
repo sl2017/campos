@@ -68,10 +68,30 @@ class CamposEventParticipant(models.Model):
             par.checkin_ok = checkin_ok
     
     @api.multi
-    #@api.depends()
+    @api.depends('staff', 'jobber_child', 'accomodation_ids.accom_type_id', 'registration_id.subcamp_id', 'accomodation_ids.accom_group_id.subcamp_id')
     def _compute_checkin_subcamp_id(self):
-        pass
-            
+        for par in self:
+            if par.staff or par.jobber_child:
+                if par.signup_state == 'oncamp': 
+                    if par.tocampdate < '2017-07-22':
+                        par.checkin_subcamp_id = self.env['campos.subcamp'].browse(9)
+                    else:
+                        if par.accomodation_ids:
+                            if par.accomodation_ids[0].accom_type_id.subcamp_sel:
+                                par.checkin_subcamp_id = par.accomodation_ids[0].subcamp_id
+                            elif par.accomodation_ids[0].accom_type_id.group_sel:
+                                par.checkin_subcamp_id = par.accomodation_ids[0].registration_id.subcamp_id
+                            elif par.accomodation_ids[0].accom_type_id.accomgroup_sel:
+                                par.checkin_subcamp_id = par.accomodation_ids[0].accom_group_id.subcamp_id
+                            elif par.accomodation_ids[0].accom_type_id.camparea_sel:
+                                par.checkin_subcamp_id = par.accomodation_ids[0].camp_area_id.subcamp_id
+                            else:
+                                par.checkin_subcamp_id = par.accomodation_ids[0].accom_type_id.subcamp_id
+                elif par.signup_state == 'groupsignup':
+                    par.checkin_subcamp_id = par.registration_id.subcamp_id
+            else:
+                par.checkin_subcamp_id = par.registration_id.subcamp_id
+
     @api.multi
     def action_checkin(self):
         self.ensure_one()
