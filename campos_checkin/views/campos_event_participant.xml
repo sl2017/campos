@@ -56,9 +56,12 @@
         <field name="arch" type="xml">
             <field name="primary_committee_id" position="after">
             	<field name="mobile_clean"/>
+            	<field name="checkin_subcamp_id"/>
             	<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d')),('state', 'in', ['approved','arrived'])]"/>
-            	
-            </field>	
+            </field>
+            <filter name="fGroup" position="after">
+            		<filter name="gcheckin_subcamp" string="Subcamp" icon="terp-personal" domain="[]" context="{'group_by':'checkin_subcamp_id'}"/>
+            	</filter>	
         </field>
     </record>
 
@@ -67,10 +70,11 @@
         <field name="model">campos.event.participant</field>
         <field name="priority">22</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="0">
             	<field name="name"/>
             	<field name="city"/>
             	<field name="primary_committee_id"/>
+            	<field name="checkin_subcamp_id"/>
             	<field name="tocampdate" string="Exp. arrival"/>
             	<field name="state"/>
             
