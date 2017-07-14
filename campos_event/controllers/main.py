@@ -416,7 +416,9 @@ class CampOsEvent(http.Controller):
                 'state': 'approved',
                 'signup_state' : 'groupsignup',
                 'committee_id': 774,
-                'primary_committee_id': 774
+                'primary_committee_id': 774,
+                'transport_to_camp': False,
+                'transport_from_camp': False,
             }
             for f in ['committee_id', 'qualifications']:
                 value[f] = post.get(f)
@@ -559,7 +561,9 @@ class CampOsEvent(http.Controller):
             'state': 'approved' if post.get('type') =='extpartner' else 'draft',
             'signup_state' : 'dayjobber',
             'job_id': post.get('job_id'),
-            'primary_committee_id': post.get('committee_id')
+            'primary_committee_id': post.get('committee_id'),
+            'transport_to_camp': False,
+            'transport_from_camp': False,
         }
         for f in ['committee_id', 'qualifications']:
             value[f] = post.get(f)
