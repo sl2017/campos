@@ -69,7 +69,7 @@ class CampCommitteeFunction(geo_model.GeoModel):
 
     @api.multi
     def add_access_grp(self):
-        for cf in self.suspend_security():
+        for cf in self.sudo():
             group_ids = False
             if cf.function_type_id.chairman and cf.committee_id.access_grp_mgr_ids:
                 group_ids = cf.committee_id.access_grp_mgr_ids
