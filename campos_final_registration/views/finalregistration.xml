@@ -647,6 +647,7 @@
 							<field name="parent_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
 							<field name="wristband_date"/>
+							<field name="cancel_dt" groups="campos_event.group_campos_admin"/>
 							<field name="name"/>
 							<field name="tag_ids" widget="many2many_tags"/>
 							<field name="birthdate" required="1" options="{'datepicker': {'yearRange': 'c-100:c+0'}}"/>
@@ -701,6 +702,10 @@
 
 						</group>
 					</sheet>
+					  <div class="oe_chatter" groups="campos_event.group_campos_admin">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
 				</form> 
 			</field>
 		</record>

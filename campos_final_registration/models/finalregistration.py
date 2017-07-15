@@ -133,6 +133,8 @@ class FinalRegistrationParticipant(models.Model):
     passport_number = fields.Char('Passport number')
     visa_required = fields.Boolean(related='registration_id.partner_id.country_id.visa_req', string='Visa Required', readonly=True)
     group_country_code = fields.Char(related='registration_id.partner_id.country_id.code', string='Country Code', readonly=True)
+    cancel_dt = fields.Datetime('Cancellation time')
+    
 #    probably not used:
 #    green_transport = fields.Boolean('Whish to participate in Green Transport - CO2 neutral?', default=False)
 #    green_transport_origin = fields.Selection([('home', 'From home'),
@@ -258,6 +260,8 @@ class FinalRegistrationParticipant(models.Model):
     @api.one
     def inactivate_participant(self):
         self.state = 'deregistered'
+        self.cancel_dt = fields.Datetime.now()
+        
     @api.one
     def activate_participant(self):
         self.state = 'draft'

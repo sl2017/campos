@@ -22,7 +22,9 @@
                         <field name="execute_func"/>
                         <field name="segment"/>
                         <field name="ref_snapshot_id"/>
+                        <field name="dyna_ref"/>
                         <field name="make_creditnota"/>
+                        <field name="always_draft"/>
                         <field name="single_reg_id" domain="[('event_id', '=', 1)]"/>
                     </group>
                 </sheet>

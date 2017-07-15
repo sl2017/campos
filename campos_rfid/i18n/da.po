@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 20:08+0000\n"
-"PO-Revision-Date: 2017-07-12 20:08+0000\n"
+"POT-Creation-Date: 2017-07-15 22:04+0000\n"
+"PO-Revision-Date: 2017-07-15 22:04+0000\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,6 +83,11 @@ msgid "Campos Rfid Device"
 msgstr ""
 
 #. module: campos_rfid
+#: model:ir.model,name:campos_rfid.model_campos_rfid_log
+msgid "Campos Rfid Log"
+msgstr ""
+
+#. module: campos_rfid
 #: view:campos.canteen.instanse:campos_rfid.campos_canteen_instanse_form_view
 #: field:campos.canteen.instanse,canteen_id:0
 #: field:campos.canteen.ticket,canteen_id:0
@@ -128,7 +133,7 @@ msgstr ""
 #: field:campos.canteen.instanse,create_uid:0
 #: field:campos.canteen.slot,create_uid:0
 #: field:campos.canteen.ticket,create_uid:0
-#: field:campos.rfid.device,create_uid:0
+#: field:campos.rfid.device,create_uid:0 field:campos.rfid.log,create_uid:0
 msgid "Created by"
 msgstr ""
 
@@ -136,7 +141,7 @@ msgstr ""
 #: field:campos.canteen.instanse,create_date:0
 #: field:campos.canteen.slot,create_date:0
 #: field:campos.canteen.ticket,create_date:0
-#: field:campos.rfid.device,create_date:0
+#: field:campos.rfid.device,create_date:0 field:campos.rfid.log,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -157,6 +162,7 @@ msgstr ""
 
 #. module: campos_rfid
 #: field:campos.rfid.device,device_macid:0
+#: field:campos.rfid.log,device_macid:0
 msgid "Device ID"
 msgstr ""
 
@@ -174,6 +180,7 @@ msgstr ""
 #: field:campos.canteen.stat,display_name:0
 #: field:campos.canteen.ticket,display_name:0
 #: field:campos.rfid.device,display_name:0
+#: field:campos.rfid.log,display_name:0
 msgid "Display Name"
 msgstr ""
 
@@ -212,7 +219,7 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.canteen.instanse,id:0 field:campos.canteen.slot,id:0
 #: field:campos.canteen.stat,id:0 field:campos.canteen.ticket,id:0
-#: field:campos.rfid.device,id:0
+#: field:campos.rfid.device,id:0 field:campos.rfid.log,id:0
 msgid "ID"
 msgstr ""
 
@@ -237,6 +244,7 @@ msgstr ""
 #: field:campos.canteen.stat,__last_update:0
 #: field:campos.canteen.ticket,__last_update:0
 #: field:campos.rfid.device,__last_update:0
+#: field:campos.rfid.log,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
@@ -244,7 +252,7 @@ msgstr ""
 #: field:campos.canteen.instanse,write_uid:0
 #: field:campos.canteen.slot,write_uid:0
 #: field:campos.canteen.ticket,write_uid:0
-#: field:campos.rfid.device,write_uid:0
+#: field:campos.rfid.device,write_uid:0 field:campos.rfid.log,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
@@ -252,8 +260,14 @@ msgstr ""
 #: field:campos.canteen.instanse,write_date:0
 #: field:campos.canteen.slot,write_date:0
 #: field:campos.canteen.ticket,write_date:0
-#: field:campos.rfid.device,write_date:0
+#: field:campos.rfid.device,write_date:0 field:campos.rfid.log,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.actions.act_window,name:campos_rfid.campos_rfid_log_act_window
+#: model:ir.ui.menu,name:campos_rfid.campos_rfid_log_menu
+msgid "Log"
 msgstr ""
 
 #. module: campos_rfid
@@ -265,7 +279,7 @@ msgid "Lunch"
 msgstr ""
 
 #. module: campos_rfid
-#: help:campos.rfid.device,device_macid:0
+#: help:campos.rfid.device,device_macid:0 help:campos.rfid.log,device_macid:0
 msgid "MAC id"
 msgstr ""
 
@@ -294,12 +308,18 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.canteen.instanse,name:0 field:campos.canteen.slot,name:0
 #: field:campos.canteen.ticket,name:0 field:campos.rfid.device,name:0
+#: field:campos.rfid.log,name:0
 msgid "Name"
 msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.ticket,participant_id:0
 msgid "Participant id"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.log,pnum:0
+msgid "Participant number"
 msgstr ""
 
 #. module: campos_rfid
