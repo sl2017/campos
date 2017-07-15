@@ -15,7 +15,7 @@ class CamposEventParticipant(models.Model):
     checkin_ok = fields.Boolean('Check In possible', compute='compute_checkin')
     arrive_time = fields.Datetime('Arrival')
     checkin_completed = fields.Datetime('Check In Time')
-    checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id')
+    checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id', store=True)
 
     @api.multi
     #@api.depends()
