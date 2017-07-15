@@ -293,7 +293,7 @@ class CamposFeeSsRegistration(models.Model):
                     if canc_ids:
                         num_canc = len(canc_ids)
                         for p in canc_ids:
-                            if p.ssreg.ref_ssreg_id.invoice_id > '2017-07-01 02:00:00':
+                            if p.participant_id.cancel_dt > '2017-07-01 02:00:00':
                                 num_c100 += 1
                             else:
                                 num_c50 += 1
