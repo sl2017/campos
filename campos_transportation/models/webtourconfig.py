@@ -303,7 +303,7 @@ class webtourconfig(models.Model):
 
     @api.multi
     def action_webtour_getbstour(self):
-        self.env['campos.webtour.tour'].get_webtourtour()
+        self.env['campos.webtour.bstour'].get_webtourtour()
 
 class WebtourConfigChecklog(models.Model):
     _description = 'Webtour check log'

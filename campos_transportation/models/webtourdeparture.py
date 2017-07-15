@@ -11,15 +11,19 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class webtourbus(models.Model):
-    _name = 'campos.webtour.bus'
-    _description = 'Campos Webtour bus'
-    bstour_id = fields.Many2one('campos.webtour.bstour','WebTour Tour', ondelete='set null') 
-    bsidno = fields.Integer('Webtour Tour IDno', related='bstour_id.id')
-    driverinfo = fields.Char('Driver Info', related='bstour_id.driverinfo')
-    pax = fields.Integer('pax')
-    state_id = fields.Many2one('campos.webtour.tripstate','State', ondelete='set null')
-    nextstate_id = fields.Many2one('campos.webtour.tripstate','Next State', related='state_id.nextstate_id')
+class webtourbstourstop(models.Model):
+    _name = 'campos.webtour.bstour.stop'
+    _description = 'Campos Webtour bsTour Stop'
+    bsidno = fields.Integer('Webtour Tour IDno')
+    usidno = fields.Integer('Webtour us Tour ID no')
+    updated = fields.Boolean('Updated')    
+    startdate = fields.Char('DateStart')
+    enddate = fields.Char('DateEnd')
+    startplaceidno =fields.Char('StartPlaceIDno')     
+    endplaceidno =  fields.Char('EndPlaceIDno')    
+    startplace =    fields.Many2one('campos.webtourusdestination.view','StartPlace')
+    endplace =      fields.Many2one('campos.webtourusdestination.view','EndPlace')
+    
 
 class webtourtripstate(models.Model):
     _name = 'campos.webtour.tripstate'
@@ -30,19 +34,19 @@ class webtourtripstate(models.Model):
 class webtourbstour(models.Model):
     _name = 'campos.webtour.bstour'
     _description = 'Webtour bsTours'
-    id = fields.Integer('Webtour IDno')
-    name = fields.Char('Tour Name')    
-    usidno = fields.Integer('Webtour us Tour ID no')
+    bsidno = fields.Integer('Webtour IDno')
+    name = fields.Char('Tour Name')
+    updated = fields.Boolean('Updated')
     drivername = fields.Char('Driver Name')
     vehiclename = fields.Char('Vehicle Name')
     interninfo = fields.Char('Intern Info')
     driverinfo = fields.Char('Driver Info')
-    startdate = fields.Char('DateStart')
-    enddate = fields.Char('DateEnd')
-    startplaceidno = fields.Many2one('campos.webtourusdestination.view','StartPlaceIDno') 
-    endplaceidno = fields.Many2one('campos.webtourusdestination.view','EndPlaceIDno')
     pax = fields.Integer('Pax')
     vehiclemaxpax = fields.Integer('VehicleMaxPax')    
+    state_id = fields.Many2one('campos.webtour.tripstate','State', ondelete='set null')
+    nextstate_id = fields.Many2one('campos.webtour.tripstate','Next State', related='state_id.nextstate_id')
+    
+    stop_ids = fields.One2many('campos.webtour.bstour.stop','bsidno','Stops')
     
     @api.model
     def get_webtourtour_cron(self):
@@ -72,14 +76,25 @@ class webtourbstour(models.Model):
         
         root = ET.fromstring(self.env['campos.webtour_req_logger'].create({'name':'usTour/GetAll/?IncludeTourInfo=true'}).responce.encode('utf-8'))
         content = root.find("i:Content",ns) #Let's find the contet Section     
-        _logger.info("kilroy 1")    
+        
+        _logger.info("kilroy 1 %s")    
         if content is not None:
             array = content.find("i:Array",ns) 
             if array is not None:                
                 _logger.info("kilroy 2")    
+                
+                tours = self.env['campos.webtour.bstour'].search([])                    
+                for t in tours:
+                    t.updated = False
+
+                stops = self.env['campos.webtour.bstour.stop'].search([])                    
+                for s in stops:
+                    s.updated = False
+
                 for ustour in array.findall('a:usTour',ns):   
                     usidno = get_tag_data_from_node(ustour,'a:IDno')
                     name = get_tag_data_from_node(ustour,'a:Name')
+                    
                     #_logger.info("kilroy 3 %s %s", usidno, name) 
                     bsTourArr = ustour.find('a:bsTourArr',ns)  
                     if bsTourArr is not None: 
@@ -87,26 +102,57 @@ class webtourbstour(models.Model):
                         arrayintour = bsTourArr.find("i:Array",ns)
                         if arrayintour is not None:
                             #_logger.info("kilroy 5")
-                            bsidnolist =[]
-                            for bstour in arrayintour.findall('a:bsTourInfo',ns): 
-                                drivername = get_tag_data_from_node(bstour,'a:DriverName')
-                                driverinfo = get_tag_data_from_node(bstour,'a:DriverInfo')
+                            for bstour in arrayintour.findall('a:bsTourInfo',ns):
+                                tourdic = {}
+                                stopdic = {}
+                                
                                 bsidno = get_tag_data_from_node(bstour,'a:IDno')
-                                bsidnolist.append(bsidno)
-                                interninfo = get_tag_data_from_node(bstour,'a:InternInfo')
-                                vehiclename = get_tag_data_from_node(bstour,'a:VehicleName')
-                                #_logger.info("kilroy 6, %s %s %s %s ", drivername, bsidno,interninfo, vehiclename )  
+
+                                tourdic['bsidno'] = bsidno
+                                tourdic['name']   = name
+                                tourdic['drivername'] =    get_tag_data_from_node(bstour,'a:DriverName')
+                                tourdic['driverinfo'] =    get_tag_data_from_node(bstour,'a:DriverInfo')
+                                tourdic['interninfo'] =    get_tag_data_from_node(bstour,'a:InternInfo')
+                                tourdic['vehiclename'] =   get_tag_data_from_node(bstour,'a:VehicleName')
+                                tourdic['pax'] =           get_tag_data_from_node(bstour,'a:Pax')
+                                tourdic['vehiclemaxpax'] = get_tag_data_from_node(bstour,'a:VehicleMaxPax')
+                                tourdic['updated'] = True
+                                
+                                stopdic['usidno'] = usidno
+                                stopdic['bsidno'] = bsidno
+                                
+                                startdate =     get_tag_data_from_node(bstour,'a:DateStart')
+                                enddate =       get_tag_data_from_node(bstour,'a:DateEnd')
+                                startplaceidno= get_tag_data_from_node(bstour,'a:StartPlaceIDno') 
+                                endplaceidno =  get_tag_data_from_node(bstour,'a:EndPlaceIDno')
+                                                                                           
+                                stopdic['startdate'] =     startdate
+                                stopdic['enddate'] =       enddate
+                                stopdic['startplace']=     startplaceidno
+                                stopdic['endplace'] =      endplaceidno
+                                stopdic['startplaceidno']= startplaceidno
+                                stopdic['endplaceidno'] =  endplaceidno
+                                stopdic['updated'] = True
                     
-                                recs = self.search([('usidno','=',usidno),('bsidno','=',bsidno)])
-                                if len(recs) == 0:
-                                    self.create({'usidno':usidno,'bsidno':bsidno,'name':name,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
-                                elif len(recs) == 1:
-                                    recs[0].write({'name':name,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
-                                else: 
-                                    _logger.info("get_webtourtour, Houston we have a problem!!! %s %s %s ", usidno, bsidno, len(recs))
-                                    
-                            for rec in recs.search([('bsidno','not in',bsidnolist)]):
-                                rec.unlink()
+                                #_logger.info("kilroy 6, %s %s %s %s", usidno, bsidno,len(recs),dic ) 
+                                                                                             
+                                bstour = self.env['campos.webtour.bstour'].search([('bsidno','=',bsidno)])
+                                                                    
+                                if len(bstour) == 0:
+                                    self.env['campos.webtour.bstour'].create(tourdic)                                     
+                                elif len(bstour) == 1:     
+                                    bstour.write(tourdic)
+                                else:                                     
+                                    _logger.info("Doublet of bsidno !!!!!!!!!! , %s %s %s", usidno, bsidno,len(bstour)) 
+
+                                stop = self.env['campos.webtour.bstour.stop'].search([('usidno','=',usidno),('bsidno','=',bsidno),('startdate','=',startdate),('enddate','=',enddate),('startplaceidno','=',startplaceidno),('endplaceidno','=',endplaceidno)])
+                                                                    
+                                if len(stop) == 0:
+                                    self.env['campos.webtour.bstour.stop'].create(stopdic)                                     
+                                elif len(stop) == 1:     
+                                    stop.write(stopdic)
+                                else:                                     
+                                    _logger.info("Doublet of stop !!!!!!!!!! , %s %s", stopdic,len(stop))                                 
 
 
                                     
