@@ -155,3 +155,10 @@ class CamposEventParticipant(models.Model):
                                                                    })
             
 
+    @api.multi
+    def set_cancel_date(self):
+        for par in self:
+            if par.state == 'deregistered' and not par.cancel_dt:
+                msg_ids = par.message_ids.filtered(lambda r: r.body.find('&rarr; Afmeldt') or r.body.find('&rarr; Deregistered') )
+                if msg_ids:
+                    par.cancel_dt = msg_ids[0].date
