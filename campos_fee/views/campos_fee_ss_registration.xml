@@ -40,12 +40,13 @@
             			<field name="fee_transport"/>
             			<field name="count_transport_to"/>
             			<field name="count_transport_from"/>
+            			<field name="transport_cost"/>
             			<field name="material_cost"/>
             			<field name="fee_total"/>
             			<field name="state"/>
             			<field name="invoice_id"/>
             			<field name="audit"/>
-            			<notebook>
+            			<notebook colspan="2">
             				<page string="Participants">
             					<field name="sspar_ids" nolabel="1" colspan="2"/>
             				</page>

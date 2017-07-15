@@ -128,6 +128,7 @@
             					<field name="invoice_id" options="{'no_open': True}"/>
             					<field name="inv_currency_id"/>
             					<field name="inv_amount_total"/>
+            					<field name="state"/>
             				</tree>
             				<form>
             					<group>
