@@ -37,10 +37,11 @@ class CamposCheckinWiz(models.TransientModel):
             if par.jobber_child_ids:
                 children = []
                 for c in par.jobber_child_ids:
-                    children.append((0,0,{'participant_id': c.id,
-                                          'name': c.name,
-                                          'checkin': True,
-                                          'note': u'Armbånd er uddelt' if c.wristband_date else False}))
+                    if c.state != 'deregistered':
+                        children.append((0,0,{'participant_id': c.id,
+                                              'name': c.name,
+                                              'checkin': True,
+                                              'note': u'Armbånd er uddelt' if c.wristband_date else False}))
                 result['children_ids'] = children
         return result
 
