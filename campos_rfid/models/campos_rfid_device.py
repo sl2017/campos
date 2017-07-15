@@ -58,6 +58,9 @@ class CamposRfidDevice(models.Model):
         elif device.check_method == 'meat':
             return self.checkin_meat(participant_number, part_ids)
         else:
+            self.env['campos.rfid.log'].create({'device_macid': device_macid,
+                                                'pnum': participant_number,
+                                                'name': u'Device not configured'})
             return self.build_response(u'Device not configured', False)
         
     
