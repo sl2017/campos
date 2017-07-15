@@ -390,6 +390,7 @@
 						 		</tree>
 						 	
 						 	</field>
+						 	<button name="action_add_jobber_child"  string="Add child" type="object"/>
 						 
 						 </page>
 
