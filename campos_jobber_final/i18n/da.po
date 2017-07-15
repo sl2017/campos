@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 21:22+0000\n"
-"PO-Revision-Date: 2017-07-14 21:22+0000\n"
+"POT-Creation-Date: 2017-07-15 22:04+0000\n"
+"PO-Revision-Date: 2017-07-15 22:04+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -88,6 +88,7 @@ msgstr "Opret overnatningsklynge"
 
 #. module: campos_jobber_final
 #: view:campos.event.participant:campos_jobber_final.campos_event_participant_staff_form_view
+#: view:campos.event.participant:campos_jobber_final.view_event_registration_participant_form
 msgid "Add child"
 msgstr "Tilføj barn"
 

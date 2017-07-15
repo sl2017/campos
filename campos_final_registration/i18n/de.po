@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 20:08+0000\n"
-"PO-Revision-Date: 2017-07-12 20:08+0000\n"
+"POT-Creation-Date: 2017-07-15 22:04+0000\n"
+"PO-Revision-Date: 2017-07-15 22:04+0000\n"
 "Last-Translator: Lykke Merete Højsting <lho@sl2017.dk>, 2017\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
@@ -102,6 +102,11 @@ msgstr "Lagertage"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Cancel Registration"
 msgstr "Registrierung annullieren"
+
+#. module: campos_final_registration
+#: field:campos.event.participant,cancel_dt:0
+msgid "Cancellation time"
+msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -254,7 +259,7 @@ msgid "Doublet"
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:342
+#: code:addons/campos_final_registration/models/finalregistration.py:346
 #: sql_constraint:event.registration.needlist:0
 #, python-format
 msgid "Each need can only be added once"
@@ -364,7 +369,7 @@ msgid "Friendship Groups"
 msgstr "Freundschaftsgruppen"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:205
+#: code:addons/campos_final_registration/models/finalregistration.py:207
 #, python-format
 msgid "Full camp"
 msgstr "Ganzes Lager"
@@ -596,7 +601,7 @@ msgid ""
 msgstr ""
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:425
+#: code:addons/campos_final_registration/models/finalregistration.py:429
 #, python-format
 msgid ""
 "Number of ordered meat portions (%d) exceeds the number of dinner "
@@ -846,7 +851,7 @@ msgid "Special needs"
 msgstr "Besondere Bedarfe"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:442
+#: code:addons/campos_final_registration/models/finalregistration.py:446
 #, python-format
 msgid "Start data cannot be after end date"
 msgstr ""
