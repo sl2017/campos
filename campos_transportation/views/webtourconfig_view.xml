@@ -36,6 +36,7 @@
 			<button name="action_Webtour_usgroup_get" string="Get usGrop from WT" type="object"/>
 			<button name="action_Webtour_usneedchangedsence" string="Start Job to Create update jobs for changed usNeed " type="object"/>	 
 			<button name="action_initialize_owntransport_paxs" string="Start Job to Initialize owntransport paxs" type="object"/>
+			<button name="action_webtour_getbstour" string="Get bsTours" type="object"/>
 		</group>
 </sheet>
 </form>

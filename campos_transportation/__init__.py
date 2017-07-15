@@ -4,4 +4,5 @@
 """
 from . import models
 from . import interface
+from . import controllers
 
