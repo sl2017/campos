@@ -11,30 +11,38 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class webtourdeparturebus(models.Model):
-    _name = 'campos.webtourdeparture.bus'
-    _description = 'Campos Webtour Departure bus'
-    bsidno = fields.Integer('Webtour Tour ID no')
+class webtourbus(models.Model):
+    _name = 'campos.webtour.bus'
+    _description = 'Campos Webtour bus'
+    bstour_id = fields.Many2one('campos.webtour.bstour','WebTour Tour', ondelete='set null') 
+    bsidno = fields.Integer('Webtour Tour IDno', related='bstour_id.id')
+    driverinfo = fields.Char('Driver Info', related='bstour_id.driverinfo')
     pax = fields.Integer('pax')
-    state = fields.Selection([('Select', 'Please Select'),
-                              ('1', 'Arrived to depot'),
-                              ('2', 'In transit to Site'),
-                              ('3', 'At Site'),
-                              ('4', 'In transit to Destination'),
-                              ('5', 'Completed')                                                                        
-                              ], default='Select', string='State')
+    state_id = fields.Many2one('campos.webtour.tripstate','State', ondelete='set null')
+    nextstate_id = fields.Many2one('campos.webtour.tripstate','Next State', related='state_id.nextstate_id')
 
+class webtourtripstate(models.Model):
+    _name = 'campos.webtour.tripstate'
+    _description = 'Campos Webtour Trip state'
+    name = fields.Char('State')
+    nextstate_id = fields.Many2one('campos.webtour.tripstate','Next State', ondelete='set null')
 
-class webtourtour(models.Model):
-    _name = 'campos.webtour.tour'
-    _description = 'Webtour Tours'
+class webtourbstour(models.Model):
+    _name = 'campos.webtour.bstour'
+    _description = 'Webtour bsTours'
+    id = fields.Integer('Webtour IDno')
+    name = fields.Char('Tour Name')    
     usidno = fields.Integer('Webtour us Tour ID no')
-    bsidno = fields.Integer('Webtour IDno')
-    usname = fields.Char('Tour Name')
     drivername = fields.Char('Driver Name')
     vehiclename = fields.Char('Vehicle Name')
     interninfo = fields.Char('Intern Info')
     driverinfo = fields.Char('Driver Info')
+    startdate = fields.Char('DateStart')
+    enddate = fields.Char('DateEnd')
+    startplaceidno = fields.Many2one('campos.webtourusdestination.view','StartPlaceIDno') 
+    endplaceidno = fields.Many2one('campos.webtourusdestination.view','EndPlaceIDno')
+    pax = fields.Integer('Pax')
+    vehiclemaxpax = fields.Integer('VehicleMaxPax')    
     
     @api.model
     def get_webtourtour_cron(self):
@@ -71,8 +79,8 @@ class webtourtour(models.Model):
                 _logger.info("kilroy 2")    
                 for ustour in array.findall('a:usTour',ns):   
                     usidno = get_tag_data_from_node(ustour,'a:IDno')
-                    usname = get_tag_data_from_node(ustour,'a:Name')
-                    #_logger.info("kilroy 3 %s %s", usidno, usname) 
+                    name = get_tag_data_from_node(ustour,'a:Name')
+                    #_logger.info("kilroy 3 %s %s", usidno, name) 
                     bsTourArr = ustour.find('a:bsTourArr',ns)  
                     if bsTourArr is not None: 
                         #_logger.info("kilroy 4")   
@@ -91,9 +99,9 @@ class webtourtour(models.Model):
                     
                                 recs = self.search([('usidno','=',usidno),('bsidno','=',bsidno)])
                                 if len(recs) == 0:
-                                    self.create({'usidno':usidno,'bsidno':bsidno,'usname':usname,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
+                                    self.create({'usidno':usidno,'bsidno':bsidno,'name':name,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
                                 elif len(recs) == 1:
-                                    recs[0].write({'usname':usname,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
+                                    recs[0].write({'name':name,'drivername':drivername,'vehiclename':vehiclename,'interninfo':interninfo,'driverinfo':driverinfo})
                                 else: 
                                     _logger.info("get_webtourtour, Houston we have a problem!!! %s %s %s ", usidno, bsidno, len(recs))
                                     
