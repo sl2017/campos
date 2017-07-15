@@ -34,7 +34,9 @@ class CamposFeeSnapshot(models.Model):
                                 ('jobber', 'Jobbers DK'),
                                 ('jobber_non_dk', 'Foreign Jobbers')], string='Segments')
     ref_snapshot_id = fields.Many2one('campos.fee.snapshot', 'Prev invoice snapshot')
-    make_creditnota = fields.Boolean('Create CreditNotas?')
+    make_creditnota = fields.Boolean('Create CreditNotas?', default=True)
+    always_draft = fields.Boolean('Leave as Drafts', default=True)
+    dyna_ref = fields.Boolean('Use Last invoice as reference snapshot', default=True)
     
     @api.multi
     def action_do_snapshot(self):

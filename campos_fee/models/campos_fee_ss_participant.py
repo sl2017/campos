@@ -32,7 +32,9 @@ class CamposFeeSsParticipant(models.Model):
                               ('inprogress', 'Work in Progress'),
                               ('approved', 'Approved by the committee'),
                               ('rejected', 'Rejected'),
-                              ('deregistered', 'Deregistered')],
+                              ('deregistered', 'Deregistered'),
+                              ('arrived', 'Arrived'),
+                              ('checkin', 'Check In Completed')],
                              'Approval Procedure')
     transport_to_camp = fields.Boolean('Common transport to camp')
     transport_from_camp = fields.Boolean('Common transport from camp')
