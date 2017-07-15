@@ -316,7 +316,7 @@ class CamposFeeSsRegistration(models.Model):
                         if num_c50:
                             product = self.env['product.product'].search([('default_code', '=', 'LKREF50')])
                             desc = _('50% refusion after may 1') 
-                            vals = self._prepare_create_invoice_line_vals(canc_fee, num_c50, type='out_invoice', description=desc, product=product)
+                            vals = self._prepare_create_invoice_line_vals(canc_fee / 2, num_c50, type='out_invoice', description=desc, product=product)
                             #vals['amount'] = -ssreg1.invoice_id.amount_total
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
