@@ -285,21 +285,45 @@ class CamposFeeSsRegistration(models.Model):
                     charged_fee_par = charged_fee_par - cancelled_fee
                          
                     if charged_fee_par > ssreg.fee_participants and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
+                        
+                        # Find cancelled since last invoice:
+                        num_canc = 0
+                        num_c100 = 0
+                        num_c50 = 0
+                        canc_ids = ssreg.sspar_ids.filtered(lambda r: r.state == 'deregistered' and not r.no_cancel_fee and r.participant_id.cancel_dt > ssreg.ref_ssreg_id.invoice_id.create_date)
+                        if canc_ids:
+                            num_canc = len(canc_ids)
+                            for p in canc_ids:
+                                if p.ssreg.ref_ssreg_id.invoice_id > '2017-07-01 02:00:00':
+                                    num_c100 += 1
+                                else:
+                                    num_c50 +=1
                         #2. 50 % refusions
-                         
+                         if num_canc:
                         charged_fee_par_val = charged_fee_par
                         fee_par_val = ssreg.fee_participants
                         if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                              charged_fee_par_val = charged_fee_par * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
                              fee_par_val = ssreg.fee_participants * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                        product = self.env['product.product'].search([('default_code', '=', 'LKREF2')])
-                        desc = _('No refusion after juli 1: %s %.2f - %.2f') % (ssreg.ref_ssreg_id.invoice_id.currency_id.name, charged_fee_par_val, fee_par_val) 
-                        vals = self._prepare_create_invoice_line_vals((charged_fee_par_val - fee_par_val), 1, type='out_invoice', description=desc, product=product)
-                        #vals['amount'] = -ssreg1.invoice_id.amount_total
-                        vals['invoice_id'] = ssreg.invoice_id.id
-                        self.env['account.invoice.line'].create(vals)
-                        ssreg.charged_fee_participants = ssreg.fee_participants + (charged_fee_par - ssreg.fee_participants / 2)
-                        ssreg.audit = True
+                        canc_fee = charged_fee_par_val - fee_par_val / num_canc
+                        if num_c100:
+                            product = self.env['product.product'].search([('default_code', '=', 'LKREF100')])
+                            desc = _('No refusion after juli 1')) 
+                            vals = self._prepare_create_invoice_line_vals(canc_fee, num_c100, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            ssreg.audit = True
+                        if num_c50:
+                            product = self.env['product.product'].search([('default_code', '=', 'LKREF50')])
+                            desc = _('50% refusion after may 1')) 
+                            vals = self._prepare_create_invoice_line_vals(canc_fee, num_c50, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            ssreg.audit = True
+
+                    
                     product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
                     #1. Prev transport fee
                     charged_fee_tran_val = charged_fee_tran
