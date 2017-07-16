@@ -176,10 +176,12 @@ class CamposEventParticipant(models.Model):
         par.registration_id.do_instant_snapshot(ss)
         if ss.ssreg_ids:
             if ss.ssreg_ids[0].invoice_id:
+                view = ss.ssreg_ids[0].invoice_id.get_formview_id()
                 action = {
                     'name': _("Invoice for %s") % (self.name),
                     'view_mode': 'form',
                     'view_type': 'form',
+                    'views': [(view.id, 'form')],
                     'res_model': 'account.invoice',
                     'res_id' : ss.ssreg_ids[0].invoice_id.id,
                     'type': 'ir.actions.act_window',
