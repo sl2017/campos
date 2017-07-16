@@ -64,7 +64,7 @@ class EventRegistration(models.Model):
             else:
                 pars = reg.participant_ids.suspend_security().filtered(lambda r: r.state not in ['cancel', 'deregistered'])
             for par in pars:
-                if not par.no_invoicing:
+                if not par.sudo().no_invoicing:
                     fee_participants += par.camp_price
                     fee_transport += par.transport_price_total
                     number_participants += 1
@@ -110,6 +110,16 @@ class EventRegistration(models.Model):
 #             if snapshot.execute_func:
 #                 func = getattr(ssreg, snapshot.execute_func)
 #                 func()
+
+    @api.multi
+    def do_instant_snapshot(self, snapshot):
+        _logger.info('SS: %s %d', snapshot, snapshot.id)
+        for reg in self:
+            ssreg = self.env['campos.fee.ss.registration'].create({'snapshot_id': snapshot.id,
+                                                                   'registration_id': reg.id})
+            ssreg.do_delayed_snapshot()
+            
+     
 
     @api.multi
     def assign_group_number(self):
