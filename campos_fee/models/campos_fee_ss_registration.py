@@ -223,6 +223,7 @@ class CamposFeeSsRegistration(models.Model):
                 if product:
                     if not ssreg.invoice_id:
                         vals = self._prepare_create_invoice_vals()
+                        vals['origin'] = ssreg.snapshot_id.code
                         _logger.info("Create invoice: %s", vals)
                         ssreg.invoice_id = aio.create(vals)
                     desc = product.name_get()[0][1] # product.display_name 
