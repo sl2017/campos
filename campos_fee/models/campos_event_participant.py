@@ -22,6 +22,7 @@ class CamposEventParticipant(models.Model):
     transport_price_total = fields.Float("Transport Total", compute='_compute_nights_product' )
     camp_price_total = fields.Float("Camp Total", compute='_compute_nights_product')
     sspar_ids = fields.One2many('campos.fee.ss.participant', 'participant_id', 'Snapshot')
+    ssreginv_ids = fields.One2many(related='registration_id.ssreginv_ids')
     no_invoicing = fields.Boolean('Suspend invoicing', groups='campos_event.group_campos_admin')
     no_cancel_fee = fields.Boolean('No cancel fee', groups='campos_event.group_campos_admin')
     
@@ -162,3 +163,21 @@ class CamposEventParticipant(models.Model):
                 msg_ids = par.message_ids.filtered(lambda r: r.body.find('&rarr; Afmeldt') or r.body.find('&rarr; Deregistered') )
                 if msg_ids:
                     par.cancel_dt = msg_ids[0].date
+                    
+    @api.multi 
+    def action_open_invoices(self):
+        self.ensure_one()
+        view = self.env.ref('account.invoice_form')
+        action = {
+                    'name': _("Invoice for %s") % (self.name),
+                    'view_mode': 'tree,form',
+                    'view_type': 'form',
+                    'views': [(False, 'tree'),(view.id, 'form')],
+                    'res_model': 'account.invoice',
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': True,
+                    'domain': [('partner_id', '=', self.registration_id.partner_id.id)],
+                    
+                }
+        _logger.info('ACTION: %s', action)
+        return action

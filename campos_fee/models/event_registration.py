@@ -112,6 +112,16 @@ class EventRegistration(models.Model):
 #                 func()
 
     @api.multi
+    def do_instant_snapshot(self, snapshot):
+        _logger.info('SS: %s %d', snapshot, snapshot.id)
+        for reg in self:
+            ssreg = self.env['campos.fee.ss.registration'].create({'snapshot_id': snapshot.id,
+                                                                   'registration_id': reg.id})
+            ssreg.do_delayed_snapshot()
+            
+     
+
+    @api.multi
     def assign_group_number(self):
         for reg in self:
             if not reg.partner_id.ref:

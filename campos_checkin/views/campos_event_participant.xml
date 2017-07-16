@@ -17,6 +17,7 @@
         	<button name="action_deregister_participant" position="after">
         		<button name="action_checkin" type="object" states="approved,arrived" string="Check In" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/>
         		<button name="action_cancel_checkin" type="object" states="arrived,checkin" string="Cancel Check In" groups="campos_checkin.group_campos_checkin_mgr"/> 
+        		<button name="action_gen_invoice" type="object" states="approved,arrived" string="Create Invoice" groups="campos_checkin.group_campos_checkin_crew"/>
         	</button>
         		
             <field name="image" position="before">
