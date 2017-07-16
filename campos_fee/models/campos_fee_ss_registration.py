@@ -406,6 +406,7 @@ class CamposFeeSsRegistration(models.Model):
                 if product:
                     if not ssreg.invoice_id:
                         vals = self._prepare_create_invoice_vals()
+                        vals['origin'] = ssreg.snapshot_id.code
                         _logger.info("Create invoice: %s", vals)
                         ssreg.invoice_id = aio.create(vals)
                     desc = product.name_get()[0][1] + ' ' + jobname #product.display_name 
@@ -550,7 +551,7 @@ class CamposFeeSsRegistration(models.Model):
                     ssreg.invoice_id.unlink()
             elif ssreg.invoice_id.amount_total == 0.0:
                 ssreg.invoice_id.unlink()
-            elif not ssreg.audit:
+            elif not ssreg.audit and not ssreg.snapshot_id.always_draft:
                 ssreg.invoice_id.signal_workflow('invoice_open')
 
 

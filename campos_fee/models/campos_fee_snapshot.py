@@ -37,6 +37,7 @@ class CamposFeeSnapshot(models.Model):
     make_creditnota = fields.Boolean('Create CreditNotas?', default=True)
     always_draft = fields.Boolean('Leave as Drafts', default=True)
     dyna_ref = fields.Boolean('Use Last invoice as reference snapshot', default=True)
+    ssreg_ids = fields.One2many('campos.fee.ss.registration', 'snapshot_id', 'Registration Snapshot')
     
     @api.multi
     def action_do_snapshot(self):

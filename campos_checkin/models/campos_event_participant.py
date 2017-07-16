@@ -16,6 +16,7 @@ class CamposEventParticipant(models.Model):
     arrive_time = fields.Datetime('Arrival')
     checkin_completed = fields.Datetime('Check In Time')
     checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id', store=True)
+    not_invoiced = fields.Boolean('Not invoiced', compute='compute_checkin')
 
     @api.multi
     #@api.depends()
@@ -37,8 +38,15 @@ class CamposEventParticipant(models.Model):
             elif par.registration_id.partner_id.credit > 0:
                 infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (par.registration_id.partner_id.credit))
                 checkin_ok = False
+            elif par.registration_id.partner_id.credit == 0 and not par.no_invoicing:
+                if self.env['account.invoice'].search_count([('partner_id', '=', par.registration_id.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
+                    par.not_invoiced = True
+                    checkin_ok = False
+                    infotext.append(_('Invoice not yet generated!'))
+                else:
+                    infotext.append(_('Payment recived'))
             else:
-                infotext.append(_('Payment recived'))
+                    infotext.append(_('Payment recived'))
             if len(par.jobber_pay_for_ids) > 1:
                 infotext.append(_('Paying for: %s' % ', '.join(par.jobber_pay_for_ids.mapped('name'))))
 
@@ -154,3 +162,30 @@ class CamposEventParticipant(models.Model):
             self.state = force_state
             if force_state == 'approved':
                 self.arrive_time = False
+                
+    @api.multi
+    def action_gen_invoice(self):
+        self.ensure_one()
+        par = self.suspend_security()
+        ss = par.env['campos.fee.snapshot'].create({'code': 'CHECKIN',
+                                                    'name': 'Checkin: %s' % par.name,
+                                                    'execute_func': 'make_invoice_group',
+                                                    'segment': 'jobber' if par.group_country_code2 == 'DK' else 'jobber_non_dk',
+                                                    'single_reg_id': par.registration_id.id })
+
+        par.registration_id.do_instant_snapshot(ss)
+        if ss.ssreg_ids:
+            if ss.ssreg_ids[0].invoice_id:
+                action = {
+                    'name': _("Invoice for %s") % (self.name),
+                    'view_mode': 'form',
+                    'view_type': 'form',
+                    'res_model': 'account.invoice',
+                    'res_id' : ss.ssreg_ids[0].invoice_id.id,
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': True,
+                    
+                }
+                _logger.info('ACTION: %s', action)
+                return action
+        return self.env['warning_box'].info(title=_('Checkin'), message=_('No invoice generated')) 
