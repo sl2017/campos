@@ -45,6 +45,9 @@ class CamposRfidDevice(models.Model):
     def checkin(self, device_macid, participant_number):
         device = self.search([('device_macid', '=', device_macid)])
         if not device:
+            self.env['campos.rfid.log'].create({'device_macid': device_macid,
+                                                'pnum': participant_number,
+                                                'name': u'Unknown scanner'})
             return self.build_response(u'Unknown Scanner\n%s' % device_macid, False)
         
         part = self.env['campos.event.participant'].search([('participant_number' ,'=', participant_number)])
