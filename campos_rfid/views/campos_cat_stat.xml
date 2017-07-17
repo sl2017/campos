@@ -5,9 +5,9 @@
 <openerp>
 <data>
 
-    <record model="ir.ui.view" id="campos_canteen_stat_form_view">
-        <field name="name">campos.canteen.stat.form (in campos_rfid)</field>
-        <field name="model">campos.canteen.stat</field>
+    <record model="ir.ui.view" id="campos_cat_stat_form_view">
+        <field name="name">campos.cat.stat.form (in campos_rfid)</field>
+        <field name="model">campos.cat.stat</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -16,7 +16,7 @@
                 <sheet>
                     <!-- TODO -->
                     <group>
-                    	<field name="canteen_inst_id"/>
+                        <field name="cat_inst_id"/>
                         <field name="attended_slot_name"/>
                 		<field name="attended"/>
                     </group>
@@ -26,42 +26,43 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="campos_canteen_stat_search_view">
-        <field name="name">campos.canteen.stat.search (in campos_rfid)</field>
-        <field name="model">campos.canteen.stat</field>
+    <record model="ir.ui.view" id="campos_cat_stat_search_view">
+        <field name="name">campos.cat.stat.search (in campos_rfid)</field>
+        <field name="model">campos.cat.stat</field>
         <field name="arch" type="xml">
             <search>
-            	<field name="canteen_inst_id"/>
+                <field name="cat_inst_id"/>
                 <field name="attended_slot_name"/>
             </search>
         </field>
     </record>
 
-    <record model="ir.ui.view" id="campos_canteen_stat_tree_view">
-        <field name="name">campos.canteen.stat.tree (in campos_rfid)</field>
-        <field name="model">campos.canteen.stat</field>
+    <record model="ir.ui.view" id="campos_cat_stat_tree_view">
+        <field name="name">campos.cat.stat.tree (in campos_rfid)</field>
+        <field name="model">campos.cat.stat</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="canteen_inst_id"/>
+                <!-- TODO -->
+                <field name="cat_inst_id"/>
                 <field name="attended_slot_name"/>
                 <field name="attended"/>
             </tree>
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="campos_canteen_stat_act_window">
-        <field name="name">Campos Canteen Stat</field> <!-- TODO -->
-        <field name="res_model">campos.canteen.stat</field>
+    <record model="ir.actions.act_window" id="campos_cat_stat_act_window">
+        <field name="name">Campos Cat Stat</field> <!-- TODO -->
+        <field name="res_model">campos.cat.stat</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
 
-    <record model="ir.ui.menu" id="campos_canteen_stat_menu">
+    <record model="ir.ui.menu" id="campos_cat_stat_menu">
         <field name="name">Statistics</field>
-        <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
-        <field name="action" ref="campos_canteen_stat_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="parent_id" ref="menu_campos_catering_catering"/>
+        <field name="action" ref="campos_cat_stat_act_window"/>
+        <field name="sequence" eval="70"/> 
     </record>
 
 </data>

@@ -20,6 +20,7 @@ class CamposRfidDevice(models.Model):
     check_method = fields.Selection([('canteen', 'Canteen Check In'),
                                      ('meat', 'Meat Supply')], string='Function')
     canteen_id = fields.Many2one('campos.canteen', 'Canteen')
+    subcamp_id = fields.Many2one('campos.subcamp', 'Subcamp')
     meal = fields.Selection([('1breakfast', 'Breakfast'),
                              ('2lunch', 'Lunch'),
                              ('3dinner', 'Dinner')], string='Meal') 
@@ -56,7 +57,7 @@ class CamposRfidDevice(models.Model):
         if device.check_method == 'canteen':
             return device.checkin_canteen(participant_number, part_ids)
         elif device.check_method == 'meat':
-            return self.checkin_meat(participant_number, part_ids)
+            return device.checkin_meat(participant_number, part_ids)
         else:
             self.env['campos.rfid.log'].create({'device_macid': device_macid,
                                                 'pnum': participant_number,
@@ -82,16 +83,51 @@ class CamposRfidDevice(models.Model):
             return self.build_response(u'Afvist\nEj tilmeldt mad', False)
 
         return self.build_response(u'Ukendt deltager', False)
+    
+    def meat_response(self, ticket, message, access, par):
+        if access:
+            responce = '<div class="campos_info_box">%s</div>' % message.replace('\n','<br/>')
+        else:
+            responce = '<div class="campos_warning_box">%s</div>' % message.replace('\n','<br/>')
+        ticket.write({'responce': responce,
+                      'responce_status': access,
+                      'participant_id': par.id if par else ticket.particpant_id})
+        return self.build_response(message, access, res_id=ticket.id)
                                    
     def checkin_meat(self, participant_number, part_ids):
-        if participant_number == '100':
-            return self.build_response(u' 3 Kylling\n 3 Oksekød', True)
-        if participant_number == '200':
-            return self.build_response(u'Afvist\nGå til Slottet', False)
-        if participant_number == '300':
-            return self.build_response(u'Afvist\nAllerede afhentet', False)
-        if participant_number == '400':
-            return self.build_response(u'Afvist\nEj tilmeldt kød', False)
+        reg = False
+        par = False
+        for p in self.env['campos.event.participant'].browse(part_ids):
+            if p.registration_id:
+                reg = p.registration_id
+                par = p
+            else:
+                reg = p.partner_id.primary_reg_id
+                par = p
+            if reg:
+                break
+        if reg:
+            tickets = self.env['campos.cat.ticket'].search([('registration_id', '=', reg.id),  ('date', '=', fields.Date.today())])
+            if tickets:
+                if tickets[0].subcamp_id != self.subcamp_id:
+                    return self.meat_response(tickets[0],u'Afvist\nGå til %s' % (tickets[0].subcamp_id.name), False, par)
+                elif not tickets[0].attended_time:
+                    att = fields.Datetime.now()
+                    s1 = str((int(att[11:13]) + 2) % 24)
+                    s2 = '30' if int(att[14:16]) >= 30 else '00'
+                    tickets[0].write({'attended_time': att,
+                                      'attended_slot': '%s%s' % (s1, s2)})
+                    meat_txt = []
+                    for m in tickets[0].meat_ids:
+                        meat_txt.append('%d %s' % m.packs, m.event_day_meat_id.meat_id.name)
+                    return self.meat_response(tickets[0], '\n'.join(meat_txt), True, par)
+                elif tickets[0].attended_time:
+                    if tickets[0].state == 'done':
+                        return self.meat_response(tickets[0],u'Afvist\nAllerede afhentet', False, False)
+                    else:
+                        return self.meat_response(tickets[0], u'Delvist afhentet\n%s' % (tickets[0].participant_id.name), True, par)
+            else:
+                return self.build_response(u'Afvist\nEj tilmeldt kød', False)
         
         return self.build_response(u'Ukendt gruppe', False)
             

@@ -21,6 +21,7 @@
                         <field name="check_method"/>
                         <field name="canteen_id" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
                         <field name="meal" attrs="{'invisible': [('check_method', '!=', 'canteen')]}"/>
+                        <field name="subcamp_id"/>
                         <field name="action"/>
                         <field name="user"/>
                     </group>
