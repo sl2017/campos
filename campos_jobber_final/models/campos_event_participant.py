@@ -329,7 +329,7 @@ class CamposEventParticipant(models.Model):
     def get_formview_id(self):
         """ Update form view id of action to open the participant """
         view_ref = False
-        if self.user.env.has_group('campos_event.group_campos_committee') or self.env.user.has_group('campos_event.group_campos_info'):
+        if self.env.user.has_group('campos_event.group_campos_committee') or self.env.user.has_group('campos_event.group_campos_info'):
             if self.staff:
                 view_ref = 'campos_event.view_event_registration_participant_form'
             elif self.participant:

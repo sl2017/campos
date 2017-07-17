@@ -33,6 +33,7 @@
             <search>
                 <field name="name"/>
                 <field name="code"/>
+                <field name="meal"/>
             </search>
         </field>
     </record>
@@ -45,6 +46,7 @@
                 <!-- TODO -->
                 <field name="name"/>
                 <field name="code"/>
+                <field name="meal"/>
             </tree>
         </field>
     </record>
