@@ -16,6 +16,16 @@
 			<field name="implied_ids" eval="[(4, ref('campos_checkin.group_campos_checkin_crew'))]"/>
 			<field name="category_id" ref="campos_event.module_campos_category" />
 	</record>
+	
+	 <record model="ir.model.access" id="campos_mat_report_access">
+        <field name="name">campos.activity.ticket access name</field>
+        <field name="model_id" ref="model_campos_mat_report"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
 
 </data>
 </openerp>

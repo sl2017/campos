@@ -3,6 +3,11 @@ from . import campos_canteen_instanse
 from . import campos_canteen_ticket
 from . import campos_canteen_slot
 from . import campos_canteen_stat
-
+from . import event_registration
 from . import campos_event_participant
 from . import campos_rfid_log
+from . import campos_cat_inst
+from . import campos_cat_ticket
+from . import event_day_meat
+from . import event_registration_meatlist
+from . import campos_cat_stat

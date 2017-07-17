@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_cat_ticket_form_view">
+        <field name="name">campos.cat.ticket.form (in campos_rfid)</field>
+        <field name="model">campos.cat.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" clickable="True"/> 
+                </header>
+                <sheet>
+                	<div class="oe_left" style="width: 500px;" colspan="2">
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="registration_id" string="Group"/>
+                                <h2><field name="registration_id" class="oe_inline"/></h2>
+                            </div>
+                    </div>
+                    <div class="oe_right oe_button_box" name="buttons"> 
+                    	<field name="cat_inst_id"/>
+                    </div>
+                    <field name="responce" readonly="0"/>
+                    <group>
+                        <field name="participant_id"/>
+                        <field name="meat_ids" nolabel="1" colspan="2">
+                        	<tree>
+                        		<field name="event_day_meat_id"  options="{'no_create': True, 'no_open': True}" string="Day and Meat Type"/>
+								<field name="meat_count"/>
+                        		<field name="packs"/>
+                        	</tree>
+                        </field>
+                        <group col="1">
+                        	<label for="ticket_note"/>
+                        	<field name="ticket_note" nolabel="1"/>
+                        </group>
+                        <group col="1">
+                        	<label for="catering_note"/>
+                        	<field name="catering_note" nolabel="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_cat_ticket_search_view">
+        <field name="name">campos.cat.ticket.search (in campos_rfid)</field>
+        <field name="model">campos.cat.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+            			<field name="cat_inst_id"/>
+                    	<field name="date"/>
+                    	<field name="subcamp_id"/>
+                        <field name="registration_id"/>
+                        <field name="participant_id"/>
+                        <filter name="ftoday" string="Today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_cat_ticket_tree_view">
+        <field name="name">campos.cat.ticket.tree (in campos_rfid)</field>
+        <field name="model">campos.cat.ticket</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="cat_inst_id"/>
+            	<field name="subcamp_id"/>
+                <field name="registration_id"/>
+                <field name="participant_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_cat_ticket_act_window">
+        <field name="name">Food delivery</field> <!-- TODO -->
+        <field name="res_model">campos.cat.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_ftoday': 1}</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="campos_cat_ticket_act_form">
+        <field name="name">Food delivery</field> <!-- TODO -->
+        <field name="res_model">campos.cat.ticket</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="campos_rfid.campos_cat_ticket_form_view"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_cat_ticket_menu">
+        <field name="name">Food delivery</field>
+        <field name="parent_id" ref="menu_campos_catering_catering"/>
+        <field name="action" ref="campos_cat_ticket_act_window"/>
+        <field name="sequence" eval="32"/>
+    </record>
+
+</data>
+</openerp>

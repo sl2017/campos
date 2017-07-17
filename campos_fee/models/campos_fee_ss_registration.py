@@ -496,10 +496,11 @@ class CamposFeeSsRegistration(models.Model):
                 vals['invoice_id'] = ssreg.invoice_id.id
                 self.env['account.invoice.line'].create(vals)
                 for line in ssreg.ref_ssreg_id.invoice_id.invoice_line:
-                    if line.product_id.default_code and line.product_id.default_code.startswith('LK'):
-                        vals = self._prepare_create_invoice_line_vals(line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
-                        vals['invoice_id'] = ssreg.invoice_id.id
-                        self.env['account.invoice.line'].create(vals)
+                    if line.product_id.default_code and line.product_id.default_code.startswith('LK') and line.quantity > 0:
+                        if line.product_id.default_code != 'LKREF':
+                            vals = self._prepare_create_invoice_line_vals(line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
                         
                 if charged_fee_par > ssreg.fee_participants and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
                     #2. 50 % refusions

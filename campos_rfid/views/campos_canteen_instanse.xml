@@ -49,7 +49,10 @@
         <field name="model">campos.canteen.instanse</field>
         <field name="arch" type="xml">
             <search>
-                <!-- TODO -->
+            	<field name="canteen_id"/>
+                <field name="date"/>
+                <field name="meal"/>
+                <filter name="ftoday" string="Today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
             </search>
         </field>
     </record>
@@ -72,7 +75,7 @@
         <field name="res_model">campos.canteen.instanse</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_ftoday': 1}</field>
     </record>
 
     <record model="ir.actions.act_window" id="campos_canteen_instanse_act_form">

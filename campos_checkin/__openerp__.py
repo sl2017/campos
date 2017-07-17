@@ -18,9 +18,11 @@
         #'web_tree_dynamic_colored_field',
     ],
     'data': [
+        'views/event_registration.xml',
         'wizards/campos_checkin_wiz.xml',
         'security/campos_checkin.xml',
         'views/campos_event_participant.xml',
+        'views/campos_mat_report.xml',
     ],
     'demo': [
     ],
