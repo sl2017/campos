@@ -37,9 +37,10 @@
         'security/campos_cat_stat.xml',
         'views/campos_cat_stat.xml',
         #'views/event_registration_meatlist.xml',
-        #'views/event_day_meat.xml',
+        'views/event_day_meat.xml',
         'security/campos_cat_ticket.xml',
         'views/campos_cat_ticket.xml',
+        'data/ir_cron.xml',
         
     ],
     'demo': [

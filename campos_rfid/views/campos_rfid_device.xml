@@ -24,6 +24,8 @@
                         <field name="subcamp_id"/>
                         <field name="action"/>
                         <field name="user"/>
+                        <field name="showtime_ok"/>
+                        <field name="showtime_not"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

@@ -5,12 +5,14 @@
 <openerp>
 <data>
 
+<!-- TODO 
     <record model="ir.ui.view" id="event_day_meat_form_view">
         <field name="name">event.day.meat.form (in campos_rfid)</field>
         <field name="model">event.day.meat</field>
         <field name="inherit_id" ref="TODO othermodule.form_view"/>
         <field name="arch" type="xml">
-            <!-- TODO -->
+            
+            pck_pr_par
         </field>
     </record>
 
@@ -19,21 +21,24 @@
         <field name="model">event.day.meat</field>
         <field name="inherit_id" ref="TODO othermodule.search_view"/>
         <field name="arch" type="xml">
-            <!-- TODO -->
+   
         </field>
     </record>
-
+-->
     <record model="ir.ui.view" id="event_day_meat_tree_view">
         <field name="name">event.day.meat.tree (in campos_rfid)</field>
         <field name="model">event.day.meat</field>
-        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+        <field name="inherit_id" ref="campos_final_registration.view_tree_event_day_meat"/>
         <field name="arch" type="xml">
-            <!-- TODO -->
+            <field name="meat_id" position="after">
+            	<field name="pck_pr_par"/>
+            </field>
         </field>
     </record>
 
+<!-- TODO 
     <record model="ir.actions.act_window" id="event_day_meat_act_window">
-        <field name="name">Event Day Meat</field> <!-- TODO -->
+        <field name="name">Event Day Meat</field> 
         <field name="res_model">event.day.meat</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -42,10 +47,10 @@
 
     <record model="ir.ui.menu" id="event_day_meat_menu">
         <field name="name">Event Day Meat</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="parent_id" ref="xmlid of parent menu"/> 
         <field name="action" ref="event_day_meat_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
+        <field name="sequence" eval="16"/> 
     </record>
-
+-->
 </data>
 </openerp>

@@ -3,8 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models, _
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 import logging
+from datetime import datetime, timedelta
 _logger = logging.getLogger(__name__)
 
 
@@ -28,6 +30,8 @@ class CamposRfidDevice(models.Model):
     action = fields.Many2one('ir.actions.act_window')
     user = fields.Many2one('res.users')
 
+    showtime_ok = fields.Integer('OK Show Time', default=7)
+    showtime_not = fields.Integer('Not OK Show Time', default=7)
 
     
     
@@ -39,7 +43,7 @@ class CamposRfidDevice(models.Model):
             _logger.info('ACTION: %s', action)
             self.sudo(self.user.id).env['action.request'].notify(action)
 
-        return {'ShowTime': 10,
+        return {'ShowTime': self.showtime_ok if access else self.showtime_not,
                 'Message': message,
                 'Access': access}
     @api.model
@@ -69,7 +73,12 @@ class CamposRfidDevice(models.Model):
         tickets = self.env['campos.canteen.ticket'].search([('participant_id', 'in', part_ids), ('meal', '=', self.meal), ('date', '=', fields.Date.today())])
         if tickets:
             if tickets[0].attended_time:
-                return self.build_response(u'Afvist\nAllerede scannet', False) 
+                att = datetime.strptime(tickets[0].attended_time, DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(seconds=120)
+                _logger.info('ATT: %s < %s', att, datetime.strptime(fields.Datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT))
+                if att > datetime.strptime(fields.Datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT):
+                    return self.build_response(u'Velbekommen\nAllerede scannet', True)
+                else:
+                    return self.build_response(u'Afvist\nAllerede scannet', False)
             elif tickets[0].canteen_id == self.canteen_id:
                 att = fields.Datetime.now()
                 s1 = str((int(att[11:13]) + 2) % 24)
@@ -130,5 +139,10 @@ class CamposRfidDevice(models.Model):
                 return self.build_response(u'Afvist\nEj tilmeldt kød', False)
         
         return self.build_response(u'Ukendt gruppe', False)
+    
+    @api.model
+    def update_meal_on_canteen_devices(self, meal=False):
+        devs = self.search([('check_method','=', 'canteen')])
+        devs.write({'meal': meal})
             
         
