@@ -16,6 +16,8 @@
                 
     ],
     'data': [
+        #'views/event_registration.xml',
+        
         'views/campos_event_participant.xml',
         'security/campos_rfid_device.xml',
         'views/campos_rfid_device.xml',
@@ -30,6 +32,15 @@
         'data/campos.canteen.slot.csv',
         'security/campos_rfid_log.xml',
         'views/campos_rfid_log.xml',
+        'security/campos_cat_inst.xml',
+        'views/campos_cat_inst.xml',
+        'security/campos_cat_stat.xml',
+        'views/campos_cat_stat.xml',
+        #'views/event_registration_meatlist.xml',
+        #'views/event_day_meat.xml',
+        'security/campos_cat_ticket.xml',
+        'views/campos_cat_ticket.xml',
+        
     ],
     'demo': [
     ],

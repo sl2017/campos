@@ -324,6 +324,30 @@ class CamposEventParticipant(models.Model):
                     'res_id': self.partner_id.primary_reg_id.id,
                     }
             
+    @api.one
+    @api.returns('ir.ui.view')
+    def get_formview_id(self):
+        """ Update form view id of action to open the participant """
+        view_ref = False
+        if self.user.env.has_group('campos_event.group_campos_committee') or self.env.user.has_group('campos_event.group_campos_info'):
+            if self.staff:
+                view_ref = 'campos_event.view_event_registration_participant_form'
+            elif self.participant:
+                view_ref = 'campos_final_registration.view_form_finalregistration_participant'
+            elif self.jobber_child:
+                view_ref = 'campos_jobber_final.campos_jobber_child_form_view'
+        else:
+            if self.staff:
+                view_ref = 'campos_event.staff_event_registration_participant_form'
+            elif self.participant:
+                view_ref = 'campos_final_registration.view_form_finalregistration_participant'
+            elif self.jobber_child:
+                view_ref = 'campos_jobber_final.campos_jobber_child_form_view'
+        if view_ref:
+            return self.env.ref(view_ref)
+        else:
+            return False
+        
     @api.multi
     def sync_jobber_children(self):
         for c in self:

@@ -58,7 +58,7 @@
     </record>
 
     <record model="ir.ui.menu" id="campos_canteen_slot_menu">
-        <field name="name">Campos Canteen Slot</field>
+        <field name="name">Time Slots</field>
         <field name="parent_id" ref="campos_rfid_top_menu"/> <!-- TODO -->
         <field name="action" ref="campos_canteen_slot_act_window"/>
         <field name="sequence" eval="16"/> <!-- TODO -->
