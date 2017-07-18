@@ -84,7 +84,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="campos_event_participant_act_window">
-        <field name="name">Campos Event Participant</field> <!-- TODO -->
+        <field name="name">Jobber Check In</field>
         <field name="res_model">campos.event.participant</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('staff', '=', True)]</field>
