@@ -301,6 +301,10 @@ class webtourconfig(models.Model):
             _logger.info("action_initialize_owntransport_paxs here we go!! %s %s ", config, config.event_id.id)
             config.env['event.registration'].action_makejob_owntransport_paxs(config.event_id.id)
 
+    @api.multi
+    def action_webtour_getbstour(self):
+        self.env['campos.webtour.bstour'].get_webtourtour()
+
 class WebtourConfigChecklog(models.Model):
     _description = 'Webtour check log'
     _name = 'campos.webtourconfig.checklog'

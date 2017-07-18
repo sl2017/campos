@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 15:31+0000\n"
-"PO-Revision-Date: 2017-07-11 15:31+0000\n"
+"POT-Creation-Date: 2017-07-18 04:59+0000\n"
+"PO-Revision-Date: 2017-07-18 04:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,12 @@ msgid "2. rate 100% DK Groups"
 msgstr ""
 
 #. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:320
+#, python-format
+msgid "50% refusion after may 1"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_194
 msgid "Aabenraa"
 msgstr ""
@@ -78,6 +84,11 @@ msgstr ""
 #. module: campos_fee
 #: selection:campos.fee.ss.participant,state:0
 msgid "Approved by the committee"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.ss.participant,state:0
+msgid "Arrived"
 msgstr ""
 
 #. module: campos_fee
@@ -206,6 +217,11 @@ msgstr ""
 #: selection:campos.fee.ss.participant,payreq_state:0
 #: selection:campos.fee.ss.registration,state:0
 msgid "Cancelled"
+msgstr ""
+
+#. module: campos_fee
+#: selection:campos.fee.ss.participant,state:0
+msgid "Check In Completed"
 msgstr ""
 
 #. module: campos_fee
@@ -585,6 +601,7 @@ msgid "In process"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.event.participant:campos_fee.view_event_registration_participant_form
 #: field:campos.fee.ss.registration,invoice_id:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
@@ -602,6 +619,14 @@ msgid "Invoice Lines"
 msgstr ""
 
 #. module: campos_fee
+#: code:addons/campos_fee/models/campos_event_participant.py:172
+#, python-format
+msgid "Invoice for %s"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.event.participant:campos_fee.view_event_registration_participant_form
+#: field:campos.event.participant,ssreginv_ids:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: field:event.registration,ssreginv_ids:0
@@ -698,6 +723,11 @@ msgstr ""
 #: field:campos.fee.ss.reg.meat,write_date:0
 #: field:campos.fee.ss.registration,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.snapshot,always_draft:0
+msgid "Leave as Drafts"
 msgstr ""
 
 #. module: campos_fee
@@ -798,8 +828,20 @@ msgid "No cancel fee"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:300
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:450
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:312
+#, python-format
+msgid "No refusion after juli 1"
+msgstr ""
+
+#. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:356
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:370
+#, python-format
+msgid "No refusion after may 1"
+msgstr ""
+
+#. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:536
 #, python-format
 msgid "No refusion after may 1: %s %.2f - %.2f"
 msgstr ""
@@ -856,10 +898,14 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:277
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:427
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:513
 #, python-format
 msgid "Only  50%% refusion after may 1: %s %.2f - %.2f"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.event.participant:campos_fee.view_event_registration_participant_form
+msgid "Open Invoices"
 msgstr ""
 
 #. module: campos_fee
@@ -876,13 +922,14 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:259
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:409
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:273
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:494
 #, python-format
 msgid "Participant fee charged on invoice %s:"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.event.participant:campos_fee.view_event_registration_participant_form
 #: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
 #: field:campos.fee.ss.registration,sspar_ids:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
@@ -974,6 +1021,7 @@ msgid "Registration"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.snapshot,ssreg_ids:0
 #: model:ir.actions.act_window,name:campos_fee.campos_fee_ss_registration_act_window
 msgid "Registration Snapshot"
 msgstr ""
@@ -1069,6 +1117,7 @@ msgid "Slagelse"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.event.participant:campos_fee.view_event_registration_participant_form
 #: field:campos.event.participant,sspar_ids:0
 #: field:campos.fee.ss.registration,snapshot_id:0
 #: view:event.registration:campos_fee.view_form_finalregistration_admin
@@ -1218,6 +1267,11 @@ msgid "Total Fee"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.fee.ss.registration,transport_cost:0
+msgid "Transport Cost"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.event.participant,transport_price:0
 #: field:campos.fee.ss.participant,transport_price:0
 msgid "Transport Fee"
@@ -1248,8 +1302,8 @@ msgid "Transport Total"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:291
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:441
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:334
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:527
 #, python-format
 msgid "Transport fee charged on invoice %s"
 msgstr ""
@@ -1283,6 +1337,11 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.snapshot,message_unread:0
 msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.snapshot,dyna_ref:0
+msgid "Use Last invoice as reference snapshot"
 msgstr ""
 
 #. module: campos_fee

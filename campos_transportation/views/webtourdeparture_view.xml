@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<record id="view_tree_webtourbstour" model="ir.ui.view">
+<field name="name">Webtour bsTour</field>
+<field name="model">campos.webtour.bstour</field>
+<field name="arch" type="xml">
+<tree>
+<field name="bsidno" string="bsIDno"/>
+<field name="drivername" string="Driver Name"/>
+<field name="vehiclename" string="Vehicle Name"/>
+<field name="driverinfo" string="Driver Info"/>
+<field name="pax" string="Pax"/>
+<field name="vehiclemaxpax" string="VehicleMaxPax"/>
+<field name="updated" string="Updated"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourbstour" model="ir.ui.view">
+<field name="name">Webtour bsTour</field>
+<field name="model">campos.webtour.bstour</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="bstour_top">
+<field name="bsidno" string="bsIDno"/>
+<field name="drivername" string="Driver Name"/>
+<field name="vehiclename" string="Vehicle Name"/>
+<field name="interninfo" string="Intern Info"/>
+<field name="driverinfo" string="Driver Info"/>
+<field name="pax" string="Pax"/>
+<field name="vehiclemaxpax" string="VehicleMaxPax"/>
+<field name="updated" string="Updated"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<record id="view_search_webtourbstour" model="ir.ui.view">
+	<field name="name">Webtour bstour Search</field>
+	<field name="model">campos.webtour.bstour</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="bsidno"/>
+			<field name="drivername"/>	
+			<field name="vehiclename"/>				
+		</search>
+	</field>
+</record>
+
+<record id="view_tree_webtourbstourdtop" model="ir.ui.view">
+<field name="name">Webtour bsTour Stop</field>
+<field name="model">campos.webtour.bstour.stop</field>
+<field name="arch" type="xml">
+<tree>
+<field name="bsidno" string="bsIDno"/>
+<field name="usidno" string="usIDno"/>
+<field name="startdate" string="DateStart"/>
+<field name="enddate" string="DateEnd"/>
+<field name="startplaceidno" string="StartPlaceIDno"/>
+<field name="startplace" string="StartPlace"/>
+<field name="endplaceidno" string="EndPlaceIDno"/>
+<field name="endplace" string="EndPlace"/>
+<field name="updated" string="Updated"/>
+</tree>
+</field>
+</record>
+<record id="view_form_webtourbstourstop" model="ir.ui.view">
+<field name="name">Webtour bsTour Stop</field>
+<field name="model">campos.webtour.bstour.stop</field>
+<field name="arch" type="xml">
+<form>
+<sheet>
+<group name="stop_top">
+<field name="bsidno" string="bsIDno"/>
+<field name="usidno" string="usIDno"/>
+<field name="startdate" string="DateStart"/>
+<field name="enddate" string="DateEnd"/>
+<field name="startplaceidno" string="StartPlaceIDno"/>
+<field name="startplace" string="StartPlace"/>
+<field name="endplaceidno" string="EndPlaceIDno"/>
+<field name="endplace" string="EndPlace"/>
+<field name="updated" string="Updated"/>
+</group>
+</sheet>
+</form>
+</field>
+</record>
+
+<!-- Action to open Webtour Us bsTour list -->
+<act_window id="action_webtourbstour"
+name="Camp OS Webtour bsTour"
+res_model="campos.webtour.bstour"
+view_mode="tree,form" />
+
+
+<!-- Action to open Webtour Us Destination list -->
+<act_window id="action_webtourbstourstop"
+name="Camp OS Webtour bsTour Stop"
+res_model="campos.webtour.bstour.stop"
+view_mode="tree,form" />
+
+<!-- Menu item to open Campos Webtour bsTour list  -->
+<menuitem id="menu_action_campos_transportation_bstour" parent="menu_campos_transportation" name="Webtour bsTour" action="action_webtourbstour" groups="campos_event.group_campos_admin" sequence="80"/>
+<menuitem id="menu_action_campos_transportation_bstour_stop" parent="menu_campos_transportation" name="Webtour bsTour Stop" action="action_webtourbstourstop" groups="campos_event.group_campos_admin" sequence="80"/>
+
+</data>
+</openerp>
