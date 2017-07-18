@@ -151,8 +151,8 @@ class CamposEventParticipant(models.Model):
                                                                   'tocampusneed_id': par.tocampusneed_id.id,
                                                                   'fromcampusneed_id': par.fromcampusneed_id.id,
                                                                   'signup_state': par.signup_state,
-                                                                  'no_invoicing': par.no_invoicing,
-                                                                  'no_cancel_fee': par.no_cancel_fee,
+                                                                  'no_invoicing': par.sudo().no_invoicing,
+                                                                  'no_cancel_fee': par.sudo().no_cancel_fee,
                                                                    })
             
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_checkin_grp_wiz_form_view">
+        <field name="name">campos.checkin.grp.wiz.form (in campos_checkin)</field>
+        <field name="model">campos.checkin.grp.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Campos Checkin Grp Wiz">
+                <!-- TODO -->
+                <group>
+                	<field name="registration_id" invisible="1"/>
+                	<field name="checkin_ok" invisible="1"/>
+                    <field name="checkin_info_html" nolabel="1" colspan="2"/>
+                    
+                    <field  name="hand_out"  colspan="2" readonly="1"/>
+                    
+                </group>
+                <footer>
+                	<button name='doit_arrived'
+                        string='Register arrival'
+                        class='btn-primary oe_highlight'
+                        type='object'
+                        attrs="{'invisible':[('checkin_ok', '=', True)]}"/>
+                        
+                    <button name='doit_checkin'
+                        string='Check In Completed'
+                        class='btn-primary oe_highlight'
+                        type='object'/>
+                    or
+                    <button string='Cancel'
+                        class='btn-default oe_link'
+                        special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+
+</data>
+</openerp>
