@@ -70,9 +70,10 @@
             <graph type="bar">
                 
                 
-                <field name="canteen_id"/>
-                <field name="date" interval="day"/>
-                <field name="meal"/>
+                <field name="canteen_id" type="col"/>
+                <field name="device_id" type="col"/>
+                <field name="date" interval="day" type="row"/>
+                <field name="meal" type="row"/>
                 <field name="attended_slot" type="col"/>
             </graph>
         </field>

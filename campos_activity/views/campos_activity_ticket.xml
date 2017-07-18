@@ -5,6 +5,12 @@
 <openerp>
 <data>
 
+	<act_window id="action_activityticket_sms" name="Send SMS"
+			res_model="part.sms" src_model="campos.activity.ticket"
+			view_mode="form" target="new" key2="client_action_multi"
+			context="{'partner_id_field': 'reg_id.contact_partner_id'}"
+			groups="campos_sms.group_sgsms_send,base.group_erp_manager,campos_event.group_campos_admin" />
+			
 	<!--  Administrator views -->
     <record model="ir.ui.view" id="campos_activity_ticket_form_view">
         <field name="name">campos.activity.ticket.form (in campos_activity)</field>

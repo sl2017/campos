@@ -39,6 +39,7 @@ class CamposCatTicket(models.Model):
                               ('done', 'Completed')], string='State', default='draft')
     catering_note = fields.Text(related='registration_id.catering_note', string='Group Note')
     ticket_note = fields.Text('Todays Note')
+    device_id = fields.Many2one('campos.rfid.device', 'Scanner')
     
     
     @api.multi
