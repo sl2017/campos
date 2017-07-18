@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 22:04+0000\n"
-"PO-Revision-Date: 2017-07-15 22:04+0000\n"
+"POT-Creation-Date: 2017-07-18 04:59+0000\n"
+"PO-Revision-Date: 2017-07-18 04:59+0000\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,12 +24,19 @@ msgstr ""
 #: field:campos.canteen.stat,attended:0
 #: view:campos.canteen.ticket:campos_rfid.campos_canteen_ticket_search_view
 #: field:campos.canteen.ticket,attended_time:0
+#: field:campos.cat.stat,attended:0 field:campos.cat.ticket,attended_time:0
 msgid "Attended"
 msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.stat,attended_slot_name:0
+#: field:campos.cat.stat,attended_slot_name:0
 msgid "Attended slot name"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.model,name:campos_rfid.model_event_day_meat
+msgid "Available meat types per event day"
 msgstr ""
 
 #. module: campos_rfid
@@ -42,6 +49,7 @@ msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.ticket,attended_slot:0
+#: field:campos.cat.ticket,attended_slot:0
 msgid "Bucket"
 msgstr ""
 
@@ -59,14 +67,12 @@ msgstr ""
 #. module: campos_rfid
 #: model:ir.actions.act_window,name:campos_rfid.campos_canteen_slot_act_window
 #: model:ir.model,name:campos_rfid.model_campos_canteen_slot
-#: model:ir.ui.menu,name:campos_rfid.campos_canteen_slot_menu
 msgid "Campos Canteen Slot"
 msgstr ""
 
 #. module: campos_rfid
 #: model:ir.actions.act_window,name:campos_rfid.campos_canteen_stat_act_window
 #: model:ir.model,name:campos_rfid.model_campos_canteen_stat
-#: model:ir.ui.menu,name:campos_rfid.campos_canteen_stat_menu
 msgid "Campos Canteen Stat"
 msgstr ""
 
@@ -74,6 +80,23 @@ msgstr ""
 #: model:ir.actions.act_window,name:campos_rfid.campos_canteen_ticket_act_window
 #: model:ir.model,name:campos_rfid.model_campos_canteen_ticket
 msgid "Campos Canteen Ticket"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.actions.act_window,name:campos_rfid.campos_cat_inst_act_window
+#: model:ir.model,name:campos_rfid.model_campos_cat_inst
+msgid "Campos Cat Inst"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.actions.act_window,name:campos_rfid.campos_cat_stat_act_window
+#: model:ir.model,name:campos_rfid.model_campos_cat_stat
+msgid "Campos Cat Stat"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.model,name:campos_rfid.model_campos_cat_ticket
+msgid "Campos Cat Ticket"
 msgstr ""
 
 #. module: campos_rfid
@@ -119,9 +142,31 @@ msgid "Canteen Tickets"
 msgstr ""
 
 #. module: campos_rfid
+#: field:campos.cat.stat,cat_inst_id:0
+msgid "Cantering Instanse"
+msgstr ""
+
+#. module: campos_rfid
 #: model:ir.ui.menu,name:campos_rfid.menu_campos_catering
+#: model:ir.ui.menu,name:campos_rfid.menu_campos_catering_catering
 #: model:res.groups,name:campos_rfid.group_campos_catering
 msgid "Catering"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,cat_inst_id:0
+#: model:ir.ui.menu,name:campos_rfid.campos_cat_inst_menu
+msgid "Catering Instanse"
+msgstr ""
+
+#. module: campos_rfid
+#: field:event.registration,catering_note:0
+msgid "Catering Note"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.model,name:campos_rfid.model_event_registration_meatlist
+msgid "Chosen meat on a registration"
 msgstr ""
 
 #. module: campos_rfid
@@ -130,10 +175,16 @@ msgid "Code"
 msgstr ""
 
 #. module: campos_rfid
+#: selection:campos.cat.ticket,state:0
+msgid "Completed"
+msgstr ""
+
+#. module: campos_rfid
 #: field:campos.canteen.instanse,create_uid:0
 #: field:campos.canteen.slot,create_uid:0
-#: field:campos.canteen.ticket,create_uid:0
-#: field:campos.rfid.device,create_uid:0 field:campos.rfid.log,create_uid:0
+#: field:campos.canteen.ticket,create_uid:0 field:campos.cat.inst,create_uid:0
+#: field:campos.cat.ticket,create_uid:0 field:campos.rfid.device,create_uid:0
+#: field:campos.rfid.log,create_uid:0
 msgid "Created by"
 msgstr ""
 
@@ -141,18 +192,25 @@ msgstr ""
 #: field:campos.canteen.instanse,create_date:0
 #: field:campos.canteen.slot,create_date:0
 #: field:campos.canteen.ticket,create_date:0
+#: field:campos.cat.inst,create_date:0 field:campos.cat.ticket,create_date:0
 #: field:campos.rfid.device,create_date:0 field:campos.rfid.log,create_date:0
 msgid "Created on"
 msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.instanse,date:0 field:campos.canteen.ticket,date:0
+#: field:campos.cat.inst,date:0 field:campos.cat.ticket,date:0
 msgid "Date"
 msgstr ""
 
 #. module: campos_rfid
 #: help:campos.rfid.device,message_last_post:0
 msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_rfid
+#: view:campos.cat.ticket:campos_rfid.campos_cat_ticket_form_view
+msgid "Day and Meat Type"
 msgstr ""
 
 #. module: campos_rfid
@@ -179,6 +237,8 @@ msgstr ""
 #: field:campos.canteen.slot,display_name:0
 #: field:campos.canteen.stat,display_name:0
 #: field:campos.canteen.ticket,display_name:0
+#: field:campos.cat.inst,display_name:0 field:campos.cat.stat,display_name:0
+#: field:campos.cat.ticket,display_name:0
 #: field:campos.rfid.device,display_name:0
 #: field:campos.rfid.log,display_name:0
 msgid "Display Name"
@@ -190,13 +250,25 @@ msgid "Event Participant"
 msgstr ""
 
 #. module: campos_rfid
-#: field:campos.canteen.instanse,ticket_no:0
+#: model:ir.model,name:campos_rfid.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.canteen.instanse,ticket_no:0 field:campos.cat.inst,ticket_no:0
 msgid "Expected"
 msgstr ""
 
 #. module: campos_rfid
 #: field:campos.rfid.device,message_follower_ids:0
 msgid "Followers"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.actions.act_window,name:campos_rfid.campos_cat_ticket_act_form
+#: model:ir.actions.act_window,name:campos_rfid.campos_cat_ticket_act_window
+#: model:ir.ui.menu,name:campos_rfid.campos_cat_ticket_menu
+msgid "Food delivery"
 msgstr ""
 
 #. module: campos_rfid
@@ -210,6 +282,17 @@ msgid "Generate tickets"
 msgstr ""
 
 #. module: campos_rfid
+#: view:campos.cat.ticket:campos_rfid.campos_cat_ticket_form_view
+#: field:campos.cat.ticket,registration_id:0
+msgid "Group"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,catering_note:0
+msgid "Group Note"
+msgstr ""
+
+#. module: campos_rfid
 #: help:campos.rfid.device,message_summary:0
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
@@ -219,7 +302,9 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.canteen.instanse,id:0 field:campos.canteen.slot,id:0
 #: field:campos.canteen.stat,id:0 field:campos.canteen.ticket,id:0
-#: field:campos.rfid.device,id:0 field:campos.rfid.log,id:0
+#: field:campos.cat.inst,id:0 field:campos.cat.stat,id:0
+#: field:campos.cat.ticket,id:0 field:campos.rfid.device,id:0
+#: field:campos.rfid.log,id:0
 msgid "ID"
 msgstr ""
 
@@ -243,6 +328,8 @@ msgstr ""
 #: field:campos.canteen.slot,__last_update:0
 #: field:campos.canteen.stat,__last_update:0
 #: field:campos.canteen.ticket,__last_update:0
+#: field:campos.cat.inst,__last_update:0 field:campos.cat.stat,__last_update:0
+#: field:campos.cat.ticket,__last_update:0
 #: field:campos.rfid.device,__last_update:0
 #: field:campos.rfid.log,__last_update:0
 msgid "Last Modified on"
@@ -251,16 +338,18 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.canteen.instanse,write_uid:0
 #: field:campos.canteen.slot,write_uid:0
-#: field:campos.canteen.ticket,write_uid:0
-#: field:campos.rfid.device,write_uid:0 field:campos.rfid.log,write_uid:0
+#: field:campos.canteen.ticket,write_uid:0 field:campos.cat.inst,write_uid:0
+#: field:campos.cat.ticket,write_uid:0 field:campos.rfid.device,write_uid:0
+#: field:campos.rfid.log,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.instanse,write_date:0
 #: field:campos.canteen.slot,write_date:0
-#: field:campos.canteen.ticket,write_date:0
-#: field:campos.rfid.device,write_date:0 field:campos.rfid.log,write_date:0
+#: field:campos.canteen.ticket,write_date:0 field:campos.cat.inst,write_date:0
+#: field:campos.cat.ticket,write_date:0 field:campos.rfid.device,write_date:0
+#: field:campos.rfid.log,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
@@ -296,6 +385,16 @@ msgid "Meat Supply"
 msgstr ""
 
 #. module: campos_rfid
+#: field:campos.cat.ticket,meat_ids:0
+msgid "Meat list"
+msgstr ""
+
+#. module: campos_rfid
+#: field:event.registration.meatlist,ticket_id:0
+msgid "Meat ticket"
+msgstr ""
+
+#. module: campos_rfid
 #: field:campos.rfid.device,message_ids:0
 msgid "Messages"
 msgstr ""
@@ -307,9 +406,35 @@ msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.instanse,name:0 field:campos.canteen.slot,name:0
-#: field:campos.canteen.ticket,name:0 field:campos.rfid.device,name:0
+#: field:campos.canteen.ticket,name:0 field:campos.cat.inst,name:0
+#: field:campos.cat.ticket,name:0 field:campos.rfid.device,name:0
 #: field:campos.rfid.log,name:0
 msgid "Name"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,showtime_not:0
+msgid "Not OK Show Time"
+msgstr ""
+
+#. module: campos_rfid
+#: selection:campos.cat.ticket,state:0
+msgid "Not delivered"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.rfid.device,showtime_ok:0
+msgid "OK Show Time"
+msgstr ""
+
+#. module: campos_rfid
+#: field:event.registration.meatlist,packs:0
+msgid "Packs"
+msgstr ""
+
+#. module: campos_rfid
+#: field:event.day.meat,pck_pr_par:0
+msgid "Packs pr. Participant"
 msgstr ""
 
 #. module: campos_rfid
@@ -323,7 +448,28 @@ msgid "Participant number"
 msgstr ""
 
 #. module: campos_rfid
+#: selection:campos.cat.ticket,state:0
+msgid "Partly delivered"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,participant_id:0
+msgid "Pick up by"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,responce_status:0
+msgid "Responce status"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,responce:0
+msgid "Response"
+msgstr ""
+
+#. module: campos_rfid
 #: field:campos.canteen.instanse,ticket_used:0
+#: field:campos.cat.inst,ticket_used:0
 msgid "Scanned"
 msgstr ""
 
@@ -333,8 +479,26 @@ msgid "Scanners"
 msgstr ""
 
 #. module: campos_rfid
-#: field:campos.canteen.instanse,stat_ids:0
+#: field:campos.cat.ticket,state:0
+msgid "State"
+msgstr ""
+
+#. module: campos_rfid
+#: model:ir.ui.menu,name:campos_rfid.campos_canteen_stat_menu
+#: model:ir.ui.menu,name:campos_rfid.campos_cat_stat_menu
+msgid "Statistics"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.canteen.instanse,stat_ids:0 field:campos.cat.inst,stat_ids:0
 msgid "Stats"
+msgstr ""
+
+#. module: campos_rfid
+#: view:campos.cat.inst:campos_rfid.campos_cat_inst_form_view
+#: field:campos.cat.inst,subcamp_id:0 field:campos.cat.ticket,subcamp_id:0
+#: field:campos.rfid.device,subcamp_id:0
+msgid "Subcamp"
 msgstr ""
 
 #. module: campos_rfid
@@ -344,12 +508,26 @@ msgstr ""
 
 #. module: campos_rfid
 #: field:campos.canteen.instanse,ticket_ids:0
+#: field:campos.cat.inst,ticket_ids:0
 msgid "Tickets"
 msgstr ""
 
 #. module: campos_rfid
+#: model:ir.ui.menu,name:campos_rfid.campos_canteen_slot_menu
+msgid "Time Slots"
+msgstr ""
+
+#. module: campos_rfid
+#: view:campos.canteen.instanse:campos_rfid.campos_canteen_instanse_search_view
 #: view:campos.canteen.ticket:campos_rfid.campos_canteen_ticket_search_view
+#: view:campos.cat.inst:campos_rfid.campos_cat_inst_search_view
+#: view:campos.cat.ticket:campos_rfid.campos_cat_ticket_search_view
 msgid "Today"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.cat.ticket,ticket_note:0
+msgid "Todays Note"
 msgstr ""
 
 #. module: campos_rfid
