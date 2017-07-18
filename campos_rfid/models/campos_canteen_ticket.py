@@ -31,5 +31,5 @@ class CamposCanteenTicket(models.Model):
     meal = fields.Selection(related='canteen_inst_id.meal', store=True)
     attended_time = fields.Datetime('Attended')
     attended_slot = fields.Selection(_get_slots, string='Bucket', default = '-')
-    device_id = fields.One2many('campos.rfid.device', 'Scanner')
+    device_id = fields.Many2one('campos.rfid.device', 'Scanner')
     
