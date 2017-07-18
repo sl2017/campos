@@ -21,7 +21,7 @@
         	</button>
         		
             <field name="image" position="before">
-            	<field name="checkin_info_html"/>
+            	<field name="checkin_info_html" readonly="1"/>
             </field>
             
             <field name="com_contact" position="replace">

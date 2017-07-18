@@ -215,7 +215,9 @@ class EventRegistration(models.Model):
         ('cancel', 'Cancelled'),
         ('open', 'Confirmed'),
         ('done', 'Attended'),
-        ('deregistered', 'Deregistered')
+        ('deregistered', 'Deregistered'),
+        ('arrived', 'Arrived'),
+        ('checkin', 'Check In Completed')
     ], string='Status', default='draft', readonly=True, copy=False,
         track_visibility='onchange')
 

@@ -5,16 +5,29 @@
 <openerp>
 <data>
 
-    <record model="ir.ui.view" id="event_registration_form_view">
+    <record model="ir.ui.view" id="event_registration_checkin_form_view">
         <field name="name">event.registration.form (in campos_checkin)</field>
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
+        <field name="mode">primary</field>
+        <field name="priority">22</field>
         <field name="arch" type="xml">
+        		<button name="cancel_registration" position="replace">
+        			<button name="action_checkin" type="object" states="open,arrived" string="Check In" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/>
+        			<button name="action_cancel_checkin" type="object" states="arrived,checkin" string="Cancel Check In" groups="campos_checkin.group_campos_checkin_mgr"/>
+        		</button>
+        		<field name="state" position="replace">
+        			<field name="state" widget="statusbar" statusbar_visible="draft,open,arrived,checkin" statusbar_colors="{'cancel':'red', 'arrived': '#90EE90', 'checkin': '#008000'}"/>
+        		</field>
+        		<field name="event_id" position="before">
+        			<field name="checkin_info_html" nolabel="1" readonly="1" colspan="2"/>
+        		</field>
             	<field name="pioneering_pole_depot_id" position="after">
             		<field name="sale_order_line_ids"/>
             	</field>
         </field>
     </record>
+    
 <!-- TODO 
     <record model="ir.ui.view" id="event_registration_search_view">
         <field name="name">event.registration.search (in campos_checkin)</field>
@@ -24,29 +37,51 @@
             
         </field>
     </record>
-
+-->
     <record model="ir.ui.view" id="event_registration_tree_view">
         <field name="name">event.registration.tree (in campos_checkin)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+		<field name="priority">22</field>
         <field name="arch" type="xml">
-          
+            <tree create="0">
+            	<field name="name"/>
+            	<field name="organization_id"/>
+            	<field name="tocampdate"/>
+            	<field name="state"/>
+            	
+            </tree>          
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="event_registration_act_window">
-        <field name="name">Event Registration</field> 
+        <field name="name">Group Check In</field> 
         <field name="res_model">event.registration</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
+    
+    <record model="ir.actions.act_window.view"
+        id="campos_event_registration_act_window_tree">
+	  <field name="sequence" eval="1"/>
+	  <field name="view_mode">tree</field>
+	  <field name="view_id" ref="event_registration_tree_view"/>
+	  <field name="act_window_id" ref="event_registration_act_window"/>
+	</record>
+
+	<record model="ir.actions.act_window.view"
+	        id="campos_event_registration_act_window_form">
+	  <field name="sequence" eval="2"/>
+	  <field name="view_mode">form</field>
+	  <field name="view_id" ref="event_registration_checkin_form_view"/>
+	  <field name="act_window_id" ref="event_registration_act_window"/>
+	</record>	
 
     <record model="ir.ui.menu" id="event_registration_menu">
-        <field name="name">Event Registration</field>
-        <field name="parent_id" ref="xmlid of parent menu"/> 
+        <field name="name">Group Check In</field>
+        <field name="parent_id" ref="submenu_campos_checkin"/> 
         <field name="action" ref="event_registration_act_window"/>
-        <field name="sequence" eval="16"/>
+        <field name="sequence" eval="32"/>
     </record>
 -->
 </data>

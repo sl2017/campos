@@ -66,7 +66,7 @@
 		            	<field name="camp_price_total"/>
 	            	</group>
             	</page>
-            	<page string="Invoices" >
+            	<page string="Invoices" groups="account.group_account_invoice">
             			<button name="action_open_invoices" string="Open Invoices" type="object"/>
             			<newline/>
             			<field name="ssreginv_ids" readonly="1" nolabel="1">

@@ -8,11 +8,16 @@ from openerp import api, fields, models, _
 class EventRegistration(models.Model):
 
     _inherit = 'event.registration'
-    
+
     sale_order_line_ids = fields.One2many('campos.mat.report', 'reg_id')
     tocampdate = fields.Date('Arrival date', compute='_compute_dates', store=True)
     fromcampdate = fields.Date('Departure date', compute='_compute_dates')
-    
+
+    checkin_info_html = fields.Html('Check In Notes', compute='compute_checkin')
+    checkin_ok = fields.Boolean('Check In possible', compute='compute_checkin')
+    arrive_time = fields.Datetime('Arrival')
+    checkin_completed = fields.Datetime('Check In Time')
+
     @api.multi
     @api.depends('participants_camp_day_ids.will_participate')
     def _compute_dates(self):
@@ -34,3 +39,97 @@ class EventRegistration(models.Model):
             reg = self.browse(reg_id)
             reg.tocampdate = tocampdate
             reg.fromcampdate = fromcampdate
+ 
+    @api.multi
+    #@api.depends()
+    def compute_checkin(self):
+        for reg in self:
+            ckr_clc = False
+            checkin_ok = True
+            infotext = []
+            if reg.group_country_code2 == 'DK':
+                if not reg.child_certificates_accept:
+                    infotext.append(_('Indhentning af børneattester ikke bekræftiget'))
+                    checkin_ok = False
+            else:
+                if reg.clc_stat_ids.filtered(lambda r: r.state in ['required', 'enrolled']):
+                    infotext.append(_('CLC not completed'))
+                    checkin_ok = False
+            #Economy
+            if reg.partner_id.credit > 0:
+                infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (reg.partner_id.credit))
+                checkin_ok = False
+            elif reg.partner_id.credit == 0 and not reg.fee_total > 0:
+                if self.env['account.invoice'].search_count([('partner_id', '=', reg.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
+                    checkin_ok = False
+                    infotext.append(_('Invoice not yet generated!'))
+                else:
+                    infotext.append(_('Payment recived'))
+            else:
+                if reg.fee_total > 0:
+                    infotext.append(_('Payment recived'))
+                else:
+                    infotext.append(_('No Payment'))
+
+            if checkin_ok:
+                reg.checkin_info_html = '<div class="campos_info_box">%s</div>' % '<br />'.join(infotext) if infotext else False
+            else:
+                reg.checkin_info_html = '<div class="campos_warning_box">%s</div>' % '<br />'.join(infotext) if infotext else False
+            reg.checkin_ok = checkin_ok
+            
+            
+    @api.multi
+    def action_checkin(self):
+        self.ensure_one()
+        self.state = 'arrived'
+        self.arrive_time = fields.Datetime.now()
+
+        if not self.checkin_ok and not self.env.user.has_group('campos_checkin.group_campos_checkin_mgr'):
+            return self.env['warning_box'].info(title=_('Checkin'), message=_(u'Checkin for %s is not possible here\nGo to Løkkegård for Checkin.\n\nPlease show the location on the map for the Group') %  (self.name))
+
+        action = {
+            'name': _("Checkin for %s") % (self.name),
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'campos.checkin.grp.wiz',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'context': {
+                'default_registration_id': self.id,
+                },
+        }
+        return action
+
+    @api.multi
+    def action_cancel_checkin(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window.message',
+            'title': _('Cancel Checkin'),
+            'message': _("Change to 'Arrived' or 'Not yet arrived'"),
+            'buttons': [
+                {
+                    'type': 'method',
+                    'name': _('Arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'arrived'},
+                },
+                {
+                    'type': 'method',
+                    'name': _('Not yet arrived'),
+                    'model': self._name,
+                    'method': 'action_execute_cancel_checkin',
+                    # list of arguments to pass positionally
+                    'args': [self.ids],
+                    # dictionary of keyword arguments
+                    'kwargs': {'force_state': 'approved'},
+                }
+            ]
+        }
+
+
