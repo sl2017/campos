@@ -87,7 +87,8 @@ class CamposRfidDevice(models.Model):
                 s1 = str((int(att[11:13]) + 2) % 24)
                 s2 = '30' if int(att[14:16]) >= 30 else '00'
                 tickets[0].write({'attended_time': att,
-                                  'attended_slot': '%s%s' % (s1,s2)})
+                                  'attended_slot': '%s%s' % (s1,s2),
+                                  'device_id': self.id})
                 return self.build_response(u'Godkendt\nVelbekommen', True, res_id=tickets[0].canteen_inst_id.id)
             else:
                 return self.build_response(u'Afvist\nGå til %s' % tickets[0].canteen_id.name, False)
@@ -128,7 +129,8 @@ class CamposRfidDevice(models.Model):
                     s1 = str((int(att[11:13]) + 2) % 24)
                     s2 = '30' if int(att[14:16]) >= 30 else '00'
                     tickets[0].write({'attended_time': att,
-                                      'attended_slot': '%s%s' % (s1, s2)})
+                                      'attended_slot': '%s%s' % (s1, s2),
+                                      'device_id': self.id})
                     meat_txt = []
                     for m in tickets[0].meat_ids:
                         meat_txt.append('%d %s' % m.packs, m.event_day_meat_id.meat_id.name)
