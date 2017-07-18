@@ -61,7 +61,7 @@ class WebtourParticipantOverview(models.Model):
                     ,transport_to_camp, transport_from_camp
                     ,regpcountry.code as countrycode
                     ,scoutorgcountry.code as scoutorgcountrycode                                       
-                    ,p.tocampdate,p.fromcampdate
+                    ,p.tocampdate as tocampdate, p.fromcampdate as fromcampdate 
                     ,tocampusneed_id,fromcampusneed_id
                     ,tocampfromdestination_id, fromcamptodestination_id
                     ,tocamptravelgroup,fromcamptravelgroup
