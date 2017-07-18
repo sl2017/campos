@@ -14,6 +14,7 @@
                 'campos_event',
                 'campos_final_registration',
                 'campos_jobber_final',
+                'campos_sms',
     ],
     'data': [
         'wizards/campos_activity_mass_signup_wiz.xml',
