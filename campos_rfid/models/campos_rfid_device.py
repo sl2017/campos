@@ -81,7 +81,7 @@ class CamposRfidDevice(models.Model):
                 if att > datetime.strptime(fields.Datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT):
                     return self.build_response(u'Velbekommen\nAllerede scannet', True)
                 else:
-                    return self.build_response(u'Afvist\nAllerede scannet', False)
+                    return self.build_response(u'Velbekommen\nAllerede scannet', True)
             elif tickets[0].canteen_id == self.canteen_id:
                 att = fields.Datetime.now()
                 s1 = str((int(att[11:13]) + 2) % 24)
