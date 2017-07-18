@@ -38,7 +38,7 @@ class CamposEventParticipant(models.Model):
             elif par.registration_id.partner_id.credit > 0:
                 infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (par.registration_id.partner_id.credit))
                 checkin_ok = False
-            elif par.registration_id.partner_id.credit == 0 and not par.no_invoicing:
+            elif par.registration_id.partner_id.credit == 0 and not par.sudo().no_invoicing:
                 if self.env['account.invoice'].search_count([('partner_id', '=', par.registration_id.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
                     par.not_invoiced = True
                     checkin_ok = False
