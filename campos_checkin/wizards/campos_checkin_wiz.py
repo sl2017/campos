@@ -59,7 +59,12 @@ class CamposCheckinWiz(models.TransientModel):
             if wizard.participant_id.state != 'arrived':
                 wizard.participant_id.state = 'arrived'
                 wizard.participant_id.arrive_time = fields.Datetime.now()
-            
+                wizard.participant_id.suspend_security().generate_canteen_tickets()
+            for c in wizard.children_ids:
+                c.participant_id.state = 'arrived'
+                c.participant_id.arrive_time = fields.Datetime.now()
+                c.participant_id.suspend_security().generate_canteen_tickets()
+                
     @api.multi
     def doit_checkin(self):
         for wizard in self:

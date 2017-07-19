@@ -33,23 +33,27 @@ class CamposEventParticipant(models.Model):
                 infotext.append(_('CKR not yet approved!'))
                 checkin_ok = False
             #Economy
-            if par.registration_id.partner_id != par.partner_id:
-                infotext.append(_('Paid by: %s') % (par.registration_id.partner_id.name))
-            elif par.registration_id.partner_id.credit > 0:
-                infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (par.registration_id.partner_id.credit))
-                checkin_ok = False
-            elif par.registration_id.partner_id.credit == 0 and not par.sudo().no_invoicing and par.camp_price_total > 0:
-                if self.env['account.invoice'].search_count([('partner_id', '=', par.registration_id.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
-                    par.not_invoiced = True
+            if par.signup_state in ['oncamp']:
+                if par.registration_id.partner_id != par.partner_id:
+                    infotext.append(_('Paid by: %s') % (par.registration_id.partner_id.name))
+                elif par.registration_id.partner_id.credit > 0:
+                    infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (par.registration_id.partner_id.credit))
                     checkin_ok = False
-                    infotext.append(_('Invoice not yet generated!'))
+                elif par.registration_id.partner_id.credit == 0 and not par.sudo().no_invoicing and par.camp_price_total > 0:
+                    if self.env['account.invoice'].search_count([('partner_id', '=', par.registration_id.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
+                        par.not_invoiced = True
+                        checkin_ok = False
+                        infotext.append(_('Invoice not yet generated!'))
+                    else:
+                        infotext.append(_('Payment recived'))
                 else:
-                    infotext.append(_('Payment recived'))
+                    if par.camp_price_total > 0:
+                        infotext.append(_('Payment recived'))
+                    else:
+                        infotext.append(_('No Payment'))
             else:
-                if par.camp_price_total > 0:
-                    infotext.append(_('Payment recived'))
-                else:
-                    infotext.append(_('No Payment'))
+                infotext.append(_('No Payment'))
+                
             if len(par.jobber_pay_for_ids) > 1:
                 infotext.append(_('Paying for: %s' % ', '.join(par.jobber_pay_for_ids.mapped('name'))))
 
@@ -108,6 +112,11 @@ class CamposEventParticipant(models.Model):
         self.ensure_one()
         self.state = 'arrived'
         self.arrive_time = fields.Datetime.now()
+        self.suspend_security().generate_canteen_tickets()
+        for c in self.jobber_child_ids:
+            c.state = 'arrived'
+            c.arrive_time = fields.Datetime.now()
+            c.suspend_security().generate_canteen_tickets()
 
         if not self.checkin_ok and not self.env.user.has_group('campos_checkin.group_campos_checkin_mgr'):
             return self.env['warning_box'].info(title=_('Checkin'), message=_(u'Checkin for %s is not possible here\nGo to Løkkegård for Checkin.\n\nPlease show the location on the map for the ITS') %  (self.name))
@@ -194,3 +203,28 @@ class CamposEventParticipant(models.Model):
                 _logger.info('ACTION: %s', action)
                 return action
         return self.env['warning_box'].info(title=_('Checkin'), message=_('No invoice generated')) 
+
+    @api.model
+    def recompute_to_from_dates(self):
+        self._cr.execute("""SELECT 
+                                participant_id as par_id, 
+                                min(the_date) as x_tocampdate, 
+                                min(cep.tocampdate) as cep_tocamp,
+                                max(the_date) as x_fromcampdate, 
+                                max(cep.fromcampdate) as cep_fromcamp
+                            FROM campos_event_participant_day d 
+                            JOIN campos_event_participant cep ON cep.id = d.participant_id 
+                            JOIN res_partner p ON p.id=cep.partner_id  
+                            WHERE d.will_participate = 't' AND 
+                                cep.state <> 'deregistered' AND 
+                                p.participant = 't' 
+                  GROUP BY participant_id) cepd 
+WHERE (cepd.x_tocampdate <> cepd.cep_tocamp or cepd.x_fromcampdate <> cepd.cep_fromcamp);
+                      """)
+        for par_id, x_tocampdate, cep_tocamp, x_fromcampdate, cep_fromcamp in self._cr.fetchall():
+            par = self.browse(par_id)
+            if x_tocampdate != par.tocampdate:
+                par.tocampdate = x_tocampdate
+            if x_fromcampdate != par.fromcampdate:
+                par.fromcampdate = x_fromcampdate
+ 
