@@ -642,7 +642,7 @@
 					<sheet>
 						<group name="sheet2">
 							<field name="staff" invisible="1"/>
-							<field name="registration_id" invisible="1"/>
+							<field name="registration_id" invisible="0" options="{'no_create': True}"/>
 							<field name="participant" invisible="1"/>
 							<field name="parent_id" invisible="1"/>
 							<field name="participant_number" readonly="1"/>
