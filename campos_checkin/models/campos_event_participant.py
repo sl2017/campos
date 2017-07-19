@@ -17,7 +17,8 @@ class CamposEventParticipant(models.Model):
     checkin_completed = fields.Datetime('Check In Time')
     checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id', store=True)
     not_invoiced = fields.Boolean('Not invoiced', compute='compute_checkin')
-
+    firstcampdate = fields.Date('First Camp Date', compute='_compute_firstcampdate', store=True)
+ 
     @api.multi
     #@api.depends()
     def compute_checkin(self):
@@ -106,6 +107,22 @@ class CamposEventParticipant(models.Model):
                     par.checkin_subcamp_id = par.registration_id.subcamp_id
             else:
                 par.checkin_subcamp_id = par.registration_id.subcamp_id
+
+    @api.multi
+    @api.depends('camp_day_ids.will_participate','camp_day_ids.the_date')
+    def _compute_dates(self):
+        where_params = [tuple(self.ids)]
+        self._cr.execute("""SELECT 
+                                participant_id as pat_id, 
+                                min(the_date) as firstcampdate
+                            FROM campos_event_participant_day d
+                            WHERE participant_id in %s
+                            GROUP BY participant_id;
+                      """, where_params)
+        for pat_id, firstcampdate in self._cr.fetchall():
+            pat = self.browse(pat_id)
+            pat.firstcampdate = firstcampdate
+       
 
     @api.multi
     def action_checkin(self):

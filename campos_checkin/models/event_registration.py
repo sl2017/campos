@@ -17,6 +17,7 @@ class EventRegistration(models.Model):
     checkin_ok = fields.Boolean('Check In possible', compute='compute_checkin')
     arrive_time = fields.Datetime('Arrival')
     checkin_completed = fields.Datetime('Check In Time')
+    arr_date_ids = fields.One2many('campos.reg.arrdate', 'registration_id', 'Arrival dates')
 
     @api.multi
     @api.depends('participants_camp_day_ids.will_participate')

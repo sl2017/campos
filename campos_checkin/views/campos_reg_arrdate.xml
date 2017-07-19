@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Stein & Gabelgaard ApS
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="campos_reg_arrdate_form_view">
+        <field name="name">campos.reg.arrdate.form (in campos_checkin)</field>
+        <field name="model">campos.reg.arrdate</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="registration_id"/>
+                		<field name="arr_date"/>
+                		<field name="arr_count"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_reg_arrdate_search_view">
+        <field name="name">campos.reg.arrdate.search (in campos_checkin)</field>
+        <field name="model">campos.reg.arrdate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="registration_id"/>
+                <field name="arr_date"/>
+                <field name="arr_count"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="campos_reg_arrdate_tree_view">
+        <field name="name">campos.reg.arrdate.tree (in campos_checkin)</field>
+        <field name="model">campos.reg.arrdate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="registration_id"/>
+                <field name="arr_date"/>
+                <field name="arr_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="campos_reg_arrdate_act_window">
+        <field name="name">Campos Reg Arrdate</field> <!-- TODO -->
+        <field name="res_model">campos.reg.arrdate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="campos_reg_arrdate_menu">
+        <field name="name">Campos Reg Arrdate</field>
+        <field name="parent_id" ref="submenu_campos_checkin"/> <!-- TODO -->
+        <field name="action" ref="campos_reg_arrdate_act_window"/>
+        <field name="sequence" eval="70"/> <!-- TODO -->
+    </record>
+
+</data>
+</openerp>
