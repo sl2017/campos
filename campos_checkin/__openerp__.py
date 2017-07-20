@@ -18,14 +18,18 @@
         #'web_tree_dynamic_colored_field',
     ],
     'data': [
-        'security/campos_reg_arrdate.xml',
-        'views/campos_reg_arrdate.xml',
+        
         'wizards/campos_checkin_wiz.xml',
         'security/campos_checkin.xml',
         'views/campos_event_participant.xml',
         'views/campos_mat_report.xml',
         'wizards/campos_checkin_grp_wiz.xml',
         'views/event_registration.xml',
+        'views/report_group_arrival.xml',
+        'wizards/campos_import_grp_due_wiz.xml',
+        'security/campos_reg_arrdate.xml',
+        'views/campos_reg_arrdate.xml',
+        
     ],
     'demo': [
     ],

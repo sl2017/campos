@@ -110,13 +110,13 @@ class CamposEventParticipant(models.Model):
 
     @api.multi
     @api.depends('camp_day_ids.will_participate','camp_day_ids.the_date')
-    def _compute_dates(self):
+    def _compute_firstcampdate(self):
         where_params = [tuple(self.ids)]
         self._cr.execute("""SELECT 
                                 participant_id as pat_id, 
                                 min(the_date) as firstcampdate
                             FROM campos_event_participant_day d
-                            WHERE participant_id in %s
+                            WHERE d.will_participate = 't' and participant_id in %s
                             GROUP BY participant_id;
                       """, where_params)
         for pat_id, firstcampdate in self._cr.fetchall():

@@ -55,13 +55,13 @@
         <field name="name">Campos Reg Arrdate</field> <!-- TODO -->
         <field name="res_model">campos.reg.arrdate</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
+        <field name="domain">[('registration_id.scoutgroup', '=', True)]</field>
         <field name="context">{}</field>
     </record>
 
     <record model="ir.ui.menu" id="campos_reg_arrdate_menu">
         <field name="name">Campos Reg Arrdate</field>
-        <field name="parent_id" ref="submenu_campos_checkin"/> <!-- TODO -->
+        <field name="parent_id" ref="submenu_campos_checkin_config"/> <!-- TODO -->
         <field name="action" ref="campos_reg_arrdate_act_window"/>
         <field name="sequence" eval="70"/> <!-- TODO -->
     </record>
