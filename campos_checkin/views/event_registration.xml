@@ -25,6 +25,14 @@
             	<field name="pioneering_pole_depot_id" position="after">
             		<field name="sale_order_line_ids"/>
             	</field>
+            	<field name="child_certificates_user" position="after">
+            		<field name="arr_date_ids">
+            			<tree>
+            				<field name="arr_date"/>
+            				<field name="arr_count"/>
+            			</tree>
+            		</field>
+            	</field>
         </field>
     </record>
     
