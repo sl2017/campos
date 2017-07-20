@@ -16,7 +16,9 @@
                 	<field name="checkin_ok" invisible="1"/>
                     <field name="checkin_info_html" nolabel="1" colspan="2"/>
                     
-                    <field  name="hand_out"  colspan="2" readonly="1"/>
+                    <field name="checkin_participant_id" domain="[('registration_id', '=', registration_id ),('camp_age', '&gt;', 17)]" />
+                    <field name="checkin_par_mobile"/>
+                    <field name="hand_out"  colspan="2" readonly="1"/>
                     
                 </group>
                 <footer>

@@ -32,6 +32,7 @@
             				<field name="arr_count"/>
             			</tree>
             		</field>
+            		<field name="checkin_participant_id"/>
             	</field>
         </field>
     </record>
