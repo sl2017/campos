@@ -21,13 +21,13 @@ msgstr ""
 #. module: campos_checkin
 #: field:campos.reg.arrdate,arr_count:0
 msgid "# participants"
-msgstr ""
+msgstr "# deltagere"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Age"
-msgstr ""
+msgstr "Alder"
 
 #. module: campos_checkin
 #: field:campos.event.participant,arrive_time:0
@@ -262,13 +262,13 @@ msgstr ""
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Contact at Camp: Name: ______________________________"
-msgstr ""
+msgstr "Kontakt på lejren: Navn: ______________________________"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Corrections"
-msgstr ""
+msgstr "Ændringer"
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_form_view
