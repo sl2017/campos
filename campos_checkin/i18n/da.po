@@ -394,7 +394,7 @@ msgstr ""
 #. module: campos_checkin
 #: field:campos.checkin.grp.wiz,hand_out:0 field:campos.checkin.wiz,hand_out:0
 msgid "Hand out"
-msgstr ""
+msgstr "Udlever"
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,id:0 field:campos.checkin.grp.wiz,id:0
@@ -491,7 +491,7 @@ msgstr "Navn"
 #: code:addons/campos_checkin/models/campos_event_participant.py:71
 #, python-format
 msgid "No Catering specified"
-msgstr ""
+msgstr "Kantine ikke angivet"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:54
@@ -499,13 +499,13 @@ msgstr ""
 #: code:addons/campos_checkin/models/event_registration.py:74
 #, python-format
 msgid "No Payment"
-msgstr ""
+msgstr "Ingen betaling"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:65
 #, python-format
 msgid "No accomonodation specified"
-msgstr ""
+msgstr "Overnatning ikke angivet"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:222
@@ -523,7 +523,7 @@ msgstr "Ikke faktureret"
 #: code:addons/campos_checkin/models/event_registration.py:126
 #, python-format
 msgid "Not yet arrived"
-msgstr ""
+msgstr "Endnu ikke ankommet"
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,note:0
@@ -534,7 +534,7 @@ msgstr ""
 #: field:campos.mat.report,ordernum:0
 #: view:website:campos_checkin.report_mat_order_detail_template
 msgid "Order"
-msgstr ""
+msgstr "Ordre"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_mat_order_detail_template
@@ -560,40 +560,40 @@ msgstr ""
 #: code:addons/campos_checkin/models/event_registration.py:72
 #, python-format
 msgid "Payment recived"
-msgstr ""
+msgstr "Betaling modtaget"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_mat_order_detail_template
 msgid "Pole depot:"
-msgstr ""
+msgstr "Raftedepot:"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 #: view:website:campos_checkin.report_mat_order_detail_template
 msgid "Printed at:"
-msgstr ""
+msgstr "Udskrevet:"
 
 #. module: campos_checkin
 #: field:campos.mat.report,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_mat_order_detail_template
 msgid "Qty"
-msgstr ""
+msgstr "Antal"
 
 #. module: campos_checkin
 #: field:campos.mat.report,qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Antal"
 
 #. module: campos_checkin
 #: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
 msgid "Register arrival"
-msgstr ""
+msgstr "Registrer ankomst"
 
 #. module: campos_checkin
 #: field:campos.mat.report,reg_id:0 field:campos.reg.arrdate,registration_id:0
@@ -625,18 +625,18 @@ msgstr ""
 #. module: campos_checkin
 #: field:campos.event.participant,checkin_subcamp_id:0
 msgid "Sub Camp"
-msgstr ""
+msgstr "Underlejr"
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_search_view
 msgid "Subcamp"
-msgstr ""
+msgstr "Underlejr"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Subcamp:"
-msgstr ""
+msgstr "Underlejr:"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
