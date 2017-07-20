@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<report id="report_group_arrival" string="Group Check In Report" model="event.registration"
+			report_type="qweb-pdf" name="campos_checkin.report_group_checkin_template" />
+			
+		<report id="report_group_arrival" string="Group Check In Report" model="campos.reg.arrdate"
+			report_type="qweb-pdf" name="campos_checkin.report_group_arrdate_template" />	
+
+		<template id="report_group_checkin_template">
+			<t t-call="report.html_container">
+			 
+				<t t-foreach="doc_ids" t-as="doc_id">
+					<t
+						t-raw="translate_doc(doc_id, doc_model,
+							 				'partner_id.lang',
+							 				'campos_checkin.report_group_checkin_detail_template')" />
+				</t>
+			</t>
+		</template>
+		
+		<template id="report_group_arrdate_template">
+			<t t-call="report.html_container">
+			 
+				<t t-foreach="doc_ids" t-as="doc_id">
+					<t
+						t-raw="translate_doc(doc_id, doc_model,
+							 				'registration_id.partner_id.lang',
+							 				'campos_checkin.report_group_arrdate_detail_template')" />
+				</t>
+			</t>
+		</template>
+		
+
+
+		<template id="campos_checkin.report_group_checkin_detail_template">
+		    <t t-foreach="o.arr_date_ids" t-as="d" >
+				<t t-call="report.external_layout">
+					<div class="page">
+						<div class="row">
+							<div class="col-xs-5 col-xs-offset-7">
+								<br/>
+								<address t-field="o.partner_id"
+									t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+								<br/>
+								<p>Subcamp: <span t-field="o.subcamp_id.name"/></p>
+								<p><strong>Printed at: </strong>
+	                            <span t-esc="time.strftime('%Y-%m-%d')"/> 
+	                            <span t-esc="time.strftime('%H:%M')"/></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<h2 class="text-center"><span t-field="o.partner_id.name"/></h2>
+								<h3 class="text-center">Arrival: <span t-field="d.arr_date"/></h3>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Age</th>
+										<th>Corrections</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<t t-foreach="o.participant_ids" t-as="par">
+										<t t-if="par.firstcampdate == d.arr_date">
+											<tr>
+												<td>
+													<span t-field="par.name" />
+												</td>
+												
+												<td class="text-right">
+													<span t-field="par.camp_age" />
+												</td>
+												<td>
+												
+												</td>
+											</tr>
+										</t>
+									</t>
+									<tr>
+									<td> </td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td> </td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td> </td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td> </td><td> </td><td> </td>
+									</tr>
+									
+								</tbody>
+							</table>
+							
+							<table>
+							<tr><td>Total arrived: <span t-field="d.arr_count" />  __________ </td><td>Sign: ___________________________________</td>
+							</tr>
+							<tr>
+							<td>Contact at Camp: Name: ______________________________ </td><td>Mobile: ___________________________</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+				</t>
+			</t>
+		</template>
+		
+		
+		<template id="report_group_arrdate_detail_template">
+				<t t-call="report.external_layout">
+					<div class="page">
+						<div class="row">
+							<div class="col-xs-5 col-xs-offset-7">
+								<address t-field="o.registration_id.partner_id"
+									t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+								<p><strong>Subcamp: </strong><span t-field="o.registration_id.subcamp_id.name"/></p>
+								<p><strong>Printed at: </strong>
+	                            <span t-esc="time.strftime('%Y-%m-%d')"/> 
+	                            <span t-esc="time.strftime('%H:%M')"/></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<h2 class="text-center"><span t-field="o.registration_id.partner_id.name"/></h2>
+								<h3 class="text-center">Arrival: <span t-field="o.arr_date"/></h3>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Age</th>
+										<th>Corrections</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<t t-foreach="o.registration_id.participant_ids" t-as="par">
+										<t t-if="par.firstcampdate == o.arr_date">
+											<tr>
+												<td>
+													<span t-field="par.name" />
+												</td>
+												
+												<td class="text-right">
+													<span t-field="par.camp_age" />
+												</td>
+												<td>
+												
+												</td>
+											</tr>
+										</t>
+									</t>
+									<tr>
+									<td><br/> </td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td><br/></td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td><br/></td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td><br/> </td><td> </td><td> </td>
+									</tr>
+									<tr>
+									<td><br/> </td><td> </td><td> </td>
+									</tr>
+									
+								</tbody>
+							</table>
+							
+		<table>
+							<tr><td>Total arrived: <span t-field="o.arr_count" />  __________ </td><td>Sign: ___________________________________</td>
+							</tr>
+							<tr>
+							<td>Contact at Camp: Name: ______________________________ </td><td>Mobile: ___________________________</td>
+							</tr>
+							</table>				</div>
+					</div>
+				</t>
+		</template>
+	</data>
+</openerp>
+		

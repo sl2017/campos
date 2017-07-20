@@ -42,12 +42,13 @@ class CamposRfidDevice(models.Model):
                 action['res_id'] = res_id
             _logger.info('ACTION: %s', action)
             self.sudo(self.user.id).env['action.request'].notify(action)
-
+        _logger.info('SCAN response: %s %s', access, message)
         return {'ShowTime': self.showtime_ok if access else self.showtime_not,
                 'Message': message,
                 'Access': access}
     @api.model
     def checkin(self, device_macid, participant_number):
+        _logger.info('SCAN mac: %s, p: %s', device_macid, participant_number)
         device = self.search([('device_macid', '=', device_macid)])
         if not device:
             self.env['campos.rfid.log'].create({'device_macid': device_macid,
@@ -73,6 +74,8 @@ class CamposRfidDevice(models.Model):
         
     
     def checkin_canteen(self, participant_number, part_ids):
+        if participant_number == '-1':
+            return self.build_response(u'Armbånd er ikke\ni Skejser', False)
         tickets = self.env['campos.canteen.ticket'].search([('participant_id', 'in', part_ids), ('meal', '=', self.meal), ('date', '=', fields.Date.today())])
         if tickets:
             if tickets[0].attended_time:
@@ -84,7 +87,7 @@ class CamposRfidDevice(models.Model):
                     return self.build_response(u'Velbekommen\nAllerede scannet', True)
             elif tickets[0].canteen_id == self.canteen_id:
                 att = fields.Datetime.now()
-                s1 = str((int(att[11:13]) + 2) % 24)
+                s1 = str((int(att[11:13]) + 2) % 24).zfill(2)
                 s2 = '30' if int(att[14:16]) >= 30 else '00'
                 tickets[0].write({'attended_time': att,
                                   'attended_slot': '%s%s' % (s1,s2),
