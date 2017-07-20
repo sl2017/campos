@@ -118,6 +118,11 @@
         parent="menu_campos_checkin"
         sequence="10"/>
 
+	<menuitem name="Config"
+        id="submenu_campos_checkin_config"
+        parent="menu_campos_checkin"
+        sequence="10"/>
+	
     <record model="ir.ui.menu" id="campos_event_participant_menu">
         <field name="name">Jobber Check In</field>
         <field name="parent_id" ref="submenu_campos_checkin"/>
