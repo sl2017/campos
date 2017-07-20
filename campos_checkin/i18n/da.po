@@ -2,12 +2,15 @@
 # This file contains the translation of the following modules:
 # * campos_checkin
 # 
+# Translators:
+# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-20 13:56+0000\n"
 "PO-Revision-Date: 2017-07-20 13:56+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,48 +33,48 @@ msgstr ""
 #: field:campos.event.participant,arrive_time:0
 #: field:event.registration,arrive_time:0
 msgid "Arrival"
-msgstr ""
+msgstr "Ankomst"
 
 #. module: campos_checkin
 #: field:campos.reg.arrdate,arr_date:0 field:event.registration,tocampdate:0
 msgid "Arrival date"
-msgstr ""
+msgstr "Ankonstdato"
 
 #. module: campos_checkin
 #: field:event.registration,arr_date_ids:0
 msgid "Arrival dates"
-msgstr ""
+msgstr "Ankonstdatoer"
 
 #. module: campos_checkin
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Arrival:"
-msgstr ""
+msgstr "Ankomst"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:166
 #: code:addons/campos_checkin/models/event_registration.py:116
 #, python-format
 msgid "Arrived"
-msgstr ""
+msgstr "Ankommet"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:34
 #, python-format
 msgid "CKR not yet approved!"
-msgstr ""
+msgstr "Børneattest endnu ikke godkendt"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/event_registration.py:58
 #, python-format
 msgid "CLC not completed"
-msgstr ""
+msgstr "CLC ikke gennemført"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:31
 #, python-format
 msgid "CLC not passed!"
-msgstr ""
+msgstr "CLC ikke gennemført"
 
 #. module: campos_checkin
 #: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
@@ -107,7 +110,7 @@ msgstr ""
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
 #: view:campos.import.grp.due.wiz:campos_checkin.campos_import_grp_due_wiz_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuller"
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_form_view
@@ -471,7 +474,7 @@ msgstr ""
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Mobile: ___________________________"
-msgstr ""
+msgstr "Mobiltlf: ___________________________"
 
 #. module: campos_checkin
 #: field:campos.import.grp.due.wiz,data_file:0
@@ -482,7 +485,7 @@ msgstr ""
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:71
@@ -513,7 +516,7 @@ msgstr ""
 #. module: campos_checkin
 #: field:campos.event.participant,not_invoiced:0
 msgid "Not invoiced"
-msgstr ""
+msgstr "Ikke faktureret"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:176
@@ -606,7 +609,7 @@ msgstr ""
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Sign: ___________________________________"
-msgstr ""
+msgstr "Underskrift: ___________________________________"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:78
@@ -639,7 +642,7 @@ msgstr ""
 #: view:website:campos_checkin.report_group_arrdate_detail_template
 #: view:website:campos_checkin.report_group_checkin_detail_template
 msgid "Total arrived:"
-msgstr ""
+msgstr "Ialt ankommet:"
 
 #. module: campos_checkin
 #: code:addons/campos_checkin/models/campos_event_participant.py:41
