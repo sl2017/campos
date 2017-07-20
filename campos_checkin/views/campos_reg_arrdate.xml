@@ -18,7 +18,7 @@
                     <group>
                         <field name="registration_id"/>
                 		<field name="arr_date"/>
-                		<field name="arr_count"/>
+                		<field name="arr_count" sum="Total"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter"></div>

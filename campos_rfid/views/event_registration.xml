@@ -8,9 +8,13 @@
     <record model="ir.ui.view" id="event_registration_form_view">
         <field name="name">event.registration.form (in campos_rfid)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="TODO othermodule.form_view"/>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
         <field name="arch" type="xml">
-            <!-- TODO -->
+            <field name="meatlist_ids" position="after">
+            	<button name="generate_catering_tickets" string="Generate Catering" tyoe="object"/>
+            	<newline/>
+            	<field name="catering_ticket_ids"/>
+            </field>
         </field>
     </record>
 

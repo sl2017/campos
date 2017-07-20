@@ -23,6 +23,8 @@ class CamposCheckinGrpWiz(models.TransientModel):
     hand_out = fields.Text('Hand out')
     checkin_info_html = fields.Html(related='registration_id.checkin_info_html')
     checkin_ok = fields.Boolean(related='registration_id.checkin_ok')
+    checkin_participant_id = fields.Many2one(related='registration_id.checkin_participant_id')
+    checkin_par_mobile = fields.Char(related='checkin_participant_id.mobile')
 
     @api.multi
     def doit_arrived(self):

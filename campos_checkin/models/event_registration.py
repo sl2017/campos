@@ -19,6 +19,7 @@ class EventRegistration(models.Model):
     checkin_completed = fields.Datetime('Check In Time')
     arr_date_ids = fields.One2many('campos.reg.arrdate', 'registration_id', 'Arrival dates')
     nav_due_amount = fields.Float('Due amount')
+    checkin_participant_id = fields.Many2one('campos.event.participant', 'Check in by', track_visibility='onchange')
 
     @api.multi
     @api.depends('participants_camp_day_ids.will_participate')
@@ -83,9 +84,7 @@ class EventRegistration(models.Model):
     @api.multi
     def action_checkin(self):
         self.ensure_one()
-        self.state = 'arrived'
-        self.arrive_time = fields.Datetime.now()
-
+        
         if not self.checkin_ok and not self.env.user.has_group('campos_checkin.group_campos_checkin_mgr'):
             return self.env['warning_box'].info(title=_('Checkin'), message=_(u'Checkin for %s is not possible here\nGo to Løkkegård for Checkin.\n\nPlease show the location on the map for the Group') %  (self.name))
 
@@ -129,9 +128,17 @@ class EventRegistration(models.Model):
                     # list of arguments to pass positionally
                     'args': [self.ids],
                     # dictionary of keyword arguments
-                    'kwargs': {'force_state': 'approved'},
+                    'kwargs': {'force_state': 'open'},
                 }
             ]
         }
+
+    @api.multi
+    def action_execute_cancel_checkin(self, force_state=None):
+        self.ensure_one()
+        if force_state:
+            self.state = force_state
+            if force_state == 'open':
+                self.arrive_time = False
 
 

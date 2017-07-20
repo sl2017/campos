@@ -16,8 +16,7 @@
                 
     ],
     'data': [
-        #'views/event_registration.xml',
-        
+        'views/event_registration.xml',
         'views/campos_event_participant.xml',
         'security/campos_rfid_device.xml',
         'views/campos_rfid_device.xml',
