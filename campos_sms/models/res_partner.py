@@ -6,14 +6,16 @@ import string
 class ResPartner(models.Model):
     _inherit = ['res.partner']
 
-    mobile_clean = fields.Char(compute='_compute_mobile_clean')
+    mobile_clean = fields.Char(compute='_compute_mobile_clean', store=True)
 
     @api.multi
-    @api.depends('mobile')
+    @api.depends('mobile','phone')
     def _compute_mobile_clean(self):
         allowed_chars = '+0123456789'
         for p in self:
             # Filter allowed chars
+            if not p.mobile:
+                p.mobile = p.phone
             mobile_clean = ''.join([c for c in p.mobile if c in allowed_chars]) if p.mobile else ''
             # Make sure number starts with country code
             if len(mobile_clean) > 0 and mobile_clean[0] != '+':
