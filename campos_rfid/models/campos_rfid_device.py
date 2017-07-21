@@ -96,6 +96,8 @@ class CamposRfidDevice(models.Model):
             else:
                 return self.build_response(u'Afvist\nGå til %s' % tickets[0].canteen_id.name, False)
         else:
+            if self.env['campos.event.participant'].browse(part_ids).filtered(lambda r: r.staff and not r.arrive_time):
+                return self.build_response(u'Jobber CheckIN\nMangler', False)
             return self.build_response(u'Afvist\nEj tilmeldt mad', False)
 
         return self.build_response(u'Ukendt deltager', False)
