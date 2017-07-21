@@ -29,7 +29,7 @@
             		<!--  <field name="tocampdate"/>
             		<field name="fromcampdate"/>  -->
             		<field name="arr_date_ids">
-            			<tree>
+            			<tree order="arr_date">
             				<field name="arr_date"/>
             				<field name="arr_count"/>
             			</tree>
