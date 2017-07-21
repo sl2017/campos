@@ -26,7 +26,7 @@
                         string='Register arrival'
                         class='btn-primary oe_highlight'
                         type='object'
-                        attrs="{'invisible':[('checkin_ok', '=', True)]}"/>
+                        />
                         
                     <button name='doit_checkin'
                         string='Check In Completed'
