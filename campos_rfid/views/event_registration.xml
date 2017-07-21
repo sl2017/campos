@@ -11,7 +11,7 @@
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
         <field name="arch" type="xml">
             <field name="meatlist_ids" position="after">
-            	<button name="generate_catering_tickets" string="Generate Catering" tyoe="object"/>
+            	<button name="generate_catering_tickets" string="Generate Catering" type="object"/>
             	<newline/>
             	<field name="catering_ticket_ids"/>
             </field>

@@ -17,8 +17,9 @@ class EventRegistration(models.Model):
     checkin_ok = fields.Boolean('Check In possible', compute='compute_checkin')
     arrive_time = fields.Datetime('Arrival')
     checkin_completed = fields.Datetime('Check In Time')
-    arr_date_ids = fields.One2many('campos.reg.arrdate', 'registration_id', 'Arrival dates')
+    arr_date_ids = fields.One2many('campos.reg.arrdate', 'registration_id', 'Arrival dates', domain=[('arr_date', '!=', False)])
     nav_due_amount = fields.Float('Due amount')
+    nav_due_amount_eur = fields.Float('Due amount EUR')
     checkin_participant_id = fields.Many2one('campos.event.participant', 'Check in by', track_visibility='onchange')
 
     @api.multi
@@ -58,22 +59,36 @@ class EventRegistration(models.Model):
                 if reg.clc_stat_ids.filtered(lambda r: r.state in ['required', 'enrolled']):
                     infotext.append(_('CLC not completed'))
                     checkin_ok = False
-            #Economy
-            if reg.partner_id.credit > 0:
-                infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (reg.partner_id.credit))
-                checkin_ok = False
-            elif reg.partner_id.credit == 0 and not reg.fee_total > 0:
-                if self.env['account.invoice'].search_count([('partner_id', '=', reg.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
-                    checkin_ok = False
-                    infotext.append(_('Invoice not yet generated!'))
-                else:
-                    infotext.append(_('Payment recived'))
-            else:
-                if reg.fee_total > 0:
-                    infotext.append(_('Payment recived'))
-                else:
-                    infotext.append(_('No Payment'))
+#             #Economy
+#             if reg.partner_id.credit > 0:
+#                 infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (reg.partner_id.credit))
+#                 checkin_ok = False
+#             elif reg.partner_id.credit == 0 and not reg.fee_total > 0:
+#                 if self.env['account.invoice'].search_count([('partner_id', '=', reg.partner_id.id), ('state', 'in', ['open','paid'])]) == 0:
+#                     checkin_ok = False
+#                     infotext.append(_('Invoice not yet generated!'))
+#                 else:
+#                     infotext.append(_('Payment recived'))
+#             else:
+#                 if reg.fee_total > 0:
+#                     infotext.append(_('Payment recived'))
+#                 else:
+#                     infotext.append(_('No Payment'))
 
+            
+            if reg.nav_due_amount > 0:
+                infotext.append(_('Unpaid invoices. Total due: DKK %.2f') % (reg.nav_due_amount))
+                checkin_ok = False
+            else:
+                infotext.append(_('Payment recived'))
+#             EUR figures is not valid
+#             else:
+#                 if reg.nav_due_amount_eur > 0:
+#                     infotext.append(_('Unpaid invoices. Total due: EUR %.2f') % (reg.nav_due_amount_eur))
+#                     checkin_ok = False
+#                 else:
+#                     infotext.append(_('Payment recived'))
+#                     
             if checkin_ok:
                 reg.checkin_info_html = '<div class="campos_info_box">%s</div>' % '<br />'.join(infotext) if infotext else False
             else:
