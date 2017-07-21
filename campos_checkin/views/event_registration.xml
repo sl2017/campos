@@ -26,6 +26,8 @@
             		<field name="sale_order_line_ids"/>
             	</field>
             	<field name="child_certificates_user" position="after">
+            		<!--  <field name="tocampdate"/>
+            		<field name="fromcampdate"/>  -->
             		<field name="arr_date_ids">
             			<tree>
             				<field name="arr_date"/>
