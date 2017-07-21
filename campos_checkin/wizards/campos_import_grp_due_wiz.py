@@ -52,8 +52,8 @@ class CamposImportGrpDueWiz(models.TransientModel):
                 grp = self.env['event.registration'].search([('partner_id.ref','=', refnr)])
                 if grp:
                     grp[0].nav_due_amount = self._csv_convert_amount(line['Saldo (RV)'])
-                    if line['Valutakode'] == 'EUR':
-                        grp[0].nav_due_amount_eur = self._csv_convert_amount(line['Saldo'])
+                    #if line['Valutakode'] == 'EUR':
+                    #    grp[0].nav_due_amount_eur = self._csv_convert_amount(line['Saldo'])
         except Exception as e:
             raise UserError(_('File parse error:\n%s\nLine: %d') % (ustr(e), n))
 
