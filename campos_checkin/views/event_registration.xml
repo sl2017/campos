@@ -43,7 +43,7 @@
     <record model="ir.ui.view" id="event_registration_search_view">
         <field name="name">event.registration.search (in campos_checkin)</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="inherit_id" ref="event.view_registration_search"/>
         <field name="arch" type="xml">
  			<field name="contact_partner_id" position="after">
 				<field name="subcamp_id"/>            
