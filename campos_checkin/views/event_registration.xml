@@ -39,16 +39,25 @@
         </field>
     </record>
     
-<!-- TODO 
+
     <record model="ir.ui.view" id="event_registration_search_view">
         <field name="name">event.registration.search (in campos_checkin)</field>
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="TODO othermodule.search_view"/>
         <field name="arch" type="xml">
-            
+ 			<field name="contact_partner_id" position="after">
+				<field name="subcamp_id"/>            
+			</field>
+			<filter string="Status" position="after">
+				<filter string="Underlejr" domain="[]" context="{'group_by':'subcamp_id'}"/>
+				<filter name="ftoday" string="Expected Today" domain="[('tocampdate', '=', context_today().strftime('%Y-%m-%d')),('state', 'in', ['open','arrived'])]"/>
+			</filter>
+			
+			
+			
         </field>
     </record>
--->
+
     <record model="ir.ui.view" id="event_registration_tree_view">
         <field name="name">event.registration.tree (in campos_checkin)</field>
         <field name="model">event.registration</field>
@@ -57,6 +66,7 @@
             <tree create="0">
             	<field name="name"/>
             	<field name="organization_id"/>
+            	<field name="subcamp_id"/>
             	<field name="tocampdate"/>
             	<field name="state"/>
             	

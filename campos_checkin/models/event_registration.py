@@ -56,7 +56,7 @@ class EventRegistration(models.Model):
                     infotext.append(_('Indhentning af børneattester ikke bekræftiget'))
                     checkin_ok = False
             else:
-                if reg.clc_stat_ids.filtered(lambda r: r.state in ['required', 'enrolled']):
+                if reg.clc_stat_ids.filtered(lambda r: r.clc_state in ['required', 'enrolled']):
                     infotext.append(_('CLC not completed'))
                     checkin_ok = False
 #             #Economy
