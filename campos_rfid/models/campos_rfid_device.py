@@ -138,7 +138,7 @@ class CamposRfidDevice(models.Model):
                                       'device_id': self.id})
                     meat_txt = []
                     for m in tickets[0].meat_ids:
-                        meat_txt.append('%d %s' % m.packs, m.event_day_meat_id.meat_id.name)
+                        meat_txt.append('%d %s' % (m.packs, m.event_day_meat_id.meat_id.name))
                     return self.meat_response(tickets[0], '\n'.join(meat_txt), True, par)
                 elif tickets[0].attended_time:
                     if tickets[0].state == 'done':
