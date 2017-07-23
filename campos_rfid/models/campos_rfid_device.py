@@ -142,7 +142,7 @@ class CamposRfidDevice(models.Model):
                     return self.meat_response(tickets[0], '\n'.join(meat_txt), True, par)
                 elif tickets[0].attended_time:
                     if tickets[0].state == 'done':
-                        return self.meat_response(tickets[0],u'Afvist\nAllerede afhentet', False, False)
+                        return self.meat_response(tickets[0],u'Afvist\nAllerede afhentet', True, False)
                     else:
                         return self.meat_response(tickets[0], u'Delvist afhentet\n%s' % (tickets[0].participant_id.name), True, par)
             else:
