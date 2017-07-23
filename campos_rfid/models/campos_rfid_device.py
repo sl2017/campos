@@ -131,14 +131,14 @@ class CamposRfidDevice(models.Model):
                     return self.meat_response(tickets[0],u'Afvist\nGå til %s' % (tickets[0].subcamp_id.name), False, par)
                 elif not tickets[0].attended_time:
                     att = fields.Datetime.now()
-                    s1 = str((int(att[11:13]) + 2) % 24)
+                    s1 = str((int(att[11:13]) + 2) % 24).zfill(2)
                     s2 = '30' if int(att[14:16]) >= 30 else '00'
                     tickets[0].write({'attended_time': att,
                                       'attended_slot': '%s%s' % (s1, s2),
                                       'device_id': self.id})
                     meat_txt = []
                     for m in tickets[0].meat_ids:
-                        meat_txt.append('%d %s' % m.packs, m.event_day_meat_id.meat_id.name)
+                        meat_txt.append('%d %s' % (m.packs, m.event_day_meat_id.meat_id.name))
                     return self.meat_response(tickets[0], '\n'.join(meat_txt), True, par)
                 elif tickets[0].attended_time:
                     if tickets[0].state == 'done':
