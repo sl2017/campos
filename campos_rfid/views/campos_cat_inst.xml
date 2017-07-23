@@ -73,6 +73,15 @@
         <field name="context">{'search_default_ftoday': 1}</field>
     </record>
     
+    <record model="ir.actions.act_window" id="campos_cat_inst_act_form">
+        <field name="name">Campos Cat Inst Form</field> <!-- TODO -->
+        <field name="res_model">campos.cat.inst</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="campos_cat_inst_form_view"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    
     <record model="ir.ui.menu" id="menu_campos_catering_catering">
         <field name="name">Catering</field>
         <field name="parent_id" ref="menu_campos_catering"/>
