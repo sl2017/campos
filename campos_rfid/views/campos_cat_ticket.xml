@@ -53,10 +53,10 @@
         <field name="model">campos.cat.ticket</field>
         <field name="arch" type="xml">
             <search>
+            	        <field name="registration_id"/>
             			<field name="cat_inst_id"/>
                     	<field name="date"/>
                     	<field name="subcamp_id"/>
-                        <field name="registration_id"/>
                         <field name="participant_id"/>
                         <filter name="ftoday" string="Today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
             </search>
@@ -69,10 +69,10 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date"/>
-                <field name="cat_inst_id"/>
             	<field name="subcamp_id"/>
                 <field name="registration_id"/>
                 <field name="participant_id"/>
+				<field name="state"/>
             </tree>
         </field>
     </record>
@@ -86,7 +86,7 @@
     </record>
     
     <record model="ir.actions.act_window" id="campos_cat_ticket_act_form">
-        <field name="name">Food delivery</field> <!-- TODO -->
+        <field name="name">Food delivery Form</field> <!-- TODO -->
         <field name="res_model">campos.cat.ticket</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="campos_rfid.campos_cat_ticket_form_view"/>
