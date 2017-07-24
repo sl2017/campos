@@ -109,7 +109,7 @@ class CamposRfidDevice(models.Model):
             responce = '<div class="campos_warning_box">%s</div>' % message.replace('\n','<br/>')
         ticket.write({'responce': responce,
                       'responce_status': access,
-                      'participant_id': par.id if par else ticket.particpant_id})
+                      'participant_id': par.id if par else ticket.participant_id.id})
         return self.build_response(message, access, res_id=ticket.id)
                                    
     def checkin_meat(self, participant_number, part_ids):
