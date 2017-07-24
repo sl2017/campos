@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-18 04:59+0000\n"
-"PO-Revision-Date: 2017-07-18 04:59+0000\n"
+"POT-Creation-Date: 2017-07-23 12:55+0000\n"
+"PO-Revision-Date: 2017-07-23 12:55+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -92,6 +92,11 @@ msgid "Campos Cat Inst"
 msgstr ""
 
 #. module: campos_rfid
+#: model:ir.actions.act_window,name:campos_rfid.campos_cat_inst_act_form
+msgid "Campos Cat Inst Form"
+msgstr ""
+
+#. module: campos_rfid
 #: model:ir.actions.act_window,name:campos_rfid.campos_cat_stat_act_window
 #: model:ir.model,name:campos_rfid.model_campos_cat_stat
 msgid "Campos Cat Stat"
@@ -165,6 +170,11 @@ msgstr ""
 #. module: campos_rfid
 #: field:event.registration,catering_note:0
 msgid "Catering Note"
+msgstr ""
+
+#. module: campos_rfid
+#: field:event.registration,catering_ticket_ids:0
+msgid "Catering Tickets"
 msgstr ""
 
 #. module: campos_rfid
@@ -277,6 +287,11 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.rfid.device,check_method:0
 msgid "Function"
+msgstr ""
+
+#. module: campos_rfid
+#: view:event.registration:campos_rfid.event_registration_form_view
+msgid "Generate Catering"
 msgstr ""
 
 #. module: campos_rfid
@@ -474,6 +489,11 @@ msgstr ""
 #: field:campos.canteen.instanse,ticket_used:0
 #: field:campos.cat.inst,ticket_used:0
 msgid "Scanned"
+msgstr ""
+
+#. module: campos_rfid
+#: field:campos.canteen.ticket,device_id:0 field:campos.cat.ticket,device_id:0
+msgid "Scanner"
 msgstr ""
 
 #. module: campos_rfid

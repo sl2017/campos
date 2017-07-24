@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-18 10:51+0000\n"
-"PO-Revision-Date: 2017-07-18 10:51+0000\n"
+"POT-Creation-Date: 2017-07-23 12:55+0000\n"
+"PO-Revision-Date: 2017-07-23 12:55+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,31 +16,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: campos_checkin
+#: field:campos.reg.arrdate,arr_count:0
+msgid "# participants"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Age"
+msgstr ""
+
+#. module: campos_checkin
 #: field:campos.event.participant,arrive_time:0
+#: field:event.registration,arrive_time:0
 msgid "Arrival"
 msgstr ""
 
 #. module: campos_checkin
-#: field:event.registration,tocampdate:0
+#: field:campos.reg.arrdate,arr_date:0 field:event.registration,tocampdate:0
 msgid "Arrival date"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:140
+#: field:event.registration,arr_date_ids:0
+msgid "Arrival dates"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Arrival:"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:166
+#: code:addons/campos_checkin/models/event_registration.py:130
 #, python-format
 msgid "Arrived"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:33
+#: code:addons/campos_checkin/models/campos_event_participant.py:34
 #, python-format
 msgid "CKR not yet approved!"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:30
+#: code:addons/campos_checkin/models/event_registration.py:60
+#, python-format
+msgid "CLC not completed"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:31
 #, python-format
 msgid "CLC not passed!"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
+msgid "Campos Checkin Grp Wiz"
 msgstr ""
 
 #. module: campos_checkin
@@ -50,22 +85,39 @@ msgid "Campos Checkin Wiz"
 msgstr ""
 
 #. module: campos_checkin
+#: view:campos.import.grp.due.wiz:campos_checkin.campos_import_grp_due_wiz_form_view
+#: model:ir.actions.act_window,name:campos_checkin.campos_import_grp_due_wiz_act_window
+#: model:ir.ui.menu,name:campos_checkin.campos_import_grp_due_wiz_menu
+msgid "Campos Import Grp Due Wiz"
+msgstr ""
+
+#. module: campos_checkin
 #: model:ir.model,name:campos_checkin.model_campos_mat_report
 msgid "Campos Mat Report"
 msgstr ""
 
 #. module: campos_checkin
+#: model:ir.actions.act_window,name:campos_checkin.campos_reg_arrdate_act_window
+#: model:ir.ui.menu,name:campos_checkin.campos_reg_arrdate_menu
+msgid "Campos Reg Arrdate"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+#: view:campos.import.grp.due.wiz:campos_checkin.campos_import_grp_due_wiz_form_view
 msgid "Cancel"
 msgstr ""
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_form_view
+#: view:event.registration:campos_checkin.event_registration_checkin_form_view
 msgid "Cancel Check In"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:135
+#: code:addons/campos_checkin/models/campos_event_participant.py:161
+#: code:addons/campos_checkin/models/event_registration.py:125
 #, python-format
 msgid "Cancel Checkin"
 msgstr ""
@@ -76,19 +128,22 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:136
+#: code:addons/campos_checkin/models/campos_event_participant.py:162
+#: code:addons/campos_checkin/models/event_registration.py:126
 #, python-format
 msgid "Change to 'Arrived' or 'Not yet arrived'"
 msgstr ""
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_form_view
+#: view:event.registration:campos_checkin.event_registration_checkin_form_view
 #: model:ir.ui.menu,name:campos_checkin.menu_campos_checkin
 #: model:ir.ui.menu,name:campos_checkin.submenu_campos_checkin
 msgid "Check In"
 msgstr ""
 
 #. module: campos_checkin
+#: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
 msgid "Check In Completed"
 msgstr ""
@@ -104,50 +159,73 @@ msgid "Check In Manager"
 msgstr ""
 
 #. module: campos_checkin
+#: field:campos.checkin.grp.wiz,checkin_info_html:0
 #: field:campos.checkin.wiz,checkin_info_html:0
 #: field:campos.event.participant,checkin_info_html:0
+#: field:event.registration,checkin_info_html:0
 msgid "Check In Notes"
 msgstr ""
 
 #. module: campos_checkin
 #: field:campos.event.participant,checkin_completed:0
+#: field:event.registration,checkin_completed:0
 msgid "Check In Time"
 msgstr ""
 
 #. module: campos_checkin
+#: field:campos.checkin.grp.wiz,checkin_ok:0
 #: field:campos.checkin.wiz,checkin_ok:0
 #: field:campos.event.participant,checkin_ok:0
+#: field:event.registration,checkin_ok:0
 msgid "Check In possible"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:63
+#: code:addons/campos_checkin/models/campos_event_participant.py:68
 #, python-format
 msgid "Check accomodation"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:69
+#: code:addons/campos_checkin/models/campos_event_participant.py:74
 #, python-format
 msgid "Check catering"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:113
-#: code:addons/campos_checkin/models/campos_event_participant.py:196
+#: field:campos.checkin.grp.wiz,checkin_participant_id:0
+#: field:event.registration,checkin_participant_id:0
+msgid "Check in by"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:139
+#: code:addons/campos_checkin/models/campos_event_participant.py:222
+#: code:addons/campos_checkin/models/event_registration.py:104
 #: field:campos.checkin.child.wiz,checkin:0
 #, python-format
 msgid "Checkin"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:116
+#: code:addons/campos_checkin/models/campos_event_participant.py:142
+#: code:addons/campos_checkin/models/event_registration.py:107
 #, python-format
 msgid "Checkin for %s"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:113
+#: code:addons/campos_checkin/models/event_registration.py:104
+#, python-format
+msgid ""
+"Checkin for %s is not possible here\n"
+"Go to Løkkegård for Checkin.\n"
+"\n"
+"Please show the location on the map for the Group"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:139
 #, python-format
 msgid ""
 "Checkin for %s is not possible here\n"
@@ -168,14 +246,31 @@ msgid "Children"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:57
+#: code:addons/campos_checkin/models/campos_event_participant.py:62
 #, python-format
 msgid "Children: %s, "
 msgstr ""
 
 #. module: campos_checkin
+#: model:ir.ui.menu,name:campos_checkin.submenu_campos_checkin_config
+msgid "Config"
+msgstr ""
+
+#. module: campos_checkin
 #: selection:campos.mat.report,state:0
 msgid "Confirmed"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Contact at Camp: Name: ______________________________"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Corrections"
 msgstr ""
 
 #. module: campos_checkin
@@ -185,13 +280,17 @@ msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,create_uid:0
+#: field:campos.checkin.grp.wiz,create_uid:0
 #: field:campos.checkin.wiz,create_uid:0
+#: field:campos.import.grp.due.wiz,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,create_date:0
+#: field:campos.checkin.grp.wiz,create_date:0
 #: field:campos.checkin.wiz,create_date:0
+#: field:campos.import.grp.due.wiz,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -208,8 +307,11 @@ msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,display_name:0
+#: field:campos.checkin.grp.wiz,display_name:0
 #: field:campos.checkin.wiz,display_name:0
+#: field:campos.import.grp.due.wiz,display_name:0
 #: field:campos.mat.report,display_name:0
+#: field:campos.reg.arrdate,display_name:0
 msgid "Display Name"
 msgstr ""
 
@@ -221,6 +323,16 @@ msgstr ""
 #. module: campos_checkin
 #: selection:campos.mat.report,state:0
 msgid "Draft"
+msgstr ""
+
+#. module: campos_checkin
+#: field:event.registration,nav_due_amount:0
+msgid "Due amount"
+msgstr ""
+
+#. module: campos_checkin
+#: field:event.registration,nav_due_amount_eur:0
+msgid "Due amount EUR"
 msgstr ""
 
 #. module: campos_checkin
@@ -245,28 +357,81 @@ msgstr ""
 
 #. module: campos_checkin
 #: view:campos.event.participant:campos_checkin.campos_event_participant_search_view
+#: view:event.registration:campos_checkin.event_registration_search_view
 msgid "Expected Today"
 msgstr ""
 
 #. module: campos_checkin
-#: field:campos.checkin.wiz,hand_out:0
+#: code:addons/campos_checkin/wizards/campos_import_grp_due_wiz.py:58
+#, python-format
+msgid ""
+"File parse error:\n"
+"%s\n"
+"Line: %d"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.import.grp.due.wiz,filename:0
+msgid "Filename"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.event.participant,firstcampdate:0
+msgid "First Camp Date"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.grp.wiz,registration_id:0
+msgid "Group"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.model,name:campos_checkin.model_campos_reg_arrdate
+msgid "Group  Arrivals date"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.actions.act_window,name:campos_checkin.event_registration_act_window
+#: model:ir.ui.menu,name:campos_checkin.event_registration_menu
+msgid "Group Check In"
+msgstr ""
+
+#. module: campos_checkin
+#: model:ir.actions.report.xml,name:campos_checkin.report_group_arrival
+msgid "Group Check In Report"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.checkin.grp.wiz,hand_out:0 field:campos.checkin.wiz,hand_out:0
 msgid "Hand out"
 msgstr ""
 
 #. module: campos_checkin
-#: field:campos.checkin.child.wiz,id:0 field:campos.checkin.wiz,id:0
-#: field:campos.mat.report,id:0
+#: field:campos.checkin.child.wiz,id:0 field:campos.checkin.grp.wiz,id:0
+#: field:campos.checkin.wiz,id:0 field:campos.import.grp.due.wiz,id:0
+#: field:campos.mat.report,id:0 field:campos.reg.arrdate,id:0
 msgid "ID"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:184
+#: view:campos.import.grp.due.wiz:campos_checkin.campos_import_grp_due_wiz_form_view
+msgid "Import File"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/event_registration.py:56
+#, python-format
+msgid "Indhentning af børneattester ikke bekræftiget"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:210
 #, python-format
 msgid "Invoice for %s"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:45
+#: code:addons/campos_checkin/models/campos_event_participant.py:47
 #, python-format
 msgid "Invoice not yet generated!"
 msgstr ""
@@ -284,20 +449,27 @@ msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,__last_update:0
+#: field:campos.checkin.grp.wiz,__last_update:0
 #: field:campos.checkin.wiz,__last_update:0
+#: field:campos.import.grp.due.wiz,__last_update:0
 #: field:campos.mat.report,__last_update:0
+#: field:campos.reg.arrdate,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,write_uid:0
+#: field:campos.checkin.grp.wiz,write_uid:0
 #: field:campos.checkin.wiz,write_uid:0
+#: field:campos.import.grp.due.wiz,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: campos_checkin
 #: field:campos.checkin.child.wiz,write_date:0
+#: field:campos.checkin.grp.wiz,write_date:0
 #: field:campos.checkin.wiz,write_date:0
+#: field:campos.import.grp.due.wiz,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
@@ -308,25 +480,48 @@ msgid "Material Orders"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:66
+#: field:campos.checkin.grp.wiz,checkin_par_mobile:0
+msgid "Mobile"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Mobile: ___________________________"
+msgstr ""
+
+#. module: campos_checkin
+#: field:campos.import.grp.due.wiz,data_file:0
+msgid "NAV Saldo Fil"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Name"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:71
 #, python-format
 msgid "No Catering specified"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:52
+#: code:addons/campos_checkin/models/campos_event_participant.py:54
+#: code:addons/campos_checkin/models/campos_event_participant.py:56
 #, python-format
 msgid "No Payment"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:60
+#: code:addons/campos_checkin/models/campos_event_participant.py:65
 #, python-format
 msgid "No accomonodation specified"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:196
+#: code:addons/campos_checkin/models/campos_event_participant.py:222
 #, python-format
 msgid "No invoice generated"
 msgstr ""
@@ -337,7 +532,8 @@ msgid "Not invoiced"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:150
+#: code:addons/campos_checkin/models/campos_event_participant.py:176
+#: code:addons/campos_checkin/models/event_registration.py:140
 #, python-format
 msgid "Not yet arrived"
 msgstr ""
@@ -359,20 +555,21 @@ msgid "Other material ordered can be picked up at Knudepladsen."
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:37
+#: code:addons/campos_checkin/models/campos_event_participant.py:39
 #, python-format
 msgid "Paid by: %s"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:54
+#: code:addons/campos_checkin/models/campos_event_participant.py:59
 #, python-format
 msgid "Paying for: %s, "
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:47
-#: code:addons/campos_checkin/models/campos_event_participant.py:50
+#: code:addons/campos_checkin/models/campos_event_participant.py:49
+#: code:addons/campos_checkin/models/campos_event_participant.py:52
+#: code:addons/campos_checkin/models/event_registration.py:83
 #, python-format
 msgid "Payment recived"
 msgstr ""
@@ -383,6 +580,8 @@ msgid "Pole depot:"
 msgstr ""
 
 #. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
 #: view:website:campos_checkin.report_mat_order_detail_template
 msgid "Printed at:"
 msgstr ""
@@ -403,12 +602,13 @@ msgid "Quantity"
 msgstr ""
 
 #. module: campos_checkin
+#: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
 msgid "Register arrival"
 msgstr ""
 
 #. module: campos_checkin
-#: field:campos.mat.report,reg_id:0
+#: field:campos.mat.report,reg_id:0 field:campos.reg.arrdate,registration_id:0
 msgid "Registration"
 msgstr ""
 
@@ -418,7 +618,13 @@ msgid "Sale order line ids"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:73
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Sign: ___________________________________"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:78
 #, python-format
 msgid "Skejser armbånd er udsendt/uddelt"
 msgstr ""
@@ -426,6 +632,11 @@ msgstr ""
 #. module: campos_checkin
 #: field:campos.mat.report,state:0
 msgid "State"
+msgstr ""
+
+#. module: campos_checkin
+#: view:event.registration:campos_checkin.event_registration_search_view
+msgid "Status"
 msgstr ""
 
 #. module: campos_checkin
@@ -439,7 +650,30 @@ msgid "Subcamp"
 msgstr ""
 
 #. module: campos_checkin
-#: code:addons/campos_checkin/models/campos_event_participant.py:39
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Subcamp:"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.reg.arrdate:campos_checkin.campos_reg_arrdate_form_view
+msgid "Total"
+msgstr ""
+
+#. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "Total arrived:"
+msgstr ""
+
+#. module: campos_checkin
+#: view:event.registration:campos_checkin.event_registration_search_view
+msgid "Underlejr"
+msgstr ""
+
+#. module: campos_checkin
+#: code:addons/campos_checkin/models/campos_event_participant.py:41
+#: code:addons/campos_checkin/models/event_registration.py:80
 #, python-format
 msgid "Unpaid invoices. Total due: DKK %.2f"
 msgstr ""
@@ -450,6 +684,14 @@ msgid "Wizard"
 msgstr ""
 
 #. module: campos_checkin
+#: view:website:campos_checkin.report_group_arrdate_detail_template
+#: view:website:campos_checkin.report_group_checkin_detail_template
+msgid "__________"
+msgstr ""
+
+#. module: campos_checkin
+#: view:campos.checkin.grp.wiz:campos_checkin.campos_checkin_grp_wiz_form_view
 #: view:campos.checkin.wiz:campos_checkin.campos_checkin_wiz_form_view
+#: view:campos.import.grp.due.wiz:campos_checkin.campos_import_grp_due_wiz_form_view
 msgid "or"
 msgstr ""
