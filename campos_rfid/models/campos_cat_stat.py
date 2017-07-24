@@ -12,7 +12,7 @@ class CamposCatStat(models.Model):
     _auto = False
     _log_access = False
     _order = 'attended_slot_name'
-    
+
     cat_inst_id = fields.Many2one('campos.cat.inst', 'Cantering Instanse')
     attended_slot_name = fields.Char()
     attended = fields.Integer('Attended')
@@ -27,6 +27,6 @@ class CamposCatStat(models.Model):
                         s.name as attended_slot_name,
                         count(t.*) as attended
                         from campos_cat_inst i 
-                        join campos_canteen_slot as s on TRUE
+                        join campos_canteen_slot as s on s.code >= '1200' and s.code <= '2000'
                         left join campos_cat_ticket t on s.code = t.attended_slot and t.cat_inst_id = i.id group by i.id, s.name;
                         """)
