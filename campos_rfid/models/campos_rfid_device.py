@@ -109,7 +109,7 @@ class CamposRfidDevice(models.Model):
             responce = '<div class="campos_warning_box">%s</div>' % message.replace('\n','<br/>')
         ticket.write({'responce': responce,
                       'responce_status': access,
-                      'participant_id': par.id if par else ticket.particpant_id})
+                      'participant_id': par.id if par else ticket.participant_id.id})
         return self.build_response(message, access, res_id=ticket.id)
                                    
     def checkin_meat(self, participant_number, part_ids):
@@ -125,7 +125,7 @@ class CamposRfidDevice(models.Model):
             if reg:
                 break
         if reg:
-            tickets = self.env['campos.cat.ticket'].search([('registration_id', '=', reg.id),  ('date', '=', fields.Date.today())])
+            tickets = self.env['campos.cat.ticket'].with_context(lang='da_DK').search([('registration_id', '=', reg.id),  ('date', '=', fields.Date.today())])
             if tickets:
                 if tickets[0].subcamp_id != self.subcamp_id:
                     return self.meat_response(tickets[0],u'Afvist\nGå til %s' % (tickets[0].subcamp_id.name), False, par)

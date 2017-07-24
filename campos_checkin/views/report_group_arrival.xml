@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <openerp>
 	<data>
-
+<!--
 		<report id="report_group_arrival" string="Group Check In Report" model="event.registration"
 			report_type="qweb-pdf" name="campos_checkin.report_group_checkin_template" />
-			
+i-->			
 		<report id="report_group_arrival" string="Group Check In Report" model="campos.reg.arrdate"
 			report_type="qweb-pdf" name="campos_checkin.report_group_arrdate_template" />	
 
