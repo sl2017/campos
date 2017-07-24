@@ -28,5 +28,5 @@ class CamposCatStat(models.Model):
                         count(t.*) as attended
                         from campos_cat_inst i 
                         join campos_canteen_slot as s on TRUE
-                        left join campos_cat_ticket t on s.code = t.attended_slot and t.cat_inst_id = i.id and t.attended_slot >= '1200' and t.attended_slot =< '2000' group by i.id, s.name;
+                        left join campos_cat_ticket t on s.code = t.attended_slot and t.cat_inst_id = i.id and s.code >= '1200' and s.code =< '2000' group by i.id, s.name;
                         """)
