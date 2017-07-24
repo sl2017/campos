@@ -9,6 +9,7 @@ class CamposCatTicket(models.Model):
 
     _name = 'campos.cat.ticket'
     _description = 'Campos Cat Ticket'  # TODO
+    _inherit = 'mail.thread'
 
     def _get_slots(self):
         slots = [('-', 'Missing')]
@@ -27,7 +28,7 @@ class CamposCatTicket(models.Model):
     cat_inst_id = fields.Many2one('campos.cat.inst', 'Catering Instanse')
     subcamp_id = fields.Many2one(related='cat_inst_id.subcamp_id', store=True)
     registration_id = fields.Many2one('event.registration', 'Group')
-    participant_id = fields.Many2one('campos.event.participant', 'Pick up by')
+    participant_id = fields.Many2one('campos.event.participant', 'Pick up by', track_visibility='onchange')
     date = fields.Date(related='cat_inst_id.date', store=True)
     attended_time = fields.Datetime('Attended')
     attended_slot = fields.Selection(_get_slots, string='Bucket', default = '-')
@@ -36,9 +37,9 @@ class CamposCatTicket(models.Model):
     meat_ids = fields.One2many('event.registration.meatlist', 'ticket_id', 'Meat list')
     state = fields.Selection([('draft', 'Not delivered'),
                               ('open', 'Partly delivered'),
-                              ('done', 'Completed')], string='State', default='draft')
+                              ('done', 'Completed')], string='State', default='draft', track_visibility='onchange')
     catering_note = fields.Text(related='registration_id.catering_note', string='Group Note')
-    ticket_note = fields.Text('Todays Note')
+    ticket_note = fields.Text('Todays Note', track_visibility='onchange')
     device_id = fields.Many2one('campos.rfid.device', 'Scanner')
     
     
