@@ -334,7 +334,7 @@ class CamposFeeSsRegistration(models.Model):
                 if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                     charged_fee_tran_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                     fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                desc = _('Transport on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
                 vals = self._prepare_create_invoice_line_vals(-charged_fee_tran_val, 1, type='out_invoice', description=desc, product=product)
                 vals['invoice_id'] = ssreg.invoice_id.id
                 self.env['account.invoice.line'].create(vals)
