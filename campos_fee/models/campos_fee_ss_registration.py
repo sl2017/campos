@@ -33,7 +33,10 @@ class CamposFeeSsRegistration(models.Model):
         ('cancel', 'Cancelled'),
         ('open', 'Confirmed'),
         ('done', 'Attended'),
-        ('deregistered', 'Deregistered')
+        ('deregistered', 'Deregistered'),
+        ('arrived', 'Arrived'),
+        ('checkin', 'Check In Completed'),
+        ('checkout', 'Check OUT Completed'),
         ], string='Status')
     number_participants = fields.Integer('Number of participants')
     fee_participants = fields.Float('Participants Fees')

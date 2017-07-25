@@ -217,7 +217,8 @@ class EventRegistration(models.Model):
         ('done', 'Attended'),
         ('deregistered', 'Deregistered'),
         ('arrived', 'Arrived'),
-        ('checkin', 'Check In Completed')
+        ('checkin', 'Check In Completed'),
+        ('checkout', 'Check OUT Completed'),
     ], string='Status', default='draft', readonly=True, copy=False,
         track_visibility='onchange')
 
