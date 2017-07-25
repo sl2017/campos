@@ -254,7 +254,7 @@ class CamposFeeSsRegistration(models.Model):
                         if ssreg.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                              price_unit = price_unit * ssreg.invoice_id.currency_id.rate
                         
-                        vals = self._prepare_create_invoice_line_vals(line.price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
+                        vals = self._prepare_create_invoice_line_vals(price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         ail_id = self.env['account.invoice.line'].create(vals)
                         line.invoice_lines = ail_id
