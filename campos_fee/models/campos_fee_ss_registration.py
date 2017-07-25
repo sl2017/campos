@@ -186,7 +186,8 @@ class CamposFeeSsRegistration(models.Model):
         cancelled_transport_cost = 0
         for p in prev_par_ids:
             cancelled_fee += p.camp_price
-            cancelled_transport_cost += (2 - p.transport_co) * self.ref_ssreg_id.par_ids.filtered(lambda r: r.transport_price > 0).mapped('transport_price')
+            if self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price'):
+                cancelled_transport_cost += (2 - p.transport_co) * abs(self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')[0])
             
         return cancelled_fee, cancelled_transport_cost 
     
@@ -250,7 +251,11 @@ class CamposFeeSsRegistration(models.Model):
                             _logger.info("Create invoice: %s", vals)
                             ssreg.invoice_id = aio.create(vals)
                         #desc = product.name_get()[0][1]
-                        vals = self._prepare_create_invoice_line_vals(line.price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
+                        price_unit = line.price_unit
+                        if ssreg.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
+                             price_unit = price_unit * ssreg.invoice_id.currency_id.rate
+                        
+                        vals = self._prepare_create_invoice_line_vals(price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         ail_id = self.env['account.invoice.line'].create(vals)
                         line.invoice_lines = ail_id
@@ -344,7 +349,7 @@ class CamposFeeSsRegistration(models.Model):
                 corr = False
                 for line in ssreg.ref_ssreg_id.invoice_id.invoice_line:
                     if line.product_id.default_code and line.product_id.default_code == 'TREF' and line.quantity > 0:
-                        vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description='Correction: %s' % line.name, product=line.product_id)
+                        vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description=_('Correction: %s') % line.name, product=line.product_id)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         self.env['account.invoice.line'].create(vals)
                         corr = True
