@@ -16,6 +16,7 @@ class webtourbstourstop(models.Model):
     _description = 'Campos Webtour bsTour Stop'
     bsidno = fields.Integer('Webtour Tour IDno')
     usidno = fields.Integer('Webtour us Tour ID no')
+    usname = fields.Char('Webtour usName')
     updated = fields.Boolean('Updated')    
     startdate = fields.Char('DateStart')
     enddate = fields.Char('DateEnd')
@@ -23,7 +24,7 @@ class webtourbstourstop(models.Model):
     endplaceidno =  fields.Char('EndPlaceIDno')    
     startplace =    fields.Many2one('campos.webtourusdestination.view','StartPlace')
     endplace =      fields.Many2one('campos.webtourusdestination.view','EndPlace')
-    
+
 
 class webtourtripstate(models.Model):
     _name = 'campos.webtour.tripstate'
@@ -35,9 +36,11 @@ class webtourbstour(models.Model):
     _name = 'campos.webtour.bstour'
     _description = 'Webtour bsTours'
     bsidno = fields.Integer('Webtour IDno')
-    name = fields.Char('Tour Name')
+    bstourname = fields.Char('Tour bsName')
     updated = fields.Boolean('Updated')
     drivername = fields.Char('Driver Name')
+    driver2name = fields.Char('Driver2 Name')
+    driver3name = fields.Char('Driver3 Name')
     vehiclename = fields.Char('Vehicle Name')
     interninfo = fields.Char('Intern Info')
     driverinfo = fields.Char('Driver Info')
@@ -93,7 +96,7 @@ class webtourbstour(models.Model):
 
                 for ustour in array.findall('a:usTour',ns):   
                     usidno = get_tag_data_from_node(ustour,'a:IDno')
-                    name = get_tag_data_from_node(ustour,'a:Name')
+                    usname = get_tag_data_from_node(ustour,'a:Name')
                     
                     #_logger.info("kilroy 3 %s %s", usidno, name) 
                     bsTourArr = ustour.find('a:bsTourArr',ns)  
@@ -107,10 +110,13 @@ class webtourbstour(models.Model):
                                 stopdic = {}
                                 
                                 bsidno = get_tag_data_from_node(bstour,'a:IDno')
+                                bstourname = get_tag_data_from_node(bstour,'a:TourName')
 
                                 tourdic['bsidno'] = bsidno
-                                tourdic['name']   = name
+                                tourdic['bstourname'] = bstourname
                                 tourdic['drivername'] =    get_tag_data_from_node(bstour,'a:DriverName')
+                                tourdic['driver2name'] =   get_tag_data_from_node(bstour,'a:Driver2Name')
+                                tourdic['driver3name'] =   get_tag_data_from_node(bstour,'a:Driver3Name')
                                 tourdic['driverinfo'] =    get_tag_data_from_node(bstour,'a:DriverInfo')
                                 tourdic['interninfo'] =    get_tag_data_from_node(bstour,'a:InternInfo')
                                 tourdic['vehiclename'] =   get_tag_data_from_node(bstour,'a:VehicleName')
@@ -119,8 +125,9 @@ class webtourbstour(models.Model):
                                 tourdic['updated'] = True
                                 
                                 stopdic['usidno'] = usidno
+                                stopdic['usname'] = usname
                                 stopdic['bsidno'] = bsidno
-                                
+
                                 startdate =     get_tag_data_from_node(bstour,'a:DateStart')
                                 enddate =       get_tag_data_from_node(bstour,'a:DateEnd')
                                 startplaceidno= get_tag_data_from_node(bstour,'a:StartPlaceIDno') 
