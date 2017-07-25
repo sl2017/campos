@@ -306,7 +306,7 @@ class CamposFeeSsRegistration(models.Model):
                         if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                              charged_fee_par_val = charged_fee_par * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
                              fee_par_val = ssreg.fee_participants * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                        canc_fee = charged_fee_par_val - fee_par_val / num_canc
+                        canc_fee = (charged_fee_par_val - fee_par_val) / num_canc
                         if num_c100:
                             product = self.env['product.product'].search([('default_code', '=', 'LKREF100')])
                             desc = _('No refusion after juli 1') 
