@@ -147,11 +147,11 @@ class CamposFeeSsRegistration(models.Model):
     @api.multi
     def make_invoice_group(self):
         for ssreg in self:
-            if ssreg.snapshot_id.segment == 'ss_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+            if ssreg.snapshot_id.segment == 'ss_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-            elif ssreg.snapshot_id.segment == 'dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            elif ssreg.snapshot_id.segment == 'dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-            elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
             elif ssreg.snapshot_id.segment == 'jobber' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff and ssreg.registration_id.partner_id.country_id.code == 'DK':
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_jobber(subtract1=False)
@@ -206,6 +206,7 @@ class CamposFeeSsRegistration(models.Model):
                 if product:
                     if not ssreg.invoice_id:
                         vals = self._prepare_create_invoice_vals()
+                        vals['origin'] = ssreg.snapshot_id.code
                         _logger.info("Create invoice: %s", vals)
                         ssreg.invoice_id = aio.create(vals)
                     desc = product.name_get()[0][1] #product.display_name 
