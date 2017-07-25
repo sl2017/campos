@@ -33,7 +33,10 @@ class CamposFeeSsRegistration(models.Model):
         ('cancel', 'Cancelled'),
         ('open', 'Confirmed'),
         ('done', 'Attended'),
-        ('deregistered', 'Deregistered')
+        ('deregistered', 'Deregistered'),
+        ('arrived', 'Arrived'),
+        ('checkin', 'Check In Completed'),
+        ('checkout', 'Check OUT Completed'),
         ], string='Status')
     number_participants = fields.Integer('Number of participants')
     fee_participants = fields.Float('Participants Fees')
@@ -144,11 +147,11 @@ class CamposFeeSsRegistration(models.Model):
     @api.multi
     def make_invoice_group(self):
         for ssreg in self:
-            if ssreg.snapshot_id.segment == 'ss_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done']:
+            if ssreg.snapshot_id.segment == 'ss_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.scoutorg_id.id == 83 and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-            elif ssreg.snapshot_id.segment == 'dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            elif ssreg.snapshot_id.segment == 'dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code == 'DK' and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
-            elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done']:
+            elif ssreg.snapshot_id.segment == 'non_dk_groups' and ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.country_id and ssreg.registration_id.partner_id.country_id.code != 'DK' and ssreg.registration_id.state in ['open', 'done', 'arrived', 'checkin', 'checkout']:
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_spec(subtract1=False)
             elif ssreg.snapshot_id.segment == 'jobber' and not ssreg.registration_id.partner_id.scoutgroup and ssreg.registration_id.partner_id.staff and ssreg.registration_id.partner_id.country_id.code == 'DK':
                 ssreg.with_context(lang=ssreg.registration_id.partner_id.lang).make_invoice_jobber(subtract1=False)
@@ -203,6 +206,7 @@ class CamposFeeSsRegistration(models.Model):
                 if product:
                     if not ssreg.invoice_id:
                         vals = self._prepare_create_invoice_vals()
+                        vals['origin'] = ssreg.snapshot_id.code
                         _logger.info("Create invoice: %s", vals)
                         ssreg.invoice_id = aio.create(vals)
                     desc = product.name_get()[0][1] #product.display_name 
@@ -245,8 +249,8 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_vals()
                             _logger.info("Create invoice: %s", vals)
                             ssreg.invoice_id = aio.create(vals)
-                        desc = product.name_get()[0][1]
-                        vals = self._prepare_create_invoice_line_vals(False, line.product_uom_qty, type='out_invoice', description=desc, product=product)
+                        #desc = product.name_get()[0][1]
+                        vals = self._prepare_create_invoice_line_vals(line.price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         ail_id = self.env['account.invoice.line'].create(vals)
                         line.invoice_lines = ail_id
@@ -306,7 +310,7 @@ class CamposFeeSsRegistration(models.Model):
                         if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                              charged_fee_par_val = charged_fee_par * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
                              fee_par_val = ssreg.fee_participants * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                        canc_fee = charged_fee_par_val - fee_par_val / num_canc
+                        canc_fee = (charged_fee_par_val - fee_par_val) / num_canc
                         if num_c100:
                             product = self.env['product.product'].search([('default_code', '=', 'LKREF100')])
                             desc = _('No refusion after juli 1') 
@@ -331,7 +335,7 @@ class CamposFeeSsRegistration(models.Model):
                 if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                     charged_fee_tran_val = charged_fee_tran * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                     fee_tran_val = ssreg.fee_transport * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                desc = _('Transport fee charged on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
+                desc = _('Transport on invoice %s') % ssreg.ref_ssreg_id.invoice_id.number
                 vals = self._prepare_create_invoice_line_vals(-charged_fee_tran_val, 1, type='out_invoice', description=desc, product=product)
                 vals['invoice_id'] = ssreg.invoice_id.id
                 self.env['account.invoice.line'].create(vals)
