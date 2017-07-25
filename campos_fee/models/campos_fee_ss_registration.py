@@ -186,7 +186,8 @@ class CamposFeeSsRegistration(models.Model):
         cancelled_transport_cost = 0
         for p in prev_par_ids:
             cancelled_fee += p.camp_price
-            cancelled_transport_cost += (2 - p.transport_co) * self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price > 0).mapped('transport_price')
+            if self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price'):
+                cancelled_transport_cost += (2 - p.transport_co) * abs(self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')[0])
             
         return cancelled_fee, cancelled_transport_cost 
     
