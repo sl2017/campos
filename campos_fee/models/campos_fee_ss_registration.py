@@ -186,7 +186,8 @@ class CamposFeeSsRegistration(models.Model):
         cancelled_transport_cost = 0
         for p in prev_par_ids:
             cancelled_fee += p.camp_price
-            cancelled_transport_cost += (2 - p.transport_co) * self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')
+            if self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price'):
+                cancelled_transport_cost += (2 - p.transport_co) * abs(self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')[0])            
             
         return cancelled_fee, cancelled_transport_cost 
     
@@ -195,6 +196,7 @@ class CamposFeeSsRegistration(models.Model):
         aio = self.env['account.invoice']
         for ssreg in self:
             #1 Camp Participations
+            invoice_new_val = 0
             query = """  select camp_product_id, count(*) 
                          from campos_fee_ss_participant 
                          where ssreg_id in %s and no_invoicing = 'f'
@@ -212,7 +214,8 @@ class CamposFeeSsRegistration(models.Model):
                     desc = product.name_get()[0][1] #product.display_name 
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
-                    self.env['account.invoice.line'].create(vals)
+                    inv_line = self.env['account.invoice.line'].create(vals)
+                    invoice_new_val += inv_line.price_unit * inv_line.quantity
                     ssreg.invoice_id.button_compute(set_total=True)
             
             #2 Transport
@@ -222,7 +225,6 @@ class CamposFeeSsRegistration(models.Model):
                          group by transport_product_id
                     """
             self._cr.execute(query, (tuple([ssreg.id]), ))
-            invoice_new_val = 0
             for product_id, quantity in self._cr.fetchall():
                 product = self.env['product.product'].browse(product_id)
                 if product:
@@ -235,7 +237,6 @@ class CamposFeeSsRegistration(models.Model):
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
                     inv_line = self.env['account.invoice.line'].create(vals)
-                    invoice_new_val += inv_line.price_unit * inv_line.line.quantity
                     ssreg.invoice_id.button_compute(set_total=True)
 
             # 3 Other orders (Invoice sales orders)
@@ -295,12 +296,12 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
-                            old_invoice_val += (line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit) * -line.quantity 
+                            old_invoice_val += (line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit) * line.quantity 
                         
                 # Handle "no_cancel_fee
                 cancelled_fee, cancelled_transport = ssreg._get_no_cancel_fee()    
                 charged_fee_par = charged_fee_par - cancelled_fee
-                     
+                _logger.info('Old: %s, new: %s', old_invoice_val, invoice_new_val)     
                 if old_invoice_val > invoice_new_val and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
                     
                     # Find cancelled since last invoice:
