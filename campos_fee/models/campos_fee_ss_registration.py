@@ -185,8 +185,9 @@ class CamposFeeSsRegistration(models.Model):
         cancelled_fee = 0
         cancelled_transport_cost = 0
         for p in prev_par_ids:
-            cancelled_fee += p.camp_price
-            cancelled_transport_cost += (2 - p.transport_co) * self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')
+            cancelled_fee += p.camp_price            
+            if self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price'):
+                cancelled_transport_cost += (2 - p.transport_co) * abs(self.ref_ssreg_id.sspar_ids.filtered(lambda r: r.transport_price != 0).mapped('transport_price')[0])
             
         return cancelled_fee, cancelled_transport_cost 
     
@@ -222,7 +223,6 @@ class CamposFeeSsRegistration(models.Model):
                          group by transport_product_id
                     """
             self._cr.execute(query, (tuple([ssreg.id]), ))
-            invoice_new_val = 0
             for product_id, quantity in self._cr.fetchall():
                 product = self.env['product.product'].browse(product_id)
                 if product:
@@ -234,10 +234,9 @@ class CamposFeeSsRegistration(models.Model):
                     desc = product.name_get()[0][1] # product.display_name 
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
-                    inv_line = self.env['account.invoice.line'].create(vals)
-                    invoice_new_val += inv_line.price_unit * inv_line.line.quantity
+                    self.env['account.invoice.line'].create(vals)
                     ssreg.invoice_id.button_compute(set_total=True)
-
+                    
             # 3 Other orders (Invoice sales orders)
             invoices = {}
             sales_order_line_obj = self.env['sale.order.line']
@@ -251,21 +250,17 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_vals()
                             _logger.info("Create invoice: %s", vals)
                             ssreg.invoice_id = aio.create(vals)
-                        if product.default_code == 'XT':
-                            desc = line.name
-                            price_unit = line.price_unit
-                            if ssreg.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
-                                 price_unit = price_unit * ssreg.invoice_id.currency_id.rate
-                            
-                        else: 
-                            desc = product.name_get()[0][1]
-                            price_unit = False
-
-                        vals = self._prepare_create_invoice_line_vals(price_unit, line.product_uom_qty, type='out_invoice', description=desc, product=product)
+                        #desc = product.name_get()[0][1]
+                        price_unit = line.price_unit
+                        if ssreg.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
+                             price_unit = price_unit * ssreg.invoice_id.currency_id.rate
+                        
+                        vals = self._prepare_create_invoice_line_vals(price_unit, line.product_uom_qty, type='out_invoice', description=line.name, product=product)
                         vals['invoice_id'] = ssreg.invoice_id.id
                         ail_id = self.env['account.invoice.line'].create(vals)
                         line.invoice_lines = ail_id
-
+            
+                    
             prev_inv_id = False
             prev2_ssreg_id = False
             if ssreg.ref_ssreg_id and ssreg.ref_ssreg_id.invoice_id:
@@ -288,20 +283,18 @@ class CamposFeeSsRegistration(models.Model):
                 vals = self._prepare_create_invoice_line_vals(0, 0, type='out_invoice', description=desc, product=product)
                 vals['invoice_id'] = ssreg.invoice_id.id
                 self.env['account.invoice.line'].create(vals)
-                old_invoice_val = 0
                 for line in ssreg.ref_ssreg_id.invoice_id.invoice_line:
                     if line.product_id.default_code and line.product_id.default_code.startswith('LK') and line.quantity > 0:
                         if line.product_id.default_code != 'LKREF':
                             vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
-                            old_invoice_val += (line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit) * -line.quantity 
                         
                 # Handle "no_cancel_fee
                 cancelled_fee, cancelled_transport = ssreg._get_no_cancel_fee()    
                 charged_fee_par = charged_fee_par - cancelled_fee
                      
-                if old_invoice_val > invoice_new_val and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
+                if charged_fee_par > ssreg.fee_participants and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
                     
                     # Find cancelled since last invoice:
                     num_canc = 0
@@ -317,12 +310,12 @@ class CamposFeeSsRegistration(models.Model):
                                 num_c50 += 1
                     #2. 50 % refusions
                     if num_canc:
-                        #charged_fee_par_val = charged_fee_par
-                        #fee_par_val = ssreg.fee_participants
-                        #if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
-                        #     charged_fee_par_val = charged_fee_par * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
-                        #     fee_par_val = ssreg.fee_participants * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
-                        canc_fee = (old_invoice_val - invoice_new_val) / num_canc
+                        charged_fee_par_val = charged_fee_par
+                        fee_par_val = ssreg.fee_participants
+                        if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
+                             charged_fee_par_val = charged_fee_par * ssreg.ref_ssreg_id.invoice_id.currency_id.rate 
+                             fee_par_val = ssreg.fee_participants * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
+                        canc_fee = (charged_fee_par_val - fee_par_val) / num_canc
                         if num_c100:
                             product = self.env['product.product'].search([('default_code', '=', 'LKREF100')])
                             desc = _('No refusion after juli 1') 
