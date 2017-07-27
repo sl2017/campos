@@ -62,7 +62,7 @@ class CamposFeeSsRegistration(models.Model):
         for ssreg in self:
             ssreg.count_transport_to = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_to_camp', '=', True)])
             ssreg.count_transport_from = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_from_camp', '=', True)])
-            ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * self.get_transport_cost_price() 
+            ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * ssreg.get_transport_cost_price() 
 
     def get_transport_cost_price(self):
         muni_prod_attr_ids = False
@@ -82,6 +82,7 @@ class CamposFeeSsRegistration(models.Model):
             if pp_id:
                 pp_id = pp_id.sorted(key=lambda r: r.lst_price)
                 transport_price = pp_id[0].lst_price
+        return transport_price
 
     @api.multi
     def do_delayed_snapshot(self):
