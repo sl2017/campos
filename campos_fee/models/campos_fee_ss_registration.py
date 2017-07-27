@@ -254,7 +254,6 @@ class CamposFeeSsRegistration(models.Model):
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
                     inv_line = self.env['account.invoice.line'].create(vals)
-                    invoice_new_val += inv_line.price_unit * inv_line.quantity
                     ssreg.invoice_id.button_compute(set_total=True)
 
             # 3 Other orders (Invoice sales orders)
@@ -310,7 +309,7 @@ class CamposFeeSsRegistration(models.Model):
                 old_invoice_val = 0
                 for line in ssreg.ref_ssreg_id.invoice_id.invoice_line:
                     if line.product_id.default_code and line.product_id.default_code.startswith('LK') and line.quantity > 0:
-                        if line.product_id.default_code != 'LKREF':
+                        if not line.product_id.default_code.startswith('LKREF'):
                             vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
