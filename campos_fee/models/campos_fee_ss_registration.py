@@ -253,10 +253,7 @@ class CamposFeeSsRegistration(models.Model):
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
                     inv_line = self.env['account.invoice.line'].create(vals)
-<<<<<<< HEAD
                     invoice_new_val += inv_line.price_unit * inv_line.quantity
-=======
->>>>>>> refs/remotes/origin/8.0
                     ssreg.invoice_id.button_compute(set_total=True)
 
             # 3 Other orders (Invoice sales orders)
