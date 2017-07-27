@@ -711,7 +711,7 @@ msgstr ""
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:362
 #, python-format
 msgid "LK 50% refusion after may 1"
-msgstr ""
+msgstr "LK 50% refusion efter 1. maj"
 
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_148
@@ -873,7 +873,7 @@ msgstr ""
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:412
 #, python-format
 msgid "No transport refusion after may 1"
-msgstr ""
+msgstr "Ingen transport refusion efter 1. maj"
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0
@@ -955,7 +955,7 @@ msgstr ""
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:536
 #, python-format
 msgid "Participant fee charged on invoice %s:"
-msgstr "Deltager afgift faktureret på tidligere faktura %s:"
+msgstr "Faktureret på faktura %s:"
 
 #. module: campos_fee
 #: view:campos.event.participant:campos_fee.view_event_registration_participant_form
