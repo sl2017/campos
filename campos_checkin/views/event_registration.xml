@@ -50,6 +50,7 @@
 				<field name="checkin_participant_id"/>
 			</field>	
         </field>
+    </record>
 
     <record model="ir.ui.view" id="event_registration_search_view">
         <field name="name">event.registration.search (in campos_checkin)</field>
@@ -115,6 +116,6 @@
         <field name="action" ref="event_registration_act_window"/>
         <field name="sequence" eval="32"/>
     </record>
--->
+
 </data>
 </openerp>
