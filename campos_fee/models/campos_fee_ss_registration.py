@@ -358,6 +358,14 @@ class CamposFeeSsRegistration(models.Model):
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
                             ssreg.audit = True
+                elif old_invoice_val > invoice_new_val and ssreg.number_participants >= ssreg.ref_ssreg_id.number_participants:
+                            product = self.env['product.product'].search([('default_code', '=', 'LKREF')])
+                            desc = _('LK 50% refusion after may 1') 
+                            vals = self._prepare_create_invoice_line_vals((old_invoice_val - invoice_new_val) / 2, num_c50, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            ssreg.audit = True
 
                 product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
                 #1. Prev transport fee
@@ -402,7 +410,7 @@ class CamposFeeSsRegistration(models.Model):
                         if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                             transport_refusion = transport_refusion * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                         product = self.env['product.product'].search([('default_code', '=', 'TREF2')])
-                        desc = _('No refusion after may 1') 
+                        desc = _('No transport refusion after may 1') 
                         vals = self._prepare_create_invoice_line_vals((transport_refusion), 1, type='out_invoice', description=desc, product=product)
                         #vals['amount'] = -ssreg1.invoice_id.amount_total
                         vals['invoice_id'] = ssreg.invoice_id.id
