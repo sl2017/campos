@@ -7,7 +7,7 @@
 <field name="arch" type="xml">
 <tree>
 <field name="bsidno" string="bsIDno"/>
-<field name="bsname" string="bsName"/>
+<field name="bstourname" string="bstourname"/>
 <field name="drivername" string="Driver Name"/>
 <field name="driver2name" string="Driver 2 Name"/>
 <field name="vehiclename" string="Vehicle Name"/>
@@ -26,7 +26,7 @@
 <sheet>
 <group name="bstour_top">
 <field name="bsidno" string="bsIDno"/>
-<field name="bsname" string="bsName"/>
+<field name="bstourname" string="bstourname"/>
 <field name="drivername" string="Driver Name"/>
 <field name="driver2name" string="Driver 2 Name"/>
 <field name="driver3name" string="Driver 3 Name"/>
@@ -62,7 +62,7 @@
 <tree>
 <field name="bsidno" string="bsIDno"/>
 <field name="usidno" string="usIDno"/>
-<field name="usname" string="bsName"/>
+<field name="usname" string="usName"/>
 <field name="startdate" string="DateStart"/>
 <field name="enddate" string="DateEnd"/>
 <field name="startplaceidno" string="StartPlaceIDno"/>
@@ -82,7 +82,7 @@
 <group name="stop_top">
 <field name="bsidno" string="bsIDno"/>
 <field name="usidno" string="usIDno"/>
-<field name="usname" string="bsName"/>
+<field name="usname" string="usName"/>
 <field name="startdate" string="DateStart"/>
 <field name="enddate" string="DateEnd"/>
 <field name="startplaceidno" string="StartPlaceIDno"/>
