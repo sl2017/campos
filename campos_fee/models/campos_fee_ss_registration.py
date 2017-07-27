@@ -318,7 +318,7 @@ class CamposFeeSsRegistration(models.Model):
                 # Handle "no_cancel_fee
                 cancelled_fee, cancelled_transport = ssreg._get_no_cancel_fee()    
                 charged_fee_par = charged_fee_par - cancelled_fee
-                _logger.info('Old: %s, new: %s', old_invoice_val, invoice_new_val)     
+                _logger.info('%s Old: %s, new: %s', ssreg.registration_id.name, old_invoice_val, invoice_new_val)     
                 if old_invoice_val > invoice_new_val and ssreg.number_participants < ssreg.ref_ssreg_id.number_participants:
                     
                     # Find cancelled since last invoice:
