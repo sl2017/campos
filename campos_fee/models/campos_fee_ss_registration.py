@@ -62,7 +62,7 @@ class CamposFeeSsRegistration(models.Model):
         for ssreg in self:
             ssreg.count_transport_to = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_to_camp', '=', True)])
             ssreg.count_transport_from = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_from_camp', '=', True)])
-            ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * self.get_transport_cost_price() 
+            ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * ssreg.get_transport_cost_price() 
 
     def get_transport_cost_price(self):
         muni_prod_attr_ids = False
@@ -357,6 +357,14 @@ class CamposFeeSsRegistration(models.Model):
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
                             ssreg.audit = True
+                elif old_invoice_val > invoice_new_val and ssreg.number_participants >= ssreg.ref_ssreg_id.number_participants:
+                            product = self.env['product.product'].search([('default_code', '=', 'LKREF')])
+                            desc = _('LK 50% refusion after may 1') 
+                            vals = self._prepare_create_invoice_line_vals((old_invoice_val - invoice_new_val) / 2, num_c50, type='out_invoice', description=desc, product=product)
+                            #vals['amount'] = -ssreg1.invoice_id.amount_total
+                            vals['invoice_id'] = ssreg.invoice_id.id
+                            self.env['account.invoice.line'].create(vals)
+                            ssreg.audit = True
 
                 product = self.env['product.product'].search([('default_code', '=', 'TRAN')])
                 #1. Prev transport fee
@@ -401,7 +409,7 @@ class CamposFeeSsRegistration(models.Model):
                         if ssreg.ref_ssreg_id.invoice_id.currency_id != ssreg.ref_ssreg_id.invoice_id.company_id.currency_id:
                             transport_refusion = transport_refusion * ssreg.ref_ssreg_id.invoice_id.currency_id.rate
                         product = self.env['product.product'].search([('default_code', '=', 'TREF2')])
-                        desc = _('No refusion after may 1') 
+                        desc = _('No transport refusion after may 1') 
                         vals = self._prepare_create_invoice_line_vals((transport_refusion), 1, type='out_invoice', description=desc, product=product)
                         #vals['amount'] = -ssreg1.invoice_id.amount_total
                         vals['invoice_id'] = ssreg.invoice_id.id
