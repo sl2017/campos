@@ -848,20 +848,21 @@ msgstr ""
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:316
 #, python-format
 msgid "No refusion after juli 1"
-msgstr ""
+msgstr "Ingen refusion af deltagerbetaling 1. juli"
 
 #. module: campos_fee
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:360
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:374
 #, python-format
 msgid "No refusion after may 1"
-msgstr ""
+msgstr "Ingen transport refusion efter 1. maj"
 
 #. module: campos_fee
 #: code:addons/campos_fee/models/campos_fee_ss_registration.py:540
 #, python-format
 msgid "No refusion after may 1: %s %.2f - %.2f"
 msgstr ""
+"Begrænset tilbagebetaling af deltagerbetaling efter 1. maj: %s %.2f - %.2f"
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0

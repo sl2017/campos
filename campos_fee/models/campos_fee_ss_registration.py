@@ -82,6 +82,7 @@ class CamposFeeSsRegistration(models.Model):
             if pp_id:
                 pp_id = pp_id.sorted(key=lambda r: r.lst_price)
                 transport_price = pp_id[0].lst_price
+        return transport_price
 
     @api.multi
     def do_delayed_snapshot(self):
