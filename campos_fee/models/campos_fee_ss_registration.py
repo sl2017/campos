@@ -2,7 +2,7 @@
 # Copyright 2017 Stein & Gabelgaard ApS
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models,  SUPERUSER_ID, _
 
 from openerp.addons.connector.queue.job import job, related_action
 from openerp.addons.connector.session import ConnectorSession
@@ -62,10 +62,26 @@ class CamposFeeSsRegistration(models.Model):
         for ssreg in self:
             ssreg.count_transport_to = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_to_camp', '=', True)])
             ssreg.count_transport_from = self.env['campos.fee.ss.participant'].search_count([('ssreg_id', '=', ssreg.id), ('transport_from_camp', '=', True)])
-            tran_prices = ssreg.sspar_ids.filtered(lambda r: r.transport_price > 0).mapped('transport_price')
-            if tran_prices:
-                ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * tran_prices[0] 
+            ssreg.transport_cost = (ssreg.count_transport_to + ssreg.count_transport_from) * self.get_transport_cost_price() 
 
+    def get_transport_cost_price(self):
+        muni_prod_attr_ids = False
+        transport_price = 0 
+        if self.registration_id.partner_id.municipality_id.product_attribute_id.id:
+            muni_prod_attr_ids = [self.registration_id.partner_id.municipality_id.product_attribute_id.id]
+        if not muni_prod_attr_ids:
+            if self.registration_id.group_entrypoint.municipality_id.product_attribute_id.id and self.registration_id.group_exitpoint.municipality_id.product_attribute_id.id:
+                 muni_prod_attr_ids = [self.registration_id.group_entrypoint.municipality_id.product_attribute_id.id, self.registration_id.group_exitpoint.municipality_id.product_attribute_id.id]
+        _logger.info('Muni: %s', muni_prod_attr_ids) 
+        if muni_prod_attr_ids:
+            pp_id = False
+            if self.env.uid == SUPERUSER_ID:
+                pp_id = self.env['product.product'].search([('product_tmpl_id', '=', 18),('attribute_value_ids', 'in', muni_prod_attr_ids)])
+            else:
+                pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', 18),('attribute_value_ids', 'in', muni_prod_attr_ids)])
+            if pp_id:
+                pp_id = pp_id.sorted(key=lambda r: r.lst_price)
+                transport_price = pp_id[0].lst_price
 
     @api.multi
     def do_delayed_snapshot(self):
@@ -235,7 +251,7 @@ class CamposFeeSsRegistration(models.Model):
                     vals = self._prepare_create_invoice_line_vals(False, quantity, type='out_invoice', description=desc, product=product)
                     vals['invoice_id'] = ssreg.invoice_id.id
                     inv_line = self.env['account.invoice.line'].create(vals)
-                    invoice_new_val += inv_line.price_unit * inv_line.line.quantity
+                    invoice_new_val += inv_line.price_unit * inv_line.quantity
                     ssreg.invoice_id.button_compute(set_total=True)
 
             # 3 Other orders (Invoice sales orders)
@@ -295,7 +311,7 @@ class CamposFeeSsRegistration(models.Model):
                             vals = self._prepare_create_invoice_line_vals(line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit, -line.quantity, type='out_invoice', description=line.name, product=line.product_id)
                             vals['invoice_id'] = ssreg.invoice_id.id
                             self.env['account.invoice.line'].create(vals)
-                            old_invoice_val += (line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit) * -line.quantity 
+                            old_invoice_val += (line.price_unit  if ssreg.ref_ssreg_id.invoice_id.type == 'out_invoice' else -line.price_unit) * line.quantity 
                         
                 # Handle "no_cancel_fee
                 cancelled_fee, cancelled_transport = ssreg._get_no_cancel_fee()    
