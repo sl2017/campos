@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-25 15:19+0000\n"
-"PO-Revision-Date: 2017-07-25 15:19+0000\n"
+"POT-Creation-Date: 2017-07-27 11:55+0000\n"
+"PO-Revision-Date: 2017-07-27 11:55+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgid "2. rate 100% DK Groups"
 msgstr "2. rate 100% Danske grupper"
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:324
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:354
 #, python-format
 msgid "50% refusion after may 1"
 msgstr "50% refusion efter 1. maj"
@@ -268,7 +268,7 @@ msgid "Confirmed"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:347
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:385
 #, python-format
 msgid "Correction: %s"
 msgstr "Korrection: %s"
@@ -708,6 +708,12 @@ msgid "Køge"
 msgstr ""
 
 #. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:362
+#, python-format
+msgid "LK 50% refusion after may 1"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_148
 msgid "Langeland"
 msgstr ""
@@ -845,24 +851,29 @@ msgid "No cancel fee"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:316
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:346
 #, python-format
 msgid "No refusion after juli 1"
 msgstr "Ingen refusion af deltagerbetaling 1. juli"
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:360
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:374
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:398
 #, python-format
 msgid "No refusion after may 1"
 msgstr "Ingen transport refusion efter 1. maj"
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:540
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:578
 #, python-format
 msgid "No refusion after may 1: %s %.2f - %.2f"
 msgstr ""
 "Begrænset tilbagebetaling af deltagerbetaling efter 1. maj: %s %.2f - %.2f"
+
+#. module: campos_fee
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:412
+#, python-format
+msgid "No transport refusion after may 1"
+msgstr ""
 
 #. module: campos_fee
 #: selection:campos.fee.snapshot,execute_func:0
@@ -916,7 +927,7 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:517
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:555
 #, python-format
 msgid "Only  50%% refusion after may 1: %s %.2f - %.2f"
 msgstr "Kun  50%% refusion efter 1. maj: %s %.2f - %.2f"
@@ -940,8 +951,8 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:277
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:498
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:305
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:536
 #, python-format
 msgid "Participant fee charged on invoice %s:"
 msgstr "Deltager afgift faktureret på tidligere faktura %s:"
@@ -1321,7 +1332,7 @@ msgid "Transport Total"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:531
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:569
 #, python-format
 msgid "Transport fee charged on invoice %s"
 msgstr "Transport på faktura %s"
@@ -1332,7 +1343,7 @@ msgid "Transport included"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:338
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:376
 #, python-format
 msgid "Transport on invoice %s"
 msgstr "Transport på faktura %s"
