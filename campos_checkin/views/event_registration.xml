@@ -39,6 +39,18 @@
         </field>
     </record>
     
+    <record model="ir.ui.view" id="event_registration_checkin_form_view">
+        <field name="name">event.registration.form (in campos_checkin)</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
+        <field name="mode">primary</field>
+        <field name="priority">22</field>
+        <field name="arch" type="xml">
+        	<field name="total_price" position="after">
+				<field name="checkin_participant_id"/>
+			</field>	
+        </field>
+    </record>
 
     <record model="ir.ui.view" id="event_registration_search_view">
         <field name="name">event.registration.search (in campos_checkin)</field>
@@ -104,6 +116,6 @@
         <field name="action" ref="event_registration_act_window"/>
         <field name="sequence" eval="32"/>
     </record>
--->
+
 </data>
 </openerp>
