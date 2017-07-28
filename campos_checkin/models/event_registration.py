@@ -157,3 +157,9 @@ class EventRegistration(models.Model):
                 self.arrive_time = False
 
 
+    @api.multi
+    def action_checkout(self):
+        self.ensure_one()
+        
+        self.state = 'checkout'
+        
