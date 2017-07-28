@@ -135,7 +135,7 @@
     
     <record model="ir.ui.menu" id="registration_checkout_menu">
         <field name="name">Group Check Out</field>
-        <field name="parent_id" ref="submenu_campos_checkóut"/> 
+        <field name="parent_id" ref="submenu_campos_checkout"/> 
         <field name="action" ref="registration_checkout_act_window"/>
         <field name="sequence" eval="32"/>
     </record>
