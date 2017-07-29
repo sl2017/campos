@@ -19,6 +19,7 @@
         'account',
     ],
     'data': [
+        'wizards/campos_mail_wiz.xml',
         'security/campos_fee_snapshot.xml',
         'views/campos_fee_snapshot.xml',
         'security/campos_fee_ss_participant.xml',

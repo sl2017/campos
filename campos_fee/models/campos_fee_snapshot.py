@@ -38,6 +38,7 @@ class CamposFeeSnapshot(models.Model):
     always_draft = fields.Boolean('Leave as Drafts', default=True)
     dyna_ref = fields.Boolean('Use Last invoice as reference snapshot', default=True)
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'snapshot_id', 'Registration Snapshot')
+    #email_template_id = 
     
     @api.multi
     def action_do_snapshot(self):
