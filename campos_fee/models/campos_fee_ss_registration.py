@@ -114,6 +114,14 @@ class CamposFeeSsRegistration(models.Model):
     def assign_participant_number(self):
         for ssreg in self:
             ssreg.registration_id.participant_ids.filtered(lambda p: p.state in ['draft', 'standby', 'sent', 'inprogress', 'approved']).assign_participant_number()
+            
+#     @api.multi            
+#     def send_email(self):
+#         
+#         for ssreg in self:
+#             if ssreg.snapshot_id.email_template_id:
+#                 ssreg.snapshot_id.email_template_id.send_mail(ssreg.registration_id.id)
+#         
 
     @api.multi            
     def sync_participant(self):
