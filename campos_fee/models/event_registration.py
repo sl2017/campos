@@ -35,6 +35,7 @@ def do_delayed_snapshot(session, model, ssreg_id):
         ssreg.do_delayed_snapshot()
 
 
+
 class EventRegistration(models.Model):
 
     _inherit = 'event.registration'

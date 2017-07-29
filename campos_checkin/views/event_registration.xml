@@ -44,6 +44,11 @@
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
         <field name="arch" type="xml">
+        	<button name="cancel_registration" position="after">
+       			<button name="action_checkout" type="object" states="open,arrived,checkin" string="Check Out" class="oe_highlight" groups="campos_checkin.group_campos_checkin_crew"/>
+       			<button name="action_cancel_checkout" type="object" states="checkout" string="Cancel Check Out" groups="campos_checkin.group_campos_checkin_mgr"/>
+       		</button>
+        	
         	<field name="total_price" position="after">
 				<field name="checkin_participant_id"/>
 			</field>	
@@ -84,6 +89,23 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="event_registration_tree_checkout_view">
+        <field name="name">event.registration.tree (in campos_checkin)</field>
+        <field name="model">event.registration</field>
+		<field name="priority">22</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+            	<field name="name"/>
+            	<field name="organization_id"/>
+            	<field name="subcamp_id"/>
+            	<field name="fromcampdate"/>
+            	<field name="state"/>
+            	
+            </tree>          
+        </field>
+    </record>
+
+
     <record model="ir.actions.act_window" id="event_registration_act_window">
         <field name="name">Group Check In</field> 
         <field name="res_model">event.registration</field>
@@ -114,6 +136,40 @@
         <field name="action" ref="event_registration_act_window"/>
         <field name="sequence" eval="32"/>
     </record>
-
+    
+    <menuitem name="Check Out"
+        id="submenu_campos_checkout"
+        parent="menu_campos_checkin"
+        sequence="20"/>
+    
+	<record model="ir.actions.act_window" id="registration_checkout_act_window">
+        <field name="name">Group Check Out</field> 
+        <field name="res_model">event.registration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    
+    <record model="ir.actions.act_window.view"
+        id="registration_checkout_act_window_tree">
+	  <field name="sequence" eval="1"/>
+	  <field name="view_mode">tree</field>
+	  <field name="view_id" ref="event_registration_tree_checkout_view"/>
+	  <field name="act_window_id" ref="registration_checkout_act_window"/>
+	</record>
+    
+    <record model="ir.actions.act_window.view"
+	        id="registration_checkout_act_window_form">
+	  <field name="sequence" eval="2"/>
+	  <field name="view_mode">form</field>
+	  <field name="view_id" ref="campos_final_registration.view_form_finalregistration_admin"/>
+	  <field name="act_window_id" ref="registration_checkout_act_window"/>
+	</record>	
+    <record model="ir.ui.menu" id="registration_checkout_menu">
+        <field name="name">Group Check Out</field>
+        <field name="parent_id" ref="submenu_campos_checkout"/> 
+        <field name="action" ref="registration_checkout_act_window"/>
+        <field name="sequence" eval="32"/>
+    </record>
 </data>
 </openerp>
