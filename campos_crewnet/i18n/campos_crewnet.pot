@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 12:55+0000\n"
-"PO-Revision-Date: 2017-07-23 12:55+0000\n"
+"POT-Creation-Date: 2017-08-12 13:48+0000\n"
+"PO-Revision-Date: 2017-08-12 13:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,14 +32,7 @@ msgstr ""
 #: view:campos.event.participant:campos_crewnet.campos_event_participant_search_view
 #: view:campos.event.participant:campos_crewnet.view_event_registration_participant_form
 #: view:campos.event.participant:campos_crewnet.view_form_finalregistration_participant
-#: field:campos.event.participant,crewnet_ok:0
 msgid "Crewnet"
-msgstr ""
-
-#. module: campos_crewnet
-#: code:addons/campos_crewnet/models/campos_ckr_check.py:16
-#, python-format
-msgid "Crewnet auto accepted on CKR approval."
 msgstr ""
 
 #. module: campos_crewnet

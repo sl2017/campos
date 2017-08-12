@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 22:04+0000\n"
-"PO-Revision-Date: 2017-07-15 22:04+0000\n"
+"POT-Creation-Date: 2017-08-12 13:48+0000\n"
+"PO-Revision-Date: 2017-08-12 13:48+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -23,13 +23,6 @@ msgstr ""
 #: model:ir.model,name:campos_final_registration.model_campos_event_car
 msgid "A car for parking at the camp"
 msgstr "parkering af en bil på lejren"
-
-#. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:105
-#: sql_constraint:campos.reg.friendship:0
-#, python-format
-msgid "A group can only be added once as friendship group"
-msgstr "En gruppe kan kun tilføjes som venskabsgruppe én gang"
 
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
@@ -49,24 +42,6 @@ msgstr "Tilføj/ret deltagere"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Agreements"
 msgstr "Aftaler"
-
-#. module: campos_final_registration
-#: field:event.registration,pioneering_in_height:0
-msgid "Are you planning to construct pioneering more than 4 meters high?"
-msgstr "Planer om raftebyggerier over 4 meter i højde?"
-
-#. module: campos_final_registration
-#: field:event.registration,pioneering_in_height_with_persons:0
-msgid ""
-"Are you planning to construct pioneering with persons staying above 2 "
-"meters?"
-msgstr ""
-"Planer om raftebyggerier med planlagt personophold i over 2 meters højde?"
-
-#. module: campos_final_registration
-#: field:event.registration,raised_sleeping:0
-msgid "Are you planning to have raised sleeping places?"
-msgstr "Planer om hævede sovepladser"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -90,30 +65,14 @@ msgid "Camp Area Coordinators"
 msgstr "Camp Area Coordinators"
 
 #. module: campos_final_registration
-#: field:campos.event.participant,camp_day_ids:0
-msgid "Camp Day List"
-msgstr "Liste over lejrdage"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,dates_summery:0
-msgid "Camp Days"
-msgstr "Lejrdage"
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Cancel Registration"
 msgstr "Cancel Registration"
 
 #. module: campos_final_registration
-#: field:campos.event.participant,cancel_dt:0
-msgid "Cancellation time"
-msgstr ""
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration,car_ids:0
 msgid "Cars"
 msgstr "Biler der skal parkeres på lejren"
 
@@ -123,36 +82,9 @@ msgid "Check all days"
 msgstr "Marker alle dage"
 
 #. module: campos_final_registration
-#: field:event.registration,child_certificates_accept:0
-msgid "Check declaration of child certificates"
-msgstr ""
-"Erklær at gruppen/kredsen har indhentet børneattest for alle voksne "
-"deltagere"
-
-#. module: campos_final_registration
-#: help:campos.event.participant,camp_day_ids:0
-msgid "Chose which days you're participating in the jamboree"
-msgstr "Chose which days you're participating in the jamboree"
-
-#. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_event_registration_meatlist
 msgid "Chosen meat on a registration"
 msgstr "valgt kød på en registrereing"
-
-#. module: campos_final_registration
-#: field:event.registration.pioneeringpoledepot,code:0
-msgid "Code"
-msgstr ""
-
-#. module: campos_final_registration
-#: field:campos.event.participant,transport_from_camp:0
-msgid "Common transport from camp"
-msgstr "Fællestransport FRA lejren"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,transport_to_camp:0
-msgid "Common transport to camp"
-msgstr "Fællestransport TIL lejren"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -166,78 +98,10 @@ msgid "Contact info"
 msgstr "Contact info"
 
 #. module: campos_final_registration
-#: field:campos.event.car,phone_number:0
-msgid "Contact phone number during camp period"
-msgstr "Kontakt telefonnummer under lejren"
-
-#. module: campos_final_registration
-#: field:event.registration.meatlist,meat_count:0
-#: field:event.registration.needlist,need_count:0
-msgid "Count"
-msgstr "Antal"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,group_country_code:0
-msgid "Country Code"
-msgstr "Lande kode"
-
-#. module: campos_final_registration
-#: field:campos.event.car,create_uid:0
-#: field:campos.event.participant.day,create_uid:0
-#: field:campos.reg.friendship,create_uid:0 field:event.day,create_uid:0
-#: field:event.day.meat,create_uid:0
-#: field:event.registration.meat,create_uid:0
-#: field:event.registration.meatlist,create_uid:0
-#: field:event.registration.need,create_uid:0
-#: field:event.registration.needlist,create_uid:0
-#: field:event.registration.pioneeringpoledepot,create_uid:0
-msgid "Created by"
-msgstr "Oprettet af"
-
-#. module: campos_final_registration
-#: field:campos.event.car,create_date:0
-#: field:campos.event.participant.day,create_date:0
-#: field:campos.reg.friendship,create_date:0 field:event.day,create_date:0
-#: field:event.day.meat,create_date:0
-#: field:event.registration.meat,create_date:0
-#: field:event.registration.meatlist,create_date:0
-#: field:event.registration.need,create_date:0
-#: field:event.registration.needlist,create_date:0
-#: field:event.registration.pioneeringpoledepot,create_date:0
-msgid "Created on"
-msgstr "Oprettet den"
-
-#. module: campos_final_registration
-#: field:campos.event.participant.day,the_date:0 field:event.day,event_date:0
-#: field:event.registration.meatlist,event_date:0
-msgid "Date"
-msgstr "Dato"
-
-#. module: campos_final_registration
-#: field:event.registration,child_certificates_date:0
-msgid "Date of declaration"
-msgstr "Dato for markering af børneattester er indhentet"
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Day and Meat Type"
 msgstr "dag og kødtype"
-
-#. module: campos_final_registration
-#: field:event.registration.meatlist,day_meat_total:0
-msgid "Day meat total"
-msgstr "Antal kødbestillinger pr. dag"
-
-#. module: campos_final_registration
-#: field:event.registration.meatlist,day_participant_total:0
-msgid "Day part. total"
-msgstr "Dags total"
-
-#. module: campos_final_registration
-#: field:event.registration.pioneeringpoledepot,name:0
-msgid "Depot Name"
-msgstr "Navn på raftedepot"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -245,34 +109,9 @@ msgid "Deregister this group from the Camp?"
 msgstr "Deregister this group from the Camp?"
 
 #. module: campos_final_registration
-#: field:campos.event.car,display_name:0
-#: field:campos.event.participant.day,display_name:0
-#: field:campos.reg.friendship,display_name:0 field:event.day,display_name:0
-#: field:event.day.meat,display_name:0
-#: field:event.registration.meat,display_name:0
-#: field:event.registration.meatlist,display_name:0
-#: field:event.registration.need,display_name:0
-#: field:event.registration.needlist,display_name:0
-#: field:event.registration.pioneeringpoledepot,display_name:0
-msgid "Display Name"
-msgstr "Navn"
-
-#. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Doublet"
 msgstr ""
-
-#. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:346
-#: sql_constraint:event.registration.needlist:0
-#, python-format
-msgid "Each need can only be added once"
-msgstr "Hvert ønske kan kun anvendes en gang"
-
-#. module: campos_final_registration
-#: field:campos.event.car,park_permit_end_date:0
-msgid "End date"
-msgstr "Slut dato"
 
 #. module: campos_final_registration
 #: view:event.day:campos_final_registration.view_tree_event_days
@@ -283,12 +122,6 @@ msgid "Event"
 msgstr "Lejr"
 
 #. module: campos_final_registration
-#: field:event.day.meat,event_day_id:0
-#: field:event.registration.meatlist,event_day_id:0
-msgid "Event Day"
-msgstr "Lejrdag"
-
-#. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_day_meat
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_event_day_meat
 msgid "Event Day Meat"
@@ -296,7 +129,6 @@ msgstr "Lejrdags kød"
 
 #. module: campos_final_registration
 #: view:event.event:campos_final_registration.view_event_form
-#: field:event.event,event_day_ids:0 field:event.registration,event_days:0
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_days
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_event_days
 msgid "Event Days"
@@ -328,12 +160,6 @@ msgid "Event Registration Pioneering Pole Depots"
 msgstr "Raftedepot"
 
 #. module: campos_final_registration
-#: field:campos.event.participant.day,day_id:0 field:event.day,event_id:0
-#: field:event.day.meat,event_id:0
-msgid "Event day"
-msgstr "Lejrdag"
-
-#. module: campos_final_registration
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_event_finalregistration_tree
 #: model:ir.ui.menu,name:campos_final_registration.menu_event_finalregistration
 msgid "Final Registration"
@@ -345,21 +171,6 @@ msgid "Final Registration GL"
 msgstr "Endelig tilmedling"
 
 #. module: campos_final_registration
-#: field:event.registration.need,for_staff:0
-msgid "For Jobbers"
-msgstr "For jobbere"
-
-#. module: campos_final_registration
-#: field:event.registration.need,for_group:0
-msgid "For Scout Groups"
-msgstr "For spejdergrupper og Kredse"
-
-#. module: campos_final_registration
-#: field:campos.reg.friendship,friendship_group_reg_id:0
-msgid "Friendship Group"
-msgstr "Friendship Group"
-
-#. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_friendshipgrouplist
 msgid "Friendship Group List"
 msgstr "Liste over venskabsgrupper"
@@ -367,27 +178,15 @@ msgstr "Liste over venskabsgrupper"
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration,friendship_group_ids:0
 #: model:ir.ui.menu,name:campos_final_registration.menu_action_finalregistration_menu_friendshipgrouplist
 msgid "Friendship Groups"
 msgstr "Venskabsgruppe"
-
-#. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:207
-#, python-format
-msgid "Full camp"
-msgstr "Fuld lejr"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "GloFo"
 msgstr "GloFO"
-
-#. module: campos_final_registration
-#: field:event.registration,glofo_co2_amount:0
-msgid "Green Profile, amount of CO2 (in grams)"
-msgstr ""
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
@@ -417,54 +216,9 @@ msgstr ""
 "lastbil osv.)"
 
 #. module: campos_final_registration
-#: field:event.registration,gear_transport:0
-msgid ""
-"How will get your gear to the camp (own trailer(s)/common transport with "
-"other groups like rented truck or carriage man)?"
-msgstr ""
-"Hvordan de agter at få deres grej til lejren.   Egen trailer (trailere).  "
-"Fælles transport af udstyr, sammen med andre grupper (vognmand, lejet "
-"lastbil osv.)"
-
-#. module: campos_final_registration
-#: field:campos.event.car,id:0 field:campos.event.participant.day,id:0
-#: field:campos.reg.friendship,id:0 field:event.day,id:0
-#: field:event.day.meat,id:0 field:event.registration.meat,id:0
-#: field:event.registration.meatlist,id:0 field:event.registration.need,id:0
-#: field:event.registration.needlist,id:0
-#: field:event.registration.pioneeringpoledepot,id:0
-msgid "ID"
-msgstr "ID"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,access_token_id:0
-msgid "Id of Access Token"
-msgstr "Chip nummer"
-
-#. module: campos_final_registration
-#: help:event.registration,large_tents:0 help:event.registration,mast_sails:0
-msgid ""
-"If the tent is larger than 50m2, it must be approved by the authorities, via"
-" the camps emergency management. This also applies to mast sails if there "
-"are sides of more than half of the circumference."
-msgstr ""
-"Hvis teltet er større end 50m2 skal det godkendes af myndighederne, via lejrens beredskab.\n"
-"Dette gælder også mastesejl, hvis der er sider på mere end halvdelen af omkredsen"
-
-#. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Inactivate Participant"
 msgstr "Afmeld deltager"
-
-#. module: campos_final_registration
-#: help:event.registration,number_of_tents:0
-msgid ""
-"Information about tents will not be used in the calculation of area for the "
-"individual group. This will be based on the number of participants. More "
-"tents will not give a bigger campsite."
-msgstr ""
-"Oplysninger om telte vil ikke indgå i beregningen af areal il den enkelte gruppe. Dette vil ske ud fra deltagerantallet.\n"
-"Flere telte vil dermed ikke give en større lejrplads."
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -473,52 +227,9 @@ msgid "Internal Information"
 msgstr "Intern information"
 
 #. module: campos_final_registration
-#: field:campos.event.car,__last_update:0
-#: field:campos.event.participant.day,__last_update:0
-#: field:campos.reg.friendship,__last_update:0 field:event.day,__last_update:0
-#: field:event.day.meat,__last_update:0
-#: field:event.registration.meat,__last_update:0
-#: field:event.registration.meatlist,__last_update:0
-#: field:event.registration.need,__last_update:0
-#: field:event.registration.needlist,__last_update:0
-#: field:event.registration.pioneeringpoledepot,__last_update:0
-msgid "Last Modified on"
-msgstr "Sidst ændret"
-
-#. module: campos_final_registration
-#: field:campos.event.car,write_uid:0
-#: field:campos.event.participant.day,write_uid:0
-#: field:campos.reg.friendship,write_uid:0 field:event.day,write_uid:0
-#: field:event.day.meat,write_uid:0 field:event.registration.meat,write_uid:0
-#: field:event.registration.meatlist,write_uid:0
-#: field:event.registration.need,write_uid:0
-#: field:event.registration.needlist,write_uid:0
-#: field:event.registration.pioneeringpoledepot,write_uid:0
-msgid "Last Updated by"
-msgstr "Sidst opdateret af"
-
-#. module: campos_final_registration
-#: field:campos.event.car,write_date:0
-#: field:campos.event.participant.day,write_date:0
-#: field:campos.reg.friendship,write_date:0 field:event.day,write_date:0
-#: field:event.day.meat,write_date:0
-#: field:event.registration.meat,write_date:0
-#: field:event.registration.meatlist,write_date:0
-#: field:event.registration.need,write_date:0
-#: field:event.registration.needlist,write_date:0
-#: field:event.registration.pioneeringpoledepot,write_date:0
-msgid "Last Updated on"
-msgstr "Sidst opdateret d."
-
-#. module: campos_final_registration
 #: model:ir.model,name:campos_final_registration.model_event_registration_meat
 msgid "List of meat types"
 msgstr "Mad typer"
-
-#. module: campos_final_registration
-#: selection:event.day,event_period:0
-msgid "Main Camp"
-msgstr "Hovedlejr"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -529,14 +240,8 @@ msgstr "Kødbestilling"
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration,meatlist_ids:0
 msgid "Meat Choices"
 msgstr "Valg af kød"
-
-#. module: campos_final_registration
-#: field:event.day.meat,meat_id:0
-msgid "Meat Type"
-msgstr "Kød type"
 
 #. module: campos_final_registration
 #: model:ir.actions.act_window,name:campos_final_registration.action_event_registration_meat
@@ -550,54 +255,21 @@ msgid "Meat Types per event day"
 msgstr "Kød typer pr. lejrdag"
 
 #. module: campos_final_registration
-#: field:event.event,event_day_meat_ids:0
-msgid "Meat list per day"
-msgstr "Kødliste pr. dag"
-
-#. module: campos_final_registration
-#: field:event.registration.meatlist,event_day_meat_id:0
-msgid "Meat type choice"
-msgstr "Valg af kød type"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,mobile_clean:0
-msgid "Mobile clean"
-msgstr ""
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration.meat,name:0
 msgid "Name"
 msgstr "Name"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration.needlist,need_id:0
 msgid "Need"
 msgstr "Behov"
 
 #. module: campos_final_registration
-#: field:event.registration.need,name:0
-msgid "Need Name"
-msgstr "Behovs navn"
-
-#. module: campos_final_registration
-#: field:event.registration,other_need_update_date:0
-msgid "Need updated"
-msgstr "Behov opdateret"
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration,large_tents:0
 msgid "Number of assembly and staff tents, more than 50 m2, incl. their sizes"
 msgstr "Antal samlings-/stabstelte over 50 m2  herunder størrelse"
-
-#. module: campos_final_registration
-#: field:event.registration,number_gas_burners:0
-msgid "Number of gas burners with tanks more than 2 kg"
-msgstr "Antal gasblus, med gasflasker over 2 kg."
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -610,62 +282,11 @@ msgstr ""
 "der er sider på, og evt. hvor stor en brøkdel."
 
 #. module: campos_final_registration
-#: field:event.registration,mast_sails:0
-msgid ""
-"Number of mast sails, incl. diameters, if they have sides and on how much of"
-" the cercumfence."
-msgstr ""
-"Antal mastesejl, herunder oplysning af diameter og oplysning om hvor vidt "
-"der er sider på, og evt. hvor stor en brøkdel."
-
-#. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:429
-#, python-format
-msgid ""
-"Number of ordered meat portions (%d) exceeds the number of dinner "
-"participants (%d) on %s. "
-msgstr ""
-"Antal af bestilt kød portioner (%d) Overstiger antallet af spisende "
-"lejrdeltager (%d) på %s."
-
-#. module: campos_final_registration
-#: field:event.registration,number_of_other_small_tents:0
-msgid "Number of other tents, less than 50 m2"
-msgstr "Antal andre telte, under 50 m2"
-
-#. module: campos_final_registration
-#: field:event.registration,glofo_number_participants:0
-msgid "Number of participants in Green Profile"
-msgstr "Antal af deltager i grøn profil"
-
-#. module: campos_final_registration
-#: field:event.registration,number_of_tents:0
-msgid "Number of patrol tents (for personal accommodation)"
-msgstr "Antal patruljetelte (personovernatning)"
-
-#. module: campos_final_registration
-#: field:event.registration,other_need_description:0
-msgid "Other Need description"
-msgstr "Beskrivelse af andre behov"
-
-#. module: campos_final_registration
-#: field:event.registration,other_need:0
-msgid "Other special need(s)"
-msgstr "Andre specielle ønsker"
-
-#. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.campos_event_participant_search
-#: field:campos.event.participant,own_note:0
 msgid "Own Note"
 msgstr "Own Note"
 
 #. module: campos_final_registration
-#: field:campos.event.participant.day,participant_id:0
-msgid "Participant"
-msgstr "Deltager"
-
-#. module: campos_final_registration
-#: field:event.registration,participants_camp_day_ids:0
 #: model:ir.model,name:campos_final_registration.model_campos_event_participant_day
 msgid "Participant Camp Days"
 msgstr "Deltager lejrdage"
@@ -683,12 +304,6 @@ msgid "Participants"
 msgstr "Deltagere"
 
 #. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:86
-#, python-format
-msgid "Participants from %s"
-msgstr "Deltager fra %s"
-
-#. module: campos_final_registration
 #: view:campos.event.participant.day:campos_final_registration.view_search_event_participant_days
 msgid "Participate"
 msgstr "Participate"
@@ -699,25 +314,6 @@ msgid "Participation"
 msgstr "Participation"
 
 #. module: campos_final_registration
-#: field:campos.event.participant,passport_number:0
-msgid "Passport number"
-msgstr "Pasnummer"
-
-#. module: campos_final_registration
-#: field:event.day,event_period:0
-msgid "Period"
-msgstr "Periode"
-
-#. module: campos_final_registration
-#: help:event.registration,pioneering_in_height_with_persons:0
-msgid ""
-"Pioneeing constructions planned for persons staying above 2 meters height "
-"must be approved by the authorities, through the camps emergency management."
-msgstr ""
-" Planer om raftebyggerier med planlagt personophold i over 2 meters højde"
-
-#. module: campos_final_registration
-#: field:event.registration,pioneering_pole_depot_id:0
 #: model:ir.model,name:campos_final_registration.model_event_registration_pioneeringpoledepot
 msgid "Pioneering Pole Depot"
 msgstr "Rafte depot"
@@ -734,41 +330,6 @@ msgid "Pioneering Poles"
 msgstr "Rafter"
 
 #. module: campos_final_registration
-#: help:event.registration,pioneering_in_height:0
-msgid ""
-"Pioneering constructions above 4 meters height must be approved by the "
-"authorities, through the camps emergency management (this does not include "
-"flagpoles and other single masts)."
-msgstr ""
-"Raftebyggerier over 4 meters højde skal godkendes af myndighederne, via lejrens beredskab\n"
-"(dette inkluderer ikke flagstænger og andre enkeltstående master)."
-
-#. module: campos_final_registration
-#: help:event.registration,raised_sleeping:0
-msgid ""
-"Pioneering constructions with planned accommodation at more than 1 meter "
-"height, must be approved by the authorities through the camps emergency "
-"management."
-msgstr ""
-"Raftebyggerier med planlagt personophold i over 1 meters højde, hvor der "
-"skal overnattes, skal godkendes af myndighederne, via lejrens beredskab"
-
-#. module: campos_final_registration
-#: field:campos.camp.area,pole_depot_id:0
-msgid "Pole depot"
-msgstr ""
-
-#. module: campos_final_registration
-#: selection:event.day,event_period:0
-msgid "Post Camp"
-msgstr "Efterlejr"
-
-#. module: campos_final_registration
-#: selection:event.day,event_period:0
-msgid "Pre Camp"
-msgstr "Forlejr"
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Pre-registration"
@@ -780,33 +341,11 @@ msgid "Re-activate Participant"
 msgstr "Fortryd framelding"
 
 #. module: campos_final_registration
-#: field:campos.event.car,registration_id:0
-#: field:campos.event.participant.day,registration_id_stored:0
-#: field:campos.reg.friendship,own_registration_id:0
-#: field:event.registration.meatlist,registration_id:0
-#: field:event.registration.needlist,registration_id:0
-msgid "Registration"
-msgstr "Registrering"
-
-#. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_tree_finalregistration_participant
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Registration State"
 msgstr "Status"
-
-#. module: campos_final_registration
-#: field:campos.event.car,reg_number:0
-msgid "Registration number (licence plate)"
-msgstr "Bilens registreringsnummer"
-
-#. module: campos_final_registration
-#: field:event.registration,glofo_remarks:0
-msgid ""
-"Remarks (e.g. certain weeks chosen, more or fewer weeks than suggested, "
-"etc.)"
-msgstr ""
-"Bemærkninger (fx  bestemte uger valgt, flere eller færre end forslået o.s.v)"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -815,16 +354,6 @@ msgid ""
 "Remarks, e.g. certain weeks chosen, more or fewer weeks than suggested etc."
 msgstr ""
 "Bemærkninger fx  bestemte uger valgt, flere eller færre end forslået o.s.v"
-
-#. module: campos_final_registration
-#: help:campos.event.participant,transport_from_camp:0
-#: help:campos.event.participant,transport_to_camp:0
-msgid ""
-"Remember to mark this, with you wish to use the joint transportation. See "
-"page 29 in the instructions."
-msgstr ""
-"Remember to mark this, with you wish to use the joint transportation. See "
-"page 29 in the instructions."
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -836,11 +365,6 @@ msgstr "Reopen Registration"
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Reverse Assigned Friendship Groups"
-msgstr "Er venskabsgruppe med"
-
-#. module: campos_final_registration
-#: field:event.registration,reverse_friendship_group_ids:0
-msgid "Reverse Friendship Groups"
 msgstr "Er venskabsgruppe med"
 
 #. module: campos_final_registration
@@ -873,20 +397,8 @@ msgstr "Speciel behov ved registrering"
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
-#: field:event.registration,need_ids:0
 msgid "Special needs"
 msgstr "Specielle ønsker"
-
-#. module: campos_final_registration
-#: code:addons/campos_final_registration/models/finalregistration.py:446
-#, python-format
-msgid "Start data cannot be after end date"
-msgstr "Start dato kan ikke være før slut dato"
-
-#. module: campos_final_registration
-#: field:campos.event.car,park_permit_start_date:0
-msgid "Start date"
-msgstr "Start dato"
 
 #. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
@@ -906,45 +418,10 @@ msgid "Tents and other"
 msgstr "Telte/byggeri og grej"
 
 #. module: campos_final_registration
-#: help:campos.event.participant,group_country_code:0
-msgid ""
-"The ISO country code in two chars.\n"
-"You can use this field for quick search."
-msgstr ""
-
-#. module: campos_final_registration
-#: help:event.registration,gear_transport:0
-msgid ""
-"The emergency management of the camp recommends that the groups use the "
-"opportunity to deliver equipment at the camp before 06:00 on 22 July, as it "
-"will not be possible to enter the campsite with vehicles not belonging to "
-"the camp, cf. the camps traffic policy."
-msgstr ""
-"Lejrens beredskab anbefaler at grupperne benytter sig af muligheden for at "
-"aflevere udstyr på lejren inden klokken 06:00 den 22. juli, da det herefter "
-"ikke vil være muligt at køre ind på lejrområdet med køretøjer der ikke "
-"tilhører lejren, jf. lejrens trafikpolitik."
-
-#. module: campos_final_registration
-#: sql_constraint:campos.event.participant.day:0
-msgid "The tag name has to be unique!"
-msgstr ""
-
-#. module: campos_final_registration
 #: view:event.registration:campos_final_registration.view_form_finalregistration_admin
 #: view:event.registration:campos_final_registration.view_form_finalregistration_gl
 msgid "Total"
 msgstr "Total"
-
-#. module: campos_final_registration
-#: field:event.registration,total_price:0
-msgid "Total Price"
-msgstr "Total deltager pris"
-
-#. module: campos_final_registration
-#: field:event.registration,glofo_co2_amount_total:0
-msgid "Total amount of CO2 (in grams)"
-msgstr "Totalt forbrug (CO2 (i gram)"
 
 #. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
@@ -963,34 +440,6 @@ msgid "Un-check all days"
 msgstr "Fjern markering fra alle dage"
 
 #. module: campos_final_registration
-#: field:event.registration,child_certificates_user:0
-msgid "User signing declaration"
-msgstr "Den der har indsendt erklæringen"
-
-#. module: campos_final_registration
-#: field:campos.event.participant,visa_required:0
-msgid "Visa Required"
-msgstr "Visa påkrævet"
-
-#. module: campos_final_registration
 #: view:campos.event.participant:campos_final_registration.view_form_finalregistration_participant
 msgid "Wednesday to Sunday"
 msgstr "Onsdag til Søndag"
-
-#. module: campos_final_registration
-#: help:event.registration,number_gas_burners:0
-msgid ""
-"When using a gas blower, place the burner on non-combustible material in a "
-"size dimensioned according to the size of the gas flue. There may be only 1 "
-"gas bottle in connection with each gas blow. The gas bottle must not exceed "
-"11 kg. There may be 1 extra gas bottle of max. 11 kg on each campsite. "
-"Excess gas bottles must be stored in another location, according to the "
-"instructions given by the emergency department."
-msgstr ""
-"Ved brug af gasblus skal brænderen placeres på ikke brændbart materiale i en størrelse der er dimensioneret efter gasblussets størrelse. Der må opbevares 1 stk. gasflaske i tilknytning til hvert gasblus. Gasflasken må maksimalt være på 11 kg.\n"
-"Der må opbevares 1 stk. ekstra gasflaske på maksimalt 11 kg, på hver lejrplads. Overskydende gasflasker skal opbevares på en anden lokalitet, efter beredskabets anvisninger"
-
-#. module: campos_final_registration
-#: field:campos.event.participant.day,will_participate:0
-msgid "Will participate this day?"
-msgstr "Vil deltage på denne dag"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-05 11:54+0000\n"
-"PO-Revision-Date: 2017-07-05 11:54+0000\n"
+"POT-Creation-Date: 2017-08-12 13:48+0000\n"
+"PO-Revision-Date: 2017-08-12 13:48+0000\n"
 "Last-Translator: christian Eggert Jørgensen <christian@eggert.dk>, 2016\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -84,36 +84,9 @@ msgid "Additional info neede for CKR Attest"
 msgstr "Vi har brug for yderligere oplysninger til børneattest"
 
 #. module: campos_ckr
-#: field:campos.ckr.check,appr_date:0
-msgid "Approval date"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
-#: selection:campos.ckr.check,state:0
 msgid "Approved"
 msgstr "Godkendt"
-
-#. module: campos_ckr
-#: field:campos.ckr.check,appr_user_id:0
-msgid "Approved by"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,birthdate_short:0
-#: field:campos.ckr.fetch.wiz,birthdate_short:0
-msgid "Birthdate short"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.event.participant,ckr_ids:0
-msgid "CKR"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.event.participant,ckr_active_id:0
-msgid "CKR (Active)"
-msgstr ""
 
 #. module: campos_ckr
 #: model:res.groups,name:campos_ckr.group_campos_ckr_admin
@@ -147,11 +120,6 @@ msgid "CKR Attest required. CPR number required."
 msgstr "Børneattest er nødvendig. CPR nummer skal indberettes"
 
 #. module: campos_ckr
-#: field:campos.event.participant,ckr_date_last_state_update:0
-msgid "CKR Last State change"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.committee.function:campos_ckr.campos_committee_member_search
 #: view:campos.event.participant:campos_ckr.campos_event_participant_search_view
 msgid "CKR Missing"
@@ -162,16 +130,6 @@ msgstr ""
 #: view:campos.event.participant:campos_ckr.view_event_registration_participant_form
 msgid "CKR Request"
 msgstr "Anmodning om børneattest"
-
-#. module: campos_ckr
-#: field:campos.event.participant,ckr_state:0
-msgid "CKR State"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,cpr:0 field:campos.ckr.fetch.wiz,cpr:0
-msgid "CPR"
-msgstr ""
 
 #. module: campos_ckr
 #: model:email.template,subject:campos_ckr.template_ckr_request_mail
@@ -204,70 +162,15 @@ msgid "Cancel"
 msgstr "Annuller"
 
 #. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Cancelled"
-msgstr ""
-
-#. module: campos_ckr
 #: model:ir.actions.act_window,name:campos_ckr.campos_ckr_check_act_window
 #: model:ir.ui.menu,name:campos_ckr.campos_ckr_check_menu
 msgid "Ckr Check"
 msgstr "Børneattest Check"
 
 #. module: campos_ckr
-#: field:campos.ckr.fetch.wiz,ckr_id:0
-msgid "Ckr id"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.sentin.wiz,ckr_ids:0
-msgid "Ckr ids"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
 msgid "Close"
 msgstr "Luk"
-
-#. module: campos_ckr
-#: field:campos.ckr.check,create_uid:0 field:campos.ckr.fetch.wiz,create_uid:0
-#: field:campos.ckr.sentin.wiz,create_uid:0
-msgid "Created by"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,create_date:0
-#: field:campos.ckr.fetch.wiz,create_date:0
-#: field:campos.ckr.sentin.wiz,create_date:0
-msgid "Created on"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.fetch.wiz,birthdate:0
-msgid "Date of birth"
-msgstr ""
-
-#. module: campos_ckr
-#: help:campos.ckr.check,message_last_post:0
-msgid "Date of the last message posted on the record."
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,display_name:0
-#: field:campos.ckr.fetch.wiz,display_name:0
-#: field:campos.ckr.sentin.wiz,display_name:0
-msgid "Display Name"
-msgstr ""
-
-#. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Draft"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,edit_appr_date:0
-msgid "Edit appr date"
-msgstr ""
 
 #. module: campos_ckr
 #: model:ir.model,name:campos_ckr.model_campos_event_participant
@@ -285,101 +188,14 @@ msgid "Expired/Send to Main Committee"
 msgstr "Udløbet sendt til funktionschef"
 
 #. module: campos_ckr
-#: field:campos.ckr.check,message_follower_ids:0
-msgid "Followers"
-msgstr ""
-
-#. module: campos_ckr
-#: help:campos.ckr.check,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is "
-"directly in html format in order to be inserted in kanban views."
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,id:0 field:campos.ckr.fetch.wiz,id:0
-#: field:campos.ckr.sentin.wiz,id:0
-msgid "ID"
-msgstr ""
-
-#. module: campos_ckr
-#: help:campos.ckr.check,message_unread:0
-msgid "If checked new messages require your attention."
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
 msgid "In Process"
 msgstr "Under behandling hos politiet"
 
 #. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Info Needed"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,message_is_follower:0
-msgid "Is a Follower"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,message_last_post:0
-msgid "Last Message Date"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,__last_update:0
-#: field:campos.ckr.fetch.wiz,__last_update:0
-#: field:campos.ckr.sentin.wiz,__last_update:0
-msgid "Last Modified on"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,date_last_state_update:0
-msgid "Last State change"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,write_uid:0 field:campos.ckr.fetch.wiz,write_uid:0
-#: field:campos.ckr.sentin.wiz,write_uid:0
-msgid "Last Updated by"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,write_date:0 field:campos.ckr.fetch.wiz,write_date:0
-#: field:campos.ckr.sentin.wiz,write_date:0
-msgid "Last Updated on"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,main_comm_id:0
-msgid "Main Committee"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.sentin.wiz:campos_ckr.campos_ckr_sentin_wiz_form_view
 msgid "Mark as Requested"
 msgstr "Marker som afsendt til Politiet"
-
-#. module: campos_ckr
-#: field:campos.ckr.sentin.wiz,message:0
-msgid "Message"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,message_ids:0
-msgid "Messages"
-msgstr ""
-
-#. module: campos_ckr
-#: help:campos.ckr.check,message_ids:0
-msgid "Messages and communication history"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.fetch.wiz,name:0
-msgid "Name"
-msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -392,28 +208,12 @@ msgid "Notifications"
 msgstr ""
 
 #. module: campos_ckr
-#: field:campos.ckr.check,participant_id:0
-msgid "Participant"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.fetch.wiz,participant_id:0
-msgid "Participant id"
-msgstr "Skejser nummer"
-
-#. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Re-Requested"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Re-Requested from CKR"
 msgstr "Genfremsendt til Politiet"
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
-#: selection:campos.ckr.check,state:0
 msgid "Rejected"
 msgstr "AFVIST"
 
@@ -423,16 +223,8 @@ msgid "Req. Expired"
 msgstr "Anmodning om børneattest er udløbet"
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:156
-#, python-format
-msgid "Request"
-msgstr ""
-
-#. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_event_participant.py:49
 #: view:campos.event.participant:campos_ckr.staff_event_registration_participant_form
 #: view:campos.event.participant:campos_ckr.view_event_registration_participant_form
-#, python-format
 msgid "Request CKR"
 msgstr "Anmodning om børneattest"
 
@@ -442,26 +234,9 @@ msgid "Request CKR/ Enter CPR"
 msgstr ""
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:106
-#, python-format
-msgid "Request action from Main Committee"
-msgstr ""
-
-#. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Requested"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Requested from CKR"
 msgstr "Anmodning om børneattest"
-
-#. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:100
-#, python-format
-msgid "Send mail asking for additional info"
-msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -469,40 +244,9 @@ msgid "Send to CO"
 msgstr "Send til SL2017 sekretariat"
 
 #. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Sent to CO"
-msgstr ""
-
-#. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Sent to Main Committee"
-msgstr ""
-
-#. module: campos_ckr
 #: model:ir.actions.server,name:campos_ckr.action_participant_cpr_list
 msgid "Show CPR List"
 msgstr "Vis liste over CPR-numre"
-
-#. module: campos_ckr
-#: field:campos.ckr.check,state:0
-msgid "State"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,message_summary:0
-msgid "Summary"
-msgstr ""
-
-#. module: campos_ckr
-#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:51
-#, python-format
-msgid "Thank you"
-msgstr ""
-
-#. module: campos_ckr
-#: selection:campos.ckr.check,state:0
-msgid "Timeout"
-msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_search_view
@@ -510,32 +254,11 @@ msgid "To Request at Central office"
 msgstr "Ikke fremsendte børneattester"
 
 #. module: campos_ckr
-#: code:addons/campos_ckr/models/campos_ckr_check.py:197
-#, python-format
-msgid "Unknown"
-msgstr ""
-
-#. module: campos_ckr
-#: field:campos.ckr.check,message_unread:0
-msgid "Unread Messages"
-msgstr ""
-
-#. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
 msgid "Use the \"Send to CO\" button to submit the CKR check request."
 msgstr ""
 "Anvend send til \"send til sl2017 sekretariatet\"  knappen for at sende en "
 "børneattest anmodning"
-
-#. module: campos_ckr
-#: field:campos.ckr.check,website_message_ids:0
-msgid "Website Messages"
-msgstr ""
-
-#. module: campos_ckr
-#: help:campos.ckr.check,website_message_ids:0
-msgid "Website communication history"
-msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.check:campos_ckr.campos_ckr_check_form_view
@@ -553,14 +276,6 @@ msgid ""
 msgstr ""
 "Du bliver nødt til at indberette din fødselsdato for at kunne afslutte "
 "børneattest anmodningen"
-
-#. module: campos_ckr
-#: code:addons/campos_ckr/wizards/campos_ckr_fetch_wiz.py:51
-#, python-format
-msgid ""
-"Your CKR request will be processed and you can expect a message in E-Boks "
-"soon."
-msgstr ""
 
 #. module: campos_ckr
 #: view:campos.ckr.fetch.wiz:campos_ckr.campos_ckr_fetch_wiz_form_view

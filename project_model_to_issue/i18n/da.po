@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:39+0000\n"
-"PO-Revision-Date: 2017-05-08 14:39+0000\n"
+"POT-Creation-Date: 2017-08-12 13:48+0000\n"
+"PO-Revision-Date: 2017-08-12 13:48+0000\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,42 +16,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: project_model_to_issue
-#: field:project.issue,action_id:0
-msgid "Action"
-msgstr ""
-
-#. module: project_model_to_issue
-#: help:project.issue,action_id:0
-msgid "Action called to go to the original window."
-msgstr ""
-
-#. module: project_model_to_issue
-#: code:addons/project_model_to_issue/action.py:35
-#, python-format
-msgid "Create a related issue"
-msgstr ""
-
-#. module: project_model_to_issue
-#: code:addons/project_model_to_issue/project.py:70
-#, python-format
-msgid ""
-"Field 'Issue Origin' is not set.\n"
-"Impossible to go to the original document."
-msgstr ""
-
-#. module: project_model_to_issue
 #: view:project.issue:project_model_to_issue.view_issue_form2
 msgid "Go to the window from which the issue has been defined."
-msgstr ""
-
-#. module: project_model_to_issue
-#: field:project.issue,issue_origin:0
-msgid "Issue origin"
-msgstr ""
-
-#. module: project_model_to_issue
-#: field:project.issue,model_reference:0
-msgid "Model reference"
 msgstr ""
 
 #. module: project_model_to_issue
