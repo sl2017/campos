@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<report id="report_group_participants" string="Group Participant Report" model="event.registration"
+			report_type="qweb-pdf" name="campos_fee.report_group_participants_template" />
+			
+
+		<template id="report_group_participants_template">
+			<t t-call="report.html_container">
+			 
+				<t t-foreach="doc_ids" t-as="doc_id">
+					<t
+						t-raw="translate_doc(doc_id, doc_model,
+							 				'partner_id.lang',
+							 				'campos_fee.report_group_participants_detail_template')" />
+				</t>
+			</t>
+		</template>
+		
+		
+	
+		<template id="campos_fee.report_group_participants_detail_template">
+				<t t-call="report.external_layout">
+					<div class="page">
+						<div class="row">
+							<div class="col-xs-5 col-xs-offset-7">
+								<address t-field="o.partner_id"
+									t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+								<p><strong>Printed at: </strong>
+	                            <span t-esc="time.strftime('%Y-%m-%d')"/> 
+	                            <span t-esc="time.strftime('%H:%M')"/></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<h2 class="text-center">Deltagerliste <span t-field="o.partner_id.name"/></h2>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Navn</th>
+										<th>Lejrperiode</th>
+										<th>Lejrdøgn</th>
+										<th>Deltager betaling</th>
+										<th>Lejrpladsleje</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<t t-foreach="o.participant_ids" t-as="par">
+										<t t-if="par.rent_product_id">
+											<tr>
+												<td>
+													<span t-field="par.name" />
+												</td>
+												
+												<td>
+													<span t-field="par.firstcampdate" /> - <span t-field="par.firstcampdate" /> 
+												</td>
+												<td class="text-right">
+													<span t-field="par.nights" />
+												</td>
+												<td class="text-right">
+													<span t-field="par.camp_price" />
+												</td>
+												<td class="text-right">
+													<span t-field="par.rent_price" />
+												</td>
+												<td>
+												
+												</td>
+											</tr>
+										</t>
+									</t>
+									
+											<tr>
+												<td>
+													
+												</td>
+												
+												<td>
+													 
+												</td>
+												<td class="text-right">
+													<span t-field="o.rent_nights" />
+												</td>
+												<td class="text-right">
+													<span t-field="o.fee_participants" />
+												</td>
+												<td class="text-right">
+													<span t-field="0.rent_total" />
+												</td>
+												<td>
+												
+												</td>
+											</tr>
+											
+								</tbody>
+							</table>
+							
+									
+				</div>
+					</div>
+				</t>
+		</template>
+	</data>
+</openerp>
+		
