@@ -89,7 +89,7 @@
 													<span t-field="o.fee_participants" />
 												</td>
 												<td class="text-right">
-													<span t-field="0.rent_total" />
+													<span t-field="o.rent_total" />
 												</td>
 												<td>
 												
