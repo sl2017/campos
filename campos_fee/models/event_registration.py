@@ -50,6 +50,9 @@ class EventRegistration(models.Model):
     ssreg_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Snapshot')
     ssreginv_ids = fields.One2many('campos.fee.ss.registration', 'registration_id', 'Invoices', domain=[('invoice_id', '!=', False), ('invoice_id.state', 'in', ['open','paid'])])
     cmp_currency_id = fields.Many2one(related='event_id.company_id.currency_id', readonly=True)
+    rent_participants = fields.Integer('Number of participants (Campsite Rent)', compute='_compute_fees', compute_sudo=True)
+    rent_nights = fields.Integer('Number of Nigths (Campsite Rent)', compute='_compute_fees', compute_sudo=True)
+    rent_total = fields.Float('Total Campsite Rent', compute='_compute_fees', compute_sudo=True)
 
     @api.multi
     @api.depends('participant_ids', 'participant_ids.state', 'participant_ids.staff', 'jobber_accomodation_ids')
@@ -60,6 +63,9 @@ class EventRegistration(models.Model):
             fee_transport = 0.0
             number_participants = 0
             number_accomondations = 0
+            rent_participants = 0
+            rent_nights = 0
+            rent_total = 0.0
             if self.env.uid == SUPERUSER_ID:
                 pars = reg.participant_ids.filtered(lambda r: r.state not in ['cancel', 'deregistered'])
             else:
@@ -69,6 +75,9 @@ class EventRegistration(models.Model):
                     fee_participants += par.camp_price
                     fee_transport += par.transport_price_total
                     number_participants += 1
+                    rent_participants += 1
+                    rent_nights += par.nights
+                    rent_total += par.rent_price
                 if not par.staff:
                     number_accomondations += 1
             number_accomondations += len(reg.jobber_accomodation_ids)
@@ -77,6 +86,9 @@ class EventRegistration(models.Model):
             reg.number_participants = number_participants
             reg.number_participants_stored = number_participants
             reg.number_accomondations = number_accomondations
+            reg.rent_participants = rent_participants
+            reg.rent_nights = rent_nights
+            reg.rent_total = rent_total
             _logger.info('Calc # %d %s', number_participants, reg.name)
             so_cost = 0.0
             if self.env.uid == SUPERUSER_ID:

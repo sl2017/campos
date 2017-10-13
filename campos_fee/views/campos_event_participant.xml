@@ -25,6 +25,8 @@
 		            	<field name="transport_price" nolabel="1"/>
 		            	<field name="transport_price_total"/>
 		            	<field name="camp_price_total"/>
+		            	<field name="rent_product_id"/>
+		            	<field name="rent_price"/>
 	            	</group>
             	</page>
             	<page string="Snapshots" groups="campos_event.group_campos_admin">
