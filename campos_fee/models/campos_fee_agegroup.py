@@ -14,6 +14,7 @@ class CamposFeeAgegroup(models.Model):
     template_id = fields.Many2one('product.template', 'Camp Fee Product')
     transport_tmpl_id = fields.Many2one('product.template', 'Transport Product')
     transport_incl = fields.Boolean('Transport included')
+    rent_template_id = fields.Many2one('product.template', 'Campsite rent Product')
     birthdate_from = fields.Date('Brithdate From')
     birthdate_to = fields.Date('Brithdate To')
     default_group = fields.Boolean('Default Agegroup', help='Used when birthdate is unknown or outside intervals')
