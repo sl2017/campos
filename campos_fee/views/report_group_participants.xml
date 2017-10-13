@@ -58,7 +58,7 @@
 												</td>
 												
 												<td>
-													<span t-field="par.firstcampdate" /> - <span t-field="par.firstcampdate" /> 
+													<span t-field="par.firstcampdate" /> - <span t-field="par.lastcampdate" /> 
 												</td>
 												<td class="text-right">
 													<span t-field="par.nights" />
