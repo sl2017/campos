@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 13:48+0000\n"
-"PO-Revision-Date: 2017-08-12 13:48+0000\n"
+"POT-Creation-Date: 2017-10-15 02:00+0000\n"
+"PO-Revision-Date: 2017-10-15 02:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -124,6 +124,16 @@ msgid "DK Kommuner"
 msgstr ""
 
 #. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Deltager betaling"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Deltagerliste"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_108
 msgid "Dragør"
 msgstr ""
@@ -226,6 +236,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_125
 msgid "Gribskov"
+msgstr ""
+
+#. module: campos_fee
+#: model:ir.actions.report.xml,name:campos_fee.report_group_participants
+msgid "Group Participant Report"
 msgstr ""
 
 #. module: campos_fee
@@ -368,8 +383,23 @@ msgid "Langeland"
 msgstr ""
 
 #. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrdøgn"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_149
 msgid "Lejre"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrperiode"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrpladsleje"
 msgstr ""
 
 #. module: campos_fee
@@ -410,6 +440,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_156
 msgid "Morsø"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Navn"
 msgstr ""
 
 #. module: campos_fee
@@ -470,6 +505,11 @@ msgstr ""
 #: view:event.registration:campos_fee.view_form_finalregistration_gl
 #: model:ir.ui.menu,name:campos_fee.campos_fee_ss_participant_menu
 msgid "Participants"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Printed at:"
 msgstr ""
 
 #. module: campos_fee
