@@ -74,7 +74,7 @@ class CamposEventParticipant(models.Model):
                         par.camp_product_id = pp_id[0]
                         camp_price = pp_id[0].lst_price
                         
-                    if not par.no_invoicing:
+                    if not par.sudo().no_invoicing:
                         if self.env.uid == SUPERUSER_ID:
                             pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.rent_template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
                         else:    
