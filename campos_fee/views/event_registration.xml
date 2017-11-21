@@ -30,6 +30,7 @@
             			<field name="ssreginv_ids" readonly="1" nolabel="1">
             				<tree>
             					<field name="create_date" string="Snapshot"/>
+            					<field name="inv_type">
             					<field name="invoice_id" options="{'no_open': True}"/>
             					<field name="inv_currency_id"/>
             					<field name="inv_amount_total"/>
@@ -128,6 +129,7 @@
             			<field name="ssreginv_ids" readonly="1" nolabel="1">
             				<tree>
             					<field name="create_date" string="Snapshot"/>
+            					<field name="inv_type"/>
             					<field name="invoice_id" options="{'no_open': True}"/>
             					<field name="inv_currency_id"/>
             					<field name="inv_amount_total"/>
@@ -151,6 +153,7 @@
 									</page>
 									<page string="Invoice">
 										<group>
+											<field name="inv_type"/>
 											<field name="invoice_id" options="{'no_create': True, 'no_open': True}"/>
 											<field name="inv_date"/>
 										</group>
