@@ -85,6 +85,9 @@
 												<td>
 													 
 												</td>
+												<td>
+													 
+												</td>
 												<td class="text-right">
 													<span t-field="o.rent_nights" />
 												</td>
