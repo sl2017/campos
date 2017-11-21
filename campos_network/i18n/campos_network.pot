@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 13:48+0000\n"
-"PO-Revision-Date: 2017-08-12 13:48+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,230 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "01"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "02"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "03"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "04"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "05"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "06"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "07"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "08"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "09"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "10"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "11"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "12"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "13"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "14"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "15"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "16"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "17"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "18"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "19"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "20"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "21"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "22"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "23"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "24"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "25"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "26"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "27"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "28"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "29"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "30"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_day:0
+#: selection:model.network,network_last_day:0
+#: selection:model.network,network_usage_day:0
+msgid "31"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Afvis ansøgning"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_state:0
+msgid "Afvist"
 msgstr ""
 
 #. module: campos_network
@@ -32,7 +254,13 @@ msgstr ""
 
 #. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
+#: field:model.network,network_connection_amount:0
 msgid "Antal kablet forbindelser"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_usage:0
+msgid "Anvendelse"
 msgstr ""
 
 #. module: campos_network
@@ -41,7 +269,20 @@ msgid "Anvendelse*"
 msgstr ""
 
 #. module: campos_network
+#: selection:model.network,network_delivery_month:0
+#: selection:model.network,network_last_month:0
+#: selection:model.network,network_usage_month:0
+msgid "August"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_connection:0
+msgid "Begge"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
+#: selection:model.network,network_state:0
 msgid "Behandles"
 msgstr ""
 
@@ -56,13 +297,39 @@ msgid "Bestil netværk"
 msgstr ""
 
 #. module: campos_network
+#: selection:model.network,network_state:0
+msgid "Bestilt"
+msgstr ""
+
+#. module: campos_network
 #: model:ir.model,name:campos_network.model_campos_committee
+#: field:model.network,network_committee_id:0
 msgid "Committee"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,create_date:0
+msgid "Created on"
 msgstr ""
 
 #. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Dag:"
+msgstr ""
+
+#. module: campos_network
+#: help:model.network,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,display_name:0
+msgid "Display Name"
 msgstr ""
 
 #. module: campos_network
@@ -81,6 +348,16 @@ msgid "Eventuelle bemærkninger"
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,network_other:0
+msgid "Evt. bemærkninger"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Forbindelse*"
 msgstr ""
@@ -88,6 +365,16 @@ msgstr ""
 #. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Godkend ansøgning"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_state:0
+msgid "Godkendt"
+msgstr ""
+
+#. module: campos_network
+#: help:model.network,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: campos_network
@@ -116,8 +403,47 @@ msgid "Hvornår skal netværket bruges?"
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Ibrugtagelse"
+msgstr ""
+
+#. module: campos_network
+#: help:model.network,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_month:0
+#: selection:model.network,network_last_month:0
+#: selection:model.network,network_usage_month:0
+msgid "Juli"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_month:0
+#: selection:model.network,network_last_month:0
+#: selection:model.network,network_usage_month:0
+msgid "Juni"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_connection:0
+msgid "Kablet"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_state:0
+msgid "Kladde"
 msgstr ""
 
 #. module: campos_network
@@ -131,6 +457,31 @@ msgid "Klik nu på sigtekorns-ikonet i menuen til højre."
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_lat:0
+msgid "Latitude/breddegrad"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Latitude/breddegrad*"
 msgstr ""
@@ -141,8 +492,30 @@ msgid "Leveringsdato"
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,network_lon:0
+msgid "Longitude/længdegrad"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Longitude/længdegrad*"
+msgstr ""
+
+#. module: campos_network
+#: selection:model.network,network_delivery_month:0
+#: selection:model.network,network_last_month:0
+#: selection:model.network,network_usage_month:0
+msgid "Maj"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: campos_network
+#: help:model.network,message_ids:0
+msgid "Messages and communication history"
 msgstr ""
 
 #. module: campos_network
@@ -166,6 +539,46 @@ msgid "Network Group"
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,network_connection:0
+msgid "Network connection"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_delivery_day:0
+msgid "Network delivery day"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_delivery_month:0
+msgid "Network delivery month"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_last_day:0
+msgid "Network last day"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_last_month:0
+msgid "Network last month"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_state:0
+msgid "Network state"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_usage_day:0
+msgid "Network usage day"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_usage_month:0
+msgid "Network usage month"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Notér koordinaterne i felterne under kortet"
 msgstr ""
@@ -173,6 +586,11 @@ msgstr ""
 #. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Opret ansøgning"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,network_participant_id:0
+msgid "Participant"
 msgstr ""
 
 #. module: campos_network
@@ -191,13 +609,38 @@ msgid "Start med at zoome ind på kort og find det sted du skal bruge netværk."
 msgstr ""
 
 #. module: campos_network
+#: field:model.network,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Sådan finder du koordinaterne"
 msgstr ""
 
 #. module: campos_network
+#: selection:model.network,network_connection:0
+msgid "Trådløs"
+msgstr ""
+
+#. module: campos_network
 #: view:model.network:campos_network.view_form_network_create
 msgid "Udvald"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_network
+#: field:model.network,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: campos_network
+#: help:model.network,website_message_ids:0
+msgid "Website communication history"
 msgstr ""
 
 #. module: campos_network

@@ -6,14 +6,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 13:47+0000\n"
-"PO-Revision-Date: 2017-08-12 13:47+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,act_id:0
+msgid "1. Select Activity"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,act_ins_id:0
+msgid "2. Select Period"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,seats:0
+msgid "3. Reserve Seats"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,par_signup_ids:0
+msgid "4. Signup participants"
+msgstr ""
 
 #. module: campos_activity
 #: view:campos.activity.instanse:campos_activity.campos_activity_instanse_calendar_view
@@ -28,7 +48,18 @@ msgid "Activities"
 msgstr ""
 
 #. module: campos_activity
+#: code:addons/campos_activity/models/campos_event_participant.py:46
+#: code:addons/campos_activity/models/event_registration.py:36
+#, python-format
+msgid "Activities for %s"
+msgstr ""
+
+#. module: campos_activity
 #: view:campos.activity.instanse:campos_activity.campos_activity_instanse_form_view
+#: field:campos.activity.instanse,activity_id:0
+#: field:campos.activity.mass.signup.wiz,act_ins_id:0
+#: field:campos.activity.ticket,act_ins_id:0
+#: field:campos.activity.ticket,activity_id:0
 #: model:ir.ui.menu,name:campos_activity.campos_activity_activity_menu
 msgid "Activity"
 msgstr ""
@@ -66,11 +97,93 @@ msgid "Activity Ticket"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.event.participant,ticket_ids:0
+msgid "Activity Tickets"
+msgstr ""
+
+#. module: campos_activity
+#: field:event.registration,ticket_ids:0
+msgid "Activity tickets"
+msgstr ""
+
+#. module: campos_activity
 #: view:campos.event.participant:campos_activity.campos_event_participant_form_view
 #: view:campos.event.participant:campos_activity.campos_event_participant_staff_form_view
 #: view:campos.event.participant:campos_activity.view_event_registration_participant_form
 #: view:event.registration:campos_activity.event_registration_form_view
 msgid "Add Activity"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:130
+#, python-format
+msgid "Add participants"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.members,camp_age:0
+msgid "Age (On Camp)"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,age_from:0
+#: field:campos.activity.mass.signup.wiz,age_from:0
+#: field:campos.activity.signup.wiz,age_from:0
+msgid "Age from"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,age_to:0
+#: field:campos.activity.mass.signup.wiz,age_to:0
+#: field:campos.activity.signup.wiz,age_to:0
+msgid "Age to"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,allow_edit:0
+msgid "Allow edit"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,state:0
+msgid "At risk of cancellation due to weather conditions"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,audience_ids:0
+#: field:campos.activity.signup.wiz,audience_ids:0
+msgid "Audience"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_available:0
+#: field:campos.activity.signup.wiz,seats_available:0
+msgid "Available Seats"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "Booked"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking:0
+msgid "Booking"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking_date_end:0
+msgid "Booking closes"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,booking_date_begin:0
+msgid "Booking opens"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Booking required"
 msgstr ""
 
 #. module: campos_activity
@@ -157,13 +270,136 @@ msgid "Cancel ticket"
 msgstr ""
 
 #. module: campos_activity
+#: selection:campos.activity.activity,state:0
+#: selection:campos.activity.instanse,state:0
+#: selection:campos.activity.ticket,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,state:0
+msgid "Cancelled due to weather"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,code:0
+#: field:campos.activity.instanse,act_code:0
+#: field:campos.activity.location,code:0
+msgid "Code"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,committee_id:0
+msgid "Committee"
+msgstr ""
+
+#. module: campos_activity
 #: model:ir.ui.menu,name:campos_activity.submenu_campos_config
 msgid "Configuration"
 msgstr ""
 
 #. module: campos_activity
+#: selection:campos.activity.activity,state:0
+msgid "Confirmed"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,create_uid:0
+#: field:campos.activity.audience,create_uid:0
+#: field:campos.activity.instanse,create_uid:0
+#: field:campos.activity.location,create_uid:0
+#: field:campos.activity.mass.signup.wiz,create_uid:0
+#: field:campos.activity.period,create_uid:0
+#: field:campos.activity.pitag,create_uid:0
+#: field:campos.activity.signup.members,create_uid:0
+#: field:campos.activity.signup.wiz,create_uid:0
+#: field:campos.activity.tag,create_uid:0
+#: field:campos.activity.ticket,create_uid:0
+#: field:campos.activity.type,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,create_date:0
+#: field:campos.activity.audience,create_date:0
+#: field:campos.activity.instanse,create_date:0
+#: field:campos.activity.location,create_date:0
+#: field:campos.activity.mass.signup.wiz,create_date:0
+#: field:campos.activity.period,create_date:0
+#: field:campos.activity.pitag,create_date:0
+#: field:campos.activity.signup.members,create_date:0
+#: field:campos.activity.signup.wiz,create_date:0
+#: field:campos.activity.tag,create_date:0
+#: field:campos.activity.ticket,create_date:0
+#: field:campos.activity.type,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_last_post:0
+#: help:campos.activity.instanse,message_last_post:0
+#: help:campos.activity.ticket,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,desc:0
+#: field:campos.activity.ticket,act_desc:0
+msgid "Description"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,display_name:0
+#: field:campos.activity.audience,display_name:0
+#: field:campos.activity.instanse,display_name:0
+#: field:campos.activity.location,display_name:0
+#: field:campos.activity.mass.signup.wiz,display_name:0
+#: field:campos.activity.period,display_name:0
+#: field:campos.activity.pitag,display_name:0
+#: field:campos.activity.signup.members,display_name:0
+#: field:campos.activity.signup.wiz,display_name:0
+#: field:campos.activity.tag,display_name:0
+#: field:campos.activity.ticket,display_name:0
+#: field:campos.activity.type,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Drop In"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Dropin at time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,duration:0
+msgid "Duration"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:197
+#, python-format
+msgid "Edit participants"
+msgstr ""
+
+#. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_form_view2
 msgid "Edit ticket"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,actins_date_end:0
+#: field:campos.activity.period,date_end:0
+#: field:campos.activity.ticket,actins_date_end:0
+msgid "End Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,equipment:0
+msgid "Equipment"
 msgstr ""
 
 #. module: campos_activity
@@ -177,14 +413,358 @@ msgid "Event Registration"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.activity,message_follower_ids:0
+#: field:campos.activity.instanse,message_follower_ids:0
+#: field:campos.activity.ticket,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.location,latitude:0
+msgid "Geo Latitude"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.location,longitude:0
+msgid "Geo Longitude"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,has_image:0
+msgid "Ha Image"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_hard:0
+msgid "Hard limit"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_summary:0
+#: help:campos.activity.instanse,message_summary:0
+#: help:campos.activity.ticket,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,id:0
+#: field:campos.activity.audience,id:0
+#: field:campos.activity.instanse,id:0
+#: field:campos.activity.location,id:0
+#: field:campos.activity.mass.signup.wiz,id:0
+#: field:campos.activity.period,id:0
+#: field:campos.activity.pitag,id:0
+#: field:campos.activity.signup.members,id:0
+#: field:campos.activity.signup.wiz,id:0
+#: field:campos.activity.tag,id:0
+#: field:campos.activity.ticket,id:0
+#: field:campos.activity.type,id:0
+msgid "ID"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,state:0
+msgid "Idea"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_unread:0
+#: help:campos.activity.instanse,message_unread:0
+#: help:campos.activity.ticket,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image:0
+msgid "Image"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_filename:0
+msgid "Image Filename"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,act_ins_ids:0
+msgid "Instanses"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,comment:0
+msgid "Internal Note"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_is_follower:0
+#: field:campos.activity.instanse,message_is_follower:0
+#: field:campos.activity.ticket,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Joint arrangement"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_last_post:0
+#: field:campos.activity.instanse,message_last_post:0
+#: field:campos.activity.ticket,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,__last_update:0
+#: field:campos.activity.audience,__last_update:0
+#: field:campos.activity.instanse,__last_update:0
+#: field:campos.activity.location,__last_update:0
+#: field:campos.activity.mass.signup.wiz,__last_update:0
+#: field:campos.activity.period,__last_update:0
+#: field:campos.activity.pitag,__last_update:0
+#: field:campos.activity.signup.members,__last_update:0
+#: field:campos.activity.signup.wiz,__last_update:0
+#: field:campos.activity.tag,__last_update:0
+#: field:campos.activity.ticket,__last_update:0
+#: field:campos.activity.type,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,write_uid:0
+#: field:campos.activity.audience,write_uid:0
+#: field:campos.activity.instanse,write_uid:0
+#: field:campos.activity.location,write_uid:0
+#: field:campos.activity.mass.signup.wiz,write_uid:0
+#: field:campos.activity.period,write_uid:0
+#: field:campos.activity.pitag,write_uid:0
+#: field:campos.activity.signup.members,write_uid:0
+#: field:campos.activity.signup.wiz,write_uid:0
+#: field:campos.activity.tag,write_uid:0
+#: field:campos.activity.ticket,write_uid:0
+#: field:campos.activity.type,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,write_date:0
+#: field:campos.activity.audience,write_date:0
+#: field:campos.activity.instanse,write_date:0
+#: field:campos.activity.location,write_date:0
+#: field:campos.activity.mass.signup.wiz,write_date:0
+#: field:campos.activity.period,write_date:0
+#: field:campos.activity.pitag,write_date:0
+#: field:campos.activity.signup.members,write_date:0
+#: field:campos.activity.signup.wiz,write_date:0
+#: field:campos.activity.tag,write_date:0
+#: field:campos.activity.ticket,write_date:0
+#: field:campos.activity.type,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.event.participant,last_import:0
+msgid "Last import"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,leader_req:0
+msgid "Leader req"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_max:0
+msgid "Maximum Avalaible Seats"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_medium:0
+msgid "Medium-sized image"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,image_medium:0
+msgid "Medium-sized image of this activity. It is automatically resized as a 128x128px image, with aspect ratio preserved. Use this field in form views or some kanban views."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_ids:0
+#: field:campos.activity.instanse,message_ids:0
+#: field:campos.activity.ticket,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,message_ids:0
+#: help:campos.activity.instanse,message_ids:0
+#: help:campos.activity.ticket,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,name:0
+#: field:campos.activity.audience,name:0
+#: field:campos.activity.instanse,name:0
+#: field:campos.activity.location,name:0
+#: field:campos.activity.period,name:0
+#: field:campos.activity.pitag,name:0
+#: field:campos.activity.signup.members,name:0
+#: field:campos.activity.tag,name:0
+#: field:campos.activity.type,name:0
+msgid "Name"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/models/campos_event_participant.py:27
+#: code:addons/campos_activity/models/event_registration.py:19
+#, python-format
+msgid "New activity signup for: %s"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:66
+#, python-format
+msgid "No seats available for selected period!"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_used:0
+msgid "Number of Participations"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,state:0
+msgid "Open"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.members,own_note:0
+#: field:campos.activity.signup.wiz,name:0
+#: field:campos.activity.ticket,name:0
+msgid "Own Note"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,pitag_ids:0
+msgid "PI Tags"
+msgstr ""
+
+#. module: campos_activity
 #: model:ir.actions.act_window,name:campos_activity.campos_activity_pitag_act_window
 #: model:ir.ui.menu,name:campos_activity.campos_activity_pitag_menu
 msgid "PI Track"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.ticket,par_ids:0
+msgid "Participants"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.members,par_id:0
+msgid "Participation"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,period_id:0
+msgid "Period"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.activity,state:0
+msgid "Planning"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.instanse,booking:0
+msgid "Pre Camp Booking Required"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.members,reg_id:0
+msgid "Registration"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.mass.signup.wiz,reg_ids:0
+msgid "Registrations"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.event.participant,remote_link_id:0
+msgid "Remote System link ID"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.event.participant,remote_ext_id:0
+msgid "Remote system external ID"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.event.participant,remote_system_id:0
+msgid "Remote system id"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.event.participant,remote_int_id:0
+msgid "Remote system internal ID"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "Reservation Expired"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.ticket,state:0
+msgid "Reserved"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,reserved_time:0
+msgid "Reserved Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,seats_reserved:0
+#: field:campos.activity.signup.wiz,seats_reserved:0
+msgid "Reserved Seats"
+msgstr ""
+
+#. module: campos_activity
 #: view:campos.activity.signup.wiz:campos_activity.campos_activity_signup_wiz_form_view
 msgid "Reserved seats not completed as a real registration will be removed after 30 minutes."
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:49
+#, python-format
+msgid "Reserved seats should be positive"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,reg_id:0
+#: field:campos.activity.ticket,reg_id:0
+msgid "Scout Group"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,seats:0
+msgid "Seats"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.signup.wiz,state:0
+msgid "Select Activity"
+msgstr ""
+
+#. module: campos_activity
+#: selection:campos.activity.signup.wiz,state:0
+msgid "Select Participants"
 msgstr ""
 
 #. module: campos_activity
@@ -201,7 +781,94 @@ msgid "Show in Calendar"
 msgstr ""
 
 #. module: campos_activity
+#: field:campos.activity.signup.wiz,par_id:0
+msgid "Single signup"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,image_small:0
+msgid "Small sized image of this activity. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field in form views or some kanban views."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,image_small:0
+msgid "Small-sized image"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:55
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:59
+#, python-format
+msgid "Sorry! No seats available"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:53
+#, python-format
+msgid "Sorry! Only %d seats available"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:57
+#, python-format
+msgid "Sorry! You can't increase the number of reserved seats. Only %d reserved"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,special_req:0
+msgid "Special Req."
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,staff_ids:0
+msgid "Staff"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.instanse,actins_date_begin:0
+#: field:campos.activity.period,date_begin:0
+#: field:campos.activity.ticket,actins_date_begin:0
+msgid "Start Date/Time"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,state:0
+#: field:campos.activity.instanse,state:0
+#: field:campos.activity.signup.wiz,state:0
+msgid "State"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_summary:0
+#: field:campos.activity.instanse,message_summary:0
+#: field:campos.activity.ticket,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,tag_ids:0
+msgid "Tags"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,teaser:0
+#: field:campos.activity.signup.wiz,teaser:0
+msgid "Teaser"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.wiz,ticket_id:0
+msgid "Ticket"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.ticket,state:0
+msgid "Ticket State"
+msgstr ""
+
+#. module: campos_activity
 #: view:campos.activity.instanse:campos_activity.campos_activity_instanse_form_view
+#: field:campos.activity.instanse,ticket_ids:0
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_calendar_view
 msgid "Tickets"
 msgstr ""
@@ -209,6 +876,74 @@ msgstr ""
 #. module: campos_activity
 #: view:campos.activity.ticket:campos_activity.campos_activity_ticket_tree_view
 msgid "Total"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,lang_ok:0
+msgid "Translation status"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,activity_type_id:0
+msgid "Type"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,message_unread:0
+#: field:campos.activity.instanse,message_unread:0
+#: field:campos.activity.ticket,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:66
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:78
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.activity,website_message_ids:0
+#: field:campos.activity.instanse,website_message_ids:0
+#: field:campos.activity.ticket,website_message_ids:0
+msgid "Website Messages"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.activity,website_message_ids:0
+#: help:campos.activity.instanse,website_message_ids:0
+#: help:campos.activity.ticket,website_message_ids:0
+msgid "Website communication history"
+msgstr ""
+
+#. module: campos_activity
+#: field:campos.activity.signup.members,wiz_id:0
+msgid "Wizard"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/wizards/campos_activity_signup_wiz.py:78
+#, python-format
+msgid "You are already booked in that period for:\n"
+"%s"
+msgstr ""
+
+#. module: campos_activity
+#: help:campos.activity.signup.wiz,name:0
+#: help:campos.activity.ticket,name:0
+msgid "You can add a Note for own use. It will be shown on activity list etc. I will NOT be read/answered by the Staff."
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/models/campos_activity_activity.py:65
+#, python-format
+msgid "You can only delete unused activities!"
+msgstr ""
+
+#. module: campos_activity
+#: code:addons/campos_activity/models/campos_activity_instanse.py:49
+#, python-format
+msgid "You can only delete unused instanse! You need to Cancel it."
 msgstr ""
 
 #. module: campos_activity
