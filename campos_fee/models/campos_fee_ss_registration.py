@@ -50,7 +50,7 @@ class CamposFeeSsRegistration(models.Model):
     inv_amount_total = fields.Float(related='invoice_id.amount_total', readonly=True)
     invoice_line = fields.One2many(related='invoice_id.invoice_line', readonly=True)
     inv_date = fields.Date(related='invoice_id.date_invoice', readonly=True)
-    inv_type = fields.Date(related='invoice_id.type', readonly=True)
+    inv_type = fields.Selection(related='invoice_id.type', readonly=True)
     audit = fields.Boolean('Audit')
     cmp_currency_id = fields.Many2one(related='registration_id.event_id.company_id.currency_id', readonly=True)
     ref_ssreg_id = fields.Many2one('campos.fee.ss.registration', 'Ref Snapshot')
