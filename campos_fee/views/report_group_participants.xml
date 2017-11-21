@@ -42,6 +42,7 @@
 								<thead>
 									<tr>
 										<th>Navn</th>
+										<th>Alder</th>
 										<th>Lejrperiode</th>
 										<th>Lejrdøgn</th>
 										<th>Deltager betaling</th>
@@ -56,7 +57,9 @@
 												<td>
 													<span t-field="par.name" />
 												</td>
-												
+												<td class="text-right">
+													<span t-field="par.camp_age" />
+												</td>
 												<td>
 													<span t-field="par.firstcampdate" /> - <span t-field="par.lastcampdate" /> 
 												</td>
