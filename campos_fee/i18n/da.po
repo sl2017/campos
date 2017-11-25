@@ -556,7 +556,7 @@ msgstr ""
 #. module: campos_fee
 #: model:ir.actions.report.xml,name:campos_fee.report_group_participants
 msgid "Group Participant Report"
-msgstr ""
+msgstr "Rapport over lejrpladsleje"
 
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_126
