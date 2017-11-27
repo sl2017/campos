@@ -37,6 +37,7 @@
         'data/product.attribute.value.csv',
         'data/campos.municipality.csv',
         'data/group_number.xml',
+        'views/report_group_participants.xml',
     ],
     'demo': [
     ],

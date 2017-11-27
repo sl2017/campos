@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CampOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-13 15:40+0000\n"
-"PO-Revision-Date: 2017-07-13 15:40+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:37+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: Danish (http://www.transifex.com/sl2017/campos/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -306,10 +306,10 @@ msgid "45 minutes"
 msgstr "45 minutter"
 
 #. module: campos_event
-#: code:addons/campos_event/controllers/main.py:441
+#: code:addons/campos_event/controllers/main.py:443
 #, python-format
 msgid "<span>Jobberpulje Signup</span>"
-msgstr "Tilmelding som  ad hoc jobbere\nKan kun bruges af lejrdeltagere der skal hjælpe lejren som jobber på lejren og har brug for ne børneattest"
+msgstr ""
 
 #. module: campos_event
 #: field:campos.committee,account:0
@@ -536,7 +536,7 @@ msgstr "Fødselsdag dd/mm/åååå"
 #. module: campos_event
 #: field:campos.event.participant,birthdate_short:0
 msgid "Birthdate short"
-msgstr "Fødselsdag kort"
+msgstr ""
 
 #. module: campos_event
 #: selection:event.track,kanban_state:0
@@ -668,7 +668,7 @@ msgstr ""
 #. module: campos_event
 #: field:campos.committee.function.type,chairman:0
 msgid "Chairman"
-msgstr "Formand"
+msgstr ""
 
 #. module: campos_event
 #: selection:campos.event.participant,state:0

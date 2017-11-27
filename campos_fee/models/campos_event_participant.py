@@ -16,7 +16,9 @@ class CamposEventParticipant(models.Model):
     nights = fields.Integer('Nights', compute='_compute_nights_product')
     transport_co = fields.Integer('Transports', compute='_compute_nights_product')
     camp_product_id = fields.Many2one('product.product', 'Camp Fee Product', compute='_compute_nights_product')
+    rent_product_id = fields.Many2one('product.product', 'Campsite Rent Product', compute='_compute_nights_product')
     camp_price = fields.Float(related='camp_product_id.lst_price', string="Camp Fee", readonly=True)
+    rent_price = fields.Float(related='rent_product_id.lst_price', string="Campsite Rent", readonly=True)
     transport_product_id = fields.Many2one('product.product', 'Transport Fee Product', compute='_compute_nights_product')
     transport_price = fields.Float(related='transport_product_id.lst_price', string="Transport Fee", readonly=True)
     transport_price_total = fields.Float("Transport Total", compute='_compute_nights_product' )
@@ -45,6 +47,7 @@ class CamposEventParticipant(models.Model):
     @api.depends('birthdate', 'camp_day_ids')
     def _compute_nights_product(self):
         for par in self:
+            par.rent_product_id = False
             if par.state not in ['deregistered','rejected']:
                 camp_price = 0.0
                 days_ids = par.camp_day_ids.filtered(lambda r: r.will_participate and r.day_id.event_period == 'maincamp')
@@ -70,6 +73,14 @@ class CamposEventParticipant(models.Model):
                     if pp_id:
                         par.camp_product_id = pp_id[0]
                         camp_price = pp_id[0].lst_price
+                        
+                    if not par.sudo().no_invoicing:
+                        if self.env.uid == SUPERUSER_ID:
+                            pp_id = self.env['product.product'].search([('product_tmpl_id', '=', par.fee_agegroup_id.rent_template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
+                        else:    
+                            pp_id = self.env['product.product'].suspend_security().search([('product_tmpl_id', '=', par.fee_agegroup_id.rent_template_id.id),('attribute_value_ids', 'in', pav_id.ids)])
+                        if pp_id:
+                            par.rent_product_id = pp_id[0]
                 transport_co = 0
                 transport_price_total = 0.0
 

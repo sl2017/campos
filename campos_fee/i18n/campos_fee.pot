@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-27 11:55+0000\n"
-"PO-Revision-Date: 2017-07-27 11:55+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid "2. rate 100% DK Groups"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:354
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:363
 #, python-format
 msgid "50% refusion after may 1"
 msgstr ""
@@ -64,6 +64,11 @@ msgstr ""
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_100
 msgid "Albertslund"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Alder"
 msgstr ""
 
 #. module: campos_fee
@@ -215,6 +220,32 @@ msgid "Campos Fee Ss Registration"
 msgstr ""
 
 #. module: campos_fee
+#: view:campos.mail.wiz:campos_fee.campos_mail_wiz_form_view
+#: model:ir.actions.act_window,name:campos_fee.campos_mail_wiz_act_window
+msgid "Campos Mail Wiz"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,rent_price:0
+msgid "Campsite Rent"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.event.participant,rent_product_id:0
+msgid "Campsite Rent Product"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.agegroup,rent_template_id:0
+msgid "Campsite rent Product"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.mail.wiz:campos_fee.campos_mail_wiz_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: campos_fee
 #: selection:campos.fee.ss.participant,payreq_state:0
 #: selection:campos.fee.ss.registration,state:0
 msgid "Cancelled"
@@ -262,7 +293,7 @@ msgid "Confirmed"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:385
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:394
 #, python-format
 msgid "Correction: %s"
 msgstr ""
@@ -288,6 +319,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,create_uid:0
 #: field:campos.fee.ss.reg.meat,create_uid:0
 #: field:campos.fee.ss.registration,create_uid:0
+#: field:campos.mail.wiz,create_uid:0
 msgid "Created by"
 msgstr ""
 
@@ -297,6 +329,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,create_date:0
 #: field:campos.fee.ss.reg.meat,create_date:0
 #: field:campos.fee.ss.registration,create_date:0
+#: field:campos.mail.wiz,create_date:0
 msgid "Created on"
 msgstr ""
 
@@ -333,6 +366,16 @@ msgid "Default Agegroup"
 msgstr ""
 
 #. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Deltager betaling"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Deltagerliste"
+msgstr ""
+
+#. module: campos_fee
 #: selection:campos.fee.ss.participant,state:0
 #: selection:campos.fee.ss.registration,state:0
 msgid "Deregistered"
@@ -344,6 +387,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,display_name:0
 #: field:campos.fee.ss.reg.meat,display_name:0
 #: field:campos.fee.ss.registration,display_name:0
+#: field:campos.mail.wiz,display_name:0
 msgid "Display Name"
 msgstr ""
 
@@ -505,6 +549,11 @@ msgid "Gribskov"
 msgstr ""
 
 #. module: campos_fee
+#: model:ir.actions.report.xml,name:campos_fee.report_group_participants
+msgid "Group Participant Report"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_126
 msgid "Guldborgsund"
 msgstr ""
@@ -590,6 +639,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,id:0
 #: field:campos.fee.ss.reg.meat,id:0
 #: field:campos.fee.ss.registration,id:0
+#: field:campos.mail.wiz,id:0
 msgid "ID"
 msgstr ""
 
@@ -632,7 +682,7 @@ msgid "Invoice Lines"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_event_participant.py:172
+#: code:addons/campos_fee/models/campos_event_participant.py:183
 #, python-format
 msgid "Invoice for %s"
 msgstr ""
@@ -702,7 +752,7 @@ msgid "Køge"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:362
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:371
 #, python-format
 msgid "LK 50% refusion after may 1"
 msgstr ""
@@ -723,6 +773,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,__last_update:0
 #: field:campos.fee.ss.reg.meat,__last_update:0
 #: field:campos.fee.ss.registration,__last_update:0
+#: field:campos.mail.wiz,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
@@ -732,6 +783,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,write_uid:0
 #: field:campos.fee.ss.reg.meat,write_uid:0
 #: field:campos.fee.ss.registration,write_uid:0
+#: field:campos.mail.wiz,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
@@ -741,6 +793,7 @@ msgstr ""
 #: field:campos.fee.ss.participant,write_date:0
 #: field:campos.fee.ss.reg.meat,write_date:0
 #: field:campos.fee.ss.registration,write_date:0
+#: field:campos.mail.wiz,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
@@ -750,8 +803,23 @@ msgid "Leave as Drafts"
 msgstr ""
 
 #. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrdøgn"
+msgstr ""
+
+#. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_149
 msgid "Lejre"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrperiode"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Lejrpladsleje"
 msgstr ""
 
 #. module: campos_fee
@@ -821,7 +889,13 @@ msgstr ""
 #: field:campos.fee.snapshot,name:0
 #: field:campos.fee.ss.participant,name:0
 #: field:campos.fee.ss.registration,name:0
+#: field:campos.mail.wiz,name:0
 msgid "Name"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Navn"
 msgstr ""
 
 #. module: campos_fee
@@ -847,25 +921,25 @@ msgid "No cancel fee"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:346
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:355
 #, python-format
 msgid "No refusion after juli 1"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:398
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:407
 #, python-format
 msgid "No refusion after may 1"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:578
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:587
 #, python-format
 msgid "No refusion after may 1: %s %.2f - %.2f"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:412
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:421
 #, python-format
 msgid "No transport refusion after may 1"
 msgstr ""
@@ -891,9 +965,19 @@ msgid "Not signed up"
 msgstr ""
 
 #. module: campos_fee
+#: field:event.registration,rent_nights:0
+msgid "Number of Nigths (Campsite Rent)"
+msgstr ""
+
+#. module: campos_fee
 #: field:campos.fee.ss.registration,number_participants:0
 #: field:event.registration,number_participants:0
 msgid "Number of participants"
+msgstr ""
+
+#. module: campos_fee
+#: field:event.registration,rent_participants:0
+msgid "Number of participants (Campsite Rent)"
 msgstr ""
 
 #. module: campos_fee
@@ -922,7 +1006,7 @@ msgid "Odsherred"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:555
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:564
 #, python-format
 msgid "Only  50%% refusion after may 1: %s %.2f - %.2f"
 msgstr ""
@@ -946,8 +1030,8 @@ msgid "Participant Snapshot"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:305
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:536
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:314
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:545
 #, python-format
 msgid "Participant fee charged on invoice %s:"
 msgstr ""
@@ -997,6 +1081,11 @@ msgstr ""
 #. module: campos_fee
 #: field:campos.fee.snapshot,ref_snapshot_id:0
 msgid "Prev invoice snapshot"
+msgstr ""
+
+#. module: campos_fee
+#: view:website:campos_fee.report_group_participants_detail_template
+msgid "Printed at:"
 msgstr ""
 
 #. module: campos_fee
@@ -1051,6 +1140,7 @@ msgid "Registration Snapshot"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.mail.wiz,reg_ids:0
 #: model:ir.ui.menu,name:campos_fee.campos_fee_ss_registration_menu
 msgid "Registrations"
 msgstr ""
@@ -1248,6 +1338,11 @@ msgid "Sønderborg"
 msgstr ""
 
 #. module: campos_fee
+#: field:campos.mail.wiz,template_id:0
+msgid "Template"
+msgstr ""
+
+#. module: campos_fee
 #: view:campos.fee.ss.registration:campos_fee.campos_fee_ss_registration_form_view
 msgid "Test invoice"
 msgstr ""
@@ -1282,6 +1377,11 @@ msgstr ""
 #: view:campos.fee.ss.participant:campos_fee.campos_fee_ss_participant_tree_view
 #: field:campos.fee.ss.registration,inv_amount_total:0
 msgid "Total"
+msgstr ""
+
+#. module: campos_fee
+#: field:event.registration,rent_total:0
+msgid "Total Campsite Rent"
 msgstr ""
 
 #. module: campos_fee
@@ -1326,7 +1426,7 @@ msgid "Transport Total"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:569
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:578
 #, python-format
 msgid "Transport fee charged on invoice %s"
 msgstr ""
@@ -1337,7 +1437,7 @@ msgid "Transport included"
 msgstr ""
 
 #. module: campos_fee
-#: code:addons/campos_fee/models/campos_fee_ss_registration.py:376
+#: code:addons/campos_fee/models/campos_fee_ss_registration.py:385
 #, python-format
 msgid "Transport on invoice %s"
 msgstr ""
@@ -1346,6 +1446,11 @@ msgstr ""
 #: field:campos.event.participant,transport_co:0
 #: field:campos.fee.ss.participant,transport_co:0
 msgid "Transports"
+msgstr ""
+
+#. module: campos_fee
+#: field:campos.fee.ss.registration,inv_type:0
+msgid "Type"
 msgstr ""
 
 #. module: campos_fee
@@ -1426,6 +1531,11 @@ msgstr ""
 #. module: campos_fee
 #: selection:campos.fee.ss.participant,state:0
 msgid "Work in Progress"
+msgstr ""
+
+#. module: campos_fee
+#: view:campos.mail.wiz:campos_fee.campos_mail_wiz_form_view
+msgid "or"
 msgstr ""
 
 #. module: campos_fee

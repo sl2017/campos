@@ -18,6 +18,7 @@ class CamposEventParticipant(models.Model):
     checkin_subcamp_id = fields.Many2one('campos.subcamp', 'Sub Camp', compute='_compute_checkin_subcamp_id', store=True)
     not_invoiced = fields.Boolean('Not invoiced', compute='compute_checkin')
     firstcampdate = fields.Date('First Camp Date', compute='_compute_firstcampdate', store=True)
+    lastcampdate = fields.Date('Last Camp Date', compute='_compute_lastcampdate', store=True)
  
     @api.multi
     #@api.depends()
@@ -123,7 +124,21 @@ class CamposEventParticipant(models.Model):
             pat = self.browse(pat_id)
             pat.firstcampdate = firstcampdate
        
-
+    @api.multi
+    @api.depends('camp_day_ids.will_participate','camp_day_ids.the_date')
+    def _compute_lastcampdate(self):
+        where_params = [tuple(self.ids)]
+        self._cr.execute("""SELECT 
+                                participant_id as pat_id, 
+                                max(the_date) as lastcampdate
+                            FROM campos_event_participant_day d
+                            WHERE d.will_participate = 't' and participant_id in %s
+                            GROUP BY participant_id;
+                      """, where_params)
+        for pat_id, lastcampdate in self._cr.fetchall():
+            pat = self.browse(pat_id)
+            pat.lastcampdate = lastcampdate
+    
     @api.multi
     def action_checkin(self):
         self.ensure_one()

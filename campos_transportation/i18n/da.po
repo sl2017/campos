@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 22:04+0000\n"
-"PO-Revision-Date: 2017-07-15 22:04+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Last-Translator: Jesper Darum <jda@sl2017.dk>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -320,7 +320,7 @@ msgstr "Tilføj/ret deltagere"
 #: field:campos.webtourusneed.ticketsparticipant,address:0
 #: field:event.registration.entryexitpoint,address:0
 msgid "Address"
-msgstr "Adresse"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.usgroup,alias:0
@@ -359,7 +359,7 @@ msgstr ""
 #. module: campos_transportation
 #: field:event.registration,arrival_ids:0
 msgid "Arrivals"
-msgstr "Ankomst"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
@@ -374,14 +374,14 @@ msgstr "Busbillet"
 #: field:campos.webtourusneed.tickets.sent,busterminaldate:0
 #: field:campos.webtourusneed.ticketsparticipant,busterminaldate:0
 msgid "Busterminal Date"
-msgstr "Busterminal Dato"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,busterminaltime:0
 #: field:campos.webtourusneed.tickets.sent,busterminaltime:0
 #: field:campos.webtourusneed.ticketsparticipant,busterminaltime:0
 msgid "Busterminal Time"
-msgstr "Busterminal Tid"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -393,7 +393,7 @@ msgstr "Med tog"
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "CANNOT BE CANCELED"
-msgstr "Kan ikke afmeldes"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
@@ -688,7 +688,7 @@ msgstr "(fly) forbindelse"
 #: field:campos.webtourusneed,travelneed_travelconnectiondetails:0
 #: field:event.registration.travelneed,travelconnectiondetails:0
 msgid "Connection Details"
-msgstr "(fly) forbindelse"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,create_uid:0
@@ -725,7 +725,7 @@ msgstr ""
 #: field:event.registration.campos.arrivaldeparture,create_uid:0
 #: field:event.registration.travelneed,create_uid:0
 msgid "Created by"
-msgstr "Oprettet af"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.bstour,create_date:0
@@ -748,13 +748,13 @@ msgstr "Oprettet af"
 #: field:event.registration.campos.arrivaldeparture,create_date:0
 #: field:event.registration.travelneed,create_date:0
 msgid "Created on"
-msgstr "Oprettet den"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,webtour_CurrentDateTime:0
 #: field:campos.webtourusneed.changes,currentdatetime:0
 msgid "CurrentDateTime"
-msgstr "Aktuel dato og tid"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -807,7 +807,7 @@ msgstr "Standard afsætningssted for hjemrejse"
 #. module: campos_transportation
 #: field:event.registration,webtourdefaulthomedestination_name:0
 msgid "Default Pickup Place"
-msgstr "Standard opsamlingssted"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -834,7 +834,7 @@ msgstr ""
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Deleted"
-msgstr "Slettet"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -851,12 +851,12 @@ msgstr "Hjemrejse dato"
 #. module: campos_transportation
 #: field:event.registration,departure_ids:0
 msgid "Departures"
-msgstr "Afgange"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture.pax,departpax:0
 msgid "Depature pax"
-msgstr "Antal"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
@@ -924,7 +924,7 @@ msgstr "Til Lejren"
 #: field:event.registration.campos.arrivaldeparture.pax,display_name:0
 #: field:event.registration.travelneed,display_name:0
 msgid "Display Name"
-msgstr "Navn der vises"
+msgstr ""
 
 #. module: campos_transportation
 #: model:ir.actions.server,name:campos_transportation.action_do_request
@@ -934,7 +934,18 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.event.participant,donotparticipate:0
 msgid "Do not participate"
-msgstr "Deltager ikke"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+#: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
+msgid "Driver 2 Name"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+msgid "Driver 3 Name"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
@@ -951,26 +962,36 @@ msgid "Driver Name"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtour.bstour,driver2name:0
+msgid "Driver2 Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour.bstour,driver3name:0
+msgid "Driver3 Name"
+msgstr ""
+
+#. module: campos_transportation
 #: field:campos.webtourusneed.tickets,enddatetime:0
 #: field:campos.webtourusneed.tickets.sent,enddatetime:0
 #: field:campos.webtourusneed.ticketsparticipant,enddatetime:0
 msgid "End Date Time"
-msgstr "Ankomst dag og tid"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,enddatetime:0
 msgid "EndDateTime"
-msgstr "Slut dato/tid"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,enddestinationidno:0
 msgid "EndDestinationIDno"
-msgstr "Slut destination"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,endnote:0
 msgid "EndNote"
-msgstr "Note til slut destination"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
@@ -990,7 +1011,7 @@ msgstr ""
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "Error"
-msgstr "Fejl"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1017,7 +1038,7 @@ msgstr "Lejrregistrering"
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,excessdemand:0
 msgid "Excess demand in WEBTour"
-msgstr "Overskudskapacited i Webtour"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,webtour_externalid_suffix:0
@@ -1084,13 +1105,13 @@ msgstr "Fra lejren til"
 #: field:campos.event.participant,fromcampdate:0
 #: field:campos.webtourparticipantoverview,fromcampdate:0
 msgid "From Camp Date"
-msgstr "Afrejsedato"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,fromcampusneed_id:0
 #: field:campos.webtourparticipantoverview,fromcampusneed_id:0
 msgid "From Camp Need ID"
-msgstr "Fra lejr Need ID"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
@@ -1112,12 +1133,12 @@ msgstr "Transporttype fra lejren"
 #: code:addons/campos_transportation/models/webtourparticipant.py:775
 #, python-format
 msgid "From Camp to: "
-msgstr "Fra Lejren til:"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,fromcamptodestination_id:0
 msgid "From camp Drop off"
-msgstr "Afsætningssted for hjemrejse"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
@@ -1175,31 +1196,31 @@ msgstr "Spejdergruppe"
 #: selection:campos.event.participant,fromcamptravelgroup:0
 #: selection:campos.event.participant,tocamptravelgroup:0
 msgid "Group 1"
-msgstr "Rejsegruppe 1"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0
 #: selection:campos.event.participant,tocamptravelgroup:0
 msgid "Group 2"
-msgstr "Rejsegruppe 2"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0
 #: selection:campos.event.participant,tocamptravelgroup:0
 msgid "Group 3"
-msgstr "Rejsegruppe 3"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0
 #: selection:campos.event.participant,tocamptravelgroup:0
 msgid "Group 4"
-msgstr "Rejsegruppe 4"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant,fromcamptravelgroup:0
 #: selection:campos.event.participant,tocamptravelgroup:0
 msgid "Group 5"
-msgstr "Rejsegruppe 5"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
@@ -1211,12 +1232,12 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.webtour.usneedminimum,group_name:0
 msgid "Group Name"
-msgstr "Gruppe Navn"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourregistrationoverview,webtourgroupfromcampdestination_id:0
 msgid "Group from camp destination"
-msgstr "Gruppens afsætningssted på hjemrejsen"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1227,7 +1248,7 @@ msgstr "Valgt afsætningssted for gruppen på hjemrejse"
 #. module: campos_transportation
 #: field:campos.webtourregistrationoverview,webtourgrouptocampdestination_id:0
 msgid "Group to camp destination"
-msgstr "Gruppens opsamlingssted på udrejsen"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1270,7 +1291,7 @@ msgstr ""
 #: field:event.registration.campos.arrivaldeparture.pax,id:0
 #: field:event.registration.travelneed,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.usgroup,idno:0 field:campos.webtour.usneederror,idno:0
@@ -1283,12 +1304,12 @@ msgstr ""
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "In Planning"
-msgstr "Under planlægning"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,individualfromcamptodestination_id:0
 msgid "Individual From camp Drop off"
-msgstr "Individuel afsætningssted på hjemrejse"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
@@ -1298,7 +1319,7 @@ msgstr "Individuel afsætningssted på hjemrejse"
 #. module: campos_transportation
 #: field:campos.event.participant,individualtocampfromdestination_id:0
 msgid "Individual To camp Pick up"
-msgstr "Individuel afsætningssted på hjemrejse"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_participant_webtour
@@ -1359,7 +1380,7 @@ msgstr ""
 #: field:event.registration.campos.arrivaldeparture.pax,__last_update:0
 #: field:event.registration.travelneed,__last_update:0
 msgid "Last Modified on"
-msgstr "Sidst ændret den"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.bstour,write_uid:0
@@ -1382,7 +1403,7 @@ msgstr "Sidst ændret den"
 #: field:event.registration.campos.arrivaldeparture,write_uid:0
 #: field:event.registration.travelneed,write_uid:0
 msgid "Last Updated by"
-msgstr "Sids opdateret af"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.bstour,write_date:0
@@ -1405,13 +1426,13 @@ msgstr "Sids opdateret af"
 #: field:event.registration.campos.arrivaldeparture,write_date:0
 #: field:event.registration.travelneed,write_date:0
 msgid "Last Updated on"
-msgstr "Sidst opdateret den"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusdestination,latitude:0
 #: field:event.registration.entryexitpoint,latitude:0
 msgid "Latitude"
-msgstr "Breddegrad"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,extra_participant_id:0
@@ -1424,18 +1445,18 @@ msgstr "Tilknyttet Deltager"
 #: field:campos.webtourusdestination,longitude:0
 #: field:event.registration.entryexitpoint,longitude:0
 msgid "Longitude"
-msgstr "Længdegrad"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "NO SEAT RESERVED"
-msgstr "INGEN PLADS RESERVERET"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,needstatus:0
 msgid "NOT AS DESIRED"
-msgstr "IKKE SOM ØNSKET"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
@@ -1477,42 +1498,42 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,notdeleted:0
 msgid "Needs Not Deleted in WEBTour"
-msgstr "Behov ikke slettet i Webtour"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,nottransfered:0
 msgid "Needs Not transfered to WEBTour"
-msgstr "Behov ikke overført til Webtour"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,enddatetimediffer:0
 msgid "Needs where end datetime differ"
-msgstr "Behov hvor sluttid afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,enddestdiffer:0
 msgid "Needs where end destination differ"
-msgstr "Behov hvor afsætningssted afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,endnotediffer:0
 msgid "Needs where end note differ"
-msgstr "Behov hvor slut note afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,startdestdiffer:0
 msgid "Needs where start destination differ"
-msgstr "Behov hvor opsamlingssted afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,startnotediffer:0
 msgid "Needs where start note differ"
-msgstr "Behov hvor start note afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.overview,startdatetimediffer:0
 msgid "Needs where startdatetime differ"
-msgstr "Behov hvor starttid afviger"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.bstour,nextstate_id:0
@@ -1524,24 +1545,24 @@ msgstr ""
 #: code:addons/campos_transportation/models/webtourparticipant.py:777
 #, python-format
 msgid "No Camp Transportation From camp avaible this day!!!"
-msgstr "BEMÆRK!!! Der er ingen fællestransport fra lejen denne dag"
+msgstr ""
 
 #. module: campos_transportation
 #: code:addons/campos_transportation/models/webtourparticipant.py:764
 #, python-format
 msgid "No Camp Transportation To camp avaible this day!!!"
-msgstr "BEMÆRK!!! Der er ingen fællestransport til lejen denne dag"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "No Demand"
-msgstr "Ingen behov"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "No Pending Change"
-msgstr "Ingen igangværende ændringer"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1566,7 +1587,7 @@ msgstr "Antal Anhængere"
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture,trailes:0
 msgid "No of Trailes"
-msgstr "Antal anhængere"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1577,7 +1598,7 @@ msgstr "Antal deltagere"
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Not Accepted"
-msgstr "Ikke Accepteret"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
@@ -1592,7 +1613,7 @@ msgstr "Ikke bekræfter > 0"
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Not Deleted"
-msgstr "ikke Slettet"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusdestination:campos_transportation.view_form_webtourusdestination
@@ -1604,7 +1625,7 @@ msgstr "Note"
 #: selection:campos.event.participant.day,webtourticketstatus:0
 #: selection:campos.webtourusneed,needstatus:0
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1622,7 +1643,7 @@ msgstr "Gående"
 #: field:campos.event.participant,org_country_code:0
 #: field:event.registration,org_country_code2:0
 msgid "Org Country Code2"
-msgstr "Landekode for spejder org."
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,org_name:0
@@ -1633,7 +1654,7 @@ msgstr ""
 #. module: campos_transportation
 #: field:event.registration.travelneed,overview:0
 msgid "Overview"
-msgstr "Oversigt"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1666,12 +1687,12 @@ msgstr "Lejrdage"
 #: field:campos.webtourusneed.seatsparticipant,participant_id:0
 #: field:campos.webtourusneed.ticketsparticipant,participant_id:0
 msgid "Participant ID"
-msgstr "Deltager ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,partner_id:0
 msgid "Participant Partner ID"
-msgstr "Deltager Kontakt ID"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourparticipantoverview:campos_transportation.view_search_webtourparticipantoverview
@@ -1692,7 +1713,7 @@ msgstr "Passager Navn"
 #. module: campos_transportation
 #: field:campos.webtourusneed,extra_passengername:0
 msgid "Passenger name"
-msgstr "Passager Navn"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
@@ -1707,17 +1728,17 @@ msgstr ""
 #: selection:campos.webtourusneed,needstatus:0
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Pending Change"
-msgstr "Ændringer under behandling"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Pending Create"
-msgstr "Oprettelse igang"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.webtourusneed,webtourstatus:0
 msgid "Pending Delete"
-msgstr "Sletning igang"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
@@ -1748,19 +1769,19 @@ msgstr "Planlagt hjemrejse tidspunkt"
 #: selection:event.registration.campos.arrivaldeparture,eta:0
 #: selection:event.registration.travelneed,deadline:0
 msgid "Please Select"
-msgstr "Vælg venligst"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,group_entrypoint:0
 #: field:campos.webtourregistrationoverview,group_entrypoint:0
 msgid "Point of entry into Denmark"
-msgstr "Ankomststed i Danmark"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,group_exitpoint:0
 #: field:campos.webtourregistrationoverview,group_exitpoint:0
 msgid "Point of exit from Denmark"
-msgstr "Udrejsested fra Danmark"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -1774,7 +1795,7 @@ msgstr ""
 #: field:event.registration.campos.arrivaldeparture.pax,registration_id:0
 #: field:event.registration.travelneed,registration_id:0
 msgid "Registration"
-msgstr "Registering"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,registration_id:0
@@ -1786,7 +1807,7 @@ msgstr "Registering"
 #: field:campos.webtourusneed.tickets,registration_id:0
 #: field:campos.webtourusneed.tickets.sent,registration_id:0
 msgid "Registration ID"
-msgstr "Registererings ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,regpartner_id:0
@@ -1797,17 +1818,17 @@ msgstr ""
 #: field:campos.webtour_req_commands,name:0
 #: field:campos.webtour_req_logger,name:0
 msgid "Request"
-msgstr "Request"
+msgstr ""
 
 #. module: campos_transportation
 #: selection:campos.event.participant.day,webtourticketstatus:0
 msgid "Request changed, waiting to be processed"
-msgstr "Behov ændret, venter på behandling"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour_req_logger,responce:0
 msgid "Responce"
-msgstr "Responce"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour_req_logger,responcexml:0
@@ -1828,7 +1849,7 @@ msgstr "Returrejse"
 #. module: campos_transportation
 #: field:campos.webtourusneed,campos_triptype_returnjourney:0
 msgid "Return journey"
-msgstr "Returrejse"
+msgstr ""
 
 #. module: campos_transportation
 #: model:email.template,subject:campos_transportation.webtour_ticket_mail_group
@@ -1840,7 +1861,7 @@ msgstr ""
 #: field:campos.webtourusneed.tickets,sameaslastmail:0
 #: field:campos.webtourusneed.tickets.overview,sameaslastmail:0
 msgid "Same as last mail"
-msgstr "Mail som sidst"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_confirmed:0
@@ -1849,7 +1870,7 @@ msgstr "Mail som sidst"
 #: field:campos.webtourusneed.tickets.sent,seats_confirmed:0
 #: field:campos.webtourusneed.ticketsparticipant,seats_confirmed:0
 msgid "Seats confirmed"
-msgstr "Bekræftede pladser"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_not_confirmed:0
@@ -1858,7 +1879,7 @@ msgstr "Bekræftede pladser"
 #: field:campos.webtourusneed.tickets.sent,seats_not_confirmed:0
 #: field:campos.webtourusneed.ticketsparticipant,seats_not_confirmed:0
 msgid "Seats not confirmed"
-msgstr "Afviste pladser"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.seats,seats_pending:0
@@ -1867,22 +1888,22 @@ msgstr "Afviste pladser"
 #: field:campos.webtourusneed.tickets.sent,seats_pending:0
 #: field:campos.webtourusneed.ticketsparticipant,seats_pending:0
 msgid "Seats pending"
-msgstr "Ændringer under behandling"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.entryexitpoint,defaultdestination_id:0
 msgid "Selected Destination"
-msgstr "Valgt destination"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration,webtourgroupfromcampdestination_id:0
 msgid "Selected Drop off from Camp"
-msgstr "Valgt afsætningssted fra lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration,webtourgrouptocampdestination_id:0
 msgid "Selected Pick up to Camp"
-msgstr "Valgt opsamlingssted til lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
@@ -1899,30 +1920,30 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.event.participant,specialfromcampdate_id:0
 msgid "Special From Camp Date"
-msgstr "Særlig hjemrejsetidspunkt"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,specialtocampdate_id:0
 msgid "Special To Camp Date"
-msgstr "Særlig udrejse dato"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,webtourtravelneed_ids:0
 #: field:event.registration,webtourtravelneed_ids:0
 msgid "Special travel needs"
-msgstr "Særlige rejsebehov"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration,webtourtravelneed2_ids:0
 msgid "Special travel needs 2"
-msgstr "Særlig rejsebehov"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets,startdatetime:0
 #: field:campos.webtourusneed.tickets.sent,startdatetime:0
 #: field:campos.webtourusneed.ticketsparticipant,startdatetime:0
 msgid "Start Date Time"
-msgstr "Afgangs dato og tid"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourconfig:campos_transportation.view_form_webtourconfig
@@ -1952,17 +1973,17 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,startdatetime:0
 msgid "StartDateTime"
-msgstr "Start dato/tid"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,startdestinationidno:0
 msgid "StartDestinationIDno"
-msgstr "Startlokations ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.changes,startnote:0
 msgid "StartNote"
-msgstr "Start Note"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
@@ -2015,13 +2036,11 @@ msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
-"ISO landekode (2 bogstaver)\n"
-"Kan bruges til hurtig søgning"
 
 #. module: campos_transportation
 #: field:campos.event.participant.day,webtourticketstatus:0
 msgid "Ticket Status"
-msgstr "Billetstatus"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_tree_finalregistration_participant_webtour
@@ -2045,17 +2064,17 @@ msgstr "Billetstatus"
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets.overview,ticketscnt:0
 msgid "Tickets Cnt"
-msgstr "Antal billeter"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets.sent,ticket_id:0
 msgid "Tickets Id"
-msgstr "Billet ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed.tickets.overview,ticketsentcnt:0
 msgid "Tickets sent Cnt"
-msgstr "Antal Billetter sendt"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,campos_transfered_deadline:0
@@ -2063,12 +2082,12 @@ msgstr "Antal Billetter sendt"
 #: field:event.registration.campos.arrivaldeparture,eta:0
 #: field:event.registration.travelneed,deadline:0
 msgid "Time"
-msgstr "Tid"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.travelneed,enddestinationidno:0
 msgid "To"
-msgstr "Til"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusneed:campos_transportation.view_search_webtourusneed
@@ -2080,13 +2099,13 @@ msgstr "Til lejren fra"
 #: field:campos.event.participant,tocampdate:0
 #: field:campos.webtourparticipantoverview,tocampdate:0
 msgid "To Camp Date"
-msgstr "Til lejr dato"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,tocampusneed_id:0
 #: field:campos.webtourparticipantoverview,tocampusneed_id:0
 msgid "To Camp Need ID"
-msgstr "Til lejr Need ID"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour
@@ -2108,12 +2127,12 @@ msgstr "Transporttype til lejren"
 #: code:addons/campos_transportation/models/webtourparticipant.py:762
 #, python-format
 msgid "To Camp from: "
-msgstr "Til Lejren fra:"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,tocampfromdestination_id:0
 msgid "To camp Pick up"
-msgstr "Opsamlinssted til lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.event.participant:campos_transportation.view_form_finalregistration_Jobber_webtour_admin
@@ -2138,18 +2157,18 @@ msgstr "Udrejsedato"
 #: field:campos.webtourusneed.tickets.sent,touridno:0
 #: field:campos.webtourusneed.ticketsparticipant,touridno:0
 msgid "Tour IDno"
-msgstr "Tur ID"
+msgstr ""
 
 #. module: campos_transportation
-#: field:campos.webtour.bstour,name:0
-msgid "Tour Name"
+#: field:campos.webtour.bstour,bstourname:0
+msgid "Tour bsName"
 msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtour.usneedminimum,touridno:0
 #: field:campos.webtourusneed.changes,touridno:0
 msgid "TourIDno"
-msgstr "Tur ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,campos_transfered_demandneeded:0
@@ -2213,7 +2232,7 @@ msgstr "Rejse"
 #: field:campos.webtourusneed,extra_traveldate_id:0
 #: field:event.registration.travelneed,traveldate:0
 msgid "Travel Date"
-msgstr "Rejse dato"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourconfig.triptype:campos_transportation.view_form_WebtourTripType
@@ -2223,29 +2242,29 @@ msgstr "Rejse datoer"
 #. module: campos_transportation
 #: field:campos.webtourconfig.triptype,traveldate_ids:0
 msgid "Travel Days"
-msgstr "Rejsedage"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,travelgroup:0
 #: field:campos.webtourusneed.overview,travelgroup:0
 #: field:event.registration.travelneed,travelgroup:0
 msgid "Travel Group"
-msgstr "Rejse gruppe"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,fromcamptravelgroup:0
 msgid "Travel Group from Camp"
-msgstr "Rejsegruppe fra lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,tocamptravelgroup:0
 msgid "Travel Group to Camp"
-msgstr "Rejsegruppe til lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourusneed,travelneed_id:0
 msgid "Travel need"
-msgstr "Rejsebehov"
+msgstr ""
 
 #. module: campos_transportation
 #: view:event.registration:campos_transportation.view_form_finalregistration_webtour
@@ -2328,7 +2347,7 @@ msgstr ""
 #: field:campos.webtour.usneedminimum,useridno:0
 #: field:campos.webtourusneed.changes,useridno:0
 msgid "UserIDno"
-msgstr "Bruger ID"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
@@ -2653,6 +2672,11 @@ msgid "Webtour usGroup"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtour.bstour.stop,usname:0
+msgid "Webtour usName"
+msgstr ""
+
+#. module: campos_transportation
 #: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_usneed
 msgid "Webtour usNeed"
 msgstr ""
@@ -2751,6 +2775,12 @@ msgid "bsIDno"
 msgstr ""
 
 #. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+#: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
+msgid "bstourname"
+msgstr ""
+
+#. module: campos_transportation
 #: view:campos.webtourusneed.tickets:campos_transportation.view_search_webtourusneed_tickets
 msgid "busterminaldate"
 msgstr "Busterminal Dato"
@@ -2829,18 +2859,18 @@ msgstr ""
 #: field:campos.webtourparticipantoverview,countrycode:0
 #: field:campos.webtourregistrationoverview,countrycode:0
 msgid "country code"
-msgstr "Landekode"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,webtourdefaulthomedestination:0
 #: field:campos.webtourregistrationoverview,webtourdefaulthomedestination:0
 msgid "default home destination"
-msgstr "Standard stoppested (tættes på)"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,donotparticipate:0
 msgid "do not participate"
-msgstr "Deltager ikke"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusneed:campos_transportation.view_search_webtourusneed
@@ -2872,7 +2902,7 @@ msgstr ""
 #: field:campos.event.participant,groupisdanish:0
 #: field:event.registration,groupisdanish:0
 msgid "groupisdanish"
-msgstr "Dansk gruppe"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourconfig,campdestinationid:0
@@ -2880,7 +2910,7 @@ msgstr "Dansk gruppe"
 #: field:campos.webtourusneed.changes,WebtourUsNeed_id:0
 #: field:event.registration,webtourdefaulthomedestination:0
 msgid "id"
-msgstr "ID"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,is_groupisdanish_notadmin:0
@@ -2947,22 +2977,22 @@ msgstr ""
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture,pax:0
 msgid "pax"
-msgstr "Antal"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture,bytrain:0
 msgid "pax bytrain"
-msgstr "Antal med Tog"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture,bikes:0
 msgid "pax on Bikes"
-msgstr "Antal på Cyckel"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration.campos.arrivaldeparture,onfoot:0
 msgid "pax on foot"
-msgstr "Antal til fods"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.event.participant,recalcfromneed:0
@@ -3041,12 +3071,12 @@ msgstr ""
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,transport_from_camp:0
 msgid "transport from camp"
-msgstr "Transport fra Lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: field:campos.webtourparticipantoverview,transport_to_camp:0
 msgid "transport to camp"
-msgstr "Transport til Lejren"
+msgstr ""
 
 #. module: campos_transportation
 #: view:campos.webtourusneed:campos_transportation.view_search_webtourusneed
@@ -3057,6 +3087,12 @@ msgstr "Rejsedato"
 #: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
 #: view:campos.webtour.bstour.stop:campos_transportation.view_tree_webtourbstourdtop
 msgid "usIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
+#: view:campos.webtour.bstour.stop:campos_transportation.view_tree_webtourbstourdtop
+msgid "usName"
 msgstr ""
 
 #. module: campos_transportation
@@ -3073,7 +3109,7 @@ msgstr ""
 #. module: campos_transportation
 #: field:event.registration,webtourhasgeoadd:0
 msgid "webtour Has Geo Adress"
-msgstr "Adresse Geokodet"
+msgstr ""
 
 #. module: campos_transportation
 #: field:event.registration,webtourPreregTotalSeats:0

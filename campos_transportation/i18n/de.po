@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 22:04+0000\n"
-"PO-Revision-Date: 2017-07-15 22:04+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Language-Team: German (https://www.transifex.com/sl2017/teams/49003/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -934,6 +934,17 @@ msgstr ""
 #. module: campos_transportation
 #: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
 #: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
+msgid "Driver 2 Name"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+msgid "Driver 3 Name"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+#: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
 #: field:campos.webtour.bstour,driverinfo:0
 msgid "Driver Info"
 msgstr ""
@@ -943,6 +954,16 @@ msgstr ""
 #: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
 #: field:campos.webtour.bstour,drivername:0
 msgid "Driver Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour.bstour,driver2name:0
+msgid "Driver2 Name"
+msgstr ""
+
+#. module: campos_transportation
+#: field:campos.webtour.bstour,driver3name:0
+msgid "Driver3 Name"
 msgstr ""
 
 #. module: campos_transportation
@@ -2134,8 +2155,8 @@ msgid "Tour IDno"
 msgstr ""
 
 #. module: campos_transportation
-#: field:campos.webtour.bstour,name:0
-msgid "Tour Name"
+#: field:campos.webtour.bstour,bstourname:0
+msgid "Tour bsName"
 msgstr ""
 
 #. module: campos_transportation
@@ -2646,6 +2667,11 @@ msgid "Webtour usGroup"
 msgstr ""
 
 #. module: campos_transportation
+#: field:campos.webtour.bstour.stop,usname:0
+msgid "Webtour usName"
+msgstr ""
+
+#. module: campos_transportation
 #: model:ir.ui.menu,name:campos_transportation.menu_action_campos_transportation_usneed
 msgid "Webtour usNeed"
 msgstr ""
@@ -2741,6 +2767,12 @@ msgstr ""
 #: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
 #: view:campos.webtour.bstour.stop:campos_transportation.view_tree_webtourbstourdtop
 msgid "bsIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour:campos_transportation.view_form_webtourbstour
+#: view:campos.webtour.bstour:campos_transportation.view_tree_webtourbstour
+msgid "bstourname"
 msgstr ""
 
 #. module: campos_transportation
@@ -3050,6 +3082,12 @@ msgstr ""
 #: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
 #: view:campos.webtour.bstour.stop:campos_transportation.view_tree_webtourbstourdtop
 msgid "usIDno"
+msgstr ""
+
+#. module: campos_transportation
+#: view:campos.webtour.bstour.stop:campos_transportation.view_form_webtourbstourstop
+#: view:campos.webtour.bstour.stop:campos_transportation.view_tree_webtourbstourdtop
+msgid "usName"
 msgstr ""
 
 #. module: campos_transportation

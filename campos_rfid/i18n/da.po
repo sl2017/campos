@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-25 13:34+0000\n"
-"PO-Revision-Date: 2017-07-25 13:34+0000\n"
+"POT-Creation-Date: 2017-11-21 21:36+0000\n"
+"PO-Revision-Date: 2017-11-21 21:36+0000\n"
 "Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2017\n"
 "Language-Team: Danish (https://www.transifex.com/sl2017/teams/49003/da/)\n"
 "MIME-Version: 1.0\n"
@@ -214,7 +214,7 @@ msgstr ""
 #: field:campos.canteen.instanse,date:0 field:campos.canteen.ticket,date:0
 #: field:campos.cat.inst,date:0 field:campos.cat.ticket,date:0
 msgid "Date"
-msgstr "Dato"
+msgstr ""
 
 #. module: campos_rfid
 #: help:campos.cat.ticket,message_last_post:0
@@ -271,7 +271,7 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.canteen.instanse,ticket_no:0 field:campos.cat.inst,ticket_no:0
 msgid "Expected"
-msgstr "Forventet"
+msgstr ""
 
 #. module: campos_rfid
 #: field:campos.cat.ticket,message_follower_ids:0
@@ -314,7 +314,7 @@ msgstr "Gruppe"
 #. module: campos_rfid
 #: field:campos.cat.ticket,catering_note:0
 msgid "Group Note"
-msgstr "Note for denne gruppe (for hele ugen)"
+msgstr ""
 
 #. module: campos_rfid
 #: help:campos.cat.ticket,message_summary:0
@@ -439,7 +439,7 @@ msgstr ""
 #: field:campos.cat.ticket,name:0 field:campos.rfid.device,name:0
 #: field:campos.rfid.log,name:0
 msgid "Name"
-msgstr "Navn"
+msgstr ""
 
 #. module: campos_rfid
 #: field:campos.rfid.device,showtime_not:0
@@ -459,7 +459,7 @@ msgstr ""
 #. module: campos_rfid
 #: field:event.registration.meatlist,packs:0
 msgid "Packs"
-msgstr "Pakker"
+msgstr ""
 
 #. module: campos_rfid
 #: field:event.day.meat,pck_pr_par:0
@@ -474,7 +474,7 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.rfid.log,pnum:0
 msgid "Participant number"
-msgstr "Skejser ID"
+msgstr ""
 
 #. module: campos_rfid
 #: selection:campos.cat.ticket,state:0
@@ -484,7 +484,7 @@ msgstr ""
 #. module: campos_rfid
 #: field:campos.cat.ticket,participant_id:0
 msgid "Pick up by"
-msgstr "Hentet af"
+msgstr ""
 
 #. module: campos_rfid
 #: field:campos.cat.ticket,responce_status:0
@@ -563,7 +563,7 @@ msgstr "Idag"
 #. module: campos_rfid
 #: field:campos.cat.ticket,ticket_note:0
 msgid "Todays Note"
-msgstr "Noter for i dag"
+msgstr ""
 
 #. module: campos_rfid
 #: field:campos.cat.ticket,message_unread:0

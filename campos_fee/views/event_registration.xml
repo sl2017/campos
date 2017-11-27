@@ -22,11 +22,15 @@
            			<field name="material_cost" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
            			<field name="fee_total" widget="monetary" options="{'currency_field': 'cmp_currency_id'}"/>
            			<field name="cmp_currency_id" invisible="1"/>
+           			<field name="rent_participants"/>
+            		<field name="rent_nights"/>
+            		<field name="rent_total"/>
             		</group>
             		<seperator string="Invoices" />
             			<field name="ssreginv_ids" readonly="1" nolabel="1">
             				<tree>
             					<field name="create_date" string="Snapshot"/>
+            					<field name="inv_type"/>
             					<field name="invoice_id" options="{'no_open': True}"/>
             					<field name="inv_currency_id"/>
             					<field name="inv_amount_total"/>
@@ -49,6 +53,7 @@
 									</page>
 									<page string="Invoice">
 										<group>
+											<field name="inv_type"/>
 											<field name="invoice_id" options="{'no_create': True, 'no_open': True}"/>
 											<field name="inv_date"/>
 										</group>
@@ -125,6 +130,7 @@
             			<field name="ssreginv_ids" readonly="1" nolabel="1">
             				<tree>
             					<field name="create_date" string="Snapshot"/>
+            					<field name="inv_type"/>
             					<field name="invoice_id" options="{'no_open': True}"/>
             					<field name="inv_currency_id"/>
             					<field name="inv_amount_total"/>
@@ -148,6 +154,7 @@
 									</page>
 									<page string="Invoice">
 										<group>
+											<field name="inv_type"/>
 											<field name="invoice_id" options="{'no_create': True, 'no_open': True}"/>
 											<field name="inv_date"/>
 										</group>
