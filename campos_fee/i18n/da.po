@@ -968,7 +968,7 @@ msgstr ""
 #. module: campos_fee
 #: field:event.registration,rent_nights:0
 msgid "Number of Nigths (Campsite Rent)"
-msgstr ""
+msgstr "Antal lejr døgn"
 
 #. module: campos_fee
 #: field:campos.fee.ss.registration,number_participants:0
@@ -979,7 +979,7 @@ msgstr ""
 #. module: campos_fee
 #: field:event.registration,rent_participants:0
 msgid "Number of participants (Campsite Rent)"
-msgstr ""
+msgstr "Antal deltagere på lejren"
 
 #. module: campos_fee
 #: model:product.attribute.value,name:campos_fee.campos_fee_product_attr_val_159
@@ -1384,7 +1384,7 @@ msgstr ""
 #. module: campos_fee
 #: field:event.registration,rent_total:0
 msgid "Total Campsite Rent"
-msgstr ""
+msgstr "Total lejrpladsleje"
 
 #. module: campos_fee
 #: field:campos.fee.ss.registration,fee_total:0
